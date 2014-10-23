@@ -1,0 +1,248 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="http://necolas.github.com/normalize.css/2.0.1/normalize.css" />
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="jquery.marmots-checkbox.css" media="all">
+    
+    <style type="text/css">
+		body{
+			font-size:9pt;
+			margin:10px;
+		}
+		
+		p {
+			margin: 10px;
+			color: gray;
+		}
+		
+		fieldset {
+			margin: 10px;
+			padding: 15px;
+			border: 1px solid gainsboro;
+			border-radius: 5px;
+		}
+		
+		fieldset legend{
+			color: gray;
+		}
+		
+		label {
+			margin: 0 10px;
+		}
+		
+		#switcher{
+			float:right;
+		}
+		
+		.error{
+			color: red;
+			border: 1px solid;
+			padding: 5px;
+			background-color: #F7E7E7;
+		}
+		
+		.ui-widget-header{
+			padding: 5px;
+			margin: 1px;
+		}
+	</style>
+    
+	<script src="../../vendor/jquery-1.10.2.min.js"></script>
+    <script src="../../vendor/jquery-ui-1.9.2/themes/bbva/jquery-ui-1.9.2.custom.js"></script>
+	<script type="text/javascript" src="lib/jquery-validation-1.10.0/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="jquery.marmots-checkbox.js"></script>
+	
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$('input[type="radio"], input[type="checkbox"]').checkbox();
+		
+		// Skins
+		$('#skin-default').button().click(function(){
+			$('input[type="radio"], input[type="checkbox"]').checkbox('option', 'skin', '');
+		});
+		$('#skin-large').button().click(function(){
+			$('input[type="radio"], input[type="checkbox"]').checkbox('option', 'skin', 'large');
+		});
+		$('#skin-blue').button().click(function(){
+			$('input[type="radio"], input[type="checkbox"]').checkbox('option', 'skin', 'blue');
+		});
+		$('#skin-clear').button().click(function(){
+			$('input[type="radio"], input[type="checkbox"]').checkbox('option', 'skin', 'clear');
+		});
+		$('#skin-fancy').button().click(function(){
+			$('input[type="radio"], input[type="checkbox"]').checkbox('option', 'skin', 'fancy');
+		});
+		
+		// Checkbox actions
+		$('#checkbox-check').button().click(function(){
+			$('#checkbox-01').checkbox('check');
+			return false;
+		});
+		
+		$('#checkbox-uncheck').button().click(function(){
+			$('#checkbox-01').checkbox('uncheck');
+			return false;
+		});
+		
+		$('#checkbox-toggle').button().click(function(){
+			$('#checkbox-01').checkbox('toggle');
+			return false;
+		});
+		
+		$('#checkbox-checked').button().click(function(){
+			alert($('#checkbox-01').checkbox('isChecked'));
+			return false;
+		});
+		
+		$('#checkbox-destroy').button().click(function(){
+			$('#checkbox-02').checkbox('destroy');
+			return false;
+		});
+		
+		$('#checkbox-create').button().click(function(){
+			$('#checkbox-02').checkbox();
+			return false;
+		});
+		
+		$('#checkbox-val').button().click(function(){
+			alert('jquery val: ' + $('#checkbox-02').val() + '\nplugin val: ' + $('#checkbox-02').checkbox('val'));
+			return false;
+		});
+		
+		// Radio actions
+		$('#radio-check').button().click(function(){
+			$('#radio-02').checkbox('check');
+			return false;
+		});
+		
+		$('#radio-uncheck').button().click(function(){
+			$('#radio-02').checkbox('uncheck');
+			return false;
+		});
+		
+		$('#radio-toggle').button().click(function(){
+			$('#radio-02').checkbox('toggle');
+			return false;
+		});
+		
+		$('#radio-checked').button().click(function(){
+			alert($('#radio-02').checkbox('isChecked'));
+			return false;
+		});
+		
+		$('#radio-destroy').button().click(function(){
+			$('input[name="sample-radio"]').checkbox('destroy');
+			return false;
+		});
+		
+		$('#radio-create').button().click(function(){
+			$('input[name="sample-radio"]').checkbox();
+			return false;
+		});
+		
+		$('#radio-val').button().click(function(){
+			alert('jquery val: ' + $('#radio-02').val() + '\nplugin val: ' + $('#radio-02').checkbox('val'));
+			return false;
+		});
+		
+		$('form.validable').validate();
+		
+		$('#btn-submit').button().click(function(){
+			if($('form.validable').valid()){
+				alert('valid');
+			}
+			return false;
+		});
+		
+		$('#btn-clear').button().click(function(){
+			$('input[type="radio"], input[type="checkbox"]').checkbox('uncheck');
+			$('label.error').remove();
+			$('.error').removeClass('.error');
+		});
+	});
+	</script>
+</head>
+<body>
+<div class="ui-widget-content ui-corner-all">
+	<div class="ui-widget-header ui-corner-top">marmots checkbox'es</div>
+	<form class="validable" action="#">
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et purus vel elit facilisis tempus. Aenean scelerisque nulla et leo dapibus sit amet iaculis turpis accumsan. Maecenas sodales libero at justo condimentum posuere. Sed tempus diam nec elit euismod feugiat nec nec eros. Integer a augue vel enim dignissim lacinia sed quis odio. Maecenas vitae tortor ante, sit amet malesuada nulla. Aliquam ullamcorper, ligula nec accumsan hendrerit, odio ligula commodo lacus, eget congue dui odio ut nisl. Nullam sit amet tortor tristique ipsum convallis tempor ultrices eu orci. Nunc in dolor sit amet lacus mollis ornare sed sed arcu. Morbi ornare turpis vitae massa hendrerit sed volutpat sem iaculis. In pharetra pulvinar massa, sed vehicula urna accumsan posuere. Integer cursus ligula eget arcu pharetra dictum.</p>
+		<p>In accumsan lobortis ipsum nec ultricies. Nam a vehicula nulla. Quisque porttitor metus eget massa dictum euismod non nec purus. Maecenas porttitor, urna eu faucibus congue, mi velit interdum elit, convallis egestas mi est vel enim. Nulla eget sapien metus, quis ultricies magna. In dui lectus, fringilla a sodales eu, laoreet a ligula. Nulla sit amet consectetur enim. Duis a dolor mauris, a condimentum magna. Duis mattis nulla sed eros euismod vitae congue dui volutpat. Mauris in magna ut magna adipiscing placerat id id nulla.</p>
+		
+		<fieldset>
+			<legend>Skin selection:</legend>
+			<a id="skin-default" href="#">default</a>
+			<a id="skin-large" href="#">large</a>
+			<a id="skin-blue" href="#">blue</a>
+			<a id="skin-clear" href="#">clear</a>
+			<a id="skin-fancy" href="#">fancy</a>
+			
+			<div id="switcher"></div>
+		</fieldset>
+		
+		<fieldset>
+			<legend>Checkbox actions:</legend>
+			<a id="checkbox-check" href="#">check-check</a>
+			<a id="checkbox-uncheck" href="#">check-uncheck</a>
+			<a id="checkbox-toggle" href="#">check-toggle</a>
+			<a id="checkbox-checked" href="#">check-checked ?</a>
+			<a id="checkbox-destroy" href="#">check-destroy</a>
+			<a id="checkbox-create" href="#">check-create</a>
+			<a id="checkbox-val" href="#">check-val</a>
+		</fieldset>
+		
+		<fieldset>
+			<legend>Checkboxes inside</legend>
+	        <label for="checkbox-01"><input name="sample-checkbox-01" id="checkbox-01" value="1" type="checkbox" checked class="required" /> I agree to the terms &#38; conditions.</label>
+	        <label for="checkbox-02"><input name="sample-checkbox-02" id="checkbox-02" value="1" type="checkbox" class="required" /> Please send me regular updates.</label>
+	    </fieldset>
+	    
+	    <fieldset>
+	    	<legend>Checkboxes outside</legend>
+	        <input name="sample-checkbox-03" id="checkbox-03" value="1" type="checkbox" class="required" /> <label for="checkbox-03">I agree to the terms &#38; conditions.</label>
+	        <label for="checkbox-04">Please send me regular updates.</label> <input name="sample-checkbox-04" id="checkbox-04" value="1" type="checkbox" checked />
+	    </fieldset>
+	    
+	    <fieldset>
+			<legend>Radio actions:</legend>
+			<a id="radio-check" href="#">radio-check</a>
+			<a id="radio-uncheck" href="#">radio-uncheck</a>
+			<a id="radio-toggle" href="#">radio-toggle</a>
+			<a id="radio-checked" href="#">radio-checked ?</a>
+			<a id="radio-destroy" href="#">radio-destroy</a>
+			<a id="radio-create" href="#">radio-create</a>
+			<a id="radio-val" href="#">radio-val</a>
+		</fieldset>
+	    
+	    <fieldset>
+	    	<legend>Radios inside</legend>
+	        <label class="label_radio" for="radio-01"><input name="sample-radio" id="radio-01" value="1" type="radio" checked class="required" /> This is option A...</label>
+	        <label class="label_radio" for="radio-02"><input name="sample-radio" id="radio-02" value="2" type="radio" /> and this is option B...</label>
+	        <label class="label_radio" for="radio-03"><input name="sample-radio" id="radio-03" value="3" type="radio" /> or simply choose option C</label>
+	    </fieldset>
+	    
+	    <fieldset>
+	    	<legend>Radios left</legend>
+	        <input name="sample-radio-out" id="radio-out-01" value="1" type="radio" class="required" /> <label for="radio-out-01">This is option A...</label> 
+	        <input name="sample-radio-out" id="radio-out-02" value="1" type="radio" checked /> <label for="radio-out-02">and this is option B...</label>
+	        <input name="sample-radio-out" id="radio-out-03" value="1" type="radio" /> <label for="radio-out-03">or simply choose option C</label>
+	    </fieldset>
+	    
+	    <fieldset>
+	    	<legend>Radios right</legend>
+	        <label for="radio-out-right-01">This is option A...</label> <input name="sample-radio-out-right" id="radio-out-right-01" value="1" type="radio" class="required" />  
+	        <label for="radio-out-right-02">and this is option B...</label> <input name="sample-radio-out-right" id="radio-out-right-02" value="1" type="radio" /> 
+	        <label for="radio-out-right-03">or simply choose option C</label> <input name="sample-radio-out-right" id="radio-out-right-03" value="1" type="radio" checked /> 
+	    </fieldset>
+	    
+	    <fieldset>
+	    	<button id="btn-submit" type="submit">Go</button>
+	    	<button id="btn-clear" type="button">Reset</button>
+	    </fieldset> 
+	</form>
+</div>
+</body>
+</html>

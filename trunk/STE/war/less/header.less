@@ -1,0 +1,110 @@
+.header-layout{
+	padding: 0px;
+	background-color:#F1F1F1;
+	height: 175px;
+	text-align:center;	
+	.header-container{	
+		display:inline-block;
+		width:980px;
+		height: 175px;
+		box-shadow: 2px 2px 2px 0 #a3a3a3;
+		-moz-box-shadow: 2px 2px 2px 0 #a3a3a3;
+		-webkit-box-shadow: 2px 2px 2px 0 #a3a3a3;
+		
+		background-color:white;
+		padding:0 10px;
+		margin-right:auto;
+		margin-left:auto;
+		text-align:left;
+		
+		.container{
+			padding:0px;
+		}
+			
+		.main-logo{
+			display:inline-block;
+		}
+
+		.main-menu{
+			width:100%;
+			height:40px;
+			
+			ul {
+				&.menu{
+					.linear-gradient(#0079C1,#00529B);
+				    border-radius: 5px;
+				    list-style: none outside none;
+				    width:100%;
+					padding:0px;
+					padding-top:3px;
+					height: 48px;
+					li {
+					
+						&:hover{
+							background-color:#2586d7;
+						}
+					
+						&.menu {
+							display: inline-block;
+						    height: 48px;
+						    padding: 0 7px;
+						    position: relative;
+						    top: -5px;
+    						vertical-align: text-top;
+    						padding-top:13px;
+    						
+    						a{
+    							
+    						}
+						}
+
+						&.home {
+							 border-bottom-left-radius: 5px;
+						    border-top-left-radius: 5px;
+						    display: inline-block;
+						    height: 47px;
+						    padding: 3px 7px 0;
+						    position: relative;
+						    top: -2px;
+						    vertical-align: top;
+						}
+
+						a {
+							&.no-underline {
+								text-decoration:none;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+span.menu-title{
+	color: #FFFFFF;
+    font-family: 'BBVA Web Book';
+    font-size: 13px;
+    padding-left: 10px;
+    white-space: nowrap;
+}
+
+button.btn-default {
+	.linear-gradient(#fff, #fff);
+}
+
+#empresas-submenu{
+	height:45px;
+	
+	li{
+		width:100px;
+	}
+	
+	
+	li.home.active{
+		width:40px;
+		
+		> a > span {
+			margin: 0px;
+		}
+	}
+}

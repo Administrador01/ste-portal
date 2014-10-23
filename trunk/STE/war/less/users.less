@@ -1,0 +1,721 @@
+/* USERS */
+.users_title_icon{
+	margin-right:10px;
+}
+
+#excel_btn{
+	
+	position:relative;
+	vertical-align:top;
+	
+}
+
+#newUserButton{
+	vertical-align:bottom;
+}
+
+.modal-dialog{
+	width:700px;
+	
+	.form-fieldset .radio-container-holder{
+		width:590px;
+	}
+	
+	.form-field{
+		> .lbl{
+			margin-right:20px;
+		}
+	
+		> input, > textarea, > div.bootstrap-select{
+			position:relative;
+			float:right;
+			margin-right:5px;
+			width: 200px !important;
+			}
+	}
+}
+
+.usersTable{
+	> .table{
+	
+	
+		width:100%;
+		background-color:#FFF;
+		text-align:left;
+		
+   		border-spacing: 0;
+   		    border-collapse: initial;
+   		    
+   		>  thead:first-child > tr:first-child > th {
+   			border-top: 1px solid #dcdcdc !important;
+   		}
+   		
+   		> #myTable{
+   		
+   			.editing, .extended-row{
+				background-color: #FBF1D0;
+			}
+			
+			extended-div{
+				background-color:transparent;
+			}
+   		
+	   		button.selectpicker {
+	   			   height: 30px;
+	   		}
+   			
+   			.long{
+				height: 31px;
+				left: 0;
+				top: 5px;
+				width: 306px;
+			}
+			
+			.permiso_ed{
+				 width: 175px;
+			}
+			.dto_ed{
+				width: 260px;
+   			}
+   			#email_ext{
+				margin-left:85px;
+				width:455px;
+			}
+			td{
+				border-right:medium none;
+			}
+		}
+   		
+		th{	
+			background-color: #F8F8F5;
+		    border-bottom: 1px solid #DCDCDC;
+		    border-top: 1px solid #DCDCDC;
+		    border-right: 1px solid #DCDCDC;
+		    color: #434A58;
+		    font-size: 10px;
+		    font-weight: bold;
+		    padding: 4px 10px;
+		    text-transform: uppercase;
+		    
+		}
+		th:first-child{
+			 border-left: 1px solid #DCDCDC;
+		}
+		
+		th.search-th {
+			> input{
+				width: 100%;
+			}
+		}
+		
+		th.search-th:nth-child(5) {
+			overflow: visible;
+			> input{
+				position:relative;
+				width: 162%;
+			}
+		}
+		
+		
+			.extended-row{
+				width:100%;
+				background-color:#FFF;
+				border:none !important;
+				td{
+					border: none;
+				
+				}
+				
+				tr{
+					border:none;
+				}
+			}
+			
+			.extended-div{
+				width:925px;
+			
+				button{
+					margin-left:20px;
+				}
+				
+				.area-div{
+					margin-bottom: 20px;
+					position: relative;
+					> span {
+						vertical-align:top;
+						&[class^="span-"] {
+							padding-top: 9px;
+							padding-right: 10px;
+							&.last {
+								padding: 0;
+								width: 10%;
+								position: absolute;
+								right: -15px;
+								a {
+									margin-top: 9px;
+								}
+								&.demanda {
+									right: -4px;
+									a {
+										margin-top: 3px;
+									}
+								}
+							}
+							&.cod_peticion {
+								padding-top: 8px;
+								text-align: right;
+							}
+						}
+					}
+					.btn-group.bootstrap-select {
+						margin-bottom: 0;
+						.btn.dropdown-toggle {
+							margin-left: 0;
+						}
+					}
+					&.email {
+						> span {
+							vertical-align: middle;
+						}
+						input {
+							display: inline-block;
+							margin-left: 80px;
+							width: 300px;
+						}
+					}
+
+				}
+				
+				> .dtos-div{
+					
+					 display: inline-block;
+				    margin-top: 20px;
+				    width: 743px;
+					
+									
+					select {
+						margin-left:40px;
+					}
+				}
+				
+				.areas{
+					display:inline-block;
+					width: 89%;
+					margin-left:40px;
+				}
+				
+				.radio-container{
+					display:inline-block;
+					 padding-left: 40px;
+    				width: 265px;
+					
+					span{
+						vertical-align: baseline;
+					}
+				}
+				#edit-item {
+					button {
+						float: right;
+					}
+					.bootstrap-select {
+						width: 100%;
+					}
+					&.demanda {
+						.area-div {
+							> span {
+								vertical-align: middle;
+							}
+						}
+					}
+				}
+			}
+			
+			.edit_input{
+				width:100%;		
+			}
+		
+		
+		
+		
+		.table_results tr:not(first-child){
+			height:70px;
+			border-bottom: 1px solid #dcdcdc !important;
+		}		
+	
+		td:nth-child(1),  th:nth-child(1){
+			width:120px;
+			max-width:120px;
+		}
+		td:nth-child(2),  th:nth-child(2){
+			width:115px;
+			max-width:115px;
+			
+		}
+		td:nth-child(3),  th:nth-child(3){
+			width:115px;
+			max-width:115px;			
+		}
+		td:nth-child(4),  th:nth-child(4){
+			width:305px;
+			max-width:305px;
+		}
+
+		td:nth-child(5){
+			width:175px;
+			max-width:175px;
+			border-right:0px;
+		}
+		
+		th:nth-child(5){
+			border-right:0px;
+		}
+		
+		 th:last-child{
+			width:122px;
+			max-width:122px;
+		}
+		
+		td{
+			padding:20px;
+			padding-right:1px;
+			padding-left:13px;
+			font-weight:bold;
+			font-size:12px;
+			color:#434A58;
+			font-family:arial;
+			text-align:left;
+			vertical-align:middle !important;
+			
+			span{
+				vertical-align:middle;
+			}
+			
+			.papelera{
+				background-image:url(../img/delete.png);
+				vertical-align:middle;
+				margin-left:10px;
+				height:30px;
+				width:30px;
+				display:inline-block;
+				cursor: pointer;
+				&:active{
+					background-image:url(../img/delete-active.png);
+				}		
+				&.inactive{
+					cursor: default;
+					background-image:url(../img/delete-inactive.png);
+				}
+			}
+			
+			.return{
+				background-image:url(../img/return.png);
+				vertical-align:middle;
+				margin-left:10px;
+				height:30px;
+				width:30px;
+				display:none;
+				&:active{
+					background-image:url(../img/returnon.png);
+				}
+			}
+			
+			.guardar{
+				background-image:url(../img/guardar.png);
+				vertical-align:middle;
+				margin-left:10px;
+				height:30px;
+				width:30px;
+				display:none;
+				&:active{
+					background-image:url(../img/guardaron.png);
+				}		
+			}
+			
+			.lapiz{
+				background-image:url(../img/edit.png);
+				vertical-align:middle;
+				margin-left:10px;
+				height:30px;
+				width:30px;
+				display:inline-block;	
+				cursor: pointer;
+				&:active{
+					background-image:url(../img/edit-active.png);
+				}
+				&.inactive{
+					cursor: default;
+					background-image:url(../img/edit-inactive.png);
+				}
+			}
+			
+			.vs{
+				position:relative;
+				left:0px;	
+				vertical-align:inherit;
+				cursos:pointer;
+				height:45px;
+			}
+		}
+	} 
+	> .sortable tr:first-child{
+			background-color:#F8F8F5;	
+			height:30px;
+			text-align:left;		
+		}
+		
+	.users{
+		max-height:500px;
+		display:inline-block;
+		overflow:auto;
+		border-bottom: 2px solid #DCDCDC;
+		
+		
+	}
+}
+.headButtonsBox{
+	> button#newUserButton,  button#newProjectButton{
+		position:relative;
+		margin-right:5px;
+		vertical-align:top;
+		
+		
+	}
+	
+
+    margin-bottom: 10px;
+    position: relative;
+    text-align: right;
+	.form-holder{
+		border: 1px solid #FFF;
+		background-color:#F1F1F1;
+		border-radius: 2px;
+		overflow: hidden;
+		height:0px;
+		position:relative;
+		
+		-webkit-transition: height 1s, border 1s; /* For Safari 3.1 to 6.0 */
+		transition: height 1s, border 1s;
+		&.open {
+			height: 441px;
+			border: 1px solid #DCDCDC;
+			margin-bottom:20px;
+			padding-bottom: 20px;
+			top:-1px;
+		}
+		button {
+			margin-right: 10px;
+			&:last-of-type{
+				margin-right: 20px;
+			}
+			
+		}
+		.form-container{
+			display: block;
+			text-align: center;
+			margin: 20px;
+			background-color:#FFF;
+			padding:30px;
+			border: 1px solid #dcdcdc;
+			border-radius:2px; 
+			
+			
+
+			.form-fieldset{
+				display: block;
+				width: 92%;
+			    text-align: left;			  
+			    margin: 10px auto 0;
+			    
+			    
+			    > .fieldset-title{
+			    	display:block;
+			    	margin-bottom:10px;
+			    }
+			    
+			    label{
+			    	display:inline-block;						
+					font-family: "BBVA Web Light";
+					font-size:12px;
+					color:#434A58;
+					text-align:left;
+					font-weight:100;
+			    }
+			    
+			    span{
+						display:inline-block;						
+						font-family: "BBVA Web Light";
+						font-size:12px;
+						color:#434A58;
+						text-align:left;
+						margin-right:10px !important;
+					}	
+				    
+			    .radio-container-holder {
+			    	display: block;
+					border: 1px solid #dcdcdc;
+					border-radius: 4px;
+					display: inline-block;
+					padding:15px 20px 10px 20px;
+					width: 780px;
+					
+					.radio-container{
+						.clearfix();
+						display:inline-block;
+						width:32.333%;
+						padding: 0 20px;
+						margin: 5px 0;
+						height:30px;
+						input{
+							float:right;
+						}
+					}
+				}
+				
+				
+			}
+
+			.form-field{
+				display: inline-block;
+				width: 49%;
+				vertical-align: top;
+				margin-bottom: 10px;
+				.bootstrap-select{
+			    	position:relative;
+			    	width:245px !important;
+			    	&.error {
+			    		button {
+				    		.linear-gradient(#f7e9e9, #f7e9e9);
+							border: 1px solid #e8e8e6;
+						}
+			    	}
+			    }
+				
+				> span{
+					width:75px;
+					display:inline-block;
+					margin-right:40px;
+					font-family: "BBVA Web Light";
+					font-size:12px;
+					color:#434A58;
+					text-align:left;
+				}	
+				
+				.long{
+					width:245px;
+					left:0;
+				}
+			}
+		}	
+	}	
+}
+
+
+/* CLIENTES */
+
+.clients{
+
+	.bootstrap-select{
+		width:80px !important;
+	}
+
+	> #btn_alta_cliente{
+		margin-right:10px;
+	}
+
+	> .abc{
+		margin-top:20px;
+		text-align:center;
+		margin-bottom:0px;	
+		
+		> div {		
+		
+			> a {
+			
+				text-decoration:none;
+			
+				> span{
+					margin-right:1.5%;
+					
+					font-family: BBVA Web Light;
+					font-size:18px;
+					
+				}
+				
+				>span.active{
+					color: #0065B7;
+					font-weight: bold;
+				}
+				
+				>span.inactive{
+					color:#71777F;
+				}
+			}
+			
+		}
+		
+	}
+	
+	
+
+	> div.search_div{
+		display:inline-block;
+		float:right;
+		max-width:300px;
+		
+		#buscador_cliente{
+			float:right;
+			margin-bottom:5px;
+			width: 166px;
+		}
+		
+	
+		button{
+			float:right;
+			font-family: BBVA Web Medium;
+			font-size:12px;
+			font-weight:bold;
+			margin-left:10px;
+			width:165px;
+			
+			> img{
+				height:20px;
+				margin-left: 10px;
+	    		vertical-align: sub;
+			}
+		}
+		
+		.btn-group{
+			float:right;
+			
+			> button{
+				 background: linear-gradient(to bottom, #0069b1 0px, #004b8c 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+				 color: white;				 
+			}
+			
+			> .dropdown-menu{
+				> li > a{
+					
+					padding:3px 12px;
+				
+					> span{
+					
+						background-repeat: no-repeat;
+						padding-left:20px;
+						margin-left:0px !important;
+						margin-right:5px;
+					}
+				} 
+			}
+		}
+	} 
+	
+	
+
+	.selector{
+		width:385px;
+		margin-top:5px;
+	
+		> span{
+			font-family: arial;
+			font-size:12px;
+			color:#71777F;
+		}
+		
+		> select{
+			height: 25px;
+		    padding: 2px;
+		    margin-right:5px;
+		}
+		
+	}
+
+	.leyenda_clientes{
+	
+		.bootstrap-select{
+			float:inherit;
+		}
+	
+		display:inline-block;
+		width:450px;
+	
+		.color{
+			display:inline-block;
+			height: 20px;
+			width:20px;
+			margin-right: 5px;
+		}
+		
+		span{
+			font-family: arial;
+			font-size:12px;
+			color:#71777F;
+			font-weight: bold;
+			vertical-align:text-top;
+			margin-left:5px;
+			margin-right: 15px;
+		}
+		
+		.alta{
+			background-color: #F6891E;
+		}
+		
+		.media{
+			background-color: #FDBD2C;
+			margin-top:0px !important;
+		}
+		
+		.baja{
+			background-color: #86C82D;
+		}
+		
+		.bootstrap-select.btn-group .btn .caret {
+			right: 0px;
+		}
+		
+		.selects{
+			span{
+				margin-left:0px;
+				margin-right:10px;
+			}
+		}
+	}
+}
+
+#message_div, .message_div{
+				position: absolute;
+				border: 1px solid black;
+			    border-radius: 2px;
+			    display: inline-block;
+			    width: 90%;
+			    position: relative;
+			    border-radius:4px;
+			    opacity: 0;
+				filter: alpha(opacity=0);
+				&.error, &.success {
+					margin: 20px auto 0;
+					position: inherit;
+			    	display: block;
+			    	opacity: 1;
+    				filter: alpha(opacity=100);
+
+    				> span {
+						display: inline-block;
+    					padding: 10px;
+    				}
+				}
+			    &.error {
+    				background-color: #F7E9E9;
+					border: 1px solid #CA0161; 
+					> span{
+						color: #C4136C;
+					}
+			    }
+			    &.success{
+					background-color: #E2FAFE;
+					border: 1px solid #c8e1e6;
+					text-align: left;
+					> span {
+						color: #0065b7;
+					} 
+				}
+			}

@@ -1,0 +1,620 @@
+// SPAN 24
+.span-24 {
+	display: inline-block;
+	width: 100%;
+}
+.span-12 {
+	display: inline-block;
+	width: 50%;
+}
+.span-10 {
+	display: inline-block;
+	width: 41.66666666666667%;
+}
+.span-9 {
+	display: inline-block;
+	width: 38%;
+}
+.span-8 {
+	display: inline-block;
+	width: 33.33333333333333%;
+}
+.span-7 {
+	display: inline-block;
+	width: 29.16666666666667%;
+}
+.span-6 {
+	display: inline-block;
+	width: 25%;
+}
+.span-5 {
+	display: inline-block;
+	width: 20.83333333333333%;
+}
+.span-4 {
+	display: inline-block;
+	width: 16.66666666666667%;
+}
+.span-3 {
+	display: inline-block;
+	width: 12.5%;
+}
+.span-2 {
+	display: inline-block;
+	width: 8.333333333333333%;
+}
+body{
+	margin:0px;
+	background-color:#F1F1F1;
+}
+
+.clientes-24x{
+	background-position: -444px -444px;
+}
+	
+.pruebas-24x{
+	background-position: -444px -518px;
+}
+
+.servicios-24x{
+	background-position: -74px -1332px;
+}
+
+.informes-24x{
+	background-position: -518px -1036px;
+}
+
+.soporte-24x{
+	background-position: -148px -1851px;
+}
+
+.documentacion-24x{
+	background-position: -518px -1036px;
+}
+
+html{
+	background-color:#F1F1F1;
+}
+
+.body-layout{
+	padding: 0px;
+	background-color:#F1F1F1;
+	text-align:center;	
+}
+
+
+.form-field{
+	display: inline-block;
+	width: 45%;
+	vertical-align: top;
+	margin-bottom: 10px;
+	.bootstrap-select{
+    	position:relative;
+    	width:245px !important;
+    	&.error {
+    		button {
+	    		.linear-gradient(#f7e9e9, #f7e9e9);
+				border: 1px solid #e8e8e6;
+			}
+    	}
+    }
+	
+	> span{
+		width:75px;
+		display:inline-block;
+		margin-right:40px;
+		font-family: "BBVA Web Light";
+		font-size:12px;
+		color:#434A58;
+		text-align:left;
+	}	
+	
+	.long{
+		width:245px;
+		left:0;
+	}
+}
+		
+
+.body-container{	
+	display:inline-block;
+	width:980px;
+	padding: 0 10px;
+	margin-right:auto;
+	margin-left:auto;
+	text-align:left;	
+	background-color:white;
+	min-height:570px;
+	box-shadow: 2px 2px 2px 0 #a3a3a3;
+	-moz-box-shadow: 2px 2px 2px 0 #a3a3a3;
+	-webkit-box-shadow: 2px 2px 2px 0 #a3a3a3;
+	margin-bottom:20px;
+}
+
+p{
+	font-family:Arial;
+}
+
+.align-top{
+	vertical-align:top;
+}
+
+
+input , textarea {
+	resize: none;
+    border: 1px solid #e8e8e6;
+    border-radius: 2px;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.16) inset;
+    color: #434a58;
+    font: 12px Arial,sans-serif;
+    height: auto;
+    margin: 0;
+    padding: 0.583em 0.755em 0.5em;
+    
+    &.readonly{
+    	background-color: #F4F7F5;
+    }
+}
+
+input:active, input:focus, textarea:active, textarea:focus{
+	 background-color: #fffff5;
+     box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.16) inset, 0 0 0 2px #def4fb;
+     
+     &.readonly{
+    	background-color: #F4F7F5;
+    }
+}
+
+.btn-atras{
+	cursor:pointer;
+	background-image: url("../img/bot-volver.png");
+	display: inline-block;
+    height: 30px;
+    width: 88px;
+    
+    &:active{
+    	background-image: url("../img/bot-volveron.png");
+    }
+}
+
+a.mas{
+		background-image:url(../img/mas1.png);
+		vertical-align:middle;
+		margin-left:10px;
+		height:32px;
+		width:32px;
+		display:inline-block;	
+		cursor: pointer;
+		&:active{
+			background-image:url(../img/mas-hover.png);
+		}
+		
+	}
+
+.gestion_demanda .btn-atras{
+	margin-top:20px;
+	float:right;
+}
+
+.lbl{
+	font-family: "BBVA Web Light";
+	font-size: 12px;
+}
+	
+.alta_usuario{
+	
+	h1{
+		width: 280px;
+	}
+
+	.btn-atras{
+		float:right;
+		margin-top:20px;
+	}	
+} 
+
+.gestion_cliente .btn-atras{
+	float:right;
+	margin-top:20px;
+}	
+
+.gestion_cliente {
+	td:nth-child(2),  th:nth-child(2){
+			width:115px;
+			max-width:175px;
+			
+		}
+		td:nth-child(3),  th:nth-child(3){
+			width:205px;
+			max-width:305px;			
+		}
+		
+		.usersTable{
+		
+		
+			> .table th:nth-child(5) {		
+				border-right: 1px solid #dcdcdc;				
+				 > input{
+				 	width:105% !important;
+				 }
+			}
+			 > .table td:nth-child(3), 
+			 > .table th:nth-child(3) {			   
+			    	width: 305px !important;
+			    	max-width: inherit;
+			}
+			
+			 > .table td:nth-child(4), 
+			 > .table th:nth-child(4) {			   
+			    	width: 140px !important;
+			}
+		} 
+}
+
+
+.pagination{
+	margin-bottom:0px;
+}
+
+.pagesummary{
+	display:block;
+	font-family:arial;
+	margin-bottom:20px;
+}
+
+
+
+
+label.ui-marmots-label-check, label.ui-marmots-label-radio {
+    -moz-user-select: none;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 400;
+    height: 18px;
+    margin-bottom: 0;
+ }
+
+
+.radio-container {
+	position: relative;
+	input[type="checkbox"] {
+	    //visibility:hidden;
+	    //display: none;
+	    z-index: -1;
+	    position: absolute;
+	}
+	input[type="checkbox"] + label span,
+	label.error + label span,
+	 {
+	    display:inline-block;
+	    width:19px;
+	    height:19px;
+	    background:url(/img/input-check.png) left top no-repeat;
+	    position:relative;
+	    top:5px;
+	    margin-right:10px;
+	}
+	input[type="checkbox"]:checked + label span {
+	    background:url(/img/input-check-checked.png) left top no-repeat;
+	    position:relative;
+	    top:5px;
+	    margin-right:10px;
+	}
+}
+
+select{
+	border: 1px solid #e8e8e6;
+    border-radius: 2px;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.16) inset;
+    color: #434a58;
+    font: 12px Arial,sans-serif;
+    height: auto;
+    margin: 0;
+    padding: 0.583em 0.755em 0.5em;
+}
+
+
+button {
+	.linear-gradient(#0079C1, #00559D);
+    border: 1px solid #00559D;
+    border-radius: 4px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font: 12px/24px "BBVA Web Medium",arial bold,sans-serif;
+    padding: 2px 9px 2px 8px;
+    position: relative;
+    text-align: center;
+    text-shadow: none;
+    vertical-align: middle;
+    height: 30px;
+    
+    
+   
+}
+
+button:not(.selectpicker):not(.white-btn):not(.pink-btn):hover{
+    	.linear-gradient(#0069b1, #004b8c);
+    }
+
+.selectpicker > span.filter-option{
+	 font-family: Arial, sans-serif;
+	 font-size:12px;
+}
+
+
+
+.white-btn{
+	.linear-gradient(#F1F1F1, #F1F1F1);
+    background-color: #F1F1F1;
+	border: 1px solid #dcdcdc;
+	border-bottom:0px;
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	color:#0065B7;
+	z-index:1;
+	height:50px;	
+	padding-bottom: 11px;
+}
+
+.pink-btn{
+	.linear-gradient(#CC0966, #9D004A);
+	border: 1px solid #8E0043;
+	border-radius:4px;
+	color:#FFFFFF;
+	z-index:1
+}
+
+.proyecto_span,
+.proyecto_span_fixed{
+	background-image: url("../img/nuevoPB.png");
+    display: inline-block;
+    height: 16px;
+    margin-left: 10px;
+    vertical-align: text-bottom;
+    width: 13px;	
+    
+    &.blue{
+    	background-image: url("../img/nuevoP.png");
+    }
+}
+
+.cliente_span{
+	background-image: url("../img/new-user-white.png");
+    height: 15px;
+    margin-left: 10px;
+    vertical-align: text-bottom;
+    width: 15px;	
+    display:inline-block;
+}
+
+.cliente_span.blue{
+	background-image: url("../img/new-user-blue.png");
+ 	
+}
+
+
+.coste_span{
+	background-image: url("../img/pagosBlanco.png");
+    height: 15px;
+    margin-left: 10px;
+    vertical-align: text-bottom;
+    width: 15px;	
+    display:inline-block;
+}
+
+.coste_span.blue{
+	background-image: url("../img/pagosAzul.png");
+ 	
+}
+
+.user_span{
+	background-image: url("../img/user16.png");
+    display: inline-block;
+    height: 14px;
+    margin-left: 10px;
+    vertical-align: text-bottom;
+    width: 15px;	
+}
+
+.user_span.blue{
+	background-image: url("../img/user16_blue.png");
+ 	
+}
+
+.demanda_span {
+	background-image: url("../img/gestion_white_small.png");
+    display: inline-block;
+    height: 16px;
+    margin-left: 10px;
+    vertical-align: text-bottom;
+    width: 15px;
+    
+    &.blue {
+    	background-image: url("../img/gestion_blue_small.png");
+    }	
+}
+
+.excel_span{
+	background-image: url("../img/icon-excel-white.png");
+	background-repeat: no-repeat;
+    display: inline-block;
+    height: 20px;
+    margin-left: 10px;
+    vertical-align: text-bottom;
+    width: 19px;	
+    background-position:50% 90%;
+}
+
+.bootstrap-select{
+		float:right;
+		margin-bottom:0px !important;
+		width:215px;
+		
+		> .btn-default{
+			 border: 1px solid #e8e8e6;
+			 box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.16) inset;
+		}
+	}
+
+
+
+img{
+	vertical-align:inherit !important;
+}
+
+
+
+h1{
+	display:inline-block !important;
+	font-family: "BBVA Web Light" !important;
+	font-size:30px !important;
+	color:#0078D2 !important;	
+}
+
+h2{
+	font-family: "BBVA Web Light" !important;
+	font-size:22px !important;
+	color:#0078D2 !important;
+	display:inline-block;	
+}
+
+hr{
+	color:#F8F8F5;
+	margin:0px;
+	margin-bottom:10px;
+	border-top: 1px solid #D1D1D1;
+	}
+	
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default {
+	background-color: #fffff5;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.16) inset, 0 0 0 2px #def4fb;
+}
+
+/* ****** GRID  ******  */
+
+/* ****** Ventana modal  ******  */
+
+.modal-content{
+	border: 10px solid #F1F5F2;
+	padding:10px;
+	padding-top:0px;
+	
+	p{
+		
+	}
+	
+
+	.form-field.horas{
+		div.input{
+			display:block !important;
+			float:none;
+			text-align:inherit;
+			
+			div:first-child{			
+				float:left !important;				
+			}
+			
+			div:first-child + select{			
+				float:right !important;	
+				position:relative;			
+			}
+		}
+	}
+
+	
+}
+
+.modal-footer{
+		  border: 0 none;
+	      padding: 0;
+	      text-align: center;
+		
+		
+		> button{
+			margin-right:15px;
+		} 
+	}
+
+form .datepicker {
+  background-image: url('../img/textbox_calendar.png');
+  background-position: 95% 50%;
+  background-repeat: no-repeat;
+  background-attachment: center;
+  cursor: pointer;
+  padding-right: 30px;
+  width: 245px;
+  
+}
+
+
+.euro {
+	background: url("../img/euro.png") 96% center no-repeat;
+	padding-right:30px;
+}
+
+.ajax_loader{
+	text-align:center;
+	margin-top:20px;
+	
+}
+
+.breadcrumbs {
+	display: inline-block;
+    height: 40px;
+    position: absolute;
+    z-index:1;
+
+	> span{
+		color: #0078d2;
+		cursor: pointer;
+		font-family: arial;
+	}
+}
+
+.form-field-divider{
+	display: inline-block;
+    vertical-align: top;
+    width: 48%;
+    
+    .form-field{
+    	width:100% !important;
+    	display: inline-block;
+    	text-align:left;
+    	
+    	.input {
+    	
+    		display:inline-block;
+    	
+    		> input,
+    		> textarea,
+    		> div{
+	    		width: 245px;
+	    	}
+    	}		    	
+    }
+}
+
+/* Clientes */
+
+.clients > div.search_div button {
+	float: right;
+	font-family: BBVA Web Medium, arial !important;
+	font-weight: normal !important;
+	font-size: 12px;
+	font-weight: 700;
+	margin-left: 10px;
+	width: 165px;
+}
+
+#accion_menu.white{
+	background:none;
+	background-color:white;
+	color: #004b8c;
+	border: 1px solid;
+}
+
+/* Modal errors */
+
+.modal_ajax .form-field label.error{
+	display:none !important;
+}

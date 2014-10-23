@@ -1,0 +1,12 @@
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+"http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+ 
+   <definition name="template" path="../layout/layout.jsp">
+	<put name="header" value="../header.jsp" />	
+	<put name="side-bar" value="../sidebar.jsp"/>
+	<put name="footer" value="../footer.jsp" />
+   </definition>
+ 
+</tiles-definitions>
