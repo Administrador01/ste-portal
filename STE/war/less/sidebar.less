@@ -1,0 +1,59 @@
+#sidebar{
+	.right-middle();
+	background-color:transparent;
+	overflow:hidden;
+	right: -95px;
+	-webkit-transition: right 0.5s; /* For Safari 3.1 to 6.0 */
+	transition: right 0.5s;
+	&.hovering {
+		right: -5px;
+	}
+	
+	.side-menu{
+		.linear-gradient(#0079c1, #00529b);
+		border-radius:5px 0 0 5px;
+		ul {
+			list-style-type:none;
+			margin:0px;
+			padding:0px;
+			li {
+				a{
+					border-radius:5px 0 0 5px;
+					display: block;
+					padding: 10px 10px 10px 0;
+					list-style-type: none;
+					font-family: BBVA Web Light;
+					font-size:15px;
+					text-decoration:none;
+					color:#FFF;
+					&:hover {
+						background-color:#005098;
+					}
+					span{
+						display: block;
+						margin: 0 20px;
+						padding:5px 0px 5px 40px;
+						font-weight: bolder;
+						background-repeat: no-repeat;
+						&.usuarios {
+							background-position: left center;
+							background-image: url('../img/user-white20.png');
+						}
+						&.demanda {
+							background-position: left center;
+							background-image: url('../img/gestion_white.png');
+						}
+						&.informes {
+							background-position: left center;
+							background-image: url('../img/informe-white.png');
+						}
+						&.logs {
+							background-position: 2px center;
+							background-image: url('../img/logs-white.png');
+						}
+					}
+				}
+			}
+		}
+	}
+}

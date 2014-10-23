@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE struts-config PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+"http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+
+	<global-forwards>
+		<forward name="home" path="/home.do" />
+		
+	</global-forwards>	
+
+	<action-mappings>
+		<action path="/home" type="com.ste.actions.HomeAction">
+			<forward name="ok" path="/jsp/skeletons/home-skeleton.jsp" />
+		</action>
+		
+		<action path="/userModal" type="com.ste.actions.modal.UserModalAction">
+			<forward name="ok" path="/jsp/modal/modal-user.jsp" />
+			
+		</action>
+		
+		<action path="/admin/users" type="com.ste.actions.UsersAction">
+			<forward name="ok" path="/jsp/skeletons/users-skeleton.jsp" />
+		</action>
+		
+		
+	</action-mappings>
+	
+	
+	<plug-in className="org.apache.struts.tiles.TilesPlugin" >
+		<set-property property="definitions-config"
+		value="/WEB-INF/tiles-defs.xml"/>
+	</plug-in>
+
+</struts-config>

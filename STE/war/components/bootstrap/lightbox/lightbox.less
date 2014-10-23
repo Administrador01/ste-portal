@@ -1,0 +1,80 @@
+.lightbox {
+	display: none;
+}
+
+.bbva-lightbox.ui-dialog {
+	background: #F4F7F5;
+	border: 1px solid #EDEDED;
+	border-radius: 4px 4px 4px 4px;
+	padding: 9px;
+	position: fixed;
+}
+
+.ui-front {
+	z-index:1100;
+}
+
+.ui-widget-overlay {
+	background: #EEE;
+	opacity: 0.8;
+}
+
+@media (max-width: 768px){
+	.bbva-lightbox.ui-dialog {
+		border: none;
+		padding: 0;
+		left:0 !important;
+		width: 100% !important;
+		max-width: 100% !important;
+		max-height:100%;
+		overflow:auto;
+	}
+}
+
+.bbva-lightbox.ui-dialog .lightbox {
+	background: #FFF;
+	border: 1px solid #DCDCDC;
+	border-radius: 0px 0 4px 4px;
+	border-top: none;
+	padding:20px;
+}
+
+.bbva-lightbox.ui-dialog .ui-dialog-titlebar {
+	background: #FFF;
+	padding: 0;
+	z-index: 1;
+	border: 1px solid #DCDCDC;
+	border-bottom: none;
+}
+
+.bbva-lightbox.ui-dialog .ui-dialog-titlebar .ui-dialog-title{
+	padding: 10px 0 12px;
+	font-size: 24px;
+	color: #0078D2;
+	font-family: "BBVA Web Light", arial, sans-serif;
+	font-weight: normal;
+	line-height: 30px;
+	width: auto;
+	margin: 0 20px;
+	display: block;
+	float: none;
+	border-bottom:1px solid gainsboro;
+}
+
+.bbva-lightbox.ui-dialog .ui-dialog-titlebar-close {
+	top: 18px;
+	right: 8px;
+	background: url("img/lightbox-close-blue-circle.png") no-repeat scroll left top transparent;
+	height: 19px;
+	width: 19px;
+	border:none;
+	padding: 0;
+}
+
+.bbva-lightbox.ui-dialog .ui-dialog-titlebar-close.ui-corner-all.ui-state-hover {
+	background: none;
+	border: none;
+}
+
+
+
