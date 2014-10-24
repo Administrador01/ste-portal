@@ -87,16 +87,13 @@ public class UserServlet extends HttpServlet {
 		String ap2 = req.getParameter("ap2");
 		String email = req.getParameter("email");
 		
-		String[] areas = req.getParameterValues("areas");
-		ArrayList<String> areas_list = new ArrayList<String>();
 		
-		if (areas!=null){
-			for (String a:areas){
-				areas_list.add(a);
-			}
-		}
-		
-		
+		String area_cliente = req.getParameter("area_cliente");
+		String area_documentacion = req.getParameter("area_documentacion");
+		String area_informes = req.getParameter("area_informes");
+		String area_pruebas = req.getParameter("area_pruebas");
+		String area_servicios = req.getParameter("area_servicios");
+		String area_soporte = req.getParameter("area_soporte");		
 		
 		String dto = req.getParameter("dto");
 		
@@ -116,7 +113,13 @@ public class UserServlet extends HttpServlet {
 		u.setDepartamento(dto);
 		u.setPermisoStr(permisoStr);
 		u.setPermiso(permiso);
-		u.setAreas(areas_list);
+
+		u.setPermiso_clientes(Integer.parseInt(area_cliente));
+		u.setPermiso_documentacion(Integer.parseInt(area_documentacion));
+		u.setPermiso_informes(Integer.parseInt(area_informes));
+		u.setPermiso_pruebas(Integer.parseInt(area_pruebas));
+		u.setPermiso_servicios(Integer.parseInt(area_servicios));
+		u.setPermiso_soporte(Integer.parseInt(area_soporte));
 		
 		uDao.createUser(u);
 		
@@ -125,7 +128,6 @@ public class UserServlet extends HttpServlet {
 		json.append("permiso", u.getPermisoStr());
 		json.append("permisoid", permiso);
 		json.append("dto", dto);
-		json.append("area", areas);
 		
 		resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");       
@@ -146,7 +148,13 @@ public class UserServlet extends HttpServlet {
 		String dto = req.getParameter("dto");	
 		Integer permiso = Integer.parseInt(req.getParameter("permiso"));
 		
-		String[] areas = req.getParameterValues("areas");
+
+		String area_cliente = req.getParameter("area_cliente");
+		String area_documentacion = req.getParameter("area_documentacion");
+		String area_informes = req.getParameter("area_informes");
+		String area_pruebas = req.getParameter("area_pruebas");
+		String area_servicios = req.getParameter("area_servicios");
+		String area_soporte = req.getParameter("area_soporte");		
 		
 		
 		
@@ -177,18 +185,14 @@ public class UserServlet extends HttpServlet {
 			u.setPermisoStr(permisoStr);
 			u.setDepartamento(dto);
 			
-			ArrayList<String> areas_list = new ArrayList<String>();
+			u.setPermiso_clientes(Integer.parseInt(area_cliente));
+			u.setPermiso_documentacion(Integer.parseInt(area_documentacion));
+			u.setPermiso_informes(Integer.parseInt(area_informes));
+			u.setPermiso_pruebas(Integer.parseInt(area_pruebas));
+			u.setPermiso_servicios(Integer.parseInt(area_servicios));
+			u.setPermiso_soporte(Integer.parseInt(area_soporte));
+			 
 			
-			if (areas!=null){
-				for (String a:areas){
-					areas_list.add(a);
-				}
-			}	
-			
-			
-			
-			
-			u.setAreas(areas_list);
             u.setErased(false);
             
 			uDao.createUser(u);
@@ -280,7 +284,13 @@ public class UserServlet extends HttpServlet {
 			s.addCell(new Label(3, 0, "EMAIL",cellFormat));
 			s.addCell(new Label(4, 0, "PERFIL",cellFormat));
 			s.addCell(new Label(5, 0, "DEPARTAMENTO",cellFormat));
-			s.addCell(new Label(6, 0, "AREAS",cellFormat));
+			
+			s.addCell(new Label(6, 0, "AREA CLIENTE",cellFormat));
+			s.addCell(new Label(7, 0, "AREA PRUEBAS",cellFormat));
+			s.addCell(new Label(8, 0, "AREA SERVICIOS",cellFormat));
+			s.addCell(new Label(9, 0, "AREA INFORMES",cellFormat));
+			s.addCell(new Label(10, 0, "AREA SOPORTE",cellFormat));
+			s.addCell(new Label(11, 0, "AREA DOCUMENTACIÓN",cellFormat));
 			
 			
 			int aux=1;
@@ -298,16 +308,14 @@ public class UserServlet extends HttpServlet {
 				s.addCell(new Label(4, aux, u.getPermisoStr()));
 				s.addCell(new Label(5, aux, u.getDepartamento()));
 				
-				List<String> areas = u.getAreas();
-				String areasStr = "";
+	
 				
-				if (areas!=null){
-					for (String a:areas){
-						areasStr += a + ", ";
-					}
-				}
-				
-				s.addCell(new Label(6, aux, areasStr));
+				s.addCell(new Label(6, aux, u.getPermiso_clientes().toString()));
+				s.addCell(new Label(7, aux, u.getPermiso_pruebas().toString()));
+				s.addCell(new Label(8, aux, u.getPermiso_servicios().toString()));
+				s.addCell(new Label(9, aux, u.getPermiso_informes().toString()));
+				s.addCell(new Label(10, aux, u.getPermiso_soporte().toString()));
+				s.addCell(new Label(11, aux, u.getPermiso_documentacion().toString()));
 				
 				aux++;
 			}		

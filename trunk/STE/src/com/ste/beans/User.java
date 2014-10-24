@@ -39,16 +39,27 @@ public class User implements Serializable {
 	private String departamento;
 	
 	@Persistent
-	private int permiso;
+	private Integer permiso;
 	
-	public ArrayList<String> getAreas() {
-		return areas;
-	}
-
-	public void setAreas(ArrayList<String> areas) {
-		this.areas = areas;
-	}
-
+	@Persistent
+	private Integer permiso_clientes;
+	
+	@Persistent
+	private Integer permiso_pruebas;
+	
+	@Persistent
+	private Integer permiso_servicios;
+	
+	@Persistent
+	private Integer permiso_informes;
+	
+	@Persistent
+	private Integer permiso_soporte;
+	
+	@Persistent
+	private Integer permiso_documentacion;
+	
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -59,8 +70,7 @@ public class User implements Serializable {
 	@Persistent
 	private Boolean erased;
 	
-	@Persistent
-	private ArrayList<String> areas;
+	
 	
 	public User(String nombre, String apellido1, String apellido2,
 			String email, int permiso, String permisoStr, String areas,String dto) {
@@ -74,6 +84,7 @@ public class User implements Serializable {
 		this.departamento = dto;
 	}
 		
+	
 	public User() {
 		super();
 	};
@@ -86,13 +97,75 @@ public class User implements Serializable {
 		this.erased = erased;
 	}
 
-	public int getPermiso() {
+	public Integer getPermiso() {
 		return permiso;
 	}
 
-	public void setPermiso(int permiso) {
+
+	public void setPermiso(Integer permiso) {
 		this.permiso = permiso;
 	}
+
+
+	public Integer getPermiso_clientes() {
+		return permiso_clientes;
+	}
+
+
+	public void setPermiso_clientes(Integer permiso_clientes) {
+		this.permiso_clientes = permiso_clientes;
+	}
+
+
+	public Integer getPermiso_pruebas() {
+		return permiso_pruebas;
+	}
+
+
+	public void setPermiso_pruebas(Integer permiso_pruebas) {
+		this.permiso_pruebas = permiso_pruebas;
+	}
+
+
+	public Integer getPermiso_servicios() {
+		return permiso_servicios;
+	}
+
+
+	public void setPermiso_servicios(Integer permiso_servicios) {
+		this.permiso_servicios = permiso_servicios;
+	}
+
+
+	public Integer getPermiso_informes() {
+		return permiso_informes;
+	}
+
+
+	public void setPermiso_informes(Integer permiso_informes) {
+		this.permiso_informes = permiso_informes;
+	}
+
+
+	public Integer getPermiso_soporte() {
+		return permiso_soporte;
+	}
+
+
+	public void setPermiso_soporte(Integer permiso_soporte) {
+		this.permiso_soporte = permiso_soporte;
+	}
+
+
+	public Integer getPermiso_documentacion() {
+		return permiso_documentacion;
+	}
+
+
+	public void setPermiso_documentacion(Integer permiso_documentacion) {
+		this.permiso_documentacion = permiso_documentacion;
+	}
+
 
 	public Key getKey() {
 		return key;

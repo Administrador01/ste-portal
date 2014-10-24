@@ -290,7 +290,8 @@ a.mas:active {
   margin-top: 20px;
   float: right;
 }
-.lbl {
+.lbl,
+.form-fieldset {
   font-family: "BBVA Web Light";
   font-size: 12px;
 }
@@ -1109,6 +1110,7 @@ form .datepicker {
 }
 .headButtonsBox .form-holder .form-container .form-fieldset div.bootstrap-select {
   float: right;
+  margin-right: 10px;
 }
 .headButtonsBox .form-holder .form-container .form-fieldset > .fieldset-title {
   display: block;
@@ -1322,6 +1324,9 @@ form .datepicker {
 #message_div.success > span,
 .message_div.success > span {
   color: #0065b7;
+}
+#edit-user-form .form-fieldset {
+  text-align: center;
 }
 form #error-messages {
   margin-bottom: 10px;

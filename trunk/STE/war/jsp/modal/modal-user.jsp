@@ -58,39 +58,57 @@
 								</div>
 							
 							</div>
-							
-							<div class="form-fieldset">
 					<span class="fieldset-title">&Aacute;reas:</span>
+					
+					<div class="form-fieldset">
 					<fieldset class='radio-container-holder'>
-						<div class="radio-container">
-							
-								<input type="checkbox" name='areas' value="Clientes" id="clientes_modal" <c:if test="${fn:contains(areas, 'Clientes')}"> checked</c:if>><label for="clientes_modal"><span></span>Clientes</label>
-							
-						</div>
-						<div class="radio-container">
-							<input type="checkbox" name='areas' value="Pruebas"
-								id="pruebas_modal" <c:if test="${fn:contains(areas, 'Pruebas')}"> checked</c:if>><label for="pruebas_modal"><span></span>Pruebas</label>
-						</div>
-						<div class="radio-container">
-							<input type="checkbox" name='areas'
-								value="Servicios" id="servicios_modal" <c:if test="${fn:contains(areas, 'Servicios')}"> checked</c:if>>
-								<label	for="servicios_modal" ><span></span>Servicios</label>
-						</div>
-						<div class="radio-container">
-							<input type="checkbox" name='areas' value="Informes" id="informes_modal" <c:if test="${fn:contains(areas, 'Informes')}"> checked</c:if>>
-							<label	for="informes_modal" ><span></span>Informes</label>
+						<div class="form-field">
+							<span>Clientes:</span><select id="area_cliente" class="long selectpicker" name="area_cliente">
+								<option value="1" ${usuario.permiso_clientes == 1 ? 'selected' : ''}>Propietario</option>	
+								<option value="2" ${usuario.permiso_clientes == 2 ? 'selected' : ''}>Editar</option>
+								<option value="3" ${usuario.permiso_clientes == 3 ? 'selected' : ''}>Ver</option>															
+							</select>
 						</div>
 						
-						<div class="radio-container">
-							<input type="checkbox" name='areas' value="Soporte"
-								id="soporte_modal" <c:if test="${fn:contains(areas, 'Soporte')}"> checked</c:if>><label for="soporte_modal"><span></span>Soporte</label>
-						</div>
-						<div class="radio-container">
-							<input type="checkbox" name='areas' value="Documentación"
-								id="documentacion_modal" <c:if test="${fn:contains(areas, 'Documentación')}"> checked</c:if>><label for="documentacion_modal"><span></span>Documentación</label>
+						<div class="form-field">
+							<span>Pruebas:</span><select id="area_pruebas" class="long selectpicker" name="area_pruebas">
+								<option value="1" ${usuario.permiso_pruebas == 1 ? 'selected' : ''}>Propietario</option>	
+								<option value="2" ${usuario.permiso_pruebas == 2 ? 'selected' : ''}>Editar</option>
+								<option value="3" ${usuario.permiso_pruebas == 3 ? 'selected' : ''}>Ver</option>								
+							</select>
 						</div>
 						
+						<div class="form-field">
+							<span>Servicios:</span><select id="area_servicios" class="long selectpicker" name="area_servicios">
+								<option value="1" ${usuario.permiso_servicios == 1 ? 'selected' : ''}>Propietario</option>	
+								<option value="2" ${usuario.permiso_servicios == 2 ? 'selected' : ''}>Editar</option>
+								<option value="3" ${usuario.permiso_servicios == 3 ? 'selected' : ''}>Ver</option>							
+							</select>
+						</div>
 						
+						<div class="form-field">
+							<span>Informes:</span><select id="area_informes" class="long selectpicker" name="area_informes">
+								<option value="1" ${usuario.permiso_informes == 1 ? 'selected' : ''}>Propietario</option>	
+								<option value="2" ${usuario.permiso_informes == 2 ? 'selected' : ''}>Editar</option>
+								<option value="3" ${usuario.permiso_informes == 3 ? 'selected' : ''}>Ver</option>							
+							</select>
+						</div>
+						
+						<div class="form-field">
+							<span>Soporte:</span><select id="area_soporte" class="long selectpicker" name="area_soporte">
+								<option value="1" ${usuario.permiso_soporte == 1 ? 'selected' : ''}>Propietario</option>	
+								<option value="2" ${usuario.permiso_soporte == 2 ? 'selected' : ''}>Editar</option>
+								<option value="3" ${usuario.permiso_soporte == 3 ? 'selected' : ''}>Ver</option>							
+							</select>
+						</div>
+						
+						<div class="form-field">
+							<span>Documentación:</span><select id="area_documentacion" class="long selectpicker" name="area_documentacion">
+								<option value="1" ${usuario.permiso_documentacion == 1 ? 'selected' : ''}>Propietario</option>	
+								<option value="2" ${usuario.permiso_documentacion == 2 ? 'selected' : ''}>Editar</option>
+								<option value="3" ${usuario.permiso_documentacion == 3 ? 'selected' : ''}>Ver</option>							
+							</select>
+						</div>
 						
 					</fieldset>
 				</div>

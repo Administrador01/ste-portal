@@ -25,19 +25,8 @@ public class UserModalAction extends Action {
 			UserDao uDao = UserDao.getInstance();
 			User usuario = uDao.getUserbyId(Long.parseLong(id));
 			
-			ArrayList<String> areas = usuario.getAreas();
-			String areasStr = "";
+				
 			
-			if (areas!=null){
-				for (String a:areas){
-					areasStr += a;
-				}
-			}
-			
-			
-			
-			
-			req.setAttribute("areas", areasStr);
 			req.setAttribute("usuario", usuario);
 			req.setAttribute("permisos", StaticConfig.permisos);
 			req.setAttribute("departamentos", StaticConfig.departamentos);			
