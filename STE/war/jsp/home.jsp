@@ -12,32 +12,38 @@
       <h2>Clientes</h2>
       <img src="img/icn_t-iconLib_J03-64px_k.png" alt="Imagen destacado"/>
       <p>Inventario de clientes y ficha resumen de cada uno con los productos/servicios implementados o en proceso.</p>
-      <a class="btn" href="#">Acceder</a> </div>
+      <button onclick="" type="button">Acceder</button>
+    </div>
     <div class="destacadoHome">
       <h2>Pruebas</h2>
       <img src="img/icn_t-iconLib_J04-64px_k.png" alt="Imagen destacado"/>
       <p>Registro de pruebas realizadas para la implementación de servicios con clientes.</p>
-      <a class="btn" href="#">Acceder</a> </div>
+      <button onclick="" type="button">Acceder</button>
+    </div>
     <div class="destacadoHome">
       <h2>Servicios</h2>
       <img src="img/icn_t-iconLib_B31-64px_k.png" alt="Imagen destacado"/>
       <p>Información detallada de los productos y servicios que se han implementado o están en proceso.</p>
-      <a class="btn" href="#">Acceder</a> </div>
+      <button onclick="" type="button">Acceder</button> 
+    </div>
     <div class="destacadoHome">
       <h2>Informes</h2>
       <img src="img/icn_t-iconLib_L15-64px_k.png" alt="Imagen destacado"/>
       <p>Obtención de informes de gestión y de seguimiento sobre las implementaciones y las pruebas realizadas.</p>
-      <a class="btn" href="#">Acceder</a> </div>
+      <button onclick="" type="button">Acceder</button> 
+    </div>
     <div class="destacadoHome">
       <h2>Soporte</h2>
       <img src="img/icn_t-iconLib_D02-64px_k.png" alt="Imagen destacado"/>
       <p>Registro de solicitudes recibidas para atención a la Post-Venta, consultas, incidencias, etc.</p>
-      <a class="btn" href="#">Acceder</a> </div>
+      <button onclick="" type="button">Acceder</button> 
+    </div>
     <div class="destacadoHome">
       <h2>Documentación</h2>
       <img src="img/icn_t-iconLib_L11-64px_k.png" alt="Imagen destacado"/>
       <p>Acceso a la documentación asociada a las implementaciones, así como procedimientos y normativas. <!-- , catálogos, formatos, estándares, etc. -->	</p>
-      <a class="btn" href="#">Acceder</a> </div>
+      <button onclick="" type="button">Acceder</button> 
+    </div>
   </div>
 </div>
 <br/>
