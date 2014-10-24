@@ -307,7 +307,10 @@ a.btn:hover, a.btn.hover, a.btn:focus, a.btn.focus {
 }
 
 
-
+div.main-menu .menu li > a [class*="icon-"] {
+    background-image: url("../img/sprite-white-x24.png");
+    margin-right: 10px;
+}
 
 
 
