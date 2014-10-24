@@ -276,6 +276,13 @@ public class UserServlet extends HttpServlet {
 		    s.setColumnView(4, 16);
 		    s.setColumnView(5, 50);
 		    s.setColumnView(6, 70);
+		    
+		    s.setColumnView(6, 70);
+		    s.setColumnView(7, 70);
+		    s.setColumnView(8, 70);
+		    s.setColumnView(9, 70);
+		    s.setColumnView(10, 70);
+		    s.setColumnView(11, 70);
 		    s.setRowView(0, 900);
 						
 			s.addCell(new Label(0, 0, "NOMBRE",cellFormat));

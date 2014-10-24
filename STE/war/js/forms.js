@@ -6,7 +6,7 @@ var initForms = function(){
 	// Closing and resetting the form.
 	$('form').parent().find('button.close-form').off('.close-form').on('click.close-form', function(){
 		var $form = $(this).parent().find('form');
-		$('#newUserButton').trigger('click');
+		$('#formButton').trigger('click');
 
 		return false;
 	});
