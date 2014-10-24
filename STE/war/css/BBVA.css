@@ -313,7 +313,15 @@ div.main-menu .menu li > a [class*="icon-"] {
 }
 
 
-
+.header-layout .header-container .main-menu ul.menu li.menu {
+    display: inline-block;
+    height: 48px;
+    padding: 13px 0 0 !important;
+    position: relative;
+    top: -5px;
+    vertical-align: text-top;
+    width: 15% !important;  
+}
 
 
 
