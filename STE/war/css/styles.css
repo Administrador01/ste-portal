@@ -57,13 +57,14 @@
   background-color: #2586d7;
 }
 .header-layout .header-container .main-menu ul.menu li.menu {
-    display: inline-block;
-    height: 48px;
-    padding: 13px 0 0;
-    position: relative;
-    top: -5px;
-    vertical-align: text-top;
-    width: 15%;  
+  display: inline-block;
+  height: 48px;
+  padding: 0 7px;
+  position: relative;
+  top: -5px;
+  vertical-align: text-top;
+  padding-top: 13px;
+  text-align: center;
 }
 .header-layout .header-container .main-menu ul.menu li.home {
   border-bottom-left-radius: 5px;
@@ -1115,6 +1116,8 @@ form .datepicker {
 .headButtonsBox .form-holder .form-container .form-fieldset > .fieldset-title {
   display: block;
   margin-bottom: 10px;
+  text-align: left;
+  float: left;
 }
 .headButtonsBox .form-holder .form-container .form-fieldset label {
   display: inline-block;
@@ -1327,6 +1330,10 @@ form .datepicker {
 }
 #edit-user-form .form-fieldset {
   text-align: center;
+  margin-top: 10px;
+}
+#edit-user-form .form-fieldset > .fieldset-title {
+  float: left;
 }
 form #error-messages {
   margin-bottom: 10px;

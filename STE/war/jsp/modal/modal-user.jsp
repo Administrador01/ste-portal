@@ -48,7 +48,7 @@
 								</div>
 								
 								<div class="form-field">
-									<span class="lbl">Perfil<span class="required-asterisk">*</span>:</span>
+									<span class="lbl">Perfil App<span class="required-asterisk">*</span>:</span>
 									<select id="permiso_select_modal" class="selected selectpicker"
 										name="permiso">
 										<c:forEach items="${permisos}" var="permiso">		         	
@@ -58,9 +58,11 @@
 								</div>
 							
 							</div>
-					<span class="fieldset-title">&Aacute;reas:</span>
+					
 					
 					<div class="form-fieldset">
+					<span class="fieldset-title">Permisos por área:</span>
+					<br>
 					<fieldset class='radio-container-holder'>
 						<div class="form-field">
 							<span>Clientes:</span><select id="area_cliente" class="long selectpicker" name="area_cliente">

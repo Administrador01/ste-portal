@@ -9,6 +9,22 @@ import java.util.List;
 
 public class Utils {
 	
+	public static String getPermisoAreaStr(int num){
+		
+		String result="";
+		
+		if (num==1){
+			result = "Propietario";
+		} else if (num==2){
+			result = "Editar";
+		} else if (num==3){
+			result = "Ver";
+		}
+		
+		return result;
+		
+	}
+	
 	public static boolean isNumeric(String str)  
 	{  
 	  try  
