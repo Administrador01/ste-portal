@@ -55,7 +55,7 @@
 					</select>
 				</div>
 				<div class="form-field">
-					<span>Perfil<span class="required-asterisk">*</span>:</span><select id="permiso_select" class="long selected selectpicker"
+					<span>Perfil App<span class="required-asterisk">*</span>:</span><select id="permiso_select" class="long selected selectpicker"
 						name="permiso" required>
 						<option selected value="default">Seleccionar</option>
 						<c:forEach items="${permisos}" var="permiso">		         	
@@ -65,7 +65,7 @@
 				</div>
 				
 				<div class="form-fieldset">
-					<span class="fieldset-title">&Aacute;reas:</span>
+					<span class="fieldset-title">Permisos por área:</span>
 					<fieldset class='radio-container-holder'>
 						<div class="form-field">
 							<span>Clientes:</span><select id="area_cliente" class="long selectpicker" name="area_cliente">

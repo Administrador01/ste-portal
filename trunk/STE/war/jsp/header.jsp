@@ -7,7 +7,7 @@
 		<div class="main-menu">
 			<ul class="menu">
 				<li class="home">
-					<a href="https://sites.google.com/a/bbva.com/portal-gcs/home/">
+					<a href="${sessionScope.entorno}">
 						<img src="../img/home.png"/>
 					</a>
 				</li>

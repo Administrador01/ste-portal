@@ -277,19 +277,19 @@ public class UserServlet extends HttpServlet {
 		    s.setColumnView(5, 50);
 		    s.setColumnView(6, 70);
 		    
-		    s.setColumnView(6, 70);
-		    s.setColumnView(7, 70);
-		    s.setColumnView(8, 70);
-		    s.setColumnView(9, 70);
-		    s.setColumnView(10, 70);
-		    s.setColumnView(11, 70);
+		    s.setColumnView(6, 20);
+		    s.setColumnView(7, 20);
+		    s.setColumnView(8, 20);
+		    s.setColumnView(9, 20);
+		    s.setColumnView(10, 20);
+		    s.setColumnView(11, 25);
 		    s.setRowView(0, 900);
 						
 			s.addCell(new Label(0, 0, "NOMBRE",cellFormat));
 			s.addCell(new Label(1, 0, "APELLIDO 1",cellFormat));
 			s.addCell(new Label(2, 0, "APELLIDO 2",cellFormat));
 			s.addCell(new Label(3, 0, "EMAIL",cellFormat));
-			s.addCell(new Label(4, 0, "PERFIL",cellFormat));
+			s.addCell(new Label(4, 0, "PERFIL APP",cellFormat));
 			s.addCell(new Label(5, 0, "DEPARTAMENTO",cellFormat));
 			
 			s.addCell(new Label(6, 0, "AREA CLIENTE",cellFormat));
@@ -317,12 +317,12 @@ public class UserServlet extends HttpServlet {
 				
 	
 				
-				s.addCell(new Label(6, aux, u.getPermiso_clientes().toString()));
-				s.addCell(new Label(7, aux, u.getPermiso_pruebas().toString()));
-				s.addCell(new Label(8, aux, u.getPermiso_servicios().toString()));
-				s.addCell(new Label(9, aux, u.getPermiso_informes().toString()));
-				s.addCell(new Label(10, aux, u.getPermiso_soporte().toString()));
-				s.addCell(new Label(11, aux, u.getPermiso_documentacion().toString()));
+				s.addCell(new Label(6, aux, Utils.getPermisoAreaStr(u.getPermiso_clientes())));
+				s.addCell(new Label(7, aux, Utils.getPermisoAreaStr(u.getPermiso_pruebas())));
+				s.addCell(new Label(8, aux, Utils.getPermisoAreaStr(u.getPermiso_servicios())));
+				s.addCell(new Label(9, aux, Utils.getPermisoAreaStr(u.getPermiso_informes())));
+				s.addCell(new Label(10, aux, Utils.getPermisoAreaStr(u.getPermiso_soporte())));
+				s.addCell(new Label(11, aux, Utils.getPermisoAreaStr(u.getPermiso_documentacion())));
 				
 				aux++;
 			}		
