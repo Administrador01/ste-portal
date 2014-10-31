@@ -48,6 +48,8 @@ function resetForm($form) {
 	var validator = $form.validate();
 	validator.resetForm();
 	$form.find('.bootstrap-select.error').removeClass('error');
+	$form.find('.error-messages').remove();
+	
 };$(function(){
 	initDatepickers();
 	initSelectpickers();

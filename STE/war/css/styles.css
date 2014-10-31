@@ -36,6 +36,7 @@
 .header-layout .header-container .main-menu {
   width: 100%;
   height: 40px;
+  margin-top: 10px;
 }
 .header-layout .header-container .main-menu ul.menu {
   background: #0079c1;
@@ -247,6 +248,7 @@ textarea {
   height: auto;
   margin: 0;
   padding: 0.583em 0.755em 0.5em;
+  float: right;
 }
 input.readonly,
 textarea.readonly {
@@ -518,7 +520,7 @@ button:not(.selectpicker):not(.white-btn):not(.pink-btn):hover {
   background-position: 50% 90%;
 }
 .bootstrap-select {
-  float: right;
+  float: right !important;
   margin-bottom: 0px !important;
   width: 215px;
 }
@@ -647,6 +649,11 @@ form .datepicker {
 /* Modal errors */
 .modal_ajax .form-field label.error {
   display: none !important;
+}
+.modal-dialog {
+  margin-top: 40px;
+  margin-right: auto;
+  margin-left: auto;
 }
 #sidebar {
   position: fixed;
@@ -807,7 +814,6 @@ form .datepicker {
 }
 .usersTable > .table th.search-th:nth-child(5) > input {
   position: relative;
-  width: 162%;
 }
 .usersTable > .table .extended-row {
   width: 100%;
@@ -908,19 +914,13 @@ form .datepicker {
   border-bottom: 1px solid #dcdcdc !important;
 }
 .usersTable > .table td:nth-child(1),
-.usersTable > .table th:nth-child(1) {
-  width: 120px;
-  max-width: 120px;
-}
+.usersTable > .table th:nth-child(1),
 .usersTable > .table td:nth-child(2),
-.usersTable > .table th:nth-child(2) {
-  width: 115px;
-  max-width: 115px;
-}
+.usersTable > .table th:nth-child(2),
 .usersTable > .table td:nth-child(3),
 .usersTable > .table th:nth-child(3) {
-  width: 115px;
-  max-width: 115px;
+  width: 165px;
+  max-width: 165px;
 }
 .usersTable > .table td:nth-child(4),
 .usersTable > .table th:nth-child(4) {
