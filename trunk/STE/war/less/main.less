@@ -150,6 +150,7 @@ input , textarea {
     height: auto;
     margin: 0;
     padding: 0.583em 0.755em 0.5em;
+    float:right;
     
     &.readonly{
     	background-color: #F4F7F5;
@@ -446,7 +447,7 @@ button:not(.selectpicker):not(.white-btn):not(.pink-btn):hover{
 }
 
 .bootstrap-select{
-		float:right;
+		float:right !important;
 		margin-bottom:0px !important;
 		width:215px;
 		
@@ -617,4 +618,10 @@ form .datepicker {
 
 .modal_ajax .form-field label.error{
 	display:none !important;
+}
+
+.modal-dialog{
+	margin-top:40px;
+	margin-right:auto;
+	margin-left:auto;
 }
