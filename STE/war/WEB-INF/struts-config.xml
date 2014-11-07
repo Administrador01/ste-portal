@@ -17,12 +17,15 @@
 		</action>
 		
 		<action path="/userModal" type="com.ste.actions.modal.UserModalAction">
-			<forward name="ok" path="/jsp/modal/modal-user.jsp" />
-			
+			<forward name="ok" path="/jsp/modal/modal-user.jsp" />			
 		</action>
 		
 		<action path="/admin/users" type="com.ste.actions.UsersAction">
 			<forward name="ok" path="/jsp/skeletons/users-skeleton.jsp" />
+		</action>
+		
+		<action path="/soporte" type="com.ste.actions.SoporteAction">
+			<forward name="ok" path="/jsp/skeletons/soporte-skeleton.jsp" />
 		</action>
 		
 		
