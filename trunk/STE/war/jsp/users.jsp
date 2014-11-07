@@ -67,7 +67,7 @@
 				<div class="form-fieldset">
 					<span class="fieldset-title">Permisos por área:</span>
 					<fieldset class='radio-container-holder'>
-						<div class="form-field">
+						<div class="form-field left">
 							<span>Clientes:</span><select id="area_cliente" class="long selectpicker" name="area_cliente">
 								<option selected value="1">Propietario</option>	
 								<option selected value="2">Editar</option>
@@ -75,7 +75,7 @@
 							</select>
 						</div>
 						
-						<div class="form-field">
+						<div class="form-field right">
 							<span>Pruebas:</span><select id="area_pruebas" class="long selectpicker" name="area_pruebas">
 								<option selected value="1">Propietario</option>	
 								<option selected value="2">Editar</option>
@@ -83,7 +83,7 @@
 							</select>
 						</div>
 						
-						<div class="form-field">
+						<div class="form-field left">
 							<span>Servicios:</span><select id="area_servicios" class="long selectpicker" name="area_servicios">
 								<option selected value="1">Propietario</option>	
 								<option selected value="2">Editar</option>
@@ -91,7 +91,7 @@
 							</select>
 						</div>
 						
-						<div class="form-field">
+						<div class="form-field right">
 							<span>Informes:</span><select id="area_informes" class="long selectpicker" name="area_informes">
 								<option selected value="1">Propietario</option>	
 								<option selected value="2">Editar</option>
@@ -99,7 +99,7 @@
 							</select>
 						</div>
 						
-						<div class="form-field">
+						<div class="form-field left">
 							<span>Soporte:</span><select id="area_soporte" class="long selectpicker" name="area_soporte">
 								<option selected value="1">Propietario</option>	
 								<option selected value="2">Editar</option>
@@ -107,7 +107,7 @@
 							</select>
 						</div>
 						
-						<div class="form-field">
+						<div class="form-field right">
 							<span>Documentación:</span><select id="area_documentacion" class="long selectpicker" name="area_documentacion">
 								<option selected value="1">Propietario</option>	
 								<option selected value="2">Editar</option>
@@ -132,7 +132,7 @@
 
 <div>	
 	<div>
-		<div class="table-responsive usersTable">
+		<div class="main-table usersTable">
 			<table class="table">
 				<thead>
 					<tr>

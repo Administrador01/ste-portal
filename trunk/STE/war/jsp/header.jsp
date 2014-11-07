@@ -41,7 +41,7 @@
 				</li>
 				
 				<li class="menu">
-					<a class="no-underline" href="#">
+					<a class="no-underline" href="${entorno}/soporte.do">
 						<span class="icon-24 soporte-24x"></span>
 						<span class="menu-title">Soporte</span>
 					</a>

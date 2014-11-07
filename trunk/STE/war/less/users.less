@@ -1,4 +1,27 @@
 /* USERS */
+.alta_usuario{
+	td:nth-child(1),  th:nth-child(1),
+		td:nth-child(2),  th:nth-child(2),
+		td:nth-child(3),  th:nth-child(3){
+			width:165px;
+			max-width:165px;			
+		}
+		td:nth-child(4),  th:nth-child(4){
+			width:305px;
+			max-width:305px;
+		}
+
+		td:nth-child(5){
+			width:175px;
+			max-width:175px;
+			border-right:0px;
+		}
+		
+		th:nth-child(5){
+			border-right:0px;
+		}
+}
+
 .users_title_icon{
 	margin-right:10px;
 }
@@ -10,6 +33,11 @@
 	
 }
 
+#new-user-form .form-field > .bootstrap-select{
+	float:right !important;
+		margin-bottom:0px !important;
+}
+
 #newUserButton{
 	vertical-align:bottom;
 }
@@ -18,11 +46,18 @@
 	width:700px;
 	
 	.form-fieldset .radio-container-holder{
-		width:590px;
+		width:100%;
+		text-align:left;
 	}
 	
 	.form-field{
+		width:318px;
+	
 		> .lbl{
+			margin-right:20px;
+		}
+		
+		> span{
 			margin-right:20px;
 		}
 	
@@ -35,7 +70,7 @@
 	}
 }
 
-.usersTable{
+.main-table{
 	> .table{
 	
 	
@@ -108,13 +143,7 @@
 			}
 		}
 		
-		th.search-th:nth-child(5) {
-			overflow: visible;
-			> input{
-				position:relative;
-			
-			}
-		}
+		
 		
 		
 			.extended-row{
@@ -244,26 +273,7 @@
 	
 		
 		
-		td:nth-child(1),  th:nth-child(1),
-		td:nth-child(2),  th:nth-child(2),
-		td:nth-child(3),  th:nth-child(3){
-			width:165px;
-			max-width:165px;			
-		}
-		td:nth-child(4),  th:nth-child(4){
-			width:305px;
-			max-width:305px;
-		}
-
-		td:nth-child(5){
-			width:175px;
-			max-width:175px;
-			border-right:0px;
-		}
 		
-		th:nth-child(5){
-			border-right:0px;
-		}
 		
 		 th:last-child{
 			width:122px;
@@ -430,14 +440,27 @@
 			    }
 				
 				> span{
-					width:75px;
+					width:100px;
 					display:inline-block;
-					margin-right:40px;
+					margin-right:20px;
 					font-family: "BBVA Web Light";
 					font-size:12px;
 					color:#434A58;
 					text-align:left;
 				}	
+				
+				> .input{
+					> input,
+					> textarea,
+					> div.bootstrap-select{
+						float: right;
+						width:245px;
+					}
+				}
+				
+				
+				
+				
 				
 				.long{
 					width:245px;
@@ -483,12 +506,26 @@
 					}	
 				    
 			    .radio-container-holder {
-			    	display: block;
-					border: 1px solid #dcdcdc;
-					border-radius: 4px;
-					display: inline-block;
-					padding:15px 20px 10px 20px;
-					width: 780px;
+			    	   border: 1px solid #dcdcdc;
+					    border-radius: 4px;
+					    display: inline-block;
+					    left: -15px;
+					    padding: 15px 20px 10px;
+					    position: relative;
+					    width: 845px;
+					    padding-right:0px;
+					    
+					    .form-field{
+					    	width:397px;
+					    }
+					    
+					    .form-field.left{
+					    	margin-right:18px;
+					    }
+					    
+					    .form-field.right{
+					    	padding-left:5px;
+					    }
 					
 					.radio-container{
 						.clearfix();

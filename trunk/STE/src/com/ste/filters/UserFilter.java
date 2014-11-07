@@ -72,18 +72,10 @@ public class UserFilter implements Filter {
 					
 					log.info("Usuario Logueado: " + usuario.getNombre() + " " + usuario.getApellido1() );
 
-					if (url.contains("localhost") || url.contains("8888")) {
-						sesion.setAttribute("entorno", "http://localhost:8888");
-					} else {
-						if (url.contains("pre.")) {
-							sesion.setAttribute("entorno",
-									"https://pre.portal-ste.appspot.com");
-
-						} else {
-							sesion.setAttribute("entorno",
-									"https://portal-ste.appspot.com");
-						}						
-					}
+					String entorno = url.split("http://")[1].split("/")[0];
+					
+					
+					sesion.setAttribute("entorno", "http://" +entorno);
 					
 					Integer permiso = usuario.getPermiso();
 					sesion.setAttribute("permiso", permiso);

@@ -188,6 +188,7 @@ html {
   width: 45%;
   vertical-align: top;
   margin-bottom: 10px;
+  height: 30px;
 }
 .form-field .bootstrap-select {
   position: relative;
@@ -273,6 +274,8 @@ textarea:focus.readonly {
   display: inline-block;
   height: 30px;
   width: 88px;
+  margin-top: 30px;
+  float: right;
 }
 .btn-atras:active {
   background-image: url("../img/bot-volveron.png");
@@ -290,7 +293,7 @@ a.mas:active {
   background-image: url(../img/mas-hover.png);
 }
 .gestion_demanda .btn-atras {
-  margin-top: 20px;
+  margin-top: 30px;
   float: right;
 }
 .lbl,
@@ -303,36 +306,11 @@ a.mas:active {
 }
 .alta_usuario .btn-atras {
   float: right;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 .gestion_cliente .btn-atras {
   float: right;
-  margin-top: 20px;
-}
-.gestion_cliente td:nth-child(2),
-.gestion_cliente th:nth-child(2) {
-  width: 115px;
-  max-width: 175px;
-}
-.gestion_cliente td:nth-child(3),
-.gestion_cliente th:nth-child(3) {
-  width: 205px;
-  max-width: 305px;
-}
-.gestion_cliente .usersTable > .table th:nth-child(5) {
-  border-right: 1px solid #dcdcdc;
-}
-.gestion_cliente .usersTable > .table th:nth-child(5) > input {
-  width: 105% !important;
-}
-.gestion_cliente .usersTable > .table td:nth-child(3),
-.gestion_cliente .usersTable > .table th:nth-child(3) {
-  width: 305px !important;
-  max-width: inherit;
-}
-.gestion_cliente .usersTable > .table td:nth-child(4),
-.gestion_cliente .usersTable > .table th:nth-child(4) {
-  width: 140px !important;
+  margin-top: 30px;
 }
 .pagination {
   margin-bottom: 0px;
@@ -520,8 +498,6 @@ button:not(.selectpicker):not(.white-btn):not(.pink-btn):hover {
   background-position: 50% 90%;
 }
 .bootstrap-select {
-  float: right !important;
-  margin-bottom: 0px !important;
   width: 215px;
 }
 .bootstrap-select > .btn-default {
@@ -616,6 +592,7 @@ form .datepicker {
   display: inline-block;
   vertical-align: top;
   width: 48%;
+  padding: 0 20px;
 }
 .form-field-divider .form-field {
   width: 100% !important;
@@ -624,11 +601,16 @@ form .datepicker {
 }
 .form-field-divider .form-field .input {
   display: inline-block;
+  vertical-align: middle;
 }
 .form-field-divider .form-field .input > input,
 .form-field-divider .form-field .input > textarea,
 .form-field-divider .form-field .input > div {
   width: 245px;
+}
+input.readonly,
+textarea.readonly {
+  background-color: #f4f7f5;
 }
 /* Clientes */
 .clients > div.search_div button {
@@ -726,12 +708,38 @@ form .datepicker {
   background-image: url('../img/logs-white.png');
 }
 /* USERS */
+.alta_usuario td:nth-child(1),
+.alta_usuario th:nth-child(1),
+.alta_usuario td:nth-child(2),
+.alta_usuario th:nth-child(2),
+.alta_usuario td:nth-child(3),
+.alta_usuario th:nth-child(3) {
+  width: 165px;
+  max-width: 165px;
+}
+.alta_usuario td:nth-child(4),
+.alta_usuario th:nth-child(4) {
+  width: 305px;
+  max-width: 305px;
+}
+.alta_usuario td:nth-child(5) {
+  width: 175px;
+  max-width: 175px;
+  border-right: 0px;
+}
+.alta_usuario th:nth-child(5) {
+  border-right: 0px;
+}
 .users_title_icon {
   margin-right: 10px;
 }
 #excel_btn {
   position: relative;
   vertical-align: top;
+}
+#new-user-form .form-field > .bootstrap-select {
+  float: right !important;
+  margin-bottom: 0px !important;
 }
 #newUserButton {
   vertical-align: bottom;
@@ -740,9 +748,16 @@ form .datepicker {
   width: 700px;
 }
 .modal-dialog .form-fieldset .radio-container-holder {
-  width: 590px;
+  width: 100%;
+  text-align: left;
+}
+.modal-dialog .form-field {
+  width: 318px;
 }
 .modal-dialog .form-field > .lbl {
+  margin-right: 20px;
+}
+.modal-dialog .form-field > span {
   margin-right: 20px;
 }
 .modal-dialog .form-field > input,
@@ -753,46 +768,46 @@ form .datepicker {
   margin-right: 5px;
   width: 200px !important;
 }
-.usersTable > .table {
+.main-table > .table {
   width: 100%;
   background-color: #FFF;
   text-align: left;
   border-spacing: 0;
   border-collapse: initial;
 }
-.usersTable > .table > thead:first-child > tr:first-child > th {
+.main-table > .table > thead:first-child > tr:first-child > th {
   border-top: 1px solid #dcdcdc !important;
 }
-.usersTable > .table > #myTable .editing,
-.usersTable > .table > #myTable .extended-row {
+.main-table > .table > #myTable .editing,
+.main-table > .table > #myTable .extended-row {
   background-color: #FBF1D0;
 }
-.usersTable > .table > #myTable extended-div {
+.main-table > .table > #myTable extended-div {
   background-color: transparent;
 }
-.usersTable > .table > #myTable button.selectpicker {
+.main-table > .table > #myTable button.selectpicker {
   height: 30px;
 }
-.usersTable > .table > #myTable .long {
+.main-table > .table > #myTable .long {
   height: 31px;
   left: 0;
   top: 5px;
   width: 306px;
 }
-.usersTable > .table > #myTable .permiso_ed {
+.main-table > .table > #myTable .permiso_ed {
   width: 175px;
 }
-.usersTable > .table > #myTable .dto_ed {
+.main-table > .table > #myTable .dto_ed {
   width: 260px;
 }
-.usersTable > .table > #myTable #email_ext {
+.main-table > .table > #myTable #email_ext {
   margin-left: 85px;
   width: 455px;
 }
-.usersTable > .table > #myTable td {
+.main-table > .table > #myTable td {
   border-right: medium none;
 }
-.usersTable > .table th {
+.main-table > .table th {
   background-color: #F8F8F5;
   border-bottom: 1px solid #DCDCDC;
   border-top: 1px solid #DCDCDC;
@@ -803,143 +818,115 @@ form .datepicker {
   padding: 4px 10px;
   text-transform: uppercase;
 }
-.usersTable > .table th:first-child {
+.main-table > .table th:first-child {
   border-left: 1px solid #DCDCDC;
 }
-.usersTable > .table th.search-th > input {
+.main-table > .table th.search-th > input {
   width: 100%;
 }
-.usersTable > .table th.search-th:nth-child(5) {
-  overflow: visible;
-}
-.usersTable > .table th.search-th:nth-child(5) > input {
-  position: relative;
-}
-.usersTable > .table .extended-row {
+.main-table > .table .extended-row {
   width: 100%;
   background-color: #FFF;
   border: none !important;
 }
-.usersTable > .table .extended-row td {
+.main-table > .table .extended-row td {
   border: none;
 }
-.usersTable > .table .extended-row tr {
+.main-table > .table .extended-row tr {
   border: none;
 }
-.usersTable > .table .extended-div {
+.main-table > .table .extended-div {
   width: 925px;
 }
-.usersTable > .table .extended-div button {
+.main-table > .table .extended-div button {
   margin-left: 20px;
 }
-.usersTable > .table .extended-div .area-div {
+.main-table > .table .extended-div .area-div {
   margin-bottom: 20px;
   position: relative;
 }
-.usersTable > .table .extended-div .area-div > span {
+.main-table > .table .extended-div .area-div > span {
   vertical-align: top;
 }
-.usersTable > .table .extended-div .area-div > span[class^="span-"] {
+.main-table > .table .extended-div .area-div > span[class^="span-"] {
   padding-top: 9px;
   padding-right: 10px;
 }
-.usersTable > .table .extended-div .area-div > span[class^="span-"].last {
+.main-table > .table .extended-div .area-div > span[class^="span-"].last {
   padding: 0;
   width: 10%;
   position: absolute;
   right: -15px;
 }
-.usersTable > .table .extended-div .area-div > span[class^="span-"].last a {
+.main-table > .table .extended-div .area-div > span[class^="span-"].last a {
   margin-top: 9px;
 }
-.usersTable > .table .extended-div .area-div > span[class^="span-"].last.demanda {
+.main-table > .table .extended-div .area-div > span[class^="span-"].last.demanda {
   right: -4px;
 }
-.usersTable > .table .extended-div .area-div > span[class^="span-"].last.demanda a {
+.main-table > .table .extended-div .area-div > span[class^="span-"].last.demanda a {
   margin-top: 3px;
 }
-.usersTable > .table .extended-div .area-div > span[class^="span-"].cod_peticion {
+.main-table > .table .extended-div .area-div > span[class^="span-"].cod_peticion {
   padding-top: 8px;
   text-align: right;
 }
-.usersTable > .table .extended-div .area-div .btn-group.bootstrap-select {
+.main-table > .table .extended-div .area-div .btn-group.bootstrap-select {
   margin-bottom: 0;
 }
-.usersTable > .table .extended-div .area-div .btn-group.bootstrap-select .btn.dropdown-toggle {
+.main-table > .table .extended-div .area-div .btn-group.bootstrap-select .btn.dropdown-toggle {
   margin-left: 0;
 }
-.usersTable > .table .extended-div .area-div.email > span {
+.main-table > .table .extended-div .area-div.email > span {
   vertical-align: middle;
 }
-.usersTable > .table .extended-div .area-div.email input {
+.main-table > .table .extended-div .area-div.email input {
   display: inline-block;
   margin-left: 80px;
   width: 300px;
 }
-.usersTable > .table .extended-div > .dtos-div {
+.main-table > .table .extended-div > .dtos-div {
   display: inline-block;
   margin-top: 20px;
   width: 743px;
 }
-.usersTable > .table .extended-div > .dtos-div select {
+.main-table > .table .extended-div > .dtos-div select {
   margin-left: 40px;
 }
-.usersTable > .table .extended-div .areas {
+.main-table > .table .extended-div .areas {
   display: inline-block;
   width: 89%;
   margin-left: 40px;
 }
-.usersTable > .table .extended-div .radio-container {
+.main-table > .table .extended-div .radio-container {
   display: inline-block;
   padding-left: 40px;
   width: 265px;
 }
-.usersTable > .table .extended-div .radio-container span {
+.main-table > .table .extended-div .radio-container span {
   vertical-align: baseline;
 }
-.usersTable > .table .extended-div #edit-item button {
+.main-table > .table .extended-div #edit-item button {
   float: right;
 }
-.usersTable > .table .extended-div #edit-item .bootstrap-select {
+.main-table > .table .extended-div #edit-item .bootstrap-select {
   width: 100%;
 }
-.usersTable > .table .extended-div #edit-item.demanda .area-div > span {
+.main-table > .table .extended-div #edit-item.demanda .area-div > span {
   vertical-align: middle;
 }
-.usersTable > .table .edit_input {
+.main-table > .table .edit_input {
   width: 100%;
 }
-.usersTable > .table .table_results tr:not(first-child) {
+.main-table > .table .table_results tr:not(first-child) {
   height: 70px;
   border-bottom: 1px solid #dcdcdc !important;
 }
-.usersTable > .table td:nth-child(1),
-.usersTable > .table th:nth-child(1),
-.usersTable > .table td:nth-child(2),
-.usersTable > .table th:nth-child(2),
-.usersTable > .table td:nth-child(3),
-.usersTable > .table th:nth-child(3) {
-  width: 165px;
-  max-width: 165px;
-}
-.usersTable > .table td:nth-child(4),
-.usersTable > .table th:nth-child(4) {
-  width: 305px;
-  max-width: 305px;
-}
-.usersTable > .table td:nth-child(5) {
-  width: 175px;
-  max-width: 175px;
-  border-right: 0px;
-}
-.usersTable > .table th:nth-child(5) {
-  border-right: 0px;
-}
-.usersTable > .table th:last-child {
+.main-table > .table th:last-child {
   width: 122px;
   max-width: 122px;
 }
-.usersTable > .table td {
+.main-table > .table td {
   padding: 20px;
   padding-right: 1px;
   padding-left: 13px;
@@ -950,10 +937,10 @@ form .datepicker {
   text-align: left;
   vertical-align: middle !important;
 }
-.usersTable > .table td span {
+.main-table > .table td span {
   vertical-align: middle;
 }
-.usersTable > .table td .papelera {
+.main-table > .table td .papelera {
   background-image: url(../img/delete.png);
   vertical-align: middle;
   margin-left: 10px;
@@ -962,14 +949,14 @@ form .datepicker {
   display: inline-block;
   cursor: pointer;
 }
-.usersTable > .table td .papelera:active {
+.main-table > .table td .papelera:active {
   background-image: url(../img/delete-active.png);
 }
-.usersTable > .table td .papelera.inactive {
+.main-table > .table td .papelera.inactive {
   cursor: default;
   background-image: url(../img/delete-inactive.png);
 }
-.usersTable > .table td .return {
+.main-table > .table td .return {
   background-image: url(../img/return.png);
   vertical-align: middle;
   margin-left: 10px;
@@ -977,10 +964,10 @@ form .datepicker {
   width: 30px;
   display: none;
 }
-.usersTable > .table td .return:active {
+.main-table > .table td .return:active {
   background-image: url(../img/returnon.png);
 }
-.usersTable > .table td .guardar {
+.main-table > .table td .guardar {
   background-image: url(../img/guardar.png);
   vertical-align: middle;
   margin-left: 10px;
@@ -988,10 +975,10 @@ form .datepicker {
   width: 30px;
   display: none;
 }
-.usersTable > .table td .guardar:active {
+.main-table > .table td .guardar:active {
   background-image: url(../img/guardaron.png);
 }
-.usersTable > .table td .lapiz {
+.main-table > .table td .lapiz {
   background-image: url(../img/edit.png);
   vertical-align: middle;
   margin-left: 10px;
@@ -1000,26 +987,26 @@ form .datepicker {
   display: inline-block;
   cursor: pointer;
 }
-.usersTable > .table td .lapiz:active {
+.main-table > .table td .lapiz:active {
   background-image: url(../img/edit-active.png);
 }
-.usersTable > .table td .lapiz.inactive {
+.main-table > .table td .lapiz.inactive {
   cursor: default;
   background-image: url(../img/edit-inactive.png);
 }
-.usersTable > .table td .vs {
+.main-table > .table td .vs {
   position: relative;
   left: 0px;
   vertical-align: inherit;
   cursos: pointer;
   height: 45px;
 }
-.usersTable > .sortable tr:first-child {
+.main-table > .sortable tr:first-child {
   background-color: #F8F8F5;
   height: 30px;
   text-align: left;
 }
-.usersTable .users {
+.main-table .users {
   max-height: 500px;
   display: inline-block;
   overflow: auto;
@@ -1091,13 +1078,19 @@ form .datepicker {
   border: 1px solid #e8e8e6;
 }
 .headButtonsBox .form-holder .form-container .form-field > span {
-  width: 75px;
+  width: 100px;
   display: inline-block;
-  margin-right: 40px;
+  margin-right: 20px;
   font-family: "BBVA Web Light";
   font-size: 12px;
   color: #434A58;
   text-align: left;
+}
+.headButtonsBox .form-holder .form-container .form-field > .input > input,
+.headButtonsBox .form-holder .form-container .form-field > .input > textarea,
+.headButtonsBox .form-holder .form-container .form-field > .input > div.bootstrap-select {
+  float: right;
+  width: 245px;
 }
 .headButtonsBox .form-holder .form-container .form-field .long {
   width: 245px;
@@ -1136,12 +1129,23 @@ form .datepicker {
   margin-right: 10px !important;
 }
 .headButtonsBox .form-holder .form-container .form-fieldset .radio-container-holder {
-  display: block;
   border: 1px solid #dcdcdc;
   border-radius: 4px;
   display: inline-block;
-  padding: 15px 20px 10px 20px;
-  width: 780px;
+  left: -15px;
+  padding: 15px 20px 10px;
+  position: relative;
+  width: 845px;
+  padding-right: 0px;
+}
+.headButtonsBox .form-holder .form-container .form-fieldset .radio-container-holder .form-field {
+  width: 397px;
+}
+.headButtonsBox .form-holder .form-container .form-fieldset .radio-container-holder .form-field.left {
+  margin-right: 18px;
+}
+.headButtonsBox .form-holder .form-container .form-fieldset .radio-container-holder .form-field.right {
+  padding-left: 5px;
 }
 .headButtonsBox .form-holder .form-container .form-fieldset .radio-container-holder .radio-container {
   display: inline-block;
@@ -1439,4 +1443,11 @@ form textarea.error {
   border-top-color: #ca0161;
   border-width: 6px;
   margin-left: -6px;
+}
+#soporte .tipo-cliente-field > .lbl {
+  vertical-align: super;
+  margin-right: 10px;
+}
+#soporte .tipo-cliente-field > .bootstrap-select {
+  width: 100px;
 }
