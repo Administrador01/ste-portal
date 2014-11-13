@@ -79,6 +79,7 @@ $(function() {
 	initValidator();
 });
 
+
 var initValidator = function() {
 	// Setup form validation on all the form elements.
 	$('form').each(function(){
@@ -149,4 +150,6 @@ var initValidator = function() {
 			}
 		});
 	});
+	
+	
 }

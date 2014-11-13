@@ -10,20 +10,20 @@ import javax.jdo.annotations.PrimaryKey;
 import com.google.appengine.api.datastore.Key;
 
 @PersistenceCapable
-public class Soporte {
+public class Cliente {
 
 	@PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
     private Key key;
-
+	
 	@Persistent
 	private String id_prueba;
-	
-	@Persistent
-	private Date fecha_inicio;
-	
+
 	@Persistent
 	private String str_fecha_inicio;
+
+	@Persistent
+	private Date fecha_inicio; 	
 	
 	@Persistent
 	private Date fecha_fin;
@@ -32,27 +32,19 @@ public class Soporte {
 	private String str_fecha_fin;
 	
 	@Persistent
-	private Long cliente_id;
-	
-	@Persistent
-	private String cliente_name;
-	
+	private String cliente;
+
 	@Persistent
 	private String estado;
-	
+
 	@Persistent
 	private String tipo_servicio;
-		
+	
+	@Persistent
+	private String producto_canal;
+	
 	@Persistent
 	private String detalles;
-	
-	public String getDetalles() {
-		return detalles;
-	}
-
-	public void setDetalles(String detalles) {
-		this.detalles = detalles;
-	}
 
 	public Key getKey() {
 		return key;
@@ -70,20 +62,20 @@ public class Soporte {
 		this.id_prueba = id_prueba;
 	}
 
-	public Date getFecha_inicio() {
-		return fecha_inicio;
-	}
-
-	public void setFecha_inicio(Date fecha_inicio) {
-		this.fecha_inicio = fecha_inicio;
-	}
-
 	public String getStr_fecha_inicio() {
 		return str_fecha_inicio;
 	}
 
 	public void setStr_fecha_inicio(String str_fecha_inicio) {
 		this.str_fecha_inicio = str_fecha_inicio;
+	}
+
+	public Date getFecha_inicio() {
+		return fecha_inicio;
+	}
+
+	public void setFecha_inicio(Date fecha_inicio) {
+		this.fecha_inicio = fecha_inicio;
 	}
 
 	public Date getFecha_fin() {
@@ -102,20 +94,12 @@ public class Soporte {
 		this.str_fecha_fin = str_fecha_fin;
 	}
 
-	public Long getCliente_id() {
-		return cliente_id;
+	public String getCliente() {
+		return cliente;
 	}
 
-	public void setCliente_id(Long cliente_id) {
-		this.cliente_id = cliente_id;
-	}
-
-	public String getCliente_name() {
-		return cliente_name;
-	}
-
-	public void setCliente_name(String cliente_name) {
-		this.cliente_name = cliente_name;
+	public void setCliente(String cliente) {
+		this.cliente = cliente;
 	}
 
 	public String getEstado() {
@@ -142,8 +126,13 @@ public class Soporte {
 		this.producto_canal = producto_canal;
 	}
 
-	@Persistent
-	private String producto_canal;
+	public String getDetalles() {
+		return detalles;
+	}
+
+	public void setDetalles(String detalles) {
+		this.detalles = detalles;
+	}
 	
 	
 }

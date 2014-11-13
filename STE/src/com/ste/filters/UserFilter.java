@@ -61,6 +61,8 @@ public class UserFilter implements Filter {
 				
 				
 				email = user.getEmail();
+				HttpSession sesion = request.getSession();
+				sesion.setAttribute("mail", email);
 				req.setAttribute("mail", email);
 				log.info(email);
 
@@ -68,7 +70,7 @@ public class UserFilter implements Filter {
 				log.info("Usuario: " + usuario);
 				
 				if (usuario!=null){
-					HttpSession sesion = request.getSession();
+					
 					
 					log.info("Usuario Logueado: " + usuario.getNombre() + " " + usuario.getApellido1() );
 

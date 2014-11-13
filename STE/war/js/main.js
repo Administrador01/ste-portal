@@ -13,6 +13,26 @@ function showModal(){
 	$('.modal_ajax').css("display","block");	
 }
 
+function resetFormSlider(){
+	var $slider = $('.form-slider');
+	var $buttons = $('.holder_buttons');
+	$slider.css("left","0px");
+	$buttons.css("bottom","0px");
+}
+
+function validate_multiform(form, elements){
+	var result = true;
+	$.each(elements, function( index, value ){
+		if(!(form.validate().element(value))){ // validate the input field
+		   //   form.validate().element(value).focusInvalid(); // focus it if it was invalid
+		      result = false;
+	      }
+	})
+	
+	return result;
+	 
+}
+
 $(function() {
 	
 	
@@ -34,6 +54,27 @@ $(function() {
 	$('html').on('loaded.bs.modal', function () {
 		showModal();
 	});
+	
+	$("#next_form").on('click', function(e){
+		var $slider = $('.form-slider');
+		var pagina = $(this).data('pagina');
+		var left = $slider.css('left');
+		var contenedores = $('.form-slider').find('.form-container');
+		var form = $($slider.parent());
+		var $prevElement = $(contenedores[pagina-1]);
+
+		var elements = $prevElement.find("input, select");
+		var $nextElement = $(contenedores[pagina]);
+		var $formholder = $('.form-holder');
+		
+		if (validate_multiform(form, elements )){
+			$('.holder_buttons').css("bottom", $prevElement.outerHeight() - $nextElement.outerHeight());
+			$formholder.animate({height: "+=" + ($nextElement.outerHeight() - $prevElement.outerHeight())}, 500);
+			$slider.animate({left: "-=962px"}, 500);
+			
+			$(this).data=pagina+1;
+		}
+	})
 
 	// Submit for creating a new user.
 	$("#submit_form").on('click',function(e) {
@@ -90,9 +131,11 @@ $(function() {
 	
 	
 	$('#formButton').click(function(e){
+			$('.filter-option').html('Seleccionar');
 			var $formButton = $(this);
 			if ($formButton.hasClass('white-btn')){
 				if ($('.form-holder').css('overflow')=="visible"){
+					resetFormSlider();
 					$('.form-holder').css('overflow','hidden');
 					userBoxSize = $('.form-holder.open').outerHeight();
 					$('.form-holder.open').css('height', userBoxSize);

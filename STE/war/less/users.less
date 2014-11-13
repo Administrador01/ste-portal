@@ -415,13 +415,15 @@
 			
 		}
 		.form-container{
-			display: block;
+			display: inline-block;
 			text-align: center;
 			margin: 20px;
 			background-color:#FFF;
 			padding:30px;
 			border: 1px solid #dcdcdc;
 			border-radius:2px; 
+			width:918px;
+			vertical-align: top;
 			
 			.form-field{
 				display: inline-block;
@@ -759,13 +761,19 @@
 				}
 			}
 			
-#edit-user-form{
-		.form-fieldset{
-			> .fieldset-title{
-				float:left;
-			}
+#edit-user-form, .edit-form{
+		.form-field-divider{
+			padding: 0px;
 		
-			text-align:center;
-			margin-top:10px;
+			.form-fieldset{
+				> .fieldset-title{
+					float:left;
+				}
+			
+				text-align:center;
+				margin-top:10px;
+			}
 		}
+
+		
 }
