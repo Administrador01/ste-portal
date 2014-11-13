@@ -16,6 +16,26 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	    <url-pattern>/usersServlet</url-pattern>
 	  </servlet-mapping>
 	  
+	   <servlet>
+	    <servlet-name>SoporteServlet</servlet-name>
+	    <servlet-class>com.ste.servlets.SoporteServlet</servlet-class>
+	  </servlet>
+	
+	  <servlet-mapping>
+	    <servlet-name>SoporteServlet</servlet-name>
+	    <url-pattern>/soporteServlet</url-pattern>
+	  </servlet-mapping>
+	  
+	  <servlet>
+	    <servlet-name>DefaultConfServlet</servlet-name>
+	    <servlet-class>com.ste.defaultConf.DefaultConf</servlet-class>
+	  </servlet>
+	
+	  <servlet-mapping>
+	    <servlet-name>DefaultConfServlet</servlet-name>
+	    <url-pattern>/defaultConf</url-pattern>
+	  </servlet-mapping>
+	  
 	  <servlet>
 	    <servlet-name>TestServlet</servlet-name>
 	    <servlet-class>com.ste.defaultConf.TestServlet</servlet-class>

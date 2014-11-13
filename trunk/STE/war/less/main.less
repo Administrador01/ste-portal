@@ -141,6 +141,12 @@ p{
 	vertical-align:top;
 }
 
+.holder_buttons{
+	
+    display: inline-block;
+    position: relative;
+}
+
 
 input , textarea {
 	resize: none;
@@ -153,6 +159,7 @@ input , textarea {
     margin: 0;
     padding: 0.583em 0.755em 0.5em;
     float:right;
+    width:245px;
     
     &.readonly{
     	background-color: #F4F7F5;
@@ -550,6 +557,17 @@ form .datepicker {
     width: 48%;
     padding: 0 20px;
     
+    &.down{
+    	width:826px;
+    	margin-top:5px;
+    	
+    	
+    	
+    	.input > textarea {
+    		width: 660px !important;
+    	}
+    }
+    
     .form-field{
     	width:100% !important;
     	display: inline-block;
@@ -559,11 +577,12 @@ form .datepicker {
     	
     		display:inline-block;
     		vertical-align:middle;
+    		float:right;
     	
     		> input,
     		> textarea,
     		> div{
-	    		width: 245px;
+	    		width: 235px;
 	    	}
     	}		    	
     }
@@ -602,4 +621,13 @@ input.readonly, textarea.readonly {
 	margin-top:40px;
 	margin-right:auto;
 	margin-left:auto;
+}
+
+.form-slider{
+	display: block;
+    height: 295px;
+    overflow: visible;
+    width: 1920px;
+    position:relative;
+    left:0px;
 }

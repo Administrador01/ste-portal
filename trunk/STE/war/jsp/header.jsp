@@ -13,7 +13,7 @@
 				</li>
 				
 				<li class="menu">
-					<a class="no-underline"  href="#">
+					<a class="no-underline"  href="${entorno}/gestionCliente.do">
 						<span class="icon-24 clientes-24x"></span> 
 						<span class="menu-title">Clientes</span>
 					</a>

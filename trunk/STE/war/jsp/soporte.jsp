@@ -17,7 +17,7 @@
 
 <div class="headButtonsBox">
 	<button id="formButton">
-		Alta soporte<span class="user_span"></span>
+		Nuevo<span class="user_span"></span>
 	</button>
 	
 	<!-- 
@@ -27,7 +27,7 @@
  -->
 
 	<div class="form-holder">
-		<form id="new-user-form" name="new-user-form" action="/usersServlet"
+		<form id="new-user-form" name="new-user-form" action="/soporteServlet"
 			method="POST" novalidate="novalidate">
 			<div class="form-container">
 				<div class="form-field-divider left">
@@ -46,12 +46,8 @@
 					<div class="form-field">
 						<span class="lbl">Cliente<span class="required-asterisk">*</span>:</span>
 						<div class="input">
-							<select id="input_cliente" class="selectpicker selected" name="cliente" required aria-required="true">
-								<option value="default">Seleccionar</option>
-								<!-- <c:forEach items="${clientes}" var="cliente">	
-									<option value="${cliente.key.id}">${cliente.nombre}</option>
-								</c:forEach> -->
-							</select>
+							<input class="long" type="text" name="cliente" id="cliente" required>
+
 						</div>
 					</div>
 					
@@ -108,6 +104,14 @@
 					</div>
 					
 				</div>
+				<div class="form-field-divider down">
+					<div class="form-field detalles">
+						<span class="lbl">Detalles:</span>
+						<div class="input">
+							<textarea name="detalles" maxlength="500" rows="1" cols="1"></textarea>
+						</div>
+					</div>				
+				</div>
 			</div>
 
 		</form>
@@ -152,14 +156,14 @@
 					<c:choose>
 						<c:when test="${empty soportes}">
 							<tr>
-								<td><span>No existen soportes.</span></td>
+								<td><span>No existen datos.</span></td>
 							</tr>
 						</c:when>
 
 						<c:otherwise>
 							<c:forEach items="${soportes}" var="s">
 								<tr class="valid-result" id="row${s.key.id}">
-									<td><span>${s.str_fecha_inico}</span></td>
+									<td><span>${s.str_fecha_inicio}</span></td>
 									<td><span>${s.str_fecha_fin}</span></td>
 									<td><span>${s.cliente_name}</span></td>
 									<td><span>${s.estado}</span></td>
@@ -205,7 +209,7 @@
 				<p>&iquest;Est&aacute; seguro que desea eliminar soporte?
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="pink-btn" id="deleteUser">Eliminar</button>
+				<button type="button" class="pink-btn" id="deleteSoporte">Eliminar</button>
 				<button type="button" class="" data-dismiss="modal">Cancelar</button>
 			</div>
 		</div>
