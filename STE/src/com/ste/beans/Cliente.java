@@ -17,34 +17,22 @@ public class Cliente {
     private Key key;
 	
 	@Persistent
-	private String id_prueba;
-
-	@Persistent
-	private String str_fecha_inicio;
-
-	@Persistent
-	private Date fecha_inicio; 	
+	private String id_cliente;
 	
 	@Persistent
-	private Date fecha_fin;
+	private Date fecha_alta;
 	
 	@Persistent
-	private String str_fecha_fin;
+	private String str_fecha_alta;
 	
 	@Persistent
-	private String cliente;
-
-	@Persistent
-	private String estado;
-
-	@Persistent
-	private String tipo_servicio;
+	private String premium;
 	
 	@Persistent
-	private String producto_canal;
+	private String tipo_cliente;
 	
 	@Persistent
-	private String detalles;
+	private String nombre;
 
 	public Key getKey() {
 		return key;
@@ -54,85 +42,51 @@ public class Cliente {
 		this.key = key;
 	}
 
-	public String getId_prueba() {
-		return id_prueba;
+	public String getId_cliente() {
+		return id_cliente;
 	}
 
-	public void setId_prueba(String id_prueba) {
-		this.id_prueba = id_prueba;
+	public void setId_cliente(String id_cliente) {
+		this.id_cliente = id_cliente;
 	}
 
-	public String getStr_fecha_inicio() {
-		return str_fecha_inicio;
+	public Date getFecha_alta() {
+		return fecha_alta;
 	}
 
-	public void setStr_fecha_inicio(String str_fecha_inicio) {
-		this.str_fecha_inicio = str_fecha_inicio;
+	public void setFecha_alta(Date fecha_alta) {
+		this.fecha_alta = fecha_alta;
 	}
 
-	public Date getFecha_inicio() {
-		return fecha_inicio;
+	public String getPremium() {
+		return premium;
 	}
 
-	public void setFecha_inicio(Date fecha_inicio) {
-		this.fecha_inicio = fecha_inicio;
+	public void setPremium(String premium) {
+		this.premium = premium;
 	}
 
-	public Date getFecha_fin() {
-		return fecha_fin;
+	public String getStr_fecha_alta() {
+		return str_fecha_alta;
 	}
 
-	public void setFecha_fin(Date fecha_fin) {
-		this.fecha_fin = fecha_fin;
+	public void setStr_fecha_alta(String str_fecha_alta) {
+		this.str_fecha_alta = str_fecha_alta;
 	}
 
-	public String getStr_fecha_fin() {
-		return str_fecha_fin;
+	public String getTipo_cliente() {
+		return tipo_cliente;
 	}
 
-	public void setStr_fecha_fin(String str_fecha_fin) {
-		this.str_fecha_fin = str_fecha_fin;
+	public void setTipo_cliente(String tipo_cliente) {
+		this.tipo_cliente = tipo_cliente;
 	}
 
-	public String getCliente() {
-		return cliente;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setCliente(String cliente) {
-		this.cliente = cliente;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
-
-	public String getEstado() {
-		return estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-
-	public String getTipo_servicio() {
-		return tipo_servicio;
-	}
-
-	public void setTipo_servicio(String tipo_servicio) {
-		this.tipo_servicio = tipo_servicio;
-	}
-
-	public String getProducto_canal() {
-		return producto_canal;
-	}
-
-	public void setProducto_canal(String producto_canal) {
-		this.producto_canal = producto_canal;
-	}
-
-	public String getDetalles() {
-		return detalles;
-	}
-
-	public void setDetalles(String detalles) {
-		this.detalles = detalles;
-	}
-	
-	
 }

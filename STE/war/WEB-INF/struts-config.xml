@@ -16,8 +16,16 @@
 			<forward name="ok" path="/jsp/skeletons/home-skeleton.jsp" />
 		</action>
 		
+		<action path="/clientes" type="com.ste.actions.ClientsAction">
+			<forward name="ok" path="/jsp/skeletons/clients-skeleton.jsp" />
+		</action>
+		
 		<action path="/userModal" type="com.ste.actions.modal.UserModalAction">
 			<forward name="ok" path="/jsp/modal/modal-user.jsp" />			
+		</action>
+		
+		<action path="/clienteModal" type="com.ste.actions.modal.ClienteModalAction">
+			<forward name="ok" path="/jsp/modal/modal-cliente.jsp" />			
 		</action>
 		
 		<action path="/soporteModal" type="com.ste.actions.modal.SoporteModalAction">

@@ -16,6 +16,16 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	    <url-pattern>/usersServlet</url-pattern>
 	  </servlet-mapping>
 	  
+	    <servlet>
+	    <servlet-name>ClientServlet</servlet-name>
+	    <servlet-class>com.ste.servlets.ClienteServlet</servlet-class>
+	  </servlet>
+	
+	  <servlet-mapping>
+	    <servlet-name>ClientServlet</servlet-name>
+	    <url-pattern>/clientServlet</url-pattern>
+	  </servlet-mapping>
+	  
 	   <servlet>
 	    <servlet-name>SoporteServlet</servlet-name>
 	    <servlet-class>com.ste.servlets.SoporteServlet</servlet-class>

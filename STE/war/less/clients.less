@@ -1,0 +1,98 @@
+.clients{
+
+	.l_anchor{
+		  position: relative;
+    	top: -20px;
+		height:1px;
+		width:1px;
+		display:inline;
+	}
+
+	> .abc{
+		
+		> #abc_child_scroll.scroll_hidden{
+			display:none;
+		}
+	
+		> #abc_child_scroll.inScroll{
+			background-color: #fff;
+    
+    position: fixed;
+    text-align: center;
+    top: 0;
+    width: 960px;
+	
+		}
+	} 
+
+	> .clients_container{
+	
+		>.letter_anchor{
+			span{
+				color: #0065b7;
+                font-family: BBVA Web Light;
+                font-size: 18px;
+			}
+		}
+	
+		>.clientes_letra{
+			margin-top:20px;
+	
+		> .client_box{
+			display: inline-table; 
+			height: 60px;
+			width: 148px;
+			margin-right: 10px;
+			text-align:center;
+			vertical-align:bottom;
+			margin-bottom:10px;
+			cursor:pointer;
+			line-height:1;
+			padding: 0 5px;
+			background-color: #86c82d;
+		
+			&.crit_h{
+				display:none;
+			}
+			
+			&.tipo_h{
+				display:none;
+			}
+			
+			&.search_h{
+				display:none;
+			}
+		
+			&.crit_Alta{
+				background-color: #F6891E;
+			}
+		
+			&.crit_Media{
+				background-color: #FDBD2C;
+			}
+		
+			&.crit_Baja{
+				background-color: #86C82D;
+			}
+			
+			
+			p{
+				color: white;		
+				font-family: "BBVA Web Book", arial, sans-serif;
+				font-weight:300;
+				font-size:15px;
+				
+				display: table-cell; 
+                vertical-align: middle; 
+                text-align: center; 
+			}
+		}
+		
+		>.client_box:nth-child(6n).client_box{
+			margin-right:0px;
+		}
+		}
+		
+		
+	}	
+}

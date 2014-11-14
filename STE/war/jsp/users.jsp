@@ -119,7 +119,7 @@
 				</div>
 				
 				<div id="message_div">
-					<span id="span_message"></span>
+					<span id="span_message">El usuario ha sido creado de forma correcta.<br/>En breve volvemos a la página.</span>
 				</div>
 			</div>
 

@@ -20,11 +20,11 @@
 		Nuevo<span class="user_span"></span>
 	</button>
 	
-	<!-- 
-	<button id="excel_btn" onclick=	"window.location.href='../../usersServlet?accion=xls'">
+	 
+	<button id="excel_btn" onclick=	"window.location.href='../../soporteServlet?accion=xls'">
 		Descargar Tabla<span class="excel_span"></span>
 	</button>
- -->
+ 
 
 	<div class="form-holder">
 		<form id="new-user-form" name="new-user-form" action="/soporteServlet"
@@ -32,7 +32,7 @@
 			<div class="form-container">
 				<div class="form-field-divider left">
 					<div class="form-field">
-						<span class="lbl">Id. Prueba:</span>
+						<span class="lbl">Identificador:</span>
 						<input class="long readonly" type="text" readonly name="id_prueba" id="id_prueba">
 					</div>
 					
@@ -64,12 +64,20 @@
 				</div>
 				<div class="form-field-divider right">
 					
-					<div class="form-field"></div>
+					<div class="form-field">
+							<span class="lbl">Premium<span class="required-asterisk">*</span>:</span>
+							<label class="ui-marmots-label-radio on" for="radio_Si">
+								<input name="premium" id="radio_Si" selected type="radio" value="Si"/>Si
+							</label>
+							<label class="ui-marmots-label-radio marmots-label-left" for="radio_No">
+								<input name="premium"  id="radio_No"  type="radio" value="No"/>No
+							</label>
+						</div>
 					
 					<div class="form-field">
-						<span class="lbl">Fecha fin<span class="required-asterisk">*</span>:</span>
+						<span class="lbl">Fecha fin:</span>
 						<div class="input">
-							<input type="text" readonly="" value="" size="16" class="datepicker" name="fecha_fin" id="fecha_fin" required aria-required="true">
+							<input type="text" readonly="" value="" size="16" class="datepicker" name="fecha_fin" id="fecha_fin" >
 						</div>
 					</div>
 					
@@ -93,11 +101,10 @@
 						<div class="input">
 							<select id="producto_canal" class="selectpicker selected" name="producto_canal" >
 								<option value="default">Seleccionar</option>		
-								<option value="SwiftFIN">SwiftFIN</option>	
-								<option value="SwiftFileact">SwiftFileact</option>	
+								<option value="Swift FIN">Swift FIN</option>	
+								<option value="Swift Fileact">Swift Fileact</option>	
 								<option value="Editran">Editran</option>	
 								<option value="BBVA Netcash">BBVA Netcash</option>	
-								<option value="default">Seleccionar</option>	
 															
 							</select>
 						</div>
@@ -112,6 +119,9 @@
 						</div>
 					</div>				
 				</div>
+				<div id="message_div" class="message_div">
+					<span id="span_message">El soporte ha sido creado de forma correcta.<br/>En breve volvemos a la página.</span>
+				</div>
 			</div>
 
 		</form>
@@ -125,7 +135,7 @@
 	<div>
 		<div class="tipo-cliente-field">
 			<span class="lbl">Tipo cliente:</span>
-			<select id="tipo_servicio" class="selectpicker selected" name="tipo_servicio" >
+			<select id="tipo_cliente" class="selectpicker selected" name="tipo_servicio" >
 				<option value="Todos" selected>Todos</option>	
 				<option value="Premium">Premium</option>	
 			</select>
@@ -162,7 +172,7 @@
 
 						<c:otherwise>
 							<c:forEach items="${soportes}" var="s">
-								<tr class="valid-result" id="row${s.key.id}">
+								<tr class="valid-result ${s.premium == 'Si' ? 'premium' : ''}" id="row${s.key.id}">
 									<td><span>${s.str_fecha_inicio}</span></td>
 									<td><span>${s.str_fecha_fin}</span></td>
 									<td><span>${s.cliente_name}</span></td>
@@ -217,3 +227,9 @@
 </div>
 
 </div>
+
+<script type="text/javascript">
+  $(function() {
+       $('.selectpicker').selectpicker();
+  });
+</script>

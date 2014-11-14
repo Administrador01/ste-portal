@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
+
 
 import com.ste.beans.Soporte;
 import com.ste.beans.User;
@@ -44,18 +46,24 @@ public class SoporteDao {
 			s.setFecha_inicio(Utils.dateConverter(s.getStr_fecha_inicio()));
 			s.setFecha_fin(Utils.dateConverter(s.getStr_fecha_fin()));
 			
-			CounterDao cDao = CounterDao.getInstance();
-			
-			Counter count = cDao.getCounterByName("soporte");
-			
-			String num = String.format("%08d", count.getValue());
-			
-			s.setId_prueba("STE"+num);
+			if (s.getKey()==null){
+				CounterDao cDao = CounterDao.getInstance();
+				
+				Counter count = cDao.getCounterByName("soporte");
+				
+				String num = String.format("%08d", count.getValue());
+				
+				s.setId_prueba("STE"+num);
+				
+				
+				
+				CounterDao countDao = CounterDao.getInstance();
+				countDao.increaseCounter(count);
+			}
 			
 			pm.makePersistent(s);
 			
-			CounterDao countDao = CounterDao.getInstance();
-			countDao.increaseCounter(count);
+			
 
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -77,8 +85,12 @@ public class SoporteDao {
 
 		List<Soporte> soportes;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		String queryStr = "select from " + Soporte.class.getName();
-		soportes = (List<Soporte>) pm.newQuery(queryStr).execute();
+		
+		
+		Query q = pm.newQuery("select from " + Soporte.class.getName());		
+		q.setOrdering("fecha_inicio desc");
+		soportes = (List<Soporte>) q.execute();
+		
 		
 		pm.close();
 

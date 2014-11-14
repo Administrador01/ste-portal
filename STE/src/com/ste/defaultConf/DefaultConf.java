@@ -29,14 +29,28 @@ public class DefaultConf extends HttpServlet{
 		
 		if ("david.martin.beltran.contractor@bbva.com".equals(mail)){
 			CounterDao cDao = CounterDao.getInstance();
+			Counter contadorSoporte = cDao.getCounterByName("soporte");
+			
+			if (contadorSoporte == null){
+				contadorSoporte = new Counter();
+			}
+			contadorSoporte.setNombre("soporte");
+			contadorSoporte.setValue(1);
+			cDao.createCounter(contadorSoporte);
+			
+			
 			Counter contadorCliente = cDao.getCounterByName("cliente");
 			
 			if (contadorCliente == null){
 				contadorCliente = new Counter();
 			}
-			contadorCliente.setNombre("soporte");
+			contadorCliente.setNombre("cliente");
 			contadorCliente.setValue(1);
 			cDao.createCounter(contadorCliente);
+			
+			
+			
+			
 			
 			json.append("success", true);
 			

@@ -50,9 +50,76 @@ function resetForm($form) {
 	$form.find('.bootstrap-select.error').removeClass('error');
 	$form.find('.error-messages').remove();
 	
-};$(function(){
+};function sendEditClient(){
 	
+	editForm($("#edit-cliente-form"),"cliente")
+}
+
+function editForm($form, entidad){
 	
+	if($form.valid()){			
+		
+		var postData = $form.serialize() + "&accion=update&id="+id;
+		var formURL = $form.attr("action");
+		$.ajax(
+		{
+		  url : formURL,
+		  type: "GET",
+		  data : postData,
+		  success:function(data, textStatus, jqXHR) 
+		  {
+				//data: return data from server
+			  if (data.success==("true")){
+					if ($('.edit-user-form-holder').height()<190){
+						$('.edit-user-form-holder').height($('.edit-user-form-holder').height()+35);
+					}
+					$form.find('.form-container').find('div:not(#message_div_modal)').hide(0);
+					$form.find('#span_message_modal').html('El '+ entidad +' ha sido modificado de forma correcta.<br/>En breve volvemos a la p&aacute;gina.');
+					$('#modal-footer_submit').css('display','none');
+					$('#message_div_modal').css('display','block').removeClass("error").addClass("success");
+
+					setTimeout(function() { 
+						resetForm($form);
+						location.reload();
+					}, 1500);
+				}else{
+					$('#message_div_modal').removeClass("success").addClass("error");
+					if ($('.edit-user-form-holder').height()<190){
+						$('.edit-user-form-holder').height($('.edit-user-form-holder').height()+35);
+					}
+					$('#span_message_modal').html(data.error);
+					$('#message_div_modal').css('display','block');
+				}
+		  }
+		},'html');
+	}
+}
+
+$(function(){
+	
+	$('#gestion_cliente').on('click','#deleteClient', function (e){
+		
+		 var formURL = "/clientServlet?";
+		 var postData="accion=delete&id="+ id;
+		 $.ajax({
+			url : formURL,
+			type: "POST",
+			data : postData,
+			success:function(data, textStatus, jqXHR) 
+			{
+				$('#row'+id).fadeOut("fast", function(){
+					$(this).remove();
+					$('#myTable').paginateMe({
+						pagerSelector : '#myPager',
+						showPrevNext : true,
+						hidePageNumbers : false,
+						perPage : 10
+					});
+				});
+				$('#confirm-delete').modal('hide');	        	
+			}
+		});
+	})
 
 	$('#estado').change(function(e){
 		//vaciamos el select
@@ -141,6 +208,82 @@ var getIsoDate = function(dateString) {
 };var userBoxSize;
 var id;
 
+function  changeActionsButtonColor(){
+	if ($('#accion_menu').hasClass('white')){
+		$('#accion_menu').removeClass('white');
+	}else{
+		$('#accion_menu').addClass('white');
+	}
+}
+
+function isIE () {
+	  var myNav = navigator.userAgent.toLowerCase();
+	  return (myNav.indexOf('msie') != -1) ? parseInt(myNav.split('msie')[1]) : false;
+	}
+
+function drawLetters(){
+	var isEmpty;
+	var cajas = $('.clients_container').children();
+	var a=0;
+	var letra;
+	var letrasValidas="";
+	for (a; a<=cajas.length-1; a++){
+		var div = $(cajas[a]);
+		if (div.hasClass('letter_anchor')){
+			isEmpty = true;
+			letra = div;
+		}else if (div.hasClass('clientes_letra')){
+			var clientes = div.children();
+			var b=0;
+			for (b; b<=clientes.length-1;b++){
+				var cliente = $(clientes[b]);
+				if (!cliente.hasClass('hidden')){
+					isEmpty = false;
+				}
+			}				
+			if (isEmpty==true){
+				letra.css('display','none');
+				letra.prev().css('display','none');
+				div.css('display','none');
+				
+			}else{
+				letra.css('display','block');
+				letrasValidas += $(letra.find('span')[0]).text();
+				letra.prev().css('display','inline-block');
+				div.css('display','inherit');
+			}
+		}
+		
+	}
+	
+	drawbar(letrasValidas);
+}
+
+function drawbar(string){
+	
+	var barra = $('.abc').children();
+	var z = 0;
+	for (z=0; z<=barra.length-1;z++){
+		var letras = $(barra[z]).children();		
+		var a=0;
+		for (a; a<=letras.length-1;a++){
+			var letra_div = $(letras[a]);
+			var letra = letra_div[0].id.substring(6,7);
+			if (string.indexOf(letra)!=-1){
+				letra_div.attr('href','#'+letra+'_anchor');
+				letra_div.children().addClass('active');	
+				letra_div.children().removeClass('inactive');				
+
+			}else{
+				letra_div.removeAttr('href');
+				letra_div.children().addClass('inactive');
+				letra_div.children().removeClass('active');
+			}
+		}
+	}
+	
+}
+
 $(document).on('hidden.bs.modal', function (e) {
 	$(".modal-content").html();
 	$(e.target).removeData('bs.modal');	
@@ -214,7 +357,80 @@ $(function() {
 			
 			$(this).data=pagina+1;
 		}
-	})
+	});
+	
+	$('#buscador_cliente').on('keyup', function(e) {
+		var busqueda = $(this).val();
+		var ln_busqueda = busqueda.length;
+		var clientes = $('.client_box');
+		var a = 0;
+		for (a; a<=clientes.length-1;a++){
+			if (busqueda.toUpperCase() == $(clientes[a]).children().text().substring(0,ln_busqueda).toUpperCase()){
+				$(clientes[a]).removeClass('search_h');
+			}else{
+				$(clientes[a]).addClass('search_h');
+			}
+		}
+		drawLetters();
+	});
+	
+	
+	$('#tipo_cliente').on('change', function(e) {
+		var val = $('#tipo_cliente').val();
+		var trs = $('#myTable').find('tr');
+		var a;
+		if (val=="Premium")
+			for (a=0; a<=trs.length;a++){
+				if (!$(trs[a]).hasClass('premium'))
+					$(trs[a]).addClass('hidden');
+			}
+				
+		else{
+			for (a=0; a<=trs.length;a++)
+				$(trs[a]).removeClass('hidden');
+		}
+			
+	});
+	
+	$('#tip_crit').on('change', function(e) {		
+		var val = $('#tip_crit').val();
+		var cajas = $('.client_box');
+		var a;
+		if (val=="Premium"){
+			for (a = 0; a<=cajas.length-1; a++){
+				if (!$(cajas[a]).hasClass('premium'))
+					$(cajas[a]).addClass('hidden');
+			}
+		}else{
+			for (a = 0; a<=cajas.length-1; a++){
+				$(cajas[a]).removeClass('hidden');	
+			} 
+		}	
+		
+		drawLetters();
+	});
+	
+	
+	$(window).scroll(function (event) {
+	    var scroll = $(window).scrollTop();
+	    if (scroll>350){
+	    	$('#abc_child_scroll').addClass('inScroll');
+	    	$('#abc_child_scroll').removeClass('scroll_hidden');
+	    }else{
+	    	$('#abc_child_scroll').removeClass('inScroll');
+	    	$('#abc_child_scroll').addClass('scroll_hidden');
+
+	    }
+	});
+		
+	
+	$('.clients').on('click', '#accion_menu', function(e) {
+		 changeActionsButtonColor();
+		
+	});
+	
+		
+	
 
 	// Submit for creating a new user.
 	$("#submit_form").on('click',function(e) {
