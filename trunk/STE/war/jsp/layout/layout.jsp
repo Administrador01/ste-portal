@@ -30,8 +30,9 @@
       	<script src="../tools/jquery-ui.min.js" type="text/javascript"></script>
       	<script src="../tools/jquery-ui-datepicker-es.js" type="text/javascript"></script>
       	<script src="../tools/jquery.validate.js" type="text/javascript"></script> 
-		<script src="../components/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+		
 		<script src="../components/checkbox/jquery.marmots-checkbox.js" type="text/javascript"></script>
+		<script src="../components/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 		<script src="../components/bootstrap/select/bootstrap-select.min.js" type="text/javascript"></script>
 		<script src="../js/dev/scripts.js" type="text/javascript"></script>		
 

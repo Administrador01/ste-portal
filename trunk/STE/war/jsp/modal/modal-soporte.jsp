@@ -22,7 +22,7 @@
 					<div class="form-field">
 						<span class="lbl">Fecha inicio<span class="required-asterisk">*</span>:</span>
 						<div class="input">
-							<input type="text" readonly="" value="${soporte.str_fecha_inicio}" size="16" class="datepicker fromTo" data-target-id='fecha_fin' name="fecha_inicio" id="fecha_inicio" required aria-required="true">
+							<input type="text" readonly="" value="${soporte.str_fecha_inicio}" size="16" class="datepicker fromTo" data-target-id='fecha_fin_modal' name="fecha_inicio" id="fecha_inicio_modal" required aria-required="true">
 						</div>
 					</div>
 					
@@ -50,9 +50,9 @@
 					<div class="form-field"></div>
 					
 					<div class="form-field">
-						<span class="lbl">Fecha fin<span class="required-asterisk">*</span>:</span>
+						<span class="lbl">Fecha fin:</span>
 						<div class="input">
-							<input type="text" readonly="" value="${soporte.str_fecha_fin}" size="16" class="datepicker" name="fecha_fin" id="fecha_fin" required aria-required="true">
+							<input type="text" readonly="" value="${soporte.str_fecha_fin}" size="16" class="datepicker" name="fecha_fin" id="fecha_fin_modal">
 						</div>
 					</div>
 					
@@ -75,8 +75,8 @@
 						<span class="lbl">Producto/canal<span class="required-asterisk">*</span>:</span>
 						<div class="input">
 							<select id="producto_canal" class="selectpicker selected" name="producto_canal" >
-								<option value="SwiftFIN" ${soporte.producto_canal == 'SwiftFIN' ? 'selected' : ''}>SwiftFIN</option>	
-								<option value="SwiftFileact" ${soporte.producto_canal == 'SwiftFileact' ? 'selected' : ''}>SwiftFileact</option>	
+								<option value="Swift FIN" ${soporte.producto_canal == 'SwiftFIN' ? 'selected' : ''}>Swift FIN</option>	
+								<option value="Swift Fileact" ${soporte.producto_canal == 'SwiftFileact' ? 'selected' : ''}>Swift Fileact</option>	
 								<option value="Editran" ${soporte.producto_canal == 'Editran' ? 'selected' : ''}>Editran</option>	
 								<option value="BBVA Netcash" ${soporte.producto_canal == 'BBVA Netcash' ? 'selected' : ''}>BBVA Netcash</option>	
 															
@@ -97,9 +97,9 @@
 					
 					
 							
-							<div id="message_div_modal" class="message_div">
-								<span id="span_message_modal"></span>
-							</div>
+				<div id="message_div_modal" class="message_div">
+					<span id="span_message_modal"></span>
+				</div>
 						</div>
 					</form>
 				</div>

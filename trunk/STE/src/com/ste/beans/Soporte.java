@@ -15,6 +15,9 @@ public class Soporte {
 	@PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
     private Key key;
+	
+	@Persistent
+	private String premium;
 
 	@Persistent
 	private String id_prueba;
@@ -144,6 +147,14 @@ public class Soporte {
 
 	@Persistent
 	private String producto_canal;
+
+	public String getPremium() {
+		return premium;
+	}
+
+	public void setPremium(String premium) {
+		this.premium = premium;
+	}
 	
 	
 }
