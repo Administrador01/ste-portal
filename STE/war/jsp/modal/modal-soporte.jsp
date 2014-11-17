@@ -5,10 +5,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <div class="modal_ajax">
-<div class="">
+			<div class="">
 				<h2>Editar soporte</h2>
 				<hr />
-			</div>c
+			</div>
+			
 			<div class="form-holder">
 					<form id="edit-soporte-form" name="edit-soporte-form" class="edit-form" action="/soporteServlet"
 						method="POST" novalidate="novalidate">
@@ -49,7 +50,7 @@
 					
 					<div class="form-field">
 							<span class="lbl">Premium<span class="required-asterisk">*</span>:</span>
-							<label class="ui-marmots-label-radio on" for="radio_Si_modal">
+							<label class="ui-marmots-label-radio marmots-label-left on" for="radio_Si_modal">
 								<input name="premium" id="radio_Si_modal" ${soporte.premium == 'Si' ? 'checked' : ''} type="radio" value="Si"/>Si
 							</label>
 							<label class="ui-marmots-label-radio marmots-label-left" for="radio_No_modal">
