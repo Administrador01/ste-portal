@@ -67,7 +67,7 @@
 					<div class="form-field">
 							<span class="lbl">Premium<span class="required-asterisk">*</span>:</span>
 							<label class="ui-marmots-label-radio on" for="radio_Si">
-								<input name="premium" id="radio_Si" selected type="radio" value="Si"/>Si
+								<input name="premium" id="radio_Si" checked type="radio" value="Si"/>Si
 							</label>
 							<label class="ui-marmots-label-radio marmots-label-left" for="radio_No">
 								<input name="premium"  id="radio_No"  type="radio" value="No"/>No

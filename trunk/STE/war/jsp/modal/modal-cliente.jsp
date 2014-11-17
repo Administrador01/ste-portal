@@ -42,16 +42,16 @@
 							
 							
 							<label class="ui-marmots-label-radio marmots-label-left ${cliente.premium == 'Si' ? 'on' : ''}" for="radio_Si_modal">
-								<input name="premium_modal" id="radio_Si_modal" ${cliente.premium == 'Si' ? 'selected' : ''} type="radio" value="Si"/>Si
+								<input name="premium_modal" id="radio_Si_modal" ${cliente.premium == 'Si' ? 'selected' : ''} type="radio" value="Si"/>Premium
 							</label>
 							<label class="ui-marmots-label-radio marmots-label-left ${cliente.premium == 'No' ? 'on' : ''}" for="radio_No_modal">
-								<input name="premium_modal" ${cliente.premium == 'No' ? 'selected' : ''} id="radio_No_modal" value="No"  type="radio"/>No
+								<input name="premium_modal" ${cliente.premium == 'No' ? 'selected' : ''} id="radio_No_modal" value="No"  type="radio"/>No Premium
 							</label>
 						</div>
 					
 						 
 						<div class="form-field">
-							<span class="lbl">Tipo cliente<span class="required-asterisk">*</span>:</span>
+							<span class="lbl">Tipo segmento<span class="required-asterisk">*</span>:</span>
 							<div class="input">
 								<select id="tipo_cliente" class="selectpicker selected" name="tipo_cliente" >
 									<option value="CIB" ${cliente.tipo_cliente == 'CIB' ? 'selected' : ''}>CIB</option>									

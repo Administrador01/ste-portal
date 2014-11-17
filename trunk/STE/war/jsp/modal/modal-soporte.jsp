@@ -8,7 +8,7 @@
 <div class="">
 				<h2>Editar soporte</h2>
 				<hr />
-			</div>
+			</div>c
 			<div class="form-holder">
 					<form id="edit-soporte-form" name="edit-soporte-form" class="edit-form" action="/soporteServlet"
 						method="POST" novalidate="novalidate">
@@ -47,7 +47,15 @@
 				</div>
 				<div class="form-field-divider right">
 					
-					<div class="form-field"></div>
+					<div class="form-field">
+							<span class="lbl">Premium<span class="required-asterisk">*</span>:</span>
+							<label class="ui-marmots-label-radio on" for="radio_Si_modal">
+								<input name="premium" id="radio_Si_modal" ${soporte.premium == 'Si' ? 'checked' : ''} type="radio" value="Si"/>Si
+							</label>
+							<label class="ui-marmots-label-radio marmots-label-left" for="radio_No_modal">
+								<input name="premium"  id="radio_No_modal" ${soporte.premium == 'No' ? 'checked' : ''} type="radio" value="No"/>No
+							</label>
+						</div>
 					
 					<div class="form-field">
 						<span class="lbl">Fecha fin:</span>
