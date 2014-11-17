@@ -117,3 +117,10 @@
 					<button type="button" class="" data-dismiss="modal">Cancelar</button>
 				</div>
 			</div>	
+			
+<script>
+$(document).ready(function(){
+	$('input:checkbox, input:radio').checkbox();
+
+});
+</script>
