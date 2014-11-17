@@ -70,7 +70,7 @@
 								<input name="premium" id="radio_Si" checked type="radio" value="Si"/>Si
 							</label>
 							<label class="ui-marmots-label-radio marmots-label-left" for="radio_No">
-								<input name="premium"  id="radio_No"  type="radio" value="No"/>No
+								<input name="premium" id="radio_No"  type="radio" value="No"/>No
 							</label>
 						</div>
 					
