@@ -20,6 +20,10 @@
 		Nuevo<span class="user_span"></span>
 	</button>
 	
+	<button id="excel_btn" onclick=	"window.location.href='../../clientServlet?accion=xls'">
+		Descargar Tabla<span class="excel_span"></span>
+	</button>
+ 
 	<!-- 
 	<button id="excel_btn" onclick=	"window.location.href='../../usersServlet?accion=xls'">
 		Descargar Tabla<span class="excel_span"></span>
@@ -105,16 +109,16 @@
 					<div class="form-field-divider right">
 						<div class="form-field"></div>
 						<div class="form-field">
-							<span class="lbl">Premium<span class="required-asterisk">*</span>:</span>
+							<span class="lbl">Tipo<span class="required-asterisk">*</span>:</span>
 							
 							
 							
 							<label class="ui-marmots-label-radio marmots-label-left on" for="radio_Si">
-								Si
-								<input id="radio_Si" type="radio" selected="" name="premium" value="Si">
+								Premium
+								<input id="radio_Si" type="radio" checked name="premium" value="Si">
 							</label>
 							<label class="ui-marmots-label-radio marmots-label-left" for="radio_No">
-								No
+								No Premium
 								<input id="radio_No" type="radio" name="premium" value="No">
 							</label>
 						</div>
@@ -141,7 +145,7 @@
 						 -->
 						 
 						<div class="form-field">
-							<span class="lbl">Tipo cliente<span class="required-asterisk">*</span>:</span>
+							<span class="lbl">Tipo segmento<span class="required-asterisk">*</span>:</span>
 							<div class="input">
 								<select id="tipo_cliente" class="selectpicker selected" name="tipo_cliente" >
 									<option value="default">Seleccionar</option>		
@@ -177,8 +181,8 @@
 						<th><span class="table-title">Identificador</span></th>
 						<th><span class="table-title">Nombre</span></th>
 						<th><span class="table-title">Fecha alta</span></th>
-						<th><span class="table-title">Tipo Cliente</span></th>
-						<th><span class="table-title">Premium</span></th>
+						<th><span class="table-title">Tipo Segmento</span></th>
+						<th><span class="table-title">Tipo</span></th>
 						<th style="width: 110px;">&nbsp;</th>
 					</tr>
 					<tr>
