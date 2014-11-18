@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
 
 import com.ste.beans.Cliente;
 import com.ste.beans.Soporte;
@@ -23,8 +24,12 @@ public class ClienteDao {
 
 		List<Cliente> clientes;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		String queryStr = "select from " + Cliente.class.getName();
-		clientes = (List<Cliente>) pm.newQuery(queryStr).execute();
+		
+		
+		Query q = pm.newQuery("select from " + Cliente.class.getName());		
+		q.setOrdering("id_cliente asc");
+		clientes = (List<Cliente>) q.execute();
+		
 		
 		pm.close();
 
