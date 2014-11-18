@@ -109,17 +109,16 @@
 					<div class="form-field-divider right">
 						<div class="form-field"></div>
 						<div class="form-field">
-							<span class="lbl">Tipo<span class="required-asterisk">*</span>:</span>
-							
+							<span class="lbl">Tipo<span class="required-asterisk">*</span>:</span>						
 							
 							
 							<label class="ui-marmots-label-radio marmots-label-left on" for="radio_Si">
 								Premium
-								<input id="radio_Si" type="radio" name="premium" value="Premium">
+								<input id="radio_Si" type="radio" name="premium" value="Premium" checked/>
 							</label>
 							<label class="ui-marmots-label-radio marmots-label-left" for="radio_No">
 								No Premium
-								<input id="radio_No" type="radio" name="premium" value="No premium">
+								<input id="radio_No" type="radio" name="premium" value="No premium" />
 							</label>
 						</div>
 						
