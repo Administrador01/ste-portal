@@ -9,17 +9,15 @@
 
 	<h1>Listado de Clientes</h1>
 	<hr/>
+	
 	<div class="leyenda_clientes">
-		
 		<div class="selects">
 		<span>Tipo de cliente</span>
 		<select class="selectpicker" id="tip_crit">
 			<option value="0">Todas</option>
 			<option value="Premium">Premium</option>
-			
 		</select>
-		
-	</div>	
+		</div>	
 	</div>
 	<div class="search_div">
 	<!-- 
