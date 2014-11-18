@@ -1610,14 +1610,11 @@ form textarea.error {
 .clients > .clients_container > .clientes_letra > .client_box.search_h {
   display: none;
 }
-.clients > .clients_container > .clientes_letra > .client_box.crit_Alta {
-  background-color: #F6891E;
+.clients > .clients_container > .clientes_letra > .client_box.tipo_premium {
+  background-color: #80C3FF;
 }
-.clients > .clients_container > .clientes_letra > .client_box.crit_Media {
-  background-color: #FDBD2C;
-}
-.clients > .clients_container > .clientes_letra > .client_box.crit_Baja {
-  background-color: #86C82D;
+.clients > .clients_container > .clientes_letra > .client_box.tipo_nopremium {
+  background-color: #6A8DFF;
 }
 .clients > .clients_container > .clientes_letra > .client_box p {
   color: white;
