@@ -109,7 +109,7 @@
 					<div class="form-field-divider right">
 						<div class="form-field"></div>
 						<div class="form-field">
-							<span class="lbl">Tipo<span class="required-asterisk">*</span>:</span>						
+							<span class="lbl">Tipo cliente<span class="required-asterisk">*</span>:</span>						
 							
 							
 							<label class="ui-marmots-label-radio marmots-label-left on" for="radio_Si">

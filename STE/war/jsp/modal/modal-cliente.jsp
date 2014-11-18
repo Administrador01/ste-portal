@@ -36,7 +36,7 @@
 					<div class="form-field-divider right">
 						<div class="form-field"></div>
 						<div class="form-field">
-							<span class="lbl">Premium<span class="required-asterisk">*</span>:</span>
+							<span class="lbl">Tipo cliente<span class="required-asterisk">*</span>:</span>
 							
 							
 							
@@ -51,7 +51,7 @@
 					
 						 
 						<div class="form-field">
-							<span class="lbl">Tipo segmento<span class="required-asterisk">*</span>:</span>
+							<span class="lbl">Segmento<span class="required-asterisk">*</span>:</span>
 							<div class="input">
 								<select id="tipo_cliente" class="selectpicker selected" name="tipo_cliente" >
 									<option value="CIB" ${cliente.tipo_cliente == 'CIB' ? 'selected' : ''}>CIB</option>									
