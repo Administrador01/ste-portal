@@ -72,7 +72,7 @@
 					<div class="form-field">
 							<span class="lbl">Premium<span class="required-asterisk">*</span>:</span>
 							<label class="ui-marmots-label-radio on" for="radio_Si">
-								<input name="premium" id="radio_Si" checked type="radio" value="Si"/>Si
+								<input name="premium" id="radio_Si" type="radio" value="Si" checked />Si
 							</label>
 							<label class="ui-marmots-label-radio marmots-label-left" for="radio_No">
 								<input name="premium" id="radio_No"  type="radio" value="No"/>No
@@ -82,10 +82,10 @@
 					<div class="form-field">
 							<span class="lbl">Tipo<span class="required-asterisk">*</span>:</span>
 							<label class="ui-marmots-label-radio on" for="radio_incidencia">
-								<input name="tipo" id="radio_incidencia" checked type="radio" value="incidencia"/>Incidencia
+								<input name="tipo" id="radio_incidencia" type="radio" value="Incidencia" checked />Incidencia
 							</label>
 							<label class="ui-marmots-label-radio marmots-label-left" for="radio_consulta">
-								<input name="tipo"  id="radio_consulta"  type="radio" value="consulta"/>Consulta
+								<input name="tipo"  id="radio_consulta"  type="radio" value="Consulta"/>Consulta
 							</label>
 					</div>
 

@@ -144,7 +144,7 @@
 						 -->
 						 
 						<div class="form-field">
-							<span class="lbl">Tipo segmento<span class="required-asterisk">*</span>:</span>
+							<span class="lbl">Segmento<span class="required-asterisk">*</span>:</span>
 							<div class="input">
 								<select id="tipo_cliente" class="selectpicker selected" name="tipo_cliente" >
 									<option value="default">Seleccionar</option>		
@@ -180,7 +180,7 @@
 						<th><span class="table-title">Identificador</span></th>
 						<th><span class="table-title">Nombre</span></th>
 						<th><span class="table-title">Fecha alta</span></th>
-						<th><span class="table-title">Tipo Segmento</span></th>
+						<th><span class="table-title">Segmento</span></th>
 						<th><span class="table-title">Tipo Cliente</span></th>
 						<th style="width: 110px;">&nbsp;</th>
 					</tr>

@@ -100,7 +100,7 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 			s.addCell(new Label(1, 0, "NOMBRE", cellFormat));
 			s.addCell(new Label(2, 0, "FECHA ALTA", cellFormat));
 			s.addCell(new Label(3, 0, "PREMIUM", cellFormat));
-			s.addCell(new Label(4, 0, "TIPO SEGMENTO", cellFormat));
+			s.addCell(new Label(4, 0, "SEGMENTO", cellFormat));
 			
 
 			int aux = 1;
