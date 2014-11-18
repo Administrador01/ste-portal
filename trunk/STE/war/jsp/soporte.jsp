@@ -56,8 +56,13 @@
 						<div class="input">
 							<select id="tipo_servicio" class="selectpicker selected" name="tipo_servicio" >
 								<option value="default">Seleccionar</option>	
-								<option value="CIB">CIB</option>	
-								<option value="BEC">BEC</option>	
+								<option value="cobros">Cobros</option>	
+								<option value="pagos">Pagos</option>
+								<option value="MT101">MT101</option>
+								<option value="MT94x">MT94x</option>
+								<option value="cashpool">Cashpool</option>
+								<option value="factura integral">Factura integral</option>
+								<option value="otros">Otros</option>	
 							</select>
 						</div>
 					</div>
@@ -72,8 +77,18 @@
 							<label class="ui-marmots-label-radio marmots-label-left" for="radio_No">
 								<input name="premium" id="radio_No"  type="radio" value="No"/>No
 							</label>
-						</div>
-					
+					</div>
+
+					<div class="form-field">
+							<span class="lbl">Tipo<span class="required-asterisk">*</span>:</span>
+							<label class="ui-marmots-label-radio on" for="radio_incidencia">
+								<input name="tipo" id="radio_incidencia" checked type="radio" value="incidencia"/>Incidencia
+							</label>
+							<label class="ui-marmots-label-radio marmots-label-left" for="radio_consulta">
+								<input name="tipo"  id="radio_consulta"  type="radio" value="consulta"/>Consulta
+							</label>
+					</div>
+
 					<div class="form-field">
 						<span class="lbl">Fecha fin:</span>
 						<div class="input">
@@ -84,13 +99,10 @@
 					<div class="form-field">
 						<span class="lbl">Estado<span class="required-asterisk">*</span>:</span>
 						<div class="input">
-							<select id="estado" class="selectpicker selected" name="estado" >
-								<option value="default">Seleccionar</option>		
-								<option value="Pendiente">Pendiente</option>									
-								<option value="Producción">Producción</option>	
-								<option value="Eliminado">Eliminado</option>	
-								<option value="Finalizado">Finalizado</option>	
-								<option value="Parado">Parado</option>	
+							<select id="estado" class="selectpicker" name="estado">
+								<option value="Pendiente" selected>Pendiente</option>									
+								<option value="EnCurso">En curso</option>	
+								<option value="Finalizado">Finalizado</option>		
 															
 							</select>
 						</div>
@@ -100,11 +112,19 @@
 						<span class="lbl">Producto/canal<span class="required-asterisk">*</span>:</span>
 						<div class="input">
 							<select id="producto_canal" class="selectpicker selected" name="producto_canal" >
-								<option value="default">Seleccionar</option>		
+								
+								<option value="default">Seleccionar</option>	
+								<option value="Swift Fileact">Swift Fileact</option>
+								<option value="Swift Fileact Antig">Swift Fileact (antigua conexi&oacuten)</option>
 								<option value="Swift FIN">Swift FIN</option>	
-								<option value="Swift Fileact">Swift Fileact</option>	
-								<option value="Editran">Editran</option>	
-								<option value="BBVA Netcash">BBVA Netcash</option>	
+								<option value="Swift FIN relay">Swift FIN (Relay Bank)</option>
+								<option value="Editran">EDITRAN</option>	
+								<option value="BBVA Netcash">BBVA Netcash</option>
+								<option value="Edifact">EDIFACT</option>
+								<option value="Normalizador">Normalizador</option>
+								<option value="Cashpool domestico">Cashpool dom&eacutestico</option>
+								<option value="Cashpool internacional">Cashpool internacional</option>
+								<option value="factura integral">Factura integral</option>
 															
 							</select>
 						</div>
@@ -113,14 +133,30 @@
 				</div>
 				<div class="form-field-divider down">
 					<div class="form-field detalles">
-						<span class="lbl">Detalles:</span>
+						<span class="lbl">Descripci&oacuten:</span>
 						<div class="input">
 							<textarea name="detalles" maxlength="500" rows="1" cols="1"></textarea>
 						</div>
+					</div>			 
+				</div>
+				<br />
+				<br /> 
+				
+
+				<div class="form-field-divider down">
+					<div class="form-field solucion">
+						<span class="lbl">Soluci&oacuten:</span>
+						<div class="input">
+							<textarea name="solucion" maxlength="500" rows="1" cols="1"></textarea>
+						</div>
 					</div>				
 				</div>
+				
+
+				
+				
 				<div id="message_div" class="message_div">
-					<span id="span_message">El soporte ha sido creado de forma correcta.<br/>En breve volvemos a la página.</span>
+					<span id="span_message">El soporte ha sido creado de forma correcta.<br/>En breve volvemos a la p�gina.</span>
 				</div>
 			</div>
 
