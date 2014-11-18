@@ -123,7 +123,8 @@ public class SoporteServlet extends HttpServlet{
 				s.addCell(new Label(4, aux, sop.getPremium()));
 				s.addCell(new Label(5, aux, sop.getEstado()));
 				s.addCell(new Label(6, aux, sop.getTipo_servicio()));
-				s.addCell(new Label(7, aux, sop.getDetalles()));
+				s.addCell(new Label(7, aux, sop.getTipo_servicio()));
+				s.addCell(new Label(8, aux, sop.getDetalles()));
 
 				
 

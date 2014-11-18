@@ -20,7 +20,7 @@
 				</li>
 				
 				<li class="menu">
-					<a class="no-underline" href="#">
+					<a class="no-underline" href="${entorno}/pruebas.do">
 						<span class="icon-24 pruebas-24x"></span>
 						<span class="menu-title">Pruebas</span>
 					</a>

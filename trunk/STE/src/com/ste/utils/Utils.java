@@ -44,7 +44,7 @@ public class Utils {
 		switch(permiso){
 		case 1: s="Propietario";
 			break;
-		case 2: s="EdiciÃ³n";
+		case 2: s="Edición";
 			break;
 		case 3: s="Consulta";
 			break;

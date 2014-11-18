@@ -33,8 +33,11 @@ import com.ste.utils.Utils;
 
 public class UserServlet extends HttpServlet {
 
-	private static final long serialVersionUID = -826683004548238295L;
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1943683652171875011L;
 	private static final Logger log = Logger.getLogger(UserServlet.class.getName());
 
 	
@@ -51,7 +54,7 @@ public class UserServlet extends HttpServlet {
 			 
 			 if (sesionpermiso>2){
 					json.append("failure", "true");
-					json.append("error", "No tienes los permisos para realizar esta operaciÃ³n");
+					json.append("error", "No tienes los permisos para realizar esta operación");
 					
 					resp.setCharacterEncoding("UTF-8");
 			        resp.setContentType("application/json");       

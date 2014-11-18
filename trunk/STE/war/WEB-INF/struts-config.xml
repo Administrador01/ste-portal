@@ -36,6 +36,10 @@
 			<forward name="ok" path="/jsp/skeletons/users-skeleton.jsp" />
 		</action>
 		
+		<action path="/pruebas" type="com.ste.actions.PruebasAction">
+			<forward name="ok" path="/jsp/skeletons/pruebas-skeleton.jsp" />
+		</action>
+		
 		<action path="/soporte" type="com.ste.actions.SoporteAction">
 			<forward name="ok" path="/jsp/skeletons/soporte-skeleton.jsp" />
 		</action>
