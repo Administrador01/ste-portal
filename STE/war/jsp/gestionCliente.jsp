@@ -115,11 +115,11 @@
 							
 							<label class="ui-marmots-label-radio marmots-label-left on" for="radio_Si">
 								Premium
-								<input id="radio_Si" type="radio" name="premium" value="Si">
+								<input id="radio_Si" type="radio" name="premium" value="Premium">
 							</label>
 							<label class="ui-marmots-label-radio marmots-label-left" for="radio_No">
 								No Premium
-								<input id="radio_No" type="radio" name="premium" value="No">
+								<input id="radio_No" type="radio" name="premium" value="No premium">
 							</label>
 						</div>
 						
@@ -182,7 +182,7 @@
 						<th><span class="table-title">Nombre</span></th>
 						<th><span class="table-title">Fecha alta</span></th>
 						<th><span class="table-title">Tipo Segmento</span></th>
-						<th><span class="table-title">Tipo</span></th>
+						<th><span class="table-title">Tipo Cliente</span></th>
 						<th style="width: 110px;">&nbsp;</th>
 					</tr>
 					<tr>

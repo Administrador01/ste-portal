@@ -114,7 +114,7 @@
 				</c:when>
 			</c:choose>
 				
-				<div class="client_box ${c.premium == 'Si' ? 'tipo_premium' : 'tipo_nopremium'}" data-id="${c.key.id}">
+				<div class="client_box ${c.premium == 'Premium' ? 'tipo_premium' : 'tipo_nopremium'}" data-id="${c.key.id}">
 					<p>${c.nombre}</p>
 				</div>
 			<c:set var="letra_anterior" value="${letra}" />	

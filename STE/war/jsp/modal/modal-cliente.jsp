@@ -68,6 +68,8 @@
 				</div>
 					</form>
 				</div>
+				<br />
+				<br />
 				<div class="modal-footer" id="modal-footer_submit">
 					<button type="button" id="submit_edit_cliente_form" onclick="sendEditClient();">Aceptar</button>
 					<button type="button" class="" data-dismiss="modal">Cancelar</button>

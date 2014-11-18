@@ -33,7 +33,7 @@ public class ClientsAction extends Action {
 			letras.add(c.getNombre().substring(0,1).toUpperCase());
 		}
 
-		String[] alphabet = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","Ã‘","O","P","Q","R","S","T","U","V","W","X","Y","Z"}; 
+		String[] alphabet = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","Ñ","O","P","Q","R","S","T","U","V","W","X","Y","Z"}; 
 		
 		
 		req.setAttribute("clientes", clientes);
