@@ -397,8 +397,9 @@ $(function() {
 		var cajas = $('.client_box');
 		var a;
 		if (val=="Premium"){
+
 			for (a = 0; a<=cajas.length-1; a++){
-				if (!$(cajas[a]).hasClass('premium'))
+				if (!$(cajas[a]).hasClass('tipo_premium'))
 					$(cajas[a]).addClass('hidden');
 			}
 		}else{
