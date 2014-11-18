@@ -12,7 +12,7 @@
 <hr />
 
 <div class="breadcrumbs">
-		<span onclick="window.location.href='../../' ">Home</span> > <span> GestiÃ³n de usuarios </span>
+		<span onclick="window.location.href='../../' ">Home</span> > <span> Gestión de usuarios </span>
 	</div>
 
 <div class="headButtonsBox">

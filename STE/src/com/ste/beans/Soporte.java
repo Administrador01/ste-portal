@@ -18,6 +18,9 @@ public class Soporte {
 	
 	@Persistent
 	private String premium;
+	
+	@Persistent
+	private String tipo;
 
 	@Persistent
 	private String id_prueba;
@@ -49,12 +52,23 @@ public class Soporte {
 	@Persistent
 	private String detalles;
 	
+	@Persistent
+	private String solucion;
+	
 	public String getDetalles() {
 		return detalles;
 	}
 
 	public void setDetalles(String detalles) {
 		this.detalles = detalles;
+	}
+
+	public String getSolucion() {
+		return solucion;
+	}
+
+	public void setSolucion(String solucion) {
+		this.solucion = solucion;
 	}
 
 	public Key getKey() {
@@ -156,5 +170,12 @@ public class Soporte {
 		this.premium = premium;
 	}
 	
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
 	
 }

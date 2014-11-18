@@ -12,7 +12,7 @@ public class StaticConfig {
 	
 	static public ArrayList<Config> departamentos =
 			new ArrayList<Config>(Arrays.asList(
-					new Config("PromociÃ³n Local", "PromociÃ³n Local"),
+					new Config("Promoción local", "Promoción Local"),
 					new Config("Global Customer Service", "Global Customer Service"),
 					new Config("Local Customer Service", "Local Customer Service")
 					));	
