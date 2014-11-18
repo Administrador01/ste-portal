@@ -7,7 +7,7 @@
 
 
 <h1>Gestión cliente</h1>
-<span class="btn-atras" onclick="window.location.href='../../'"></span>
+<span class="btn-atras" onclick="window.location.href='../../clientes.do'"></span>
 
 <hr />
 
@@ -115,7 +115,7 @@
 							
 							<label class="ui-marmots-label-radio marmots-label-left on" for="radio_Si">
 								Premium
-								<input id="radio_Si" type="radio" checked name="premium" value="Si">
+								<input id="radio_Si" type="radio" name="premium" value="Si">
 							</label>
 							<label class="ui-marmots-label-radio marmots-label-left" for="radio_No">
 								No Premium
