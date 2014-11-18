@@ -98,6 +98,7 @@ public class SoporteServlet extends HttpServlet{
 			s.setColumnView(6, 20);
 			s.setColumnView(7, 20);
 			s.setColumnView(8, 30);
+			s.setColumnView(9, 30);
 			
 			s.setRowView(0, 900);
 
@@ -108,9 +109,9 @@ public class SoporteServlet extends HttpServlet{
 			s.addCell(new Label(4, 0, "PREMIUM", cellFormat));
 			s.addCell(new Label(5, 0, "ESTADO", cellFormat));
 			s.addCell(new Label(6, 0, "SERVICIO", cellFormat));
-			s.addCell(new Label(7, 0, "PORIDUCTO/CANAL", cellFormat));
+			s.addCell(new Label(7, 0, "PRODUCTO/CANAL", cellFormat));
 			s.addCell(new Label(8, 0, "DETALLES", cellFormat));
-			
+			s.addCell(new Label(9, 0, "SOLUCION", cellFormat));
 
 			int aux = 1;
 
@@ -123,10 +124,9 @@ public class SoporteServlet extends HttpServlet{
 				s.addCell(new Label(4, aux, sop.getPremium()));
 				s.addCell(new Label(5, aux, sop.getEstado()));
 				s.addCell(new Label(6, aux, sop.getTipo_servicio()));
-				s.addCell(new Label(7, aux, sop.getTipo_servicio()));
+				s.addCell(new Label(7, aux, null));
 				s.addCell(new Label(8, aux, sop.getDetalles()));
-
-				
+				s.addCell(new Label(9, aux, sop.getSolucion()));
 
 				aux++;
 			}
@@ -218,7 +218,7 @@ public class SoporteServlet extends HttpServlet{
 		
 		String fecha_inicio = req.getParameter("fecha_inicio");
 		String fecha_fin = req.getParameter("fecha_fin");
-		
+		String tipo = req.getParameter("tipo");
 		String cliente = req.getParameter("cliente");
 		String estado = req.getParameter("estado");
 		String tipo_servicio = req.getParameter("tipo_servicio");
@@ -226,18 +226,20 @@ public class SoporteServlet extends HttpServlet{
 		String premium = req.getParameter("premium");
 		
 		String detalles = req.getParameter("detalles");
-		
+		String solucion = req.getParameter("solucion");
 		Soporte s = new Soporte();
 		SoporteDao sDao = SoporteDao.getInstance();
 		
 		s.setStr_fecha_inicio(fecha_inicio);
 		s.setStr_fecha_fin(fecha_fin);
+		s.setTipo(tipo);
 		s.setCliente_name(cliente);
 		s.setEstado(estado);
 		s.setTipo_servicio(tipo_servicio);
 		s.setProducto_canal(producto_canal);
 		s.setDetalles(detalles);
 		s.setPremium(premium);
+		s.setSolucion(solucion);
 		
 		sDao.createSoporte(s);
 		
