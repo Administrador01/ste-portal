@@ -11,14 +11,17 @@
 	<hr/>
 	
 	<div class="leyenda_clientes">
-		<div class="selects">
-		<span>Tipo de cliente</span>
-		<select class="selectpicker" title="Todos" id="tip_crit">
-			<option value="0">Todos</option>
-			<option value="Premium">Premium</option>
-		</select>
-		</div>	
+			<div class="selects">
+				<span>Tipo de cliente</span>
+				<select class="selectpicker clients" id="tip_crit" >
+					<option value="">Todos</option>
+					<option value="Premium">Premium</option>
+				</select>
+			</div>
+		
 	</div>
+
+
 	<div class="search_div">
 	<!-- 
 		<c:if test="${sessionScope.permiso <= 6}">

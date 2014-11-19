@@ -55,20 +55,20 @@
 					<div class="form-field">
 							<span class="lbl">Premium<span class="required-asterisk">*</span>:</span>
 							<label class="ui-marmots-label-radio marmots-label-left on" for="radio_Si_modal">
-								<input name="premium" id="radio_Si_modal" ${soporte.premium == 'Si' ? 'checked' : ''} type="radio" value="Si"/>Si
+								<input name="premium_modal" id="radio_Si_modal" ${soporte.premium == 'Si' ? 'checked' : ''} type="radio" value="Si" />Si
 							</label>
 							<label class="ui-marmots-label-radio marmots-label-left" for="radio_No_modal">
-								<input name="premium"  id="radio_No_modal" ${soporte.premium == 'No' ? 'checked' : ''} type="radio" value="No"/>No
+								<input name="premium_modal"  id="radio_No_modal"  ${soporte.premium == 'No' ? 'checked' : ''}  type="radio" value="No" />No ${soporte.premium}
 							</label>
 					</div>
 					
 					<div class="form-field">
 							<span class="lbl">Tipo<span class="required-asterisk">*</span>:</span>
-							<label class="ui-marmots-label-radio on" for="radio_incidencia">
+							<label class="ui-marmots-label-radio ${soporte.tipo == 'Incidencia' ? 'on' : ''}" for="radio_incidencia">
 								<input name="tipo" id="radio_incidencia" ${soporte.tipo == 'Incidencia' ? 'checked' : ''} type="radio" value="incidencia"/>Incidencia
 							</label>
-							<label class="ui-marmots-label-radio marmots-label-left" for="radio_consulta">
-								<input name="tipo"  id="radio_consulta"  ${soporte.tipo == 'Consulta' ? 'checked' : ''}type="radio" value="consulta"/>Consulta
+							<label class="ui-marmots-label-radio marmots-label-left ${soporte.tipo == 'Consulta' ? 'on' : ''}" for="radio_consulta">
+								<input name="tipo"  id="radio_consulta"  ${soporte.tipo == 'Consulta' ? 'checked' : ''}type="radio" value="consulta"/>Consulta<br />${soporte.tipo}
 							</label>
 					</div>
 					
@@ -85,7 +85,7 @@
 							<select id="estado" class="selectpicker selected" name="estado" >							
 								<option value="Pendiente" ${soporte.estado == 'Pendiente' ? 'selected' : ''} selected>Pendiente</option>									
 								<option value="EnCurso" ${soporte.estado == 'EnCurso' ? 'selected' : ''}>En curso</option>	
-								<option value="Finalizado" ${soporte.estado == 'Finalizado' ? 'selected' : ''}>Finalizado</option>	
+								<option value="Finalizado" ${soporte.estado == 'Finalizado' ? 'selected' : ''}>Finalizado</option>
 							</select>
 						</div>
 					</div>

@@ -1628,3 +1628,6 @@ form textarea.error {
 .clients > .clients_container > .clientes_letra > .client_box:nth-child(6n).client_box {
   margin-right: 0px;
 }
+.btn-group.bootstrap-select.clients button {
+  width: 105px;
+}
