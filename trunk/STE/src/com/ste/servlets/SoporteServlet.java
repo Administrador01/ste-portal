@@ -124,7 +124,7 @@ public class SoporteServlet extends HttpServlet{
 				s.addCell(new Label(4, aux, sop.getPremium()));
 				s.addCell(new Label(5, aux, sop.getEstado()));
 				s.addCell(new Label(6, aux, sop.getTipo_servicio()));
-				s.addCell(new Label(7, aux, null));
+				s.addCell(new Label(7, aux, sop.getProducto_canal()));
 				s.addCell(new Label(8, aux, sop.getDetalles()));
 				s.addCell(new Label(9, aux, sop.getSolucion()));
 
@@ -177,7 +177,7 @@ public class SoporteServlet extends HttpServlet{
 		
 		String fecha_inicio = req.getParameter("fecha_inicio");
 		String fecha_fin = req.getParameter("fecha_fin");
-		
+		String tipo = req.getParameter("tipo");
 		String cliente = req.getParameter("cliente");
 		String estado = req.getParameter("estado");
 		String tipo_servicio = req.getParameter("tipo_servicio");
@@ -190,6 +190,7 @@ public class SoporteServlet extends HttpServlet{
 		s.setStr_fecha_inicio(fecha_inicio);
 		s.setStr_fecha_fin(fecha_fin);
 		s.setCliente_name(cliente);
+		s.setTipo(tipo);
 		s.setEstado(estado);
 		s.setTipo_servicio(tipo_servicio);
 		s.setProducto_canal(producto_canal);

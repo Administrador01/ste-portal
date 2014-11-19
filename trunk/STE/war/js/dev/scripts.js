@@ -402,6 +402,7 @@ $(function() {
 				if (!$(cajas[a]).hasClass('tipo_premium'))
 					$(cajas[a]).addClass('hidden');
 			}
+
 		}else{
 			for (a = 0; a<=cajas.length-1; a++){
 				$(cajas[a]).removeClass('hidden');	

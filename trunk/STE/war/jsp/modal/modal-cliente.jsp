@@ -28,10 +28,10 @@
 						<div class="form-field">
 							<span class="lbl">Fecha alta<span class="required-asterisk">*</span>:</span>
 							<div class="input">
-								<input type="text" readonly="" value="${cliente.str_fecha_alta}" size="16" class="datepicker" name="fecha_alta" id="fecha_alta" required aria-required="true">
+								<input type="text" readonly="" value="${cliente.str_fecha_alta}" size="16" class="datepicker fromTo"  data-target-id='' name="fecha_alta" id="fecha_alta_modal" required aria-required="true">
 							</div>
 						</div>
-				
+
 					</div>
 					<div class="form-field-divider right">
 						<div class="form-field"></div>
