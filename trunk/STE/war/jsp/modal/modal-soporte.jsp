@@ -65,10 +65,10 @@
 					<div class="form-field">
 							<span class="lbl">Tipo<span class="required-asterisk">*</span>:</span>
 							<label class="ui-marmots-label-radio ${soporte.tipo == 'Incidencia' ? 'on' : ''}" for="radio_incidencia">
-								<input name="tipo" id="radio_incidencia" ${soporte.tipo == 'Incidencia' ? 'checked' : ''} type="radio" value="incidencia"/>Incidencia
+								<input name="tipo" id="radio_incidencia" ${soporte.tipo == 'Incidencia' ? 'checked' : ''} type="radio" value="Incidencia"/>Incidencia
 							</label>
 							<label class="ui-marmots-label-radio marmots-label-left ${soporte.tipo == 'Consulta' ? 'on' : ''}" for="radio_consulta">
-								<input name="tipo"  id="radio_consulta"  ${soporte.tipo == 'Consulta' ? 'checked' : ''}type="radio" value="consulta"/>Consulta<br />${soporte.tipo}
+								<input name="tipo"  id="radio_consulta"  ${soporte.tipo == 'Consulta' ? 'checked' : ''}type="radio" value="Consulta"/>Consulta<br />${soporte.tipo}
 							</label>
 					</div>
 					
