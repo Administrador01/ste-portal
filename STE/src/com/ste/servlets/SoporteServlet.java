@@ -99,6 +99,7 @@ public class SoporteServlet extends HttpServlet{
 			s.setColumnView(7, 20);
 			s.setColumnView(8, 30);
 			s.setColumnView(9, 30);
+			s.setColumnView(10, 30);
 			
 			s.setRowView(0, 900);
 
@@ -112,7 +113,8 @@ public class SoporteServlet extends HttpServlet{
 			s.addCell(new Label(7, 0, "PRODUCTO/CANAL", cellFormat));
 			s.addCell(new Label(8, 0, "DETALLES", cellFormat));
 			s.addCell(new Label(9, 0, "SOLUCION", cellFormat));
-
+			s.addCell(new Label(10, 0, "TIPO SOPORTE", cellFormat));
+			
 			int aux = 1;
 
 			for (Soporte sop : soportes) {
@@ -127,6 +129,7 @@ public class SoporteServlet extends HttpServlet{
 				s.addCell(new Label(7, aux, sop.getProducto_canal()));
 				s.addCell(new Label(8, aux, sop.getDetalles()));
 				s.addCell(new Label(9, aux, sop.getSolucion()));
+				s.addCell(new Label(10, aux, sop.getTipo()));
 
 				aux++;
 			}

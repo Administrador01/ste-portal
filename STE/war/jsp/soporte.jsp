@@ -43,13 +43,36 @@
 						</div>
 					</div>
 					
+					
+					
+					
+					
 					<div class="form-field">
 						<span class="lbl">Cliente<span class="required-asterisk">*</span>:</span>
 						<div class="input">
-							<input class="long" type="text" name="cliente" id="cliente" required>
-
+						
+							<select id="tipo_servicio" class="selectpicker selected" name="cliente" id="cliente">
+							
+								<c:choose>
+										<c:when test="${empty clientes}">
+											<option value="default">No hay clientes</option>
+										</c:when>
+										<c:otherwise>
+											<option value="default">Seleccionar</option>
+											<c:forEach items="${clientes}" var="t">							
+												<option value="${t.nombre}">${t.nombre}</option>
+											</c:forEach>
+										</c:otherwise>
+								</c:choose>
+							</select>
 						</div>
 					</div>
+					
+					
+					
+					
+					
+					
 					
 					<div class="form-field">
 						<span class="lbl">Tipo de servicio<span class="required-asterisk">*</span>:</span>
@@ -99,8 +122,9 @@
 					<div class="form-field">
 						<span class="lbl">Estado<span class="required-asterisk">*</span>:</span>
 						<div class="input">
-							<select id="estado" class="selectpicker" name="estado">
-								<option value="Pendiente" selected>Pendiente</option>									
+							<select id="estado" class="selectpicker selected" name="estado">
+								<option value="default">Seleccionar</option>
+								<option value="Pendiente">Pendiente</option>									
 								<option value="EnCurso">En curso</option>	
 								<option value="Finalizado">Finalizado</option>		
 															
