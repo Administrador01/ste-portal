@@ -10,7 +10,9 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.ste.beans.Cliente;
 import com.ste.beans.Soporte;
+import com.ste.dao.ClienteDao;
 import com.ste.dao.SoporteDao;
 
 public class SoporteAction extends Action{
@@ -23,6 +25,10 @@ public class SoporteAction extends Action{
 		SoporteDao sDao = SoporteDao.getInstance();
 		List<Soporte> soportes = sDao.getAllSoportes();
 		
+		ClienteDao cDao = ClienteDao.getInstance();
+		List<Cliente> clientes = cDao.getAllClients();
+		
+		req.setAttribute("clientes", clientes);
 		req.setAttribute("soportes", soportes);
 		
 		return  mapping.findForward("ok");
