@@ -1478,6 +1478,9 @@ form textarea.error {
   border-width: 6px;
   margin-left: -6px;
 }
+#soporte {
+  /*anadido de forma manual  para premium y soporte para que tenga el mismo formato que con el atributo disabled pero tenga la caracteristica readonly*/
+}
 #soporte .tipo-cliente-field > .lbl {
   vertical-align: super;
   margin-right: 10px;
