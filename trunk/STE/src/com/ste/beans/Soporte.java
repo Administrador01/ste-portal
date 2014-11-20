@@ -20,7 +20,7 @@ public class Soporte {
 	private String premium;
 	
 	@Persistent
-	private String tipo;
+	private String tipo_soporte;
 
 	@Persistent
 	private String id_prueba;
@@ -54,6 +54,12 @@ public class Soporte {
 	
 	@Persistent
 	private String solucion;
+
+	@Persistent
+	private String tipo_cliente;
+	
+	@Persistent
+	private String producto_canal;
 	
 	public String getDetalles() {
 		return detalles;
@@ -82,11 +88,17 @@ public class Soporte {
 	public String getId_prueba() {
 		return id_prueba;
 	}
-
+	
+	public String getTipo_cliente() {
+		return tipo_cliente;
+	}
 	public void setId_prueba(String id_prueba) {
 		this.id_prueba = id_prueba;
 	}
-
+	
+	public void setTipo_cliente(String tipo_cliente) {
+		this.tipo_cliente = tipo_cliente;
+	}
 	public Date getFecha_inicio() {
 		return fecha_inicio;
 	}
@@ -159,8 +171,7 @@ public class Soporte {
 		this.producto_canal = producto_canal;
 	}
 
-	@Persistent
-	private String producto_canal;
+
 
 	public String getPremium() {
 		return premium;
@@ -170,12 +181,12 @@ public class Soporte {
 		this.premium = premium;
 	}
 	
-	public String getTipo() {
-		return tipo;
+	public String getTipo_soporte() {
+		return tipo_soporte;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setTipo_soporte(String tipo_soporte) {
+		this.tipo_soporte = tipo_soporte;
 	}
 	
 }
