@@ -25,6 +25,7 @@ public class SoporteAction extends Action{
 		SoporteDao sDao = SoporteDao.getInstance();
 		List<Soporte> soportes = sDao.getAllSoportes();
 		
+		//Mandamos los clientes para generar la lista select desplegable
 		ClienteDao cDao = ClienteDao.getInstance();
 		List<Cliente> clientes = cDao.getAllClients();
 		

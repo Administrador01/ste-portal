@@ -66,8 +66,8 @@
 								</c:choose>
 							</select>
 						</div>
-
 					</div>
+					
 					<div class="form-field">
 						<span class="lbl">Tipo cliente:</span>
 						<input type="text" name="input-premium-soporte" id="input-premium-soporte" value="" readonly>
