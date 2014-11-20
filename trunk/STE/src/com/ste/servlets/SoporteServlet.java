@@ -90,49 +90,50 @@ public class SoporteServlet extends HttpServlet{
 			cellFormat.setVerticalAlignment(VerticalAlignment.CENTRE);
 
 			s.setColumnView(0, 16);
-			s.setColumnView(1, 30);
+			s.setColumnView(1, 20);
 			s.setColumnView(2, 20);
 			s.setColumnView(3, 20);
 			s.setColumnView(4, 20);
 			s.setColumnView(5, 20);
 			s.setColumnView(6, 20);
-			s.setColumnView(7, 20);
-			s.setColumnView(8, 30);
-			s.setColumnView(9, 30);
-			s.setColumnView(10, 30);
-			s.setColumnView(11, 30);
+			s.setColumnView(7, 40);
+			s.setColumnView(8, 40);
+			s.setColumnView(9, 20);
+			s.setColumnView(10, 20);
+			s.setColumnView(11, 20);
 			
 			s.setRowView(0, 900);
 
 			s.addCell(new Label(0, 0, "IDENTIFICADOR", cellFormat));
-			s.addCell(new Label(1, 0, "CLIENTE", cellFormat));
-			s.addCell(new Label(2, 0, "FECHA INICIO", cellFormat));
-			s.addCell(new Label(3, 0, "FECHA FIN", cellFormat));
-			s.addCell(new Label(4, 0, "TIPO CLIENTE", cellFormat));
-			s.addCell(new Label(5, 0, "ESTADO", cellFormat));
-			s.addCell(new Label(6, 0, "SERVICIO", cellFormat));
-			s.addCell(new Label(7, 0, "PRODUCTO/CANAL", cellFormat));
-			s.addCell(new Label(8, 0, "DETALLES", cellFormat));
-			s.addCell(new Label(9, 0, "SOLUCION", cellFormat));
-			s.addCell(new Label(10, 0, "TIPO SOPORTE", cellFormat));
-			s.addCell(new Label(11, 0, "SEGMENTO CLIENTE", cellFormat));
+			s.addCell(new Label(1, 0, "FECHA INICIO", cellFormat));
+			s.addCell(new Label(2, 0, "CLIENTE", cellFormat));
+			s.addCell(new Label(3, 0, "SEGMENTO", cellFormat));
+			s.addCell(new Label(4, 0, "ESTADO", cellFormat));
+			s.addCell(new Label(5, 0, "TIPO SERVICIO", cellFormat));
+			s.addCell(new Label(6, 0, "PRODUCTO/CANAL", cellFormat));
+			s.addCell(new Label(7, 0, "DESCRIPCION", cellFormat));
+			s.addCell(new Label(8, 0, "SOLUCION", cellFormat));
+			s.addCell(new Label(9, 0, "TIPO SOPORTE", cellFormat));
+			s.addCell(new Label(10, 0, "TIPO CLIENTE", cellFormat));
+			s.addCell(new Label(11, 0, "FECHA FIN", cellFormat));
 			
 			int aux = 1;
 
 			for (Soporte sop : soportes) {
 				
 				s.addCell(new Label(0, aux, sop.getId_prueba()));
-				s.addCell(new Label(1, aux, sop.getCliente_name()));
-				s.addCell(new Label(2, aux, sop.getStr_fecha_inicio()));
-				s.addCell(new Label(3, aux, sop.getStr_fecha_fin()));
-				s.addCell(new Label(4, aux, sop.getPremium()));
-				s.addCell(new Label(5, aux, sop.getEstado()));
-				s.addCell(new Label(6, aux, sop.getTipo_servicio()));
-				s.addCell(new Label(7, aux, sop.getProducto_canal()));
-				s.addCell(new Label(8, aux, sop.getDetalles()));
-				s.addCell(new Label(9, aux, sop.getSolucion()));
-				s.addCell(new Label(10, aux, sop.getTipo_soporte()));
-				s.addCell(new Label(11, aux, sop.getTipo_cliente()));
+				s.addCell(new Label(1, aux, sop.getStr_fecha_inicio()));
+				s.addCell(new Label(2, aux, sop.getCliente_name()));
+				s.addCell(new Label(3, aux, sop.getTipo_cliente()));
+				s.addCell(new Label(4, aux, sop.getEstado()));
+				s.addCell(new Label(5, aux, sop.getTipo_servicio()));
+				s.addCell(new Label(6, aux, sop.getProducto_canal()));
+				s.addCell(new Label(7, aux, sop.getDetalles()));
+				s.addCell(new Label(8, aux, sop.getSolucion()));
+				s.addCell(new Label(9, aux, sop.getTipo_soporte()));
+				s.addCell(new Label(10, aux, sop.getPremium()));
+				s.addCell(new Label(11, aux, sop.getStr_fecha_fin()));
+
 
 				aux++;
 			}
