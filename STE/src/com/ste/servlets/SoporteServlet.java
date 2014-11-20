@@ -100,6 +100,7 @@ public class SoporteServlet extends HttpServlet{
 			s.setColumnView(8, 30);
 			s.setColumnView(9, 30);
 			s.setColumnView(10, 30);
+			s.setColumnView(11, 30);
 			
 			s.setRowView(0, 900);
 
@@ -107,13 +108,14 @@ public class SoporteServlet extends HttpServlet{
 			s.addCell(new Label(1, 0, "CLIENTE", cellFormat));
 			s.addCell(new Label(2, 0, "FECHA INICIO", cellFormat));
 			s.addCell(new Label(3, 0, "FECHA FIN", cellFormat));
-			s.addCell(new Label(4, 0, "PREMIUM", cellFormat));
+			s.addCell(new Label(4, 0, "TIPO CLIENTE", cellFormat));
 			s.addCell(new Label(5, 0, "ESTADO", cellFormat));
 			s.addCell(new Label(6, 0, "SERVICIO", cellFormat));
 			s.addCell(new Label(7, 0, "PRODUCTO/CANAL", cellFormat));
 			s.addCell(new Label(8, 0, "DETALLES", cellFormat));
 			s.addCell(new Label(9, 0, "SOLUCION", cellFormat));
 			s.addCell(new Label(10, 0, "TIPO SOPORTE", cellFormat));
+			s.addCell(new Label(11, 0, "SEGMENTO CLIENTE", cellFormat));
 			
 			int aux = 1;
 
@@ -129,7 +131,8 @@ public class SoporteServlet extends HttpServlet{
 				s.addCell(new Label(7, aux, sop.getProducto_canal()));
 				s.addCell(new Label(8, aux, sop.getDetalles()));
 				s.addCell(new Label(9, aux, sop.getSolucion()));
-				s.addCell(new Label(10, aux, sop.getTipo()));
+				s.addCell(new Label(10, aux, sop.getTipo_soporte()));
+				s.addCell(new Label(11, aux, sop.getTipo_cliente()));
 
 				aux++;
 			}
@@ -180,7 +183,7 @@ public class SoporteServlet extends HttpServlet{
 		
 		String fecha_inicio = req.getParameter("fecha_inicio");
 		String fecha_fin = req.getParameter("fecha_fin");
-		String tipo = req.getParameter("tipo");
+		String tipo_soporte = req.getParameter("tipo");
 		String cliente = req.getParameter("cliente");
 		String estado = req.getParameter("estado");
 		String tipo_servicio = req.getParameter("tipo_servicio");
@@ -193,7 +196,7 @@ public class SoporteServlet extends HttpServlet{
 		s.setStr_fecha_inicio(fecha_inicio);
 		s.setStr_fecha_fin(fecha_fin);
 		s.setCliente_name(cliente);
-		s.setTipo(tipo);
+		s.setTipo_soporte(tipo_soporte);
 		s.setEstado(estado);
 		s.setTipo_servicio(tipo_servicio);
 		s.setProducto_canal(producto_canal);
@@ -227,8 +230,8 @@ public class SoporteServlet extends HttpServlet{
 		String estado = req.getParameter("estado");
 		String tipo_servicio = req.getParameter("tipo_servicio");
 		String producto_canal = req.getParameter("producto_canal");
-		String premium = req.getParameter("premium");
-		
+		String premium = req.getParameter("input-premium-soporte");
+		String tipo_cliente = req.getParameter("tipo_cliente");		
 		String detalles = req.getParameter("detalles");
 		String solucion = req.getParameter("solucion");
 		Soporte s = new Soporte();
@@ -236,13 +239,14 @@ public class SoporteServlet extends HttpServlet{
 		
 		s.setStr_fecha_inicio(fecha_inicio);
 		s.setStr_fecha_fin(fecha_fin);
-		s.setTipo(tipo);
+		s.setTipo_soporte(tipo);
 		s.setCliente_name(cliente);
 		s.setEstado(estado);
 		s.setTipo_servicio(tipo_servicio);
 		s.setProducto_canal(producto_canal);
 		s.setDetalles(detalles);
 		s.setPremium(premium);
+		s.setTipo_cliente(tipo_cliente);
 		s.setSolucion(solucion);
 		
 		sDao.createSoporte(s);
