@@ -69,7 +69,7 @@
 
 					</div>
 					<div class="form-field">
-						<span class="lbl">Premium:</span>
+						<span class="lbl">Tipo cliente:</span>
 						<input type="text" name="input-premium-soporte" id="input-premium-soporte" value="" readonly>
 					</div>
 					<div class="form-field">						
@@ -214,13 +214,12 @@
 				<thead>
 					<tr>
 						<th><span class="table-title">Fecha inicio</span></th>
-						<th><span class="table-title">Fecha fin</span></th>
 						<th><span class="table-title">Cliente</span></th>
-						<th><span class="table-title">Tipo cliente</span></th>
 						<th><span class="table-title">Segmento</span></th>
 						<th><span class="table-title">Estado</span></th>
 						<th><span class="table-title">Tipo de servicio</span></th>
 						<th><span class="table-title">Producto / Canal</span></th>
+						<th><span class="table-title">Descripci&oacuten</span></th>
 						<th style="width: 110px;">&nbsp;</th>
 					</tr>
 					<tr>
@@ -231,7 +230,6 @@
 						<th class="search-th"><input class="search col4"></th>
 						<th class="search-th"><input class="search col5"></th>
 						<th class="search-th"><input class="search col6"></th>
-						<th class="search-th"><input class="search col7"></th>
 						<th style="width: 110px;">&nbsp;</th>
 					</tr>
 				</thead>
@@ -247,13 +245,12 @@
 							<c:forEach items="${soportes}" var="s">
 								<tr class="valid-result ${s.premium == 'Premium' ? 'premium' : ''}" id="row${s.key.id}">
 									<td><span>${s.str_fecha_inicio}</span></td>
-									<td><span>${s.str_fecha_fin}</span></td>
 									<td><span>${s.cliente_name}</span></td>
-									<td><span>${s.premium}</span></td>
 									<td><span>${s.tipo_cliente}</span></td>
 									<td><span>${s.estado}</span></td>
 									<td><span>${s.tipo_servicio}</span></td>
 									<td><span>${s.producto_canal}</span></td>
+									<td><span>${s.detalles}</span></td>
 									
 									<td><img class="vs" src="../img/vs.png"><a class="lapiz" name="${s.key.id}" href="../soporteModal.do?id=${s.key.id}"	id="lapiz${s.key.id}" data-toggle="modal" data-target="#edit-soporte" ></a>
 									<a class="papelera" name="${s.key.id}" data-toggle="modal"	data-target="#confirm-delete" id="papelera${s.key.id}"></a></td>
