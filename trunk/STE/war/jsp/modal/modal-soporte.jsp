@@ -96,13 +96,13 @@
 						<span class="lbl">Tipo de servicio<span class="required-asterisk">*</span>:</span>
 						<div class="input">
 							<select id="tipo_servicio" class="selectpicker selected" name="tipo_servicio" >
-								<option value="cobros" ${soporte.tipo_servicio == 'cobros' ? 'selected' : ''}>Cobros</option>	
-								<option value="pagos" ${soporte.tipo_servicio == 'pagos' ? 'selected' : ''}>Pagos</option>
+								<option value="Cobros" ${soporte.tipo_servicio == 'Cobros' ? 'selected' : ''}>Cobros</option>	
+								<option value="Pagos" ${soporte.tipo_servicio == 'Pagos' ? 'selected' : ''}>Pagos</option>
 								<option value="MT101" ${soporte.tipo_servicio == 'MT101' ? 'selected' : ''}>MT101</option>
 								<option value="MT94x" ${soporte.tipo_servicio == 'MT94x' ? 'selected' : ''}>MT94x</option>
-								<option value="cashpool" ${soporte.tipo_servicio == 'cashpool' ? 'selected' : ''}>Cashpool</option>
-								<option value="factura integral" ${soporte.tipo_servicio == 'factura integral' ? 'selected' : ''}>Factura integral</option>
-								<option value="otros" ${soporte.tipo_servicio == 'otros' ? 'selected' : ''}>Otros</option>	
+								<option value="Cashpool" ${soporte.tipo_servicio == 'Cashpool' ? 'selected' : ''}>Cashpool</option>
+								<option value="Factura integral" ${soporte.tipo_servicio == 'Factura integral' ? 'selected' : ''}>Factura integral</option>
+								<option value="Otros" ${soporte.tipo_servicio == 'Otros' ? 'selected' : ''}>Otros</option>	
 							</select>
 						</div>
 					</div>
@@ -119,7 +119,7 @@
 						<div class="input">
 							<select id="estado" class="selectpicker selected" name="estado" >							
 								<option value="Pendiente" ${soporte.estado == 'Pendiente' ? 'selected' : ''} selected>Pendiente</option>									
-								<option value="EnCurso" ${soporte.estado == 'EnCurso' ? 'selected' : ''}>En curso</option>	
+								<option value="En curso" ${soporte.estado == 'En curso' ? 'selected' : ''}>En curso</option>	
 								<option value="Finalizado" ${soporte.estado == 'Finalizado' ? 'selected' : ''}>Finalizado</option>
 							</select>
 						</div>

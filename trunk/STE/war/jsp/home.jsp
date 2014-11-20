@@ -12,13 +12,13 @@
       <h2>Clientes</h2>
       <img src="img/icn_t-iconLib_J03-64px_k.png" alt="Imagen destacado"/>
       <p>Inventario de clientes y ficha resumen de cada uno con los productos/servicios implementados o en proceso.</p>
-      <button onclick="" type="button">Acceder</button>
+      <button onclick="window.location.href='${entorno}/clientes.do'" type="button">Acceder</button>
     </div>
     <div class="destacadoHome">
       <h2>Pruebas</h2>
       <img src="img/icn_t-iconLib_J04-64px_k.png" alt="Imagen destacado"/>
       <p>Registro de pruebas realizadas para la implementación de servicios con clientes.</p>
-      <button onclick="" type="button">Acceder</button>
+      <button onclick="window.location.href='${entorno}/pruebas.do'" type="button">Acceder</button>
     </div>
     <div class="destacadoHome">
       <h2>Servicios</h2>
@@ -36,7 +36,7 @@
       <h2>Soporte</h2>
       <img src="img/icn_t-iconLib_D02-64px_k.png" alt="Imagen destacado"/>
       <p>Registro de solicitudes recibidas para atención a la Post-Venta, consultas, incidencias, etc.</p>
-      <button onclick="" type="button">Acceder</button> 
+      <button onclick="window.location.href='${entorno}/soporte.do'" type="button">Acceder</button> 
     </div>
     <div class="destacadoHome">
       <h2>Documentación</h2>
