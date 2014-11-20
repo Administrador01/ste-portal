@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+
+
 
 <div class="modal_ajax">
 			<div class="">
@@ -27,13 +30,67 @@
 						</div>
 					</div>
 					
+
+
 					<div class="form-field">
 						<span class="lbl">Cliente<span class="required-asterisk">*</span>:</span>
 						<div class="input">
-							<input class="long" type="text" value="${soporte.cliente_name}" name="cliente" id="cliente" required>
-
+						
+							<select class="selectpicker selected" name="cliente" id="cliente-soporte-modal" data-live-search="true">
+							
+								<c:choose>
+										<c:when test="${empty clientes}">
+											<option value="default">No hay clientes</option>
+										</c:when>
+										<c:otherwise>
+											<option value="default">Seleccionar</option>
+											<c:forEach items="${clientes}" var="t">	
+												<option value="${t.nombre}" data-premium="${t.premium}" data-segmento="${t.tipo_cliente}" ${t.nombre == soporte.cliente_name ? 'selected' : ''}>${t.nombre}</option>
+											</c:forEach>
+										</c:otherwise>
+								</c:choose>
+							</select>
 						</div>
 					</div>
+
+
+
+
+					<div class="form-field">
+						<span class="lbl">Tipo cliente :</span>
+						<input type="text" name="input-premium-soporte" id="input-premium-soporte-modal" value="${soporte.premium}" readonly>
+					</div>
+					<div class="form-field">						
+						<span class="lbl">Segmento:</span>
+						<input type="text" name="tipo_cliente" id="input-segmento-soporte-modal" value="${soporte.tipo_cliente}" readonly>
+					</div>
+			
+				</div>
+				<div class="form-field-divider right">
+					
+					<%--
+					<div class="form-field">
+							<span class="lbl">Premium<span class="required-asterisk">*</span>:</span>
+							<label class="ui-marmots-label-radio marmots-label-left on" for="radio_Si_modal">
+								<input name="premium_modal" id="radio_Si_modal" ${soporte.premium == 'Si' ? 'checked' : ''} type="radio" value="Si" />Si
+							</label>
+							<label class="ui-marmots-label-radio marmots-label-left" for="radio_No_modal">
+								<input name="premium_modal"  id="radio_No_modal"  ${soporte.premium == 'No' ? 'checked' : ''}  type="radio" value="No" />No ${soporte.premium}
+							</label>
+					</div>
+					--%>
+					
+					<%--
+					<div class="form-field">
+							<span class="lbl">Tipo<span class="required-asterisk">*</span>:</span>
+							<label class="ui-marmots-label-radio ${soporte.tipo == 'Incidencia' ? 'on' : ''}" for="radio_incidencia">
+								<input name="tipo" id="radio_incidencia" ${soporte.tipo == 'Incidencia' ? 'checked' : ''} type="radio" value="Incidencia"/>Incidencia
+							</label>
+							<label class="ui-marmots-label-radio marmots-label-left ${soporte.tipo == 'Consulta' ? 'on' : ''}" for="radio_consulta">
+								<input name="tipo"  id="radio_consulta"  ${soporte.tipo == 'Consulta' ? 'checked' : ''}type="radio" value="Consulta"/>Consulta<br />${soporte.tipo}
+							</label>
+					</div>
+					--%>
 					
 					<div class="form-field">
 						<span class="lbl">Tipo de servicio<span class="required-asterisk">*</span>:</span>
@@ -48,28 +105,6 @@
 								<option value="otros" ${soporte.tipo_servicio == 'otros' ? 'selected' : ''}>Otros</option>	
 							</select>
 						</div>
-					</div>
-				</div>
-				<div class="form-field-divider right">
-					
-					<div class="form-field">
-							<span class="lbl">Premium<span class="required-asterisk">*</span>:</span>
-							<label class="ui-marmots-label-radio marmots-label-left on" for="radio_Si_modal">
-								<input name="premium_modal" id="radio_Si_modal" ${soporte.premium == 'Si' ? 'checked' : ''} type="radio" value="Si" />Si
-							</label>
-							<label class="ui-marmots-label-radio marmots-label-left" for="radio_No_modal">
-								<input name="premium_modal"  id="radio_No_modal"  ${soporte.premium == 'No' ? 'checked' : ''}  type="radio" value="No" />No ${soporte.premium}
-							</label>
-					</div>
-					
-					<div class="form-field">
-							<span class="lbl">Tipo<span class="required-asterisk">*</span>:</span>
-							<label class="ui-marmots-label-radio ${soporte.tipo == 'Incidencia' ? 'on' : ''}" for="radio_incidencia">
-								<input name="tipo" id="radio_incidencia" ${soporte.tipo == 'Incidencia' ? 'checked' : ''} type="radio" value="Incidencia"/>Incidencia
-							</label>
-							<label class="ui-marmots-label-radio marmots-label-left ${soporte.tipo == 'Consulta' ? 'on' : ''}" for="radio_consulta">
-								<input name="tipo"  id="radio_consulta"  ${soporte.tipo == 'Consulta' ? 'checked' : ''}type="radio" value="Consulta"/>Consulta<br />${soporte.tipo}
-							</label>
 					</div>
 					
 					<div class="form-field">
@@ -114,7 +149,7 @@
 					<div class="form-field detalles">
 						<span class="lbl">Descripci&oacuten:</span>
 						<div class="input">
-							<textarea name="detalles" maxlength="500" rows="1" cols="1" value="${soporte.detalles}"></textarea>
+							<textarea name="detalles" maxlength="500" rows="1" cols="1">${soporte.detalles}</textarea>
 						</div>
 					</div>		
 					
@@ -122,7 +157,7 @@
 					<div class="form-field detalles">
 						<span class="lbl">Soluci&oacuten:</span>
 						<div class="input">
-							<textarea name="solucion" maxlength="500" rows="1" cols="1"></textarea>
+							<textarea name="solucion" maxlength="500" rows="1" cols="1">${soporte.solucion}</textarea>
 						</div>
 					</div>	
 							
@@ -143,6 +178,22 @@
 <script>
 $(document).ready(function(){
 	$('input:checkbox, input:radio').checkbox();
+	
+	
+	$('#cliente-soporte-modal').on('change', function() {
+		console.log("hello");
+		console.log($(this).find(":selected"));
+		var option = $(this).find(":selected");
+		console.log($(option));
+		console.log(option.data('premium'));
+		console.log(option.data('segmento'));
+		
+		$('#input-premium-soporte-modal').val(option.data('premium'));
+		$('#input-segmento-soporte-modal').val(option.data('segmento'));
+	})
+	
+	
+	
 
 });
 </script>

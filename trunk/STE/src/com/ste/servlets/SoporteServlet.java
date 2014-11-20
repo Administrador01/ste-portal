@@ -184,24 +184,29 @@ public class SoporteServlet extends HttpServlet{
 		
 		String fecha_inicio = req.getParameter("fecha_inicio");
 		String fecha_fin = req.getParameter("fecha_fin");
-		String tipo_soporte = req.getParameter("tipo");
+		String tipo = req.getParameter("tipo");
 		String cliente = req.getParameter("cliente");
 		String estado = req.getParameter("estado");
 		String tipo_servicio = req.getParameter("tipo_servicio");
 		String producto_canal = req.getParameter("producto_canal");
-		
+		String premium = req.getParameter("input-premium-soporte");
+		String tipo_cliente = req.getParameter("tipo_cliente");		
 		String detalles = req.getParameter("detalles");
+		String solucion = req.getParameter("solucion");
 		
 		
 		
 		s.setStr_fecha_inicio(fecha_inicio);
 		s.setStr_fecha_fin(fecha_fin);
+		s.setTipo_soporte(tipo);
 		s.setCliente_name(cliente);
-		s.setTipo_soporte(tipo_soporte);
 		s.setEstado(estado);
 		s.setTipo_servicio(tipo_servicio);
 		s.setProducto_canal(producto_canal);
 		s.setDetalles(detalles);
+		s.setPremium(premium);
+		s.setTipo_cliente(tipo_cliente);
+		s.setSolucion(solucion);
 		
 		sDao.createSoporte(s);
 		

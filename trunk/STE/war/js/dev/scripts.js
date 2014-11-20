@@ -532,7 +532,7 @@ $(function() {
 			}
 		});
 });
-;$.fn.paginateMe = function(opts) {
+;;$.fn.paginateMe = function(opts) {
 	var $this = this, defaults = {
 		perPage : 10,
 		showPrevNext : false,
