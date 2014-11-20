@@ -111,8 +111,8 @@ public class SoporteServlet extends HttpServlet{
 			s.addCell(new Label(4, 0, "ESTADO", cellFormat));
 			s.addCell(new Label(5, 0, "TIPO SERVICIO", cellFormat));
 			s.addCell(new Label(6, 0, "PRODUCTO/CANAL", cellFormat));
-			s.addCell(new Label(7, 0, "DESCRIPCION", cellFormat));
-			s.addCell(new Label(8, 0, "SOLUCION", cellFormat));
+			s.addCell(new Label(7, 0, "DESCRIPCIÓN", cellFormat));
+			s.addCell(new Label(8, 0, "SOLUCIÓN", cellFormat));
 			s.addCell(new Label(9, 0, "TIPO SOPORTE", cellFormat));
 			s.addCell(new Label(10, 0, "TIPO CLIENTE", cellFormat));
 			s.addCell(new Label(11, 0, "FECHA FIN", cellFormat));
