@@ -97,7 +97,7 @@ public class Prueba {
 		return nombre_cliente;
 	}
 
-	public void setnombre_cliente(String nombre_cliente) {
+	public void setNombre_cliente(String nombre_cliente) {
 		this.nombre_cliente = nombre_cliente;
 	}
 	
