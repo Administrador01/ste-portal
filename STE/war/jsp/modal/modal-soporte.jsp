@@ -181,13 +181,7 @@ $(document).ready(function(){
 	
 	
 	$('#cliente-soporte-modal').on('change', function() {
-		console.log("hello");
-		console.log($(this).find(":selected"));
 		var option = $(this).find(":selected");
-		console.log($(option));
-		console.log(option.data('premium'));
-		console.log(option.data('segmento'));
-		
 		$('#input-premium-soporte-modal').val(option.data('premium'));
 		$('#input-segmento-soporte-modal').val(option.data('segmento'));
 	})

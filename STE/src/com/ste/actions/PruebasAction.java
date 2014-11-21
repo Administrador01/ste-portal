@@ -1,5 +1,7 @@
 package com.ste.actions;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -8,11 +10,28 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.ste.beans.Cliente;
+import com.ste.beans.Prueba;
+import com.ste.dao.ClienteDao;
+import com.ste.dao.PruebaDao;
+
 public class PruebasAction extends Action{
 	
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
-			HttpServletRequest req, HttpServletResponse resp){
+			HttpServletRequest req, HttpServletResponse resp)
+			throws Exception{
 
-			return  mapping.findForward("ok");
+		//Mandamos los clientes para generar la lista select desplegable
+		ClienteDao cDao = ClienteDao.getInstance();
+		List<Cliente> clientes = cDao.getAllClients();
+		req.setAttribute("clientes", clientes);
+		
+		PruebaDao pDao = PruebaDao.getInstance();
+		List<Prueba> pruebas = pDao.getAllPruebas();
+		
+		req.setAttribute("clientes", clientes);	
+		req.setAttribute("pruebas", pruebas);
+		
+		return  mapping.findForward("ok");
 	}
 }
