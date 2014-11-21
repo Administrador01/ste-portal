@@ -171,7 +171,7 @@
 					<div class="form-field detalles">
 						<span class="lbl">Descripci&oacuten:</span>
 						<div class="input">
-							<textarea name="detalles" maxlength="500" rows="1" cols="1"></textarea>
+							<textarea name="detalles" maxlength="500" rows="1" cols="1" placeholder="Introduzca texto ..."></textarea>
 						</div>
 					</div>	
 					<br />
@@ -179,7 +179,7 @@
 					<div class="form-field solucion">
 						<span class="lbl">Soluci&oacuten:</span>
 						<div class="input">
-							<textarea name="solucion" maxlength="500" rows="1" cols="1"></textarea>
+							<textarea name="solucion" maxlength="500" rows="1" cols="1" placeholder="Introduzca texto ..."></textarea>
 						</div>
 					</div>					 
 				</div>

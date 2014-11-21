@@ -1479,7 +1479,21 @@ form textarea.error {
   margin-left: -6px;
 }
 #soporte {
+  /* firefox 19+ */
+  /* ie */
   /*anadido de forma manual  para premium y soporte para que tenga el mismo formato que con el atributo disabled pero tenga la caracteristica readonly*/
+}
+#soporte ::-webkit-input-placeholder {
+  font-style: italic;
+}
+#soporte ::-moz-placeholder {
+  font-style: italic;
+}
+#soporte :-ms-input-placeholder {
+  font-style: italic;
+}
+#soporte input:-moz-placeholder {
+  font-style: italic;
 }
 #soporte .tipo-cliente-field > .lbl {
   vertical-align: super;
