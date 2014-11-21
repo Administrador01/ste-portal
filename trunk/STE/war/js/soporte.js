@@ -67,11 +67,11 @@ $(function(){
 	});
 	
 	$('#cliente-soporte').on('change', function() {
-		console.log($(this).find(":selected"));
+		//console.log($(this).find(":selected"));
 		var option = $(this).find(":selected");
-		console.log($(option));
-		console.log(option.data('premium'));
-		console.log(option.data('segmento'));
+		//console.log($(option));
+		//console.log(option.data('premium'));
+		//console.log(option.data('segmento'));
 		
 		$('#input-premium-soporte').val(option.data('premium'));
 		$('#input-segmento-soporte').val(option.data('segmento'));
