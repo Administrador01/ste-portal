@@ -16,7 +16,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	    <url-pattern>/usersServlet</url-pattern>
 	  </servlet-mapping>
 	  
-	    <servlet>
+	   <servlet>
 	    <servlet-name>ClientServlet</servlet-name>
 	    <servlet-class>com.ste.servlets.ClienteServlet</servlet-class>
 	  </servlet>
@@ -34,6 +34,16 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	  <servlet-mapping>
 	    <servlet-name>SoporteServlet</servlet-name>
 	    <url-pattern>/soporteServlet</url-pattern>
+	  </servlet-mapping>
+	  
+	  <servlet>
+	    <servlet-name>PruebaServlet</servlet-name>
+	    <servlet-class>com.ste.servlets.PruebaServlet</servlet-class>
+	  </servlet>
+	
+	  <servlet-mapping>
+	    <servlet-name>PruebaServlet</servlet-name>
+	    <url-pattern>/pruebaServlet</url-pattern>
 	  </servlet-mapping>
 	  
 	  <servlet>
