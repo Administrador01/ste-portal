@@ -29,7 +29,11 @@
 		</action>
 		
 		<action path="/soporteModal" type="com.ste.actions.modal.SoporteModalAction">
-			<forward name="ok" path="/jsp/modal/modal-soporte.jsp" />			
+			<forward name="ok" path="/jsp/modal/modal-soporte.jsp" />
+		</action>
+		
+		<action path="/pruebaModal" type="com.ste.actions.modal.PruebaModalAction">
+			<forward name="ok" path="/jsp/modal/modal-pruebas.jsp" />	
 		</action>
 		
 		<action path="/admin/users" type="com.ste.actions.UsersAction">

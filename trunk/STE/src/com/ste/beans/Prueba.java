@@ -20,6 +20,9 @@ public class Prueba {
 	private String id_prueba;
 
 	@Persistent
+	private String id_cliente;
+	
+	@Persistent
 	private Date fecha_estado;
 	
 	@Persistent
@@ -36,6 +39,9 @@ public class Prueba {
 	
 	@Persistent
 	private String entorno;
+	
+	@Persistent
+	private String estado;
 	
 	@Persistent
 	private String producto;
@@ -111,6 +117,14 @@ public class Prueba {
 		this.entorno = entorno;
 	}
 	
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	
 	public String getProducto() {
 		return producto;
 	}
@@ -134,5 +148,12 @@ public class Prueba {
 	public void setReferencia(String referencia) {
 		this.referencia = referencia;
 	}
-		
+
+	public String getIdCliente() {
+		return id_cliente;
+	}
+
+	public void setIdCliente(String id_cliente) {
+		this.id_cliente = id_cliente;
+	}
 }
