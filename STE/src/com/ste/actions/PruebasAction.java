@@ -24,7 +24,7 @@ public class PruebasAction extends Action{
 		//Mandamos los clientes para generar la lista select desplegable
 		ClienteDao cDao = ClienteDao.getInstance();
 		List<Cliente> clientes = cDao.getAllClients();
-		req.setAttribute("clientes", clientes);
+
 		
 		PruebaDao pDao = PruebaDao.getInstance();
 		List<Prueba> pruebas = pDao.getAllPruebas();

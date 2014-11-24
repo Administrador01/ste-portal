@@ -109,6 +109,20 @@ button.btn-default {
 #empresas-submenu li.home.active > a > span {
   margin: 0px;
 }
+::-webkit-input-placeholder {
+  font-style: italic;
+}
+::-moz-placeholder {
+  font-style: italic;
+}
+/* firefox 19+ */
+:-ms-input-placeholder {
+  font-style: italic;
+}
+/* ie */
+input:-moz-placeholder {
+  font-style: italic;
+}
 .span-24 {
   display: inline-block;
   width: 100%;
@@ -660,6 +674,11 @@ textarea.readonly {
 }
 #message_div {
   margin-top: 0px;
+}
+#div-filtro-pruebas {
+  border: 1px solid;
+  padding: 10px;
+  margin: 10px;
 }
 #sidebar {
   position: fixed;
@@ -1479,21 +1498,7 @@ form textarea.error {
   margin-left: -6px;
 }
 #soporte {
-  /* firefox 19+ */
-  /* ie */
   /*anadido de forma manual  para premium y soporte para que tenga el mismo formato que con el atributo disabled pero tenga la caracteristica readonly*/
-}
-#soporte ::-webkit-input-placeholder {
-  font-style: italic;
-}
-#soporte ::-moz-placeholder {
-  font-style: italic;
-}
-#soporte :-ms-input-placeholder {
-  font-style: italic;
-}
-#soporte input:-moz-placeholder {
-  font-style: italic;
 }
 #soporte .tipo-cliente-field > .lbl {
   vertical-align: super;

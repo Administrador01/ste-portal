@@ -40,6 +40,11 @@ public class Prueba {
 	@Persistent
 	private String producto;
 	
+	@Persistent
+	private String referencia;
+	
+	@Persistent
+	private String detalles;
 	
 	
 	public Key getKey() {
@@ -112,6 +117,22 @@ public class Prueba {
 
 	public void setProducto(String producto) {
 		this.producto = producto;
+	}
+	
+	public String getDetalles() {
+		return detalles;
+	}
+
+	public void setDetalles(String detalles) {
+		this.detalles = detalles;
+	}
+	
+	public String getReferencia() {
+		return referencia;
+	}
+
+	public void setReferencia(String referencia) {
+		this.referencia = referencia;
 	}
 		
 }

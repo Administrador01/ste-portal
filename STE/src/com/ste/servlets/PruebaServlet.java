@@ -66,8 +66,13 @@ public class PruebaServlet extends HttpServlet{
 
 		
 		String fecha_estado = req.getParameter("fecha_estado");
-		String nombre_cliente = req.getParameter("nombre_cliente");
-		String premium = req.getParameter("premium");
+		String nombre_cliente = req.getParameter("cliente");
+		String referencia = req.getParameter("referencia");
+		String producto = req.getParameter("producto_canal");
+		String premium = req.getParameter("input-premium-soporte");
+		String entorno = req.getParameter("entorno");
+		String servicio = "No disp";
+		String detalles = req.getParameter("detalles");
 		
 		
 		PruebaDao pDao = PruebaDao.getInstance();	
@@ -75,7 +80,14 @@ public class PruebaServlet extends HttpServlet{
 		
 		p.setStr_fecha_estado(fecha_estado);
 		p.setNombre_cliente(nombre_cliente);
+		p.setReferencia(referencia);
+		p.setProducto(producto);
 		p.setPremium(premium);
+		p.setTipo_servicio(servicio);
+		p.setEntorno(entorno);
+		p.setDetalles(detalles);
+
+		
 		
 		
 		pDao.createPrueba(p);
@@ -117,6 +129,8 @@ public class PruebaServlet extends HttpServlet{
 		String tipo_cliente = req.getParameter("tipo_cliente");		
 		String detalles = req.getParameter("detalles");
 		String solucion = req.getParameter("solucion");
+
+		
 		
 		
 		
