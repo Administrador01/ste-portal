@@ -14,7 +14,7 @@
 			</div>
 			
 			<div class="form-holder">
-				<form id="edit-soporte-form" name="edit-soporte-form" class="edit-form" action="/soporteServlet"
+				<form id="edit-soporte-form" name="edit-prueba-form" class="edit-form" action="/soporteServlet"
 						method="POST" novalidate="novalidate">
 						<div class="form-container">
 								<div class="form-field-divider left">

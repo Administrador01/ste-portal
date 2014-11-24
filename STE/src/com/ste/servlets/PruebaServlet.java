@@ -9,9 +9,7 @@ import javax.servlet.http.HttpSession;
 import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.ste.beans.Prueba;
-import com.ste.beans.Soporte;
 import com.ste.dao.PruebaDao;
-import com.ste.dao.SoporteDao;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -117,40 +115,35 @@ public class PruebaServlet extends HttpServlet{
 		JSONObject json = new JSONObject();
 		
 		String id_str = req.getParameter("id");
-		SoporteDao sDao = SoporteDao.getInstance();
-		Soporte s = sDao.getSoportebyId(Long.parseLong(id_str));
 		
-		String fecha_inicio = req.getParameter("fecha_inicio");
-		String fecha_fin = req.getParameter("fecha_fin");
-		String tipo = req.getParameter("tipo");
-		String cliente = req.getParameter("cliente");
+		String fecha_estado = req.getParameter("fecha_estado");
+		String nombre_cliente = req.getParameter("cliente");
+		String referencia = req.getParameter("referencia");
+		String producto = req.getParameter("producto_canal");
+		String premium = req.getParameter("input-premium-soporte");
 		String estado = req.getParameter("estado");
 		String entorno = req.getParameter("entorno");
-		String tipo_servicio = req.getParameter("tipo_servicio");
-		String producto_canal = req.getParameter("producto_canal");
-		String premium = req.getParameter("input-premium-soporte");
-		String tipo_cliente = req.getParameter("tipo_cliente");		
+		String servicio = "No disp";
 		String detalles = req.getParameter("detalles");
-		String solucion = req.getParameter("solucion");
-
+		String clientID = req.getParameter("client_id");
 		
 		
+		PruebaDao pDao = PruebaDao.getInstance();	
+		Prueba p = pDao.getPruebabyId(Long.parseLong(id_str));
+		
+		p.setStr_fecha_estado(fecha_estado);
+		p.setNombre_cliente(nombre_cliente);
+		p.setReferencia(referencia);
+		p.setProducto(producto);
+		p.setPremium(premium);
+		p.setTipo_servicio(servicio);
+		p.setEntorno(entorno);
+		p.setEstado(estado);
+		p.setDetalles(detalles);
+		p.setIdCliente(clientID);
 		
 		
-		s.setStr_fecha_inicio(fecha_inicio);
-		s.setStr_fecha_fin(fecha_fin);
-		s.setTipo_soporte(tipo);
-		s.setCliente_name(cliente);
-		s.setEstado(estado);
-		s.setEstado(entorno);
-		s.setTipo_servicio(tipo_servicio);
-		s.setProducto_canal(producto_canal);
-		s.setDetalles(detalles);
-		s.setPremium(premium);
-		s.setTipo_cliente(tipo_cliente);
-		s.setSolucion(solucion);
-		
-		sDao.createSoporte(s);
+		pDao.createPrueba(p);
 		
 		
 		try {
@@ -197,15 +190,15 @@ public class PruebaServlet extends HttpServlet{
 		try {
 			resp.setContentType("application/vnd.ms-excel");
 			resp.setHeader("Content-Disposition",
-					"attachment; filename=GestionSoporteSTE.xls");
+					"attachment; filename=GestionPruebasSTE.xls");
 
 			WritableWorkbook w = Workbook
 					.createWorkbook(resp.getOutputStream());
 
-			SoporteDao sDao = SoporteDao.getInstance();
-			List<Soporte> soportes = sDao.getAllSoportes();
+			PruebaDao pDao = PruebaDao.getInstance();
+			List<Prueba> pruebas = pDao.getAllPruebas();
 
-			WritableSheet s = w.createSheet("Gestion de soporte", 0);
+			WritableSheet s = w.createSheet("Gestion de pruebas", 0);
 
 			WritableFont cellFont = new WritableFont(WritableFont.TIMES, 12);
 			cellFont.setColour(Colour.WHITE);
@@ -223,43 +216,37 @@ public class PruebaServlet extends HttpServlet{
 			s.setColumnView(4, 20);
 			s.setColumnView(5, 20);
 			s.setColumnView(6, 20);
-			s.setColumnView(7, 40);
+			s.setColumnView(7, 20);
 			s.setColumnView(8, 40);
-			s.setColumnView(9, 20);
-			s.setColumnView(10, 20);
-			s.setColumnView(11, 20);
+
 			
 			s.setRowView(0, 900);
 
 			s.addCell(new Label(0, 0, "IDENTIFICADOR", cellFormat));
-			s.addCell(new Label(1, 0, "FECHA INICIO", cellFormat));
+			s.addCell(new Label(1, 0, "FECHA ESTADO", cellFormat));
 			s.addCell(new Label(2, 0, "CLIENTE", cellFormat));
-			s.addCell(new Label(3, 0, "SEGMENTO", cellFormat));
+			s.addCell(new Label(3, 0, "ENTORNO", cellFormat));
 			s.addCell(new Label(4, 0, "ESTADO", cellFormat));
-			s.addCell(new Label(5, 0, "TIPO SERVICIO", cellFormat));
+			s.addCell(new Label(5, 0, "SERVICIO", cellFormat));
 			s.addCell(new Label(6, 0, "PRODUCTO/CANAL", cellFormat));
-			s.addCell(new Label(7, 0, "DESCRIPCIÓN", cellFormat));
-			s.addCell(new Label(8, 0, "SOLUCIÓN", cellFormat));
-			s.addCell(new Label(9, 0, "TIPO SOPORTE", cellFormat));
-			s.addCell(new Label(10, 0, "TIPO CLIENTE", cellFormat));
-			s.addCell(new Label(11, 0, "FECHA FIN", cellFormat));
+			s.addCell(new Label(7, 0, "TIPO CLIENTE", cellFormat));
+			s.addCell(new Label(8, 0, "DETALLES", cellFormat));
+
 			
 			int aux = 1;
 
-			for (Soporte sop : soportes) {
+			for ( Prueba pru : pruebas) {
 				
-				s.addCell(new Label(0, aux, sop.getId_prueba()));
-				s.addCell(new Label(1, aux, sop.getStr_fecha_inicio()));
-				s.addCell(new Label(2, aux, sop.getCliente_name()));
-				s.addCell(new Label(3, aux, sop.getTipo_cliente()));
-				s.addCell(new Label(4, aux, sop.getEstado()));
-				s.addCell(new Label(5, aux, sop.getTipo_servicio()));
-				s.addCell(new Label(6, aux, sop.getProducto_canal()));
-				s.addCell(new Label(7, aux, sop.getDetalles()));
-				s.addCell(new Label(8, aux, sop.getSolucion()));
-				s.addCell(new Label(9, aux, sop.getTipo_soporte()));
-				s.addCell(new Label(10, aux, sop.getPremium()));
-				s.addCell(new Label(11, aux, sop.getStr_fecha_fin()));
+				s.addCell(new Label(0, aux, pru.getId_prueba()));
+				s.addCell(new Label(1, aux, pru.getStr_fecha_estado()));
+				s.addCell(new Label(2, aux, pru.getNombre_cliente()));
+				s.addCell(new Label(3, aux, pru.getEntorno()));
+				s.addCell(new Label(4, aux, pru.getEstado()));
+				s.addCell(new Label(5, aux, pru.getTipo_servicio()));
+				s.addCell(new Label(6, aux, pru.getProducto()));
+				s.addCell(new Label(7, aux, pru.getPremium()));
+				s.addCell(new Label(8, aux, pru.getDetalles()));
+
 
 
 				aux++;
