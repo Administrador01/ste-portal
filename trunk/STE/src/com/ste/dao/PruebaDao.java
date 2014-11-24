@@ -53,7 +53,7 @@ public class PruebaDao {
 				
 				String num = String.format("%08d", count.getValue());
 				
-				s.setId_prueba("STE"+num);
+				s.setId_prueba("FRA"+num);
 				
 				CounterDao countDao = CounterDao.getInstance();
 				countDao.increaseCounter(count);
@@ -86,7 +86,7 @@ public class PruebaDao {
 		
 		
 		Query q = pm.newQuery("select from " + Prueba.class.getName());		
-		q.setOrdering("fecha_inicio desc");
+		q.setOrdering("fecha_estado desc");
 		pruebas = (List<Prueba>) q.execute();
 		
 		

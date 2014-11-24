@@ -109,6 +109,13 @@
 					</div>
 					
 					<div class="form-field">
+						<span class="lbl">Fecha fin:</span>
+						<div class="input">
+							<input type="text" readonly="" value="" size="16" class="datepicker" name="fecha_fin" id="fecha_fin" >
+						</div>
+					</div>
+					
+					<div class="form-field">
 						<span class="lbl">Tipo de servicio<span class="required-asterisk">*</span>:</span>
 						<div class="input">
 							<select id="tipo_servicio" class="selectpicker selected" name="tipo_servicio" >
@@ -124,12 +131,6 @@
 						</div>
 					</div>
 
-					<div class="form-field">
-						<span class="lbl">Fecha fin:</span>
-						<div class="input">
-							<input type="text" readonly="" value="" size="16" class="datepicker" name="fecha_fin" id="fecha_fin" >
-						</div>
-					</div>
 					
 					<div class="form-field">
 						<span class="lbl">Estado<span class="required-asterisk">*</span>:</span>

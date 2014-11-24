@@ -30,7 +30,7 @@ public class DefaultConf extends HttpServlet{
 		if ("david.martin.beltran.contractor@bbva.com".equals(mail)){
 			CounterDao cDao = CounterDao.getInstance();
 			Counter contadorSoporte = cDao.getCounterByName("soporte");
-			
+			//instancia para anadir nuevos contadores+
 			if (contadorSoporte == null){
 				contadorSoporte = new Counter();
 			}
@@ -48,7 +48,14 @@ public class DefaultConf extends HttpServlet{
 			contadorCliente.setValue(1);
 			cDao.createCounter(contadorCliente);
 			
+			Counter contadorPrueba = cDao.getCounterByName("prueba");
 			
+			if (contadorPrueba == null){
+				contadorPrueba = new Counter();
+			}
+			contadorPrueba.setNombre("prueba");
+			contadorPrueba.setValue(1);
+			cDao.createCounter(contadorPrueba);			
 			
 			
 			
