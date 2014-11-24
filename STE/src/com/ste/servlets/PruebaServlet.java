@@ -62,14 +62,26 @@ public class PruebaServlet extends HttpServlet{
 	
 	public void createPrueba(HttpServletRequest req, HttpServletResponse resp){
 		JSONObject json = new JSONObject();
+
+
+		
+		String fecha_estado = req.getParameter("fecha_estado");
+		String nombre_cliente = req.getParameter("nombre_cliente");
+		String premium = req.getParameter("premium");
+		
+		
 		PruebaDao pDao = PruebaDao.getInstance();	
 		Prueba p = new Prueba();
-
-		String nombre_cliente = req.getParameter("nombre_cliente");
 		
+		p.setStr_fecha_estado(fecha_estado);
 		p.setNombre_cliente(nombre_cliente);
+		p.setPremium(premium);
+		
 		
 		pDao.createPrueba(p);
+		
+		
+		
 		
 		
 		try {

@@ -194,7 +194,7 @@
 			</div>
 
 		</form>
-		<button type="submit" id="submit_form">Aceptar</button>
+		<button type="submit" id="submit_form_support">Aceptar</button>
 		<button href="#" class="close-form">Cancelar</button>
 	</div>
 </div>

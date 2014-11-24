@@ -43,10 +43,8 @@ public class PruebaDao {
 		try {
 			
 			//Conversi'on de las fechas de string a tipo date
-			s.setFecha_inicio(Utils.dateConverter(s.getStr_fecha_inicio()));
-			if (s.getStr_fecha_fin()!=""){
-				s.setFecha_fin(Utils.dateConverter(s.getStr_fecha_fin()));
-			}
+			s.setFecha_estado(Utils.dateConverter(s.getStr_fecha_estado()));
+
 			
 			if (s.getKey()==null){
 				CounterDao cDao = CounterDao.getInstance();
