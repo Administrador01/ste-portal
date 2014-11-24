@@ -26,7 +26,7 @@
 		Nuevo<span class="user_span"></span>
 	</button>
 	
-	<button id="excel_btn" onclick=	"window.location.href='../../PruebaServlet?accion=xls'">
+	<button id="excel_btn" onclick=	"window.location.href='/pruebaServlet?accion=xls'">
 		Descargar Tabla<span class="excel_span"></span>
 	</button>
 	
@@ -276,7 +276,7 @@
 				<p>&iquest;Est&aacute; seguro que desea eliminar la prueba?
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="pink-btn" id="deleteSoporte">Eliminar</button>
+				<button type="button" class="pink-btn" id="deletePrueba">Eliminar</button>
 				<button type="button" class="" data-dismiss="modal">Cancelar</button>
 			</div>
 		</div>

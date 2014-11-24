@@ -1,4 +1,4 @@
-function sendEditSoporte(){
+function sendEditPrueba(){
 
 	var $form = $("#edit-prueba-form");
 	
@@ -42,9 +42,9 @@ function sendEditSoporte(){
 
 
 $(function(){
-	$('#soporte').on('click','#deleteSoporte', function (e){
+	$('#pruebas').on('click','#deletePrueba', function (e){
 		
-		 var formURL = "/soporteServlet?";
+		 var formURL = "/pruebaServlet?";
 		 var postData="accion=delete&id="+ id;
 		 $.ajax({
 			url : formURL,
