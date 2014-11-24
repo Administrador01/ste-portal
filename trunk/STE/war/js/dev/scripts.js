@@ -398,7 +398,7 @@ $(function() {
 		var a;
 		if (val=="Premium"){
 			for (a = 0; a<=cajas.length-1; a++){
-				if (!$(cajas[a]).hasClass('premium'))
+				if (!$(cajas[a]).hasClass('tipo_premium'))
 					$(cajas[a]).addClass('hidden');
 			}
 		}else{
@@ -456,7 +456,7 @@ $(function() {
 						$('.form-holder').height($('.form-holder').height()+35);
 					}
 					$form.find('.form-container').find('div:not(#message_div)').hide(0);
-					$form.find('#span_message').html('El soporte ha sido creado de forma correcta.<br/>En breve volvemos a la p&aacute;gina.');
+					$form.find('#span_message').html('El usuario ha sido creado de forma correcta.<br/>En breve volvemos a la p&aacute;gina.');
 					$('#message_div').css('display','block').removeClass("error").addClass("success");;
 
 					setTimeout(function() { 
@@ -484,6 +484,112 @@ $(function() {
 		}
 		return false;
 	});
+	
+	// Submit for creating a new client.
+	$("#submit_form_client").on('click',function(e) {
+		e.preventDefault(); //STOP default action
+		
+		
+		var $form = $($(this).prev());
+		
+		if($form.valid()){
+						
+			var postData = $form.serialize() + "&accion=new";
+			var formURL = $form.attr("action");
+			$.ajax(
+			{
+			  url : formURL,
+			  type: "GET",
+			  data : postData,
+			  success:function(data, textStatus, jqXHR) 
+			  {
+					//data: return data from server
+				if (data.success==("true")){
+					if ($('.form-holder').height()<190){
+						$('.form-holder').height($('.form-holder').height()+35);
+					}
+					$form.find('.form-container').find('div:not(#message_div)').hide(0);
+					$form.find('#span_message').html('El cliente ha sido creado de forma correcta.<br/>En breve volvemos a la p&aacute;gina.');
+					$('#message_div').css('display','block').removeClass("error").addClass("success");;
+
+					setTimeout(function() { 
+						resetForm($form);
+						location.reload();
+					}, 1500);
+				}else{
+					$('#message_div').removeClass("success").addClass("error");
+					if ($('.form-holder').height()<190){
+						$('.form-holder').height($('.form-holder').height()+35);
+					}
+					$('#span_message').html(data.error);
+					$('#message_div').css('display','block');
+				}
+			  },
+			  error: function(jqXHR, textStatus, errorThrown) 
+			  {
+				if (errorThrown.length > 0){
+					$('#span_message').html(errorThrown);
+					$('#message_div').addClass('error').removeClass('success');
+				}
+			  }
+			});
+			
+		}
+		return false;
+	});	
+	
+	// Submit for creating a new client.
+	$("#submit_form_support").on('click',function(e) {
+		e.preventDefault(); //STOP default action
+		
+		
+		var $form = $($(this).prev());
+		
+		if($form.valid()){
+						
+			var postData = $form.serialize() + "&accion=new";
+			var formURL = $form.attr("action");
+			$.ajax(
+			{
+			  url : formURL,
+			  type: "GET",
+			  data : postData,
+			  success:function(data, textStatus, jqXHR) 
+			  {
+					//data: return data from server
+				if (data.success==("true")){
+					if ($('.form-holder').height()<190){
+						$('.form-holder').height($('.form-holder').height()+35);
+					}
+					$form.find('.form-container').find('div:not(#message_div)').hide(0);
+					$form.find('#span_message').html('El soporte ha sido creado de forma correcta.<br/>En breve volvemos a la p&aacute;gina.');
+					$('#message_div').css('display','block').removeClass("error").addClass("success");;
+
+					setTimeout(function() { 
+						resetForm($form);
+						location.reload();
+					}, 1500);
+				}else{
+					$('#message_div').removeClass("success").addClass("error");
+					if ($('.form-holder').height()<190){
+						$('.form-holder').height($('.form-holder').height()+35);
+					}
+					$('#span_message').html(data.error);
+					$('#message_div').css('display','block');
+				}
+			  },
+			  error: function(jqXHR, textStatus, errorThrown) 
+			  {
+				if (errorThrown.length > 0){
+					$('#span_message').html(errorThrown);
+					$('#message_div').addClass('error').removeClass('success');
+				}
+			  }
+			});
+			
+		}
+		return false;
+	});	
 	
 	
 	$('#formButton').click(function(e){
@@ -531,6 +637,7 @@ $(function() {
 				}
 			}
 		});
+	
 });
 ;;$.fn.paginateMe = function(opts) {
 	var $this = this, defaults = {

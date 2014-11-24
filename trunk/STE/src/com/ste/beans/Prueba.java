@@ -20,16 +20,13 @@ public class Prueba {
 	private String id_prueba;
 
 	@Persistent
-	private Date fecha_inicio;
+	private Date fecha_estado;
 	
 	@Persistent
-	private String str_fecha_inicio;
+	private String str_fecha_estado;
 	
 	@Persistent
-	private Date fecha_fin;
-	
-	@Persistent
-	private String str_fecha_fin;
+	private String premium;
 
 	@Persistent
 	private String nombre_cliente;
@@ -61,37 +58,29 @@ public class Prueba {
 		this.id_prueba = id_prueba;
 	}
 	
-	public Date getFecha_inicio() {
-		return fecha_inicio;
+	public Date getFecha_estado() {
+		return fecha_estado;
 	}
 
-	public void setFecha_inicio(Date fecha_inicio) {
-		this.fecha_inicio = fecha_inicio;
+	public void setFecha_estado(Date fecha_estado) {
+		this.fecha_estado = fecha_estado;
 	}
 
-	public String getStr_fecha_inicio() {
-		return str_fecha_inicio;
+	public String getStr_fecha_estado() {
+		return str_fecha_estado;
 	}
 
-	public void setStr_fecha_inicio(String str_fecha_inicio) {
-		this.str_fecha_inicio = str_fecha_inicio;
+	public void setStr_fecha_estado(String str_fecha_estado) {
+		this.str_fecha_estado = str_fecha_estado;
 	}
 
-	public Date getFecha_fin() {
-		return fecha_fin;
+	public String getPremium() {
+		return premium;
 	}
 
-	public void setFecha_fin(Date fecha_fin) {
-		this.fecha_fin = fecha_fin;
+	public void setPremium(String premium) {
+		this.premium = premium;
 	}
-
-	public String getStr_fecha_fin() {
-		return str_fecha_fin;
-	}
-
-	public void setStr_fecha_fin(String str_fecha_fin) {
-		this.str_fecha_fin = str_fecha_fin;
-	}	
 	
 	public String getNombre_cliente() {
 		return nombre_cliente;

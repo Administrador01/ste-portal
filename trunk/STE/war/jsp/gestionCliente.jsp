@@ -163,7 +163,7 @@
 			
 		</form>
 		
-			<button id="submit_form" type="submit">Aceptar</button>
+			<button id="submit_form_client" type="submit">Aceptar</button>
 			<button class="close-form">Cancelar</button>			
 	
 	</div>
