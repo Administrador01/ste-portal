@@ -680,6 +680,34 @@ textarea.readonly {
   padding: 10px;
   margin: 10px;
 }
+#edit-prueba-form {
+  width: 800px !important;
+}
+#edit-prueba-form .form-field-divider.left {
+  margin-right: 10px;
+}
+#edit-prueba-form .form-field-divider.down {
+  width: 100%;
+}
+#edit-prueba-form .form-field-divider.down .form-field.detalles {
+  width: 745px !important;
+  height: 60px;
+}
+#edit-prueba-form .form-field-divider.down .form-field.detalles > .input > textarea {
+  width: 625px !important;
+}
+#edit-prueba-form .form-field-divider > .form-field .lbl {
+  width: 99px;
+}
+#edit-prueba-form .form-field-divider > .form-field input,
+#edit-prueba-form .form-field-divider > .form-field textarea,
+#edit-prueba-form .form-field-divider > .form-field #id_prueba {
+  width: 245px !important;
+  margin-right: 0px;
+}
+body .modal-dialog {
+  width: 850px;
+}
 #sidebar {
   position: fixed;
   top: 50%;

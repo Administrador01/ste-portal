@@ -52,7 +52,7 @@
 										<c:otherwise>
 											<option value="default">Seleccionar</option>
 											<c:forEach items="${clientes}" var="t">							
-												<option value="${t.nombre}" data-premium="${t.premium}" data-segmento="${t.tipo_cliente}">${t.nombre}</option>
+												<option value="${t.nombre}" data-premium="${t.premium}" clientid="${t.key.id}" data-segmento="${t.tipo_cliente}">${t.nombre}</option>
 											</c:forEach>
 										</c:otherwise>
 								</c:choose>
@@ -65,17 +65,30 @@
 						<input type="text" name="input-premium-soporte" id="input-premium-soporte" value="" readonly>
 					</div>				
 						
-					<div class="form-field">						
-						<span class="lbl">Segmento:</span>
-						<input type="text" name="tipo_cliente" id="input-segmento-soporte" value="" readonly>
-					</div>
+
+					
+					<input type="text" name="client_id" id="client-id-input" value="" hidden readonly>
+					
 					
 					<div class="form-field">
 						<span class="lbl">Referencia:</span>
 						<input class="long" type="text" name="referencia" id="referencia">
 					</div>
 					
-				</div>
+					<div class="form-field">
+						<span class="lbl">Estado<span class="required-asterisk">*</span>:</span>
+						<div class="input">
+							<select id="estado" class="selectpicker selected" name="estado">
+								<option value="default">Seleccionar</option>
+								<option value="Pendiente">Pendiente</option>									
+								<option value="En curso">En curso</option>	
+								<option value="Finalizado">Finalizado</option>		
+															
+							</select>
+						</div>
+					</div>
+					
+				</div>	
 				<div class="form-field-divider right">
 				
 					<div class="form-field">
@@ -120,6 +133,8 @@
 							</select>
 						</div>
 					</div>
+					
+
 					
 					<div class="form-field">
 						<span class="lbl">Servicio<span class="required-asterisk">*</span>:</span>
@@ -241,7 +256,7 @@
 
 <div class="modal fade" id="edit-soporte" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" id="edit_soporte_dialog">
+	<div class="modal-dialog">
 		<div class="modal-content">
 			
 		</div>
