@@ -655,6 +655,12 @@ textarea.readonly {
   color: #004b8c;
   border: 1px solid;
 }
+#fecha-desde-filtro {
+  width: 245px;
+}
+#fecha-hasta-filtro {
+  width: 245px;
+}
 /* Modal errors */
 .modal_ajax .form-field label.error {
   display: none !important;
@@ -677,7 +683,9 @@ textarea.readonly {
 }
 #div-filtro-pruebas {
   border: 1px solid;
-  padding: 20px;
+  padding-top: 15px;
+  padding-bottom: 5px;
+  padding-left: 25px;
   margin: 10px;
 }
 #test_filter_button {

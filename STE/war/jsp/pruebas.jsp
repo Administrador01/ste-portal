@@ -173,13 +173,13 @@
 
 <div>	
 	<div>	
-		<div id="div-filtro-pruebas" name="div-filtro-pruebas">
+		<div id="div-filtro-pruebas" class="form-container">
 			<form id="filtro-pruebas" name="filtro-pruebas">
 
 				<div class="form-field-divider right">
 					
 					<div class="form-field">
-							<span class="lbl">Cliente<span class="required-asterisk">*</span>:</span>
+							<span class="lbl">Cliente:</span>
 							<div class="input">
 							
 								<select class="selectpicker selected" name="cliente-filtro" id="cliente-filtro" data-live-search="true">
@@ -207,7 +207,7 @@
 					</div>
 					
 					<div class="form-field">
-						<span class="lbl">Tipo servicio<span class="required-asterisk">*</span>:</span>
+						<span class="lbl">Tipo servicio:</span>
 						<div class="input">
 						
 							<select class="selectpicker selected" name="servicio-filtro" id="servicio-filtro" data-live-search="true">
@@ -221,7 +221,7 @@
 				<div class="form-field-divider left">
 				
 					<div class="form-field">
-						<span class="lbl">Entorno<span class="required-asterisk">*</span>:</span>
+						<span class="lbl">Entorno:</span>
 						<div class="input">
 							<select class="selectpicker selected" name="entorno-filtro" id="entorno-filtro" >
 								<option value="">Filtro vacio</option>	
@@ -239,7 +239,7 @@
 					</div>
 					
 					<div class="form-field">
-						<span class="lbl">Estado<span class="required-asterisk">*</span>:</span>
+						<span class="lbl">Estado:</span>
 						<div class="input">
 							<select class="selectpicker selected" name="estado-filtro" id="estado-filtro">
 								<option value="">Filtro vacio</option>
@@ -252,7 +252,7 @@
 					</div>
 					
 					<button id="test_filter_button" type="button">Buscar</button>
-											
+					
 				</div>
 
 			</form>
