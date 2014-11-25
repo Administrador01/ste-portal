@@ -53,7 +53,7 @@ public class PruebaDao {
 				
 				String num = String.format("%08d", count.getValue());
 				
-				s.setId_prueba("FRA"+num);
+				s.setId_prueba("PRU"+num);
 				
 				CounterDao countDao = CounterDao.getInstance();
 				countDao.increaseCounter(count);

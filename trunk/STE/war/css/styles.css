@@ -680,6 +680,9 @@ textarea.readonly {
   padding: 10px;
   margin: 10px;
 }
+#test_filter_button {
+  float: right;
+}
 #edit-prueba-form {
   width: 800px !important;
 }
