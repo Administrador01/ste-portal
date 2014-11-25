@@ -77,4 +77,56 @@ $(function(){
 		$('#input-segmento-soporte').val(option.data('segmento'));
 		$('#client-id-input').val(option.data('clientid'));
 	})
+	
+	$('#pruebas').on('click','#test_filter_button', function (){
+
+		var val_client_form = $('#cliente-filtro').val();
+		var val_entorno_form = $('#entorno-filtro').val();
+		var val_estado_form = $('#estado-filtro').val();
+
+		
+		//console.log(client_form);
+	//	console.log(entorno_form);
+		//console.log(estado_form);
+
+
+		var trs = $('#myTable').find('tr');
+
+		var entradas = [];
+		for (a=0; a<=trs.length;a++){
+			entradas[a]= $(trs[a]);
+		}
+		
+		for (a=0; a<=trs.length;a++){
+			$(trs[a]).removeClass('hidden');
+		}
+
+	//	console.log(entradas[2].data('entorno'));	
+
+		if (val_client_form!="" && val_client_form!=null){
+			for (a=0; a<=trs.length;a++){
+				if (entradas[a].data('nombrecliente')!=val_client_form)
+					$(trs[a]).addClass('hidden');
+			}
+		}
+
+		if (val_entorno_form!="" && val_entorno_form!=null){
+			for (a=0; a<=trs.length;a++){
+				if (entradas[a].data('entorno')!=val_entorno_form)
+					$(trs[a]).addClass('hidden');
+			}
+		}
+		
+		if (val_estado_form!="" && val_estado_form!=null){
+			for (a=0; a<=trs.length;a++){
+				if (entradas[a].data('estado')!=val_estado_form)
+					$(trs[a]).addClass('hidden');
+			}
+		}
+		
+		
+
+	})
+	
+	
 });

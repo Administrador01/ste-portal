@@ -17,7 +17,7 @@
 <hr />
 
 <div class="breadcrumbs">
-		<span onclick="window.location.href='../../' ">Home</span> > <span> Soporte </span>
+		<span onclick="window.location.href='../../' ">Home</span> > <span> Pruebas </span>
 </div>
 
 
@@ -137,7 +137,7 @@
 
 					
 					<div class="form-field">
-						<span class="lbl">Servicio<span class="required-asterisk">*</span>:</span>
+						<span class="lbl">Tipo servicio<span class="required-asterisk">*</span>:</span>
 						<div class="input">
 						
 							<select class="selectpicker selected" name="servicio" id="servicio" data-live-search="true">
@@ -174,17 +174,74 @@
 <div>	
 	<div>	
 		<div id="div-filtro-pruebas" name="div-filtro-pruebas">
-			<form id="filtro-pruebas" name="filtro-pruebas" action=""
-				novalidate="novalidate">
-				<select id="prueba" class="selectpicker selected" name="prueba" >
-					<option value="Todos" selected>Todos</option>	
-					<option value="Premium">Premium</option>	
-				</select>
+			<form id="filtro-pruebas" name="filtro-pruebas">
+			
+				<div class="form-field-divider right">
+					
+					<div class="form-field">
+							<span class="lbl">Cliente<span class="required-asterisk">*</span>:</span>
+							<div class="input">
+							
+								<select class="selectpicker selected" name="cliente-filtro" id="cliente-filtro" data-live-search="true">
+								
+									<c:choose>
+											<c:when test="${empty clientes}">
+												<option value="default">No hay clientes</option>
+											</c:when>
+											<c:otherwise>
+												<option value="">Filtro vacio</option>
+												<c:forEach items="${clientes}" var="t">							
+													<option value="${t.nombre}" clientid="${t.key.id}">${t.nombre}</option>
+												</c:forEach>
+											</c:otherwise>
+									</c:choose>
+								</select>
+							</div>
+						</div>
+					
+					<div class="form-field">
+						<span class="lbl">Tipo servicio<span class="required-asterisk">*</span>:</span>
+						<div class="input">
+						
+							<select class="selectpicker selected" name="servicio-filtro" id="servicio-filtro" data-live-search="true">
+								<option value="no disponible">No disponible dep imple</option>
+							</select>
+						</div>
+					</div>
+					
+				</div>
 				
+				<div class="form-field-divider left">
 				
-				
-				<button id="submit_test_filter" type="submit">Aceptar</button>
+					<div class="form-field">
+						<span class="lbl">Entorno<span class="required-asterisk">*</span>:</span>
+						<div class="input">
+							<select class="selectpicker selected" name="entorno-filtro" id="entorno-filtro" >
+								<option value="">Filtro vacio</option>	
+								<option value="Pre produccion">Pre producci&oacuten</option>
+								<option value="Produccion">Producci&oacuten</option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="form-field">
+						<span class="lbl">Estado<span class="required-asterisk">*</span>:</span>
+						<div class="input">
+							<select class="selectpicker selected" name="estado-filtro" id="estado-filtro">
+								<option value="">Filtro vacio</option>
+								<option value="Pendiente">Pendiente</option>									
+								<option value="En curso">En curso</option>	
+								<option value="Finalizado">Finalizado</option>		
+															
+							</select>
+						</div>
+					</div>
+					
+					<button id="test_filter_button" type="button">Buscar</button>
+											
+				</div>
 			</form>
+
 		</div>
 		<div class="tipo-cliente-field">
 			<span class="lbl">Tipo cliente:</span>
@@ -197,23 +254,21 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th><span class="table-title">Fecha inicio</span></th>
+						<th><span class="table-title">Fecha alta</span></th>
 						<th><span class="table-title">Cliente</span></th>
-						<th><span class="table-title">Tipo cliente</span></th>
+						<th><span class="table-title">Tipo servicio</span></th>
+						<th><span class="table-title">Estado</span></th>
 						<th><span class="table-title">Producto</span></th>
-						<th><span class="table-title">Referencia</span></th>
-						<th><span class="table-title">Servicio</span></th>
 						<th><span class="table-title">Entorno</span></th>
 						<th style="width: 110px;">&nbsp;</th>
 					</tr>
-					
+
 					<tr>
 						<th class="search-th"><input class="search col0"></th>
 						<th class="search-th"><input class="search col1"></th>
 						<th class="search-th"><input class="search col2"></th>
 						<th class="search-th"><input class="search col3"></th>
 						<th class="search-th"><input class="search col4"></th>
-						<th class="search-th"><input class="search col5"></th>
 						<th class="search-th"><input class="search col5"></th>
 						<th style="width: 110px;">&nbsp;</th>
 					</tr>
@@ -228,13 +283,13 @@
 
 						<c:otherwise>
 							<c:forEach items="${pruebas}" var="s">
-								<tr class="valid-result ${s.premium == 'Premium' ? 'premium' : ''}" id="row${s.key.id}">
+								<tr class="valid-result ${s.premium == 'Premium' ? 'premium' : ''}" data-strfechaestado="${s.str_fecha_estado}"
+								 data-nombrecliente="${s.nombre_cliente}" data-estado="${s.estado}" data-producto="${s.producto}" data-referencia="${s.referencia}" data-entorno="${s.entorno}"  id="row${s.key.id}">
 									<td><span>${s.str_fecha_estado}</span></td>
 									<td><span>${s.nombre_cliente}</span></td>
-									<td><span>${s.premium}</span></td>
+									<td><span>No disponib </span></td>
+									<td><span>${s.estado}</span></td>
 									<td><span>${s.producto}</span></td>
-									<td><span>${s.referencia}</span></td>
-									<td><span> No disponib</span></td>
 									<td><span>${s.entorno}</span></td>
 									
 									<td><img class="vs" src="../img/vs.png"><a class="lapiz" name="${s.key.id}" href="../pruebaModal.do?id=${s.key.id}"	id="lapiz${s.key.id}" data-toggle="modal" data-target="#edit-soporte" ></a>
