@@ -43,7 +43,7 @@
 						<span class="lbl">Cliente<span class="required-asterisk">*</span>:</span>
 						<div class="input">
 						
-							<select class="selectpicker selected" name="cliente" id="cliente-soporte" data-live-search="true">
+							<select class="selectpicker selected" name="cliente" id="cliente-pruebas" data-live-search="true">
 							
 								<c:choose>
 										<c:when test="${empty clientes}">
@@ -175,7 +175,7 @@
 	<div>	
 		<div id="div-filtro-pruebas" name="div-filtro-pruebas">
 			<form id="filtro-pruebas" name="filtro-pruebas">
-			
+
 				<div class="form-field-divider right">
 					
 					<div class="form-field">
@@ -198,6 +198,13 @@
 								</select>
 							</div>
 						</div>
+					
+					<div class="form-field">
+						<span class="lbl">Fecha alta desde:</span>
+						<div class="input">
+							<input type="text" value="" size="16" class="datepicker fromTo" data-target-id='fecha-hasta-filtro' name="fecha-desde-filtro" id="fecha-desde-filtro" >
+						</div>
+					</div>
 					
 					<div class="form-field">
 						<span class="lbl">Tipo servicio<span class="required-asterisk">*</span>:</span>
@@ -225,6 +232,13 @@
 					</div>
 					
 					<div class="form-field">
+						<span class="lbl">Fecha alta hasta:</span>
+						<div class="input">
+							<input type="text" value="" size="16" class="datepicker" name="fecha-hasta-filtro" id="fecha-hasta-filtro" >
+						</div>
+					</div>
+					
+					<div class="form-field">
 						<span class="lbl">Estado<span class="required-asterisk">*</span>:</span>
 						<div class="input">
 							<select class="selectpicker selected" name="estado-filtro" id="estado-filtro">
@@ -240,6 +254,7 @@
 					<button id="test_filter_button" type="button">Buscar</button>
 											
 				</div>
+
 			</form>
 
 		</div>
