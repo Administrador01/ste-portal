@@ -915,7 +915,7 @@ $(function(){
 		});
 	});
 	
-	$('#cliente-soporte').on('change', function() {
+	$('#cliente-pruebas').on('change', function() {
 		//console.log($(this).find(":selected"));
 		var option = $(this).find(":selected");
 		//console.log($(option));
@@ -932,13 +932,15 @@ $(function(){
 		var val_client_form = $('#cliente-filtro').val();
 		var val_entorno_form = $('#entorno-filtro').val();
 		var val_estado_form = $('#estado-filtro').val();
-
+		var val_fecha_desde_form = $('#fecha-desde-filtro').val();
+		var val_fecha_hasta_form = $('#fecha-hasta-filtro').val();
 		
+ 
 		//console.log(client_form);
 	//	console.log(entorno_form);
 		//console.log(estado_form);
-
-
+		console.log(val_fecha_desde_form);
+		console.log(val_fecha_hasta_form);
 		var trs = $('#myTable').find('tr');
 
 		var entradas = [];
@@ -946,39 +948,102 @@ $(function(){
 			entradas[a]= $(trs[a]);
 		}
 		
-		for (a=0; a<=trs.length;a++){
+		for (a=0; a<trs.length;a++){
 			$(trs[a]).removeClass('hidden');
 		}
 
-	//	console.log(entradas[2].data('entorno'));	
+		console.log(entradas[2].data('strfechaestado'));	
 
 		if (val_client_form!="" && val_client_form!=null){
-			for (a=0; a<=trs.length;a++){
+			for (a=0; a<trs.length;a++){
 				if (entradas[a].data('nombrecliente')!=val_client_form)
 					$(trs[a]).addClass('hidden');
 			}
 		}
 
 		if (val_entorno_form!="" && val_entorno_form!=null){
-			for (a=0; a<=trs.length;a++){
+			for (a=0; a<trs.length;a++){
 				if (entradas[a].data('entorno')!=val_entorno_form)
 					$(trs[a]).addClass('hidden');
 			}
 		}
 		
 		if (val_estado_form!="" && val_estado_form!=null){
-			for (a=0; a<=trs.length;a++){
+			for (a=0; a<trs.length;a++){
 				if (entradas[a].data('estado')!=val_estado_form)
 					$(trs[a]).addClass('hidden');
 			}
 		}
 		
+		if (val_fecha_desde_form!="" && val_fecha_desde_form!=null){
+			for (a=0; a<trs.length;a++){
+				if (compare_dates(entradas[a].data('strfechaestado'),val_fecha_desde_form)){
+					//el dato de la tabla es mayor que el del filtro
+				}else{
+					//el dato del filtro es mayor que el de la tabla
+					$(trs[a]).addClass('hidden');
+				}
+			}
+		}
 		
+		console.log(val_fecha_hasta_form);
+		
+		if (val_fecha_hasta_form!="" && val_fecha_hasta_form!=null){
+			for (a=0; a<=trs.length;a++){
+				if (compare_dates(entradas[a].data('strfechaestado'),val_fecha_hasta_form)){
+					//el dato de la tabla es mayor que el del filtro
+					
+					$(trs[a]).addClass('hidden');
+				}else{
+					//el dato del filtro es mayor que el de la tabla
+					
+				}
+			}
+		}
 
 	})
 	
 	
-});;var normalize = (function() {
+});
+
+function compare_dates(fecha, fecha2)  
+{  
+  var xMonth=fecha.substring(3, 5);  
+  var xDay=fecha.substring(0, 2);  
+  var xYear=fecha.substring(6,10);  
+  var yMonth=fecha2.substring(3, 5);  
+  var yDay=fecha2.substring(0, 2);  
+  var yYear=fecha2.substring(6,10);  
+  
+  if (xYear> yYear)  
+  {  
+      return(true)  
+  }  
+  else  
+  {  
+    if (xYear == yYear)  
+    {   
+      if (xMonth> yMonth)  
+      {  
+          return(true)  
+      }  
+      else  
+      {   
+        if (xMonth == yMonth)  
+        {  
+          if (xDay>= yDay)  
+            return(true);  
+          else  
+            return(false);  
+        }  
+        else  
+          return(false);  
+      }  
+    }  
+    else  
+      return(false);  
+  }  
+};;var normalize = (function() {
 	var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
 	  to   = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc",
 	  mapping = {};

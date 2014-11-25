@@ -7,8 +7,6 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import com.ste.beans.Cliente;
-import com.ste.beans.Soporte;
-import com.ste.beans.User;
 import com.ste.counters.Counter;
 import com.ste.persistence.PMF;
 import com.ste.utils.Utils;
@@ -28,6 +26,23 @@ public class ClienteDao {
 		
 		Query q = pm.newQuery("select from " + Cliente.class.getName());		
 		q.setOrdering("id_cliente asc");
+		clientes = (List<Cliente>) q.execute();
+		
+		
+		pm.close();
+
+		return clientes;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Cliente> getAllClientsAlphabet() {
+
+		List<Cliente> clientes;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		
+		Query q = pm.newQuery("select from " + Cliente.class.getName());		
+		q.setOrdering("nombre asc");
 		clientes = (List<Cliente>) q.execute();
 		
 		
