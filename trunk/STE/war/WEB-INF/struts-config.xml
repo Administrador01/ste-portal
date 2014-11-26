@@ -40,6 +40,10 @@
 			<forward name="ok" path="/jsp/skeletons/users-skeleton.jsp" />
 		</action>
 		
+		<action path="/admin/auditoria" type="com.ste.actions.AuditoriaAction">
+			<forward name="ok" path="/jsp/skeletons/auditoria-skeleton.jsp" />
+		</action>
+		
 		<action path="/pruebas" type="com.ste.actions.PruebasAction">
 			<forward name="ok" path="/jsp/skeletons/pruebas-skeleton.jsp" />
 		</action>

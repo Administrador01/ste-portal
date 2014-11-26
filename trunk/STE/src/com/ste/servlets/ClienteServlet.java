@@ -36,11 +36,13 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 		
 		String accion = req.getParameter("accion");
 		
+		
 		 try {
 			 
 			HttpSession sesion = req.getSession();
 			int sesionpermiso = (int) sesion.getAttribute("permiso");			 
-			 
+			String usermail = (String) sesion.getAttribute("mail");
+			
 			 if (accion.equals("new")){
 					createClient(req,resp);
 				}else if (accion.equals("delete")){
@@ -76,7 +78,7 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 			ClienteDao cDao = ClienteDao.getInstance();
 			List<Cliente> clientes = cDao.getAllClients();
 					
-			WritableSheet s = w.createSheet("Gestion de soporte", 0);
+			WritableSheet s = w.createSheet("Gestion de cliente", 0);
 
 			WritableFont cellFont = new WritableFont(WritableFont.TIMES, 12);
 			cellFont.setColour(Colour.WHITE);

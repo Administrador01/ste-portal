@@ -58,6 +58,8 @@ public class ClienteDao {
 		try{
 			c.setFecha_alta(Utils.dateConverter(c.getStr_fecha_alta()));
 			
+			boolean isNewClient = false;
+			
 			if (c.getKey()==null){
 				
 				Counter count = cDao.getCounterByName("cliente");
@@ -66,9 +68,28 @@ public class ClienteDao {
 				c.setId_cliente("IDGLOBAL_"+num);
 				cDao.increaseCounter(count);
 				
-			}		
+				isNewClient = true;
+				
+			}
 			
-			pm.makePersistent(c);
+			
+			try {
+				pm.makePersistent(c);
+			} finally {/*
+				if (!usermail.equals("")){
+					if (c.isErased()){
+						Utils.writeLog(usermail, "Eliminó", "Cliente", c.getNombre());
+					}else{
+						if (isNewClient)
+							Utils.writeLog(usermail, "Creó", "Cliente", c.getNombre());
+						else{
+							Utils.writeLog(usermail, "Editó", "Cliente", c.getNombre());
+						}
+					}
+				}*/
+			}
+			
+			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
