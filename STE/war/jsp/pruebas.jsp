@@ -299,7 +299,7 @@
 						<c:otherwise>
 							<c:forEach items="${pruebas}" var="s">
 								<tr class="valid-result ${s.premium == 'Premium' ? 'premium' : ''}" data-strfechaestado="${s.str_fecha_estado}"
-								 data-nombrecliente="${s.nombre_cliente}" data-estado="${s.estado}" data-producto="${s.producto}" data-referencia="${s.referencia}" data-entorno="${s.entorno}"  id="row${s.key.id}">
+								 data-nombrecliente="${s.nombre_cliente}" data-estado="${s.estado}" data-entorno="${s.entorno}"  id="row${s.key.id}">
 									<td><span>${s.str_fecha_estado}</span></td>
 									<td><span>${s.nombre_cliente}</span></td>
 									<td><span>No disponib </span></td>
