@@ -101,8 +101,8 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 			s.addCell(new Label(0, 0, "IDENTIFICADOR", cellFormat));
 			s.addCell(new Label(1, 0, "NOMBRE", cellFormat));
 			s.addCell(new Label(2, 0, "FECHA ALTA", cellFormat));
-			s.addCell(new Label(3, 0, "TIPO CLIENTE", cellFormat));
-			s.addCell(new Label(4, 0, "SEGMENTO", cellFormat));
+			s.addCell(new Label(3, 0, "SEGMENTO", cellFormat));
+			s.addCell(new Label(4, 0, "TIPO CLIENTE", cellFormat));
 			
 
 			int aux = 1;
@@ -112,8 +112,8 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 				s.addCell(new Label(0, aux, cli.getId_cliente()));
 				s.addCell(new Label(1, aux, cli.getNombre()));
 				s.addCell(new Label(2, aux, cli.getStr_fecha_alta()));
-				s.addCell(new Label(3, aux, cli.getPremium()));
-				s.addCell(new Label(4, aux, cli.getTipo_cliente()));
+				s.addCell(new Label(3, aux, cli.getTipo_cliente()));
+				s.addCell(new Label(4, aux, cli.getPremium()));
 			
 
 				

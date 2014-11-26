@@ -1284,7 +1284,10 @@ body .modal-dialog {
 .clients > div.search_div #buscador_cliente {
   float: right;
   margin-bottom: 5px;
-  width: 166px;
+  width: 180px;
+}
+.clients > div.search_div #accion_menu {
+  width: 180px;
 }
 .clients > div.search_div button {
   float: right;
