@@ -36,10 +36,9 @@
 				<div class="form-container">
 					<div class="form-field-divider left">
 						
-						<div class="form-field">
-							<span class="lbl">Identificador:</span>
-							<input class="long readonly" type="text" readonly name="id_cliente" id="id_cliente">
-						</div>
+
+						<input class="long readonly hidden" type="text" readonly name="id_cliente" id="id_cliente">
+
 						
 						<div class="form-field">
 							<span class="lbl">Nombre cliente<span class="required-asterisk">*</span>:</span>
@@ -107,7 +106,7 @@
 						 -->
 					</div>
 					<div class="form-field-divider right">
-						<div class="form-field"></div>
+
 						<div class="form-field">
 							<span class="lbl">Tipo cliente<span class="required-asterisk">*</span>:</span>						
 							
