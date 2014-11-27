@@ -51,7 +51,7 @@ public class ClienteDao {
 		return clientes;
 	}
 
-	public void createCliente(Cliente c) {
+	public void createCliente(Cliente c, String usermail) {
 		PersistenceManager pm = PMF.get().getPersistenceManager();	
 		CounterDao cDao = CounterDao.getInstance();
 
