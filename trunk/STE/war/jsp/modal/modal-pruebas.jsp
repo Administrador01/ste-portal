@@ -49,15 +49,26 @@
 								</div>
 			
 			
-			
-			
 								<div class="form-field">
 									<span class="lbl">Tipo cliente :</span>
 									<input type="text" name="input-premium-soporte" id="input-premium-soporte-modal" value="${prueba.premium}" readonly>
 								</div>
 								
-
-			
+								<div class="form-field">
+									<span class="lbl">Tipo de servicio<span class="required-asterisk">*</span>:</span>
+									<div class="input">
+										<select id="tipo_servicio" class="selectpicker selected" name="tipo_servicio" >
+											<option value="Cobros" ${prueba.tipo_servicio == 'Cobros' ? 'selected' : ''}>Cobros</option>	
+											<option value="Pagos" ${prueba.tipo_servicio == 'Pagos' ? 'selected' : ''}>Pagos</option>
+											<option value="MT101" ${prueba.tipo_servicio == 'MT101' ? 'selected' : ''}>MT101</option>
+											<option value="MT94x" ${prueba.tipo_servicio == 'MT94x' ? 'selected' : ''}>MT94x</option>
+											<option value="Cashpool" ${prueba.tipo_servicio == 'Cashpool' ? 'selected' : ''}>Cashpool</option>
+											<option value="Factura integral" ${prueba.tipo_servicio == 'Factura integral' ? 'selected' : ''}>Factura integral</option>
+											<option value="Otros" ${prueba.tipo_servicio == 'Otros' ? 'selected' : ''}>Otros</option>	
+										</select>
+									</div>
+								</div>
+						
 								
 							</div>
 							<div class="form-field-divider right">

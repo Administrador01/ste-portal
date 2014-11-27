@@ -182,6 +182,13 @@ $(function() {
 			for (a=0; a<=trs.length;a++)
 				$(trs[a]).removeClass('hidden');
 		}
+		
+		$('#myTable').paginateMe({
+			pagerSelector : '#myPager',
+			showPrevNext : true,
+			hidePageNumbers : false,
+			perPage : 10
+		})
 			
 	});
 	

@@ -389,6 +389,13 @@ $(function() {
 			for (a=0; a<=trs.length;a++)
 				$(trs[a]).removeClass('hidden');
 		}
+		
+		$('#myTable').paginateMe({
+			pagerSelector : '#myPager',
+			showPrevNext : true,
+			hidePageNumbers : false,
+			perPage : 10
+		})
 			
 	});
 	
@@ -705,7 +712,11 @@ $(function() {
 
 	var listElement = $this;
 	var perPage = settings.perPage;
-	var children = listElement.find(".valid-result");
+
+	
+	var children = listElement.find(".valid-result").not(".hidden");
+	
+
 	var pager = $('.pagination');
 	var resumen = $('.pagesummary');
 
@@ -719,7 +730,6 @@ $(function() {
 
 	var numItems = children.size();
 	var numPages = Math.ceil(numItems / perPage);
-
 	// clean up.
 	$(pager).html('');
 
@@ -939,8 +949,7 @@ $(function(){
 		//console.log(client_form);
 	//	console.log(entorno_form);
 		//console.log(estado_form);
-		console.log(val_fecha_desde_form);
-		console.log(val_fecha_hasta_form);
+
 		var trs = $('#myTable').find('tr');
 
 		var entradas = [];
@@ -952,7 +961,7 @@ $(function(){
 			$(trs[a]).removeClass('hidden');
 		}
 
-		console.log(entradas[2].data('strfechaestado'));	
+	
 
 		if (val_client_form!="" && val_client_form!=null){
 			for (a=0; a<trs.length;a++){
@@ -986,7 +995,7 @@ $(function(){
 			}
 		}
 		
-		console.log(val_fecha_hasta_form);
+
 		
 		if (val_fecha_hasta_form!="" && val_fecha_hasta_form!=null){
 			for (a=0; a<=trs.length;a++){

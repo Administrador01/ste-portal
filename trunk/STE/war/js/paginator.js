@@ -8,7 +8,11 @@ $.fn.paginateMe = function(opts) {
 
 	var listElement = $this;
 	var perPage = settings.perPage;
-	var children = listElement.find(".valid-result");
+
+	
+	var children = listElement.find(".valid-result").not(".hidden");
+	
+
 	var pager = $('.pagination');
 	var resumen = $('.pagesummary');
 
@@ -22,7 +26,6 @@ $.fn.paginateMe = function(opts) {
 
 	var numItems = children.size();
 	var numPages = Math.ceil(numItems / perPage);
-
 	// clean up.
 	$(pager).html('');
 

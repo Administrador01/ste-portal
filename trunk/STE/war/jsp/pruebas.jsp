@@ -139,9 +139,15 @@
 					<div class="form-field">
 						<span class="lbl">Tipo servicio<span class="required-asterisk">*</span>:</span>
 						<div class="input">
-						
-							<select class="selectpicker selected" name="servicio" id="servicio" data-live-search="true">
-								<option value="no disponible">No disponible dep imple</option>
+							<select id="tipo_servicio" class="selectpicker selected" name="tipo_servicio" >
+								<option value="default">Seleccionar</option>	
+								<option value="Cobros">Cobros</option>	
+								<option value="Pagos">Pagos</option>
+								<option value="MT101">MT101</option>
+								<option value="MT94x">MT94x</option>
+								<option value="Cashpool">Cashpool</option>
+								<option value="Factura integral">Factura integral</option>
+								<option value="Otros">Otros</option>	
 							</select>
 						</div>
 					</div>
