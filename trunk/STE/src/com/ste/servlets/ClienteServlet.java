@@ -44,13 +44,13 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 			String usermail = (String) sesion.getAttribute("mail");
 			
 			 if (accion.equals("new")){
-					createClient(req,resp);
+					createClient(req,resp,usermail);
 				}else if (accion.equals("delete")){
-					deleteClient(req,resp);
+					deleteClient(req,resp,usermail);
 				}else if (accion.equals("update")){
-					updateClient(req,resp);
+					updateClient(req,resp,usermail);
 				}else if (accion.equals("xls")){
-					generateXLS(req,resp);
+					generateXLS(req,resp,usermail);
 				}
 			 
 		
@@ -64,7 +64,7 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 		doGet(req,resp);
 	}
 	
-	public void generateXLS(HttpServletRequest req, HttpServletResponse resp)
+	public void generateXLS(HttpServletRequest req, HttpServletResponse resp, String usermail)
 			throws ServletException, IOException {
 		OutputStream out = null;
 		try {
@@ -133,7 +133,7 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 
 	}
 	
-	public void deleteClient(HttpServletRequest req, HttpServletResponse resp) throws JSONException, IOException{
+	public void deleteClient(HttpServletRequest req, HttpServletResponse resp, String usermail) throws JSONException, IOException{
 		
 		JSONObject json = new JSONObject();
 		String str_id = req.getParameter("id");
@@ -157,7 +157,7 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 	
 	}
 	
-	public void updateClient(HttpServletRequest req, HttpServletResponse resp) throws JSONException, IOException{
+	public void updateClient(HttpServletRequest req, HttpServletResponse resp, String usermail) throws JSONException, IOException{
 		
 		JSONObject json = new JSONObject();
 		
@@ -179,8 +179,8 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 		c.setTipo_cliente(tipo_cliente);
 		
 		c.setPremium(premium);
-		
-		cDao.createCliente(c);
+		//eeeeeeeeeeeeeee
+		cDao.createCliente(c,usermail);
 		
 		json.append("success", "true");
 	
@@ -191,7 +191,7 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 				
 	}
 	
-	public void createClient(HttpServletRequest req, HttpServletResponse resp) throws JSONException, IOException{
+	public void createClient(HttpServletRequest req, HttpServletResponse resp, String usermail) throws JSONException, IOException{
 		JSONObject json = new JSONObject();
 		ClienteDao cDao = ClienteDao.getInstance();
 		Cliente c = new Cliente();
@@ -211,7 +211,7 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 		
 		
 		
-		cDao.createCliente(c);
+		cDao.createCliente(c,usermail);
 		
 		
 		json.append("success", "true");
