@@ -72,6 +72,7 @@ public class PruebaServlet extends HttpServlet{
 		String entorno = req.getParameter("entorno");
 		String servicio = "No disp";
 		String detalles = req.getParameter("detalles");
+		String solucion = req.getParameter("solucion");
 		String clientID = req.getParameter("client_id");
 		
 		
@@ -87,13 +88,9 @@ public class PruebaServlet extends HttpServlet{
 		p.setEntorno(entorno);
 		p.setEstado(estado);
 		p.setDetalles(detalles);
+		p.setSolucion(solucion);
 		p.setIdCliente(clientID);
-		
-		
-		pDao.createPrueba(p);
-		
-		
-		
+		pDao.createPrueba(p);		
 		
 		
 		try {
@@ -125,6 +122,7 @@ public class PruebaServlet extends HttpServlet{
 		String entorno = req.getParameter("entorno");
 		String servicio = "No disp";
 		String detalles = req.getParameter("detalles");
+		String solucion = req.getParameter("solucion");
 		String clientID = req.getParameter("client_id");
 		
 		
@@ -140,6 +138,7 @@ public class PruebaServlet extends HttpServlet{
 		p.setEntorno(entorno);
 		p.setEstado(estado);
 		p.setDetalles(detalles);
+		p.setSolucion(solucion);
 		p.setIdCliente(clientID);
 		
 		
