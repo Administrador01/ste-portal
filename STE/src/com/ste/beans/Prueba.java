@@ -51,7 +51,9 @@ public class Prueba {
 	
 	@Persistent
 	private String detalles;
-	
+
+	@Persistent
+	private String solucion;
 	
 	public Key getKey() {
 		return key;
@@ -147,6 +149,14 @@ public class Prueba {
 
 	public void setReferencia(String referencia) {
 		this.referencia = referencia;
+	}
+	
+	public String getSolucion() {
+		return solucion;
+	}
+
+	public void setSolucion(String solucion) {
+		this.solucion = solucion;
 	}
 
 	public String getIdCliente() {
