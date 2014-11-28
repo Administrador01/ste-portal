@@ -22,7 +22,7 @@
 
 
 <div class="headButtonsBox">
-	<button id="formButton">
+	<button id="formButton"> 
 		Nuevo<span class="user_span"></span>
 	</button>
 	
@@ -67,7 +67,7 @@
 						
 
 					
-					<input type="text" name="client_id" id="client-id-input" value="" hidden readonly>
+					<input type="text" name="client_id" id="client-id-input" value="" hidden>
 					
 					
 					<div class="form-field">
@@ -161,7 +161,18 @@
 							<textarea name="detalles" maxlength="500" rows="1" cols="1" placeholder="Introduzca texto ..."></textarea>
 						</div>
 					</div>	
-				</div>			
+					<br />
+					<br />
+					<div class="form-field solucion">
+						<span class="lbl">Soluci&oacuten:</span>
+						<div class="input">
+							<textarea name="solucion" maxlength="500" rows="1" cols="1" placeholder="Introduzca texto ..."></textarea>
+						</div>
+					</div>
+					
+				</div>	
+				
+					
 				<div id="message_div" class="message_div">
 					<span id="span_message">La prueba ha sido creado de forma correcta.<br/>En breve volvemos a la página.</span>
 				</div>
@@ -183,7 +194,7 @@
 			<form id="filtro-pruebas" name="filtro-pruebas">
 
 				<div class="form-field-divider right">
-					
+					<%-- 
 					<div class="form-field">
 							<span class="lbl">Cliente:</span>
 							<div class="input">
@@ -204,14 +215,14 @@
 								</select>
 							</div>
 						</div>
-					
+					--%>
 					<div class="form-field">
 						<span class="lbl">Fecha alta desde:</span>
 						<div class="input">
 							<input type="text" value="" size="16" class="datepicker fromTo" data-target-id='fecha-hasta-filtro' name="fecha-desde-filtro" id="fecha-desde-filtro" >
 						</div>
 					</div>
-					
+					<%-- 
 					<div class="form-field">
 						<span class="lbl">Tipo servicio:</span>
 						<div class="input">
@@ -221,11 +232,11 @@
 							</select>
 						</div>
 					</div>
-					
+					--%>
 				</div>
 				
 				<div class="form-field-divider left">
-				
+				<%-- 
 					<div class="form-field">
 						<span class="lbl">Entorno:</span>
 						<div class="input">
@@ -236,14 +247,14 @@
 							</select>
 						</div>
 					</div>
-					
+				--%>	
 					<div class="form-field">
 						<span class="lbl">Fecha alta hasta:</span>
 						<div class="input">
 							<input type="text" value="" size="16" class="datepicker" name="fecha-hasta-filtro" id="fecha-hasta-filtro" >
 						</div>
 					</div>
-					
+					<%-- 
 					<div class="form-field">
 						<span class="lbl">Estado:</span>
 						<div class="input">
@@ -256,7 +267,7 @@
 							</select>
 						</div>
 					</div>
-					
+					--%>
 					<button id="test_filter_button" type="button">Buscar</button>
 					
 				</div>
