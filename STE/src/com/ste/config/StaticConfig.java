@@ -15,5 +15,5 @@ public class StaticConfig {
 					new Config("Promoción local", "Promoción Local"),
 					new Config("Global Customer Service", "Global Customer Service"),
 					new Config("Local Customer Service", "Local Customer Service")
-					));	
+					));
 }

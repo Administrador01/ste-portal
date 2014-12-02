@@ -70,10 +70,10 @@ public class PruebaServlet extends HttpServlet{
 		String premium = req.getParameter("input-premium-soporte");
 		String estado = req.getParameter("estado");
 		String entorno = req.getParameter("entorno");
-		String servicio = "No disp";
 		String detalles = req.getParameter("detalles");
 		String solucion = req.getParameter("solucion");
 		String clientID = req.getParameter("client_id");
+		String tipo_servicio = req.getParameter("tipo_servicio");
 		
 		
 		PruebaDao pDao = PruebaDao.getInstance();	
@@ -84,12 +84,13 @@ public class PruebaServlet extends HttpServlet{
 		p.setReferencia(referencia);
 		p.setProducto(producto);
 		p.setPremium(premium);
-		p.setTipo_servicio(servicio);
 		p.setEntorno(entorno);
 		p.setEstado(estado);
 		p.setDetalles(detalles);
 		p.setSolucion(solucion);
 		p.setIdCliente(clientID);
+		p.setTipo_servicio(tipo_servicio);
+		
 		pDao.createPrueba(p);		
 		
 		
@@ -120,10 +121,10 @@ public class PruebaServlet extends HttpServlet{
 		String premium = req.getParameter("input-premium-soporte");
 		String estado = req.getParameter("estado");
 		String entorno = req.getParameter("entorno");
-		String servicio = "No disp";
+		String servicio =  req.getParameter("tipo_servicio");
 		String detalles = req.getParameter("detalles");
 		String solucion = req.getParameter("solucion");
-		String clientID = req.getParameter("client_id");
+		String clientID = req.getParameter("client_id_mod");
 		
 		
 		PruebaDao pDao = PruebaDao.getInstance();	
@@ -139,7 +140,7 @@ public class PruebaServlet extends HttpServlet{
 		p.setEstado(estado);
 		p.setDetalles(detalles);
 		p.setSolucion(solucion);
-		p.setIdCliente(clientID);
+		if (clientID !="" && clientID != null) p.setIdCliente(clientID);
 		
 		
 		pDao.createPrueba(p);

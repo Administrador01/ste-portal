@@ -24,8 +24,10 @@ import jxl.write.WritableWorkbook;
 import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.ste.beans.Cliente;
+import com.ste.beans.Prueba;
 import com.ste.beans.Soporte;
 import com.ste.dao.ClienteDao;
+import com.ste.dao.PruebaDao;
 import com.ste.dao.SoporteDao;
 
 public class ClienteServlet extends HttpServlet {
@@ -166,6 +168,18 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 		ClienteDao cDao = ClienteDao.getInstance();
 		Cliente c = cDao.getClientebyId(Long.parseLong(str_id));
 		
+		
+		//recuperamos las pruebas relacionadas conel cliente para cambiar el nombre de cliente de ellas
+		PruebaDao pDao = PruebaDao.getInstance();
+				
+		List<Prueba> prueb_arr = pDao.getAllPruebasByClientId(str_id);
+		
+		SoporteDao sDao = SoporteDao.getInstance();
+		
+		List<Soporte> sop_arr = sDao.getAllSoportesByClientId(str_id);
+		
+		//actualizamos los valores del cliente
+		
 		String str_fecha_alta = req.getParameter("fecha_alta");		
 		String nombre = req.getParameter("nombre_cliente");
 		
@@ -177,8 +191,22 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 		c.setStr_fecha_alta(str_fecha_alta);
 		c.setNombre(nombre);
 		c.setTipo_cliente(tipo_cliente);
-		
 		c.setPremium(premium);
+		
+		//actualizamos los valores de los campos de pruebas y de soporte
+		for (Prueba a : prueb_arr){
+			a.setNombre_cliente(nombre);
+			a.setPremium(premium);			
+			pDao.createPrueba(a);
+		}
+		
+		for (Soporte so : sop_arr){
+			so.setCliente_name(nombre);;
+			so.setPremium(premium);			
+			sDao.createSoporte(so);
+		}
+		
+		
 		//eeeeeeeeeeeeeee
 		cDao.createCliente(c,usermail);
 		

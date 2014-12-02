@@ -7,6 +7,8 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 
+
+import com.ste.beans.Prueba;
 import com.ste.beans.Soporte;
 import com.ste.beans.User;
 import com.ste.counters.Counter;
@@ -93,6 +95,26 @@ public class SoporteDao {
 		q.setOrdering("fecha_inicio desc");
 		soportes = (List<Soporte>) q.execute();
 		
+		
+		pm.close();
+
+		return soportes;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Soporte> getAllSoportesByClientId(String clientID) {
+
+		List<Soporte> soportes;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		
+		
+		String query = "select from " + Soporte.class.getName()+" where cliente_id == '"+clientID+"'";
+		
+		Query q = pm.newQuery(query);//.setFilter(propertyFilter);
+
+		soportes = (List<Soporte>) q.execute();
+
 		
 		pm.close();
 

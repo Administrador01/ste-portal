@@ -38,7 +38,7 @@ public class Soporte {
 	private String str_fecha_fin;
 	
 	@Persistent
-	private Long cliente_id;
+	private String cliente_id;
 	
 	@Persistent
 	private String cliente_name;
@@ -131,11 +131,11 @@ public class Soporte {
 		this.str_fecha_fin = str_fecha_fin;
 	}
 
-	public Long getCliente_id() {
+	public String getCliente_id() {
 		return cliente_id;
 	}
 
-	public void setCliente_id(Long cliente_id) {
+	public void setCliente_id(String cliente_id) {
 		this.cliente_id = cliente_id;
 	}
 

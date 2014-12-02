@@ -193,7 +193,7 @@ public class SoporteServlet extends HttpServlet{
 		String tipo_cliente = req.getParameter("tipo_cliente");		
 		String detalles = req.getParameter("detalles");
 		String solucion = req.getParameter("solucion");
-		
+		String clienteID = req.getParameter("client_id");
 		
 		
 		s.setStr_fecha_inicio(fecha_inicio);
@@ -207,6 +207,7 @@ public class SoporteServlet extends HttpServlet{
 		s.setPremium(premium);
 		s.setTipo_cliente(tipo_cliente);
 		s.setSolucion(solucion);
+		s.setCliente_id(clienteID);
 		
 		sDao.createSoporte(s);
 		
@@ -240,6 +241,7 @@ public class SoporteServlet extends HttpServlet{
 		String tipo_cliente = req.getParameter("tipo_cliente");		
 		String detalles = req.getParameter("detalles");
 		String solucion = req.getParameter("solucion");
+		String clienteID = req.getParameter("client_id");
 		Soporte s = new Soporte();
 		SoporteDao sDao = SoporteDao.getInstance();
 		
@@ -254,6 +256,7 @@ public class SoporteServlet extends HttpServlet{
 		s.setPremium(premium);
 		s.setTipo_cliente(tipo_cliente);
 		s.setSolucion(solucion);
+		s.setCliente_id(clienteID);
 		
 		sDao.createSoporte(s);
 		

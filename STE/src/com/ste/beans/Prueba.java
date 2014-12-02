@@ -20,9 +20,6 @@ public class Prueba {
 	private String id_prueba;
 
 	@Persistent
-	private String id_cliente;
-	
-	@Persistent
 	private Date fecha_estado;
 	
 	@Persistent
@@ -55,10 +52,13 @@ public class Prueba {
 	@Persistent
 	private String solucion;
 	
+	@Persistent
+	private String cliente_id;
+	
 	public Key getKey() {
 		return key;
 	}
-
+	
 	public void setKey(Key key) {
 		this.key = key;
 	}
@@ -160,10 +160,10 @@ public class Prueba {
 	}
 
 	public String getIdCliente() {
-		return id_cliente;
+		return cliente_id;
 	}
 
 	public void setIdCliente(String id_cliente) {
-		this.id_cliente = id_cliente;
+		this.cliente_id = id_cliente;
 	}
 }
