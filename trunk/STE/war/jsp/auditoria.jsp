@@ -2,6 +2,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
+<div class="auditoria">
+<h1>Auditor&iacute;a</h1>
+<span class="btn-atras" onclick="window.location.href='../../'"></span>
+<hr />
+<div class="breadcrumbs"> <span onclick="window.location.href='../../' ">Home</span> > <span> Auditor&iacute;a </span> </div>
 
 <div class="form-field historico">
 	<span class="lbl">Hist&oacute;rico:</span>
@@ -14,4 +19,54 @@
 	
 	  <button id="excel_btn" onclick="window.location.href='../../logsServlet?accion=xls'"> Descargar Tabla<span class="excel_span"></span> </button>
 	
+</div>
+
+
+<div>
+  <div>
+    <div class="table-responsive usersTable">
+      <table class="table">
+        <thead>
+          <tr>
+            <th><span class="table-title">Historial de revisiones</span></th> 
+           
+          </tr>          
+        </thead>
+        <tbody id="myTable" cellspacing="0">
+          <c:choose>
+            <c:when test="${empty logs}">
+              <tr>
+                <td><span>No existen logs.</span></td>
+              </tr>
+            </c:when>
+            <c:otherwise>
+              <c:forEach items="${logs}" var="log">
+                <tr class="valid-result">
+                 <c:choose>
+           			 <c:when test="${log.fecha_str eq hoy}">
+           			 	<td><div class="usuario_fecha"><span>${log.usuario}</span><br><span>Hoy</span></div><div class="log_accion"> <span class="accion">${log.accion}:</span><span>  ${log.entidad} -  ${log.nombre_entidad}</span></div></td>
+           			</c:when>
+           			<c:when test="${log.fecha_str eq ayer}">
+           			 	<td><div class="usuario_fecha"><span>${log.usuario}</span><br><span>Ayer</span></div> <div class="log_accion"><span class="accion">${log.accion}:</span><span>    ${log.entidad} -  ${log.nombre_entidad}</span></div></td>
+           			</c:when>
+           			<c:when test="${log.fecha_str ne hoy && log.fecha_str ne ayer}">
+		                 <td><div class="usuario_fecha"><span>${log.usuario}</span><br><span>${log.fecha_str}</span></div> <div class="log_accion"><span  class="accion">${log.accion}:</span><span>   ${log.entidad} -  ${log.nombre_entidad}</span></div></td>
+           			</c:when>
+           			 
+           			 
+           			 
+                 </c:choose>
+                </tr>
+              </c:forEach>
+            </c:otherwise>
+          </c:choose>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-12 text-center">
+      <ul class="pagination" id="myPager">
+      </ul>
+      <span class="pagesummary"></span>
+    </div>
+  </div>
 </div>
