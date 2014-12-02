@@ -23,7 +23,7 @@ public class Soporte {
 	private String tipo_soporte;
 
 	@Persistent
-	private String id_prueba;
+	private String id_soporte;
 	
 	@Persistent
 	private Date fecha_inicio;
@@ -85,15 +85,15 @@ public class Soporte {
 		this.key = key;
 	}
 
-	public String getId_prueba() {
-		return id_prueba;
+	public String getId_soporte() {
+		return id_soporte;
 	}
 	
 	public String getTipo_cliente() {
 		return tipo_cliente;
 	}
-	public void setId_prueba(String id_prueba) {
-		this.id_prueba = id_prueba;
+	public void setId_soporte(String id_soporte) {
+		this.id_soporte = id_soporte;
 	}
 	
 	public void setTipo_cliente(String tipo_cliente) {

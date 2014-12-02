@@ -58,7 +58,7 @@ public class ClienteDao {
 		try{
 			c.setFecha_alta(Utils.dateConverter(c.getStr_fecha_alta()));
 			
-			boolean isNewClient = false;
+
 			
 			if (c.getKey()==null){
 				
@@ -67,27 +67,13 @@ public class ClienteDao {
 				
 				c.setId_cliente("IDGLOBAL_"+num);
 				cDao.increaseCounter(count);
-				
-				isNewClient = true;
-				
+				c.setErased(false);	
 			}
 			
 			
 			try {
 				pm.makePersistent(c);
-			} finally {/*
-				if (!usermail.equals("")){
-					if (c.isErased()){
-						Utils.writeLog(usermail, "Eliminó", "Cliente", c.getNombre());
-					}else{
-						if (isNewClient)
-							Utils.writeLog(usermail, "Creó", "Cliente", c.getNombre());
-						else{
-							Utils.writeLog(usermail, "Editó", "Cliente", c.getNombre());
-						}
-					}
-				}*/
-			}
+			} finally {}
 			
 			
 		} catch (ParseException e) {
@@ -122,6 +108,7 @@ public Cliente getClientebyId(long l) {
 	public void deleteCliente(Cliente c) {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		pm.deletePersistent(pm.getObjectById(c.getClass(), c.getKey().getId()));
+		
 		pm.close();
 
 	}

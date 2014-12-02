@@ -33,6 +33,9 @@ public class Cliente {
 	
 	@Persistent
 	private String nombre;
+	
+	@Persistent
+	private Boolean erased;
 
 	public Key getKey() {
 		return key;
@@ -42,6 +45,14 @@ public class Cliente {
 		this.key = key;
 	}
 
+	public Boolean isErased() {
+		return erased;
+	}
+
+	public void setErased(Boolean erased) {
+		this.erased = erased;
+	}
+	
 	public String getId_cliente() {
 		return id_cliente;
 	}

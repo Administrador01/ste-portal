@@ -49,30 +49,52 @@ public class PruebaDao {
 		
 	}
 
-	public void createPrueba(Prueba s) {
+	public synchronized void createPrueba(Prueba s) {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 
 		try {
 			
-			//Conversi'on de las fechas de string a tipo date
-			s.setFecha_estado(Utils.dateConverter(s.getStr_fecha_estado()));
+			PruebaDao pruDao = PruebaDao.getInstance();	
 
-			
-			if (s.getKey()==null){
-				CounterDao cDao = CounterDao.getInstance();
+			List<Prueba> prueb_arr = pruDao.getAllPruebas();
+			boolean flag = false;
+			for (Prueba prub : prueb_arr){
 				
-				Counter count = cDao.getCounterByName("prueba");
-				
-				String num = String.format("%08d", count.getValue());
-				
-				s.setId_prueba("PRU"+num);
-				
-				CounterDao countDao = CounterDao.getInstance();
-				countDao.increaseCounter(count);
+				String tipos = s.getTipo_servicio().toString();
+				String tipoprub =prub.getTipo_servicio().toString();
+				if(prub.getDetalles().equals(s.getDetalles())&&
+				   prub.getEntorno().equals(s.getEntorno())&&
+				   prub.getEstado().equals(s.getEstado())&&
+				   prub.getStr_fecha_estado().equals(s.getStr_fecha_estado())&&
+				   prub.getSolucion().equals(s.getSolucion())&&
+				   prub.getIdCliente().equals(s.getIdCliente())&&
+				   prub.getProducto().equals(s.getProducto())&&
+				   prub.getReferencia().equals(s.getReferencia())&&
+				   prub.getTipo_servicio().equals(s.getTipo_servicio())){
+						flag = true;
+				}
+
 			}
-			
-			pm.makePersistent(s);
-			
+			if(!flag){
+				//Conversi'on de las fechas de string a tipo date
+				s.setFecha_estado(Utils.dateConverter(s.getStr_fecha_estado()));
+	
+				
+				if (s.getKey()==null){
+					CounterDao cDao = CounterDao.getInstance();
+					
+					Counter count = cDao.getCounterByName("prueba");
+					
+					String num = String.format("%08d", count.getValue());
+					
+					s.setId_prueba("PRU"+num);
+					
+					CounterDao countDao = CounterDao.getInstance();
+					countDao.increaseCounter(count);
+				}
+				
+				pm.makePersistent(s);
+			}
 			
 
 		} catch (ParseException e) {

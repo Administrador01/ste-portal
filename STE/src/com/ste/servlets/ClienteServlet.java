@@ -29,6 +29,7 @@ import com.ste.beans.Soporte;
 import com.ste.dao.ClienteDao;
 import com.ste.dao.PruebaDao;
 import com.ste.dao.SoporteDao;
+import com.ste.utils.Utils;
 
 public class ClienteServlet extends HttpServlet {
 	
@@ -110,16 +111,11 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 			int aux = 1;
 
 			for (Cliente cli : clientes) {
-				
 				s.addCell(new Label(0, aux, cli.getId_cliente()));
 				s.addCell(new Label(1, aux, cli.getNombre()));
 				s.addCell(new Label(2, aux, cli.getStr_fecha_alta()));
 				s.addCell(new Label(3, aux, cli.getTipo_cliente()));
 				s.addCell(new Label(4, aux, cli.getPremium()));
-			
-
-				
-
 				aux++;
 			}
 
@@ -129,6 +125,7 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 			e.printStackTrace();
 			throw new ServletException("Exception in Excel", e);
 		} finally {
+			Utils.writeLog(usermail, "Descarga XML", "Cliente","");
 			if (out != null)
 				out.close();
 		}
@@ -142,6 +139,8 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 		
 		ClienteDao cDao = ClienteDao.getInstance();
 		Cliente c = cDao.getClientebyId(Long.parseLong(str_id));
+		//registramos la operacion
+		Utils.writeLog(usermail, "Elimina", "Cliente", c.getNombre());
 		
 		cDao.deleteCliente(c);
 		
@@ -163,11 +162,13 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 		
 		JSONObject json = new JSONObject();
 		
+		
 		String str_id = req.getParameter("id");
 		
 		ClienteDao cDao = ClienteDao.getInstance();
 		Cliente c = cDao.getClientebyId(Long.parseLong(str_id));
 		
+		Utils.writeLog(usermail, "Modifica", "Cliente", c.getNombre());
 		
 		//recuperamos las pruebas relacionadas conel cliente para cambiar el nombre de cliente de ellas
 		PruebaDao pDao = PruebaDao.getInstance();
@@ -232,12 +233,9 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 		c.setStr_fecha_alta(str_fecha_alta);
 		c.setNombre(nombre);
 		c.setTipo_cliente(tipo_cliente);
-		
-		
 		c.setPremium(premium);
-	
 		
-		
+		Utils.writeLog(usermail, "Crea", "Cliente", c.getNombre());		
 		
 		cDao.createCliente(c,usermail);
 		
