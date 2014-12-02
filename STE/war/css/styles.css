@@ -682,7 +682,8 @@ textarea.readonly {
   margin-top: 0px;
 }
 #div-filtro-pruebas {
-  border: 1px solid;
+  border: 20px solid;
+  border-color: #f1f1f1;
   padding-top: 15px;
   padding-bottom: 5px;
   padding-left: 25px;
@@ -701,11 +702,12 @@ textarea.readonly {
   width: 100%;
 }
 #edit-prueba-form .form-field-divider.down .form-field.detalles {
-  width: 745px !important;
+  width: 782px !important;
   height: 60px;
 }
 #edit-prueba-form .form-field-divider.down .form-field.detalles > .input > textarea {
-  width: 625px !important;
+  width: 644px !important;
+  float: right;
 }
 #edit-prueba-form .form-field-divider > .form-field .lbl {
   width: 99px;

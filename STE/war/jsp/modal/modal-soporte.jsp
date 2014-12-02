@@ -45,7 +45,7 @@
 										<c:otherwise>
 											<option value="default">Seleccionar</option>
 											<c:forEach items="${clientes}" var="t">	
-												<option value="${t.nombre}" data-premium="${t.premium}" data-segmento="${t.tipo_cliente}" ${t.nombre == soporte.cliente_name ? 'selected' : ''}>${t.nombre}</option>
+												<option value="${t.nombre}" data-premium="${t.premium}" data-segmento="${t.tipo_cliente}"  data-clientid="${t.key.id}" ${t.nombre == soporte.cliente_name ? 'selected' : ''}>${t.nombre}</option>
 											</c:forEach>
 										</c:otherwise>
 								</c:choose>
@@ -54,7 +54,7 @@
 					</div>
 
 
-
+					<input type="text" name="client_id" id="input-client-id-modal" value="${soporte.cliente_id}" hidden>
 
 					<div class="form-field">
 						<span class="lbl">Tipo cliente :</span>
@@ -182,8 +182,11 @@ $(document).ready(function(){
 	
 	$('#cliente-soporte-modal').on('change', function() {
 		var option = $(this).find(":selected");
+		var pasfg = option.data('clientid');
+		console.log(option.data('clientid'));
 		$('#input-premium-soporte-modal').val(option.data('premium'));
 		$('#input-segmento-soporte-modal').val(option.data('segmento'));
+		$('#input-client-id-modal').val(option.data('clientid'));
 	})
 	
 	

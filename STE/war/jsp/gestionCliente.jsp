@@ -184,11 +184,11 @@
 						<th style="width: 110px;">&nbsp;</th>
 					</tr>
 					<tr>
-						<th class="search-th"><input class="search col0"></th>
-						<th class="search-th"><input class="search col1"></th>
-						<th class="search-th"><input class="search col2"></th>
-						<th class="search-th"><input class="search col3"></th>
-						<th class="search-th"><input class="search col4"></th>
+						<th class="search-th"><input class="search col0 search_anywhere"></th>
+						<th class="search-th"><input class="search col1 search_anywhere"></th>
+						<th class="search-th"><input class="search col2 search_anywhere"></th>
+						<th class="search-th"><input class="search col3 search_anywhere"></th>
+						<th class="search-th"><input class="search col4 search_anywhere"></th>
 						<th style="width: 110px;">&nbsp;</th>
 					</tr>
 				</thead>

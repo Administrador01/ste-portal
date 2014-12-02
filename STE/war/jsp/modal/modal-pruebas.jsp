@@ -31,7 +31,7 @@
 									<span class="lbl">Cliente<span class="required-asterisk">*</span>:</span>
 									<div class="input">
 									
-										<select class="selectpicker selected" name="cliente" id="cliente-soporte-modal" required data-live-search="true">
+										<select class="selectpicker selected" name="cliente" id="cliente-pruebas-modal" required data-live-search="true">
 										
 											<c:choose>
 													<c:when test="${empty clientes}">
@@ -40,17 +40,19 @@
 													<c:otherwise>
 														<option value="default">Seleccionar</option>
 														<c:forEach items="${clientes}" var="t">	
-															<option value="${t.nombre}" data-premium="${t.premium}" data-segmento="${t.tipo_cliente}" clientid="${t.key.id}" ${t.nombre == prueba.nombre_cliente ? 'selected' : ''}>${t.nombre}</option>
+															<option value="${t.nombre}" data-premium="${t.premium}" data-segmento="${t.tipo_cliente}" data-clientid="${t.key.id}" ${t.nombre == prueba.nombre_cliente ? 'selected' : ''}>${t.nombre}</option>
 														</c:forEach>
 													</c:otherwise>
 											</c:choose>
 										</select>
 									</div>
 								</div>
-			
-			
+								
+								<input type="text" name="client_id_mod" id="input-client-id-modal" value="" hidden>
+								
+								
 								<div class="form-field">
-									<span class="lbl">Tipo cliente :</span>
+									<span class="lbl">Tipo cliente:</span>
 									<input type="text" name="input-premium-soporte" id="input-premium-soporte-modal" value="${prueba.premium}" readonly>
 								</div>
 								
@@ -123,21 +125,23 @@
 								</div>
 								
 							</div>
+							
 							<div class="form-field-divider down">
 								<div class="form-field detalles">
 									<span class="lbl">Descripci&oacuten:</span>
-									<div class="input">
+									<div class="input editDetalles">
 										<textarea name="detalles" maxlength="500" rows="1" cols="1">${prueba.detalles}</textarea>
 									</div>
 								</div>
 								<div class="form-field detalles">
 									<span class="lbl">Soluci&oacuten:</span>
-									<div class="input">
+									<div class="input editDetalles">
 										<textarea name="solucion" maxlength="500" rows="1" cols="1">${prueba.solucion}</textarea>
 									</div>
 								</div>
 										
-							</div>					
+							</div>
+										
 										
 							<div id="message_div_modal" class="message_div">
 								<span id="span_message_modal"></span>
@@ -155,12 +159,12 @@
 $(document).ready(function(){
 
 	
-	$('#cliente-soporte-modal').on('change', function() {
+	$('#cliente-pruebas-modal').on('change', function() {
 		var option = $(this).find(":selected");
+		console.log(option.data('clientid'));
 		$('#input-premium-soporte-modal').val(option.data('premium'));
 		$('#input-segmento-soporte-modal').val(option.data('segmento'));
-
-		$('#client-id-input').val(option.data('clientid'));
+		$('#input-client-id-modal').val(option.data('clientid'));
 	})
 	
 	
