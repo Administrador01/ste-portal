@@ -52,7 +52,7 @@
 										<c:otherwise>
 											<option value="default">Seleccionar</option>
 											<c:forEach items="${clientes}" var="t">							
-												<option value="${t.nombre}" data-premium="${t.premium}" clientid="${t.key.id}" data-segmento="${t.tipo_cliente}">${t.nombre}</option>
+												<option value="${t.nombre}" data-premium="${t.premium}" data-clientid="${t.key.id}" data-segmento="${t.tipo_cliente}">${t.nombre}</option>
 											</c:forEach>
 										</c:otherwise>
 								</c:choose>
@@ -163,7 +163,7 @@
 					</div>	
 					<br />
 					<br />
-					<div class="form-field solucion">
+					<div class="form-field detalles">
 						<span class="lbl">Soluci&oacuten:</span>
 						<div class="input">
 							<textarea name="solucion" maxlength="500" rows="1" cols="1" placeholder="Introduzca texto ..."></textarea>
@@ -249,7 +249,7 @@
 					</div>
 				--%>	
 					<div class="form-field">
-						<span class="lbl">Fecha alta hasta:</span>
+						<span class="lbl">Fecha fin hasta:</span>
 						<div class="input">
 							<input type="text" value="" size="16" class="datepicker" name="fecha-hasta-filtro" id="fecha-hasta-filtro" >
 						</div>
@@ -296,12 +296,12 @@
 					</tr>
 
 					<tr>
-						<th class="search-th"><input class="search col0"></th>
-						<th class="search-th"><input class="search col1"></th>
-						<th class="search-th"><input class="search col2"></th>
-						<th class="search-th"><input class="search col3"></th>
-						<th class="search-th"><input class="search col4"></th>
-						<th class="search-th"><input class="search col5"></th>
+						<th class="search-th"><input class="search col0 search_anywhere"></th>
+						<th class="search-th"><input class="search col1 search_anywhere"></th>
+						<th class="search-th"><input class="search col2 search_anywhere"></th>
+						<th class="search-th"><input class="search col3 search_anywhere"></th>
+						<th class="search-th"><input class="search col4 search_anywhere"></th>
+						<th class="search-th"><input class="search col5 search_anywhere"></th>
 						<th style="width: 110px;">&nbsp;</th>
 					</tr>
 				</thead>
@@ -319,7 +319,7 @@
 								 data-nombrecliente="${s.nombre_cliente}" data-estado="${s.estado}" data-entorno="${s.entorno}"  id="row${s.key.id}">
 									<td><span>${s.str_fecha_estado}</span></td>
 									<td><span>${s.nombre_cliente}</span></td>
-									<td><span>No disponib </span></td>
+									<td><span>${s.tipo_servicio}</span></td>
 									<td><span>${s.estado}</span></td>
 									<td><span>${s.producto}</span></td>
 									<td><span>${s.entorno}</span></td>

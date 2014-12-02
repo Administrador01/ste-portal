@@ -60,13 +60,15 @@
 										<c:otherwise>
 											<option value="default">Seleccionar</option>
 											<c:forEach items="${clientes}" var="t">							
-												<option value="${t.nombre}" data-premium="${t.premium}" data-segmento="${t.tipo_cliente}">${t.nombre}</option>
+												<option value="${t.nombre}" data-premium="${t.premium}" data-segmento="${t.tipo_cliente}" data-clientid="${t.key.id}" >${t.nombre}</option>
 											</c:forEach>
 										</c:otherwise>
 								</c:choose>
 							</select>
 						</div>
 					</div>
+					
+					<input type="text" name="client_id" id="client-id-input" value="" hidden>
 					
 					<div class="form-field">
 						<span class="lbl">Tipo cliente:</span>
@@ -224,13 +226,13 @@
 						<th style="width: 110px;">&nbsp;</th>
 					</tr>
 					<tr>
-						<th class="search-th"><input class="search col0"></th>
-						<th class="search-th"><input class="search col1"></th>
-						<th class="search-th"><input class="search col2"></th>
-						<th class="search-th"><input class="search col3"></th>
-						<th class="search-th"><input class="search col4"></th>
-						<th class="search-th"><input class="search col5"></th>
-						<th class="search-th"><input class="search col6"></th>
+						<th class="search-th"><input class="search col0 search_anywhere"></th>
+						<th class="search-th"><input class="search col1 search_anywhere"></th>
+						<th class="search-th"><input class="search col2 search_anywhere"></th>
+						<th class="search-th"><input class="search col3 search_anywhere"></th>
+						<th class="search-th"><input class="search col4 search_anywhere"></th>
+						<th class="search-th"><input class="search col5 search_anywhere"></th>
+						<th class="search-th"><input class="search col6 search_anywhere"></th>
 						<th style="width: 110px;">&nbsp;</th>
 					</tr>
 				</thead>

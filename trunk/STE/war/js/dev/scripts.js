@@ -930,7 +930,7 @@ $(function(){
 		var option = $(this).find(":selected");
 		//console.log($(option));
 		//console.log(option.data('premium'));
-		//console.log(option.data('segmento'));
+		//console.log(option.data('clientid'));
 		
 		$('#input-premium-soporte').val(option.data('premium'));
 		$('#input-segmento-soporte').val(option.data('segmento'));
@@ -1299,7 +1299,7 @@ $(function(){
 		var option = $(this).find(":selected");
 		//console.log($(option));
 		//console.log(option.data('premium'));
-		//console.log(option.data('segmento'));
+		console.log(option.data('clientid'));
 		
 		$('#input-premium-soporte').val(option.data('premium'));
 		$('#input-segmento-soporte').val(option.data('segmento'));
