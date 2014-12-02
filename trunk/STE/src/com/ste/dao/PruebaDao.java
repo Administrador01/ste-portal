@@ -6,10 +6,22 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import com.google.appengine.api.datastore.Query.Filter;
+import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.ste.beans.Prueba;
 import com.ste.counters.Counter;
 import com.ste.persistence.PMF;
 import com.ste.utils.Utils;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.Query.Filter;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
+import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.datastore.Query.CompositeFilter;
+import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Entity;
+
 
 public class PruebaDao {
 
@@ -89,6 +101,26 @@ public class PruebaDao {
 		q.setOrdering("fecha_estado desc");
 		pruebas = (List<Prueba>) q.execute();
 		
+		
+		pm.close();
+
+		return pruebas;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Prueba> getAllPruebasByClientId(String clientID) {
+
+		List<Prueba> pruebas;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		
+		
+		String query = "select from " + Prueba.class.getName()+" where cliente_id == '"+clientID+"'";
+		
+		Query q = pm.newQuery(query);//.setFilter(propertyFilter);
+
+		pruebas = (List<Prueba>) q.execute();
+
 		
 		pm.close();
 
