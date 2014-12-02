@@ -22,10 +22,21 @@ import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 
 
+
+
+
+
+
+
+
+
+
+
 import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.ste.beans.Soporte;
 import com.ste.dao.SoporteDao;
+import com.ste.utils.Utils;
 
 public class SoporteServlet extends HttpServlet{
 	/**
@@ -42,16 +53,17 @@ public class SoporteServlet extends HttpServlet{
 		 try {
 			 
 			HttpSession sesion = req.getSession();
-			int sesionpermiso = (int) sesion.getAttribute("permiso");			 
+			int sesionpermiso = (int) sesion.getAttribute("permiso");
+			String usermail = (String) sesion.getAttribute("mail");
 			 
 			 if (accion.equals("new")){
-					createSoporte(req,resp);
+					createSoporte(req,resp,usermail);
 				}else if (accion.equals("delete")){
-					deleteSoporte(req,resp);
+					deleteSoporte(req,resp,usermail);
 				}else if (accion.equals("update")){
-					updateSoporte(req,resp);
+					updateSoporte(req,resp,usermail);
 				}else if (accion.equals("xls")){
-					generateXLS(req,resp);
+					generateXLS(req,resp,usermail);
 				}
 			 
 		
@@ -64,7 +76,7 @@ public class SoporteServlet extends HttpServlet{
 		doGet(req,resp);
 	}
 	
-	public void generateXLS(HttpServletRequest req, HttpServletResponse resp)
+	public void generateXLS(HttpServletRequest req, HttpServletResponse resp, String usermail)
 			throws ServletException, IOException {
 		OutputStream out = null;
 		try {
@@ -121,7 +133,7 @@ public class SoporteServlet extends HttpServlet{
 
 			for (Soporte sop : soportes) {
 				
-				s.addCell(new Label(0, aux, sop.getId_prueba()));
+				s.addCell(new Label(0, aux, sop.getId_soporte()));
 				s.addCell(new Label(1, aux, sop.getStr_fecha_inicio()));
 				s.addCell(new Label(2, aux, sop.getCliente_name()));
 				s.addCell(new Label(3, aux, sop.getTipo_cliente()));
@@ -144,6 +156,7 @@ public class SoporteServlet extends HttpServlet{
 			e.printStackTrace();
 			throw new ServletException("Exception in Excel", e);
 		} finally {
+			Utils.writeLog(usermail, "Descarga XML", "Soporte","");
 			if (out != null)
 				out.close();
 		}
@@ -151,13 +164,15 @@ public class SoporteServlet extends HttpServlet{
 	}
 
 	
-	public void deleteSoporte (HttpServletRequest req, HttpServletResponse resp){
+	public void deleteSoporte (HttpServletRequest req, HttpServletResponse resp, String usermail){
 		JSONObject json = new JSONObject();
 		
 		String id = req.getParameter("id");
 		SoporteDao sDao = SoporteDao.getInstance();
 		
 		Soporte s = sDao.getSoportebyId(Long.parseLong(id));
+		
+		Utils.writeLog(usermail, "Elimina", "Soporte", s.getId_soporte()+" "+s.getCliente_name());
 		sDao.deleteSoporte(s);
 		
 		try {
@@ -174,13 +189,15 @@ public class SoporteServlet extends HttpServlet{
 		}
 	}
 	
-	public void updateSoporte(HttpServletRequest req, HttpServletResponse resp){
+	public void updateSoporte(HttpServletRequest req, HttpServletResponse resp, String usermail){
 		
 		JSONObject json = new JSONObject();
 		
 		String id_str = req.getParameter("id");
 		SoporteDao sDao = SoporteDao.getInstance();
 		Soporte s = sDao.getSoportebyId(Long.parseLong(id_str));
+		
+		Utils.writeLog(usermail, "Modifica", "Soporte", s.getId_soporte()+" "+s.getCliente_name());
 		
 		String fecha_inicio = req.getParameter("fecha_inicio");
 		String fecha_fin = req.getParameter("fecha_fin");
@@ -227,7 +244,7 @@ public class SoporteServlet extends HttpServlet{
 	
 	}
 	
-	public void createSoporte(HttpServletRequest req, HttpServletResponse resp){
+	public void createSoporte(HttpServletRequest req, HttpServletResponse resp, String usermail){
 		JSONObject json = new JSONObject();
 		
 		String fecha_inicio = req.getParameter("fecha_inicio");
@@ -259,6 +276,8 @@ public class SoporteServlet extends HttpServlet{
 		s.setCliente_id(clienteID);
 		
 		sDao.createSoporte(s);
+		
+		Utils.writeLog(usermail, "Crea", "Soporte", s.getId_soporte()+" "+s.getCliente_name());
 		
 		
 		try {

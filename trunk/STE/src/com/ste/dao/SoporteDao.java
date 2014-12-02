@@ -59,7 +59,7 @@ public class SoporteDao {
 				
 				String num = String.format("%08d", count.getValue());
 				
-				s.setId_prueba("STE"+num);
+				s.setId_soporte("STE"+num);
 				
 				CounterDao countDao = CounterDao.getInstance();
 				countDao.increaseCounter(count);
