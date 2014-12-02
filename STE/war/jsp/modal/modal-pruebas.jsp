@@ -88,7 +88,7 @@
 									<span class="lbl">Entorno<span class="required-asterisk">*</span>:</span>
 									<div class="input">
 										<select id="estado" class="selectpicker selected" name="entorno" >							
-											<option value="Pre produccion" ${prueba.entorno == 'Pre produccion' ? 'selected' : ''} selected>Pre producci&oacuten</option>									
+											<option value="Preproduccion" ${prueba.entorno == 'Preproduccion' ? 'selected' : ''} selected>Pre producci&oacuten</option>									
 											<option value="Produccion" ${prueba.entorno == 'Produccion' ? 'selected' : ''}>Producci&oacuten</option>	
 										</select>
 									</div>

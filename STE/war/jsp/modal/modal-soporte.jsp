@@ -20,7 +20,7 @@
 								<div class="form-field-divider left">
 					<div class="form-field">
 						<span class="lbl">Identificador:</span>
-						<input class="long readonly" type="text" readonly name="id_prueba" id="id_prueba" value="${soporte.id_prueba}">
+						<input class="long readonly" type="text" readonly name="id_prueba" id="id_prueba" value="${soporte.id_soporte}">
 					</div>
 					
 					<div class="form-field">

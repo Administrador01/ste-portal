@@ -309,6 +309,7 @@ $(function() {
 						$('.form-holder').height($('.form-holder').height()+35);
 					}
 					$form.find('.form-container').find('div:not(#message_div)').hide(0);
+					$('#submit_form_client').hide(0);
 					$form.find('#span_message').html('El cliente ha sido creado de forma correcta.<br/>En breve volvemos a la p&aacute;gina.');
 					$('#message_div').css('display','block').removeClass("error").addClass("success");;
 
@@ -362,6 +363,7 @@ $(function() {
 						$('.form-holder').height($('.form-holder').height()+35);
 					}
 					$form.find('.form-container').find('div:not(#message_div)').hide(0);
+					$('#submit_form_support').hide(0);
 					$form.find('#span_message').html('El soporte ha sido creado de forma correcta.<br/>En breve volvemos a la p&aacute;gina.');
 					$('#message_div').css('display','block').removeClass("error").addClass("success");;
 
@@ -394,6 +396,7 @@ $(function() {
 	//submit method for new test
 	
 	$("#submit_form_test").on('click',function(e) {
+
 		e.preventDefault(); //STOP default action
 		
 		
@@ -416,7 +419,8 @@ $(function() {
 						$('.form-holder').height($('.form-holder').height()+35);
 					}
 					$form.find('.form-container').find('div:not(#message_div)').hide(0);
-					$form.find('#span_message').html('La prueba ha sido creado de forma correcta.<br/>En breve volvemos a la p&aacute;gina.');
+					$('#submit_form_test').hide(0);
+					$form.find('#span_message').html('La prueba ha sido creada de forma correcta.<br/>En breve volvemos a la p&aacute;gina.');
 					$('#message_div').css('display','block').removeClass("error").addClass("success");;
 
 					setTimeout(function() { 

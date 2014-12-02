@@ -126,7 +126,7 @@
 							<select id="entorno" class="selectpicker selected" name="entorno" >
 								
 								<option value="default">Seleccionar</option>	
-								<option value="Pre produccion">Pre producci&oacuten</option>
+								<option value="Preproduccion">Preproducci&oacuten</option>
 								<option value="Produccion">Producci&oacuten</option>
 
 															
@@ -242,14 +242,14 @@
 						<div class="input">
 							<select class="selectpicker selected" name="entorno-filtro" id="entorno-filtro" >
 								<option value="">Filtro vacio</option>	
-								<option value="Pre produccion">Pre producci&oacuten</option>
+								<option value="Preproduccion">Preproducci&oacuten</option>
 								<option value="Produccion">Producci&oacuten</option>
 							</select>
 						</div>
 					</div>
 				--%>	
 					<div class="form-field">
-						<span class="lbl">Fecha fin hasta:</span>
+						<span class="lbl">Fecha alta hasta:</span>
 						<div class="input">
 							<input type="text" value="" size="16" class="datepicker" name="fecha-hasta-filtro" id="fecha-hasta-filtro" >
 						</div>
