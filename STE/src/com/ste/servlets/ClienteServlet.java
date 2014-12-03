@@ -230,6 +230,8 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 		String premium = req.getParameter("premium");
 		String tipo_cliente = req.getParameter("tipo_cliente");
 		
+		if(premium == ""|| premium == null)premium = "Premium";
+		
 		c.setStr_fecha_alta(str_fecha_alta);
 		c.setNombre(nombre);
 		c.setTipo_cliente(tipo_cliente);

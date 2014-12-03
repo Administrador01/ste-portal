@@ -7,6 +7,7 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import com.ste.beans.Cliente;
+import com.ste.beans.Prueba;
 import com.ste.counters.Counter;
 import com.ste.persistence.PMF;
 import com.ste.utils.Utils;
@@ -51,30 +52,42 @@ public class ClienteDao {
 		return clientes;
 	}
 
-	public void createCliente(Cliente c, String usermail) {
+	public synchronized void createCliente(Cliente c, String usermail) {
 		PersistenceManager pm = PMF.get().getPersistenceManager();	
 		CounterDao cDao = CounterDao.getInstance();
 
 		try{
-			c.setFecha_alta(Utils.dateConverter(c.getStr_fecha_alta()));
 			
+			ClienteDao cliDao = ClienteDao.getInstance();	
 
-			
-			if (c.getKey()==null){
-				
-				Counter count = cDao.getCounterByName("cliente");
-				String num = String.format("%04d", count.getValue());
-				
-				c.setId_cliente("IDGLOBAL_"+num);
-				cDao.increaseCounter(count);
-				c.setErased(false);	
+			List<Cliente> client_arr = cliDao.getAllClients();
+			boolean flag = false;
+			for (Cliente clie : client_arr){
+				if(clie.getNombre().equals(c.getNombre())&&
+				   clie.getStr_fecha_alta().equals(c.getStr_fecha_alta())&&
+				   clie.getTipo_cliente().equals(c.getTipo_cliente())){
+						flag = true;
+				}
+
 			}
-			
-			
-			try {
-				pm.makePersistent(c);
-			} finally {}
-			
+			if(!flag){
+				
+				c.setFecha_alta(Utils.dateConverter(c.getStr_fecha_alta()));
+				if (c.getKey()==null){
+					
+					Counter count = cDao.getCounterByName("cliente");
+					String num = String.format("%04d", count.getValue());
+					
+					c.setId_cliente("IDGLOBAL_"+num);
+					cDao.increaseCounter(count);
+					c.setErased(false);	
+				}
+				
+				
+				try {
+					pm.makePersistent(c);
+				} finally {}
+			}
 			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block

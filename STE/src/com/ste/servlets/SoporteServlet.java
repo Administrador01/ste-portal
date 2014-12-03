@@ -262,6 +262,8 @@ public class SoporteServlet extends HttpServlet{
 		Soporte s = new Soporte();
 		SoporteDao sDao = SoporteDao.getInstance();
 		
+		if(tipo == ""||tipo == null)tipo = "Incidencia";
+		
 		s.setStr_fecha_inicio(fecha_inicio);
 		s.setStr_fecha_fin(fecha_fin);
 		s.setTipo_soporte(tipo);
