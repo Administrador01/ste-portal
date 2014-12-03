@@ -8,6 +8,7 @@ import javax.jdo.Query;
 
 
 
+
 import com.ste.beans.Prueba;
 import com.ste.beans.Soporte;
 import com.ste.beans.User;
@@ -41,32 +42,52 @@ public class SoporteDao {
 		
 	}
 
-	public void createSoporte(Soporte s) {
+	public synchronized void createSoporte(Soporte s) {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 
 		try {
 			
-			//Conversi'on de las fechas de string a tipo date
-			s.setFecha_inicio(Utils.dateConverter(s.getStr_fecha_inicio()));
-			if (s.getStr_fecha_fin()!=""){
-				s.setFecha_fin(Utils.dateConverter(s.getStr_fecha_fin()));
+			SoporteDao sopDao = SoporteDao.getInstance();	
+
+			List<Soporte> sopor_arr = sopDao.getAllSoportes();
+			boolean flag = false;
+			for (Soporte sopor : sopor_arr){
+				
+				if(sopor.getDetalles().equals(s.getDetalles())&&
+				   sopor.getProducto_canal().equals(s.getProducto_canal())&&
+				   sopor.getEstado().equals(s.getEstado())&&
+				   sopor.getStr_fecha_inicio().equals(s.getStr_fecha_inicio())&&
+				   sopor.getSolucion().equals(s.getSolucion())&&
+				   sopor.getCliente_id().equals(s.getCliente_id())&&
+				   sopor.getTipo_soporte().equals(s.getTipo_soporte())&&
+				   sopor.getTipo_servicio().equals(s.getTipo_servicio())){
+						flag = true;
+				}
+
 			}
+			if(!flag){
 			
-			if (s.getKey()==null){
-				CounterDao cDao = CounterDao.getInstance();
+				//Conversi'on de las fechas de string a tipo date
+				s.setFecha_inicio(Utils.dateConverter(s.getStr_fecha_inicio()));
+				if (s.getStr_fecha_fin()!=""){
+					s.setFecha_fin(Utils.dateConverter(s.getStr_fecha_fin()));
+				}
 				
-				Counter count = cDao.getCounterByName("soporte");
+				if (s.getKey()==null){
+					CounterDao cDao = CounterDao.getInstance();
+					
+					Counter count = cDao.getCounterByName("soporte");
+					
+					String num = String.format("%08d", count.getValue());
+					
+					s.setId_soporte("STE"+num);
+					
+					CounterDao countDao = CounterDao.getInstance();
+					countDao.increaseCounter(count);
+				}
 				
-				String num = String.format("%08d", count.getValue());
-				
-				s.setId_soporte("STE"+num);
-				
-				CounterDao countDao = CounterDao.getInstance();
-				countDao.increaseCounter(count);
+				pm.makePersistent(s);
 			}
-			
-			pm.makePersistent(s);
-			
 			
 
 		} catch (ParseException e) {
@@ -119,5 +140,21 @@ public class SoporteDao {
 		pm.close();
 
 		return soportes;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public boolean existSoporteByClientId(String clientID) {
+
+		List<Soporte> soportes;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		String query = "select from " + Soporte.class.getName()+" where cliente_id == '"+clientID+"'";
+		Query q = pm.newQuery(query);//.setFilter(propertyFilter);
+		soportes = (List<Soporte>) q.execute();
+		boolean existe = true;
+		if (soportes.isEmpty())existe= false;
+		
+		pm.close();
+
+		return existe;
 	}
 }

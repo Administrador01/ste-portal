@@ -60,8 +60,6 @@ public class PruebaDao {
 			boolean flag = false;
 			for (Prueba prub : prueb_arr){
 				
-				String tipos = s.getTipo_servicio().toString();
-				String tipoprub =prub.getTipo_servicio().toString();
 				if(prub.getDetalles().equals(s.getDetalles())&&
 				   prub.getEntorno().equals(s.getEntorno())&&
 				   prub.getEstado().equals(s.getEstado())&&
@@ -147,5 +145,27 @@ public class PruebaDao {
 		pm.close();
 
 		return pruebas;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public boolean existPruebaByClientId (String clientID) {
+
+		List<Prueba> pruebas;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		
+		
+		String query = "select from " + Prueba.class.getName()+" where cliente_id == '"+clientID+"'";
+		
+		Query q = pm.newQuery(query);//.setFilter(propertyFilter);
+
+		pruebas = (List<Prueba>) q.execute();
+		
+		boolean existe = true;
+		if(pruebas.isEmpty())existe = false;
+		
+		pm.close();
+
+		return existe;
 	}
 }
