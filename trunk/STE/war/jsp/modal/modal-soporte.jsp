@@ -183,7 +183,6 @@ $(document).ready(function(){
 	$('#cliente-soporte-modal').on('change', function() {
 		var option = $(this).find(":selected");
 		var pasfg = option.data('clientid');
-		console.log(option.data('clientid'));
 		$('#input-premium-soporte-modal').val(option.data('premium'));
 		$('#input-segmento-soporte-modal').val(option.data('segmento'));
 		$('#input-client-id-modal').val(option.data('clientid'));

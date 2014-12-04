@@ -42,7 +42,7 @@
       <h2>Documentación</h2>
       <img src="img/icn_t-iconLib_L11-64px_k.png" alt="Imagen destacado"/>
       <p>Acceso a la documentación asociada a las implementaciones, así como procedimientos y normativas. <!-- , catálogos, formatos, estándares, etc. -->	</p>
-      <button onclick="" type="button">Acceder</button> 
+      <button onclick="window.location.href='https://sites.google.com/a/bbva.com/portal-ste/home?previewAsViewer=1'" type="button">Acceder</button> 
     </div>
   </div>
 </div>

@@ -161,7 +161,6 @@ $(document).ready(function(){
 	
 	$('#cliente-pruebas-modal').on('change', function() {
 		var option = $(this).find(":selected");
-		console.log(option.data('clientid'));
 		$('#input-premium-soporte-modal').val(option.data('premium'));
 		$('#input-segmento-soporte-modal').val(option.data('segmento'));
 		$('#input-client-id-modal').val(option.data('clientid'));
