@@ -15,7 +15,7 @@ $(function(){
 		if($('.body-header .main-menu li.search input[type="search"]').val() == ''){
 			$('.body-header .main-menu li.search input[type="search"]').focus();
 		} else {
-			console.log($(this).closest('form').attr('action'));
+			//console.log($(this).closest('form').attr('action'));
 			$(this).closest('form').submit();
 		}
 	});
