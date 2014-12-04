@@ -38,19 +38,18 @@
 		>.clientes_letra{
 			margin-top:20px;
 	
-		> .client_box{
-			display: inline-table; 
+		> a >.client_box{
+			display: block; 
 			height: 60px;
 			width: 148px;
 			margin-right: 10px;
-			text-align:center;
-			vertical-align:bottom;
 			margin-bottom:10px;
+			vertical-align:bottom;
+			padding-top:2.2%;
 			cursor:pointer;
 			line-height:1;
-			padding: 0 5px;
-			background-color: #86c82d;
-		
+			
+			
 			&.crit_h{
 				display:none;
 			}
@@ -79,8 +78,7 @@
 				font-family: "BBVA Web Book", arial, sans-serif;
 				font-weight:300;
 				font-size:15px;
-				
-				display: table-cell; 
+
                 vertical-align: middle; 
                 text-align: center; 
 			}

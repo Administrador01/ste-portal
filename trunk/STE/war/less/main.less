@@ -18,7 +18,6 @@ input:-moz-placeholder {font-style:italic;}
 	display: inline-block;
 	width: 41.66666666666667%;
 }
-.span-9 {
 	display: inline-block;
 	width: 38%;
 }
@@ -90,6 +89,30 @@ html{
 }
 
 
+.form-field-fecha-prueba{
+	display: inline-block;
+    vertical-align: top;
+    width: 30%;
+
+}
+
+#fecha-desde-filtro{
+	width:20%;
+	float:right !important;
+}
+
+#fecha-hasta-filtro{
+	width:20%;
+}
+
+#form-field-fecha-prueba-hasta{
+	display: inline-block;
+    vertical-align: top;
+    width: 35%;
+
+    padding-left:5%;
+}
+
 .form-field{
 	display: inline-block;
 	width: 45%;
@@ -123,6 +146,8 @@ html{
 		left:0;
 	}
 }
+
+
 		
 
 .body-container{	
@@ -618,13 +643,7 @@ input.readonly, textarea.readonly {
 	border: 1px solid;
 }
 
-#fecha-desde-filtro{
-	width:245px;
-}
 
-#fecha-hasta-filtro{
-	width:245px;
-}
 /* Modal errors */
 
 .modal_ajax .form-field label.error{
@@ -653,16 +672,120 @@ input.readonly, textarea.readonly {
 #div-filtro-pruebas{
 	border:20px solid;
 	border-color: #f1f1f1;
-	padding-top:15px;
+	padding-top:10px;
 
-	padding-bottom:5px;
+	padding-bottom:10px;
 	padding-left:25px;
 	margin:10px;
 }
 
-#test_filter_button{
-	float:right;
+
+
+#auditoria{
+	.breadcrumbs{
+		display:block;
+		width:100%;
+		position:relative;
+	}
+	
+	#excel_btn{
+		float:right;
+	}
+	
+	> .historico{	
+		  display: inline-block;
+		    padding-bottom: 10px !important;
+		    position: relative;
+		    width: 100%;
+		  > span{padding-left:0.5%;margin:0px;}
+		  
+		  .bootstrap-select{
+				
+		  }
+		    
+	}
+	th{
+		display:inline-block;
+		background-color:#f6f6f6;
+		width:100%;
+		margin-top:20px;
+	}
+	
+	td{
+		padding-left:30px !important;
+		padding-top:5px !important;
+		padding-bottom:5px !important;
+		.usuario_fecha{
+			width:200px;
+			display:inline-block;
+		}
+		.log_accion{
+			display:inline-block;
+			margin-left:200px;
+			vertical-align:super;
+		}
+		.accion{
+			width:75px;
+			display:inline-block;
+			
+		}
+	}
 }
+
+#vistaCliente{
+	.breadcrumbs{
+		display:block;
+		width:100%;
+		position:relative;
+	}
+	
+	#excel_btn{
+		float:right;
+	}
+	
+	.lbl.b.right{
+		float:right;
+		font-weight: bold;
+		font-size: 13px;
+		font-family: arial;
+	}
+	
+	.vista-cliente{
+		
+		width:37.5%;
+		border: 1px solid #A7CFF7;
+		padding: 0.5%;
+		border-radius: 3px;
+		&.left{
+			float:left;
+			margin-left:7.5%;
+			
+			>div{
+				
+			}
+
+		}
+		&.right{
+			float:right;
+			margin-right:7.5%;
+			
+			>div{
+				
+			}
+		}
+
+		>div{
+			background-color: #f6f6f6;
+			padding:15px;
+			>div{
+			padding:5px;
+			}
+
+		}
+	}
+}
+
+.limpiar{float:none;}
 
 #edit-prueba-form{
 	width: 800px !important;
