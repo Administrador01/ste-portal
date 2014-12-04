@@ -193,7 +193,7 @@
 		<div id="div-filtro-pruebas" class="form-container">
 			<form id="filtro-pruebas" name="filtro-pruebas">
 
-				<div class="form-field-divider right">
+				
 					<%-- 
 					<div class="form-field">
 							<span class="lbl">Cliente:</span>
@@ -216,11 +216,10 @@
 							</div>
 						</div>
 					--%>
-					<div class="form-field">
+					<div class="form-field-fecha-prueba">
 						<span class="lbl">Fecha alta desde:</span>
-						<div class="input">
 							<input type="text" value="" size="16" class="datepicker fromTo" data-target-id='fecha-hasta-filtro' name="fecha-desde-filtro" id="fecha-desde-filtro" >
-						</div>
+						
 					</div>
 					<%-- 
 					<div class="form-field">
@@ -233,9 +232,9 @@
 						</div>
 					</div>
 					--%>
-				</div>
 				
-				<div class="form-field-divider left">
+				
+				
 				<%-- 
 					<div class="form-field">
 						<span class="lbl">Entorno:</span>
@@ -248,11 +247,11 @@
 						</div>
 					</div>
 				--%>	
-					<div class="form-field">
+					<div id="form-field-fecha-prueba-hasta">
 						<span class="lbl">Fecha alta hasta:</span>
-						<div class="input">
+
 							<input type="text" value="" size="16" class="datepicker" name="fecha-hasta-filtro" id="fecha-hasta-filtro" >
-						</div>
+
 					</div>
 					<%-- 
 					<div class="form-field">
@@ -268,10 +267,12 @@
 						</div>
 					</div>
 					--%>
-					<button id="test_filter_button" type="button">Buscar</button>
 					
-				</div>
-
+					
+				
+				
+				<button id="test_filter_button" type="button">Buscar</button>
+			
 			</form>
 
 		</div>

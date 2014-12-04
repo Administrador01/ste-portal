@@ -114,10 +114,11 @@
 					<div class="clientes_letra">
 				</c:when>
 			</c:choose>
-				
-				<div class="client_box ${c.premium == 'Premium' ? 'tipo_premium' : 'tipo_nopremium'}" data-id="${c.key.id}">
-					<p>${c.nombre}</p>
-				</div>
+				<a class="enlaceCliente" href="../vistaCliente.do?id=${c.key.id}">
+					<div class="client_box ${c.premium == 'Premium' ? 'tipo_premium' : 'tipo_nopremium'}" data-id="${c.key.id}">
+						<p>${c.nombre}</p>
+					</div>
+				</a>
 			<c:set var="letra_anterior" value="${letra}" />	
 		</c:forEach>
 		</div>
