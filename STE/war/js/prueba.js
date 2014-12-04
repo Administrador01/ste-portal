@@ -89,7 +89,7 @@ $(function(){
 		
  
 		//console.log(client_form);
-	//	console.log(entorno_form);
+		//console.log(entorno_form);
 		//console.log(estado_form);
 
 		var trs = $('#myTable').find('tr');
