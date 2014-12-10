@@ -7,12 +7,12 @@
 
 
 <h1>Gestión cliente</h1>
-<span class="btn-atras" onclick="window.location.href='../../clientes.do'"></span>
+<span class="btn-atras" onclick="window.location.href='javascript:window.history.go(-1);'"></span>
 
 <hr />
 
 <div class="breadcrumbs">
-		<span onclick="window.location.href='../../' ">Home</span> > <span> Gestión cliente </span>
+		<span onclick="window.location.href='../../' ">Home</span> > <span onclick="window.location.href='../clientes.do' ">Clientes</span> > <span> Gestión cliente </span>
 	</div>
 
 <div class="headButtonsBox">

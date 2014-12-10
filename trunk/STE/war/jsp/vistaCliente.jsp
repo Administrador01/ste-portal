@@ -1,7 +1,7 @@
 
 <div id="vistaCliente">
 	<h1>${cliente.nombre}</h1>
-	<span class="btn-atras" onclick="window.location.href='../clientes.do'"></span>
+	<span class="btn-atras" onclick="window.location.href='javascript:window.history.go(-1);'"></span>
 	<hr/>
 	
 	
