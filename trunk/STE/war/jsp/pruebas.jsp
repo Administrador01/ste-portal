@@ -92,7 +92,7 @@
 				<div class="form-field-divider right">
 				
 					<div class="form-field">
-						<span class="lbl">Fecha estado<span class="required-asterisk">*</span>:</span>
+						<span class="lbl">Fecha alta<span class="required-asterisk">*</span>:</span>
 						<div class="input">
 							<input type="text" readonly="" value="" size="16" class="datepicker" name="fecha_estado" id="fecha_estado" required aria-required="true">
 						</div>
