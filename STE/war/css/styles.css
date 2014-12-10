@@ -135,7 +135,7 @@ input:-moz-placeholder {
   display: inline-block;
   width: 41.66666666666667%;
 }
-.span-9 {
+.span-19 {
   display: inline-block;
   width: 38%;
 }
@@ -196,6 +196,24 @@ html {
   padding: 0px;
   background-color: #F1F1F1;
   text-align: center;
+}
+.form-field-fecha-prueba {
+  display: inline-block;
+  vertical-align: top;
+  width: 30%;
+}
+#fecha-desde-filtro {
+  float: right;
+  width: 50%;
+}
+#fecha-hasta-filtro {
+  width: 50%;
+}
+#form-field-fecha-prueba-hasta {
+  display: inline-block;
+  padding-left: 5%;
+  vertical-align: top;
+  width: 35%;
 }
 .form-field {
   display: inline-block;
@@ -655,12 +673,6 @@ textarea.readonly {
   color: #004b8c;
   border: 1px solid;
 }
-#fecha-desde-filtro {
-  width: 245px;
-}
-#fecha-hasta-filtro {
-  width: 245px;
-}
 /* Modal errors */
 .modal_ajax .form-field label.error {
   display: none !important;
@@ -682,15 +694,104 @@ textarea.readonly {
   margin-top: 0px;
 }
 #div-filtro-pruebas {
-  border: 20px solid;
   border-color: #f1f1f1;
-  padding-top: 15px;
-  padding-bottom: 5px;
-  padding-left: 25px;
+  border-style: solid;
+  border-width: 10px 20px;
   margin: 10px;
+  padding-bottom: 10px;
+  padding-left: 25px;
+  padding-top: 10px;
 }
-#test_filter_button {
+#auditoria .breadcrumbs {
+  display: block;
+  width: 100%;
+  position: relative;
+}
+#auditoria #excel_btn {
   float: right;
+}
+#auditoria > .historico {
+  display: inline-block;
+  padding-bottom: 10px !important;
+  position: relative;
+  width: 100%;
+}
+#auditoria > .historico > span {
+  padding-left: 0.5%;
+  margin: 0px;
+}
+#auditoria th {
+  display: inline-block;
+  background-color: #f6f6f6;
+  width: 100%;
+  margin-top: 20px;
+}
+#auditoria td {
+  padding-left: 30px !important;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+}
+#auditoria td .usuario_fecha {
+  width: 200px;
+  display: inline-block;
+}
+#auditoria td .log_accion {
+  display: inline-block;
+  margin-left: 200px;
+  vertical-align: super;
+}
+#auditoria td .accion {
+  width: 75px;
+  display: inline-block;
+}
+#vistaCliente .breadcrumbs {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+#vistaCliente .lbl.b.right {
+  float: right;
+  font-family: arial;
+  font-size: 13px;
+  font-weight: 700;
+}
+#vistaCliente .right-button {
+  float: right;
+}
+#vistaCliente .right-button.desactivado {
+  background: none repeat scroll 0 0 #f6f6f6;
+  color: #aeaeae;
+}
+#vistaCliente .cuadro-cliente {
+  border: 1px solid #a7cff7;
+  border-radius: 3px;
+  padding: 0.5%;
+  width: 37.5%;
+}
+#vistaCliente .cuadro-cliente.left {
+  float: left;
+  margin-left: 7.5%;
+}
+#vistaCliente .cuadro-cliente.right {
+  float: right;
+  margin-right: 7.5%;
+}
+#vistaCliente .cuadro-cliente > div {
+  background-color: #f6f6f6;
+  padding: 15px;
+}
+#vistaCliente .cuadro-cliente > div .pres-field {
+  padding: 2%;
+}
+#vistaCliente .cuadro-cliente > div .pres-field.boton {
+  padding: 0 0 0 33%;
+}
+#vistaCliente .cuadro-cliente > div .pres-field.big {
+  padding: 5% 0 7.2%;
+}
+.limpiar {
+  clear: both;
+  float: none;
 }
 #edit-prueba-form {
   width: 800px !important;
@@ -1710,40 +1811,37 @@ form textarea.error {
 .clients > .clients_container > .clientes_letra {
   margin-top: 20px;
 }
-.clients > .clients_container > .clientes_letra > .client_box {
+.clients > .clients_container > .clientes_letra > a > .client_box {
   display: inline-table;
   height: 60px;
   width: 148px;
   margin-right: 10px;
-  text-align: center;
-  vertical-align: bottom;
   margin-bottom: 10px;
+  vertical-align: bottom;
+  padding-top: 2.2%;
   cursor: pointer;
   line-height: 1;
-  padding: 0 5px;
-  background-color: #86c82d;
 }
-.clients > .clients_container > .clientes_letra > .client_box.crit_h {
+.clients > .clients_container > .clientes_letra > a > .client_box.crit_h {
   display: none;
 }
-.clients > .clients_container > .clientes_letra > .client_box.tipo_h {
+.clients > .clients_container > .clientes_letra > a > .client_box.tipo_h {
   display: none;
 }
-.clients > .clients_container > .clientes_letra > .client_box.search_h {
+.clients > .clients_container > .clientes_letra > a > .client_box.search_h {
   display: none;
 }
-.clients > .clients_container > .clientes_letra > .client_box.tipo_premium {
+.clients > .clients_container > .clientes_letra > a > .client_box.tipo_premium {
   background-color: #80C3FF;
 }
-.clients > .clients_container > .clientes_letra > .client_box.tipo_nopremium {
+.clients > .clients_container > .clientes_letra > a > .client_box.tipo_nopremium {
   background-color: #6A8DFF;
 }
-.clients > .clients_container > .clientes_letra > .client_box p {
+.clients > .clients_container > .clientes_letra > a > .client_box p {
   color: white;
   font-family: "BBVA Web Book", arial, sans-serif;
   font-weight: 300;
   font-size: 15px;
-  display: table-cell;
   vertical-align: middle;
   text-align: center;
 }
