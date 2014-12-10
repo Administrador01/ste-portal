@@ -56,6 +56,9 @@
 			<forward name="ok" path="/jsp/skeletons/gestion-cliente-skeleton.jsp" />
 		</action>
 		
+		<action path="/vistaCliente" type="com.ste.actions.VistaClienteAction">
+			<forward name="ok" path="/jsp/skeletons/vistaCliente-skeleton.jsp" />
+		</action>
 		
 	</action-mappings>
 	
