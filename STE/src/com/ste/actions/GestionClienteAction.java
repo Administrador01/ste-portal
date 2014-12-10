@@ -1,5 +1,6 @@
 package com.ste.actions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,8 +21,18 @@ public class GestionClienteAction extends Action{
 			HttpServletRequest req, HttpServletResponse resp)
 			throws Exception {
 				
+
 		ClienteDao cDao = ClienteDao.getInstance();
-		List<Cliente> clientes = cDao.getAllClients();
+		
+		List<Cliente> clientes = new ArrayList<Cliente>();;
+		
+		String idCli = req.getParameter("idCli");
+		
+		if(idCli == null || idCli == ""){
+			clientes = cDao.getAllClients();
+		}else{
+			clientes.add(cDao.getClientebyId(Long.valueOf(idCli)));
+		}
 		
 		req.setAttribute("clientes", clientes);
 		

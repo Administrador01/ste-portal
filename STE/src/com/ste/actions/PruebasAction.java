@@ -1,5 +1,6 @@
 package com.ste.actions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,8 +27,17 @@ public class PruebasAction extends Action{
 		List<Cliente> clientes = cDao.getAllClients();
 
 		
+		
 		PruebaDao pDao = PruebaDao.getInstance();
-		List<Prueba> pruebas = pDao.getAllPruebas();
+		List<Prueba> pruebas = new ArrayList <Prueba>();
+		
+		String idCli = req.getParameter("idCli");
+
+		if(idCli == null || idCli == ""){
+			pruebas = pDao.getAllPruebas();
+		}else{
+			pruebas = pDao.getAllPruebasByClientId(idCli);
+		}
 		
 		req.setAttribute("clientes", clientes);	
 		req.setAttribute("pruebas", pruebas);

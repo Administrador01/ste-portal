@@ -1,5 +1,6 @@
 package com.ste.actions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +24,15 @@ public class SoporteAction extends Action{
 			throws Exception {
 		
 		SoporteDao sDao = SoporteDao.getInstance();
-		List<Soporte> soportes = sDao.getAllSoportes();
+		List<Soporte> soportes = new ArrayList <Soporte>();
+		
+		String idCli = req.getParameter("idCli");
+		
+		if(idCli == null || idCli == ""){
+			soportes= sDao.getAllSoportes();
+		}else{
+			soportes = sDao.getAllSoportesByClientId(idCli);
+		}
 		
 		//Mandamos los clientes para generar la lista select desplegable
 		ClienteDao cDao = ClienteDao.getInstance();
