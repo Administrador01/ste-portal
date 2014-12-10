@@ -4,7 +4,7 @@
 
 <div id="auditoria">
 	<h1>Auditor&iacute;a</h1>
-	<span class="btn-atras" onclick="window.location.href='../../'"></span>
+	<span class="btn-atras" onclick="window.location.href='javascript:window.history.go(-1);'"></span>
 	<hr />
 	<div class="breadcrumbs"> <span onclick="window.location.href='../../' ">Home</span> > <span> Auditor&iacute;a </span> </div>
 	

@@ -12,7 +12,7 @@
 
 <div id="pruebas">
 <h1>Pruebas</h1>
-<span class="btn-atras" onclick="window.location.href='../../'"></span>
+<span class="btn-atras" onclick="window.location.href='javascript:window.history.go(-1);'"></span>
 
 <hr />
 
