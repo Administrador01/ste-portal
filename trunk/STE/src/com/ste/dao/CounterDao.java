@@ -5,7 +5,7 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Transaction;
 
-import com.ste.beans.User;
+
 import com.ste.counters.Counter;
 import com.ste.persistence.PMF;
 
