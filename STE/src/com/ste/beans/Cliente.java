@@ -35,7 +35,7 @@ public class Cliente {
 	private String nombre;
 	
 	@Persistent
-	private Boolean erased;
+	private boolean erased;
 
 	public Key getKey() {
 		return key;

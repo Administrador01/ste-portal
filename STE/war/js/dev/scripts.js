@@ -205,7 +205,16 @@ var getIsoDate = function(dateString) {
 	var isoDate = year + '/' + month + '/' + day;
 
 	return isoDate;
-};var userBoxSize;
+};$(function(){
+	$('.go_pag2').click(function(e){
+		$('#page1_imp').addClass('hidden');
+		$('#page2_imp').removeClass('hidden');
+	})
+	$('.go_pag1').click(function(e){
+		$('#page2_imp').addClass('hidden');
+		$('#page1_imp').removeClass('hidden');
+	})
+});;var userBoxSize;
 var id;
 
 function  changeActionsButtonColor(){
@@ -952,7 +961,7 @@ $(function(){
 		
  
 		//console.log(client_form);
-	//	console.log(entorno_form);
+		//console.log(entorno_form);
 		//console.log(estado_form);
 
 		var trs = $('#myTable').find('tr');
@@ -1159,7 +1168,7 @@ $(function() {
 		if($('.body-header .main-menu li.search input[type="search"]').val() == ''){
 			$('.body-header .main-menu li.search input[type="search"]').focus();
 		} else {
-			console.log($(this).closest('form').attr('action'));
+			//console.log($(this).closest('form').attr('action'));
 			$(this).closest('form').submit();
 		}
 	});
@@ -1304,7 +1313,7 @@ $(function(){
 		var option = $(this).find(":selected");
 		//console.log($(option));
 		//console.log(option.data('premium'));
-		console.log(option.data('clientid'));
+		//console.log(option.data('clientid'));
 		
 		$('#input-premium-soporte').val(option.data('premium'));
 		$('#input-segmento-soporte').val(option.data('segmento'));

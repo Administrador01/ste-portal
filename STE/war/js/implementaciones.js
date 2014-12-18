@@ -1,0 +1,10 @@
+$(function(){
+	$('.go_pag2').click(function(e){
+		$('#page1_imp').addClass('hidden');
+		$('#page2_imp').removeClass('hidden');
+	})
+	$('.go_pag1').click(function(e){
+		$('#page2_imp').addClass('hidden');
+		$('#page1_imp').removeClass('hidden');
+	})
+});
