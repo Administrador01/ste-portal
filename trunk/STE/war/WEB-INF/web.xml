@@ -67,6 +67,26 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	  </servlet-mapping>
 	  
 	  <servlet>
+	    <servlet-name>ImplementacionServlet</servlet-name>
+	    <servlet-class>com.ste.servlets.ImplementacionServlet</servlet-class>
+	  </servlet>
+	
+	  <servlet-mapping>
+	    <servlet-name>ImplementacionServlet</servlet-name>
+	    <url-pattern>/implementacionServlet</url-pattern>
+	  </servlet-mapping>
+	  
+	  <servlet>
+	    <servlet-name>ServicioServlet</servlet-name>
+	    <servlet-class>com.ste.servlets.ServicioServlet</servlet-class>
+	  </servlet>
+	
+	  <servlet-mapping>
+	    <servlet-name>ServicioServlet</servlet-name>
+	    <url-pattern>/servicioServlet</url-pattern>
+	  </servlet-mapping>
+	  
+	  <servlet>
 	    <servlet-name>LogsServlet</servlet-name>
 	    <servlet-class>com.ste.servlets.LogsServlet</servlet-class>
 	  </servlet>

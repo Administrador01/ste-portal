@@ -60,6 +60,10 @@
 			<forward name="ok" path="/jsp/skeletons/vistaCliente-skeleton.jsp" />
 		</action>
 		
+		<action path="/implementacion" type="com.ste.actions.ImplementacionAction">
+			<forward name="ok" path="/jsp/skeletons/implementacion-skeleton.jsp" />
+		</action>
+		
 	</action-mappings>
 	
 	

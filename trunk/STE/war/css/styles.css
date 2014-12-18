@@ -819,6 +819,52 @@ textarea.readonly {
   width: 245px !important;
   margin-right: 0px;
 }
+#implementacion .form-holder {
+  height: auto;
+  padding: 2%;
+}
+#implementacion .form-container {
+  height: auto;
+  margin: 0px;
+}
+#implementacion > form {
+  height: auto;
+}
+#implementacion .form-field {
+  display: block;
+}
+#implementacion .form-field .lbl {
+  margin: 0px;
+}
+#implementacion .form-field .btn {
+  margin: 0px;
+}
+#implementacion .form-field input,
+#implementacion .form-field textarea {
+  width: 245px !important;
+  margin-right: 0px;
+}
+#implementacion .entor_integrad {
+  display: inline-block;
+  float: left;
+  margin-top: 2%;
+  margin-left: 5%;
+  background-color: #E4EAFE;
+  border: 3px solid #D1DCFF;
+  padding: 1%;
+}
+#implementacion .entor_integrad > h4 {
+  text-align: left;
+  color: #8DA8FF;
+}
+#implementacion .go_pag1,
+#implementacion .go_pag2 {
+  float: right;
+  margin: 0px;
+  border-radius: 10px;
+  border-bottom-right-radius: 1px;
+  border-bottom-left-radius: 1px;
+}
 body .modal-dialog {
   width: 850px;
 }
