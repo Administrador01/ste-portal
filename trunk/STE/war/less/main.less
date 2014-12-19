@@ -822,6 +822,7 @@ input.readonly, textarea.readonly {
 
 
 #implementacion{
+
 			.form-holder{
 				height:auto;
 				padding:2%;
@@ -836,23 +837,39 @@ input.readonly, textarea.readonly {
 			.form-field{
 
 				display:block;
-				.lbl{
-					margin:0px;
-				}
-				
+				.grey{
+					color:#;
+					}
+			
 				.btn{
 					margin:0px;
 				}
 		
 				input, textarea,{
-					width: 245px !important;
 					margin-right: 0px;
 				}
+				.autorrellenable{
+					
+					background-color: #f3f3f3;
+				}
+				.etiqueta{
+    				float: left;
+   					 margin-left: 6%;
+				}
+				.radio{
+					margin-right:10%;
+				}
+
+			}
+			.falta{
+				background-color: #ff8888;
 			}
 			.entor_integrad{
 				display:inline-block;
 				float:left;
+				margin:3%;
 				margin-top:2%;
+				
 				margin-left:5%;
 				background-color:#E4EAFE;
 				border: 3px solid #D1DCFF;
@@ -863,16 +880,36 @@ input.readonly, textarea.readonly {
 				}
 
 			}			
+			.entor_integrad2{
+				text-align:left;
+				margin:2%;
+				background-color:#E4EAFE;
+				border: 3px solid #D1DCFF;
+				padding:1%;
+				width:49%;
+				>h4{
+					text-align: left;
+					color:#8DA8FF;
+				}
+				.form-field{
+					width:100%;
+				}
+
+			}	
 			.go_pag1, .go_pag2{
-				float:right;
 				margin:0px;
 				border-radius: 10px;
 				border-bottom-right-radius: 1px;
 				border-bottom-left-radius: 1px;
-				
+			}
+			#siguiente{
+				border-radius: 10px;
+
 			}
 }
 
 body .modal-dialog{
 	width:850px;
 }
+
+#input-premium-soporte{background-color:#f3f3f3;}

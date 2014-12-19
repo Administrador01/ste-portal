@@ -25,8 +25,9 @@
 	<div class="form-holder">
 		<form id="new-user-form" name="new-user-form" action="/implementacionServlet"
 			method="POST" novalidate="novalidate">
-							<button type="button" class="go_pag2">P&aacutegina 2</button>
+				
 				<button type="button" class="go_pag1">P&aacutegina 1</button>
+				<button type="button" class="go_pag2">P&aacutegina 2</button>
 			<!--botones -->
 			<div class="form-container">
 			
@@ -34,7 +35,7 @@
 				
 				
 
-					<div class="form-field">
+					<div class="form-field" id="div_cliente_imp">
 						<span class="lbl">Cliente<span class="required-asterisk">*</span>:</span>
 						<select class="selectpicker" name="cliente" id="cliente_imp" data-live-search="true">
 							<c:choose>
@@ -44,7 +45,7 @@
 							<c:otherwise>
 								<option value="default">Seleccionar</option>
 								<c:forEach items="${clientes}" var="t">							
-									<option value="${t.key.id}" data-producto="${t.premium}" data-segmento="${t.tipo_cliente}" data-clientid="${t.key.id}" >${t.nombre}</option>
+									<option value="${t.key.id}" data-segmento="${t.tipo_cliente}" data-clientid="${t.key.id}" >${t.nombre}</option>
 								</c:forEach>
 							</c:otherwise>
 							</c:choose>
@@ -52,7 +53,8 @@
 						<input type="text" name="client_id" id="client-id-input" value="" hidden>
 					</div>
 					
-					<div class="form-field">
+					<h3 style="color:#FF8888;float:right;" class="error hidden">Faltan por introducir campos</h3>
+					<div class="form-field" id="div_producto_imp">
 							<span class="lbl">Producto/canal<span class="required-asterisk">*</span>:</span>
 								<select id="producto_imp" class="selectpicker selected" name="producto_imp" >
 									<option value="default">Seleccionar</option>	
@@ -70,9 +72,9 @@
 								</select>
 					</div>
 					
-					<div class="form-field">
+					<div class="form-field" id="div_servicio_imp">
 						<span class="lbl">Servicio<span class="required-asterisk">*</span>:</span>
-						<select class="selectpicker" name="cliente" id="cliente_imp" data-live-search="true">
+						<select class="selectpicker" name="servicio" id="servicio_imp" data-live-search="true">
 							<c:choose>
 								<c:when test="${empty servicios}">
 									<option value="default">No hay servicios</option>
@@ -88,16 +90,15 @@
 						<input type="text" name="servicio_id" id="servicio-id-input" value="" hidden>
 					</div>
 					
-					<div class="form-field">
+					<div class="form-field" >
 					<span class="lbl">Segmento:</span>
-					<input type="text" name="input-segmento-implementacion" id="input-segmento-implementacion" value="" readonly>
+					<input type="text" class="autorrellenable" name="segmento" id="input-segmento-implementacion" value="" readonly>
 					</div>
 					
 					<div class="form-field">
 						<span class="lbl">Estado<span class="required-asterisk">*</span>:</span>
-							<select id="producto_imp" class="selectpicker selected" name="producto_imp" >
-									<option value="default">Seleccionar</option>	
-									<option value="Pendiente">Pendiente</option>
+							<select id="estado_imp" class="selectpicker selected" name="producto_imp" >	
+									<option value="Pendiente" selected>Pendiente</option>
 									<option value="Analisis">An&aacutelisis</option>
 									<option value="Pruebas">Pruebas</option>	
 									<option value="Penny test">Pesnny test</option>
@@ -107,19 +108,25 @@
 							</select>
 					</div>
 					
-					<div class="form-field">
+					<div class="form-field" id="div_fecha_alta_imp">
 					<span class="lbl">Fecha alta<span class="required-asterisk">*</span>:</span>
-					<input type="text" value="" size="16" class="datepicker" name="fecha_alta" id="fecha_alta_imp" required>
+					<input type="text" size="16" class="datepicker" name="fecha_alta" id="fecha_alta_imp" required readonly>
+					</div>
+					
+					<div class="form-field" id="div_pais_imp">
+					<span class="lbl">Pais<span class="required-asterisk">*</span>:</span>
+					<input type="text" name="pais" id="pais_imp" required aria-required="true">
 					</div>
 					
 					<div class="form-field">
-					<span class="lbl">Segmento:</span>
-					<input type="text" name="pais" id="input-pais-implementacion">
-					</div>
-					
-					<div class="form-field">
-					<span class="lbl">Normalizador:</span>
-					<input type="text" name="pais" id="input-pais-implementacion">
+					<span class="lbl etiqueta">Normalizador<span class="required-asterisk">*</span>:</span>
+							<label class="lbl radio ui-marmots-label-radio ">
+								<input name="premium" id="radio_Si" type="radio" value="Si"/>Si
+							</label>
+
+							<label class="lbl ui-marmots-label-radio marmots-label-left on">
+								<input name="premium" id="radio_No"  type="radio" value="No" checked/>No
+							</label>
 					</div>
 					<div class="form-field">
 					<span class="lbl">Referencia global:</span>
@@ -130,26 +137,36 @@
 					<input type="text" name="ref_loc" maxlength="18">
 					</div>
 					<div class="form-field">
-					<span class="lbl">Firma contrato:</span>
-					<input type="text" name="pais" id="input-pais-implementacion">
+					<span class="lbl etiqueta">Firma contrato<span class="required-asterisk">*</span>:</span>
+							<label class="lbl radio ui-marmots-label-radio ">
+								<input name="premium" id="radio_Si" type="radio" value="Si"/>Si
+							</label>
+
+							<label class="lbl ui-marmots-label-radio marmots-label-left on">
+								<input name="premium" id="radio_No"  type="radio" value="No" checked/>No
+							</label>
 					</div>
+					
 					<div class="form-field">
 					<span class="lbl">Gestor GCS:</span>
 					<input type="text" name="gestor_gcs" maxlength="25">
 					</div>
+					
 					<div class="form-field">
 					<span class="lbl">Gestor promocion:</span>
 					<input type="text" name="gestor_relacion" maxlength="25">
 					</div>
+					
 					<div class="form-field">
 					<span class="lbl">Gestor relaci&oacuten:</span>
 					<input type="text" name="gestor_relacion" maxlength="25">
 					</div>
+					
 					<div class="form-field">
 					<span class="lbl">Detalle:</span>
 					<input type="text" name="detalle" maxlength="500">
 					</div>
-			<button type="button" class="go_pag2">Siguiente </button>	
+						
 			
 					<div class="entor_integrad">
 					<h4>Entorno Integrado</h4>
@@ -157,15 +174,64 @@
 					<input type="text" name="ref_ext" id="ref_ext" maxlength="18">
 					</div>
 					
-				
-			
+					<div class="form-field">
+					<button type="button" id="siguiente" class="go_pag2">Siguiente </button>
+					</div>
+					
+					<h3 style="color:#FF8888" class="error hidden">Faltan por introducir campos</h3>
+
+					
 				</div>
 				<div class="page2_imp hidden" id='page2_imp'>
 
 					
 					<div class="form-field">
-						<span class="lbl">Segmento:</span>
-						<input type="text" name="input-segmento-implementacion" id="input-segmento-implementacion" value="" readonly>
+						<span class="lbl">Servicio:</span>
+						<input type="text"class="autorrellenable" id="input-servicio-name-implementacion" value="" readonly>
+					</div>
+					
+					<div class="form-field">
+						<span class="lbl">Tipo servicio:</span>
+						<input type="text" class="autorrellenable" id="input-servicio-tipo-implementacion" value="" readonly>
+					</div>
+					
+					<div class="entor_integrad2">
+					<h4>Entorno Integrado</h4>
+						<div class="form-field">
+						<span class="lbl">Referencia externa:</span>
+						<input type="text" class="autorrellenable" id="input-servicio-referencia" value="" readonly>
+						</div>
+						<div class="form-field">
+						<span class="lbl">Asunto:</span>
+						<input type="text" maxlength="30">
+						</div>
+						<span class="lbl">SDD:</span>
+						<hr />
+						<div class="form-field">
+						<span class="lbl grey">Contrato Adeudos:</span>
+						<input type="text" maxlength="21">
+						</div>
+						<div class="form-field">
+						<span class="lbl grey">ID Acreedor</span>
+						<input type="text" maxlength="16">
+						</div>
+						<div class="form-field">
+						<span class="lbl grey">Cuenta de abono:</span>
+						<input type="text" maxlength="16">
+						</div>
+						
+					</div>
+					
+					<div class="form-field">
+					<span class="lbl">Fecha alta:</span>
+					<input type="text" size="16" class="datepicker" name="fecha_contrat"readonly>
+					</div>
+					<div class="form-field">
+					<span class="lbl">Fecha alta:</span>
+					<input type="text" size="16" class="datepicker" name="fecha_subid" readonly>
+					</div>
+					<div class="form-field">
+					<button type="submit"> Aceptar </button>
 					</div>
 				</div>
 			<div id="message_div" class="message_div">
