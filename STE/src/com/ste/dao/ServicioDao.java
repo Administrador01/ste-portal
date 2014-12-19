@@ -35,11 +35,10 @@ public class ServicioDao {
 	
 	public synchronized void createServicio(Servicio imp, String usermail) {
 		PersistenceManager pm = PMF.get().getPersistenceManager();	
-		CounterDao cDao = CounterDao.getInstance();
 
 		try{
 			
-			ServicioDao impDao = ServicioDao.getInstance();
+			//ServicioDao impDao = ServicioDao.getInstance();
 		
 			try {
 				pm.makePersistent(imp);
@@ -50,5 +49,15 @@ public class ServicioDao {
 			pm.close();
 			
 		}
+	}
+	public void deleteAll(){
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		ServicioDao sDao = ServicioDao.getInstance();
+		List<Servicio> servicios =sDao.getAllServicios();
+		for (Servicio s :servicios){
+			pm.deletePersistent(pm.getObjectById(s.getClass(),s.getKey().getId()));
+		}
+
+
 	}
 }
