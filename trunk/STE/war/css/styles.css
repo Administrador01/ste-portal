@@ -819,13 +819,10 @@ textarea.readonly {
   width: 245px !important;
   margin-right: 0px;
 }
-#implementacion .form-holder {
-  height: auto;
-  padding: 2%;
-}
 #implementacion .form-container {
-  height: auto;
   margin: 0px;
+  margin-right: 2%;
+  margin-bottom: 0px;
 }
 #implementacion > form {
   height: auto;
@@ -888,12 +885,16 @@ textarea.readonly {
 #implementacion .go_pag1,
 #implementacion .go_pag2 {
   margin: 0px;
+  margin-top: 2%;
   border-radius: 10px;
   border-bottom-right-radius: 1px;
   border-bottom-left-radius: 1px;
 }
 #implementacion #siguiente {
   border-radius: 10px;
+}
+#implementacion .go_pag2 {
+  margin-right: 2%;
 }
 body .modal-dialog {
   width: 850px;

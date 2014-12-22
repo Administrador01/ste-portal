@@ -13,9 +13,11 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.ste.beans.Cliente;
+import com.ste.beans.Implementacion;
 import com.ste.beans.Log;
 import com.ste.beans.Servicio;
 import com.ste.dao.ClienteDao;
+import com.ste.dao.ImplementacionDao;
 import com.ste.dao.LogsDao;
 import com.ste.dao.ServicioDao;
 import com.ste.utils.Utils;
@@ -35,6 +37,11 @@ public class ImplementacionAction extends Action{
 		List<Servicio> servicios = sDao.getAllServicios();
 
 		req.setAttribute("servicios", servicios);
+		
+		ImplementacionDao impDao = ImplementacionDao.getInstance();
+		List<Implementacion> implementaciones = impDao.getAllImplementaciones();
+		
+		req.setAttribute("implementaciones",implementaciones);
 
 
 		return  mapping.findForward("ok");

@@ -31,6 +31,7 @@
 			<!--botones -->
 			<div class="form-container">
 			
+
 				<div class="page1_imp" id='page1_imp'>
 				
 				
@@ -97,7 +98,7 @@
 					
 					<div class="form-field">
 						<span class="lbl">Estado<span class="required-asterisk">*</span>:</span>
-							<select id="estado_imp" class="selectpicker selected" name="producto_imp" >	
+							<select id="estado_imp" class="selectpicker selected" name="estado_imp" >	
 									<option value="Pendiente" selected>Pendiente</option>
 									<option value="Analisis">An&aacutelisis</option>
 									<option value="Pruebas">Pruebas</option>	
@@ -115,17 +116,25 @@
 					
 					<div class="form-field" id="div_pais_imp">
 					<span class="lbl">Pais<span class="required-asterisk">*</span>:</span>
-					<input type="text" name="pais" id="pais_imp" required aria-required="true">
+								<select id="pais_imp" class="selectpicker selected" name="pais" required aria-required="true">
+									<option value="default">Seleccionar</option>	
+									<option value="Francia">Francia</option>
+									<option value="Belgica">Belgica</option>
+									<option value="Italia">Italia</option>	
+									<option value="Portugal">Portugal</option>
+									<option value="Espa&ntildea">Espa&ntildea</option>	
+									<option value="Reino Unido">Reino Unido</option>
+							</select>
 					</div>
 					
 					<div class="form-field">
 					<span class="lbl etiqueta">Normalizador<span class="required-asterisk">*</span>:</span>
-							<label class="lbl radio ui-marmots-label-radio ">
-								<input name="premium" id="radio_Si" type="radio" value="Si"/>Si
+							<label class="lbl radio ui-marmots-label-radio marmots-label-left" for="radio_Si">
+								<input name="normalizador" id="radio_Si" type="radio" value="Si"/>Si
 							</label>
 
-							<label class="lbl ui-marmots-label-radio marmots-label-left on">
-								<input name="premium" id="radio_No"  type="radio" value="No" checked/>No
+							<label class="lbl radio ui-marmots-label-radio marmots-label-left on" for="radio_No">
+								<input name="normalizador" id="radio_No" type="radio" value="No" checked/>No
 							</label>
 					</div>
 					<div class="form-field">
@@ -136,17 +145,24 @@
 					<span class="lbl">Referencia local:</span>
 					<input type="text" name="ref_loc" maxlength="18">
 					</div>
+					
+					
 					<div class="form-field">
 					<span class="lbl etiqueta">Firma contrato<span class="required-asterisk">*</span>:</span>
-							<label class="lbl radio ui-marmots-label-radio ">
-								<input name="premium" id="radio_Si" type="radio" value="Si"/>Si
+							<label class="lbl radio ui-marmots-label-radio marmots-label-left" for="crack_Si">
+								<input name="firma" id="crack_Si" type="radio" value="Si"/>Si
 							</label>
 
-							<label class="lbl ui-marmots-label-radio marmots-label-left on">
-								<input name="premium" id="radio_No"  type="radio" value="No" checked/>No
+							<label class="lbl radio ui-marmots-label-radio marmots-label-left on" for="crack_No">
+								<input name="firma" id="crack_No"  type="radio" value="No" checked />No
 							</label>
 					</div>
 					
+					
+					
+						
+						
+						
 					<div class="form-field">
 					<span class="lbl">Gestor GCS:</span>
 					<input type="text" name="gestor_gcs" maxlength="25">
@@ -154,7 +170,7 @@
 					
 					<div class="form-field">
 					<span class="lbl">Gestor promocion:</span>
-					<input type="text" name="gestor_relacion" maxlength="25">
+					<input type="text" name="gestor_prom" maxlength="25">
 					</div>
 					
 					<div class="form-field">
@@ -174,9 +190,9 @@
 					<input type="text" name="ref_ext" id="ref_ext" maxlength="18">
 					</div>
 					
-					<div class="form-field">
+
 					<button type="button" id="siguiente" class="go_pag2">Siguiente </button>
-					</div>
+
 					
 					<h3 style="color:#FF8888" class="error hidden">Faltan por introducir campos</h3>
 
@@ -203,35 +219,35 @@
 						</div>
 						<div class="form-field">
 						<span class="lbl">Asunto:</span>
-						<input type="text" maxlength="30">
+						<input type="text" name="asunto" maxlength="30">
 						</div>
 						<span class="lbl">SDD:</span>
 						<hr />
 						<div class="form-field">
 						<span class="lbl grey">Contrato Adeudos:</span>
-						<input type="text" maxlength="21">
+						<input type="text" name="contrat_adeud" maxlength="21">
 						</div>
 						<div class="form-field">
 						<span class="lbl grey">ID Acreedor</span>
-						<input type="text" maxlength="16">
+						<input type="text" name="id_acred" maxlength="16">
 						</div>
 						<div class="form-field">
 						<span class="lbl grey">Cuenta de abono:</span>
-						<input type="text" maxlength="16">
+						<input type="text" name="cuent_abon" maxlength="16">
 						</div>
 						
 					</div>
 					
 					<div class="form-field">
-					<span class="lbl">Fecha alta:</span>
+					<span class="lbl">Fecha contrataci&oacuten:</span>
 					<input type="text" size="16" class="datepicker" name="fecha_contrat"readonly>
 					</div>
 					<div class="form-field">
-					<span class="lbl">Fecha alta:</span>
+					<span class="lbl">Fecha subida:</span>
 					<input type="text" size="16" class="datepicker" name="fecha_subid" readonly>
 					</div>
 					<div class="form-field">
-					<button type="submit"> Aceptar </button>
+					<button type="submit" id="submit_form_implementacion"> Aceptar </button>
 					</div>
 				</div>
 			<div id="message_div" class="message_div">
@@ -239,6 +255,108 @@
 			</div>
 			</div>
 		</form>
+	</div>
+</div>	
+		<div class="main-table usersTable">
+			<table class="table">
+				<thead>
+					<tr>
+						<th><span class="table-title">Cliente</span></th>
+						<th><span class="table-title">Producto</span></th>
+						<th><span class="table-title">Servicio</span></th>
+						<th><span class="table-title">Estado</span></th>
+						<th><span class="table-title">Pais</span></th>
+						<th><span class="table-title">Gestor GCS</span></th>
+						<th style="width: 110px;">&nbsp;</th>
+					</tr>
+
+					<tr>
+						<th class="search-th"><input class="search col0 search_anywhere"></th>
+						<th class="search-th"><input class="search col1 search_anywhere"></th>
+						<th class="search-th"><input class="search col2 search_anywhere"></th>
+						<th class="search-th"><input class="search col3 search_anywhere"></th>
+						<th class="search-th"><input class="search col4 search_anywhere"></th>
+						<th class="search-th"><input class="search col5 search_anywhere"></th>
+						<th style="width: 110px;">&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody id="myTable" cellspacing="0">
+					<c:choose>
+						<c:when test="${empty implementaciones}">
+							<tr>
+								<td><span>No existen datos.</span></td>
+							</tr>
+						</c:when>
+
+						<c:otherwise>
+							<c:forEach items="${implementaciones}" var="s">
+								<tr class="valid-result" id="row${s.key.id}">
+	
+									<td><span>
+										<c:forEach items="${clientes}" var="t">
+										<c:choose>
+											<c:when test="${t.key.id==s.cliente_id}">
+												${t.nombre}
+											</c:when>
+										</c:choose>	
+										</c:forEach>
+									</span></td>
+									<td><span>${s.producto}</span></td>
+									<td><span>
+										<c:forEach items="${servicios}" var="t">
+											<c:choose>
+												<c:when test="${t.key.id==s.servicio_id}">
+													${t.name}
+												</c:when>
+											</c:choose>	
+										</c:forEach>
+									</span></td>
+									<td><span>${s.estado}</span></td>
+									<td><span>${s.pais}</span></td>
+									<td><span>${s.gestor_gcs}</span></td>
+									<td><img class="vs" src="../img/vs.png"><a class="lapiz" name="${s.key.id}" href="../implementacionModal.do?id=${s.key.id}"	id="lapiz${s.key.id}" data-toggle="modal" data-target="#edit-soporte"></a></td>
+								</tr>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-12 text-center">
+			<ul class="pagination" id="myPager"></ul>
+			<span class="pagesummary"></span>
+		</div>
+	</div>
+</div>
+
+
+	<div class="modal fade" id="edit-soporte" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="">
+					<h2>Eliminar prueba</h2>
+					<hr />
+				</div>
+				<div class="">
+					<p>&iquest;Est&aacute; seguro que desea eliminar la prueba?
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="pink-btn" id="deletePrueba">Eliminar</button>
+					<button type="button" class="" data-dismiss="modal">Cancelar</button>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 
