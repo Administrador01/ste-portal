@@ -44,7 +44,7 @@
 				  </button>
 				  <ul class="dropdown-menu">
   				    	<li><a href="./gestionCliente.do"><span class="demanda_span blue"></span>Gestión Cliente</a></li>				  
-  				    	<li><a href="#"><span class="demanda_span blue"></span>Gestión Implementaciones</a></li>				  
+  				    	<li><a href="./implementacion.do"><span class="demanda_span blue"></span>Gestión Implementaciones</a></li>				  
 				    	
 				    	
 				  </ul>

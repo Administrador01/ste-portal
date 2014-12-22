@@ -119,7 +119,7 @@
 											<option value="Normalizador" ${prueba.producto == 'Normalizador' ? 'selected' : ''}>Normalizador</option>
 											<option value="Cashpool domestico" ${prueba.producto == 'Cashpool domestico' ? 'selected' : ''}>Cashpool dom&eacutestico</option>
 											<option value="Cashpool internacional" ${prueba.producto == 'Cashpool internacional' ? 'selected' : ''}>Cashpool internacional</option>
-											<option value="factura integral" ${prueba.producto == 'Factura integral' ? 'selected' : ''}>Factura integral</option>
+											<option value="Factura integral" ${prueba.producto == 'Factura integral' ? 'selected' : ''}>Factura integral</option>
 										</select>
 									</div>
 								</div>

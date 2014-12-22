@@ -11,6 +11,7 @@ import com.google.appengine.api.datastore.Key;
 
 @PersistenceCapable
 public class Implementacion {
+	
 	@PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
     private Key key;
@@ -23,6 +24,7 @@ public class Implementacion {
 	
 	@Persistent
 	private long cliente_id;
+	
 	@Persistent
 	private long servicio_id;
 	
@@ -40,6 +42,9 @@ public class Implementacion {
 	
 	@Persistent
 	private boolean firma_contrato;
+	
+	@Persistent
+	private boolean normalizador;
 
 	@Persistent
 	private String gestor_gcs;
@@ -66,6 +71,9 @@ public class Implementacion {
 	private String cuenta_ref_ext;
 	
 	@Persistent
+	private String acreedor_ref_ext;
+	
+	@Persistent
 	private String str_fech_contratacion;
 	
 	@Persistent
@@ -73,6 +81,9 @@ public class Implementacion {
 	
 	@Persistent
 	private String str_fech_subida;
+	
+	@Persistent
+	private String producto;
 	
 	@Persistent
 	private Date fech_subida;
@@ -86,19 +97,19 @@ public class Implementacion {
 		this.key = key;
 	}
 	
-	public long getClienteId() {
+	public long getCliente_id() {
 		return cliente_id;
 	}
 
-	public void setClienteId(long id) {
+	public void setCliente_id(long id) {
 		this.cliente_id = id;
 	}
 	
-	public long getServicioId() {
+	public long getServicio_id() {
 		return servicio_id;
 	}
 
-	public void setServicioId(long id) {
+	public void setServicio_id(long id) {
 		this.servicio_id = id;
 	}
 	
@@ -118,59 +129,81 @@ public class Implementacion {
 		this.pais = pais;
 	}
 	
-	public String getStrFechAlta() {
+	public boolean getFirma_contrato(){
+		return firma_contrato;
+	}
+	
+	public void setFirma_contrato(boolean firma){
+		this.firma_contrato=firma;
+	}
+	
+	public boolean getNormalizador (){
+		return normalizador;
+	}
+	
+	public void setNormalizador(boolean normalizador){
+		this.normalizador=normalizador;
+	}
+	
+	public String getStr_fecha_alta() {
 		return str_fecha_alta;
 	}
 
-	public void setStrFechAlta(String fecha) {
+	public void setStr_fech_alta(String fecha) {
 		this.str_fecha_alta = fecha;
 	}
 	
+	public String getProducto() {
+		return producto;
+	}
 
+	public void setProducto(String fecha) {
+		this.producto = fecha;
+	}
 	
-	public Date getFechAlta() {
+	public Date getFecha_alta() {
 		return fecha_alta;
 	}
 
-	public void setFechAlta(Date fecha) {
+	public void setFecha_alta(Date fecha) {
 		this.fecha_alta = fecha;
 	}
 	
-	public String getReferenciaGlobal() {
+	public String getReferencia_global() {
 		return referencia_global;
 	}
 
-	public void setReferenciaGlobal(String ref) {
+	public void setReferencia_global(String ref) {
 		this.referencia_global = ref;
 	}
 	
-	public String getReferenciaLocal() {
+	public String getReferencia_local() {
 		return referencia_local;
 	}
 
-	public void setReferenciaLocal(String ref) {
+	public void setReferencia_local(String ref) {
 		this.referencia_local = ref;
 	}
 	
-	public String getGestorGcs() {
+	public String getGestor_gcs() {
 		return gestor_gcs;
 	}
 
-	public void setGestorGcs(String gcs) {
+	public void setGestor_gcs(String gcs) {
 		this.gestor_gcs = gcs;
 	}
-	public String getGestorPromocion() {
+	public String getGestor_promocion() {
 		return gestor_promocion;
 	}
 
-	public void setGestorPromocion(String prom) {
+	public void setGestor_promocion(String prom) {
 		this.gestor_promocion = prom;
 	}
-	public String getGestorRelacion() {
+	public String getGestor_relacion() {
 		return gestor_relacion;
 	}
 
-	public void setGestorRelacion(String rel) {
+	public void setGestor_relacion(String rel) {
 		this.gestor_relacion = rel;
 	}
 	public String getDetalle() {
@@ -180,61 +213,68 @@ public class Implementacion {
 	public void setDetalle(String det) {
 		this.detalle = det;
 	}
-	public String getReferenciaExterna() {
+	public String getReferencia_externa() {
 		return referencia_externa;
 	}
 
-	public void setRefExt(String ref) {
+	public void setReferencia_externa(String ref) {
 		this.referencia_externa = ref;
 	}
-	public String getAsuntoReferenciaExt() {
+	public String getAsunto_ref_ext() {
 		return asunto_ref_ext;
 	}
 
-	public void setAsuntoRefExt(String asunto) {
+	public void setAsunto_ref_ext(String asunto) {
 		this.asunto_ref_ext = asunto;
 	}
-	public String getAdeudosRefExt() {
+	public String getAdeudos_ref_ext() {
 		return adeudos_ref_ext;
 	}
+	
+	public void setAcreedor_ref_ext(String acreedor) {
+		this.acreedor_ref_ext = acreedor;
+	}
+	public String getAcreedor_ref_ext() {
+		return acreedor_ref_ext;
+	}
 
-	public void setAdeudosRefExt(String adeudos) {
+	public void setAdeudos_ref_ext(String adeudos) {
 		this.adeudos_ref_ext = adeudos;
 	}
-	public String getCuentaRefExt() {
+	public String getCuenta_ref_ext() {
 		return cuenta_ref_ext;
 	}
 
-	public void setCuentaRefExt(String cuenta) {
+	public void setCuenta_ref_ext(String cuenta) {
 		this.cuenta_ref_ext = cuenta;
 	}
-	public String getStrFechContratacion() {
+	public String getStr_fech_contratacion() {
 		return str_fech_contratacion;
 	}
 
-	public void setStrFechContratacion(String fecha) {
+	public void setStr_fech_contratacion(String fecha) {
 		this.str_fech_contratacion = fecha;
 	}
-	public Date getFechContratacion() {
+	public Date getFech_contratacion() {
 		return fech_contratacion;
 	}
 
-	public void setFechContratacion(Date fecha) {
+	public void setFech_contratacion(Date fecha) {
 		this.fech_contratacion = fecha;
 	}
 	
-	public String getStrFechSubida() {
+	public String getStr_fech_subida() {
 		return str_fech_subida;
 	}
 
-	public void setStrFechSubida(String fecha) {
+	public void setStr_fech_subida(String fecha) {
 		this.str_fech_subida = fecha;
 	}
-	public Date getFechSubida() {
+	public Date getFech_subida() {
 		return fech_subida;
 	}
 
-	public void setFechSubida(Date fecha) {
+	public void setFech_subida(Date fecha) {
 		this.fech_subida = fecha;
 	}
 

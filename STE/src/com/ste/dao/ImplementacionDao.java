@@ -9,6 +9,7 @@ import javax.jdo.Query;
 
 
 
+
 import com.ste.beans.Cliente;
 import com.ste.beans.Implementacion;
 import com.ste.counters.Counter;
@@ -36,6 +37,23 @@ public class ImplementacionDao {
 		return Implementacions;
 	}
 	
+public Implementacion getImplementacionById(long l) {
+		
+		Implementacion c;
+		try{			
+		
+		PersistenceManager pManager = PMF.get().getPersistenceManager();
+		Implementacion implementacion_temp = pManager.getObjectById(Implementacion.class, l);
+
+		c = pManager.detachCopy(implementacion_temp);
+		pManager.close();
+
+		}catch(Exception e){
+			c=null;
+		}
+		return c;
+	}
+	
 	
 	public synchronized void createImplementacion(Implementacion imp, String usermail) {
 		PersistenceManager pm = PMF.get().getPersistenceManager();	
@@ -44,13 +62,13 @@ public class ImplementacionDao {
 		try{
 			
 			ImplementacionDao impDao = ImplementacionDao.getInstance();
-			imp.setFechAlta((Utils.dateConverter(imp.getStrFechAlta())));
-			if (imp.getStrFechContratacion()!=null){
-				imp.setFechContratacion(Utils.dateConverter(imp.getStrFechContratacion()));
+			imp.setFecha_alta((Utils.dateConverter(imp.getStr_fecha_alta())));
+			if (imp.getStr_fech_contratacion()!=null && imp.getStr_fech_contratacion()!=""){
+				imp.setFech_contratacion(Utils.dateConverter(imp.getStr_fech_contratacion()));
 			}
 			
-			if (imp.getStrFechSubida()!=null){
-				imp.setFechSubida(Utils.dateConverter(imp.getStrFechSubida()));
+			if (imp.getStr_fech_subida()!=null && imp.getStr_fech_subida()!=""){
+				imp.setFech_subida(Utils.dateConverter(imp.getStr_fech_subida()));
 			}			
 			if (imp.getKey()==null){
 					

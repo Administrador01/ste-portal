@@ -6,6 +6,7 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import com.ste.beans.Implementacion;
 import com.ste.beans.Servicio;
 import com.ste.persistence.PMF;
 import com.ste.utils.Utils;
@@ -31,7 +32,22 @@ public class ServicioDao {
 
 		return Servicios;
 	}
-	
+public Servicio getImplementacionById(long l) {
+		
+		Servicio c;
+		try{			
+		
+		PersistenceManager pManager = PMF.get().getPersistenceManager();
+		Servicio servicio_temp = pManager.getObjectById(Servicio.class, l);
+
+		c = pManager.detachCopy(servicio_temp);
+		pManager.close();
+
+		}catch(Exception e){
+			c=null;
+		}
+		return c;
+	}
 	
 	public synchronized void createServicio(Servicio imp, String usermail) {
 		PersistenceManager pm = PMF.get().getPersistenceManager();	
