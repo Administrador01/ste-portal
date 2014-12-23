@@ -120,12 +120,12 @@
 					
 					<div class="form-field">
 					<span style="width:44%;"| class="lbl etiqueta">Normalizador<span class="required-asterisk">*</span>:</span>
-							<label style="width:15%;" class="lbl radio ui-marmots-label-radio marmots-label-left ${implementacion.normalizador ? 'on' : ''} " for="radio_Si">
-								<input name="normalizador" id="radio_Si" type="radio" value="Si" ${implementacion.normalizador ? 'checked' : ''} />Si
+							<label style="width:15%;" class="lbl radio ui-marmots-label-radio marmots-label-left ${implementacion.normalizador ? 'on' : ''} " for="radio_Si_Modal">
+								<input name="normalizador_modal" id="radio_Si_Modal" type="radio" value="Si" ${implementacion.normalizador ? 'checked' : ''} />Si
 							</label>
 
-							<label style="width:15%;" class="lbl radio ui-marmots-label-radio marmots-label-left ${implementacion.normalizador ? '' : 'on'} " for="radio_No">
-								<input name="normalizador" id="radio_No" type="radio" value="No" ${implementacion.normalizador ? '' : 'checked'} />No
+							<label style="width:15%;" class="lbl radio ui-marmots-label-radio marmots-label-left ${implementacion.normalizador ? '' : 'on'} " for="radio_No_Modal">
+								<input name="normalizador_modal" id="radio_No_Modal" type="radio" value="No" ${implementacion.normalizador ? '' : 'checked'} />No
 							</label>
 					</div>
 					<div class="form-field">
@@ -139,12 +139,12 @@
 
 					<div class="form-field">
 					<span class="lbl etiqueta" style="width:44%;">Firma contrato<span class="required-asterisk">*</span>:</span>
-							<label style="width:15%;" class="lbl radio ui-marmots-label-radio marmots-label-left ${implementacion.normalizador ? 'on' : ''}" for="crack_Si">
-								<input name="firma" id="crack_Si" type="radio" value="Si" ${implementacion.normalizador ? 'checked' : ''} />Si
+							<label style="width:15%;" class="lbl radio ui-marmots-label-radio marmots-label-left ${implementacion.firma_contrato ? 'on' : ''}" for="crack_Si_Modal">
+								<input name="firma_modal" id="crack_Si_Modal" ${implementacion.firma_contrato ? 'checked' : ''} type="radio" value="Si"  />Si
 							</label>
 
-							<label style="width:15%;" class="lbl radio ui-marmots-label-radio marmots-label-left ${implementacion.normalizador ? '' : 'on'}" for="crack_No">
-								<input name="firma" id="crack_No"  type="radio" value="No" ${implementacion.normalizador ? '' : 'checked'} />No
+							<label style="width:15%;" class="lbl radio ui-marmots-label-radio marmots-label-left ${implementacion.firma_contrato ? '' : 'on'}" for="crack_No_Modal">
+								<input name="firma_modal" id="crack_No_Modal" ${implementacion.firma_contrato ? '' : 'checked'}  type="radio" value="No"  />No
 							</label>
 					</div>
 					
@@ -261,6 +261,13 @@
 
 			$('#page2_imp_modal').addClass('hidden');
 			$('#page1_imp_modal').removeClass('hidden');
+		
+	})
+	
+	$('#submit_edit_implementacion_form').click(function(e){
+
+			$('.go_pag1_modal').addClass('hidden');
+			$('.go_pag2_modal').addClass('hidden');
 		
 	})
 	

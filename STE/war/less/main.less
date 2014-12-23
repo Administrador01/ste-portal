@@ -836,7 +836,7 @@ input.readonly, textarea.readonly {
 			}			
 			.form-field{
 
-				display:block;
+				display:inline-block;
 				.grey{
 					color:#;
 					}
@@ -867,9 +867,7 @@ input.readonly, textarea.readonly {
 			.entor_integrad{
 				display:inline-block;
 				float:left;
-				margin:3%;
-				margin-top:2%;
-				
+				margin:2%;
 				margin-left:5%;
 				background-color:#E4EAFE;
 				border: 3px solid #D1DCFF;
@@ -881,21 +879,36 @@ input.readonly, textarea.readonly {
 
 			}			
 			.entor_integrad2{
-				text-align:left;
+				text-align:center;
 				margin:2%;
 				background-color:#E4EAFE;
 				border: 3px solid #D1DCFF;
 				padding:1%;
-				width:49%;
-				>h4{
+				width:46%;
+				float:left;
+
+				>h3{
 					text-align: left;
 					color:#8DA8FF;
 				}
+				>h4{
+					text-align: center;
+					color:#8DA8FF;
+				}
 				.form-field{
-					width:100%;
+					width:auto;
 				}
 
-			}	
+			}
+			.entor_derech{
+				float:right;
+				width:46%;
+				padding-bottom: 7%;
+				padding-top: 6%;
+				.form-field{
+					width:auto;
+				}
+			}
 			.go_pag1, .go_pag2{
 				margin:0px;
 				margin-top:2%;
@@ -903,8 +916,13 @@ input.readonly, textarea.readonly {
 				border-bottom-right-radius: 1px;
 				border-bottom-left-radius: 1px;
 			}
-			#siguiente{
-				border-radius: 10px;
+			.siguiente{
+				border-radius: 4px;
+				padding-left:2%;
+				padding-right:2%;
+				margin:0px;
+				margin-left:1%;
+				margin-top:6%;
 
 			}
 			.go_pag2{

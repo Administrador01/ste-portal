@@ -828,7 +828,7 @@ textarea.readonly {
   height: auto;
 }
 #implementacion .form-field {
-  display: block;
+  display: inline-block;
 }
 #implementacion .form-field .grey {
   color: #;
@@ -856,8 +856,7 @@ textarea.readonly {
 #implementacion .entor_integrad {
   display: inline-block;
   float: left;
-  margin: 3%;
-  margin-top: 2%;
+  margin: 2%;
   margin-left: 5%;
   background-color: #E4EAFE;
   border: 3px solid #D1DCFF;
@@ -868,19 +867,33 @@ textarea.readonly {
   color: #8DA8FF;
 }
 #implementacion .entor_integrad2 {
-  text-align: left;
+  text-align: center;
   margin: 2%;
   background-color: #E4EAFE;
   border: 3px solid #D1DCFF;
   padding: 1%;
-  width: 49%;
+  width: 46%;
+  float: left;
 }
-#implementacion .entor_integrad2 > h4 {
+#implementacion .entor_integrad2 > h3 {
   text-align: left;
   color: #8DA8FF;
 }
+#implementacion .entor_integrad2 > h4 {
+  text-align: center;
+  color: #8DA8FF;
+}
 #implementacion .entor_integrad2 .form-field {
-  width: 100%;
+  width: auto;
+}
+#implementacion .entor_derech {
+  float: right;
+  width: 46%;
+  padding-bottom: 7%;
+  padding-top: 6%;
+}
+#implementacion .entor_derech .form-field {
+  width: auto;
 }
 #implementacion .go_pag1,
 #implementacion .go_pag2 {
@@ -890,8 +903,13 @@ textarea.readonly {
   border-bottom-right-radius: 1px;
   border-bottom-left-radius: 1px;
 }
-#implementacion #siguiente {
-  border-radius: 10px;
+#implementacion .siguiente {
+  border-radius: 4px;
+  padding-left: 2%;
+  padding-right: 2%;
+  margin: 0px;
+  margin-left: 1%;
+  margin-top: 6%;
 }
 #implementacion .go_pag2 {
   margin-right: 2%;
