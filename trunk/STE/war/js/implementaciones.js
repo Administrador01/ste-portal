@@ -56,9 +56,9 @@ $(function(){
 		}else{
 			$('.error').addClass('hidden');
 			$('#page1_imp').addClass('hidden');
-			$('#page2_imp').removeClass('hidden');
+			$('#page2_imp').removeClass('hidden');/*
 			$('#botont1').addClass('hidden');
-			$('#botont2').removeClass('hidden');
+			$('#botont2').removeClass('hidden');*/
 		}
 		
 	})
@@ -73,9 +73,9 @@ $(function(){
 	
 	$('.go_pag1').click(function(e){
 		$('#page2_imp').addClass('hidden');
-		$('#page1_imp').removeClass('hidden');
+		$('#page1_imp').removeClass('hidden');/*
 		$('#botont2').addClass('hidden');
-		$('#botont1').removeClass('hidden');
+		$('#botont1').removeClass('hidden');*/
 	})
 	
 	$('#cliente_imp').on('change', function() {
