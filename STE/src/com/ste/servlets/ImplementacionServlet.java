@@ -23,10 +23,14 @@ import jxl.write.WritableWorkbook;
 
 import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
+import com.ste.beans.Cliente;
 import com.ste.beans.Implementacion;
 import com.ste.beans.Prueba;
+import com.ste.beans.Servicio;
+import com.ste.dao.ClienteDao;
 import com.ste.dao.ImplementacionDao;
 import com.ste.dao.PruebaDao;
+import com.ste.dao.ServicioDao;
 import com.ste.utils.Utils;
 
 public class ImplementacionServlet extends HttpServlet{
@@ -55,7 +59,7 @@ public class ImplementacionServlet extends HttpServlet{
 				}
 				
 				if (accion.equals("xls")){
-					modifImplementacion(req,resp,usermail);
+					generateXLS(req,resp,usermail);
 				}
 
 			
@@ -250,15 +254,21 @@ public class ImplementacionServlet extends HttpServlet{
 		try {
 			resp.setContentType("application/vnd.ms-excel");
 			resp.setHeader("Content-Disposition",
-					"attachment; filename=GestionPruebasSTE.xls");
+					"attachment; filename=GestionImplementacionesSTE.xls");
 
 			WritableWorkbook w = Workbook
 					.createWorkbook(resp.getOutputStream());
 
 			ImplementacionDao impDao = ImplementacionDao.getInstance();
 			List<Implementacion> implementaciones = impDao.getAllImplementaciones();
+			
+			ClienteDao cliDao = ClienteDao.getInstance();
 
-			WritableSheet s = w.createSheet("Gestion de pruebas", 0);
+			
+			ServicioDao servDao = ServicioDao.getInstance();
+
+
+			WritableSheet s = w.createSheet("Gestion de implementaciones", 0);
 
 			WritableFont cellFont = new WritableFont(WritableFont.TIMES, 12);
 			cellFont.setColour(Colour.WHITE);
@@ -269,47 +279,92 @@ public class ImplementacionServlet extends HttpServlet{
 			cellFormat.setAlignment(jxl.format.Alignment.CENTRE);
 			cellFormat.setVerticalAlignment(VerticalAlignment.CENTRE);
 
-			s.setColumnView(0, 16);
+			s.setColumnView(0, 20);
 			s.setColumnView(1, 20);
-			s.setColumnView(2, 20);
+			s.setColumnView(2, 50);
 			s.setColumnView(3, 20);
 			s.setColumnView(4, 20);
 			s.setColumnView(5, 20);
 			s.setColumnView(6, 20);
 			s.setColumnView(7, 20);
-			s.setColumnView(8, 40);
-			s.setColumnView(9, 40);
+			s.setColumnView(8, 30);
+			s.setColumnView(9, 30);
+			s.setColumnView(10, 20);
+			s.setColumnView(11, 30);
+			s.setColumnView(12, 30);
+			s.setColumnView(13, 30);
+			s.setColumnView(14, 30);
+			s.setColumnView(15, 30);
+			s.setColumnView(16, 30);
+			s.setColumnView(17, 30);
+			s.setColumnView(18, 30);
+			s.setColumnView(19, 30);
+			s.setColumnView(20, 50);
+			s.setColumnView(21, 30);
+			s.setColumnView(22, 30);
+			s.setColumnView(23, 30);
 
 			
 			s.setRowView(0, 900);
 
-			s.addCell(new Label(0, 0, "FECHA ALTA", cellFormat));
-			s.addCell(new Label(1, 0, "CLIENTE", cellFormat));
-			s.addCell(new Label(2, 0, "TIPO SERVICIO", cellFormat));
-			s.addCell(new Label(3, 0, "ESTADO", cellFormat));
-			s.addCell(new Label(4, 0, "PRODUCTO", cellFormat));
-			s.addCell(new Label(5, 0, "ENTORNO", cellFormat));
-			s.addCell(new Label(6, 0, "IDENTIFICADOR", cellFormat));
-			s.addCell(new Label(7, 0, "TIPO CLIENTE", cellFormat));
-			s.addCell(new Label(8, 0, "DESCRIPCIÓN", cellFormat));
-			s.addCell(new Label(9, 0, "SOLUCIÓN", cellFormat));
+			s.addCell(new Label(0, 0, "CLIENTE", cellFormat));
+			s.addCell(new Label(1, 0, "PRODUCTO", cellFormat));
+			s.addCell(new Label(2, 0, "SERVICIO", cellFormat));
+			s.addCell(new Label(3, 0, "SEGMENTO", cellFormat));
+			s.addCell(new Label(4, 0, "ESTADO", cellFormat));
+			s.addCell(new Label(5, 0, "FECHA ALTA", cellFormat));
+			s.addCell(new Label(6, 0, "PAIS", cellFormat));
+			s.addCell(new Label(7, 0, "NORMALIZADOR", cellFormat));
+			s.addCell(new Label(8, 0, "REFERENCIA GLOBAL", cellFormat));
+			s.addCell(new Label(9, 0, "REFERENCIA LOCAL", cellFormat));
+			s.addCell(new Label(10, 0, "FIRMA CONTRATO", cellFormat));
+			s.addCell(new Label(11, 0, "GESTOR GCS", cellFormat));
+			s.addCell(new Label(12, 0, "GESTOR PROMOCIÓN", cellFormat));
+			s.addCell(new Label(13, 0, "GESTOR RELACIÓN", cellFormat));
+			s.addCell(new Label(14, 0, "DETALLE", cellFormat));
+			s.addCell(new Label(15, 0, "REFERENCIA EXTERNA", cellFormat));
+			s.addCell(new Label(16, 0, "ASUNTO", cellFormat));
+			s.addCell(new Label(17, 0, "CONTRATO ADEUDOS", cellFormat));
+			s.addCell(new Label(18, 0, "ID ACREEDOR", cellFormat));
+			s.addCell(new Label(19, 0, "CUENTA ABONO", cellFormat));
+			s.addCell(new Label(20, 0, "SERVICIO", cellFormat));
+			s.addCell(new Label(21, 0, "TIPO SERVICIO", cellFormat));
+			s.addCell(new Label(22, 0, "FECHA CONTRATACION", cellFormat));
+			s.addCell(new Label(23, 0, "FECHA SUBIDA", cellFormat));
 			
 			int aux = 1;
 
 			for ( Implementacion imp : implementaciones) {
-				/*
-				s.addCell(new Label(0, aux,));
-				s.addCell(new Label(1, aux, ));
-				s.addCell(new Label(2, aux, ));
-				s.addCell(new Label(3, aux, ));
-				s.addCell(new Label(4, aux, ));
-				s.addCell(new Label(5, aux, ));
-				s.addCell(new Label(6, aux, ));				
-				s.addCell(new Label(7, aux, ));
-				s.addCell(new Label(8, aux, ));
-				s.addCell(new Label(9, aux, ));
+				
+				Cliente cliente = cliDao.getClientebyId(imp.getCliente_id());
+				Servicio servicio = servDao.getImplementacionById(imp.getServicio_id());
+				
+				s.addCell(new Label(0, aux,cliente.getNombre()));
+				s.addCell(new Label(1, aux,imp.getProducto() ));
+				s.addCell(new Label(2, aux,servicio.getName()));
+				s.addCell(new Label(3, aux,cliente.getTipo_cliente()));
+				s.addCell(new Label(4, aux,imp.getEstado()));
+				s.addCell(new Label(5, aux,imp.getStr_fecha_alta()));
+				s.addCell(new Label(6, aux,imp.getPais()));
+				if(imp.getNormalizador())s.addCell(new Label(7, aux,"Si"));else s.addCell(new Label(7, aux,"No"));
+				s.addCell(new Label(8, aux,imp.getReferencia_global()));
+				s.addCell(new Label(9, aux,imp.getReferencia_local()));
+				if(imp.getFirma_contrato())s.addCell(new Label(10, aux,"Si"));else s.addCell(new Label(10, aux,"No"));
+				s.addCell(new Label(11, aux,imp.getGestor_gcs()));
+				s.addCell(new Label(12, aux,imp.getGestor_promocion()));
+				s.addCell(new Label(13, aux,imp.getGestor_relacion()));
+				s.addCell(new Label(14, aux,imp.getDetalle()));
+				s.addCell(new Label(15, aux,imp.getReferencia_externa()));
+				s.addCell(new Label(16, aux,imp.getAsunto_ref_ext()));
+				s.addCell(new Label(17, aux,imp.getAdeudos_ref_ext()));
+				s.addCell(new Label(18, aux,imp.getAcreedor_ref_ext()));
+				s.addCell(new Label(19, aux,imp.getCuenta_ref_ext()));
+				s.addCell(new Label(20, aux,servicio.getName()));
+				s.addCell(new Label(21, aux,servicio.getTipo()));
+				s.addCell(new Label(22, aux,imp.getStr_fech_contratacion()));
+				s.addCell(new Label(23, aux,imp.getStr_fech_subida()));
 
-*/
+
 
 				aux++;
 			}

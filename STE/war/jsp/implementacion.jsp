@@ -17,14 +17,14 @@
 </div>
 
 <div class="headButtonsBox">
-	<button id="excel_btn" onclick=	"window.location.href='../../implementacionServlet?accion=xls'">
-		Descargar Tabla<span class="excel_span"></span>
-	</button>
+
 
 	<button id="formButton">
 		Nuevo<span class="user_span"></span>
 	</button>
-
+	<button id="excel_btn" onclick=	"window.location.href='../../implementacionServlet?accion=xls'">
+		Descargar Tabla<span class="excel_span"></span>
+	</button>
 
 	<div class="form-holder">
 		<form id="new-user-form" name="new-user-form" action="/implementacionServlet"
@@ -42,7 +42,7 @@
 
 					<div class="form-field" id="div_cliente_imp">
 						<span class="lbl">Cliente<span class="required-asterisk">*</span>:</span>
-						<select class="selectpicker" name="cliente" id="cliente_imp" data-live-search="true">
+						<select class="selectpicker" name="cliente" id="cliente_imp" data-live-search="true"  >
 							<c:choose>
 								<c:when test="${empty clientes}">
 									<option value="default">No hay clientes</option>
@@ -60,8 +60,8 @@
 					
 
 					<div class="form-field" id="div_producto_imp">
-							<span class="lbl">Producto/canal<span class="required-asterisk">*</span>:</span>
-								<select id="producto_imp" class="selectpicker selected" name="producto_imp" >
+							<span class="lbl">Producto<span class="required-asterisk">*</span>:</span>
+								<select id="producto_imp" class="selectpicker selected"  name="producto_imp" >
 									<option value="default">Seleccionar</option>	
 									<option value="Swift Fileact">Swift Fileact</option>
 									<option value="Swift Fileact Antig">Swift Fileact (antigua conexi&oacuten)</option>
@@ -79,7 +79,7 @@
 					
 					<div class="form-field" id="div_servicio_imp">
 						<span class="lbl">Servicio<span class="required-asterisk">*</span>:</span>
-						<select class="selectpicker" name="servicio" id="servicio_imp" data-live-search="true">
+						<select class="selectpicker" name="servicio" id="servicio_imp"  data-live-search="true">
 							<c:choose>
 								<c:when test="${empty servicios}">
 									<option value="default">No hay servicios</option>
@@ -102,7 +102,7 @@
 					
 					<div class="form-field">
 						<span class="lbl">Estado<span class="required-asterisk">*</span>:</span>
-							<select id="estado_imp" class="selectpicker selected" name="estado_imp" >
+							<select id="estado_imp" class="selectpicker selected"  name="estado_imp" >
 									<option value="Pendiente" selected>Pendiente</option>
 									<option value="Analisis">An&aacutelisis</option>
 									<option value="Pruebas">Pruebas</option>	
@@ -115,12 +115,12 @@
 					
 					<div class="form-field" id="div_fecha_alta_imp">
 					<span class="lbl">Fecha alta<span class="required-asterisk">*</span>:</span>
-					<input type="text" size="16" class="datepicker" name="fecha_alta" id="fecha_alta_imp" required readonly>
+					<input type="text" size="16" class="datepicker" name="fecha_alta" id="fecha_alta_imp"  readonly>
 					</div>
 					
 					<div class="form-field" id="div_pais_imp">
 					<span class="lbl">Pais<span class="required-asterisk">*</span>:</span>
-								<select id="pais_imp" class="selectpicker selected" name="pais" required aria-required="true">
+								<select id="pais_imp" class="selectpicker selected" name="pais"  aria-required="true">
 									<option value="default">Seleccionar</option>	
 									<option value="Francia">Francia</option>
 									<option value="Belgica">Belgica</option>
@@ -260,7 +260,7 @@
 					
 
 					<div class="form-field">
-					<button type="submit" id="submit_form_implementacion"> Aceptar </button>
+					<button type="submit" class="submit_form_implementacion"> Aceptar </button>
 					<button class="close-form">Cancelar</button>	
 					</div>
 				</div>
@@ -269,6 +269,10 @@
 			</div>
 			</div>
 		</form>
+		<!--
+		<button type="button" id="botont1" class="go_pag2 siguientebott">Aceptar</button>
+		<button type="submit" id="botont2" class="submit_form_implementacion hidden"> Aceptar </button>
+		<button class="close-form">Cancelar</button>	-->
 	</div>
 </div>	
 		<div class="main-table usersTable">
