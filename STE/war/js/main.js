@@ -454,8 +454,7 @@ $(function() {
 	$(".submit_form_implementacion").on('click',function(e) {
 
 		e.preventDefault(); //STOP default action
-		$('#botont2').addClass('hidden');
-		$('.close-form').addClass('hidden');
+
 		
 		var $form = $($('#new-user-form'));
 		
@@ -476,7 +475,8 @@ $(function() {
 						$('.form-holder').height($('.form-holder').height()+35);
 					}
 					$form.find('.form-container').find('div:not(#message_div)').hide(0);
-					$('#submit_form_implementacion').hide(0);
+					$('.submit_form_implementacion').hide(0);
+					$('.close-form').hide(0);
 					$form.find('#span_message').html('La implementacion ha sido creada de forma correcta.<br/>En breve volvemos a la p&aacute;gina.');
 					$('#message_div').css('display','block').removeClass("error").addClass("success");;
 
