@@ -451,10 +451,11 @@ $(function() {
 	
 //submit method for new test
 	
-	$("#submit_form_implementacion").on('click',function(e) {
+	$(".submit_form_implementacion").on('click',function(e) {
 
 		e.preventDefault(); //STOP default action
-		
+		$('#botont2').addClass('hidden');
+		$('.close-form').addClass('hidden');
 		
 		var $form = $($('#new-user-form'));
 		

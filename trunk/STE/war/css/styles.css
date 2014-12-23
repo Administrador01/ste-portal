@@ -822,7 +822,7 @@ textarea.readonly {
 #implementacion .form-container {
   margin: 0px;
   margin-right: 2%;
-  margin-bottom: 0px;
+  margin-bottom: 1%;
 }
 #implementacion > form {
   height: auto;
@@ -910,6 +910,11 @@ textarea.readonly {
   margin: 0px;
   margin-left: 1%;
   margin-top: 6%;
+}
+#implementacion .siguientebott {
+  border-radius: 4px;
+  margin: 0px;
+  margin-left: 1%;
 }
 #implementacion .go_pag2 {
   margin-right: 2%;

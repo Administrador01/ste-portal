@@ -57,6 +57,8 @@ $(function(){
 			$('.error').addClass('hidden');
 			$('#page1_imp').addClass('hidden');
 			$('#page2_imp').removeClass('hidden');
+			$('#botont1').addClass('hidden');
+			$('#botont2').removeClass('hidden');
 		}
 		
 	})
@@ -67,9 +69,13 @@ $(function(){
 	$('#fecha_alta_imp').on('change', function() {$('#div_fecha_alta_imp').removeClass('falta');if($('#producto_imp').val()!='default'&&$('#cliente_imp').val()!='default'&&$('#servicio_imp').val()!='default'&&$('#fecha_alta_imp').val()!=''&&$('#pais_imp').val()!='default')$('.error').addClass('hidden');})
 	$('#pais_imp').on('change', function() {$('#div_pais_imp').removeClass('falta');})
 	$('#pais_imp').on('change', function() {if($('#producto_imp').val()!='default'&&$('#cliente_imp').val()!='default'&&$('#servicio_imp').val()!='default'&&$('#fecha_alta_imp').val()!=''&&$('#pais_imp').val()!='default')$('.error').addClass('hidden');})
+	
+	
 	$('.go_pag1').click(function(e){
 		$('#page2_imp').addClass('hidden');
 		$('#page1_imp').removeClass('hidden');
+		$('#botont2').addClass('hidden');
+		$('#botont1').removeClass('hidden');
 	})
 	
 	$('#cliente_imp').on('change', function() {
