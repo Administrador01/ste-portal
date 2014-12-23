@@ -7,7 +7,7 @@
 
 <div id="implementacion">
 
-<h1>Implementacion</h1>
+<h1>Gesti&oacuten implementaciones</h1>
 <span class="btn-atras" onclick="window.location.href='javascript:window.history.go(-1);'"></span>
 
 <hr />
@@ -17,6 +17,10 @@
 </div>
 
 <div class="headButtonsBox">
+	<button id="excel_btn" onclick=	"window.location.href='../../implementacionServlet?accion=xls'">
+		Descargar Tabla<span class="excel_span"></span>
+	</button>
+
 	<button id="formButton">
 		Nuevo<span class="user_span"></span>
 	</button>
@@ -54,7 +58,7 @@
 						<input type="text" name="client_id" id="client-id-input" value="" hidden>
 					</div>
 					
-					<h3 style="color:#FF8888;float:right;" class="error hidden">Faltan por introducir campos</h3>
+
 					<div class="form-field" id="div_producto_imp">
 							<span class="lbl">Producto/canal<span class="required-asterisk">*</span>:</span>
 								<select id="producto_imp" class="selectpicker selected" name="producto_imp" >
@@ -98,7 +102,7 @@
 					
 					<div class="form-field">
 						<span class="lbl">Estado<span class="required-asterisk">*</span>:</span>
-							<select id="estado_imp" class="selectpicker selected" name="estado_imp" >	
+							<select id="estado_imp" class="selectpicker selected" name="estado_imp" >
 									<option value="Pendiente" selected>Pendiente</option>
 									<option value="Analisis">An&aacutelisis</option>
 									<option value="Pruebas">Pruebas</option>	
@@ -190,17 +194,18 @@
 					<input type="text" name="ref_ext" id="ref_ext" maxlength="18">
 					</div>
 					
-
-					<button type="button" id="siguiente" class="go_pag2">Siguiente </button>
-
+					<div class="form-field">
+						<button type="button" class="go_pag2 siguiente">Siguiente </button>
+						<button class="siguiente close-form">Cancelar</button>	
+					</div>
 					
 					<h3 style="color:#FF8888" class="error hidden">Faltan por introducir campos</h3>
 
 					
 				</div>
 				<div class="page2_imp hidden" id='page2_imp'>
-
-					
+				
+				<div class="entor_derech">
 					<div class="form-field">
 						<span class="lbl">Servicio:</span>
 						<input type="text"class="autorrellenable" id="input-servicio-name-implementacion" value="" readonly>
@@ -211,8 +216,19 @@
 						<input type="text" class="autorrellenable" id="input-servicio-tipo-implementacion" value="" readonly>
 					</div>
 					
+					<div class="form-field">
+						<span class="lbl">Fecha contrataci&oacuten:</span>
+						<input type="text" size="16" class="datepicker" name="fecha_contrat"readonly>
+					</div>
+					
+					<div class="form-field">
+						<span class="lbl">Fecha subida:</span>
+						<input type="text" size="16" class="datepicker" name="fecha_subid" readonly>
+					</div>
+					
+				</div>
 					<div class="entor_integrad2">
-					<h4>Entorno Integrado</h4>
+					<h3>Entorno Integrado</h3>
 						<div class="form-field">
 						<span class="lbl">Referencia externa:</span>
 						<input type="text" class="autorrellenable" id="input-servicio-referencia" value="" readonly>
@@ -221,7 +237,8 @@
 						<span class="lbl">Asunto:</span>
 						<input type="text" name="asunto" maxlength="30">
 						</div>
-						<span class="lbl">SDD:</span>
+						<hr style="visibility:hidden;"/>
+						<h4>SDD:</h4>
 						<hr />
 						<div class="form-field">
 						<span class="lbl grey">Contrato Adeudos:</span>
@@ -236,18 +253,15 @@
 						<input type="text" name="cuent_abon" maxlength="16">
 						</div>
 						
-					</div>
+				</div>
+
 					
-					<div class="form-field">
-					<span class="lbl">Fecha contrataci&oacuten:</span>
-					<input type="text" size="16" class="datepicker" name="fecha_contrat"readonly>
-					</div>
-					<div class="form-field">
-					<span class="lbl">Fecha subida:</span>
-					<input type="text" size="16" class="datepicker" name="fecha_subid" readonly>
-					</div>
+
+					
+
 					<div class="form-field">
 					<button type="submit" id="submit_form_implementacion"> Aceptar </button>
+					<button class="close-form">Cancelar</button>	
 					</div>
 				</div>
 			<div id="message_div" class="message_div">
