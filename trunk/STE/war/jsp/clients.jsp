@@ -6,7 +6,7 @@
 
 
 <div class="clients">
-
+	<span class="btn-atras" onclick="window.location.href='javascript:window.history.go(-1);'"></span>
 	<h1>Listado de Clientes</h1>
 	<hr/>
 	

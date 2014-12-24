@@ -64,7 +64,7 @@ public class ClienteDao {
 			boolean flag = false;
 			for (Cliente clie : client_arr){
 				if(clie.getNombre().equals(c.getNombre())&&
-				   clie.getStr_fecha_alta().equals(c.getStr_fecha_alta())&&
+				   clie.getStr_fecha_alta().equals(c.getStr_fecha_alta())&&clie.getPremium().equals(c.getPremium())&&
 				   clie.getTipo_cliente().equals(c.getTipo_cliente())){
 						flag = true;
 				}

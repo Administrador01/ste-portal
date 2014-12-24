@@ -13,7 +13,7 @@
 <hr />
 
 <div class="breadcrumbs">
-		<span onclick="window.location.href='../../' ">Home</span> > <span> Implementaci&oacuten </span>
+		<span onclick="window.location.href='../../' ">Home</span> > <span onclick="window.location.href='../clientes.do' ">Clientes</span> > <span> Implementaci&oacuten </span>
 </div>
 
 <div class="headButtonsBox">
@@ -30,8 +30,8 @@
 		<form id="new-user-form" name="new-user-form" action="/implementacionServlet"
 			method="POST" novalidate="novalidate">
 				
-				<button type="button" class="go_pag1">P&aacutegina 1</button>
-				<button type="button" class="go_pag2">P&aacutegina 2</button>
+				<button type="button" class="go_pag1">Paso 1</button>
+				<button type="button" class="go_pag2">Paso 2</button>
 			<!--botones -->
 			<div class="form-container">
 			
@@ -42,7 +42,7 @@
 
 					<div class="form-field" id="div_cliente_imp">
 						<span class="lbl">Cliente<span class="required-asterisk">*</span>:</span>
-						<select class="selectpicker" name="cliente" id="cliente_imp" data-live-search="true"  >
+						<select class="selectpicker selected" name="cliente" id="cliente_imp" data-live-search="true">
 							<c:choose>
 								<c:when test="${empty clientes}">
 									<option value="default">No hay clientes</option>
@@ -55,13 +55,12 @@
 							</c:otherwise>
 							</c:choose>
 						</select>
-						<input type="text" name="client_id" id="client-id-input" value="" hidden>
 					</div>
 					
 
 					<div class="form-field" id="div_producto_imp">
 							<span class="lbl">Producto<span class="required-asterisk">*</span>:</span>
-								<select id="producto_imp" class="selectpicker selected"  name="producto_imp" >
+								<select id="producto_imp" class="selectpicker selected"  name="producto_imp">
 									<option value="default">Seleccionar</option>	
 									<option value="Swift Fileact">Swift Fileact</option>
 									<option value="Swift Fileact Antig">Swift Fileact (antigua conexi&oacuten)</option>
@@ -79,7 +78,7 @@
 					
 					<div class="form-field" id="div_servicio_imp">
 						<span class="lbl">Servicio<span class="required-asterisk">*</span>:</span>
-						<select class="selectpicker" name="servicio" id="servicio_imp"  data-live-search="true">
+						<select class="selectpicker selected" name="servicio" id="servicio_imp" data-live-search="true">
 							<c:choose>
 								<c:when test="${empty servicios}">
 									<option value="default">No hay servicios</option>
@@ -102,7 +101,7 @@
 					
 					<div class="form-field">
 						<span class="lbl">Estado<span class="required-asterisk">*</span>:</span>
-							<select id="estado_imp" class="selectpicker selected"  name="estado_imp" >
+							<select id="estado_imp" class="selectpicker selected"  name="estado_imp">	
 									<option value="Pendiente" selected>Pendiente</option>
 									<option value="Analisis">An&aacutelisis</option>
 									<option value="Pruebas">Pruebas</option>	
@@ -115,15 +114,15 @@
 					
 					<div class="form-field" id="div_fecha_alta_imp">
 					<span class="lbl">Fecha alta<span class="required-asterisk">*</span>:</span>
-					<input type="text" size="16" class="datepicker" name="fecha_alta" id="fecha_alta_imp"  readonly>
+					<input type="text" size="16" class="datepicker" name="fecha_alta" id="fecha_alta_imp" readonly="" required aria-required="true">
 					</div>
 					
 					<div class="form-field" id="div_pais_imp">
-					<span class="lbl">Pais<span class="required-asterisk">*</span>:</span>
-								<select id="pais_imp" class="selectpicker selected" name="pais"  aria-required="true">
+					<span class="lbl">Pa&iacutes<span class="required-asterisk">*</span>:</span>
+								<select id="pais_imp" class="selectpicker selected" name="pais">
 									<option value="default">Seleccionar</option>	
 									<option value="Francia">Francia</option>
-									<option value="Belgica">Belgica</option>
+									<option value="Belgica">B&eacutelgica</option>
 									<option value="Italia">Italia</option>	
 									<option value="Portugal">Portugal</option>
 									<option value="Espa&ntildea">Espa&ntildea</option>	
@@ -173,7 +172,7 @@
 					</div>
 					
 					<div class="form-field">
-					<span class="lbl">Gestor promocion:</span>
+					<span class="lbl">Gestor promoci&oacuten:</span>
 					<input type="text" name="gestor_prom" maxlength="25">
 					</div>
 					
@@ -182,9 +181,9 @@
 					<input type="text" name="gestor_relacion" maxlength="25">
 					</div>
 					
-					<div class="form-field">
+					<div class="form-field detalle">
 					<span class="lbl">Detalle:</span>
-					<input type="text" name="detalle" maxlength="500">
+					<textarea type="text" name="detalle" maxlength="500" rows="3" cols="3" placeholder="Introduzca texto ..."></textarea>
 					</div>
 						
 			
@@ -193,13 +192,13 @@
 					<span class="lbl">Referencia externa:</span>
 					<input type="text" name="ref_ext" id="ref_ext" maxlength="18">
 					</div>
-					
+					<!--
 					<div class="form-field">
 						<button type="button" class="go_pag2 siguiente">Siguiente </button>
 						<button class="siguiente close-form">Cancelar</button>	
 					</div>
-					
-					<h3 style="color:#FF8888" class="error hidden">Faltan por introducir campos</h3>
+					-->
+
 
 					
 				</div>
@@ -258,21 +257,20 @@
 					
 
 					
-
+<!--
 					<div class="form-field">
 					<button type="submit" class="submit_form_implementacion"> Aceptar </button>
 					<button class="close-form">Cancelar</button>	
-					</div>
+					</div>-->
 				</div>
 			<div id="message_div" class="message_div">
 				<span id="span_message">La implementacion ha sido creado de forma correcta.<br/>En breve volvemos a la página.</span>
 			</div>
 			</div>
 		</form>
-		<!--
-		<button type="button" id="botont1" class="go_pag2 siguientebott">Aceptar</button>
+		<button type="button" id="botont1" class="go_pag2 siguientebott">Siguiente</button>
 		<button type="submit" id="botont2" class="submit_form_implementacion hidden"> Aceptar </button>
-		<button class="close-form">Cancelar</button>	-->
+		<button class="close-form">Cancelar</button>
 	</div>
 </div>	
 		<div class="main-table usersTable">
@@ -283,7 +281,7 @@
 						<th><span class="table-title">Producto</span></th>
 						<th><span class="table-title">Servicio</span></th>
 						<th><span class="table-title">Estado</span></th>
-						<th><span class="table-title">Pais</span></th>
+						<th><span class="table-title">Pa&iacutes</span></th>
 						<th><span class="table-title">Gestor GCS</span></th>
 						<th style="width: 110px;">&nbsp;</th>
 					</tr>

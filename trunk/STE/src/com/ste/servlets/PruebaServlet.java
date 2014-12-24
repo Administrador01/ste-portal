@@ -132,7 +132,7 @@ public class PruebaServlet extends HttpServlet{
 		
 		String fecha_estado = req.getParameter("fecha_estado");
 		String nombre_cliente = req.getParameter("cliente");
-		String referencia = req.getParameter("referencia");
+		//String referencia = req.getParameter("referencia");
 		String producto = req.getParameter("producto_canal");
 		String premium = req.getParameter("input-premium-soporte");
 		String estado = req.getParameter("estado");
@@ -149,7 +149,7 @@ public class PruebaServlet extends HttpServlet{
 		
 		p.setStr_fecha_estado(fecha_estado);
 		p.setNombre_cliente(nombre_cliente);
-		p.setReferencia(referencia);
+		//p.setReferencia(referencia);
 		p.setProducto(producto);
 		p.setPremium(premium);
 		p.setTipo_servicio(servicio);
@@ -161,7 +161,7 @@ public class PruebaServlet extends HttpServlet{
 		
 
 		
-		pDao.createPrueba(p);
+		pDao.updatePrueba(p);
 		
 		
 		try {
@@ -227,7 +227,7 @@ public class PruebaServlet extends HttpServlet{
 			cellFormat.setAlignment(jxl.format.Alignment.CENTRE);
 			cellFormat.setVerticalAlignment(VerticalAlignment.CENTRE);
 
-			s.setColumnView(0, 16);
+			s.setColumnView(0, 20);
 			s.setColumnView(1, 20);
 			s.setColumnView(2, 20);
 			s.setColumnView(3, 20);
@@ -235,37 +235,39 @@ public class PruebaServlet extends HttpServlet{
 			s.setColumnView(5, 20);
 			s.setColumnView(6, 20);
 			s.setColumnView(7, 20);
-			s.setColumnView(8, 40);
+			s.setColumnView(8, 20);
 			s.setColumnView(9, 40);
+			s.setColumnView(10, 40);
+		
 
-			
-			s.setRowView(0, 900);
-
-			s.addCell(new Label(0, 0, "FECHA ALTA", cellFormat));
+			s.addCell(new Label(0, 0, "IDENTIFICADOR", cellFormat));
 			s.addCell(new Label(1, 0, "CLIENTE", cellFormat));
-			s.addCell(new Label(2, 0, "TIPO SERVICIO", cellFormat));
-			s.addCell(new Label(3, 0, "ESTADO", cellFormat));
-			s.addCell(new Label(4, 0, "PRODUCTO", cellFormat));
-			s.addCell(new Label(5, 0, "ENTORNO", cellFormat));
-			s.addCell(new Label(6, 0, "IDENTIFICADOR", cellFormat));
-			s.addCell(new Label(7, 0, "TIPO CLIENTE", cellFormat));
-			s.addCell(new Label(8, 0, "DESCRIPCIÓN", cellFormat));
-			s.addCell(new Label(9, 0, "SOLUCIÓN", cellFormat));
+			s.addCell(new Label(2, 0, "FECHA ALTA", cellFormat));
+			s.addCell(new Label(3, 0, "TIPO CLIENTE", cellFormat));
+			s.addCell(new Label(4, 0, "PRODUCTO/CANAL", cellFormat));
+			s.addCell(new Label(5, 0, "REFERENCIA", cellFormat));
+			s.addCell(new Label(6, 0, "ENTORNO", cellFormat));
+			s.addCell(new Label(7, 0, "ESTADO", cellFormat));
+			s.addCell(new Label(8, 0, "TIPO SERVICIO", cellFormat));
+			s.addCell(new Label(9, 0, "DESCRIPCIÓN", cellFormat));
+			s.addCell(new Label(10, 0, "SOLUCIÓN", cellFormat));
 			
 			int aux = 1;
 
 			for ( Prueba pru : pruebas) {
 				
-				s.addCell(new Label(0, aux, pru.getStr_fecha_estado()));
+				
+				s.addCell(new Label(0, aux, pru.getId_prueba()));
 				s.addCell(new Label(1, aux, pru.getNombre_cliente()));
-				s.addCell(new Label(2, aux, pru.getTipo_servicio()));
-				s.addCell(new Label(3, aux, pru.getEstado()));
+				s.addCell(new Label(2, aux, pru.getStr_fecha_estado()));
+				s.addCell(new Label(3, aux, pru.getPremium()));
 				s.addCell(new Label(4, aux, pru.getProducto()));
-				s.addCell(new Label(5, aux, pru.getEntorno()));
-				s.addCell(new Label(6, aux, pru.getId_prueba()));				
-				s.addCell(new Label(7, aux, pru.getPremium()));
-				s.addCell(new Label(8, aux, pru.getDetalles()));
-				s.addCell(new Label(9, aux, pru.getSolucion()));
+				s.addCell(new Label(5, aux, pru.getReferencia()));
+				s.addCell(new Label(6, aux, pru.getEntorno()));
+				s.addCell(new Label(7, aux, pru.getEstado()));
+				s.addCell(new Label(8, aux, pru.getTipo_servicio()));
+				s.addCell(new Label(9, aux, pru.getDetalles()));
+				s.addCell(new Label(10, aux, pru.getSolucion()));
 
 
 

@@ -38,7 +38,6 @@
 														<option value="default">No hay clientes</option>
 													</c:when>
 													<c:otherwise>
-														<option value="default">Seleccionar</option>
 														<c:forEach items="${clientes}" var="t">	
 															<option value="${t.nombre}" data-premium="${t.premium}" data-segmento="${t.tipo_cliente}" data-clientid="${t.key.id}" ${t.nombre == prueba.nombre_cliente ? 'selected' : ''}>${t.nombre}</option>
 														</c:forEach>

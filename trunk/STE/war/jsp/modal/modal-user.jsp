@@ -64,6 +64,7 @@
 					<span class="fieldset-title">Permisos por área:</span>
 					<br>
 					<fieldset class='radio-container-holder'>
+					<div class="form-field-divider left">
 						<div class="form-field">
 							<span>Clientes:</span><select id="area_cliente" class="long selectpicker" name="area_cliente">
 								<option value="1" ${usuario.permiso_clientes == 1 ? 'selected' : ''}>Propietario</option>	
@@ -87,7 +88,8 @@
 								<option value="3" ${usuario.permiso_servicios == 3 ? 'selected' : ''}>Ver</option>							
 							</select>
 						</div>
-						
+					</div>
+					<div class="form-field-divider right">	
 						<div class="form-field">
 							<span>Informes:</span><select id="area_informes" class="long selectpicker" name="area_informes">
 								<option value="1" ${usuario.permiso_informes == 1 ? 'selected' : ''}>Propietario</option>	
@@ -111,7 +113,7 @@
 								<option value="3" ${usuario.permiso_documentacion == 3 ? 'selected' : ''}>Ver</option>							
 							</select>
 						</div>
-						
+					</div>
 					</fieldset>
 				</div>
 							

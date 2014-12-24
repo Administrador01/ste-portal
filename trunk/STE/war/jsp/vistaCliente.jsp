@@ -44,12 +44,12 @@
 		<div>
 			<div class="pres-field big">
 				<span class="lbl">Soportes:</span>
-				<button class="right-button ${existeS == true ? '' : 'desactivado'}" onclick="window.location.href='../../soporte.do?idCli=${cliente.key.id}'" ${existeS == true ? '' : 'disabled'}> Gestionar soportes </button>
+				<a class="right-button ${existeS == true ? '' : 'desactivado'}" onclick="window.location.href='../../soporte.do?idCli=${cliente.key.id}'" ${existeS == true ? '' : 'disabled'}> Gestionar soportes </a>
 			</div>
 			<hr>
 			<div class="pres-field big last">
 				<span class="lbl">Pruebas:</span>
-				<button class="right-button ${existeP == true ? '' : 'desactivado'}" onclick="window.location.href='../../pruebas.do?idCli=${cliente.key.id}'" ${existeP == true ? '' : 'disabled'}> Gestionar pruebas </button>
+				<a class="right-button ${existeP == true ? '' : 'desactivado'}" onclick="window.location.href='../../pruebas.do?idCli=${cliente.key.id}'" ${existeP == true ? '' : 'disabled'}> Gestionar pruebas </a>
 			</div>
 			<hr>
 		</div>
@@ -84,26 +84,36 @@
 </tr>
 </thead>
 <tbody id="myTable" cellspacing="0">
-<tr>
-<td>
-<span>lorem</span>
-</td>
-<td>
-<span>lorem</span>
-</td>
-<td>
-<span>lorem</span>
-</td>
-<td>
-<span>lorem</span>
-</td>
-<td>
-<span>lorem</span>
-</td>
-<td>
-<span>lorem</span>
-</td>
-</tr>
+<c:choose>
+						<c:when test="${empty implementaciones}">
+							<tr>
+								<td><span>No existen datos.</span></td>
+							</tr>
+						</c:when>
+
+						<c:otherwise>
+							<c:forEach items="${implementaciones}" var="s">
+								<tr class="valid-result" id="row${s.key.id}">
+									<td><span>${s.producto}</span></td>
+									<td><span>${s.pais}</span></td>
+
+									<td></td>
+									<td><span>
+										<c:forEach items="${servicios}" var="t">
+											<c:choose>
+												<c:when test="${t.key.id==s.servicio_id}">
+													${t.name}
+												</c:when>
+											</c:choose>	
+										</c:forEach>
+									</span></td>
+									<td><span>${s.estado}</span></td>
+									
+									<td><span>${s.gestor_gcs}</span></td>
+								</tr>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
 </tbody>
 </table>
 	</div>

@@ -24,7 +24,7 @@
 							<span class="lbl">Nombre cliente<span class="required-asterisk">*</span>:</span>
 							<input class="long" type="text" required name="nombre_cliente" id="nombre_cliente" value="${cliente.nombre}">
 						</div>
-					
+					<input type="text" required hidden name="id" value="${cliente.key.id}">
 						<div class="form-field">
 							<span class="lbl">Fecha alta<span class="required-asterisk">*</span>:</span>
 							<div class="input">

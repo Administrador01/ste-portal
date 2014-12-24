@@ -41,7 +41,11 @@ public class SoporteDao {
 		
 		
 	}
-
+	public synchronized void updateSoporte(Soporte s) {
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		pm.makePersistent(s);
+		pm.close();
+	}
 	public synchronized void createSoporte(Soporte s) {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 

@@ -252,43 +252,46 @@ var getIsoDate = function(dateString) {
 
 $(function(){
 	$('.go_pag2').click(function(e){
+		
+		var $form = $($('#new-user-form'));
+		$form.valid();
+		
+		
 		var hello =$('#pais_imp').val();
 		if($('#producto_imp').val()=='default'||$('#cliente_imp').val()=='default'||$('#servicio_imp').val()=='default'||$('#fecha_alta_imp').val()==''||$('#pais_imp').val()=='default'){
-			$('.error').removeClass('hidden');
+			/*$('.error').removeClass('hidden');
 			if($('#producto_imp').val()=='default')$('#div_producto_imp').addClass('falta');
 			if($('#cliente_imp').val()=='default')$('#div_cliente_imp').addClass('falta');
 			if($('#servicio_imp').val()=='default')$('#div_servicio_imp').addClass('falta');
 			if($('#fecha_alta_imp').val()=='')$('#div_fecha_alta_imp').addClass('falta');
-			if($('#pais_imp').val()=='default')$('#div_pais_imp').addClass('falta');
+			if($('#pais_imp').val()=='default')$('#div_pais_imp').addClass('falta');*/
 		}else{
-			$('.error').addClass('hidden');
 			$('#page1_imp').addClass('hidden');
-			$('#page2_imp').removeClass('hidden');/*
+			$('#page2_imp').removeClass('hidden');
 			$('#botont1').addClass('hidden');
-			$('#botont2').removeClass('hidden');*/
+			$('#botont2').removeClass('hidden');
 		}
 		
 	})
-	
+	/*
 	$('#producto_imp').on('change', function() {$('#div_producto_imp').removeClass('falta');if($('#producto_imp').val()!='default'&&$('#cliente_imp').val()!='default'&&$('#servicio_imp').val()!='default'&&$('#fecha_alta_imp').val()!=''&&$('#pais_imp').val()!='default')$('.error').addClass('hidden');})
 	$('#cliente_imp').on('change', function() {$('#div_cliente_imp').removeClass('falta');if($('#producto_imp').val()!='default'&&$('#cliente_imp').val()!='default'&&$('#servicio_imp').val()!='default'&&$('#fecha_alta_imp').val()!=''&&$('#pais_imp').val()!='default')$('.error').addClass('hidden');})
 	$('#servicio_imp').on('change', function() {$('#div_servicio_imp').removeClass('falta');if($('#producto_imp').val()!='default'&&$('#cliente_imp').val()!='default'&&$('#servicio_imp').val()!='default'&&$('#fecha_alta_imp').val()!=''&&$('#pais_imp').val()!='default')$('.error').addClass('hidden');})
 	$('#fecha_alta_imp').on('change', function() {$('#div_fecha_alta_imp').removeClass('falta');if($('#producto_imp').val()!='default'&&$('#cliente_imp').val()!='default'&&$('#servicio_imp').val()!='default'&&$('#fecha_alta_imp').val()!=''&&$('#pais_imp').val()!='default')$('.error').addClass('hidden');})
 	$('#pais_imp').on('change', function() {$('#div_pais_imp').removeClass('falta');})
 	$('#pais_imp').on('change', function() {if($('#producto_imp').val()!='default'&&$('#cliente_imp').val()!='default'&&$('#servicio_imp').val()!='default'&&$('#fecha_alta_imp').val()!=''&&$('#pais_imp').val()!='default')$('.error').addClass('hidden');})
-	
+	*/
 	
 	$('.go_pag1').click(function(e){
 		$('#page2_imp').addClass('hidden');
-		$('#page1_imp').removeClass('hidden');/*
+		$('#page1_imp').removeClass('hidden');
 		$('#botont2').addClass('hidden');
-		$('#botont1').removeClass('hidden');*/
+		$('#botont1').removeClass('hidden');
 	})
 	
 	$('#cliente_imp').on('change', function() {
 		var option = $(this).find(":selected");
 		$('#input-segmento-implementacion').val(option.data('segmento'));
-		$('#client-id-input').val(option.data('clientid'));
 	})
 	$('#servicio_imp').on('change', function() {
 		var option = $(this).find(":selected");
