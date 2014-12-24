@@ -43,7 +43,6 @@
 											<option value="default">No hay clientes</option>
 										</c:when>
 										<c:otherwise>
-											<option value="default">Seleccionar</option>
 											<c:forEach items="${clientes}" var="t">	
 												<option value="${t.nombre}" data-premium="${t.premium}" data-segmento="${t.tipo_cliente}"  data-clientid="${t.key.id}" ${t.nombre == soporte.cliente_name ? 'selected' : ''}>${t.nombre}</option>
 											</c:forEach>
@@ -80,17 +79,17 @@
 					</div>
 					--%>
 					
-					<%--
+					
 					<div class="form-field">
 							<span class="lbl">Tipo<span class="required-asterisk">*</span>:</span>
-							<label class="ui-marmots-label-radio ${soporte.tipo == 'Incidencia' ? 'on' : ''}" for="radio_incidencia">
-								<input name="tipo" id="radio_incidencia" ${soporte.tipo == 'Incidencia' ? 'checked' : ''} type="radio" value="Incidencia"/>Incidencia
+							<label class="lbl ui-marmots-label-radio ${soporte.tipo_soporte == 'Incidencia' ? 'on' : ''}" for="radio_incidencia">
+								<input name="tipo" id="radio_incidencia" ${soporte.tipo_soporte == 'Incidencia' ? 'checked' : ''} type="radio" value="Incidencia"/>Incidencia
 							</label>
-							<label class="ui-marmots-label-radio marmots-label-left ${soporte.tipo == 'Consulta' ? 'on' : ''}" for="radio_consulta">
-								<input name="tipo"  id="radio_consulta"  ${soporte.tipo == 'Consulta' ? 'checked' : ''}type="radio" value="Consulta"/>Consulta<br />${soporte.tipo}
+							<label class="lbl ui-marmots-label-radio marmots-label-left ${soporte.tipo_soporte == 'Consulta' ? 'on' : ''}" for="radio_consulta">
+								<input name="tipo"  id="radio_consulta"  ${soporte.tipo_soporte == 'Consulta' ? 'checked' : ''}type="radio" value="Consulta"/>Consulta<br />
 							</label>
 					</div>
-					--%>
+
 					
 					<div class="form-field">
 						<span class="lbl">Tipo de servicio<span class="required-asterisk">*</span>:</span>

@@ -757,10 +757,23 @@ textarea.readonly {
 }
 #vistaCliente .right-button {
   float: right;
+  background-color: #0079c1;
+  border: 1px solid #00559d;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font: 12px/24px "BBVA Web Medium", arial bold, sans-serif;
+  height: 30px;
+  padding: 2px 9px 2px 8px;
+  position: relative;
+  text-align: center;
+  text-shadow: none;
+  vertical-align: middle;
 }
 #vistaCliente .right-button.desactivado {
   background: none repeat scroll 0 0 #f6f6f6;
   color: #aeaeae;
+  pointer-events: none;
 }
 #vistaCliente .cuadro-cliente {
   border: 1px solid #a7cff7;
@@ -853,11 +866,19 @@ textarea.readonly {
 #implementacion .falta {
   background-color: #ff8888;
 }
+#implementacion .detalle {
+  margin-top: 2%;
+  width: 100%;
+  padding-right: 1%;
+}
+#implementacion .detalle > textarea {
+  width: 78.5%;
+}
 #implementacion .entor_integrad {
   display: inline-block;
-  float: left;
   margin: 2%;
   margin-left: 5%;
+  margin-top: 7%;
   background-color: #E4EAFE;
   border: 3px solid #D1DCFF;
   padding: 1%;

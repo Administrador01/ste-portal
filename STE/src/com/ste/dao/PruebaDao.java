@@ -48,6 +48,13 @@ public class PruebaDao {
 		
 		
 	}
+	
+	public synchronized void updatePrueba(Prueba s) {
+
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		pm.makePersistent(s);
+		pm.close();
+	}
 
 	public synchronized void createPrueba(Prueba s) {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
@@ -102,7 +109,7 @@ public class PruebaDao {
 			pm.close();
 		}
 	}
-	
+
 	public void deletePrueba(Prueba s) {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		pm.deletePersistent(pm.getObjectById(s.getClass(), s.getKey().getId()));

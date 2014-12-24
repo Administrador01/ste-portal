@@ -9,7 +9,7 @@
 
 <div class="modal_ajax">
 			<div class="">
-				<h2>Editar prueba</h2>
+				<h2>Editar implementaci&oacuten</h2>
 				<hr />
 			</div>
 			
@@ -37,7 +37,6 @@
 									<option value="default">No hay clientes</option>
 								</c:when>
 							<c:otherwise>
-								<option value="default">Seleccionar</option>
 								<c:forEach items="${clientes}" var="t">							
 									<option value="${t.key.id}" data-segmento="${t.tipo_cliente}" ${t.key.id == cliente.key.id ? 'selected' : ''}>${t.nombre}</option>
 								</c:forEach>
@@ -72,7 +71,6 @@
 									<option value="default">No hay servicios</option>
 								</c:when>
 							<c:otherwise>
-								<option value="default">Seleccionar</option>
 								<c:forEach items="${servicios}" var="t">							
 									<option value="${t.key.id}" data-nombre="${t.name}" data-tipo="${t.tipo}" ${t.key.id == servicio.key.id ? 'selected' : ''}>${t.name}</option>
 								</c:forEach>
@@ -119,7 +117,7 @@
 					</div>
 					
 					<div class="form-field">
-					<span style="width:44%;"| class="lbl etiqueta">Normalizador<span class="required-asterisk">*</span>:</span>
+					<span style="width:44%;" class="lbl etiqueta">Normalizador<span class="required-asterisk">*</span>:</span>
 							<label style="width:15%;" class="lbl radio ui-marmots-label-radio marmots-label-left ${implementacion.normalizador ? 'on' : ''} " for="radio_Si_Modal">
 								<input name="normalizador_modal" id="radio_Si_Modal" type="radio" value="Si" ${implementacion.normalizador ? 'checked' : ''} />Si
 							</label>
@@ -139,12 +137,12 @@
 
 					<div class="form-field">
 					<span class="lbl etiqueta" style="width:44%;">Firma contrato<span class="required-asterisk">*</span>:</span>
-							<label style="width:15%;" class="lbl radio ui-marmots-label-radio marmots-label-left ${implementacion.firma_contrato ? 'on' : ''}" for="crack_Si_Modal">
-								<input name="firma_modal" id="crack_Si_Modal" ${implementacion.firma_contrato ? 'checked' : ''} type="radio" value="Si"  />Si
+							<label style="width:15%;" class="lbl radio ui-marmots-label-radio marmots-label-left ${implementacion.firma_contrato ? 'on' : ''}" for="radio_Si_Firma_Modal">
+								<input name="firma_modal" ${implementacion.firma_contrato ? 'checked' : ''} id="radio_Si_Firma_Modal"  type="radio" value="Si"  />Si
 							</label>
 
-							<label style="width:15%;" class="lbl radio ui-marmots-label-radio marmots-label-left ${implementacion.firma_contrato ? '' : 'on'}" for="crack_No_Modal">
-								<input name="firma_modal" id="crack_No_Modal" ${implementacion.firma_contrato ? '' : 'checked'}  type="radio" value="No"  />No
+							<label style="width:15%;" class="lbl radio ui-marmots-label-radio marmots-label-left ${implementacion.firma_contrato ? '' : 'on'}" for="radio_No_Firma_Modal">
+								<input name="firma_modal" ${implementacion.firma_contrato ? '' : 'checked'} id="radio_No_Firma_Modal"   type="radio" value="No"  />No
 							</label>
 					</div>
 					
@@ -165,7 +163,7 @@
 					
 					<div class="form-field">
 					<span class="lbl">Detalle:</span>
-					<input type="text" name="detalle" maxlength="500" value="${implementacion.detalle}">
+					<textarea type="text" name="detalle" maxlength="500" rows="2" cols="1" placeholder="Introduzca texto ...">${implementacion.detalle}</textarea>
 					</div>
 						
 			
@@ -173,10 +171,7 @@
 					<span class="lbl">Referencia externa:</span>
 					<input type="text" name="ref_ext" id="ref_ext_modal" maxlength="18" value="${implementacion.referencia_externa}">
 					</div>
-					
-					<div class="form-field">
-						
-					</div>
+
 					
 					<h3 style="color:#FF8888" class="error hidden">Faltan por introducir campos</h3>
 

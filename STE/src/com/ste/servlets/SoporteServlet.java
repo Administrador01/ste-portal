@@ -101,50 +101,54 @@ public class SoporteServlet extends HttpServlet{
 			cellFormat.setAlignment(jxl.format.Alignment.CENTRE);
 			cellFormat.setVerticalAlignment(VerticalAlignment.CENTRE);
 
-			s.setColumnView(0, 16);
+			s.setColumnView(0, 20);
 			s.setColumnView(1, 20);
 			s.setColumnView(2, 20);
 			s.setColumnView(3, 20);
-			s.setColumnView(4, 20);
-			s.setColumnView(5, 20);
+			s.setColumnView(4, 30);
+			s.setColumnView(5, 40);
 			s.setColumnView(6, 20);
-			s.setColumnView(7, 40);
-			s.setColumnView(8, 40);
+			s.setColumnView(7, 20);
+			s.setColumnView(8, 20);
 			s.setColumnView(9, 20);
-			s.setColumnView(10, 20);
-			s.setColumnView(11, 20);
-			
+			s.setColumnView(10, 40);
+			s.setColumnView(11, 40);
+
+
 			s.setRowView(0, 900);
 
 			s.addCell(new Label(0, 0, "IDENTIFICADOR", cellFormat));
-			s.addCell(new Label(1, 0, "FECHA INICIO", cellFormat));
-			s.addCell(new Label(2, 0, "CLIENTE", cellFormat));
-			s.addCell(new Label(3, 0, "SEGMENTO", cellFormat));
-			s.addCell(new Label(4, 0, "ESTADO", cellFormat));
-			s.addCell(new Label(5, 0, "TIPO SERVICIO", cellFormat));
-			s.addCell(new Label(6, 0, "PRODUCTO/CANAL", cellFormat));
-			s.addCell(new Label(7, 0, "DESCRIPCIÓN", cellFormat));
-			s.addCell(new Label(8, 0, "SOLUCIÓN", cellFormat));
-			s.addCell(new Label(9, 0, "TIPO SOPORTE", cellFormat));
-			s.addCell(new Label(10, 0, "TIPO CLIENTE", cellFormat));
-			s.addCell(new Label(11, 0, "FECHA FIN", cellFormat));
+			s.addCell(new Label(1, 0, "CLIENTE", cellFormat));
+			s.addCell(new Label(2, 0, "TIPO CLIENTE", cellFormat));
+			s.addCell(new Label(3, 0, "TIPO SOPORTE", cellFormat));
+			s.addCell(new Label(4, 0, "FECHA INICIO", cellFormat));
+			s.addCell(new Label(5, 0, "FECHA FIN", cellFormat));
+			s.addCell(new Label(6, 0, "TIPO SERVICIO", cellFormat));
+			s.addCell(new Label(7, 0, "ESTADO", cellFormat));
+			s.addCell(new Label(8, 0, "SEGMENTO", cellFormat));
+			s.addCell(new Label(9, 0, "PRODUCTO/CANAL", cellFormat));
+			s.addCell(new Label(10, 0, "DESCRIPCIÓN", cellFormat));
+			s.addCell(new Label(11, 0, "SOLUCIÓN", cellFormat));
 			
 			int aux = 1;
 
 			for (Soporte sop : soportes) {
 				
 				s.addCell(new Label(0, aux, sop.getId_soporte()));
-				s.addCell(new Label(1, aux, sop.getStr_fecha_inicio()));
-				s.addCell(new Label(2, aux, sop.getCliente_name()));
-				s.addCell(new Label(3, aux, sop.getTipo_cliente()));
-				s.addCell(new Label(4, aux, sop.getEstado()));
-				s.addCell(new Label(5, aux, sop.getTipo_servicio()));
-				s.addCell(new Label(6, aux, sop.getProducto_canal()));
-				s.addCell(new Label(7, aux, sop.getDetalles()));
-				s.addCell(new Label(8, aux, sop.getSolucion()));
-				s.addCell(new Label(9, aux, sop.getTipo_soporte()));
-				s.addCell(new Label(10, aux, sop.getPremium()));
-				s.addCell(new Label(11, aux, sop.getStr_fecha_fin()));
+				s.addCell(new Label(1, aux, sop.getCliente_name()));
+				s.addCell(new Label(2, aux, sop.getPremium()));
+				s.addCell(new Label(3, aux, sop.getTipo_soporte()));
+				s.addCell(new Label(4, aux, sop.getStr_fecha_inicio()));
+				s.addCell(new Label(5, aux, sop.getStr_fecha_fin()));
+				s.addCell(new Label(6, aux, sop.getTipo_servicio()));
+				s.addCell(new Label(7, aux, sop.getEstado()));
+				s.addCell(new Label(8, aux, sop.getTipo_cliente()));
+				s.addCell(new Label(9, aux, sop.getProducto_canal()));
+				s.addCell(new Label(10, aux, sop.getDetalles()));
+				s.addCell(new Label(11, aux, sop.getSolucion()));
+				
+				
+				
 
 
 				aux++;
@@ -226,7 +230,7 @@ public class SoporteServlet extends HttpServlet{
 		s.setSolucion(solucion);
 		s.setCliente_id(clienteID);
 		
-		sDao.createSoporte(s);
+		sDao.updateSoporte(s);
 		
 		
 		try {

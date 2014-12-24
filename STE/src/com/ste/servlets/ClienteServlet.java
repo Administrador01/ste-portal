@@ -197,14 +197,15 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 		//actualizamos los valores de los campos de pruebas y de soporte
 		for (Prueba a : prueb_arr){
 			a.setNombre_cliente(nombre);
-			a.setPremium(premium);			
-			pDao.createPrueba(a);
+			a.setPremium(premium);
+			pDao.updatePrueba(a);
 		}
 		
 		for (Soporte so : sop_arr){
 			so.setCliente_name(nombre);;
-			so.setPremium(premium);			
-			sDao.createSoporte(so);
+			so.setPremium(premium);
+			so.setTipo_cliente(tipo_cliente);
+			sDao.updateSoporte(so);
 		}
 		
 		
