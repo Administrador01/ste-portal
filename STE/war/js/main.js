@@ -507,7 +507,7 @@ $(function() {
 	});
 	
 	$('#formButton').click(function(e){
-			$('.filter-option').html('Seleccionar');
+			//$('.filter-option').html('Seleccionar');
 			var $formButton = $(this);
 			if ($formButton.hasClass('white-btn')){
 				if ($('.form-holder').css('overflow')=="visible"){

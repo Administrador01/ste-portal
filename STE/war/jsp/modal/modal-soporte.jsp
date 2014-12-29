@@ -86,7 +86,7 @@
 								<input name="tipo" id="radio_incidencia" ${soporte.tipo_soporte == 'Incidencia' ? 'checked' : ''} type="radio" value="Incidencia"/>Incidencia
 							</label>
 							<label class="lbl ui-marmots-label-radio marmots-label-left ${soporte.tipo_soporte == 'Consulta' ? 'on' : ''}" for="radio_consulta">
-								<input name="tipo"  id="radio_consulta"  ${soporte.tipo_soporte == 'Consulta' ? 'checked' : ''}type="radio" value="Consulta"/>Consulta<br />
+								<input name="tipo"  id="radio_consulta"  ${soporte.tipo_soporte == 'Consulta' ? 'checked' : ''} type="radio" value="Consulta"/>Consulta<br />
 							</label>
 					</div>
 

@@ -7,7 +7,7 @@ function editForm($form, entidad){
 	
 	if($form.valid()){			
 		
-		var postData = $form.serialize() + "&accion=update;
+		var postData = $form.serialize() + "&accion=update";
 		var formURL = $form.attr("action");
 		$.ajax(
 		{

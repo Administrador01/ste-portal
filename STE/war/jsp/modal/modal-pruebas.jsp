@@ -77,7 +77,7 @@
 			
 								
 								<div class="form-field">
-									<span class="lbl">Fecha estado:</span>
+									<span class="lbl">Fecha alta:</span>
 									<div class="input">
 										<input type="text" readonly="" value="${prueba.str_fecha_estado}" size="16" class="datepicker" name="fecha_estado" id="fecha_estado_modal">
 									</div>
