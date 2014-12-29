@@ -105,7 +105,7 @@
 									<option value="Pendiente" selected>Pendiente</option>
 									<option value="Analisis">An&aacutelisis</option>
 									<option value="Pruebas">Pruebas</option>	
-									<option value="Penny test">Pesnny test</option>
+									<option value="Penny test">Penny test</option>
 									<option value="Finalizado">Finalizado</option>	
 									<option value="Parado">Parado</option>
 									<option value="Anulado">Anulado</option>
@@ -121,12 +121,17 @@
 					<span class="lbl">Pa&iacutes<span class="required-asterisk">*</span>:</span>
 								<select id="pais_imp" class="selectpicker selected" name="pais">
 									<option value="default">Seleccionar</option>	
-									<option value="Francia">Francia</option>
-									<option value="Belgica">B&eacutelgica</option>
-									<option value="Italia">Italia</option>	
-									<option value="Portugal">Portugal</option>
+									
+									<option value="B&eacutelgica">B&eacutelgica</option>
+									<option value="China (Hong Kong)">China (Hong Kong)</option>
 									<option value="Espa&ntildea">Espa&ntildea</option>	
+									<option value="Francia">Francia</option>
+									<option value="Italia">Italia</option>
+									<option value="Portugal">Portugal</option>
 									<option value="Reino Unido">Reino Unido</option>
+									<option value="US (New York)">US (New York)</option>
+
+									
 							</select>
 					</div>
 					
@@ -217,12 +222,12 @@
 					
 					<div class="form-field">
 						<span class="lbl">Fecha contrataci&oacuten:</span>
-						<input type="text" size="16" class="datepicker" name="fecha_contrat"readonly>
+						<input type="text" size="16" class="datepicker fromTo" data-target-id='fecha_subid' name="fecha_contrat" id="fecha_contrat" readonly>
 					</div>
 					
 					<div class="form-field">
 						<span class="lbl">Fecha subida:</span>
-						<input type="text" size="16" class="datepicker" name="fecha_subid" readonly>
+						<input type="text" size="16" class="datepicker" name="fecha_subid" id="fecha_subid" readonly>
 					</div>
 					
 				</div>

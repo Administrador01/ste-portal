@@ -25,6 +25,23 @@ public class ClienteDao {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		
 		
+		Query q = pm.newQuery("select from " + Cliente.class.getName() +" where erased == false");		
+		q.setOrdering("id_cliente asc");
+		clientes = (List<Cliente>) q.execute();
+		
+		
+		pm.close();
+
+		return clientes;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Cliente> getAllClientsEvenDeleted() {
+
+		List<Cliente> clientes;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		
 		Query q = pm.newQuery("select from " + Cliente.class.getName());		
 		q.setOrdering("id_cliente asc");
 		clientes = (List<Cliente>) q.execute();
@@ -42,7 +59,7 @@ public class ClienteDao {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		
 		
-		Query q = pm.newQuery("select from " + Cliente.class.getName());		
+		Query q = pm.newQuery("select from " + Cliente.class.getName() +" where erased == false");		
 		q.setOrdering("nombre asc");
 		clientes = (List<Cliente>) q.execute();
 		

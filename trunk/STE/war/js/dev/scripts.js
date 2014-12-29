@@ -59,7 +59,7 @@ function editForm($form, entidad){
 	
 	if($form.valid()){			
 		
-		var postData = $form.serialize() + "&accion=update&id="+id;
+		var postData = $form.serialize() + "&accion=update";
 		var formURL = $form.attr("action");
 		$.ajax(
 		{
@@ -811,7 +811,7 @@ $(function() {
 	});
 	
 	$('#formButton').click(function(e){
-			$('.filter-option').html('Seleccionar');
+			//$('.filter-option').html('Seleccionar');
 			var $formButton = $(this);
 			if ($formButton.hasClass('white-btn')){
 				if ($('.form-holder').css('overflow')=="visible"){
@@ -859,7 +859,7 @@ $(function() {
 		
 	
 });
-;;$.fn.paginateMe = function(opts) {
+;$.fn.paginateMe = function(opts) {
 	var $this = this, defaults = {
 		perPage : 10,
 		showPrevNext : false,

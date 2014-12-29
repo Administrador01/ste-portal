@@ -8,16 +8,6 @@
 	<div class="breadcrumbs">
 		<span onclick="window.location.href='../../'">Home</span> > <span onclick="window.location.href='../clientes.do'"> Clientes </span> > <span> Ficha cliente </span>
 	</div>
-	
-	
-	
-	
-	
-	${existeS}
-	${existeP}
-	
-
-
 	<div id="superior">
 		<div class="cuadro-cliente left">
 			<div>

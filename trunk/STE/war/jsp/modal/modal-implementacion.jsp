@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-
+<script src="../components/checkbox/jquery.marmots-checkbox.js" type="text/javascript"></script>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
@@ -91,7 +91,7 @@
 									<option value="Pendiente"  ${implementacion.estado == 'Pendiente' ? 'selected' : ''}>Pendiente</option>
 									<option value="Analisis" ${implementacion.estado == 'Analisis' ? 'selected' : ''}>An&aacutelisis</option>
 									<option value="Pruebas" ${implementacion.estado == 'Pruebas' ? 'selected' : ''}>Pruebas</option>	
-									<option value="Penny test" ${implementacion.estado == 'Penny test' ? 'selected' : ''}>Pesnny test</option>
+									<option value="Penny test" ${implementacion.estado == 'Penny test' ? 'selected' : ''}>Penny test</option>
 									<option value="Finalizado"${implementacion.estado == 'Finalizado' ? 'selected' : ''}>Finalizado</option>	
 									<option value="Parado" ${implementacion.estado == 'Parado' ? 'selected' : ''}>Parado</option>
 									<option value="Anulado" ${implementacion.estado == 'Anulado' ? 'selected' : ''}>Anulado</option>
@@ -105,14 +105,19 @@
 					</div>
 					
 					<div class="form-field" id="div_pais_imp">
-					<span class="lbl">Pais<span class="required-asterisk">*</span>:</span>
+					<span class="lbl">Pa&iacutes<span class="required-asterisk">*</span>:</span>
 								<select id="pais_imp" class="selectpicker selected" name="pais" required aria-required="true">	
-									<option value="Francia" ${implementacion.pais == 'Francia' ? 'selected' : ''}>Francia</option>
-									<option value="Belgica" ${implementacion.pais == 'Belgica' ? 'selected' : ''}>Belgica</option>
+									
+									<option value="B&eacutelgica" ${implementacion.pais == 'B&eacutelgica' ? 'selected' : ''}>B&eacutelgica</option>
+									<option value="China (Hong Kong)" ${implementacion.pais == 'China (Hong Kong)' ? 'selected' : ''}>China (Hong Kong)</option>
+									<option value="Espa&ntildea" ${implementacion.pais == 'Espa&ntildea' ? 'selected' : ''}>Espa&ntildea</option>
+									<option value="Francia" ${implementacion.pais == 'Francia' ? 'selected' : ''}>Francia</option>	
 									<option value="Italia" ${implementacion.pais == 'Italia' ? 'selected' : ''}>Italia</option>	
 									<option value="Portugal" ${implementacion.pais == 'Portugal' ? 'selected' : ''}>Portugal</option>
-									<option value="Espa&ntildea" ${implementacion.pais == 'Espa&ntildea' ? 'selected' : ''}>Espa&ntildea</option>	
-									<option value="Reino Unido" ${implementacion.pais == '' ? 'selected' : ''}>Reino Unido</option>
+									<option value="Reino Unido" ${implementacion.pais == 'Reino Unido' ? 'selected' : ''}>Reino Unido</option>
+									<option value="US (New York)" ${implementacion.pais == 'US (New York)' ? 'selected' : ''}>US (New York)</option>
+									
+									
 							</select>
 					</div>
 					
@@ -126,6 +131,7 @@
 								<input name="normalizador_modal" id="radio_No_Modal" type="radio" value="No" ${implementacion.normalizador ? '' : 'checked'} />No
 							</label>
 					</div>
+					
 					<div class="form-field">
 					<span class="lbl">Referencia global:</span>
 					<input type="text" name="ref_glo" maxlength="11" value="${implementacion.referencia_global}">
@@ -152,7 +158,7 @@
 					</div>
 					
 					<div class="form-field">
-					<span class="lbl">Gestor promocion:</span>
+					<span class="lbl">Gestor promoci&oacuten:</span>
 					<input type="text" name="gestor_prom" maxlength="25" value="${implementacion.gestor_promocion}">
 					</div>
 					

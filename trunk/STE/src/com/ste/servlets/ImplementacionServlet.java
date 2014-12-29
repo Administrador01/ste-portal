@@ -191,8 +191,8 @@ public class ImplementacionServlet extends HttpServlet{
 			boolean normalizador=false;
 			boolean firma = false;
 			
-			if (normalizador_str == "Si")normalizador = true;
-			if (firma_str == "Si")firma = true;
+			if (normalizador_str.equals("Si"))normalizador = true;
+			if (firma_str.endsWith("Si"))firma = true;
 			
 			
 			
