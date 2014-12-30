@@ -10,12 +10,18 @@ import java.util.List;
 
 
 
+
+
+
+
+
 import com.ste.beans.Log;
 import com.ste.beans.User;
 import com.ste.dao.LogsDao;
 import com.ste.dao.UserDao;
 
 public class Utils {
+
 	
 	public static void writeLog(String usermail, String accion, String entidad, String nombre_entidad){
 		
@@ -59,7 +65,7 @@ public class Utils {
 	{  
 	  try  
 	  {  
-	    double d = Double.parseDouble(str);  
+	    //double d = Double.parseDouble(str);  
 	  }  
 	  catch(NumberFormatException nfe)  
 	  {  
@@ -92,9 +98,11 @@ public class Utils {
         return convertedDate;
 	}
 	
+
 	public static List<String> getHorasList(){
 		
-		List<String> listaHoras = new ArrayList();
+
+		List<String> listaHoras = new ArrayList<String>();
 		
 		for (Integer a=0; a<24; a++){
 			if (a.toString().length()==1){
@@ -109,7 +117,7 @@ public class Utils {
 	
 	public static List<String> getMinutosList(){
 		
-		List<String> listaMinutos = new ArrayList();
+		List<String> listaMinutos = new ArrayList<String>();
 		
 		for (Integer a=0; a<60; a=a+5){
 			if (a.toString().length()==1){
@@ -134,6 +142,7 @@ public class Utils {
 	public static String dateConverterToStr(Date fecha){
 		
 
+		@SuppressWarnings("deprecation")
 		String convertedDate = fecha.getDate() + "/" + (fecha.getMonth()+1) + "/" + (fecha.getYear() + 1900);
 		
         return convertedDate;

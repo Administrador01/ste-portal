@@ -11,17 +11,16 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.ste.beans.Cliente;
+import com.ste.beans.ProductoCanal;
 import com.ste.beans.Prueba;
+import com.ste.beans.TipoServicio;
 import com.ste.dao.ClienteDao;
+import com.ste.dao.ProductoCanalDao;
 import com.ste.dao.PruebaDao;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.ste.dao.TipoServicioDao;
 
 import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+
 
 public class PruebaModalAction extends Action{
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
@@ -39,6 +38,16 @@ public class PruebaModalAction extends Action{
 			ClienteDao cDao = ClienteDao.getInstance();
 			List<Cliente> clientes = cDao.getAllClients();
 			req.setAttribute("clientes", clientes);
+			
+			ProductoCanalDao prodDao = ProductoCanalDao.getInstance();
+			List<ProductoCanal> productos = prodDao.getAllProductos();
+			
+			req.setAttribute("productos", productos);
+			
+			TipoServicioDao servDao = TipoServicioDao.getInstance();
+			List<TipoServicio> servicios = servDao.getAllServicios();
+			req.setAttribute("tiposervicios", servicios);
+			
 			
 			}catch(Exception e){
 				

@@ -48,18 +48,11 @@
 
 					<div class="form-field" id="div_producto_imp">
 							<span class="lbl">Producto/canal<span class="required-asterisk">*</span>:</span>
+							
 								<select id="producto_imp" class="selectpicker selected" name="producto_imp" >
-											<option value="Swift Fileact" ${implementacion.producto == 'Swift Fileact' ? 'selected' : ''}>Swift Fileact</option>
-											<option value="Swift Fileact Antig" ${implementacion.producto == 'Swift Fileact Antig' ? 'selected' : ''}>Swift Fileact (antigua conexi&oacuten)</option>
-											<option value="Swift FIN" ${implementacion.producto == 'Swift FIN' ? 'selected' : ''}>Swift FIN</option>	
-											<option value="Swift FIN relay" ${implementacion.producto == 'Swift FIN relay' ? 'selected' : ''}>Swift FIN (Relay Bank)</option>
-											<option value="Editran" ${implementacion.producto == 'Editran' ? 'selected' : ''}>EDITRAN</option>	
-											<option value="BBVA Netcash" ${implementacion.producto == 'BBVA Netcash' ? 'selected' : ''}>BBVA Netcash</option>
-											<option value="Edifact" ${implementacion.producto == 'Edifact' ? 'selected' : ''}>EDIFACT</option>
-											<option value="Normalizador" ${implementacion.producto == 'Normalizador' ? 'selected' : ''}>Normalizador</option>
-											<option value="Cashpool domestico" ${implementacion.producto == 'Cashpool domestico' ? 'selected' : ''}>Cashpool dom&eacutestico</option>
-											<option value="Cashpool internacional" ${implementacion.producto == 'Cashpool internacional' ? 'selected' : ''}>Cashpool internacional</option>
-											<option value="Factura integral" ${implementacion.producto == 'Factura integral' ? 'selected' : ''}>Factura integral</option>
+											<c:forEach items="${productos}" var="prod">
+												<option value="${prod.name}" ${implementacion.producto == prod.name ? 'selected' : ''}>${prod.name}</option>
+											</c:forEach>
 								</select>
 					</div>
 					
@@ -107,17 +100,10 @@
 					<div class="form-field" id="div_pais_imp">
 					<span class="lbl">Pa&iacutes<span class="required-asterisk">*</span>:</span>
 								<select id="pais_imp" class="selectpicker selected" name="pais" required aria-required="true">	
-									
-									<option value="B&eacutelgica" ${implementacion.pais == 'B&eacutelgica' ? 'selected' : ''}>B&eacutelgica</option>
-									<option value="China (Hong Kong)" ${implementacion.pais == 'China (Hong Kong)' ? 'selected' : ''}>China (Hong Kong)</option>
-									<option value="Espa&ntildea" ${implementacion.pais == 'Espa&ntildea' ? 'selected' : ''}>Espa&ntildea</option>
-									<option value="Francia" ${implementacion.pais == 'Francia' ? 'selected' : ''}>Francia</option>	
-									<option value="Italia" ${implementacion.pais == 'Italia' ? 'selected' : ''}>Italia</option>	
-									<option value="Portugal" ${implementacion.pais == 'Portugal' ? 'selected' : ''}>Portugal</option>
-									<option value="Reino Unido" ${implementacion.pais == 'Reino Unido' ? 'selected' : ''}>Reino Unido</option>
-									<option value="US (New York)" ${implementacion.pais == 'US (New York)' ? 'selected' : ''}>US (New York)</option>
-									
-									
+									<c:forEach items="${paises}" var="pais">
+										<option value="${pais.name}" ${implementacion.pais == pais.name ? 'selected' : ''}>${pais.name}</option>
+									</c:forEach>
+															
 							</select>
 					</div>
 					

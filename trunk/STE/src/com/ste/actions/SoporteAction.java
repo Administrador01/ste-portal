@@ -12,9 +12,13 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.ste.beans.Cliente;
+import com.ste.beans.ProductoCanal;
 import com.ste.beans.Soporte;
+import com.ste.beans.TipoServicio;
 import com.ste.dao.ClienteDao;
+import com.ste.dao.ProductoCanalDao;
 import com.ste.dao.SoporteDao;
+import com.ste.dao.TipoServicioDao;
 
 public class SoporteAction extends Action{
 
@@ -40,6 +44,15 @@ public class SoporteAction extends Action{
 		
 		req.setAttribute("clientes", clientes);
 		req.setAttribute("soportes", soportes);
+		
+		ProductoCanalDao prodDao = ProductoCanalDao.getInstance();
+		List<ProductoCanal> productos = prodDao.getAllProductos();
+		
+		req.setAttribute("productos", productos);
+		
+		TipoServicioDao servDao = TipoServicioDao.getInstance();
+		List<TipoServicio> servicios = servDao.getAllServicios();
+		req.setAttribute("tiposervicios", servicios);
 		
 		return  mapping.findForward("ok");
 	}

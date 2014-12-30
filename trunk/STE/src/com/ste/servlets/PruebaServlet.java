@@ -14,6 +14,7 @@ import com.ste.utils.Utils;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Date;
 import java.util.List;
 
 import jxl.Workbook;
@@ -36,7 +37,7 @@ public class PruebaServlet extends HttpServlet{
 		JSONObject json = new JSONObject();
 		
 		String accion = req.getParameter("accion");
-			
+		
 		 try {
 			 
 			HttpSession sesion = req.getSession();
@@ -55,12 +56,12 @@ public class PruebaServlet extends HttpServlet{
 					generateXLS(req,resp,usermail);
 				}
 				
-
+			
 			
 		} catch (Exception e) {
 
 			e.printStackTrace();
-		}		
+		}
 	}
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse resp){

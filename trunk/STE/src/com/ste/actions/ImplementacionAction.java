@@ -1,7 +1,5 @@
 package com.ste.actions;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,13 +12,14 @@ import org.apache.struts.action.ActionMapping;
 
 import com.ste.beans.Cliente;
 import com.ste.beans.Implementacion;
-import com.ste.beans.Log;
+import com.ste.beans.Pais;
+import com.ste.beans.ProductoCanal;
 import com.ste.beans.Servicio;
 import com.ste.dao.ClienteDao;
 import com.ste.dao.ImplementacionDao;
-import com.ste.dao.LogsDao;
+import com.ste.dao.PaisDao;
+import com.ste.dao.ProductoCanalDao;
 import com.ste.dao.ServicioDao;
-import com.ste.utils.Utils;
 
 
 public class ImplementacionAction extends Action{
@@ -43,10 +42,16 @@ public class ImplementacionAction extends Action{
 		
 		req.setAttribute("implementaciones",implementaciones);
 
-
-		return  mapping.findForward("ok");
+		PaisDao paisDao = PaisDao.getInstance();
+		List<Pais> paises = paisDao.getAllPaises();
 		
-
+		req.setAttribute("paises", paises);
 		
+		ProductoCanalDao prodDao = ProductoCanalDao.getInstance();
+		List<ProductoCanal> productos = prodDao.getAllProductos();
+		
+		req.setAttribute("productos", productos);
+		
+		return  mapping.findForward("ok");		
 	}
 }
