@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-
-
+<script src="../components/checkbox/jquery.marmots-checkbox.js" type="text/javascript"></script>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
@@ -82,11 +81,11 @@
 					
 					<div class="form-field">
 							<span class="lbl">Tipo<span class="required-asterisk">*</span>:</span>
-							<label class="lbl ui-marmots-label-radio ${soporte.tipo_soporte == 'Incidencia' ? 'on' : ''}" for="radio_incidencia">
-								<input name="tipo" id="radio_incidencia" ${soporte.tipo_soporte == 'Incidencia' ? 'checked' : ''} type="radio" value="Incidencia"/>Incidencia
+							<label class="lbl ui-marmots-label-radio ${soporte.tipo_soporte == 'Incidencia' ? 'on' : ''}" for="radio_incidencia_modal">
+								<input name="tipoModal" id="radio_incidencia_modal" ${soporte.tipo_soporte == 'Incidencia' ? 'checked' : ''} type="radio" value="Incidencia"/>Incidencia
 							</label>
-							<label class="lbl ui-marmots-label-radio marmots-label-left ${soporte.tipo_soporte == 'Consulta' ? 'on' : ''}" for="radio_consulta">
-								<input name="tipo"  id="radio_consulta"  ${soporte.tipo_soporte == 'Consulta' ? 'checked' : ''} type="radio" value="Consulta"/>Consulta<br />
+							<label class="lbl ui-marmots-label-radio marmots-label-left ${soporte.tipo_soporte == 'Consulta' ? 'on' : ''}" for="radio_consulta_modal">
+								<input name="tipoModal"  id="radio_consulta_modal"  ${soporte.tipo_soporte == 'Consulta' ? 'checked' : ''} type="radio" value="Consulta"/>Consulta<br />
 							</label>
 					</div>
 
@@ -95,13 +94,10 @@
 						<span class="lbl">Tipo de servicio<span class="required-asterisk">*</span>:</span>
 						<div class="input">
 							<select id="tipo_servicio" class="selectpicker selected" name="tipo_servicio" >
-								<option value="Cobros" ${soporte.tipo_servicio == 'Cobros' ? 'selected' : ''}>Cobros</option>	
-								<option value="Pagos" ${soporte.tipo_servicio == 'Pagos' ? 'selected' : ''}>Pagos</option>
-								<option value="MT101" ${soporte.tipo_servicio == 'MT101' ? 'selected' : ''}>MT101</option>
-								<option value="MT94x" ${soporte.tipo_servicio == 'MT94x' ? 'selected' : ''}>MT94x</option>
-								<option value="Cashpool" ${soporte.tipo_servicio == 'Cashpool' ? 'selected' : ''}>Cashpool</option>
-								<option value="Factura integral" ${soporte.tipo_servicio == 'Factura integral' ? 'selected' : ''}>Factura integral</option>
-								<option value="Otros" ${soporte.tipo_servicio == 'Otros' ? 'selected' : ''}>Otros</option>	
+							
+								<c:forEach items="${tiposervicios}" var="servicio">
+										<option value="${servicio.name}" ${soporte.tipo_servicio == servicio.name ? 'selected' : ''}>${servicio.name}</option>
+								</c:forEach>	
 							</select>
 						</div>
 					</div>
@@ -128,17 +124,11 @@
 						<span class="lbl">Producto/canal<span class="required-asterisk">*</span>:</span>
 						<div class="input">
 							<select id="producto_canal" class="selectpicker selected" name="producto_canal" >
-								<option value="Swift Fileact" ${soporte.producto_canal == 'Swift Fileact' ? 'selected' : ''}>Swift Fileact</option>
-								<option value="Swift Fileact Antig" ${soporte.producto_canal == 'Swift Fileact Antig' ? 'selected' : ''}>Swift Fileact (antigua conexi&oacuten)</option>
-								<option value="Swift FIN" ${soporte.producto_canal == 'Swift FIN' ? 'selected' : ''}>Swift FIN</option>	
-								<option value="Swift FIN relay" ${soporte.producto_canal == 'Swift FIN relay' ? 'selected' : ''}>Swift FIN (Relay Bank)</option>
-								<option value="Editran" ${soporte.producto_canal == 'Editran' ? 'selected' : ''}>EDITRAN</option>	
-								<option value="BBVA Netcash" ${soporte.producto_canal == 'BBVA Netcash' ? 'selected' : ''}>BBVA Netcash</option>
-								<option value="Edifact" ${soporte.producto_canal == 'Edifact' ? 'selected' : ''}>EDIFACT</option>
-								<option value="Normalizador" ${soporte.producto_canal == 'Normalizador' ? 'selected' : ''}>Normalizador</option>
-								<option value="Cashpool domestico" ${soporte.producto_canal == 'Cashpool domestico' ? 'selected' : ''}>Cashpool dom&eacutestico</option>
-								<option value="Cashpool internacional" ${soporte.producto_canal == 'Cashpool internacional' ? 'selected' : ''}>Cashpool internacional</option>
-								<option value="factura integral" ${soporte.producto_canal == 'factura integral' ? 'selected' : ''}>Factura integral</option>
+							
+								<c:forEach items="${productos}" var="producto">
+										<option value="${producto.name}" ${soporte.producto_canal == producto.name ? 'selected' : ''}>${producto.name}</option>
+								</c:forEach>
+
 							</select>
 						</div>
 					</div>

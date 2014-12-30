@@ -53,7 +53,7 @@ public class UserDao {
 
 		return usuarios;
 	}
-	
+	@SuppressWarnings("unchecked")
 	public List<User> getAllNonDeletedUsers(){
 		
 
@@ -71,7 +71,7 @@ public class UserDao {
 
 		return users;
 	}
-
+	@SuppressWarnings("unchecked")
 	public User getUserByMail(String email) {
 
 		User u = new User();
@@ -127,7 +127,7 @@ public class UserDao {
 
 		return user;
 	}
-
+	@SuppressWarnings("unchecked")
 	public List<User> getUsersByPermisoStr(int permiso) {
 		PersistenceManager pManager = PMF.get().getPersistenceManager();
 		Transaction transaction = pManager.currentTransaction();

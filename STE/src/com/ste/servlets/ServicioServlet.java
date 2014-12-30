@@ -6,8 +6,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
+import com.ste.beans.Pais;
+import com.ste.beans.ProductoCanal;
 import com.ste.beans.Servicio;
+import com.ste.beans.TipoServicio;
+import com.ste.dao.PaisDao;
+import com.ste.dao.ProductoCanalDao;
 import com.ste.dao.ServicioDao;
+import com.ste.dao.TipoServicioDao;
 
 public class ServicioServlet  extends HttpServlet{
 	public void doGet(HttpServletRequest req, HttpServletResponse resp){
@@ -42,6 +48,126 @@ public class ServicioServlet  extends HttpServlet{
 	public void createServicio(HttpServletRequest req, HttpServletResponse resp, String usermail) throws InterruptedException{
 		ServicioDao sDao = ServicioDao.getInstance();
 		sDao.deleteAll();
+		
+		TipoServicioDao tipservDao = TipoServicioDao.getInstance();
+		tipservDao.deleteAll();
+		
+		PaisDao paisDao = PaisDao.getInstance();
+		paisDao.deleteAll();
+		
+		ProductoCanalDao prodDao = ProductoCanalDao.getInstance();
+		prodDao.deleteAll();	
+		
+		Pais a = new Pais();
+		String nombrePais = "B&eacutelgica";
+		a.setNme(nombrePais);
+		paisDao.createPais(a);	
+		a = new Pais();
+		nombrePais = "China (Hong Kong)";
+		a.setNme(nombrePais);
+		paisDao.createPais(a);	
+		a = new Pais();
+		nombrePais = "Espa&ntildea";
+		a.setNme(nombrePais);
+		paisDao.createPais(a);
+		a = new Pais();
+		nombrePais = "Francia";
+		a.setNme(nombrePais);
+		paisDao.createPais(a);
+		a = new Pais();
+		nombrePais = "Italia";
+		a.setNme(nombrePais);
+		paisDao.createPais(a);
+		a = new Pais();
+		nombrePais = "Portugal";
+		a.setNme(nombrePais);
+		paisDao.createPais(a);
+		a = new Pais();
+		nombrePais = "Reino Unido";
+		a.setNme(nombrePais);
+		paisDao.createPais(a);
+		a = new Pais();
+		nombrePais = "US (New York)";
+		a.setNme(nombrePais);
+		paisDao.createPais(a);
+		
+		ProductoCanal prod = new ProductoCanal();
+		String nombreProducto = "Swift Fileact";
+		prod.setNme(nombreProducto);
+		prodDao.createProductoCanal(prod);
+		
+		prod = new ProductoCanal();
+		nombreProducto = "Swift Fileact (antigua conecxi&oacuten)";
+		prod.setNme(nombreProducto);
+		prodDao.createProductoCanal(prod);
+		
+		prod = new ProductoCanal();
+		nombreProducto = "Swift FIN";
+		prod.setNme(nombreProducto);
+		prodDao.createProductoCanal(prod);
+		
+		prod = new ProductoCanal();
+		nombreProducto = "Swift FIN (Relay Bank)";
+		prod.setNme(nombreProducto);
+		prodDao.createProductoCanal(prod);
+		prod = new ProductoCanal();
+		nombreProducto = "EDITRAN";
+		prod.setNme(nombreProducto);
+		prodDao.createProductoCanal(prod);
+		prod = new ProductoCanal();
+		nombreProducto = "BBVA Netcash";
+		prod.setNme(nombreProducto);
+		prodDao.createProductoCanal(prod);
+		prod = new ProductoCanal();
+		nombreProducto = "EDIFACT";
+		prod.setNme(nombreProducto);
+		prodDao.createProductoCanal(prod);
+		prod = new ProductoCanal();
+		nombreProducto = "Normalizador";
+		prod.setNme(nombreProducto);
+		prodDao.createProductoCanal(prod);
+		prod = new ProductoCanal();
+		nombreProducto = "Cashpool dom&eacutestico";
+		prod.setNme(nombreProducto);
+		prodDao.createProductoCanal(prod);
+		prod = new ProductoCanal();
+		nombreProducto = "Cashpool internacional";
+		prod.setNme(nombreProducto);
+		prodDao.createProductoCanal(prod);
+		prod = new ProductoCanal();
+		nombreProducto = "Factura integral";
+		prod.setNme(nombreProducto);
+		prodDao.createProductoCanal(prod);
+		
+		TipoServicio tipserv = new TipoServicio();
+		String nombreTipoServ = "Cobros";
+		tipserv.setNme(nombreTipoServ);
+		tipservDao.createTipoServicio(tipserv);
+		tipserv = new TipoServicio();
+		nombreTipoServ = "Pagos";
+		tipserv.setNme(nombreTipoServ);
+		tipservDao.createTipoServicio(tipserv);
+		tipserv = new TipoServicio();
+		nombreTipoServ = "MT101";
+		tipserv.setNme(nombreTipoServ);
+		tipservDao.createTipoServicio(tipserv);
+		tipserv = new TipoServicio();
+		nombreTipoServ = "MT94x";
+		tipserv.setNme(nombreTipoServ);
+		tipservDao.createTipoServicio(tipserv);
+		tipserv = new TipoServicio();
+		nombreTipoServ = "Cashpool";
+		tipserv.setNme(nombreTipoServ);
+		tipservDao.createTipoServicio(tipserv);
+		tipserv = new TipoServicio();
+		nombreTipoServ = "Factura integral";
+		tipserv.setNme(nombreTipoServ);
+		tipservDao.createTipoServicio(tipserv);
+		tipserv = new TipoServicio();
+		nombreTipoServ = "Otros";
+		tipserv.setNme(nombreTipoServ);
+		tipservDao.createTipoServicio(tipserv);
+		
 		Servicio s = new Servicio();
 		String nombre = "Adeudos B2B (Sepa) París       ";
 		String tipo = "Envio";

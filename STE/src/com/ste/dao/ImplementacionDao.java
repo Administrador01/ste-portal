@@ -6,15 +6,7 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-
-
-
-
-
-import com.ste.beans.Cliente;
 import com.ste.beans.Implementacion;
-import com.ste.beans.Prueba;
-import com.ste.counters.Counter;
 import com.ste.persistence.PMF;
 import com.ste.utils.Utils;
 
@@ -55,17 +47,17 @@ public Implementacion getImplementacionById(long l) {
 		}
 		return c;
 	}
-	
+@SuppressWarnings("unchecked")
 public List<Implementacion> getImplementacionByClientId(long l) {
 	
 	
 	List<Implementacion> implementaciones;
 	PersistenceManager pm = PMF.get().getPersistenceManager();
 	
-	String clientID = Long.toString(l);
 	
 	
-	String query = "select from " + Implementacion.class.getName()+" where cliente_id == '"+clientID+"'";
+	
+	String query = "select from " + Implementacion.class.getName()+" where cliente_id == "+l;
 	
 	Query q = pm.newQuery(query);//.setFilter(propertyFilter);
 
@@ -76,13 +68,14 @@ public List<Implementacion> getImplementacionByClientId(long l) {
 
 	return implementaciones;
 }	
+
 	public synchronized void createImplementacion(Implementacion imp, String usermail) {
 		PersistenceManager pm = PMF.get().getPersistenceManager();	
-		CounterDao cDao = CounterDao.getInstance();
+		
 
 		try{
 			
-			ImplementacionDao impDao = ImplementacionDao.getInstance();
+			
 			imp.setFecha_alta((Utils.dateConverter(imp.getStr_fecha_alta())));
 			if (imp.getStr_fech_contratacion()!=null && imp.getStr_fech_contratacion()!=""){
 				imp.setFech_contratacion(Utils.dateConverter(imp.getStr_fech_contratacion()));

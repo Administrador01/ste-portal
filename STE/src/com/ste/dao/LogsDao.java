@@ -38,7 +38,7 @@ public class LogsDao {
 			pm.close();
 		}
 	}
-	
+	@SuppressWarnings("unchecked")
 	public List<Log> getAllLogs() {
 
 		List<Log> logs;
@@ -52,7 +52,7 @@ public class LogsDao {
 
 		return logs;
 	}
-	
+	@SuppressWarnings("unchecked")
 	public List<Log> getLogsByLastWeek() {
 
 		Date date = new Date();
@@ -78,7 +78,7 @@ public class LogsDao {
 
 		return logs;
 	}
-	
+	@SuppressWarnings("unchecked")
 	public List<Log> getLogsByLastMonth() {
 
 		Date date = new Date();
@@ -104,7 +104,7 @@ public class LogsDao {
 
 		return logs;
 	}
-	
+	@SuppressWarnings("unchecked")
 	public List<Log> getLogsByLast3Months() {
 
 		Date date = new Date();

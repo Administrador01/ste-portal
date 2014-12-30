@@ -59,13 +59,10 @@
 									<span class="lbl">Tipo de servicio<span class="required-asterisk">*</span>:</span>
 									<div class="input">
 										<select id="tipo_servicio" class="selectpicker selected" name="tipo_servicio" >
-											<option value="Cobros" ${prueba.tipo_servicio == 'Cobros' ? 'selected' : ''}>Cobros</option>	
-											<option value="Pagos" ${prueba.tipo_servicio == 'Pagos' ? 'selected' : ''}>Pagos</option>
-											<option value="MT101" ${prueba.tipo_servicio == 'MT101' ? 'selected' : ''}>MT101</option>
-											<option value="MT94x" ${prueba.tipo_servicio == 'MT94x' ? 'selected' : ''}>MT94x</option>
-											<option value="Cashpool" ${prueba.tipo_servicio == 'Cashpool' ? 'selected' : ''}>Cashpool</option>
-											<option value="Factura integral" ${prueba.tipo_servicio == 'Factura integral' ? 'selected' : ''}>Factura integral</option>
-											<option value="Otros" ${prueba.tipo_servicio == 'Otros' ? 'selected' : ''}>Otros</option>	
+											<c:forEach items="${tiposervicios}" var="servicio">
+												<option value="${servicio.name}" ${prueba.tipo_servicio == servicio.name ? 'selected' : ''}>${servicio.name}</option>
+											</c:forEach>
+											<option value="Cobros" >Cobros</option>		
 										</select>
 									</div>
 								</div>
@@ -108,7 +105,10 @@
 									<span class="lbl">Producto/canal<span class="required-asterisk">*</span>:</span>
 									<div class="input">
 										<select id="producto_canal" class="selectpicker selected" name="producto_canal" >
-											<option value="Swift Fileact" ${prueba.producto == 'Swift Fileact' ? 'selected' : ''}>Swift Fileact</option>
+											<c:forEach items="${productos}" var="producto">
+												<option value="${producto.name}" ${prueba.producto == producto.name ? 'selected' : ''}>${producto.name}</option>
+											</c:forEach><!--
+											<option value="Swift Fileact" >Swift Fileact</option>
 											<option value="Swift Fileact Antig" ${prueba.producto == 'Swift Fileact Antig' ? 'selected' : ''}>Swift Fileact (antigua conexi&oacuten)</option>
 											<option value="Swift FIN" ${prueba.producto == 'Swift FIN' ? 'selected' : ''}>Swift FIN</option>	
 											<option value="Swift FIN relay" ${prueba.producto == 'Swift FIN relay' ? 'selected' : ''}>Swift FIN (Relay Bank)</option>
@@ -118,7 +118,7 @@
 											<option value="Normalizador" ${prueba.producto == 'Normalizador' ? 'selected' : ''}>Normalizador</option>
 											<option value="Cashpool domestico" ${prueba.producto == 'Cashpool domestico' ? 'selected' : ''}>Cashpool dom&eacutestico</option>
 											<option value="Cashpool internacional" ${prueba.producto == 'Cashpool internacional' ? 'selected' : ''}>Cashpool internacional</option>
-											<option value="Factura integral" ${prueba.producto == 'Factura integral' ? 'selected' : ''}>Factura integral</option>
+											<option value="Factura integral" ${prueba.producto == 'Factura integral' ? 'selected' : ''}>Factura integral</option>-->
 										</select>
 									</div>
 								</div>

@@ -6,6 +6,7 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Transaction;
 
 
+
 import com.ste.counters.Counter;
 import com.ste.persistence.PMF;
 
@@ -20,6 +21,7 @@ public class CounterDao {
 		createCounter(c);
 	} 
 	
+	@SuppressWarnings("unchecked")
 	public Counter getCounterByName(String name) {
 		Counter contador;
 		PersistenceManager pManager = PMF.get().getPersistenceManager();

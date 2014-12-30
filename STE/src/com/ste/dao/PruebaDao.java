@@ -6,21 +6,12 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import com.google.appengine.api.datastore.Query.Filter;
-import com.google.appengine.api.datastore.Query.FilterOperator;
+
 import com.ste.beans.Prueba;
 import com.ste.counters.Counter;
 import com.ste.persistence.PMF;
 import com.ste.utils.Utils;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
-import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.Query.Filter;
-import com.google.appengine.api.datastore.Query.FilterPredicate;
-import com.google.appengine.api.datastore.Query.FilterOperator;
-import com.google.appengine.api.datastore.Query.CompositeFilter;
-import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
-import com.google.appengine.api.datastore.PreparedQuery;
-import com.google.appengine.api.datastore.Entity;
+
 
 
 public class PruebaDao {
@@ -65,6 +56,8 @@ public class PruebaDao {
 
 			List<Prueba> prueb_arr = pruDao.getAllPruebas();
 			boolean flag = false;
+			
+			
 			for (Prueba prub : prueb_arr){
 				
 				if(prub.getDetalles().equals(s.getDetalles())&&
@@ -78,8 +71,24 @@ public class PruebaDao {
 				   prub.getTipo_servicio().equals(s.getTipo_servicio())){
 						flag = true;
 				}
-
+					
 			}
+			/*
+			int i = 0;
+			while (i<prueb_arr.size()||flag){
+				if(prueb_arr.get(i).getDetalles().equals(s.getDetalles())&&
+						   prueb_arr.get(i).getEntorno().equals(s.getEntorno())&&
+						   prueb_arr.get(i).getEstado().equals(s.getEstado())&&
+						   prueb_arr.get(i).getStr_fecha_estado().equals(s.getStr_fecha_estado())&&
+						   prueb_arr.get(i).getSolucion().equals(s.getSolucion())&&
+						   prueb_arr.get(i).getIdCliente().equals(s.getIdCliente())&&
+						   prueb_arr.get(i).getProducto().equals(s.getProducto())&&
+						   prueb_arr.get(i).getReferencia().equals(s.getReferencia())&&
+						   prueb_arr.get(i).getTipo_servicio().equals(s.getTipo_servicio())){
+								flag = true;
+				}
+				i++;
+			}*/
 			if(!flag){
 				//Conversi'on de las fechas de string a tipo date
 				s.setFecha_estado(Utils.dateConverter(s.getStr_fecha_estado()));

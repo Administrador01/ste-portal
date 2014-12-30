@@ -122,13 +122,9 @@
 						<div class="input">
 							<select id="tipo_servicio" class="selectpicker selected" name="tipo_servicio" >
 								<option value="default">Seleccionar</option>	
-								<option value="Cobros">Cobros</option>	
-								<option value="Pagos">Pagos</option>
-								<option value="MT101">MT101</option>
-								<option value="MT94x">MT94x</option>
-								<option value="Cashpool">Cashpool</option>
-								<option value="Factura integral">Factura integral</option>
-								<option value="Otros">Otros</option>	
+								<c:forEach items="${tiposervicios}" var="servicio">
+										<option value="${servicio.name}">${servicio.name}</option>
+								</c:forEach>	
 							</select>
 						</div>
 					</div>
@@ -153,17 +149,10 @@
 							<select id="producto_canal" class="selectpicker selected" name="producto_canal" >
 								
 								<option value="default">Seleccionar</option>	
-								<option value="Swift Fileact">Swift Fileact</option>
-								<option value="Swift Fileact Antig">Swift Fileact (antigua conexi&oacuten)</option>
-								<option value="Swift FIN">Swift FIN</option>	
-								<option value="Swift FIN relay">Swift FIN (Relay Bank)</option>
-								<option value="Editran">EDITRAN</option>	
-								<option value="BBVA Netcash">BBVA Netcash</option>
-								<option value="Edifact">EDIFACT</option>
-								<option value="Normalizador">Normalizador</option>
-								<option value="Cashpool domestico">Cashpool dom&eacutestico</option>
-								<option value="Cashpool internacional">Cashpool internacional</option>
-								<option value="factura integral">Factura integral</option>
+
+								<c:forEach items="${productos}" var="producto">
+										<option value="${producto.name}">${producto.name}</option>
+								</c:forEach>
 															
 							</select>
 						</div>

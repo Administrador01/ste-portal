@@ -59,20 +59,13 @@
 					
 
 					<div class="form-field" id="div_producto_imp">
-							<span class="lbl">Producto<span class="required-asterisk">*</span>:</span>
+							<span class="lbl">Producto/canal<span class="required-asterisk">*</span>:</span>
 								<select id="producto_imp" class="selectpicker selected"  name="producto_imp">
 									<option value="default">Seleccionar</option>	
-									<option value="Swift Fileact">Swift Fileact</option>
-									<option value="Swift Fileact Antig">Swift Fileact (antigua conexi&oacuten)</option>
-									<option value="Swift FIN">Swift FIN</option>	
-									<option value="Swift FIN relay">Swift FIN (Relay Bank)</option>
-									<option value="Editran">EDITRAN</option>	
-									<option value="BBVA Netcash">BBVA Netcash</option>
-									<option value="Edifact">EDIFACT</option>
-									<option value="Normalizador">Normalizador</option>
-									<option value="Cashpool domestico">Cashpool dom&eacutestico</option>
-									<option value="Cashpool internacional">Cashpool internacional</option>
-									<option value="Factura integral">Factura integral</option>
+									
+									<c:forEach items="${productos}" var="producto">
+										<option value="${producto.name}">${producto.name}</option>
+									</c:forEach>
 								</select>
 					</div>
 					
@@ -122,14 +115,9 @@
 								<select id="pais_imp" class="selectpicker selected" name="pais">
 									<option value="default">Seleccionar</option>	
 									
-									<option value="B&eacutelgica">B&eacutelgica</option>
-									<option value="China (Hong Kong)">China (Hong Kong)</option>
-									<option value="Espa&ntildea">Espa&ntildea</option>	
-									<option value="Francia">Francia</option>
-									<option value="Italia">Italia</option>
-									<option value="Portugal">Portugal</option>
-									<option value="Reino Unido">Reino Unido</option>
-									<option value="US (New York)">US (New York)</option>
+									<c:forEach items="${paises}" var="pais">
+										<option value="${pais.name}">${pais.name}</option>
+									</c:forEach>
 
 									
 							</select>

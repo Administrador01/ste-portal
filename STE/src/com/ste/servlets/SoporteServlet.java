@@ -205,7 +205,7 @@ public class SoporteServlet extends HttpServlet{
 		
 		String fecha_inicio = req.getParameter("fecha_inicio");
 		String fecha_fin = req.getParameter("fecha_fin");
-		String tipo = req.getParameter("tipo");
+		String tipo = req.getParameter("tipoModal");
 		String cliente = req.getParameter("cliente");
 		String estado = req.getParameter("estado");
 		String tipo_servicio = req.getParameter("tipo_servicio");

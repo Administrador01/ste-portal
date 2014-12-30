@@ -13,9 +13,13 @@ import org.apache.struts.action.ActionMapping;
 
 import com.ste.beans.Cliente;
 import com.ste.beans.Implementacion;
+import com.ste.beans.Pais;
+import com.ste.beans.ProductoCanal;
 import com.ste.beans.Servicio;
 import com.ste.dao.ClienteDao;
 import com.ste.dao.ImplementacionDao;
+import com.ste.dao.PaisDao;
+import com.ste.dao.ProductoCanalDao;
 import com.ste.dao.ServicioDao;
 
 public class ImplementacionModalAction extends Action{
@@ -46,6 +50,16 @@ public class ImplementacionModalAction extends Action{
 		
 		req.setAttribute("cliente", c);
 		req.setAttribute("servicio", s);
+		
+		PaisDao paisDao = PaisDao.getInstance();
+		List<Pais> paises = paisDao.getAllPaises();
+		
+		req.setAttribute("paises", paises);
+		
+		ProductoCanalDao prodDao = ProductoCanalDao.getInstance();
+		List<ProductoCanal> productos = prodDao.getAllProductos();
+		
+		req.setAttribute("productos", productos);
 		
 		return mapping.findForward("ok");
 	}
