@@ -1,5 +1,8 @@
 package com.ste.servlets;
 
+import java.io.FileReader;
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,10 +13,16 @@ import com.ste.beans.Pais;
 import com.ste.beans.ProductoCanal;
 import com.ste.beans.Servicio;
 import com.ste.beans.TipoServicio;
+import com.ste.beans.Cliente;
+import com.ste.dao.ClienteDao;
 import com.ste.dao.PaisDao;
 import com.ste.dao.ProductoCanalDao;
 import com.ste.dao.ServicioDao;
 import com.ste.dao.TipoServicioDao;
+
+import java.io.*;
+import java.net.URL;
+import java.util.List;
 
 public class ServicioServlet  extends HttpServlet{
 	public void doGet(HttpServletRequest req, HttpServletResponse resp){
@@ -29,7 +38,7 @@ public class ServicioServlet  extends HttpServlet{
 			String usermail = (String) sesion.getAttribute("mail");
 			
 
-			
+				if (accion.equals("importar")){pruebamethod(req,resp,usermail);}
 				if (accion.equals("inicial")){
 					createServicio(req,resp,usermail);
 				}
@@ -44,6 +53,92 @@ public class ServicioServlet  extends HttpServlet{
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse resp){
 		doGet(req,resp);
+	}
+	
+	public void pruebamethod(HttpServletRequest req, HttpServletResponse resp, String usermail) throws InterruptedException{
+	      
+		
+
+	      String link = req.getParameter("link");
+	      
+	      try {
+	    	  
+	    	  List <String> line = new ArrayList<String>();
+	          URL myURL = new URL(link);
+	    	 // URL myURL = new URL("http://www.gutenberg.org/files/11/11-h/11-h.htm");
+	          InputStreamReader a = new InputStreamReader(myURL.openStream());
+	          BufferedReader in = new BufferedReader(a);
+	          
+	          
+	          String inputLine = new String();
+	          String elemento = new String();
+	          
+	          Pais pais = new Pais();
+	          ProductoCanal prod = new ProductoCanal();
+	          TipoServicio tipserv = new TipoServicio();
+	          Cliente client = new Cliente();
+	          Servicio servicio = new Servicio();
+	          
+	          PaisDao paisDao = PaisDao.getInstance();
+	          ProductoCanalDao prodDao = ProductoCanalDao.getInstance();
+	          TipoServicioDao tipservDao = TipoServicioDao.getInstance();
+	          ClienteDao clientDao = ClienteDao.getInstance();
+	          ServicioDao servicioDao = ServicioDao.getInstance();
+	          
+	          while ((inputLine = in.readLine()) != null){
+	        	  if (inputLine.equals("Implementacion")||inputLine.equals("Cliente")||inputLine.equals("Pais")||inputLine.equals("ProductoCanal")||inputLine.equals("Prueba")||inputLine.equals("Servicio")||inputLine=="Soporte"||inputLine=="TipoServicio"||inputLine=="User"){
+	        		  elemento = inputLine;
+	        	  }else{
+		        	  switch (elemento){
+		        	  	case "Pais":
+		        			pais = new Pais();
+		        			String nombrePais = inputLine;
+		        			pais.setNme(nombrePais);
+		        			paisDao.createPais(pais);	
+		        			break;
+		        			
+		        	  	case "ProductoCanal":
+		      
+		        			prod = new ProductoCanal();
+		        			String nombreProducto = inputLine;
+		        			prod.setNme(nombreProducto);
+		        			prodDao.createProductoCanal(prod);
+		        			break;
+		        			
+		        	  	case "TipoServicio":
+		        			tipserv = new TipoServicio();
+		        			String nombreTipoServ = "Pagos";
+		        			tipserv.setNme(nombreTipoServ);
+		        			tipservDao.createTipoServicio(tipserv);
+		        			break;
+		        			
+		        	  	case "Servicio":
+		        	  		servicio = new Servicio();
+		        	  		String[] arrServ = inputLine.split(" ");
+		        			servicio.setNme(arrServ[0]);
+		        			servicio.setTipo(arrServ[1]);
+		        			servicioDao.createServicio(servicio, usermail);
+		        	  		break;
+		        	  	case "Cliente":
+		        	  		client = new Cliente();
+		        	  		String[] arrCliente = inputLine.split(" ");
+		        	  		client.setNombre(arrCliente[0]);
+		        	  		client.setPremium(arrCliente[1]);
+		        	  		client.setStr_fecha_alta(arrCliente[2]);
+		        	  		client.setTipo_cliente(arrCliente[0]);
+		        	  		clientDao.createCliente(client, usermail);
+		        	  		break;
+		        	  	  
+		        	  }
+	        	  }
+	          }
+	          in.close();	  
+	    	  
+
+	      }
+	      catch(Exception e){
+	          e.printStackTrace();
+	       }
 	}
 	public void createServicio(HttpServletRequest req, HttpServletResponse resp, String usermail) throws InterruptedException{
 		ServicioDao sDao = ServicioDao.getInstance();
