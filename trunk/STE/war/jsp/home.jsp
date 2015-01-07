@@ -24,7 +24,7 @@
       <h2>Servicios</h2>
       <img src="img/icn_t-iconLib_B31-64px_k.png" alt="Imagen destacado"/>
       <p>Información detallada de los productos y servicios que se han implementado o están en proceso.</p>
-      <button onclick="" type="button">Acceder</button> 
+      <button onclick="window.location.href='${entorno}/impServicios.do'" type="button">Acceder</button> 
     </div>
     <div class="destacadoHome">
       <h2>Informes</h2>
