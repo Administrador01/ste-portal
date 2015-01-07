@@ -446,7 +446,7 @@ public class ImplementacionServlet extends HttpServlet{
 				Cliente cliente = cliDao.getClientebyId(imp.getCliente_id());
 				Servicio servicio = servDao.getImplementacionById(imp.getServicio_id());
 				
-				s.addCell(new Label(0, aux,Long.toString(imp.getCliente_id()) ));
+				s.addCell(new Label(0, aux,cliente.getId_cliente() ));
 				s.addCell(new Label(1, aux,cliente.getNombre()));
 				s.addCell(new Label(2, aux,servicio.getName()));
 				s.addCell(new Label(3, aux,imp.getPais()));
