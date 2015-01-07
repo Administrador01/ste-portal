@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
-<!-- body
+<!-- body  
 
 <div class="content">
 <div class="container">
