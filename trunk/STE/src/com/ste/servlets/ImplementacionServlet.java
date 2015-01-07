@@ -61,6 +61,10 @@ public class ImplementacionServlet extends HttpServlet{
 				if (accion.equals("xls")){
 					generateXLS(req,resp,usermail);
 				}
+				
+				if (accion.equals("xlsServ")){
+					generateXLSserv(req,resp,usermail);
+				}
 
 			
 		} catch (Exception e) {
@@ -377,7 +381,92 @@ public class ImplementacionServlet extends HttpServlet{
 			e.printStackTrace();
 			throw new ServletException("Exception in Excel", e);
 		} finally {
-			Utils.writeLog(usermail, "Descarga XML", "Pruebas","");
+			Utils.writeLog(usermail, "Descarga XML", "Implementaciones","");
+			if (out != null)
+				out.close();
+		}
+
+	}	
+	
+	public void generateXLSserv(HttpServletRequest req, HttpServletResponse resp, String usermail)
+			throws ServletException, IOException {
+		OutputStream out = null;
+		try {
+			resp.setContentType("application/vnd.ms-excel");
+			resp.setHeader("Content-Disposition",
+					"attachment; filename=GestionImplementacionesSTE.xls");
+
+			WritableWorkbook w = Workbook
+					.createWorkbook(resp.getOutputStream());
+
+			ImplementacionDao impDao = ImplementacionDao.getInstance();
+			List<Implementacion> implementaciones = impDao.getAllImplementaciones();
+			
+			ClienteDao cliDao = ClienteDao.getInstance();
+
+			
+			ServicioDao servDao = ServicioDao.getInstance();
+
+
+			WritableSheet s = w.createSheet("Servicios", 0);
+
+			WritableFont cellFont = new WritableFont(WritableFont.TIMES, 12);
+			cellFont.setColour(Colour.WHITE);
+
+			WritableCellFormat cellFormat = new WritableCellFormat(cellFont);
+			cellFormat.setBackground(Colour.BLUE);
+			cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
+			cellFormat.setAlignment(jxl.format.Alignment.CENTRE);
+			cellFormat.setVerticalAlignment(VerticalAlignment.CENTRE);
+
+			s.setColumnView(0, 20);
+			s.setColumnView(1, 30);
+			s.setColumnView(2, 40);
+			s.setColumnView(3, 30);
+			s.setColumnView(4, 40);
+			s.setColumnView(5, 45);
+			s.setColumnView(6, 20);
+
+
+			
+			s.setRowView(0, 900);
+			s.addCell(new Label(0, 0, "ID CLIENTE", cellFormat));
+			s.addCell(new Label(1, 0, "CLIENTE", cellFormat));
+			s.addCell(new Label(2, 0, "FORMATO/SERVICIO", cellFormat));
+			s.addCell(new Label(3, 0, "PAÍS", cellFormat));
+			s.addCell(new Label(4, 0, "FECHA SUBIDA A PRODUCCIÓN", cellFormat));
+			s.addCell(new Label(5, 0, "FECHA CONTRATACIÓN PRODUCCIÓN", cellFormat));
+			s.addCell(new Label(6, 0, "NORMALIZADOR", cellFormat));
+
+			
+			int aux = 1;
+
+			for ( Implementacion imp : implementaciones) {
+				
+				Cliente cliente = cliDao.getClientebyId(imp.getCliente_id());
+				Servicio servicio = servDao.getImplementacionById(imp.getServicio_id());
+				
+				s.addCell(new Label(0, aux,Long.toString(imp.getCliente_id()) ));
+				s.addCell(new Label(1, aux,cliente.getNombre()));
+				s.addCell(new Label(2, aux,servicio.getName()));
+				s.addCell(new Label(3, aux,imp.getPais()));
+				s.addCell(new Label(4, aux,imp.getStr_fech_contratacion()));
+				s.addCell(new Label(5, aux,imp.getStr_fech_subida()));
+				if(imp.getNormalizador())s.addCell(new Label(6, aux,"Si"));else s.addCell(new Label(6, aux,"No"));
+				
+
+
+
+				aux++;
+			}
+
+			w.write();
+			w.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ServletException("Exception in Excel", e);
+		} finally {
+			Utils.writeLog(usermail, "Descarga XML", "Servicios","");
 			if (out != null)
 				out.close();
 		}

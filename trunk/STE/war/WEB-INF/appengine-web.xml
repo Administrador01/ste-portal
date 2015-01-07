@@ -13,10 +13,7 @@
     <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
     <property name="file.encoding" value="UTF-8" />    
   </system-properties>
-  <system-properties>
-              <property name="com.google.gdata.DisableCookieHandler"
-value="true"/>
-      </system-properties> 
+
   <sessions-enabled>true</sessions-enabled>
 
   <!--
