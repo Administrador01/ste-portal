@@ -13,11 +13,11 @@
 	<hr />
 	
 	<div class="breadcrumbs">
-			<span onclick="window.location.href='../../' ">Home</span> > <span> Sevicios </span>
+			<span onclick="window.location.href='../../' ">Home</span> > <span> Servicios </span>
 	</div>
 
 	<div class="headButtonsBox">
-		<button id="excel_btn" onclick=	"window.location.href='../../implementacionServlet?accion=xls'">
+		<button id="excel_btn" onclick=	"window.location.href='../../implementacionServlet?accion=xlsServ'">
 			Descargar Tabla<span class="excel_span"></span>
 		</button>
 	</div>
@@ -29,8 +29,9 @@
 						<th><span class="table-title">Cliente</span></th>
 						<th><span class="table-title">Servicio</span></th>
 						<th><span class="table-title">Pa&iacutes</span></th>
-						<th><span class="table-title">Fecha subida producci&oacuten</span></th>
-						<th><span class="table-title">Fecha contraci&oacuten prod</span></th>
+						<th><span class="table-title">Fecha subida prod</span></th>
+						<th><span class="table-title">Fecha contrata prod</span></th>
+						<th><span class="table-title">Normalizador</span></th>
 						<th style="width: 110px;">&nbsp;</th>
 					</tr>
 
@@ -40,6 +41,7 @@
 						<th class="search-th"><input class="search col2 search_anywhere"></th>
 						<th class="search-th"><input class="search col3 search_anywhere"></th>
 						<th class="search-th"><input class="search col4 search_anywhere"></th>
+						<th class="search-th"><input class="search col5 search_anywhere"></th>
 						<th style="width: 110px;">&nbsp;</th>
 					</tr>
 				</thead>
@@ -76,6 +78,16 @@
 									<td><span>${s.pais}</span></td>
 									<td><span>${s.str_fech_subida}</span></td>
 									<td><span>${s.str_fech_contratacion}</span></td>
+									<td><span>
+									<c:choose>
+										<c:when test="${s.normalizador}">
+											Si
+										</c:when>
+										<c:otherwise>
+											No
+										</c:otherwise>
+									</c:choose>
+									</span></td>
 									<td><img class="vs" src="../img/vs.png"><a class="lapiz" name="${s.key.id}" href="../implementacionModal.do?id=${s.key.id}"	id="lapiz${s.key.id}" data-toggle="modal" data-target="#edit-soporte"></a></td>
 								</tr>
 							</c:forEach>
