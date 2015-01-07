@@ -68,6 +68,9 @@
 			<forward name="ok" path="/jsp/skeletons/implementacion-skeleton.jsp" />
 		</action>
 		
+		<action path="/impServicios" type="com.ste.actions.ImpServiciosAction">
+			<forward name="ok" path="/jsp/skeletons/impServicios-skeleton.jsp" />
+		</action>
 	</action-mappings>
 	
 	
