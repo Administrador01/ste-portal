@@ -8,7 +8,7 @@
 <div id="implementacion">
 
 	<h1>Gesti&oacuten servicios</h1>
-	<span class="btn-atras" onclick="window.location.href='javascript:window.history.go(-1);'"></span>
+	<span class="btn-atras" onclick="window.location.href='../../'"></span>
 	
 	<hr />
 	

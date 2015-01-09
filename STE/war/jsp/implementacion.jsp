@@ -174,10 +174,7 @@
 					<input type="text" name="gestor_relacion" maxlength="25">
 					</div>
 					
-					<div class="form-field detalle">
-					<span class="lbl">Detalle:</span>
-					<textarea type="text" name="detalle" maxlength="500" rows="3" cols="3" placeholder="Introduzca texto ..."></textarea>
-					</div>
+
 						
 			
 					<div class="entor_integrad">
@@ -248,7 +245,10 @@
 				</div>
 
 					
-
+					<div class="form-field detalle">
+					<span class="lbl">Detalle:</span>
+					<textarea type="text" name="detalle" maxlength="500" rows="3" cols="3" placeholder="Introduzca texto ..."></textarea>
+					</div>
 					
 <!--
 					<div class="form-field">

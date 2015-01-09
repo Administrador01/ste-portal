@@ -477,7 +477,7 @@ $(function() {
 					$form.find('.form-container').find('div:not(#message_div)').hide(0);
 					$('.submit_form_implementacion').hide(0);
 					$('.close-form').hide(0);
-					$form.find('#span_message').html('La implementacion ha sido creada de forma correcta.<br/>En breve volvemos a la p&aacute;gina.');
+					$form.find('#span_message').html('La implementaci&oacuten ha sido creada de forma correcta.<br/>En breve volvemos a la p&aacute;gina.');
 					$('#message_div').css('display','block').removeClass("error").addClass("success");;
 
 					setTimeout(function() { 

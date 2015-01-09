@@ -63,8 +63,8 @@
 					<div class="form-fieldset">
 					<span class="fieldset-title">Permisos por área:</span>
 					<br>
-					<fieldset class='radio-container-holder'>
-					<div class="form-field-divider left">
+					<fieldset class='radio-container-holder' style="border: 1px solid #dcdcdc;border-radius: 4px;margin-bottom: 2%;padding: 2% 0 1% 2%;">
+					<div class="form-field-divider left" style="width: 47%;">
 						<div class="form-field">
 							<span>Clientes:</span><select id="area_cliente" class="long selectpicker" name="area_cliente">
 								<option value="1" ${usuario.permiso_clientes == 1 ? 'selected' : ''}>Propietario</option>	
