@@ -394,7 +394,7 @@ public class ImplementacionServlet extends HttpServlet{
 		try {
 			resp.setContentType("application/vnd.ms-excel");
 			resp.setHeader("Content-Disposition",
-					"attachment; filename=GestionImplementacionesSTE.xls");
+					"attachment; filename=GestionServicios.xls");
 
 			WritableWorkbook w = Workbook
 					.createWorkbook(resp.getOutputStream());

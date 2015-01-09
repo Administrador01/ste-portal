@@ -8,14 +8,14 @@
 
 
 <div class="modal_ajax">
-			<div class="">
+			<div class="" style="text-align: left;'">
 				<h2>Editar implementaci&oacuten</h2>
 				<hr />
 			</div>
-			
+			<div class="" style="text-align:right;'">
 				<button type="button" class="go_pag1_modal">P&aacutegina 1</button>
 				<button type="button" class="go_pag2_modal">P&aacutegina 2</button>
-			
+			</div>
 			<div class="form-holder" style="margin-top:4%;">
 		<form id="edit-implementacion-form" name="edit-soporte-form" class="edit-form" action="/implementacionServlet"
 			method="POST" novalidate="novalidate">
@@ -153,13 +153,10 @@
 					<input type="text" name="gestor_relacion" maxlength="25" value="${implementacion.gestor_relacion}">
 					</div>
 					
-					<div class="form-field">
-					<span class="lbl">Detalle:</span>
-					<textarea type="text" name="detalle" maxlength="500" rows="2" cols="1" placeholder="Introduzca texto ...">${implementacion.detalle}</textarea>
-					</div>
+
 						
 			
-					<div class="form-field">
+					<div class="form-field" style="float:left;">
 					<span class="lbl">Referencia externa:</span>
 					<input type="text" name="ref_ext" id="ref_ext_modal" maxlength="18" value="${implementacion.referencia_externa}">
 					</div>
@@ -192,6 +189,11 @@
 					<input type="text" readonly="" value="${implementacion.str_fech_subida}" size="16" class="datepicker" name="fecha_subid" id="fecha_subid_modal">
 					</div>
 					
+<div style="	 						margin-top:2%; 						width:80%; 						padding-right:1%; 						margin-bottom: 4%; 		    			margin-top: 2%; 					" class="form-field">
+					<span class="lbl">Detalle:</span>
+					<textarea placeholder="Introduzca texto ..." cols="3" rows="3" maxlength="500" name="detalle" type="text" style="width:81%!important;"></textarea>
+					</div>
+					
 					<h3 style="color:#D1DCFF;">Entorno Integrado</h3>
 					<hr style="border: 3px solid #D1DCFF; border-radius: 300px/10px; height: 0px;width: 80%;margin-left:10%;"/>
 						<div class="form-field">
@@ -220,7 +222,7 @@
 
 				</div>
 				<div id="message_div_modal" class="message_div">
-						<span id="span_message">La implementacion ha sido modificada de forma correcta.<br/>En breve volvemos a la página.</span>
+						<span id="span_message">La implementaci&oacuten ha sido modificada de forma correcta.<br/>En breve volvemos a la página.</span>
 					</div>
 				</div>
 					</form>

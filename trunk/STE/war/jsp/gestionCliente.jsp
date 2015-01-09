@@ -7,7 +7,7 @@
 
 
 <h1>Gestión cliente</h1>
-<span class="btn-atras" onclick="window.location.href='javascript:window.history.go(-1);'"></span>
+<span class="btn-atras" onclick="window.location.href='../clientes.do' "></span>
 
 <hr />
 
