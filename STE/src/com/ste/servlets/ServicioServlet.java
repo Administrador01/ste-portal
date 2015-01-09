@@ -65,7 +65,6 @@ public class ServicioServlet  extends HttpServlet{
 	    	  
 	    	  List <String> line = new ArrayList<String>();
 	          URL myURL = new URL(link);
-	    	 // URL myURL = new URL("http://www.gutenberg.org/files/11/11-h/11-h.htm");
 	          InputStreamReader a = new InputStreamReader(myURL.openStream());
 	          BufferedReader in = new BufferedReader(a);
 	          
