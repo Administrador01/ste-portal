@@ -156,13 +156,15 @@
 
 						
 			
-					<div class="form-field" style="float:left;">
+					<div class="form-field" style="   float: left;
+    padding-left: 10.8%;
+    width: 49.8%;">
 					<span class="lbl">Referencia externa:</span>
 					<input type="text" name="ref_ext" id="ref_ext_modal" maxlength="18" value="${implementacion.referencia_externa}">
 					</div>
 
 					
-					<h3 style="color:#FF8888" class="error hidden">Faltan por introducir campos</h3>
+					
 
 					
 				</div>

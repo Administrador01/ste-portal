@@ -215,6 +215,11 @@
 						<input type="text" size="16" class="datepicker" name="fecha_subid" id="fecha_subid" readonly>
 					</div>
 					
+					<div class="form-field detalle">
+						<span class="lbl">Detalle:</span>
+						<textarea type="text" name="detalle" maxlength="500" rows="3" cols="3" placeholder="Introduzca texto ..."></textarea>
+					</div>
+					
 				</div>
 					<div class="entor_integrad2">
 					<h3>Entorno Integrado</h3>
@@ -245,10 +250,7 @@
 				</div>
 
 					
-					<div class="form-field detalle">
-					<span class="lbl">Detalle:</span>
-					<textarea type="text" name="detalle" maxlength="500" rows="3" cols="3" placeholder="Introduzca texto ..."></textarea>
-					</div>
+
 					
 <!--
 					<div class="form-field">
