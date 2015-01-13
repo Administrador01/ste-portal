@@ -2,12 +2,18 @@ package com.ste.servlets;
 
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.ste.beans.Pais;
 import com.ste.beans.ProductoCanal;
@@ -20,11 +26,36 @@ import com.ste.dao.ProductoCanalDao;
 import com.ste.dao.ServicioDao;
 import com.ste.dao.TipoServicioDao;
 
+
+import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
+import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
+import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
+import com.google.api.client.http.FileContent;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.services.drive.Drive;
+import com.google.api.services.drive.DriveScopes;
+import com.google.api.services.drive.model.File;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+
+
 import java.io.*;
 import java.net.URL;
 import java.util.List;
 
 public class ServicioServlet  extends HttpServlet{
+	  private static String CLIENT_ID = "460945221032-8u3kkoqbf5sf0bcms4rrtjcuc89fthb8.apps.googleusercontent.com";
+	  private static String CLIENT_SECRET = "3AI339j0GGOzdbqBv_64Bhw_ ";
+
+	  private static String REDIRECT_URI = "https://portal-ste.appspot.com/oauth2callback ";
+
+	  
 	public void doGet(HttpServletRequest req, HttpServletResponse resp){
 
 		JSONObject json = new JSONObject();
@@ -42,6 +73,7 @@ public class ServicioServlet  extends HttpServlet{
 				if (accion.equals("inicial")){
 					createServicio(req,resp,usermail);
 				}
+				if (accion.equals("prueba"))tester(req,resp,usermail);
 
 
 			
@@ -53,6 +85,42 @@ public class ServicioServlet  extends HttpServlet{
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse resp){
 		doGet(req,resp);
+	}
+	
+	
+	public void tester(HttpServletRequest req, HttpServletResponse resp, String usermail) throws InterruptedException, IOException{
+	    HttpTransport httpTransport = new NetHttpTransport();
+	    JsonFactory jsonFactory = new JacksonFactory();
+
+	    GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
+	            httpTransport, jsonFactory, CLIENT_ID, CLIENT_SECRET, Arrays.asList(DriveScopes.DRIVE))
+	            .setAccessType("online")
+	            .setApprovalPrompt("auto").build();
+	    
+	    String url = flow.newAuthorizationUrl().setRedirectUri(REDIRECT_URI).build();
+	    System.out.println("Please open the following URL in your browser then type the authorization code:");
+	    System.out.println("  " + url);
+	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	    String code = br.readLine();
+	    
+	    GoogleTokenResponse response = flow.newTokenRequest(code).setRedirectUri(REDIRECT_URI).execute();
+	    GoogleCredential credential = new GoogleCredential().setFromTokenResponse(response);
+	    
+	    //Create a new authorized API client
+	    Drive service = new Drive.Builder(httpTransport, jsonFactory, credential).build();
+
+	    //Insert a file  
+	    File body = new File();
+	    body.setTitle("My document");
+	    body.setDescription("A test document");
+	    body.setMimeType("text/plain");
+	    
+	    java.io.File fileContent = new java.io.File("document.txt");
+	    FileContent mediaContent = new FileContent("text/plain", fileContent);
+
+	    File file = service.files().insert(body, mediaContent).execute();
+	    System.out.println("File ID: " + file.getId());
+
 	}
 	
 	public void pruebamethod(HttpServletRequest req, HttpServletResponse resp, String usermail) throws InterruptedException{
