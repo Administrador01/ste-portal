@@ -302,7 +302,7 @@ $(function(){
 		var campo = $(this).val();
 		$('#input-servicio-referencia').val(campo);
 	})
-});;var userBoxSize;
+});;;var userBoxSize;
 var id;
 
 function  changeActionsButtonColor(){

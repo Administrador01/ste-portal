@@ -34,7 +34,7 @@
 				</li>
 				
 				<li class="menu">
-					<a class="no-underline" href="#">
+					<a class="no-underline" href="${entorno}/informes.do">
 						<span class="icon-24 informes-24x"></span>
 						<span class="menu-title">Informes</span>
 					</a>
