@@ -130,12 +130,7 @@
 										<textarea name="detalles" maxlength="500" rows="1" cols="1">${prueba.detalles}</textarea>
 									</div>
 								</div>
-								<div class="form-field detalles">
-									<span class="lbl">Soluci&oacuten:</span>
-									<div class="input editDetalles">
-										<textarea name="solucion" maxlength="500" rows="1" cols="1">${prueba.solucion}</textarea>
-									</div>
-								</div>
+
 										
 							</div>
 										

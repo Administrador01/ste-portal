@@ -20,6 +20,9 @@ public class Soporte {
 	private String premium;
 	
 	@Persistent
+	private boolean erased;
+	
+	@Persistent
 	private String tipo_soporte;
 
 	@Persistent
@@ -113,6 +116,14 @@ public class Soporte {
 
 	public void setStr_fecha_inicio(String str_fecha_inicio) {
 		this.str_fecha_inicio = str_fecha_inicio;
+	}
+	
+	public boolean getErased() {
+		return erased;
+	}
+
+	public void setErased(boolean erased) {
+		this.erased = erased;
 	}
 
 	public Date getFecha_fin() {

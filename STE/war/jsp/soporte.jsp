@@ -252,6 +252,21 @@
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
+					
+					<c:forEach items="${soportes}" var="s">
+						<tr class="valid-result ${s.premium == 'Premium' ? 'premium' : ''}" style='background-color:#8B8B8B;' id="row${s.key.id}">
+							<td><span>${s.str_fecha_inicio}</span></td>
+							<td><span>${s.cliente_name}</span></td>
+							<td><span>${s.tipo_cliente}</span></td>
+							<td><span>${s.estado}</span></td>
+							<td><span>${s.tipo_servicio}</span></td>
+							<td><span>${s.producto_canal}</span></td>
+							<td><span>${s.detalles}</span></td>
+							
+							<td>
+							</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>

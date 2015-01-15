@@ -238,22 +238,27 @@ public class ServicioServlet  extends HttpServlet{
 		Estado es = new Estado();
 		String nombrees = "Pendiente";
 		es.setNme(nombrees);
+		es.setOrden(1);
 		estDao.createEstado(es);
 		es = new Estado();
 		nombrees = "En curso";
 		es.setNme(nombrees);
+		es.setOrden(536870911);
 		estDao.createEstado(es);
 		es = new Estado();
 		nombrees = "Finalizado";
 		es.setNme(nombrees);
+		es.setOrden(1073741823);
 		estDao.createEstado(es);
 		es = new Estado();
 		nombrees = "Cancelado";
 		es.setNme(nombrees);
+		es.setOrden(2147483640);
 		estDao.createEstado(es);
 		es = new Estado();
 		nombrees = "Terminado";
 		es.setNme(nombrees);
+		es.setOrden(1610612735);
 		estDao.createEstado(es);
 
 

@@ -16,6 +16,9 @@ public class Estado {
 	@Persistent
 	private String name;
 	
+	@Persistent
+	private int orden;
+	
 	public Key getKey() {
 		return key;
 	}
@@ -30,5 +33,13 @@ public class Estado {
 
 	public void setNme(String name) {
 		this.name = name;
+	}
+	
+	public int getOrden() {
+		return orden;
+	}
+
+	public void setOrden(int Orden) {
+		this.orden = Orden;
 	}
 }
