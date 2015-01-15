@@ -224,7 +224,7 @@
 							<td><span>${c.tipo_cliente}</span></td>
 							<td><span>${c.premium}</span></td>
 							
-							<td>
+							<td><a class="subida" name="${c.key.id}" data-toggle="modal" 	data-target="#confirm-restore" id="papelera${c.key.id}"></a>
 							</td>
 						</tr>
 					</c:forEach>
@@ -267,5 +267,25 @@
 		</div>
 	</div>
 </div>
+
+<div class="modal fade" id="confirm-restore" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="">
+				<h2>Restaurar cliente</h2>
+				<hr />
+			</div>
+			<div class="">
+				<p>&iquest;Est&aacute; seguro que desea restaurar el cliente?
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="pink-btn" id="restoreClient">Restaurar</button>
+				<button type="button" class="" data-dismiss="modal">Cancelar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 </div>

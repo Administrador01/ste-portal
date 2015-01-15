@@ -68,6 +68,30 @@ $(function(){
 			}
 		});
 	})
+	
+		$('#gestion_cliente').on('click','#restoreClient', function (e){
+		
+		 var formURL = "/clientServlet?";
+		 var postData="accion=restore&id="+ id;
+		 $.ajax({
+			url : formURL,
+			type: "POST",
+			data : postData,
+			success:function(data, textStatus, jqXHR) 
+			{
+				$('#row'+id).fadeOut("fast", function(){
+					$(this).remove();
+					$('#myTable').paginateMe({
+						pagerSelector : '#myPager',
+						showPrevNext : true,
+						hidePageNumbers : false,
+						perPage : 10
+					});
+				});
+				$('#confirm-restore').modal('hide');	        	
+			}
+		});
+	})
 
 	$('#estado').change(function(e){
 		//vaciamos el select

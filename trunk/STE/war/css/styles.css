@@ -1264,6 +1264,15 @@ body .modal-dialog {
   cursor: default;
   background-image: url(../img/delete-inactive.png);
 }
+.main-table > .table td .subida {
+  background-image: url(../img/guardaron.png);
+  vertical-align: middle;
+  margin-left: 10px;
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+  cursor: pointer;
+}
 .main-table > .table td .return {
   background-image: url(../img/return.png);
   vertical-align: middle;

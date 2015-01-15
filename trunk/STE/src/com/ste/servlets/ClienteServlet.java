@@ -54,6 +54,8 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 					updateClient(req,resp,usermail);
 				}else if (accion.equals("xls")){
 					generateXLS(req,resp,usermail);
+				}else if (accion.equals("restore")){
+					restoreClient(req,resp,usermail);
 				}
 			 
 		
@@ -143,6 +145,35 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 		Utils.writeLog(usermail, "Elimina", "Cliente", c.getNombre());
 		
 		cDao.deleteCliente(c);
+		
+		try{
+			json.append("success", "true");
+			
+			
+			resp.setCharacterEncoding("UTF-8");
+	        resp.setContentType("application/json");       
+			resp.getWriter().println(json);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	
+	}
+	
+	
+	public void restoreClient(HttpServletRequest req, HttpServletResponse resp, String usermail) throws JSONException, IOException{
+		
+		JSONObject json = new JSONObject();
+		String str_id = req.getParameter("id");
+		
+		ClienteDao cDao = ClienteDao.getInstance();
+		Cliente c = cDao.getClientebyId(Long.parseLong(str_id));
+		//registramos la operacion
+		Utils.writeLog(usermail, "Restaura", "Cliente", c.getNombre());
+		
+		
+		c.setErased(false);
+		cDao.createClienteRaw(c);
 		
 		try{
 			json.append("success", "true");

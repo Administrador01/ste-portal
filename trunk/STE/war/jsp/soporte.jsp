@@ -253,7 +253,7 @@
 						</c:otherwise>
 					</c:choose>
 					
-					<c:forEach items="${soportes}" var="s">
+					<c:forEach items="${soportesDel}" var="s">
 						<tr class="valid-result ${s.premium == 'Premium' ? 'premium' : ''}" style='background-color:#8B8B8B;' id="row${s.key.id}">
 							<td><span>${s.str_fecha_inicio}</span></td>
 							<td><span>${s.cliente_name}</span></td>
