@@ -80,9 +80,9 @@
 						<div class="input">
 							<select id="estado" class="selectpicker selected" name="estado">
 								<option value="default">Seleccionar</option>
-								<option value="Pendiente">Pendiente</option>									
-								<option value="En curso">En curso</option>	
-								<option value="Finalizado">Finalizado</option>		
+								<c:forEach items="${estados}" var="estado">
+										<option value="${estado.name}">${estado.name}</option>
+								</c:forEach>		
 															
 							</select>
 						</div>

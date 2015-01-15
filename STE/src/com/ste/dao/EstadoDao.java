@@ -4,16 +4,16 @@ import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
-import com.ste.beans.TipoServicio;
+
+import com.ste.beans.Estado;
 import com.ste.persistence.PMF;
 
-public class TipoServicioDao {
-	
-	public static TipoServicioDao getInstance() {
-		return new TipoServicioDao();
+public class EstadoDao {
+	public static EstadoDao getInstance() {
+		return new EstadoDao();
 	}
 	
-	public synchronized void createTipoServicio(TipoServicio imp) {
+	public synchronized void createEstado(Estado imp) {
 		PersistenceManager pm = PMF.get().getPersistenceManager();	
 
 		try{
@@ -32,27 +32,27 @@ public class TipoServicioDao {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<TipoServicio> getAllServicios() {
+	public List<Estado> getAllEstados() {
 
-		List<TipoServicio> Servicios;
+		List<Estado> Estados;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		
 		
-		Query q = pm.newQuery("select from " + TipoServicio.class.getName());
+		Query q = pm.newQuery("select from " + Estado.class.getName());
 		q.setOrdering("name asc");
-		Servicios = (List<TipoServicio>) q.execute();
+		Estados = (List<Estado>) q.execute();
 		
 		
 		pm.close();
 
-		return Servicios;
+		return Estados;
 	}
 	
 	public void deleteAll(){
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		TipoServicioDao sDao = TipoServicioDao.getInstance();
-		List<TipoServicio> servicios =sDao.getAllServicios();
-		for (TipoServicio s :servicios){
+		EstadoDao sDao = EstadoDao.getInstance();
+		List<Estado> servicios =sDao.getAllEstados();
+		for (Estado s :servicios){
 			pm.deletePersistent(pm.getObjectById(s.getClass(),s.getKey().getId()));
 		}
 

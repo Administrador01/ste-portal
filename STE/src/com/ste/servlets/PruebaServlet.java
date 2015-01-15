@@ -14,7 +14,6 @@ import com.ste.utils.Utils;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Date;
 import java.util.List;
 
 import jxl.Workbook;
@@ -32,16 +31,21 @@ public class PruebaServlet extends HttpServlet{
 	
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public void doGet(HttpServletRequest req, HttpServletResponse resp){
 
-		JSONObject json = new JSONObject();
+
 		
 		String accion = req.getParameter("accion");
 		
 		 try {
 			 
 			HttpSession sesion = req.getSession();
-			int sesionpermiso = (int) sesion.getAttribute("permiso");			 
+			//int sesionpermiso = (int) sesion.getAttribute("permiso");			 
 			String usermail = (String) sesion.getAttribute("mail");
 			
 
@@ -133,7 +137,7 @@ public class PruebaServlet extends HttpServlet{
 		
 		String fecha_estado = req.getParameter("fecha_estado");
 		String nombre_cliente = req.getParameter("cliente");
-		//String referencia = req.getParameter("referencia");
+		String referencia = req.getParameter("referencia");
 		String producto = req.getParameter("producto_canal");
 		String premium = req.getParameter("input-premium-soporte");
 		String estado = req.getParameter("estado");
@@ -150,7 +154,7 @@ public class PruebaServlet extends HttpServlet{
 		
 		p.setStr_fecha_estado(fecha_estado);
 		p.setNombre_cliente(nombre_cliente);
-		//p.setReferencia(referencia);
+		p.setReferencia(referencia);
 		p.setProducto(producto);
 		p.setPremium(premium);
 		p.setTipo_servicio(servicio);

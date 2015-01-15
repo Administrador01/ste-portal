@@ -12,10 +12,12 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.ste.beans.Cliente;
+import com.ste.beans.Estado;
 import com.ste.beans.ProductoCanal;
 import com.ste.beans.Soporte;
 import com.ste.beans.TipoServicio;
 import com.ste.dao.ClienteDao;
+import com.ste.dao.EstadoDao;
 import com.ste.dao.ProductoCanalDao;
 import com.ste.dao.SoporteDao;
 import com.ste.dao.TipoServicioDao;
@@ -47,7 +49,9 @@ public class SoporteModalAction extends Action {
 			TipoServicioDao servDao = TipoServicioDao.getInstance();
 			List<TipoServicio> servicios = servDao.getAllServicios();
 			req.setAttribute("tiposervicios", servicios);
-			
+			EstadoDao estDao = EstadoDao.getInstance();
+			List<Estado> estados = estDao.getAllEstados();
+			req.setAttribute("estados", estados);
 		}catch (Exception e){
 			
 		}
