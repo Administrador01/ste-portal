@@ -268,6 +268,7 @@ public class SoporteServlet extends HttpServlet{
 		
 		if(tipo == ""||tipo == null)tipo = "Incidencia";
 		
+		s.setErased(false);
 		s.setStr_fecha_inicio(fecha_inicio);
 		s.setStr_fecha_fin(fecha_fin);
 		s.setTipo_soporte(tipo);
