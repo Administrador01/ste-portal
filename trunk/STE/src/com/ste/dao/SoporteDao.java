@@ -97,15 +97,59 @@ public class SoporteDao {
 		}
 	}
 	
-	public void deleteSoporte(Soporte s) {
+	public void deleteSoporteDefinitivo(Soporte s) {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		pm.deletePersistent(pm.getObjectById(s.getClass(), s.getKey().getId()));
 		pm.close();
 
 	}
 	
+	public void deleteSoporte(Soporte s) {
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		s.setErased(true);
+		pm.makePersistent(s);
+		pm.close();
+
+	}
+	
+	
 	@SuppressWarnings("unchecked")
 	public List<Soporte> getAllSoportes() {
+
+		List<Soporte> soportes;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		
+		Query q = pm.newQuery("select from " + Soporte.class.getName()+" where erased == false");		
+		q.setOrdering("fecha_inicio desc");
+		soportes = (List<Soporte>) q.execute();
+		
+		
+		pm.close();
+
+		return soportes;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Soporte> getAllDelSoportes() {
+
+		List<Soporte> soportes;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		
+		Query q = pm.newQuery("select from " + Soporte.class.getName()+" where erased == true");		
+		q.setOrdering("fecha_inicio desc");
+		soportes = (List<Soporte>) q.execute();
+		
+		
+		pm.close();
+
+		return soportes;
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public List<Soporte> getAllEvenDelSoportes() {
 
 		List<Soporte> soportes;
 		PersistenceManager pm = PMF.get().getPersistenceManager();

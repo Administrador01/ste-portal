@@ -35,7 +35,10 @@ public class SoporteAction extends Action{
 		String idCli = req.getParameter("idCli");
 		
 		if(idCli == null || idCli == ""){
+			soportes= sDao.getAllDelSoportes();
+			req.setAttribute("soportesDel", soportes);
 			soportes= sDao.getAllSoportes();
+			
 		}else{
 			soportes = sDao.getAllSoportesByClientId(idCli);
 		}

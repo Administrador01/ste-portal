@@ -153,12 +153,7 @@
 					</div>	
 					<br />
 					<br />
-					<div class="form-field detalles">
-						<span class="lbl">Soluci&oacuten:</span>
-						<div class="input">
-							<textarea name="solucion" maxlength="500" rows="1" cols="1" placeholder="Introduzca texto ..."></textarea>
-						</div>
-					</div>
+
 					
 				</div>	
 				

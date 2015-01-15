@@ -215,6 +215,19 @@
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
+					
+					<c:forEach items="${clientesBorrados}" var="c">
+						<tr class="valid-result" style='background-color:#8B8B8B;' id="row${c.key.id}"  >
+							<td><span>${c.id_cliente}</span></td>
+							<td><span>${c.nombre}</span></td>
+							<td><span>${c.str_fecha_alta}</span></td>
+							<td><span>${c.tipo_cliente}</span></td>
+							<td><span>${c.premium}</span></td>
+							
+							<td>
+							</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>

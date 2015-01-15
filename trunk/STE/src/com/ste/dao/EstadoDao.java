@@ -39,7 +39,7 @@ public class EstadoDao {
 		
 		
 		Query q = pm.newQuery("select from " + Estado.class.getName());
-		q.setOrdering("name asc");
+		q.setOrdering("orden asc");
 		Estados = (List<Estado>) q.execute();
 		
 		

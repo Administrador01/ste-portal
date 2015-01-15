@@ -36,6 +36,23 @@ public class ClienteDao {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<Cliente> getAllDelClients() {
+
+		List<Cliente> clientes;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		
+		Query q = pm.newQuery("select from " + Cliente.class.getName() +" where erased == true");		
+		q.setOrdering("id_cliente asc");
+		clientes = (List<Cliente>) q.execute();
+		
+		
+		pm.close();
+
+		return clientes;
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<Cliente> getAllClientsEvenDeleted() {
 
 		List<Cliente> clientes;

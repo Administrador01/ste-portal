@@ -1865,6 +1865,9 @@ form textarea.error {
   font-family: "BBVA Web Light";
   font-size: 12px;
 }
+#gestion_cliente .borrado {
+  background-color: #BFBFBF;
+}
 #gestion_cliente .form-field textarea {
   height: 100%;
 }
