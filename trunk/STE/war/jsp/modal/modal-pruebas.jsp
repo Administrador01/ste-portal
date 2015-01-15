@@ -94,34 +94,32 @@
 									<span class="lbl">Estado<span class="required-asterisk">*</span>:</span>
 									<div class="input">
 										<select id="estado" class="selectpicker selected" name="estado" >							
-											<option value="Pendiente" ${prueba.estado == 'Pendiente' ? 'selected' : ''} selected>Pendiente</option>									
-											<option value="En curso" ${prueba.estado == 'En curso' ? 'selected' : ''}>En curso</option>	
-											<option value="Finalizado" ${prueba.estado == 'Finalizado' ? 'selected' : ''}>Finalizado</option>
+											<c:forEach items="${estados}" var="estado">
+												<option value="${estado.name}" ${prueba.estado == estado.name ? 'selected' : ''}>${estado.name}</option>
+											</c:forEach>
 										</select>
 									</div>
 								</div>
 								
 								<div class="form-field">
-									<span class="lbl">Producto/canal<span class="required-asterisk">*</span>:</span>
+									<span class="lbl">Referencia<span class="required-asterisk">*</span>:</span>
 									<div class="input">
-										<select id="producto_canal" class="selectpicker selected" name="producto_canal" >
-											<c:forEach items="${productos}" var="producto">
-												<option value="${producto.name}" ${prueba.producto == producto.name ? 'selected' : ''}>${producto.name}</option>
-											</c:forEach><!--
-											<option value="Swift Fileact" >Swift Fileact</option>
-											<option value="Swift Fileact Antig" ${prueba.producto == 'Swift Fileact Antig' ? 'selected' : ''}>Swift Fileact (antigua conexi&oacuten)</option>
-											<option value="Swift FIN" ${prueba.producto == 'Swift FIN' ? 'selected' : ''}>Swift FIN</option>	
-											<option value="Swift FIN relay" ${prueba.producto == 'Swift FIN relay' ? 'selected' : ''}>Swift FIN (Relay Bank)</option>
-											<option value="Editran" ${prueba.producto == 'Editran' ? 'selected' : ''}>EDITRAN</option>	
-											<option value="BBVA Netcash" ${prueba.producto == 'BBVA Netcash' ? 'selected' : ''}>BBVA Netcash</option>
-											<option value="Edifact" ${prueba.producto == 'Edifact' ? 'selected' : ''}>EDIFACT</option>
-											<option value="Normalizador" ${prueba.producto == 'Normalizador' ? 'selected' : ''}>Normalizador</option>
-											<option value="Cashpool domestico" ${prueba.producto == 'Cashpool domestico' ? 'selected' : ''}>Cashpool dom&eacutestico</option>
-											<option value="Cashpool internacional" ${prueba.producto == 'Cashpool internacional' ? 'selected' : ''}>Cashpool internacional</option>
-											<option value="Factura integral" ${prueba.producto == 'Factura integral' ? 'selected' : ''}>Factura integral</option>-->
-										</select>
+										<input class="long" type="text" name="referencia" id="referencia" value="${prueba.referencia}">
 									</div>
 								</div>
+								
+					<div class="form-field">
+						<span class="lbl">Producto/canal<span class="required-asterisk">*</span>:</span>
+						<div class="input">
+							<select id="producto_canal" class="selectpicker selected" name="producto_canal" >
+							
+								<c:forEach items="${productos}" var="producto">
+										<option value="${producto.name}" ${prueba.producto == producto.name ? 'selected' : ''}>${producto.name}</option>
+								</c:forEach>
+
+							</select>
+						</div>
+					</div>
 								
 							</div>
 							

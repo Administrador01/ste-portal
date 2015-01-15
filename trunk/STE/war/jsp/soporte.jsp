@@ -56,9 +56,11 @@
 								<c:choose>
 										<c:when test="${empty clientes}">
 											<option value="default">No hay clientes</option>
+											<option value="Ninguno" data-premium="No premium" data-segmento="Ninguno">Ninguno</option>
 										</c:when>
 										<c:otherwise>
 											<option value="default">Seleccionar</option>
+											<option value="Ninguno" data-premium="No premium" data-segmento="Ninguno">Ninguno</option>
 											<c:forEach items="${clientes}" var="t">							
 												<option value="${t.nombre}" data-premium="${t.premium}" data-segmento="${t.tipo_cliente}" data-clientid="${t.key.id}" >${t.nombre}</option>
 											</c:forEach>
@@ -135,9 +137,9 @@
 						<div class="input">
 							<select id="estado" class="selectpicker selected" name="estado">
 								<option value="default">Seleccionar</option>
-								<option value="Pendiente">Pendiente</option>									
-								<option value="En curso">En curso</option>	
-								<option value="Finalizado">Finalizado</option>		
+								<c:forEach items="${estados}" var="estado">
+										<option value="${estado.name}">${estado.name}</option>
+								</c:forEach>		
 															
 							</select>
 						</div>

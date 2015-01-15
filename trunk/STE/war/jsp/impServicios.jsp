@@ -58,7 +58,7 @@
 								<tr class="valid-result" id="row${s.key.id}">
 	
 									<td><span>
-										<c:forEach items="${clientes}" var="t">
+										<c:forEach items="${clientesAll}" var="t">
 										<c:choose>
 											<c:when test="${t.key.id==s.cliente_id}">
 												${t.nombre}

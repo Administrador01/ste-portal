@@ -210,7 +210,7 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 		
 		
 		//eeeeeeeeeeeeeee
-		cDao.createCliente(c,usermail);
+		cDao.createCliente(c);
 		
 		json.append("success", "true");
 	
@@ -240,7 +240,7 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 		
 		Utils.writeLog(usermail, "Crea", "Cliente", c.getNombre());		
 		
-		cDao.createCliente(c,usermail);
+		cDao.createCliente(c);
 		
 		
 		json.append("success", "true");

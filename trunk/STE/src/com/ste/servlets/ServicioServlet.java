@@ -10,17 +10,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
+
+
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
+import com.ste.beans.Estado;
 import com.ste.beans.Pais;
 import com.ste.beans.ProductoCanal;
 import com.ste.beans.Servicio;
 import com.ste.beans.TipoServicio;
 import com.ste.beans.Cliente;
 import com.ste.dao.ClienteDao;
+import com.ste.dao.EstadoDao;
 import com.ste.dao.PaisDao;
 import com.ste.dao.ProductoCanalDao;
 import com.ste.dao.ServicioDao;
@@ -50,11 +54,16 @@ import java.net.URL;
 import java.util.List;
 
 public class ServicioServlet  extends HttpServlet{
-	  private static String CLIENT_ID = "460945221032-8u3kkoqbf5sf0bcms4rrtjcuc89fthb8.apps.googleusercontent.com";
-	  private static String CLIENT_SECRET = "3AI339j0GGOzdbqBv_64Bhw_ ";
+		public static HttpTransport httpTransport = new NetHttpTransport();
+		public static JsonFactory jsonFactory = new JacksonFactory();
+		private static String CLIENT_ID = "460945221032-8u3kkoqbf5sf0bcms4rrtjcuc89fthb8.apps.googleusercontent.com";
+		private static String CLIENT_SECRET = "3AI339j0GGOzdbqBv_64Bhw_";
 
-	  private static String REDIRECT_URI = "https://portal-ste.appspot.com/oauth2callback ";
-
+		private static String REDIRECT_URI = "https://portal-ste.appspot.com/oauth2callback";
+		public static  GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
+	            httpTransport, jsonFactory, CLIENT_ID, CLIENT_SECRET, Arrays.asList(DriveScopes.DRIVE))
+	            .setAccessType("online")
+	            .setApprovalPrompt("auto").build();
 	  
 	public void doGet(HttpServletRequest req, HttpServletResponse resp){
 
@@ -89,27 +98,30 @@ public class ServicioServlet  extends HttpServlet{
 	
 	
 	public void tester(HttpServletRequest req, HttpServletResponse resp, String usermail) throws InterruptedException, IOException{
-	    HttpTransport httpTransport = new NetHttpTransport();
-	    JsonFactory jsonFactory = new JacksonFactory();
 
-	    GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
-	            httpTransport, jsonFactory, CLIENT_ID, CLIENT_SECRET, Arrays.asList(DriveScopes.DRIVE))
-	            .setAccessType("online")
-	            .setApprovalPrompt("auto").build();
+
 	    
 	    String url = flow.newAuthorizationUrl().setRedirectUri(REDIRECT_URI).build();
-	    System.out.println("Please open the following URL in your browser then type the authorization code:");
-	    System.out.println("  " + url);
+	    resp.sendRedirect(url);
+		
+	    
+	    
+	    /*
 	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	    String code = br.readLine();
+	    
+		TipoServicioDao tipoDao = TipoServicioDao.getInstance();
+		TipoServicio tipoo = new TipoServicio();
+		tipoo.setNme(code);
+		tipoDao.createTipoServicio(tipoo);
 	    
 	    GoogleTokenResponse response = flow.newTokenRequest(code).setRedirectUri(REDIRECT_URI).execute();
 	    GoogleCredential credential = new GoogleCredential().setFromTokenResponse(response);
 	    
-	    //Create a new authorized API client
+	   
 	    Drive service = new Drive.Builder(httpTransport, jsonFactory, credential).build();
 
-	    //Insert a file  
+	      
 	    File body = new File();
 	    body.setTitle("My document");
 	    body.setDescription("A test document");
@@ -119,7 +131,7 @@ public class ServicioServlet  extends HttpServlet{
 	    FileContent mediaContent = new FileContent("text/plain", fileContent);
 
 	    File file = service.files().insert(body, mediaContent).execute();
-	    System.out.println("File ID: " + file.getId());
+	    System.out.println("File ID: " + file.getId());\*/
 
 	}
 	
@@ -193,7 +205,7 @@ public class ServicioServlet  extends HttpServlet{
 		        	  		client.setPremium(arrCliente[1]);
 		        	  		client.setStr_fecha_alta(arrCliente[2]);
 		        	  		client.setTipo_cliente(arrCliente[0]);
-		        	  		clientDao.createCliente(client, usermail);
+		        	  		clientDao.createCliente(client);
 		        	  		break;
 		        	  	  
 		        	  }
@@ -218,7 +230,35 @@ public class ServicioServlet  extends HttpServlet{
 		paisDao.deleteAll();
 		
 		ProductoCanalDao prodDao = ProductoCanalDao.getInstance();
-		prodDao.deleteAll();	
+		prodDao.deleteAll();
+		
+		EstadoDao estDao = EstadoDao.getInstance();
+		estDao.deleteAll();
+		
+		Estado es = new Estado();
+		String nombrees = "Pendiente";
+		es.setNme(nombrees);
+		estDao.createEstado(es);
+		es = new Estado();
+		nombrees = "En curso";
+		es.setNme(nombrees);
+		estDao.createEstado(es);
+		es = new Estado();
+		nombrees = "Finalizado";
+		es.setNme(nombrees);
+		estDao.createEstado(es);
+		es = new Estado();
+		nombrees = "Cancelado";
+		es.setNme(nombrees);
+		estDao.createEstado(es);
+		es = new Estado();
+		nombrees = "Terminado";
+		es.setNme(nombrees);
+		estDao.createEstado(es);
+
+
+		
+		
 		
 		Pais a = new Pais();
 		String nombrePais = "B&eacutelgica";
@@ -300,6 +340,10 @@ public class ServicioServlet  extends HttpServlet{
 		nombreProducto = "Factura integral";
 		prod.setNme(nombreProducto);
 		prodDao.createProductoCanal(prod);
+		prod = new ProductoCanal();
+		nombreProducto = "HSS";
+		prod.setNme(nombreProducto);
+		prodDao.createProductoCanal(prod);
 		
 		TipoServicio tipserv = new TipoServicio();
 		String nombreTipoServ = "Cobros";
@@ -329,6 +373,12 @@ public class ServicioServlet  extends HttpServlet{
 		nombreTipoServ = "Otros";
 		tipserv.setNme(nombreTipoServ);
 		tipservDao.createTipoServicio(tipserv);
+		tipserv = new TipoServicio();
+		nombreTipoServ = "AEB43";
+		tipserv.setNme(nombreTipoServ);
+		tipservDao.createTipoServicio(tipserv);
+		
+		
 		
 		Servicio s = new Servicio();
 		String nombre = "Adeudos B2B (Sepa) París       ";

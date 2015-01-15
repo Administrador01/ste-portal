@@ -29,9 +29,12 @@ public class ImplementacionAction extends Action{
 		
 		ClienteDao cDao = ClienteDao.getInstance();
 		List<Cliente> clientes = cDao.getAllClientsAlphabet();
-
+		
 		req.setAttribute("clientes", clientes);
-
+		
+		clientes = cDao.getAllClientsEvenDeleted();
+		req.setAttribute("clientesAll", clientes);
+		
 		ServicioDao sDao = ServicioDao.getInstance();
 		List<Servicio> servicios = sDao.getAllServicios();
 

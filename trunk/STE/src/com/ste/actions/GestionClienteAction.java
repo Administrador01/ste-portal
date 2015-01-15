@@ -24,7 +24,7 @@ public class GestionClienteAction extends Action{
 
 		ClienteDao cDao = ClienteDao.getInstance();
 		
-		List<Cliente> clientes = new ArrayList<Cliente>();;
+		List<Cliente> clientes = new ArrayList<Cliente>();
 		
 		String idCli = req.getParameter("idCli");
 		

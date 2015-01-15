@@ -68,8 +68,13 @@ public class ClienteDao {
 
 		return clientes;
 	}
-
-	public synchronized void createCliente(Cliente c, String usermail) {
+	
+	public synchronized void createClienteRaw(Cliente c) {
+		PersistenceManager pm = PMF.get().getPersistenceManager();	
+		pm.makePersistent(c);
+		pm.close();
+	}
+	public synchronized void createCliente(Cliente c) {
 		PersistenceManager pm = PMF.get().getPersistenceManager();	
 		CounterDao cDao = CounterDao.getInstance();
 
@@ -137,7 +142,10 @@ public Cliente getClientebyId(long l) {
 	
 	public void deleteCliente(Cliente c) {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		pm.deletePersistent(pm.getObjectById(c.getClass(), c.getKey().getId()));
+		c.setErased(true);
+		
+		ClienteDao clieDao =ClienteDao.getInstance();
+		clieDao.createClienteRaw(c);
 		
 		pm.close();
 

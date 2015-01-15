@@ -94,7 +94,6 @@
 						<span class="lbl">Tipo de servicio<span class="required-asterisk">*</span>:</span>
 						<div class="input">
 							<select id="tipo_servicio" class="selectpicker selected" name="tipo_servicio" >
-							
 								<c:forEach items="${tiposervicios}" var="servicio">
 										<option value="${servicio.name}" ${soporte.tipo_servicio == servicio.name ? 'selected' : ''}>${servicio.name}</option>
 								</c:forEach>	
@@ -113,9 +112,10 @@
 						<span class="lbl">Estado<span class="required-asterisk">*</span>:</span>
 						<div class="input">
 							<select id="estado" class="selectpicker selected" name="estado" >							
-								<option value="Pendiente" ${soporte.estado == 'Pendiente' ? 'selected' : ''} selected>Pendiente</option>									
-								<option value="En curso" ${soporte.estado == 'En curso' ? 'selected' : ''}>En curso</option>	
-								<option value="Finalizado" ${soporte.estado == 'Finalizado' ? 'selected' : ''}>Finalizado</option>
+
+								<c:forEach items="${estados}" var="estado">
+										<option value="${estado.name}" ${soporte.estado == estado.name ? 'selected' : ''}>${estado.name}</option>
+								</c:forEach>
 							</select>
 						</div>
 					</div>
