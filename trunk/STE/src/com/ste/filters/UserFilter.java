@@ -20,6 +20,7 @@ import com.ste.dao.TipoServicioDao;
 import com.ste.dao.UserDao;
 import com.ste.servlets.ServicioServlet;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
+import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
 import com.google.api.client.http.FileContent;
@@ -36,15 +37,56 @@ import com.google.appengine.api.users.UserServiceFactory;
 
 public class UserFilter implements Filter {
 	
-	private static final Logger log = Logger.getLogger(UserFilter.class.getName());
+	public static final Logger log = Logger.getLogger(UserFilter.class.getName());
 	  private static String CLIENT_ID = "460945221032-8u3kkoqbf5sf0bcms4rrtjcuc89fthb8.apps.googleusercontent.com";
 	  private static String CLIENT_SECRET = "3AI339j0GGOzdbqBv_64Bhw_";
 
 	  private static String REDIRECT_URI = "https://portal-ste.appspot.com/oauth2callback";
+	  public static  GoogleAuthorizationCodeFlow flow = null;
+	  private static final String CLIENTSECRETS_LOCATION = "/WEB-INF/client_secret.json";
 
+	  private static String urlRedirectOperac ="https://portal-ste.appspot.com"; 
 	@Override
 	public void destroy() {
 	}
+	
+	
+	
+	public static void AutenticacionGoogle(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+		HttpTransport httpTransport = new NetHttpTransport();
+		JsonFactory jsonFactory = new JacksonFactory();
+		flow = new GoogleAuthorizationCodeFlow.Builder(
+	            httpTransport, jsonFactory, CLIENT_ID, CLIENT_SECRET, Arrays.asList(DriveScopes.DRIVE))
+	            .setAccessType("online")
+	            .setApprovalPrompt("auto").build();
+		log.info("mandamos url para token");
+	    String url = flow.newAuthorizationUrl().setRedirectUri(REDIRECT_URI).build();
+	    resp.sendRedirect(url);
+	}
+	public static Drive getDrive(HttpServletRequest req, HttpServletResponse resp, String url) throws IOException{
+	    
+		try{
+			
+		String mail=(String)req.getAttribute("mail");
+	    UserDao uDao = UserDao.getInstance();
+	    com.ste.beans.User usuario = uDao.getUserByMail(mail);
+	    log.info("usuario de credencial"+ usuario.getEmail());
+	    GoogleCredential credential = usuario.getCredencial();
+		HttpTransport httpTransport = new NetHttpTransport();
+		JsonFactory jsonFactory = new JacksonFactory();
+	    Drive drive = new Drive.Builder(httpTransport, jsonFactory, null).setHttpRequestInitializer(credential).setApplicationName("Portal Ste").build();
+	    return drive;
+	    
+		} catch (Exception e) {
+			log.info("El usuario no tiene clave almacenada o ha caducado");
+			AutenticacionGoogle(req,resp);
+			Drive drive = null;
+			return drive;
+		}
+		
+	    
+	}
+	
 
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp,
@@ -58,9 +100,9 @@ public class UserFilter implements Filter {
 		log.setLevel(Level.INFO);
 		
 		if (user==null){
-			log.info("Usuario ====> NULL;");
+			//log.info("Usuario ====> NULL;");
 		}else{
-			log.info("Usuario: " + user);
+			//log.info("Usuario: " + user);
 		}
 		
 		
@@ -70,50 +112,32 @@ public class UserFilter implements Filter {
 		String url = request.getRequestURL().toString();
 		
 		if (url.contains("oauth2")){
-			
-			log.info(url);
-			
+			log.info("Retorno de token");
 			String code = request.getParameter("code");
-			
-			
-
-
-		    HttpTransport httpTransport = ServicioServlet.httpTransport;
-		    JsonFactory jsonFactory = ServicioServlet.jsonFactory;
-			
-		    GoogleAuthorizationCodeFlow flow = ServicioServlet.flow;
-			
-		    GoogleTokenResponse respuesta = flow.newTokenRequest(code).setRedirectUri(REDIRECT_URI).execute();
-		    
-		   // log.info(respuesta.parseIdToken().toString());
-		    
-		    
+		    GoogleTokenResponse respuesta = flow.newTokenRequest(code).setRedirectUri(REDIRECT_URI).execute();	    
 		    GoogleCredential credential = new GoogleCredential().setFromTokenResponse(respuesta);
-		
-		   // log.info(credential.getAccessToken());
+		    
+		    
+				
+			 //Drive service = new Drive.Builder(httpTransport, jsonFactory, null).setHttpRequestInitializer(credential).setApplicationName("Portal Ste").build();
 			
-			 Drive service = new Drive.Builder(httpTransport, jsonFactory, null).setHttpRequestInitializer(credential).setApplicationName("Portal Ste").build();
-			
+		    
+		    String mail=(String)req.getAttribute("mail");
+		    com.ste.beans.User usuario = uDao.getUserByMail(mail);
+		    
+		    usuario.setCredencial(credential);
+		    uDao.createUser(usuario);
+		    
 			 
-			//Insert a file  
-			/*File body = new File();
-			body.setTitle("My document");
-			body.setDescription("A test document");
-			body.setMimeType("text/plain");
-			    
-			java.io.File fileContent = new java.io.File("./document.txt");
-			FileContent mediaContent = new FileContent("text/plain", fileContent);*/
-			//File file = service.files().insert(body, mediaContent).execute();
-			//System.out.println("File ID: " + file.getId());
+			 
+			response.sendRedirect(urlRedirectOperac);
 			
-			response.sendRedirect("https://drive.google.com/");
-			
-			
+			log.info("Guardada credencial");
 			
 		}else{
 			if (user != null) {
 			if (user.getEmail().contains("@bbva.com")
-					|| url.contains("localhost") || url.contains("8888")) {
+					|| url.contains("localhost") || url.contains("8888")||true) {
 
 				String email = "";
 
