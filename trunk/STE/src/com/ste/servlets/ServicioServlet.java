@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 
 
+
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
@@ -34,6 +35,8 @@ import com.ste.dao.TipoServicioDao;
 
 
 import com.ste.filters.UserFilter;
+import com.ste.filters.UserFilter.CodeExchangeException;
+import com.ste.filters.UserFilter.NoRefreshTokenException;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
@@ -98,8 +101,11 @@ public class ServicioServlet  extends HttpServlet{
 	    //GoogleCredential cred = UserFilter.getCredential(req, resp,req.getRequestURL().toString());
 	    //UserFilter.log.info("obtenida servlet+ credencial");
 	   // Drive drive= UserFilter.getDriveEntity(cred);
-	    //drive.files().trash(req.getParameter("link")).execute();
+	    //
 	    
+	    GoogleCredential credential = UserFilter.getCredential(req, resp);
+	    Drive drive = UserFilter.getDrive(credential);
+	    drive.files().trash(req.getParameter("link")).execute();
 
 		
 	    
