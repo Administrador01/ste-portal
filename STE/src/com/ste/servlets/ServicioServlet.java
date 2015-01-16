@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 
 
 
+
+
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
@@ -31,6 +33,7 @@ import com.ste.dao.ServicioDao;
 import com.ste.dao.TipoServicioDao;
 
 
+import com.ste.filters.UserFilter;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
@@ -54,16 +57,7 @@ import java.net.URL;
 import java.util.List;
 
 public class ServicioServlet  extends HttpServlet{
-		public static HttpTransport httpTransport = new NetHttpTransport();
-		public static JsonFactory jsonFactory = new JacksonFactory();
-		private static String CLIENT_ID = "460945221032-8u3kkoqbf5sf0bcms4rrtjcuc89fthb8.apps.googleusercontent.com";
-		private static String CLIENT_SECRET = "3AI339j0GGOzdbqBv_64Bhw_";
 
-		private static String REDIRECT_URI = "https://portal-ste.appspot.com/oauth2callback";
-		public static  GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
-	            httpTransport, jsonFactory, CLIENT_ID, CLIENT_SECRET, Arrays.asList(DriveScopes.DRIVE))
-	            .setAccessType("online")
-	            .setApprovalPrompt("auto").build();
 	  
 	public void doGet(HttpServletRequest req, HttpServletResponse resp){
 
@@ -100,9 +94,13 @@ public class ServicioServlet  extends HttpServlet{
 	public void tester(HttpServletRequest req, HttpServletResponse resp, String usermail) throws InterruptedException, IOException{
 
 
+
+	    //GoogleCredential cred = UserFilter.getCredential(req, resp,req.getRequestURL().toString());
+	    //UserFilter.log.info("obtenida servlet+ credencial");
+	   // Drive drive= UserFilter.getDriveEntity(cred);
+	    //drive.files().trash(req.getParameter("link")).execute();
 	    
-	    String url = flow.newAuthorizationUrl().setRedirectUri(REDIRECT_URI).build();
-	    resp.sendRedirect(url);
+
 		
 	    
 	    
