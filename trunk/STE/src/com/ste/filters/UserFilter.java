@@ -1,7 +1,6 @@
 package com.ste.filters;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,29 +14,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ste.beans.TipoServicio;
-import com.ste.dao.TipoServicioDao;
-import com.ste.dao.UserDao;
-import com.ste.servlets.ServicioServlet;
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
-import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
-import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
-import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
-import com.google.api.client.http.FileContent;
-import com.google.api.client.http.HttpTransport;
-import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.api.client.json.JsonFactory;
-import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.services.drive.Drive;
-import com.google.api.services.drive.DriveScopes;
-import com.google.api.services.drive.model.File;
+
+
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import com.ste.dao.UserDao;
+
+
+
 
 public class UserFilter implements Filter {
 	
 	public static final Logger log = Logger.getLogger(UserFilter.class.getName());
+	
+	
+	/*	 *METODO PARA PODER AUTENTICARSE POR OAUTH2 
+		 * Variables 
+		 * --------------------------------------------------------------------------------
 	  private static String CLIENT_ID = "460945221032-8u3kkoqbf5sf0bcms4rrtjcuc89fthb8.apps.googleusercontent.com";
 	  private static String CLIENT_SECRET = "3AI339j0GGOzdbqBv_64Bhw_";
 	  private static	HttpTransport httpTransport = new NetHttpTransport();
@@ -45,13 +39,19 @@ public class UserFilter implements Filter {
 	  private static String REDIRECT_URI = "https://portal-ste.appspot.com/oauth2callback";
 	  public static  GoogleAuthorizationCodeFlow flow = null;
 	  private static final String CLIENTSECRETS_LOCATION = "/WEB-INF/client_secret.json";
-
-	  public static HttpServletRequest urlRedirectOperac =null; 
+	  private static ArrayList<GoogleCredential> Credenciales = new ArrayList<GoogleCredential>();
+	  private static ArrayList<String> Emails = new ArrayList<String>();
+	  
+	  public static String urlRedirectOperac =null; */
+	
+	
 	@Override
 	public void destroy() {
 	}
 	
-	
+	/*	METODO PARA PODER AUTENTICARSE POR OAUTH2 
+	 *	Metodos de solicitud manejo y despacho de las claves
+	 * --------------------------------------------------------------------------------
 	
 	public static void AutenticacionGoogle(HttpServletRequest req, HttpServletResponse resp) throws IOException{
 
@@ -64,43 +64,59 @@ public class UserFilter implements Filter {
 	    resp.sendRedirect(url);
 	}
 	
-	public static void storeCredentials (String mail, GoogleCredential credential){
-		UserDao uDao = UserDao.getInstance();
-	    com.ste.beans.User usuario = uDao.getUserByMail(mail);
-	    //usuario.setCredencial(credential);
-	    uDao.createUser(usuario);
-	}
 	
 	
-	
-	
-	public static GoogleCredential getCredential(HttpServletRequest req, HttpServletResponse resp) throws IOException{
-
-			String mail=(String)req.getAttribute("mail");
-		    UserDao uDao = UserDao.getInstance();
-		    com.ste.beans.User usuario = uDao.getUserByMail(mail);
-		    log.info("usuario de credencial  "+ usuario.getEmail());
-		    //GoogleCredential credential = usuario.getCredencial();
-		    UserFilter.urlRedirectOperac = req;
-		    
-		    GoogleCredential credential = null;
-		    if(/*credential.getRefreshToken() != null && credential!=null */false){
-		    	log.info("la credencial es coorecta  "+ usuario.getEmail());
-		    	return credential;
-		    }else{
-		    	log.info("la credencial huele a pis  "+ usuario.getEmail());
-		    	AutenticacionGoogle(req,resp);
-		    	return null;
+	  static GoogleAuthorizationCodeFlow getFlow() throws IOException {
+		    if (flow == null) {
+		    	
+		      HttpTransport httpTransport = new NetHttpTransport();
+		      JacksonFactory jsonFactory = new JacksonFactory();
+		      flow =
+		          new GoogleAuthorizationCodeFlow.Builder(httpTransport, jsonFactory, CLIENT_ID, CLIENT_SECRET, Arrays.asList(DriveScopes.DRIVE))
+		              .setAccessType("offline").setApprovalPrompt("force").build();
 		    }
+		    return flow;
+		  }
+
+	
+	  public static String getAuthorizationUrl(String emailAddress, String state) throws IOException {
+		  log.info("mandamos url para token");
+		    GoogleAuthorizationCodeRequestUrl urlBuilder =
+		        getFlow().newAuthorizationUrl().setRedirectUri(REDIRECT_URI).setState(state);
+		    urlBuilder.set("user_id", emailAddress);
+		    return urlBuilder.build();
+		  }
+
+
+	public static GoogleCredential getCredential(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+		UserFilter.urlRedirectOperac  = Utils.getAllUrl(req);
 		
-	   
-	    
+		GoogleCredential credencial=null;
+		String mail = (String)req.getAttribute("mail");
+		int i = 0;
+		boolean flag = true;
+		if(Emails.contains(mail)){
+			while(i<Emails.size()&&flag){
+				if(Emails.get(i).equals(mail)){
+					credencial = Credenciales.get(i);
+					flag=false;
+				}
+				i++;
+			}
+			
+		}else {
+			credencial = new GoogleCredential();
+		}
+		return credencial;
 	}
+	
+
 	
 	public static Drive getDrive(GoogleCredential credential) throws IOException{
+		
 		Drive drive = new Drive.Builder(httpTransport, jsonFactory, null).setHttpRequestInitializer(credential).setApplicationName("Portal Ste").build();
 		return drive;
-	}
+	}*/
 
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp,
@@ -124,22 +140,43 @@ public class UserFilter implements Filter {
 		HttpServletResponse response = (HttpServletResponse) resp;
 
 		String url = request.getRequestURL().toString();
-		
+		/*METODO PARA PODER AUTENTICARSE POR OAUTH2 
+		 * Recepcion de token y almacenamiento en arraylist y base de datos
+		 * --------------------------------------------------------------------------------
 		if (url.contains("oauth2")){
 			log.info("Retorno de token");
 			String code = request.getParameter("code");
+			flow = getFlow();
 		    GoogleTokenResponse respuesta = flow.newTokenRequest(code).setRedirectUri(REDIRECT_URI).execute();	    
 		    GoogleCredential credential = new GoogleCredential().setFromTokenResponse(respuesta);	
-			 //Drive service = new Drive.Builder(httpTransport, jsonFactory, null).setHttpRequestInitializer(credential).setApplicationName("Portal Ste").build();
+		   
 			String mail=(String)req.getAttribute("mail");
-		    storeCredentials(mail,credential);
-		    log.info("Guardada credencial");
+		    //storeCredentials(mail,credential);
+			
+			int i =0;
+			boolean flag = true;
+			if (Emails.contains(mail)&&Emails!=null&&mail!=null&&!Emails.isEmpty()){
+				while(i<Emails.size()&&flag){
+					if(Emails.get(i).equals(mail)){
+						Credenciales.remove(i);
+						Emails.remove(i);
+						flag=false;
+						log.info("error de primera pasada");
+					}
+					i++;
+				}
+				
+			}
+			UserFilter.Credenciales.add(credential);
+			UserFilter.Emails.add(mail);
+			log.info("Guardada credencial"+" "+Emails.get(i));
 		    log.info("operacion que va a realizar "+ urlRedirectOperac);
-			response.set;
-		}else{
-			if (user != null) {
+			response.sendRedirect(urlRedirectOperac);
+			
+		}else{*/
+		if (user != null) {
 			if (user.getEmail().contains("@bbva.com")
-					|| url.contains("localhost") || url.contains("8888")||true) {
+					|| url.contains("localhost") || url.contains("8888")) {
 
 				String email = "";
 
@@ -185,9 +222,8 @@ public class UserFilter implements Filter {
 				response.sendRedirect("http://intranet.bbva.com/");
 			}
 		}
-		}
-
 	}
+	
 
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
@@ -200,65 +236,6 @@ public class UserFilter implements Filter {
 		}
 		
 	}
-	
-	 public static class GetCredentialsException extends Exception {
 
-		    protected String authorizationUrl;
-
-		    /**
-		     * Construct a GetCredentialsException.
-		     *
-		     * @param authorizationUrl The authorization URL to redirect the user to.
-		     */
-		    public GetCredentialsException(String authorizationUrl) {
-		      this.authorizationUrl = authorizationUrl;
-		    }
-
-		    /**
-		     * Set the authorization URL.
-		     */
-		    public void setAuthorizationUrl(String authorizationUrl) {
-		      this.authorizationUrl = authorizationUrl;
-		    }
-
-		    /**
-		     * @return the authorizationUrl
-		     */
-		    public String getAuthorizationUrl() {
-		      return authorizationUrl;
-		    }
-		  }
-
-		  /**
-		   * Exception thrown when a code exchange has failed.
-		   */
-		  public static class CodeExchangeException extends GetCredentialsException {
-
-		    /**
-		     * Construct a CodeExchangeException.
-		     *
-		     * @param authorizationUrl The authorization URL to redirect the user to.
-		     */
-		    public CodeExchangeException(String authorizationUrl) {
-		      super(authorizationUrl);
-		    }
-
-		  }
-
-		  /**
-		   * Exception thrown when no refresh token has been found.
-		   */
-		  public static class NoRefreshTokenException extends GetCredentialsException {
-
-		    /**
-		     * Construct a NoRefreshTokenException.
-		     *
-		     * @param authorizationUrl The authorization URL to redirect the user to.
-		     */
-		    public NoRefreshTokenException(String authorizationUrl) {
-		      super(authorizationUrl);
-		    }
-
-		  }
 
 }

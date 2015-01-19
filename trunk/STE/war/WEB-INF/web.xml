@@ -95,6 +95,16 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	    <servlet-name>LogsServlet</servlet-name>
 	    <url-pattern>/logsServlet</url-pattern>
 	  </servlet-mapping>
+	  
+	  	  <servlet>
+	    <servlet-name>InformeServlet</servlet-name>
+	    <servlet-class>com.ste.servlets.InformeServlet</servlet-class>
+	  </servlet>
+	
+	  <servlet-mapping>
+	    <servlet-name>InformeServlet</servlet-name>
+	    <url-pattern>/informeServlet</url-pattern>
+	  </servlet-mapping>
 
 	<!-- Struts -->
 

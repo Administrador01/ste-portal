@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
 
 
@@ -14,6 +15,11 @@ import java.util.List;
 
 
 
+
+
+
+
+import javax.servlet.http.HttpServletRequest;
 
 import com.ste.beans.Log;
 import com.ste.beans.User;
@@ -43,6 +49,20 @@ public class Utils {
 			lDao.createLog(log);
 		}
 	
+	}
+	/*Metodo que devuelve la url completa de una peticion web incluyendo datos get y post*/
+	public static String getAllUrl (HttpServletRequest req){
+		
+		String retorno =req.getRequestURL().toString();
+		Enumeration parameters = req.getParameterNames();
+		Object aux = parameters.nextElement();
+		retorno = retorno+"?"+aux.toString()+"="+req.getParameter(aux.toString());
+		while(parameters.hasMoreElements()){
+			aux = parameters.nextElement();
+			retorno=retorno+"&"+aux.toString()+"="+req.getParameter(aux.toString());
+		}
+		
+		return retorno;
 	}
 	
 	public static String getPermisoAreaStr(int num){

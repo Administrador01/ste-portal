@@ -326,7 +326,11 @@ $(function(){
 		var campo = $(this).val();
 		$('#input-servicio-referencia').val(campo);
 	})
-});;;var userBoxSize;
+});;$(function(){
+	$('#iframexls').attr('src',"informeServlet?accion=def#toolbar=0&navpanes=0&scrollbar=0");
+	
+	
+});var userBoxSize;
 var id;
 
 function  changeActionsButtonColor(){
