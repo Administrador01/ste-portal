@@ -21,7 +21,7 @@ public class UserDao {
 
 	public void createUser(User u) {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-
+		//u.setCredencial(null);
 		try {
 			pm.makePersistent(u);
 		} finally {
