@@ -1,10 +1,12 @@
 package com.ste.dao;
 
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
+
 
 
 import com.ste.beans.Prueba;
@@ -183,5 +185,129 @@ public class PruebaDao {
 		pm.close();
 
 		return existe;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Prueba> getPruebasSinceDate (Date fechaDesde) {
+
+		List<Prueba> pruebas;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		
+		
+		String query = "select from " + Prueba.class.getName();
+		Query q = pm.newQuery(query);
+		
+		q.setFilter("fecha_estado < fechaDesde");
+		q.declareParameters("java.util.Date fechaDesde");
+	
+		pruebas = (List<Prueba>) q.execute(new java.util.Date());
+		
+		pm.close();
+
+		return pruebas;
+	}
+	@SuppressWarnings("unchecked")
+	public List<Prueba> getPruebasUntilDate (Date fechaHasta) {
+
+		List<Prueba> pruebas;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		
+		
+		String query = "select from " + Prueba.class.getName();
+		Query q = pm.newQuery(query);
+		
+		q.setFilter("fecha_estado > fechaHasta");
+		q.declareParameters("java.util.Date fechaHasta");
+	
+		pruebas = (List<Prueba>) q.execute(new java.util.Date());
+		
+		pm.close();
+
+		return pruebas;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Prueba> getPruebasBetweenDates (Date fechaDesde,Date fechaHasta) {
+
+		List<Prueba> pruebas;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		
+		
+		String query = "select from " + Prueba.class.getName();
+		Query q = pm.newQuery(query);
+		
+		q.setFilter("fecha_estado > fechaHasta && fecha_estado < fechaDesde");
+		q.declareParameters("java.util.Date fechaHasta, java.util.Date fechaDesde");
+		
+		pruebas = (List<Prueba>) q.execute(fechaDesde,fechaHasta);
+		
+		pm.close();
+
+		return pruebas;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Prueba> getPruebasSinceDateByClientId (String clientID,Date fechaDesde) {
+
+		List<Prueba> pruebas;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		
+		
+		String query = "select from " + Prueba.class.getName()+" where cliente_id == '"+clientID+"'";
+		Query q = pm.newQuery(query);
+		
+		q.setFilter("fecha_estado < fechaDesde");
+		q.declareParameters("java.util.Date fechaDesde");
+	
+		pruebas = (List<Prueba>) q.execute(new java.util.Date());
+		
+		pm.close();
+
+		return pruebas;
+	}
+	@SuppressWarnings("unchecked")
+	public List<Prueba> getPruebasUntilDateByClientId (String clientID,Date fechaHasta) {
+
+		List<Prueba> pruebas;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		
+		
+		String query = "select from " + Prueba.class.getName()+" where cliente_id == '"+clientID+"'";
+		Query q = pm.newQuery(query);
+		
+		q.setFilter("fecha_estado > fechaHasta");
+		q.declareParameters("java.util.Date fechaHasta");
+	
+		pruebas = (List<Prueba>) q.execute(new java.util.Date());
+		
+		pm.close();
+
+		return pruebas;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Prueba> getPruebasBetweenDatesByClientId (String clientID,Date fechaDesde,Date fechaHasta) {
+
+		List<Prueba> pruebas;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		
+		
+		String query = "select from " + Prueba.class.getName();
+		Query q = pm.newQuery(query);
+		
+		q.setFilter("fecha_estado >= fechaHasta && fecha_estado <= fechaDesde && cliente_id==clientID");
+		q.declareParameters("java.util.Date fechaHasta, java.util.Date fechaDesde, int clientID");
+		
+		pruebas = (List<Prueba>) q.execute(fechaDesde,fechaHasta,clientID);
+		
+		pm.close();
+
+		return pruebas;
 	}
 }

@@ -160,7 +160,7 @@ public class UserFilter implements Filter {
 					if(Emails.get(i).equals(mail)){
 						Credenciales.remove(i);
 						Emails.remove(i);
-						flag=false;
+						flag=false;hgjr
 						log.info("error de primera pasada");
 					}
 					i++;

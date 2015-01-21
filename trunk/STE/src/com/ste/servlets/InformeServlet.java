@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -32,8 +33,10 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.ste.beans.Cliente;
+import com.ste.beans.Estado;
 import com.ste.beans.Prueba;
 import com.ste.dao.ClienteDao;
+import com.ste.dao.EstadoDao;
 import com.ste.dao.PruebaDao;
 import com.ste.utils.Utils;
 import com.aspose.cells.Workbook.*;
@@ -63,7 +66,7 @@ public class InformeServlet extends HttpServlet{
 			String accion = req.getParameter("accion");
 			
 			if(accion.equals("def"))informepordefecto(req,resp);
-
+			if(accion.equals("pruebas"))informePruebas(req,resp);
 				
 			
 			
@@ -76,6 +79,153 @@ public class InformeServlet extends HttpServlet{
 	public void doPost(HttpServletRequest req, HttpServletResponse resp){
 		doGet(req,resp);
 	}
+	
+	private void informePruebas(HttpServletRequest req, HttpServletResponse resp)throws Exception {
+
+		
+		PruebaDao pruDao =PruebaDao.getInstance();
+		EstadoDao est = EstadoDao.getInstance();
+		
+		List<Prueba> pruebas = pruDao.getAllPruebas();
+		List<Estado> estados = est.getAllEstados();
+		
+		String fechaHasta = req.getParameter("fechaHasta");
+		String fechaDesde = req.getParameter("fechaDesde");
+		
+		int tipoFecha = 1;
+		
+		if (!fechaHasta.equals("")&&fechaHasta!=null){
+			if(!fechaDesde.equals("")&&fechaDesde!=null){
+				Date fech = Utils.dateConverter(fechaDesde);
+				Date haHasta = Utils.dateConverter(fechaHasta);
+				pruebas = pruDao.getPruebasBetweenDates(fech,haHasta);
+				tipoFecha=4;
+			}else{
+				Date dateHasta = Utils.dateConverter(fechaHasta);
+				pruebas = pruDao.getPruebasUntilDate(dateHasta);
+				tipoFecha=3;
+			}
+		}else{
+			if(!fechaDesde.equals("")&&fechaDesde!=null){
+				Date dateDesde = Utils.dateConverter(fechaDesde);
+				pruebas = pruDao.getPruebasSinceDate(dateDesde);
+				tipoFecha=2;
+			}
+		}
+		
+		resp.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+		resp.setHeader("Content-Disposition","attachment; filename=InformePruebasSTE.xlsx");
+		String link= "/datadocs/templatePruebas.xlsx";
+		InputStream inp = this.getServletContext().getResourceAsStream(link);
+		Workbook workbook = new XSSFWorkbook(OPCPackage.open(inp));
+		
+		//CreationHelper createHelper = workbook.getCreationHelper();
+		Sheet sh=workbook.getSheetAt(0);
+		//String sheetName=sh.getSheetName();	
+		
+		/*ESTILO DE CELDA CON BORDES*/
+		short width = 1;
+		CellStyle cellStyle = workbook.createCellStyle();
+		cellStyle.setBorderBottom(width);
+		cellStyle.setBorderLeft(width);
+		cellStyle.setBorderRight(width);
+		cellStyle.setBorderTop(width);
+		
+		
+		/*------------------------------------------TABLA 1---------------------------------------------*/
+		int num = 0;
+		for(Estado estado: estados){
+			//Creacion de las celdas con bordes de manera dinamica
+			sh.createRow(8+num).createCell(5).setCellStyle(cellStyle);
+			sh.getRow(8+num).createCell(6).setCellStyle(cellStyle);
+			sh.getRow(8+num).createCell(7).setCellStyle(cellStyle);
+			sh.getRow(8+num).createCell(8).setCellStyle(cellStyle);
+			sh.getRow(8+num).getCell(5).setCellValue(estado.getName());
+			sh.getRow(8+num).getCell(6).setCellValue(0.0);
+			sh.getRow(8+num).getCell(7).setCellValue(0.0);
+			sh.getRow(8+num).getCell(8).setCellValue(0.0);
+			num++;
+		}
+		for(Prueba pru : pruebas){
+			for(int i =0;i<estados.size();i++){
+				
+				
+				if(pru.getEntorno().equals("Produccion")){
+					
+					if(pru.getEstado().equals(estados.get(i).getName()))sh.getRow(i+8).getCell(7).setCellValue(sh.getRow(i+8).getCell(7).getNumericCellValue()+1);
+					
+				}else{
+					if(pru.getEntorno().equals("Preproduccion")){
+						
+						if(pru.getEstado().equals(estados.get(i).getName()))sh.getRow(i+8).getCell(6).setCellValue(sh.getRow(i+8).getCell(6).getNumericCellValue()+1);
+						
+					}
+				}
+				if(pru.getEstado().equals(estados.get(i).getName()))sh.getRow(i+8).getCell(8).setCellValue(sh.getRow(i+8).getCell(8).getNumericCellValue()+1);
+			}
+		}
+		
+		sh.createRow(estados.size()+8).createCell(5).setCellStyle(cellStyle);
+		sh.getRow(estados.size()+8).createCell(6).setCellStyle(cellStyle);
+		sh.getRow(estados.size()+8).createCell(7).setCellStyle(cellStyle);
+		sh.getRow(estados.size()+8).createCell(8).setCellStyle(cellStyle);
+		sh.getRow(estados.size()+8).getCell(5).setCellValue("Total");
+		sh.getRow(estados.size()+8).getCell(6).setCellFormula("SUM(G"+(8+1)+":G"+(8+estados.size())+")");
+		sh.getRow(estados.size()+8).getCell(7).setCellFormula("SUM(H"+(8+1)+":H"+(8+estados.size())+")");
+		sh.getRow(estados.size()+8).getCell(8).setCellFormula("SUM(I"+(8+1)+":I"+(8+estados.size())+")");
+		/*------------------------------FIN DE TABLA 1-------------------------------------------------------*/
+		
+		
+		ClienteDao clientDao = ClienteDao.getInstance();
+		List<Cliente> clientes = clientDao.getAllClientsEvenDeleted();
+		/*------------------------------TABLA 2--------------------------------------------------------------*/
+		int i = 0;
+		for(Cliente cli :clientes){
+			switch (tipoFecha){
+				case 1:
+					pruebas = pruDao.getAllPruebasByClientId(Long.toString(cli.getKey().getId()));
+					break;
+				case 2:
+					Date dateDesde = Utils.dateConverter(fechaDesde);
+					pruebas = pruDao.getPruebasSinceDateByClientId(Long.toString(cli.getKey().getId()), dateDesde);
+					break;
+				case 3:
+					Date dateHasta = Utils.dateConverter(fechaHasta);
+					pruebas = pruDao.getPruebasUntilDateByClientId(Long.toString(cli.getKey().getId()), dateHasta);
+					break;
+				case 4:
+					Date datDesde = Utils.dateConverter(fechaDesde);
+					Date datHasta = Utils.dateConverter(fechaHasta);
+					pruebas = pruDao.getPruebasBetweenDatesByClientId(Long.toString(cli.getKey().getId()), datDesde, datHasta);
+					break;
+				default:
+					break;
+			}
+			sh.createRow(25+i).createCell(1).setCellStyle(cellStyle);
+			sh.getRow(25+i).createCell(2).setCellStyle(cellStyle);
+			sh.getRow(25+i).createCell(3).setCellStyle(cellStyle);
+			sh.getRow(25+i).createCell(4).setCellStyle(cellStyle);
+			sh.getRow(25+i).getCell(1).setCellValue(cli.getId_cliente());
+			sh.getRow(25+i).getCell(2).setCellValue(0.0);
+			sh.getRow(25+i).getCell(3).setCellValue(0.0);
+			sh.getRow(25+i).getCell(4).setCellValue(0.0);
+
+			for(Prueba pru : pruebas){
+				if(pru.getEntorno().equals("Preproduccion"))sh.getRow(25+i).getCell(2).setCellValue(sh.getRow(25+i).getCell(2).getNumericCellValue()+1);
+				if(pru.getEntorno().equals("Produccion"))sh.getRow(25+i).getCell(3).setCellValue(sh.getRow(25+i).getCell(3).getNumericCellValue()+1);
+				sh.getRow(25+i).getCell(4).setCellValue(sh.getRow(25+i).getCell(4).getNumericCellValue()+1);
+			}
+			i++;
+		}
+		/*------------------------------FIN TABLA 2----------------------------------------------------------*/
+		
+		//cellStyle.setDataFormat(createHelper.createDataFormat().getFormat(""));
+		
+		
+		
+		workbook.write(resp.getOutputStream());
+	}
+	
 	
 	private void informepordefecto(HttpServletRequest req, HttpServletResponse resp)throws Exception {	
 		JSONObject json = new JSONObject();
@@ -178,7 +328,7 @@ public class InformeServlet extends HttpServlet{
 //	}
 		
 	
-
+/*
 	resp.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 	resp.setHeader("Content-Disposition","attachment; filename=GestionPruebasSTE.xlsx");
 	String link= "/datadocs/template.xlsx";
@@ -196,35 +346,27 @@ public class InformeServlet extends HttpServlet{
 	workbook.write(resp.getOutputStream());
 
 		
+		*/
+	
+ 
 		
 	
-		
-		/*
-		
+
+
+	
 	resp.setContentType("application/pdf");
 	resp.setHeader("Content-Disposition","inline; filename=informe.pdf");
 
+	String link= "/datadocs/ex.html";
+	InputStream test = this.getServletContext().getResourceAsStream(link);
+	com.aspose.cells.Workbook salidP = new com.aspose.cells.Workbook(test);
+	salidP.save(resp.getOutputStream(),SaveFormat.PDF);
+		/*
 	String link= "/datadocs/template.xlsx";
-	InputStream inp = this.getServletContext().getResourceAsStream(link);
-	Workbook workbook = new XSSFWorkbook(OPCPackage.open(inp));
-	
-	CreationHelper createHelper = workbook.getCreationHelper();
-	Sheet sh=workbook.getSheetAt(0);
-	String sheetName=sh.getSheetName();	
-	
-	CellStyle cellStyle = workbook.createCellStyle();
-	cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("d/m/yyyy"));
-	sh.getRow(7).getCell(1).setCellValue(23);
-	
-	
-
-	
-	workbook.write(resp.getOutputStream());*/
-	/*
 	InputStream test = this.getServletContext().getResourceAsStream(link);
 	com.aspose.cells.Workbook salidP = new com.aspose.cells.Workbook(test);
 	
-	salidP.save(resp.getOutputStream(),SaveFormat.PDF);*/
+	salidP.save(resp.getOutputStream(),SaveFormat.HTML);*/
 
 	
 	}

@@ -1,5 +1,13 @@
 $(function(){
-	$('#iframexls').attr('src',"informeServlet?accion=def#toolbar=0&navpanes=0&scrollbar=0");
+	$('#iframexls').attr('src',"");
 	
+
 	
 })
+
+function verinforme(){
+	var variable =$('#variableInf').find(":selected").val();
+	var fechadesde = $('#fecha-desde').val();
+	var fechahasta = $('#fecha-hasta').val();
+	$('#iframexls').attr('src',"/informeServlet?accion="+variable+"&fechaHasta="+fechahasta+"&fechaDesde="+fechadesde);
+}
