@@ -1,11 +1,4 @@
-<!-- Indices written at Wed, 21 Jan 2015 18:38:33 GMT+01:00 -->
+<!-- Indices written at Thu, 22 Jan 2015 15:53:46 GMT+01:00 -->
 
-<datastore-indexes>
+<datastore-indexes/>
 
-    <!-- Used 5 times in query history -->
-    <datastore-index kind="Prueba" ancestor="false" source="auto">
-        <property name="cliente_id" direction="asc"/>
-        <property name="fecha_estado" direction="asc"/>
-    </datastore-index>
-
-</datastore-indexes>

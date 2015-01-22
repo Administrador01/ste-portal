@@ -1180,11 +1180,13 @@ $(function(){
 		
 		if (val_fecha_desde_form!="" && val_fecha_desde_form!=null){
 			for (a=0; a<trs.length;a++){
-				if (compare_dates(entradas[a].data('strfechaestado'),val_fecha_desde_form)){
+				
+				if (compare_dates(val_fecha_desde_form,entradas[a].data('strfechaestado'))){
 					//el dato de la tabla es mayor que el del filtro
+					$(trs[a]).addClass('hidden');
 				}else{
 					//el dato del filtro es mayor que el de la tabla
-					$(trs[a]).addClass('hidden');
+					
 				}
 			}
 		}
@@ -1234,7 +1236,7 @@ function compare_dates(fecha, fecha2)
       {   
         if (xMonth == yMonth)  
         {  
-          if (xDay>= yDay)  
+          if (xDay> yDay)  
             return(true);  
           else  
             return(false);  
