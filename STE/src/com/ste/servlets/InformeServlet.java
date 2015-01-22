@@ -67,7 +67,8 @@ public class InformeServlet extends HttpServlet{
 			
 			if(accion.equals("def"))informepordefecto(req,resp);
 			if(accion.equals("pruebas"))informePruebas(req,resp);
-				
+			if(accion.equals("pruebasServ"))informePruebasServ(req,resp);
+			if(accion.equals("cliente"))informeCliente(req,resp);
 			
 			
 		} catch (Exception e) {
@@ -175,6 +176,16 @@ public class InformeServlet extends HttpServlet{
 		sh.getRow(estados.size()+8).getCell(8).setCellFormula("SUM(I"+(8+1)+":I"+(8+estados.size())+")");
 		/*------------------------------FIN DE TABLA 1-------------------------------------------------------*/
 		
+		/*Insertamos el rango de nombres para la grafica*/
+		
+		Name rangeTotal = workbook.getName("Total");
+		Name rangeEstados = workbook.getName("Estados");
+		
+		String sheetName = workbook.getSheetName(0);
+		
+		rangeTotal.setRefersToFormula(sheetName+"!$I$"+9+":$I$"+(estados.size()+8));
+		rangeEstados.setRefersToFormula(sheetName+"!$F$"+9+":$F$"+(estados.size()+8));
+		
 		
 		ClienteDao clientDao = ClienteDao.getInstance();
 		List<Cliente> clientes = clientDao.getAllClientsEvenDeleted();
@@ -224,6 +235,72 @@ public class InformeServlet extends HttpServlet{
 		
 		
 		workbook.write(resp.getOutputStream());
+	}
+	
+	private void informePruebasServ(HttpServletRequest req, HttpServletResponse resp)throws Exception {
+		PruebaDao pruDao =PruebaDao.getInstance();
+		EstadoDao est = EstadoDao.getInstance();
+		
+		List<Prueba> pruebas = pruDao.getAllPruebas();
+		List<Estado> estados = est.getAllEstados();
+		
+		String fechaHasta = req.getParameter("fechaHasta");
+		String fechaDesde = req.getParameter("fechaDesde");
+		
+		int tipoFecha = 1;
+		
+		if (!fechaHasta.equals("")&&fechaHasta!=null){
+			if(!fechaDesde.equals("")&&fechaDesde!=null){
+				Date fech = Utils.dateConverter(fechaDesde);
+				Date haHasta = Utils.dateConverter(fechaHasta);
+				//pruebas = pruDao.getPruebasBetweenDates(fech,haHasta);
+				tipoFecha=4;
+			}else{
+				Date dateHasta = Utils.dateConverter(fechaHasta);
+				//pruebas = pruDao.getPruebasUntilDate(dateHasta);
+				tipoFecha=3;
+			}
+		}else{
+			if(!fechaDesde.equals("")&&fechaDesde!=null){
+				Date dateDesde = Utils.dateConverter(fechaDesde);
+				//pruebas = pruDao.getPruebasSinceDate(dateDesde);
+				tipoFecha=2;
+			}
+		}
+		
+		resp.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+		resp.setHeader("Content-Disposition","attachment; filename=InformePruebasPorServicioSTE.xlsx");
+		
+		String link= "/datadocs/templatePruebasServ.xlsx";
+		InputStream inp = this.getServletContext().getResourceAsStream(link);
+		Workbook workbook = new XSSFWorkbook(OPCPackage.open(inp));
+		
+		//CreationHelper createHelper = workbook.getCreationHelper();
+		Sheet sh=workbook.getSheetAt(0);
+		
+		Name rangeServicios = workbook.getName("Servicios");
+		Name rangeValores = workbook.getName("Valores");
+		
+		String sheetName = workbook.getSheetName(0);
+		
+		String reference = sheetName + "!$B$"+3 + ":$B$"+5;
+		
+		rangeServicios.setRefersToFormula(reference);
+		
+		reference = sheetName + "!$C$"+3 + ":$C$"+5;
+		
+		rangeValores.setRefersToFormula(reference);
+		
+		sh.createRow(4).createCell(1).setCellValue(789987);
+		sh.getRow(4).createCell(2).setCellValue("roberto");
+		
+		workbook.write(resp.getOutputStream());
+		
+	}
+	
+	private void informeCliente(HttpServletRequest req, HttpServletResponse resp)throws Exception {
+		
+		
 	}
 	
 	
@@ -352,22 +429,38 @@ public class InformeServlet extends HttpServlet{
 		
 	
 
+/*Metodos de conversion excela pdf atualmente no validos utilizan java.awt.* por lo que appengine lo prohibe*/
+	
+//	resp.setContentType("application/pdf");
+//	resp.setHeader("Content-Disposition","inline; filename=informe.pdf");
+//
+//	String link= "/datadocs/ex.html";
+//	InputStream test = this.getServletContext().getResourceAsStream(link);
+//	com.aspose.cells.Workbook salidP = new com.aspose.cells.Workbook(test);
+//	salidP.save(resp.getOutputStream(),SaveFormat.PDF);
+	
+//	resp.setContentType("application/pdf");
+//	resp.setHeader("Content-Disposition","inline; filename=informe.pdf");
+//	
+//	
+//	OfficeFile f = new OfficeFile(req.getInputStream(),"localhost","8100",true);
+//	f.convert(resp.getOutputStream(),"pdf");
+		
+
+//	File inputFile;
+//	File outputFile;
+//	DocumentFormat outputFormat;
+//	String inputExtension = FilenameUtils.getExtension(inputFile.getName());
+//	DocumentFormat inputFormat = formatRegistry.getFormatByExtension(inputExtension);
+//	StandardConversionTask conversionTask = new StandardConversionTask(inputFile, outputFile, outputFormat);
+//	conversionTask.setDefaultLoadProperties(defaultLoadProperties);
+//	conversionTask.setInputFormat(inputFormat);
+//	officeManager.execute(conversionTask);
+	
 
 	
-	resp.setContentType("application/pdf");
-	resp.setHeader("Content-Disposition","inline; filename=informe.pdf");
-
-	String link= "/datadocs/ex.html";
-	InputStream test = this.getServletContext().getResourceAsStream(link);
-	com.aspose.cells.Workbook salidP = new com.aspose.cells.Workbook(test);
-	salidP.save(resp.getOutputStream(),SaveFormat.PDF);
-		/*
-	String link= "/datadocs/template.xlsx";
-	InputStream test = this.getServletContext().getResourceAsStream(link);
-	com.aspose.cells.Workbook salidP = new com.aspose.cells.Workbook(test);
 	
-	salidP.save(resp.getOutputStream(),SaveFormat.HTML);*/
-
+/*------------------------------------------------------------------------------*/
 	
 	}
 	
