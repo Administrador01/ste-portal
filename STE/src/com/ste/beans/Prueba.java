@@ -55,6 +55,9 @@ public class Prueba {
 	@Persistent
 	private String cliente_id;
 	
+	@Persistent
+	private String resultado;
+	
 	public Key getKey() {
 		return key;
 	}
@@ -165,5 +168,13 @@ public class Prueba {
 
 	public void setIdCliente(String id_cliente) {
 		this.cliente_id = id_cliente;
+	}
+	
+	public String getResultado() {
+		return resultado;
+	}
+
+	public void setResultado(String resultado) {
+		this.resultado = resultado;
 	}
 }

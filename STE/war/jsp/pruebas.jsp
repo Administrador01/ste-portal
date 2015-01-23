@@ -119,7 +119,7 @@
 							<select id="entorno" class="selectpicker selected" name="entorno" >
 								
 								<option value="default">Seleccionar</option>	
-								<option value="Preproduccion">Preproducci&oacuten</option>
+								<option value="Integrado">Integrado</option>
 								<option value="Produccion">Producci&oacuten</option>
 
 															
@@ -127,7 +127,15 @@
 						</div>
 					</div>
 					
-
+					<div class="form-field">
+						<span class="lbl">Resultado<span class="required-asterisk">*</span>:</span>
+						<div class="input">
+							<select id="resultado" class="selectpicker selected" name="resultado" >
+								<option value="OK">OK</option>
+								<option value="KO">KO</option>
+							</select>
+						</div>
+					</div>
 					
 					<div class="form-field">
 						<span class="lbl">Tipo servicio<span class="required-asterisk">*</span>:</span>
