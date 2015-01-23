@@ -42,6 +42,7 @@ import com.ste.utils.Utils;
 import com.aspose.cells.Workbook.*;
 import com.aspose.cells.SaveFormat;
 
+import org.artofsolving.*;
 
 public class InformeServlet extends HttpServlet{
 	
@@ -156,7 +157,7 @@ public class InformeServlet extends HttpServlet{
 					if(pru.getEstado().equals(estados.get(i).getName()))sh.getRow(i+8).getCell(7).setCellValue(sh.getRow(i+8).getCell(7).getNumericCellValue()+1);
 					
 				}else{
-					if(pru.getEntorno().equals("Preproduccion")){
+					if(pru.getEntorno().equals("Integrado")){
 						
 						if(pru.getEstado().equals(estados.get(i).getName()))sh.getRow(i+8).getCell(6).setCellValue(sh.getRow(i+8).getCell(6).getNumericCellValue()+1);
 						
@@ -222,7 +223,7 @@ public class InformeServlet extends HttpServlet{
 			sh.getRow(25+i).getCell(4).setCellValue(0.0);
 
 			for(Prueba pru : pruebas){
-				if(pru.getEntorno().equals("Preproduccion"))sh.getRow(25+i).getCell(2).setCellValue(sh.getRow(25+i).getCell(2).getNumericCellValue()+1);
+				if(pru.getEntorno().equals("Integrado"))sh.getRow(25+i).getCell(2).setCellValue(sh.getRow(25+i).getCell(2).getNumericCellValue()+1);
 				if(pru.getEntorno().equals("Produccion"))sh.getRow(25+i).getCell(3).setCellValue(sh.getRow(25+i).getCell(3).getNumericCellValue()+1);
 				sh.getRow(25+i).getCell(4).setCellValue(sh.getRow(25+i).getCell(4).getNumericCellValue()+1);
 			}
@@ -299,7 +300,167 @@ public class InformeServlet extends HttpServlet{
 	}
 	
 	private void informeCliente(HttpServletRequest req, HttpServletResponse resp)throws Exception {
+		PruebaDao pruDao =PruebaDao.getInstance();
+		ClienteDao cliDao =ClienteDao.getInstance();
 		
+		
+		String fechaHasta = req.getParameter("fechaHasta");
+		String fechaDesde = req.getParameter("fechaDesde");
+		
+		int tipoFecha = 1;
+		
+		if (!fechaHasta.equals("")&&fechaHasta!=null){
+			if(!fechaDesde.equals("")&&fechaDesde!=null){
+				tipoFecha=4;
+			}else{
+				tipoFecha=3;
+			}
+		}else{
+			if(!fechaDesde.equals("")&&fechaDesde!=null){
+				tipoFecha=2;
+			}
+		}
+
+		resp.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+		resp.setHeader("Content-Disposition","attachment; filename=InformePruebasPorServicioSTE.xlsx");
+		
+		String link= "/datadocs/templatePruebasCliente.xlsx";
+		InputStream inp = this.getServletContext().getResourceAsStream(link);
+		Workbook workbook = new XSSFWorkbook(OPCPackage.open(inp));
+		
+		Sheet sh=workbook.getSheetAt(0);
+		String sheetName = workbook.getSheetName(0);
+		
+		CellStyle clientCellStyle = workbook.createCellStyle();
+		clientCellStyle.setBorderBottom((short)1);
+		clientCellStyle.setBorderLeft((short)2);
+		clientCellStyle.setBorderRight((short)2);
+		
+		
+		CellStyle testCellStyle = workbook.createCellStyle();
+		testCellStyle.setBorderRight((short)2);
+		clientCellStyle.setBorderLeft((short)2);
+		
+		CellStyle cellStyle = workbook.createCellStyle();
+		cellStyle.setBorderRight((short)2);
+		cellStyle.setBorderLeft((short)2);		
+		cellStyle.setBorderTop((short)2);
+		cellStyle.setBorderBottom((short)2);
+		
+		
+		
+		List<Cliente> clientes = cliDao.getAllClients();
+		List<Prueba> pruebas = null;
+		
+		int i = 0;
+		
+		for(Cliente cli :clientes){
+			switch (tipoFecha){
+			case 1:
+				pruebas = pruDao.getAllPruebasByClientId(Long.toString(cli.getKey().getId()));
+				break;
+			case 2:
+				Date dateDesde = Utils.dateConverter(fechaDesde);
+				pruebas = pruDao.getPruebasSinceDateByClientId(Long.toString(cli.getKey().getId()), dateDesde);
+				break;
+			case 3:
+				Date dateHasta = Utils.dateConverter(fechaHasta);
+				pruebas = pruDao.getPruebasUntilDateByClientId(Long.toString(cli.getKey().getId()), dateHasta);
+				break;
+			case 4:
+				Date datDesde = Utils.dateConverter(fechaDesde);
+				Date datHasta = Utils.dateConverter(fechaHasta);
+				pruebas = pruDao.getPruebasBetweenDatesByClientId(Long.toString(cli.getKey().getId()), datDesde, datHasta);
+				break;
+			default:
+				break;
+			}
+			
+			sh.createRow(7+i).createCell(1).setCellStyle(clientCellStyle);
+			sh.getRow(7+i).getCell(1).setCellValue(cli.getNombre());
+			sh.getRow(7+i).createCell(2).setCellStyle(testCellStyle);
+			sh.getRow(7+i).getCell(2).setCellValue(0);
+			sh.getRow(7+i).createCell(3).setCellStyle(testCellStyle);
+			sh.getRow(7+i).getCell(3).setCellValue(0);
+			sh.getRow(7+i).createCell(4).setCellStyle(cellStyle);
+			//sh.getRow(7+i).getCell(4).setCellFormula("SUM(C"+(8+i)+":D"+(8+i)+")");
+			sh.getRow(7+i).getCell(4).setCellValue(0);
+			sh.getRow(7+i).createCell(5).setCellStyle(cellStyle);
+			
+			for(Prueba pru : pruebas){
+				if(pru.getEntorno().equals("Integrado"))sh.getRow(7+i).getCell(2).setCellValue((sh.getRow(7+i).getCell(2).getNumericCellValue()+1));
+				if(pru.getEntorno().equals("Produccion"))sh.getRow(7+i).getCell(3).setCellValue((sh.getRow(7+i).getCell(3).getNumericCellValue()+1));
+				sh.getRow(7+i).getCell(4).setCellValue((sh.getRow(7+i).getCell(4).getNumericCellValue()+1));
+			}
+			
+			i++;
+		}
+		/*i = clientes.size()*/
+		i--;
+		
+		Name rangeIntegrado = workbook.getName("Integrado");
+		Name rangeProduccion = workbook.getName("Produccion");
+		Name rangeTotal = workbook.getName("Total");
+		Name rangeCliente = workbook.getName("Cliente");
+
+		rangeCliente.setRefersToFormula(sheetName + "!$B$"+8 + ":$B$"+(8+i));
+		rangeIntegrado.setRefersToFormula(sheetName + "!$C$"+ 8 + ":$C$"+(8+i));
+		rangeProduccion.setRefersToFormula(sheetName + "!$D$"+ 8 + ":$D$"+(8+i));
+		rangeTotal.setRefersToFormula(sheetName + "!$E$"+ 8 + ":$E$"+(8+i));
+		
+		
+		/*Fila de adesion del total*/
+		sh.createRow(8+i).createCell(1).setCellStyle(clientCellStyle);
+		sh.getRow(8+i).getCell(1).setCellValue("Total");
+		sh.getRow(8+i).createCell(2).setCellStyle(cellStyle);
+		sh.getRow(8+i).getCell(2).setCellFormula("SUM(C"+8+":C"+(8+i)+")");
+		sh.getRow(8+i).createCell(3).setCellStyle(cellStyle);
+		sh.getRow(8+i).getCell(3).setCellFormula("SUM(D"+8+":D"+(8+i)+")");
+		sh.getRow(8+i).createCell(4).setCellStyle(cellStyle);
+		sh.getRow(8+i).getCell(4).setCellFormula("SUM(C"+(9+i)+":D"+(9+i)+")");
+		
+		/*Adesion del valor de los pocentajes*/
+		for(int j=0; j<=i;j++){
+			//sh.getRow(7+j).getCell(5).setCellFormula("E"+(8+j)+"/E"+(9+i)+"*100");
+			double parteEntera1 = (sh.getRow(7+j).getCell(4).getNumericCellValue());
+			pruebas = pruDao.getAllPruebas();
+			double parteEntera2 = pruebas.size();
+			sh.getRow(7+j).getCell(5).setCellFormula("INT("+parteEntera1+"/"+parteEntera2+"*"+"100"+")");
+		}
+		
+		/*Fila de adesion del promedio*/
+		sh.createRow(9+i).createCell(1).setCellStyle(clientCellStyle);
+		sh.getRow(9+i).getCell(1).setCellValue("Promedio");
+		sh.getRow(9+i).createCell(2).setCellStyle(cellStyle);
+		sh.getRow(9+i).getCell(2).setCellFormula("AVERAGE(C"+8+":C"+(8+i)+")");
+		sh.getRow(9+i).createCell(3).setCellStyle(cellStyle);
+		sh.getRow(9+i).getCell(3).setCellFormula("AVERAGE(D"+8+":D"+(8+i)+")");
+		sh.getRow(9+i).createCell(4).setCellStyle(cellStyle);
+		sh.getRow(9+i).getCell(4).setCellFormula("SUM(C"+(10+i)+":D"+(10+i)+")");
+
+		/*Fila de adesion del maximo*/
+		sh.createRow(10+i).createCell(1).setCellStyle(clientCellStyle);
+		sh.getRow(10+i).getCell(1).setCellValue("Máximo");
+		sh.getRow(10+i).createCell(2).setCellStyle(cellStyle);
+		sh.getRow(10+i).getCell(2).setCellFormula("MAX(C"+8+":C"+(8+i)+")");
+		sh.getRow(10+i).createCell(3).setCellStyle(cellStyle);
+		sh.getRow(10+i).getCell(3).setCellFormula("MAX(D"+8+":D"+(8+i)+")");
+		sh.getRow(10+i).createCell(4).setCellStyle(cellStyle);
+		sh.getRow(10+i).getCell(4).setCellFormula("MAX(E"+8+":E"+(8+i)+")");
+
+		/*Fila de adesion del minimo*/
+		sh.createRow(11+i).createCell(1).setCellStyle(clientCellStyle);
+		sh.getRow(11+i).getCell(1).setCellValue("Mínimo");
+		sh.getRow(11+i).createCell(2).setCellStyle(cellStyle);
+		sh.getRow(11+i).getCell(2).setCellFormula("MIN(C"+8+":C"+(8+i)+")");
+		sh.getRow(11+i).createCell(3).setCellStyle(cellStyle);
+		sh.getRow(11+i).getCell(3).setCellFormula("MIN(D"+8+":D"+(8+i)+")");
+		sh.getRow(11+i).createCell(4).setCellStyle(cellStyle);
+		sh.getRow(11+i).getCell(4).setCellFormula("MIN(E"+8+":E"+(8+i)+")");
+		
+		
+		
+		workbook.write(resp.getOutputStream());
 		
 	}
 	

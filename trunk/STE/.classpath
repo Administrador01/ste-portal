@@ -18,5 +18,8 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/stax-api-1.0.1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/xmlbeans-2.3.0.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/aspose-cells-8.3.1.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/jodconverter-core-3.0-beta-4/jodconverter-core-3.0-beta-4-sources.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/jodconverter-core-3.0-beta-4/lib/jodconverter-core-3.0-beta-4.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/jodconverter-core-3.0-beta-4/jodconverter-core-3.0-beta-4-javadoc.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

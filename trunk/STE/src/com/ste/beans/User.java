@@ -59,8 +59,7 @@ public class User implements Serializable {
 	@Persistent
 	private Integer permiso_documentacion;
 	
-	@Persistent
-	private GoogleCredential credencial;
+
 	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -103,13 +102,6 @@ public class User implements Serializable {
 		return permiso;
 	}
 
-	public void setCredencial(GoogleCredential credencial) {
-		this.credencial = credencial;
-	}
-
-	public GoogleCredential getCredencial() {
-		return credencial;
-	}
 
 	public void setPermiso(Integer permiso) {
 		this.permiso = permiso;
