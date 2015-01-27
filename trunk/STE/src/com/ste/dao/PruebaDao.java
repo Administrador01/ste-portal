@@ -304,4 +304,23 @@ public class PruebaDao {
 
 		return pruebas;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Prueba> getPruebasByResultado (String resultado,Date fechaDesde,Date fechaHasta) {
+
+		List<Prueba> pruebas;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		String query = "select from " + Prueba.class.getName();
+		Query q = pm.newQuery(query);
+		
+		q.setFilter("fecha_estado >= fechaDesde && fecha_estado <= fechaHasta && Resultado==resultado");
+		q.declareParameters("java.util.Date fechaDesde, java.util.Date fechaHasta, String resultado");
+		
+		pruebas = (List<Prueba>) q.execute(fechaDesde,fechaHasta,resultado);
+		
+		pm.close();
+
+		return pruebas;
+	}
 }

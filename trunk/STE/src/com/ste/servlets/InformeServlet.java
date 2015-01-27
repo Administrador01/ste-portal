@@ -123,6 +123,7 @@ public class InformeServlet extends HttpServlet{
 		
 		//CreationHelper createHelper = workbook.getCreationHelper();
 		Sheet sh=workbook.getSheetAt(0);
+		Sheet sh2=workbook.getSheetAt(1);
 		//String sheetName=sh.getSheetName();	
 		
 		/*ESTILO DE CELDA CON BORDES*/
@@ -179,13 +180,7 @@ public class InformeServlet extends HttpServlet{
 		
 		/*Insertamos el rango de nombres para la grafica*/
 		
-		Name rangeTotal = workbook.getName("Total");
-		Name rangeEstados = workbook.getName("Estados");
-		
-		String sheetName = workbook.getSheetName(0);
-		
-		rangeTotal.setRefersToFormula(sheetName+"!$I$"+9+":$I$"+(estados.size()+8));
-		rangeEstados.setRefersToFormula(sheetName+"!$F$"+9+":$F$"+(estados.size()+8));
+
 		
 		
 		ClienteDao clientDao = ClienteDao.getInstance();
@@ -217,22 +212,67 @@ public class InformeServlet extends HttpServlet{
 			sh.getRow(25+i).createCell(2).setCellStyle(cellStyle);
 			sh.getRow(25+i).createCell(3).setCellStyle(cellStyle);
 			sh.getRow(25+i).createCell(4).setCellStyle(cellStyle);
-			sh.getRow(25+i).getCell(1).setCellValue(cli.getId_cliente());
+			sh.getRow(25+i).getCell(1).setCellValue(cli.getId_cliente()+"  -  "+cli.getNombre());
 			sh.getRow(25+i).getCell(2).setCellValue(0.0);
 			sh.getRow(25+i).getCell(3).setCellValue(0.0);
 			sh.getRow(25+i).getCell(4).setCellValue(0.0);
+
 
 			for(Prueba pru : pruebas){
 				if(pru.getEntorno().equals("Integrado"))sh.getRow(25+i).getCell(2).setCellValue(sh.getRow(25+i).getCell(2).getNumericCellValue()+1);
 				if(pru.getEntorno().equals("Produccion"))sh.getRow(25+i).getCell(3).setCellValue(sh.getRow(25+i).getCell(3).getNumericCellValue()+1);
 				sh.getRow(25+i).getCell(4).setCellValue(sh.getRow(25+i).getCell(4).getNumericCellValue()+1);
+			
+				
+				
 			}
 			i++;
+			
+
 		}
 		/*------------------------------FIN TABLA 2----------------------------------------------------------*/
+		/*Datos adicionales para graficas*/
+		
+		
+		switch (tipoFecha){
+		case 1:
+			
+			break;
+		case 2:
+			Date dateDesde = Utils.dateConverter(fechaDesde);
+			
+			break;
+		case 3:
+			Date dateHasta = Utils.dateConverter(fechaHasta);
+			break;
+		case 4:
+			Date datDesde = Utils.dateConverter(fechaDesde);
+			Date datHasta = Utils.dateConverter(fechaHasta);
+			
+			break;
+		default:
+			break;
+		}
+		//sh2.createRow(0).createCell(1).setCellValue(pruDao.getPruebasByResultado("OK",,));
+		sh2.createRow(1).createCell(1).setCellValue(0.0);
+		sh2.createRow(2).createCell(1).setCellValue(0.0);
+		
 		
 		//cellStyle.setDataFormat(createHelper.createDataFormat().getFormat(""));
-		
+		String sheetName = workbook.getSheetName(0);
+		String sheetname2 = workbook.getSheetName(1);
+				
+		Name rangeTotalPorClie = workbook.getName("TotalPorCliente");
+		Name rangeClientes = workbook.getName("Clientes");
+		rangeTotalPorClie.setRefersToFormula(sheetName+"!$E$"+26+":$E$"+(clientes.size()+25));
+		rangeClientes.setRefersToFormula(sheetName+"!$B$"+26+":$B$"+(clientes.size()+25));
+		Name rangeTotal = workbook.getName("Total");
+		Name rangeEstados = workbook.getName("Estados");
+		rangeTotal.setRefersToFormula(sheetName+"!$I$"+9+":$I$"+(estados.size()+8));
+		rangeEstados.setRefersToFormula(sheetName+"!$F$"+9+":$F$"+(estados.size()+8));
+		Name rangeResultados = workbook.getName("Resultados");
+		Name rangeTotalResultados = workbook.getName("TotalResultados");
+		rangeResultados.setRefersToFormula("");
 		
 		
 		workbook.write(resp.getOutputStream());
