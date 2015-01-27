@@ -20,12 +20,15 @@ import javax.servlet.http.HttpSession;
 
 
 
+
+
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.ste.beans.Estado;
+import com.ste.beans.EstadoImplementacion;
 import com.ste.beans.Pais;
 import com.ste.beans.ProductoCanal;
 import com.ste.beans.Servicio;
@@ -33,6 +36,7 @@ import com.ste.beans.TipoServicio;
 import com.ste.beans.Cliente;
 import com.ste.dao.ClienteDao;
 import com.ste.dao.EstadoDao;
+import com.ste.dao.EstadoImplementacionDao;
 import com.ste.dao.PaisDao;
 import com.ste.dao.ProductoCanalDao;
 import com.ste.dao.ServicioDao;
@@ -215,6 +219,9 @@ public class ServicioServlet  extends HttpServlet{
 		EstadoDao estDao = EstadoDao.getInstance();
 		estDao.deleteAll();
 		
+		EstadoImplementacionDao estImpDao = EstadoImplementacionDao.getInstance();
+		estImpDao.deleteAll();
+		
 		Estado es = new Estado();
 		String nombrees = "Pendiente";
 		es.setNme(nombrees);
@@ -241,7 +248,41 @@ public class ServicioServlet  extends HttpServlet{
 		es.setOrden(1610612735);
 		estDao.createEstado(es);
 
-
+		EstadoImplementacion estadoImplementacion = new EstadoImplementacion();
+		nombrees = "Pendiente";
+		estadoImplementacion.setNme(nombrees);
+		estadoImplementacion.setOrden(1);
+		estImpDao.createEstadoImplementacion(estadoImplementacion);
+		estadoImplementacion = new EstadoImplementacion();
+		nombrees = "An&aacutelisis";
+		estadoImplementacion.setNme(nombrees);
+		estadoImplementacion.setOrden(536870911);
+		estImpDao.createEstadoImplementacion(estadoImplementacion);
+		estadoImplementacion = new EstadoImplementacion();
+		nombrees = "Pruebas";
+		estadoImplementacion.setNme(nombrees);
+		estadoImplementacion.setOrden(1073741823);
+		estImpDao.createEstadoImplementacion(estadoImplementacion);
+		estadoImplementacion = new EstadoImplementacion();
+		nombrees = "Penny test";
+		estadoImplementacion.setNme(nombrees);
+		estadoImplementacion.setOrden(1500000001);
+		estImpDao.createEstadoImplementacion(estadoImplementacion);
+		estadoImplementacion = new EstadoImplementacion();
+		nombrees = "Finalizada";
+		estadoImplementacion.setNme(nombrees);
+		estadoImplementacion.setOrden(1500000001);
+		estImpDao.createEstadoImplementacion(estadoImplementacion);
+		estadoImplementacion = new EstadoImplementacion();
+		nombrees = "Anulado";
+		estadoImplementacion.setNme(nombrees);
+		estadoImplementacion.setOrden(2147483640);
+		estImpDao.createEstadoImplementacion(estadoImplementacion);
+		estadoImplementacion = new EstadoImplementacion();
+		nombrees = "Parado";
+		estadoImplementacion.setNme(nombrees);
+		estadoImplementacion.setOrden(1610612735);
+		estImpDao.createEstadoImplementacion(estadoImplementacion);
 		
 		
 		

@@ -5,7 +5,7 @@
 
 
 
-<div id="implementacion">
+<div id="implementaciones">
 
 <h1>Gesti&oacuten implementaciones</h1>
 <span class="btn-atras" onclick="window.location.href='javascript:window.history.go(-1);'"></span>
@@ -29,9 +29,9 @@
 	<div class="form-holder">
 		<form id="new-user-form" name="new-user-form" action="/implementacionServlet"
 			method="POST" novalidate="novalidate">
-				
-				<button type="button" class="go_pag1">Paso 1</button>
-				<button type="button" class="go_pag2">Paso 2</button>
+				<!--hidden porque el cliente elimino el modelo en dos paginas-->
+				<button type="button" class="go_pag1 hidden">Paso 1</button>
+				<button type="button" class="go_pag2 hidden">Paso 2</button>
 			<!--botones -->
 			<div class="form-container">
 			
@@ -69,6 +69,11 @@
 								</select>
 					</div>
 					
+					<div class="form-field" >
+						<span class="lbl">Segmento:</span>
+						<input type="text" class="autorrellenable" name="segmento" id="input-segmento-implementacion" value="" readonly>
+					</div>
+					
 					<div class="form-field" id="div_servicio_imp">
 						<span class="lbl">Servicio<span class="required-asterisk">*</span>:</span>
 						<select class="selectpicker selected" name="servicio" id="servicio_imp" data-live-search="true">
@@ -87,44 +92,38 @@
 						<input type="text" name="servicio_id" id="servicio-id-input" value="" hidden>
 					</div>
 					
-					<div class="form-field" >
-					<span class="lbl">Segmento:</span>
-					<input type="text" class="autorrellenable" name="segmento" id="input-segmento-implementacion" value="" readonly>
+					<div class="form-field" id="div_fecha_alta_imp">
+						<span class="lbl">Fecha alta<span class="required-asterisk">*</span>:</span>
+						<input type="text" size="16" class="datepicker" name="fecha_alta" id="fecha_alta_imp" readonly="" required aria-required="true">
+					</div>
+
+					<div class="form-field">
+						<span class="lbl">Tipo servicio:</span>
+						<input  type="text1" class="autorrellenable" id="input-servicio-tipo-implementacion">
 					</div>
 					
 					<div class="form-field">
-						<span class="lbl">Estado<span class="required-asterisk">*</span>:</span>
-							<select id="estado_imp" class="selectpicker selected"  name="estado_imp">	
-									<option value="Pendiente" selected>Pendiente</option>
-									<option value="Analisis">An&aacutelisis</option>
-									<option value="Pruebas">Pruebas</option>	
-									<option value="Penny test">Penny test</option>
-									<option value="Finalizado">Finalizado</option>	
-									<option value="Parado">Parado</option>
-									<option value="Anulado">Anulado</option>
-							</select>
-					</div>
-					
-					<div class="form-field" id="div_fecha_alta_imp">
-					<span class="lbl">Fecha alta<span class="required-asterisk">*</span>:</span>
-					<input type="text" size="16" class="datepicker" name="fecha_alta" id="fecha_alta_imp" readonly="" required aria-required="true">
+						<span class="lbl">Gestor GCS:</span>
+						<input type="text" name="gestor_gcs" maxlength="25">
 					</div>
 					
 					<div class="form-field" id="div_pais_imp">
-					<span class="lbl">Pa&iacutes<span class="required-asterisk">*</span>:</span>
-								<select id="pais_imp" class="selectpicker selected" name="pais">
-									<option value="default">Seleccionar</option>	
-									
-									<c:forEach items="${paises}" var="pais">
-										<option value="${pais.name}">${pais.name}</option>
-									</c:forEach>
-
-									
-							</select>
+						<span class="lbl">Pa&iacutes<span class="required-asterisk">*</span>:</span>
+						<select id="pais_imp" class="selectpicker selected" name="pais">
+							<option value="default">Seleccionar</option>	
+							<c:forEach items="${paises}" var="pais">
+								<option value="${pais.name}">${pais.name}</option>
+							</c:forEach>
+						</select>
 					</div>
 					
 					<div class="form-field">
-					<span class="lbl etiqueta">Normalizador<span class="required-asterisk">*</span>:</span>
+						<span class="lbl">Gestor promoci&oacuten:</span>
+						<input type="text" name="gestor_prom" maxlength="25">
+					</div>
+					
+					<div class="form-field">
+						<span class="lbl etiqueta">Normalizador<span class="required-asterisk">*</span>:</span>
 							<label class="lbl radio ui-marmots-label-radio marmots-label-left" for="radio_Si">
 								<input name="normalizador" id="radio_Si" type="radio" value="Si"/>Si
 							</label>
@@ -133,15 +132,16 @@
 								<input name="normalizador" id="radio_No" type="radio" value="No" checked/>No
 							</label>
 					</div>
+					
 					<div class="form-field">
-					<span class="lbl">Referencia global:</span>
-					<input type="text" name="ref_glo" maxlength="11">
-					</div>
-					<div class="form-field">
-					<span class="lbl">Referencia local:</span>
-					<input type="text" name="ref_loc" maxlength="18">
+						<span class="lbl">Gestor relaci&oacuten:</span>
+						<input type="text" name="gestor_relacion" maxlength="25">
 					</div>
 					
+					<div class="form-field">
+						<span class="lbl">Referencia global:</span>
+						<input type="text" name="ref_glo" maxlength="11">
+					</div>
 					
 					<div class="form-field">
 					<span class="lbl etiqueta">Firma contrato<span class="required-asterisk">*</span>:</span>
@@ -154,55 +154,21 @@
 							</label>
 					</div>
 					
-					
-					
-						
-						
-						
 					<div class="form-field">
-					<span class="lbl">Gestor GCS:</span>
-					<input type="text" name="gestor_gcs" maxlength="25">
+						<span class="lbl">Referencia local:</span>
+						<input type="text" name="ref_loc" maxlength="18">
 					</div>
 					
-					<div class="form-field">
-					<span class="lbl">Gestor promoci&oacuten:</span>
-					<input type="text" name="gestor_prom" maxlength="25">
-					</div>
 					
 					<div class="form-field">
-					<span class="lbl">Gestor relaci&oacuten:</span>
-					<input type="text" name="gestor_relacion" maxlength="25">
-					</div>
-					
-
-						
-			
-					<div class="entor_integrad">
-					<h4>Entorno Integrado</h4>
-					<span class="lbl">Referencia externa:</span>
-					<input type="text" name="ref_ext" id="ref_ext" maxlength="18">
-					</div>
-					<!--
-					<div class="form-field">
-						<button type="button" class="go_pag2 siguiente">Siguiente </button>
-						<button class="siguiente close-form">Cancelar</button>	
-					</div>
-					-->
-
-
-					
-				</div>
-				<div class="page2_imp hidden" id='page2_imp'>
-				
-				<div class="entor_derech">
-					<div class="form-field">
-						<span class="lbl">Servicio:</span>
-						<input type="text"class="autorrellenable" id="input-servicio-name-implementacion" value="" readonly>
-					</div>
-					
-					<div class="form-field">
-						<span class="lbl">Tipo servicio:</span>
-						<input type="text" class="autorrellenable" id="input-servicio-tipo-implementacion" value="" readonly>
+						<span class="lbl">Estado<span class="required-asterisk">*</span>:</span>
+							<select id="estado_imp" class="selectpicker selected"  name="estado_imp">
+							<c:forEach items="${estadosimp}" var="estadoimp">
+							
+								<option value="${estadoimp.name}" ${estadoimp.orden == 1? "selected":""}>${estadoimp.name}</option>
+							</c:forEach>
+									
+							</select>
 					</div>
 					
 					<div class="form-field">
@@ -210,22 +176,23 @@
 						<input type="text" size="16" class="datepicker fromTo" data-target-id='fecha_subid' name="fecha_contrat" id="fecha_contrat" readonly>
 					</div>
 					
-					<div class="form-field">
-						<span class="lbl">Fecha subida:</span>
-						<input type="text" size="16" class="datepicker" name="fecha_subid" id="fecha_subid" readonly>
-					</div>
-					
 					<div class="form-field detalle">
 						<span class="lbl">Detalle:</span>
 						<textarea type="text" name="detalle" maxlength="500" rows="3" cols="3" placeholder="Introduzca texto ..."></textarea>
 					</div>
 					
-				</div>
+					<div class="form-field">
+						<span class="lbl">Fecha subida:</span>
+						<input type="text" size="16" class="datepicker" name="fecha_subid" id="fecha_subid" readonly>
+					</div>
+					
+					
+
 					<div class="entor_integrad2">
 					<h3>Entorno Integrado</h3>
 						<div class="form-field">
 						<span class="lbl">Referencia externa:</span>
-						<input type="text" class="autorrellenable" id="input-servicio-referencia" value="" readonly>
+						<input type="text" name="ref_ext" id="ref_ext" maxlength="18">
 						</div>
 						<div class="form-field">
 						<span class="lbl">Asunto:</span>
@@ -246,8 +213,30 @@
 						<span class="lbl grey">Cuenta de abono:</span>
 						<input type="text" name="cuent_abon" maxlength="16">
 						</div>
-						
+					</div>
+
+
+					
 				</div>
+				<div class="page2_imp hidden" id='page2_imp'>
+				
+				<div class="entor_derech">
+					<div class="form-field">
+						<span class="lbl">Servicio:</span>
+						<input type="text"class="autorrellenable" id="input-servicio-name-implementacion" value="" readonly>
+					</div>
+					
+					<div class="form-field">
+						<span class="lbl">Tipo servicio:</span>
+						<input type="text" class="autorrellenable" id="input-servicio-tipo-implementacion" value="" readonly>
+					</div>
+					
+
+					
+
+					
+				</div>
+
 
 					
 
@@ -263,8 +252,8 @@
 			</div>
 			</div>
 		</form>
-		<button type="button" id="botont1" class="go_pag2 siguientebott">Siguiente</button>
-		<button type="submit" id="botont2" class="submit_form_implementacion hidden"> Aceptar </button>
+		<button type="button" id="botont1" class="go_pag2 siguientebott hidden">Siguiente</button>
+		<button type="submit" id="botont2" class="submit_form_implementacion"> Aceptar </button>
 		<button class="close-form">Cancelar</button>
 	</div>
 </div>	
@@ -272,12 +261,13 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th><span class="table-title">Cliente</span></th>
+						
+						<th><span class="table-title">Fecha alta</span></th>
+						<th><span class="table-title">Pa&iacutes</span></th>
 						<th><span class="table-title">Producto</span></th>
 						<th><span class="table-title">Servicio</span></th>
+						<th><span class="table-title">Normalizador</span></th>
 						<th><span class="table-title">Estado</span></th>
-						<th><span class="table-title">Pa&iacutes</span></th>
-						<th><span class="table-title">Gestor GCS</span></th>
 						<th style="width: 110px;">&nbsp;</th>
 					</tr>
 
@@ -302,16 +292,8 @@
 						<c:otherwise>
 							<c:forEach items="${implementaciones}" var="s">
 								<tr class="valid-result" id="row${s.key.id}">
-	
-									<td><span>
-										<c:forEach items="${clientesAll}" var="t">
-										<c:choose>
-											<c:when test="${t.key.id==s.cliente_id}">
-												${t.nombre}
-											</c:when>
-										</c:choose>	
-										</c:forEach>
-									</span></td>
+									<td><span>${s.str_fecha_alta}</span></td>
+									<td><span>${s.pais}</span></td>
 									<td><span>${s.producto}</span></td>
 									<td><span>
 										<c:forEach items="${servicios}" var="t">
@@ -322,10 +304,24 @@
 											</c:choose>	
 										</c:forEach>
 									</span></td>
-									<td><span>${s.estado}</span></td>
-									<td><span>${s.pais}</span></td>
-									<td><span>${s.gestor_gcs}</span></td>
-									<td><img class="vs" src="../img/vs.png"><a class="lapiz" name="${s.key.id}" href="../implementacionModal.do?id=${s.key.id}"	id="lapiz${s.key.id}" data-toggle="modal" data-target="#edit-soporte"></a></td>
+									<td><span>
+ 										<b>${s.normalizador ? 'S&iacute' : 'No'}</b>
+									</span></td>
+									<td><span style="color:
+									
+									${s.estado == "Finalizada"? 'green' : ''}
+									${s.estado == "An&aacutelisis"? 'black' : ''}
+									${s.estado == "Pendiente"? 'orange' : ''}
+									${s.estado == "Pruebas"? 'blue' : ''}
+									${s.estado == "Penny test"? 'purple' : ''}
+									${s.estado == "Anulado"? 'grey' : ''}
+									${s.estado == "Parado"? 'red' : ''}
+									
+									
+									
+									;">${s.estado}</span></td>
+									<td><img class="vs" src="../img/vs.png"><a class="lapiz" name="${s.key.id}" href="../implementacionModal.do?id=${s.key.id}"	id="lapiz${s.key.id}" data-toggle="modal" data-target="#edit-soporte"></a>
+									<a class="papelera" name="${s.key.id}" data-toggle="modal"	data-target="#confirm-delete" id="papelera${s.key.id}"></a></td>
 								</tr>
 							</c:forEach>
 						</c:otherwise>
@@ -356,14 +352,14 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="">
-					<h2>Eliminar prueba</h2>
+					<h2>Eliminar implementaci&oacuten</h2>
 					<hr />
 				</div>
 				<div class="">
-					<p>&iquest;Est&aacute; seguro que desea eliminar la prueba?
+					<p>&iquest;Est&aacute; seguro que desea eliminar la implementaci&oacuten?
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="pink-btn" id="deletePrueba">Eliminar</button>
+					<button type="button" class="pink-btn" id="deleteImplementacion">Eliminar</button>
 					<button type="button" class="" data-dismiss="modal">Cancelar</button>
 				</div>
 			</div>

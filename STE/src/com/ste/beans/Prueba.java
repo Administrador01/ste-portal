@@ -53,10 +53,24 @@ public class Prueba {
 	private String solucion;
 	
 	@Persistent
-	private String cliente_id;
+	private String imp_id;
 	
 	@Persistent
 	private String resultado;
+	
+	@Persistent
+	private String peticionario;
+	
+	@Persistent
+	private Date fecha_inicio;
+	
+	@Persistent
+	private String fecha_inicio_str;
+	
+	@Persistent
+	private String fichero;
+	
+
 	
 	public Key getKey() {
 		return key;
@@ -162,12 +176,12 @@ public class Prueba {
 		this.solucion = solucion;
 	}
 
-	public String getIdCliente() {
-		return cliente_id;
+	public String getImp_id() {
+		return imp_id;
 	}
 
-	public void setIdCliente(String id_cliente) {
-		this.cliente_id = id_cliente;
+	public void setImp_id(String id_cliente) {
+		this.imp_id = id_cliente;
 	}
 	
 	public String getResultado() {
@@ -177,4 +191,37 @@ public class Prueba {
 	public void setResultado(String resultado) {
 		this.resultado = resultado;
 	}
+	
+	public Date getFecha_inicio() {
+		return fecha_inicio;
+	}
+
+	public void setFecha_inicio(Date fecha) {
+		this.fecha_inicio = fecha;
+	}
+	
+	public String getFecha_inicio_str() {
+		return fecha_inicio_str;
+	}
+
+	public void setFecha_inicio_str(String fechaS) {
+		this.fecha_inicio_str = fechaS;
+	}
+	
+	public String getFichero() {
+		return fichero;
+	}
+
+	public void setFichero(String fich) {
+		this.fichero = fich;
+	}
+	
+	public String getPeticionario() {
+		return peticionario;
+	}
+
+	public void setPeticionario(String peticionario) {
+		this.peticionario = peticionario;
+	}
+	
 }

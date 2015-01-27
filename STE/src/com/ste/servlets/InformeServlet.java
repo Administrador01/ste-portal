@@ -194,16 +194,17 @@ public class InformeServlet extends HttpServlet{
 					break;
 				case 2:
 					Date dateDesde = Utils.dateConverter(fechaDesde);
-					pruebas = pruDao.getPruebasSinceDateByClientId(Long.toString(cli.getKey().getId()), dateDesde);
+					//TODO
+					//pruebas = pruDao.getPruebasSinceDateByClientId(Long.toString(cli.getKey().getId()), dateDesde);
 					break;
 				case 3:
 					Date dateHasta = Utils.dateConverter(fechaHasta);
-					pruebas = pruDao.getPruebasUntilDateByClientId(Long.toString(cli.getKey().getId()), dateHasta);
+					//pruebas = pruDao.getPruebasUntilDateByClientId(Long.toString(cli.getKey().getId()), dateHasta);
 					break;
 				case 4:
 					Date datDesde = Utils.dateConverter(fechaDesde);
 					Date datHasta = Utils.dateConverter(fechaHasta);
-					pruebas = pruDao.getPruebasBetweenDatesByClientId(Long.toString(cli.getKey().getId()), datDesde, datHasta);
+					//pruebas = pruDao.getPruebasBetweenDatesByClientId(Long.toString(cli.getKey().getId()), datDesde, datHasta);
 					break;
 				default:
 					break;
@@ -401,16 +402,17 @@ public class InformeServlet extends HttpServlet{
 				break;
 			case 2:
 				Date dateDesde = Utils.dateConverter(fechaDesde);
-				pruebas = pruDao.getPruebasSinceDateByClientId(Long.toString(cli.getKey().getId()), dateDesde);
+				//TODO
+				//pruebas = pruDao.getPruebasSinceDateByClientId(Long.toString(cli.getKey().getId()), dateDesde);
 				break;
 			case 3:
 				Date dateHasta = Utils.dateConverter(fechaHasta);
-				pruebas = pruDao.getPruebasUntilDateByClientId(Long.toString(cli.getKey().getId()), dateHasta);
+				//pruebas = pruDao.getPruebasUntilDateByClientId(Long.toString(cli.getKey().getId()), dateHasta);
 				break;
 			case 4:
 				Date datDesde = Utils.dateConverter(fechaDesde);
 				Date datHasta = Utils.dateConverter(fechaHasta);
-				pruebas = pruDao.getPruebasBetweenDatesByClientId(Long.toString(cli.getKey().getId()), datDesde, datHasta);
+				//pruebas = pruDao.getPruebasBetweenDatesByClientId(Long.toString(cli.getKey().getId()), datDesde, datHasta);
 				break;
 			default:
 				break;

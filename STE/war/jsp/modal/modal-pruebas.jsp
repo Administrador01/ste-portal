@@ -25,7 +25,7 @@
 									<span class="lbl">Identificador:</span>
 									<input class="long readonly" type="text" readonly name="id_prueba" id="id_prueba" value="${prueba.id_prueba}">
 								</div>
-			
+			<!--
 								
 								<div class="form-field">
 									<span class="lbl">Cliente<span class="required-asterisk">*</span>:</span>
@@ -46,14 +46,42 @@
 										</select>
 									</div>
 								</div>
-								
-								<input type="text" name="client_id_mod" id="input-client-id-modal" value="" hidden>
+			-->					
+								<div class="form-field">
+									<span class="lbl">Implementaci&oacuten<span class="required-asterisk">*</span>:</span>
+									<div class="input">
+										<select class="selectpicker selected" name="implementacion" id="imp-pruebas-modal" data-live-search="true">
+											<c:choose>
+												<c:when test="${empty implementaciones}">
+													<option value="default">No hay implementaciones</option>
+												</c:when>
+											<c:otherwise>
+												<option value="default">Seleccionar</option>
+												<c:forEach items="${implementaciones}" var="t">	
+													<c:forEach items="${clientes}" var="cli">
+														<c:choose>
+															<c:when test="${t.cliente_id==cli.key.id}">				
+																<option value="${t.key.id}" data-nombre="${cli.nombre}" data-premium="${cli.premium}"  ${t.key.id == prueba.imp_id ? 'selected' : ''}>${t.id_implementacion}&nbsp${cli.nombre}</option>
+															</c:when>
+														</c:choose>
+													</c:forEach>
+												</c:forEach>
+											</c:otherwise>
+											</c:choose>
+										</select>
+									</div>
+								</div>
 								
 								
 								<div class="form-field">
+									<span class="lbl">Cliente:</span>
+									<input type="text" class="input-autorefillable" id="input-cliente-prueba-modal" value="" readonly>
+								</div>	
+								
+								<div class="form-field">
 									<span class="lbl">Tipo cliente:</span>
-									<input type="text" name="input-premium-soporte" id="input-premium-soporte-modal" value="${prueba.premium}" readonly>
-								</div>
+									<input type="text" class="input-autorefillable" id="input-premium-prueba-modal" value="" readonly>
+								</div>		
 								
 								<div class="form-field">
 									<span class="lbl">Tipo de servicio<span class="required-asterisk">*</span>:</span>
@@ -148,14 +176,19 @@
 			</div>	
 
 <script>
+
 $(document).ready(function(){
 
+	var option = $('#imp-pruebas-modal').find(":selected");
+	$('#input-cliente-prueba-modal').val(option.data('nombre'));
+	$('#input-premium-prueba-modal').val(option.data('premium'));
 	
-	$('#cliente-pruebas-modal').on('change', function() {
+	$('#imp-pruebas-modal').on('change', function() {
+
 		var option = $(this).find(":selected");
-		$('#input-premium-soporte-modal').val(option.data('premium'));
-		$('#input-segmento-soporte-modal').val(option.data('segmento'));
-		$('#input-client-id-modal').val(option.data('clientid'));
+
+		$('#input-cliente-prueba-modal').val(option.data('nombre'));
+		$('#input-premium-prueba-modal').val(option.data('premium'));
 	})
 	
 	

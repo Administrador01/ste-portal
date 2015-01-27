@@ -6,7 +6,9 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import com.ste.beans.Cliente;
 import com.ste.beans.Implementacion;
+import com.ste.counters.Counter;
 import com.ste.persistence.PMF;
 import com.ste.utils.Utils;
 
@@ -85,8 +87,12 @@ public List<Implementacion> getImplementacionByClientId(long l) {
 				imp.setFech_subida(Utils.dateConverter(imp.getStr_fech_subida()));
 			}			
 			if (imp.getKey()==null){
-					
-					//campo id opcional	
+				CounterDao contDao = CounterDao.getInstance();
+				Counter contador = contDao.getCounterByName("implementacion");
+				ClienteDao cliDao = ClienteDao.getInstance();
+				Cliente cliente = cliDao.getClientebyId(imp.getCliente_id());
+				String impID = "IMP_"+cliente.getId_cliente()+"_"+contador.getValue();
+				imp.setId_implementacion(impID);
 			}
 				
 				

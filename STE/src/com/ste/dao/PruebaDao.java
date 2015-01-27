@@ -67,7 +67,7 @@ public class PruebaDao {
 				   prub.getEstado().equals(s.getEstado())&&
 				   prub.getStr_fecha_estado().equals(s.getStr_fecha_estado())&&
 				   prub.getSolucion().equals(s.getSolucion())&&
-				   prub.getIdCliente().equals(s.getIdCliente())&&
+				   prub.getImp_id().equals(s.getImp_id())&&
 				   prub.getProducto().equals(s.getProducto())&&
 				   prub.getReferencia().equals(s.getReferencia())&&
 				   prub.getTipo_servicio().equals(s.getTipo_servicio())){
@@ -250,7 +250,7 @@ public class PruebaDao {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Prueba> getPruebasSinceDateByClientId (String clientID,Date fechaDesde) {
+	public List<Prueba> getPruebasSinceDateByImpId (String impID,Date fechaDesde) {
 
 		List<Prueba> pruebas;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
@@ -258,17 +258,17 @@ public class PruebaDao {
 		String query = "select from " + Prueba.class.getName();
 		Query q = pm.newQuery(query);
 		
-		q.setFilter("fecha_estado >= fechaDesde && cliente_id==clientID");
-		q.declareParameters("java.util.Date fechaDesde,String clientID");
+		q.setFilter("fecha_estado >= fechaDesde && cliente_id==impID");
+		q.declareParameters("java.util.Date fechaDesde,String impID");
 	
-		pruebas = (List<Prueba>) q.execute(fechaDesde,clientID);
+		pruebas = (List<Prueba>) q.execute(fechaDesde,impID);
 		
 		pm.close();
 
 		return pruebas;
 	}
 	@SuppressWarnings("unchecked")
-	public List<Prueba> getPruebasUntilDateByClientId (String clientID,Date fechaHasta) {
+	public List<Prueba> getPruebasUntilDateByImpId (String impID,Date fechaHasta) {
 
 		List<Prueba> pruebas;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
@@ -276,10 +276,10 @@ public class PruebaDao {
 		String query = "select from " + Prueba.class.getName();
 		Query q = pm.newQuery(query);
 		
-		q.setFilter("fecha_estado <= fechaHasta && cliente_id==clientID");
-		q.declareParameters("java.util.Date fechaHasta,String clientID");
+		q.setFilter("fecha_estado <= fechaHasta && imp_id==impID");
+		q.declareParameters("java.util.Date fechaHasta,String impID");
 	
-		pruebas = (List<Prueba>) q.execute(fechaHasta,clientID);
+		pruebas = (List<Prueba>) q.execute(fechaHasta,impID);
 		
 		pm.close();
 
@@ -287,7 +287,7 @@ public class PruebaDao {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Prueba> getPruebasBetweenDatesByClientId (String clientID,Date fechaDesde,Date fechaHasta) {
+	public List<Prueba> getPruebasBetweenDatesByImpId (String impID,Date fechaDesde,Date fechaHasta) {
 
 		List<Prueba> pruebas;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
@@ -295,10 +295,10 @@ public class PruebaDao {
 		String query = "select from " + Prueba.class.getName();
 		Query q = pm.newQuery(query);
 		
-		q.setFilter("fecha_estado >= fechaDesde && fecha_estado <= fechaHasta && cliente_id==clientID");
-		q.declareParameters("java.util.Date fechaDesde, java.util.Date fechaHasta, String clientID");
+		q.setFilter("fecha_estado >= fechaDesde && fecha_estado <= fechaHasta && imp_id==impID");
+		q.declareParameters("java.util.Date fechaDesde, java.util.Date fechaHasta, String impID");
 		
-		pruebas = (List<Prueba>) q.execute(fechaDesde,fechaHasta,clientID);
+		pruebas = (List<Prueba>) q.execute(fechaDesde,fechaHasta,impID);
 		
 		pm.close();
 

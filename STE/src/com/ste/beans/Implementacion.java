@@ -17,6 +17,9 @@ public class Implementacion {
     private Key key;
 	
 	@Persistent
+	private String id_implementacion;
+	
+	@Persistent
 	private Date fecha_alta;
 	
 	@Persistent
@@ -119,6 +122,14 @@ public class Implementacion {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+	
+	public String getId_implementacion() {
+		return id_implementacion;
+	}
+
+	public void setId_implementacion(String id) {
+		this.id_implementacion = id;
 	}
 	
 	public String getPais() {

@@ -275,6 +275,31 @@ var getIsoDate = function(dateString) {
 
 
 $(function(){
+
+	$('#deleteImplementacion').on('click', function (e){
+		
+		 var formURL = "/implementacionServlet?";
+		 var postData="accion=delete&id="+ id;
+		 $.ajax({
+			url : formURL,
+			type: "POST",
+			data : postData,
+			success:function(data, textStatus, jqXHR) 
+			{
+				$('#row'+id).fadeOut("fast", function(){
+					$(this).remove();
+					$('#myTable').paginateMe({
+						pagerSelector : '#myPager',
+						showPrevNext : true,
+						hidePageNumbers : false,
+						perPage : 10
+					});
+				});
+				$('#confirm-delete').modal('hide');	        	
+			}
+		});
+	});
+	
 	$('.go_pag2').click(function(e){
 		
 		var $form = $($('#new-user-form'));
@@ -1119,16 +1144,12 @@ $(function(){
 		});
 	});
 	
-	$('#cliente-pruebas').on('change', function() {
-		//console.log($(this).find(":selected"));
+	$('#imp-pruebas').on('change', function() {
+
 		var option = $(this).find(":selected");
-		//console.log($(option));
-		//console.log(option.data('premium'));
-		//console.log(option.data('clientid'));
-		
-		$('#input-premium-soporte').val(option.data('premium'));
-		$('#input-segmento-soporte').val(option.data('segmento'));
-		$('#client-id-input').val(option.data('clientid'));
+
+		$('#input-cliente-prueba').val(option.data('nombre'));
+		$('#input-premium-prueba').val(option.data('premium'));
 	})
 	
 	$('#pruebas').on('click','#test_filter_button', function (){

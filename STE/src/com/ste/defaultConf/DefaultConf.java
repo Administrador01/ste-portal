@@ -58,7 +58,14 @@ public class DefaultConf extends HttpServlet{
 			cDao.createCounter(contadorPrueba);			
 			
 			
+			Counter contadorImp = cDao.getCounterByName("implementacion");
 			
+			if (contadorImp == null){
+				contadorImp = new Counter();
+			}
+			contadorImp.setNombre("implementacion");
+			contadorImp.setValue(1);
+			cDao.createCounter(contadorImp);	
 			json.append("success", true);
 			
 		}else{

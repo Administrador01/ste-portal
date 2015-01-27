@@ -86,7 +86,7 @@ public class PruebaServlet extends HttpServlet{
 			String entorno = req.getParameter("entorno");
 			String detalles = req.getParameter("detalles");
 			String solucion = req.getParameter("solucion");
-			String clientID = req.getParameter("client_id");
+			String impID = req.getParameter("imp_id");
 			String tipo_servicio = req.getParameter("tipo_servicio");
 			String resultado = req.getParameter("resultado");
 			
@@ -103,7 +103,7 @@ public class PruebaServlet extends HttpServlet{
 			p.setEstado(estado);
 			p.setDetalles(detalles);
 			p.setSolucion(solucion);
-			p.setIdCliente(clientID);
+			p.setImp_id(impID);
 			p.setTipo_servicio(tipo_servicio);
 			p.setResultado(resultado);
 
@@ -120,10 +120,10 @@ public class PruebaServlet extends HttpServlet{
 
 				
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
+
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+
 				e.printStackTrace();
 			}
 			
@@ -146,7 +146,7 @@ public class PruebaServlet extends HttpServlet{
 		String servicio =  req.getParameter("tipo_servicio");
 		String detalles = req.getParameter("detalles");
 		String solucion = req.getParameter("solucion");
-		String clientID = req.getParameter("client_id_mod");
+		String impID = req.getParameter("imp_id_mod");
 		String resultado = req.getParameter("resultado");
 		
 		PruebaDao pDao = PruebaDao.getInstance();	
@@ -163,7 +163,7 @@ public class PruebaServlet extends HttpServlet{
 		p.setEstado(estado);
 		p.setDetalles(detalles);
 		p.setSolucion(solucion);
-		if (clientID !="" && clientID != null) p.setIdCliente(clientID);
+		if (impID !="" && impID != null) p.setImp_id(impID);
 		p.setResultado(resultado);
 		
 		
