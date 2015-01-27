@@ -851,47 +851,39 @@ textarea.readonly {
   width: 245px !important;
   margin-right: 0px;
 }
-#implementacion .form-container {
-  margin: 0px;
-  margin-right: 2%;
-  margin-bottom: 1%;
-}
-#implementacion > form {
+#implementaciones > form {
   height: auto;
 }
-#implementacion .form-field {
+#implementaciones .form-field {
   display: inline-block;
 }
-#implementacion .form-field .grey {
+#implementaciones .form-field .grey {
   color: #;
 }
-#implementacion .form-field .btn {
+#implementaciones .form-field .btn {
   margin: 0px;
 }
-#implementacion .form-field input,
-#implementacion .form-field textarea {
+#implementaciones .form-field input,
+#implementaciones .form-field textarea {
   margin-right: 0px;
 }
-#implementacion .form-field .autorrellenable {
+#implementaciones .form-field .autorrellenable {
   background-color: #f3f3f3;
 }
-#implementacion .form-field .etiqueta {
+#implementaciones .form-field .etiqueta {
   float: left;
   margin-left: 6%;
 }
-#implementacion .form-field .radio {
+#implementaciones .form-field .radio {
   margin-right: 10%;
 }
-#implementacion .falta {
+#implementaciones .falta {
   background-color: #ff8888;
 }
-#implementacion .detalle {
-  width: 100%;
+#implementaciones .detalle > textarea {
+  height: 1286%;
 }
-#implementacion .detalle > textarea {
-  height: 110px;
-}
-#implementacion .entor_integrad {
+#implementaciones .entor_integrad {
   display: inline-block;
   margin: 2%;
   margin-left: 5%;
@@ -901,48 +893,46 @@ textarea.readonly {
   padding: 1%;
   float: left;
 }
-#implementacion .entor_integrad > h4 {
+#implementaciones .entor_integrad > h4 {
   text-align: left;
   color: #8DA8FF;
 }
-#implementacion .entor_integrad2 {
-  text-align: center;
-  margin: 2%;
+#implementaciones .entor_integrad2 {
+  text-align: left;
+  margin: 1%;
   background-color: #E4EAFE;
   border: 3px solid #D1DCFF;
   padding: 1%;
   width: 46%;
-  float: left;
+  float: right;
 }
-#implementacion .entor_integrad2 > h3 {
-  text-align: left;
+#implementaciones .entor_integrad2 > h3 {
   color: #8DA8FF;
 }
-#implementacion .entor_integrad2 > h4 {
-  text-align: center;
+#implementaciones .entor_integrad2 > h4 {
   color: #8DA8FF;
 }
-#implementacion .entor_integrad2 .form-field {
+#implementaciones .entor_integrad2 .form-field {
   width: auto;
 }
-#implementacion .entor_derech {
+#implementaciones .entor_derech {
   float: right;
   width: 46%;
   padding-bottom: 7%;
   padding-top: 6%;
 }
-#implementacion .entor_derech .form-field {
+#implementaciones .entor_derech .form-field {
   width: auto;
 }
-#implementacion .go_pag1,
-#implementacion .go_pag2 {
+#implementaciones .go_pag1,
+#implementaciones .go_pag2 {
   margin: 0px;
   margin-top: 2%;
   border-radius: 10px;
   border-bottom-right-radius: 1px;
   border-bottom-left-radius: 1px;
 }
-#implementacion .siguiente {
+#implementaciones .siguiente {
   border-radius: 4px;
   padding-left: 2%;
   padding-right: 2%;
@@ -950,19 +940,30 @@ textarea.readonly {
   margin-left: 1%;
   margin-top: 6%;
 }
-#implementacion .siguientebott {
+#implementaciones .siguientebott {
   border-radius: 4px;
   margin: 0px;
   margin-left: 1%;
 }
-#implementacion .go_pag2 {
+#implementaciones .go_pag2 {
   margin-right: 2%;
 }
 body .modal-dialog {
   width: 850px;
 }
-#input-premium-soporte {
-  background-color: #f3f3f3;
+.input-autorefillable {
+  resize: none;
+  border: 1px solid #E8E8E6;
+  border-radius: 2px;
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.16) inset;
+  color: #434A58;
+  font: 12px Arial, sans-serif;
+  height: auto;
+  margin: 0px;
+  padding: 0.583em 0.755em 0.5em;
+  float: right;
+  width: 245px;
+  background-color: #F3F3F3;
 }
 #sidebar {
   position: fixed;

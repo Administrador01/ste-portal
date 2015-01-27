@@ -67,16 +67,12 @@ $(function(){
 		});
 	});
 	
-	$('#cliente-pruebas').on('change', function() {
-		//console.log($(this).find(":selected"));
+	$('#imp-pruebas').on('change', function() {
+
 		var option = $(this).find(":selected");
-		//console.log($(option));
-		//console.log(option.data('premium'));
-		//console.log(option.data('clientid'));
-		
-		$('#input-premium-soporte').val(option.data('premium'));
-		$('#input-segmento-soporte').val(option.data('segmento'));
-		$('#client-id-input').val(option.data('clientid'));
+
+		$('#input-cliente-prueba').val(option.data('nombre'));
+		$('#input-premium-prueba').val(option.data('premium'));
 	})
 	
 	$('#pruebas').on('click','#test_filter_button', function (){

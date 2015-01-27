@@ -39,6 +39,32 @@
 			
 				<div class="form-field-divider left">
 				
+				
+					<div class="form-field" id="div_imp">
+						<span class="lbl">Implementaci&oacuten<span class="required-asterisk">*</span>:</span>
+						<select class="selectpicker selected" name="imp_id" id="imp-pruebas" data-live-search="true">
+							<c:choose>
+								<c:when test="${empty implementaciones}">
+									<option value="default">No hay implementaciones</option>
+								</c:when>
+							<c:otherwise>
+								<option value="default">Seleccionar</option>
+								<c:forEach items="${implementaciones}" var="t">	
+									<c:forEach items="${clientes}" var="cli">
+										<c:choose>
+											<c:when test="${t.cliente_id==cli.key.id}">				
+												<option value="${t.key.id}" data-nombre="${cli.nombre}" data-premium="${cli.premium}" >${t.id_implementacion}&nbsp${cli.nombre}</option>
+											</c:when>
+											<c:otherwise>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+								</c:forEach>
+							</c:otherwise>
+							</c:choose>
+						</select>
+					</div>
+				<!--
 					<div class="form-field">
 						<span class="lbl">Cliente<span class="required-asterisk">*</span>:</span>
 						<div class="input">
@@ -59,15 +85,20 @@
 							</select>
 						</div>
 					</div>
+				-->
+					<div class="form-field">
+						<span class="lbl">Cliente:</span>
+						<input type="text" class="input-autorefillable" id="input-cliente-prueba" value="" readonly>
+					</div>	
 					
 					<div class="form-field">
 						<span class="lbl">Tipo cliente:</span>
-						<input type="text" name="input-premium-soporte" id="input-premium-soporte" value="" readonly>
+						<input type="text" class="input-autorefillable" id="input-premium-prueba" value="" readonly>
 					</div>				
 						
 
 					
-					<input type="text" name="client_id" id="client-id-input" value="" hidden>
+
 					
 					
 					<div class="form-field">
@@ -309,18 +340,31 @@
 
 						<c:otherwise>
 							<c:forEach items="${pruebas}" var="s">
-								<tr class="valid-result ${s.premium == 'Premium' ? 'premium' : ''}" data-strfechaestado="${s.str_fecha_estado}"
-								 data-nombrecliente="${s.nombre_cliente}" data-estado="${s.estado}" data-entorno="${s.entorno}"  id="row${s.key.id}">
-									<td><span>${s.str_fecha_estado}</span></td>
-									<td><span>${s.nombre_cliente}</span></td>
-									<td><span>${s.tipo_servicio}</span></td>
-									<td><span>${s.estado}</span></td>
-									<td><span>${s.producto}</span></td>
-									<td><span>${s.entorno}</span></td>
-									
-									<td><img class="vs" src="../img/vs.png"><a class="lapiz" name="${s.key.id}" href="../pruebaModal.do?id=${s.key.id}"	id="lapiz${s.key.id}" data-toggle="modal" data-target="#edit-soporte" ></a>
-									<a class="papelera" name="${s.key.id}" data-toggle="modal"	data-target="#confirm-delete" id="papelera${s.key.id}"></a></td>
-								</tr>
+								
+									<c:forEach items="${implementaciones}" var="t">	
+										<c:choose>
+											<c:when test="${t.key.id==s.imp_id}">				
+												<c:forEach items="${clientes}" var="cli">
+													<c:choose>
+														<c:when test="${t.cliente_id==cli.key.id}">				
+															<tr class="valid-result ${s.premium == 'Premium' ? 'premium' : ''}" data-strfechaestado="${s.str_fecha_estado}"
+															 data-nombrecliente="${s.nombre_cliente}" data-estado="${s.estado}" data-entorno="${s.entorno}"  id="row${s.key.id}">
+																<td><span>${s.str_fecha_estado}</span></td>
+																<td><span>${cli.nombre}</span></td>
+																<td><span>${s.tipo_servicio}</span></td>
+																<td><span>${s.estado}</span></td>
+																<td><span>${s.producto}</span></td>
+																<td><span>${s.entorno}</span></td>
+																
+																<td><img class="vs" src="../img/vs.png"><a class="lapiz" name="${s.key.id}" href="../pruebaModal.do?id=${s.key.id}"	id="lapiz${s.key.id}" data-toggle="modal" data-target="#edit-soporte" ></a>
+																<a class="papelera" name="${s.key.id}" data-toggle="modal"	data-target="#confirm-delete" id="papelera${s.key.id}"></a></td>
+															</tr>
+														</c:when>
+													</c:choose>
+												</c:forEach>
+											</c:when>
+										</c:choose>
+									</c:forEach>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>

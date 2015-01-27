@@ -47,7 +47,7 @@ public class ImplementacionServlet extends HttpServlet{
 			HttpSession sesion = req.getSession();
 			int sesionpermiso = (int) sesion.getAttribute("permiso");			 
 			String usermail = (String) sesion.getAttribute("mail");
-			
+			String id = (String) sesion.getAttribute("id");
 
 			
 				if (accion.equals("new")){

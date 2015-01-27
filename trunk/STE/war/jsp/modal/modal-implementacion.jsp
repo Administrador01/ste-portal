@@ -81,15 +81,12 @@
 					<div class="form-field">
 						<span class="lbl">Estado<span class="required-asterisk">*</span>:</span>
 							<select id="estado_imp" class="selectpicker selected" name="estado_imp" >	
-									<option value="Pendiente"  ${implementacion.estado == 'Pendiente' ? 'selected' : ''}>Pendiente</option>
-									<option value="Analisis" ${implementacion.estado == 'Analisis' ? 'selected' : ''}>An&aacutelisis</option>
-									<option value="Pruebas" ${implementacion.estado == 'Pruebas' ? 'selected' : ''}>Pruebas</option>	
-									<option value="Penny test" ${implementacion.estado == 'Penny test' ? 'selected' : ''}>Penny test</option>
-									<option value="Finalizado"${implementacion.estado == 'Finalizado' ? 'selected' : ''}>Finalizado</option>	
-									<option value="Parado" ${implementacion.estado == 'Parado' ? 'selected' : ''}>Parado</option>
-									<option value="Anulado" ${implementacion.estado == 'Anulado' ? 'selected' : ''}>Anulado</option>
+							<c:forEach items="${estadosimp}" var="estadoimp">
+								<option value="${estadoimp.name}" ${implementacion.estado == estadoimp.name ? 'selected' : ''}>${estadoimp.name}</option>
+							</c:forEach>
 							</select>
 					</div>
+					
 					
 					<div class="form-field" id="div_fecha_alta_imp">
 					<span class="lbl">Fecha alta<span class="required-asterisk">*</span>:</span>

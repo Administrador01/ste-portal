@@ -11,11 +11,13 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.ste.beans.Cliente;
+import com.ste.beans.EstadoImplementacion;
 import com.ste.beans.Implementacion;
 import com.ste.beans.Pais;
 import com.ste.beans.ProductoCanal;
 import com.ste.beans.Servicio;
 import com.ste.dao.ClienteDao;
+import com.ste.dao.EstadoImplementacionDao;
 import com.ste.dao.ImplementacionDao;
 import com.ste.dao.PaisDao;
 import com.ste.dao.ProductoCanalDao;
@@ -54,6 +56,11 @@ public class ImplementacionAction extends Action{
 		List<ProductoCanal> productos = prodDao.getAllProductos();
 		
 		req.setAttribute("productos", productos);
+		
+		EstadoImplementacionDao estadoImpDao = EstadoImplementacionDao.getInstance();
+		List<EstadoImplementacion> estadosimp = estadoImpDao.getAllEstadoImplementacions();
+		
+		req.setAttribute("estadosimp", estadosimp);
 		
 		return  mapping.findForward("ok");		
 	}

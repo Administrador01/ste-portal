@@ -12,11 +12,13 @@ import org.apache.struts.action.ActionMapping;
 
 import com.ste.beans.Cliente;
 import com.ste.beans.Estado;
+import com.ste.beans.Implementacion;
 import com.ste.beans.ProductoCanal;
 import com.ste.beans.Prueba;
 import com.ste.beans.TipoServicio;
 import com.ste.dao.ClienteDao;
 import com.ste.dao.EstadoDao;
+import com.ste.dao.ImplementacionDao;
 import com.ste.dao.ProductoCanalDao;
 import com.ste.dao.PruebaDao;
 import com.ste.dao.TipoServicioDao;
@@ -40,6 +42,10 @@ public class PruebaModalAction extends Action{
 			ClienteDao cDao = ClienteDao.getInstance();
 			List<Cliente> clientes = cDao.getAllClients();
 			req.setAttribute("clientes", clientes);
+			
+			ImplementacionDao impDao = ImplementacionDao.getInstance();
+			List<Implementacion> implementaciones = impDao.getAllImplementaciones();
+			req.setAttribute("implementaciones", implementaciones);
 			
 			ProductoCanalDao prodDao = ProductoCanalDao.getInstance();
 			List<ProductoCanal> productos = prodDao.getAllProductos();
