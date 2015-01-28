@@ -89,6 +89,9 @@ public class PruebaServlet extends HttpServlet{
 			String impID = req.getParameter("imp_id");
 			String tipo_servicio = req.getParameter("tipo_servicio");
 			String resultado = req.getParameter("resultado");
+			String peticionario = req.getParameter("peticionario");
+			String fichero = req.getParameter("fichero");
+			String str_fecha_inicio = req.getParameter("fecha_inicio");
 			
 			
 			PruebaDao pDao = PruebaDao.getInstance();	
@@ -101,12 +104,16 @@ public class PruebaServlet extends HttpServlet{
 			p.setPremium(premium);
 			p.setEntorno(entorno);
 			p.setEstado(estado);
+			if(p.getEstado().equals("Cancelado")){p.setErased(true);}else{p.setErased(false);}
 			p.setDetalles(detalles);
 			p.setSolucion(solucion);
 			p.setImp_id(impID);
 			p.setTipo_servicio(tipo_servicio);
 			p.setResultado(resultado);
-
+			p.setFecha_inicio_str(str_fecha_inicio);
+			p.setFichero(fichero);
+			p.setPeticionario(peticionario);
+			
 			
 			pDao.createPrueba(p);		
 			
@@ -148,6 +155,10 @@ public class PruebaServlet extends HttpServlet{
 		String solucion = req.getParameter("solucion");
 		String impID = req.getParameter("imp_id_mod");
 		String resultado = req.getParameter("resultado");
+		String peticionario = req.getParameter("peticionario");
+		String fichero = req.getParameter("fichero");
+		String str_fecha_inicio = req.getParameter("fecha_inicio");
+		
 		
 		PruebaDao pDao = PruebaDao.getInstance();	
 		Prueba p = pDao.getPruebabyId(Long.parseLong(id_str));
@@ -161,10 +172,14 @@ public class PruebaServlet extends HttpServlet{
 		p.setTipo_servicio(servicio);
 		p.setEntorno(entorno);
 		p.setEstado(estado);
+		if(p.getEstado().equals("Cancelado")){p.setErased(true);}else{p.setErased(false);}
 		p.setDetalles(detalles);
 		p.setSolucion(solucion);
 		if (impID !="" && impID != null) p.setImp_id(impID);
 		p.setResultado(resultado);
+		p.setFecha_inicio_str(str_fecha_inicio);
+		p.setFichero(fichero);
+		p.setPeticionario(peticionario);
 		
 		
 

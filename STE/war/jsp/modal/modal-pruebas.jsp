@@ -95,25 +95,40 @@
 									</div>
 								</div>
 						
+								<div class="form-field">
+									<span class="lbl">Fichero<span class="required-asterisk">*</span>:</span>
+									<input type="text" class=""  name="fichero" id="" value="${prueba.fichero}" required>
+								</div>
 								
+								<div class="form-field">
+									<span class="lbl">Peticionario:</span>
+									<input type="text" class="" size="35" name="peticionario" id="" value="${prueba.peticionario}">
+								</div>	
 							</div>
 							<div class="form-field-divider right">
 			
-			
+								<div class="form-field">
+									<span class="lbl">Fecha inicio:</span>
+									<div class="input">
+										<input type="text" readonly="" value="${prueba.fecha_inicio_str}" size="16" class="datepicker" name="fecha_inicio" id="fecha_inicio_modal" required aria-required="true">
+									</div>
+								</div>
 								
 								<div class="form-field">
-									<span class="lbl">Fecha alta:</span>
+									<span class="lbl">Fecha estado:</span>
 									<div class="input">
 										<input type="text" readonly="" value="${prueba.str_fecha_estado}" size="16" class="datepicker" name="fecha_estado" id="fecha_estado_modal">
 									</div>
 								</div>
+								
+								
 								
 								<div class="form-field">
 									<span class="lbl">Entorno<span class="required-asterisk">*</span>:</span>
 									<div class="input">
 										<select id="estado" class="selectpicker selected" name="entorno" >							
 											<option value="Preproduccion" ${prueba.entorno == 'Preproduccion' ? 'selected' : ''} selected>Pre producci&oacuten</option>									
-											<option value="Produccion" ${prueba.entorno == 'Produccion' ? 'selected' : ''}>Producci&oacuten</option>	
+											<option value="Producci&oacuten" ${prueba.entorno == 'Producci&oacuten' ? 'selected' : ''}>Producci&oacuten</option>	
 										</select>
 									</div>
 								</div>

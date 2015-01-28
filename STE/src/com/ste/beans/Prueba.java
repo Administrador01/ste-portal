@@ -70,7 +70,8 @@ public class Prueba {
 	@Persistent
 	private String fichero;
 	
-
+	@Persistent
+	private boolean erased;
 	
 	public Key getKey() {
 		return key;
@@ -222,6 +223,14 @@ public class Prueba {
 
 	public void setPeticionario(String peticionario) {
 		this.peticionario = peticionario;
+	}
+	
+	public boolean getErased() {
+		return erased;
+	}
+
+	public void setErased(boolean erased) {
+		this.erased = erased;
 	}
 	
 }

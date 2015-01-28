@@ -119,15 +119,34 @@
 						</div>
 					</div>
 					
+					<div class="form-field">
+						<span class="lbl">Fichero<span class="required-asterisk">*</span>:</span>
+						<input type="text" class=""  name="fichero" id="" value="" required>
+					</div>
+					
+					<div class="form-field">
+						<span class="lbl">Peticionario:</span>
+						<input type="text" class="" size="35" name="peticionario" id="" value="">
+					</div>	
+					
 				</div>	
 				<div class="form-field-divider right">
 				
+					
 					<div class="form-field">
-						<span class="lbl">Fecha alta<span class="required-asterisk">*</span>:</span>
+						<span class="lbl">Fecha inicio<span class="required-asterisk">*</span>:</span>
+						<div class="input">
+							<input type="text" readonly="" value="" size="16" class="datepicker" name="fecha_inicio" id="fecha_inicio" required aria-required="true">
+						</div>
+					</div>
+					
+					<div class="form-field">
+						<span class="lbl">Fecha estado<span class="required-asterisk">*</span>:</span>
 						<div class="input">
 							<input type="text" readonly="" value="" size="16" class="datepicker" name="fecha_estado" id="fecha_estado" required aria-required="true">
 						</div>
 					</div>
+							
 					
 					<div class="form-field">
 						<span class="lbl">Producto/canal<span class="required-asterisk">*</span>:</span>
@@ -151,7 +170,7 @@
 								
 								<option value="default">Seleccionar</option>	
 								<option value="Integrado">Integrado</option>
-								<option value="Produccion">Producci&oacuten</option>
+								<option value="Producci&oacuten">Producci&oacuten</option>
 
 															
 							</select>
@@ -348,16 +367,29 @@
 													<c:choose>
 														<c:when test="${t.cliente_id==cli.key.id}">				
 															<tr class="valid-result ${s.premium == 'Premium' ? 'premium' : ''}" data-strfechaestado="${s.str_fecha_estado}"
-															 data-nombrecliente="${s.nombre_cliente}" data-estado="${s.estado}" data-entorno="${s.entorno}"  id="row${s.key.id}">
+															 data-nombrecliente="${s.nombre_cliente}" data-estado="${s.estado}" data-entorno="${s.entorno}"  id="row${s.key.id}" style="${s.erased?'background-color:#8B8B8B;':''}${s.entorno=="Producci&oacuten"?'background-color:#C8DBFF;':''}">
 																<td><span>${s.str_fecha_estado}</span></td>
 																<td><span>${cli.nombre}</span></td>
 																<td><span>${s.tipo_servicio}</span></td>
-																<td><span>${s.estado}</span></td>
+																<td><span style="color:
+																
+																${s.estado=="Pendiente"?'orange':''}
+																${s.estado=="En curso"?'blue':''}
+																${s.estado=="Finalizada"?'green':''}
+																${s.estado=="Cancelada"?'grey':''}
+																
+																">${s.estado}</span></td>
 																<td><span>${s.producto}</span></td>
 																<td><span>${s.entorno}</span></td>
 																
-																<td><img class="vs" src="../img/vs.png"><a class="lapiz" name="${s.key.id}" href="../pruebaModal.do?id=${s.key.id}"	id="lapiz${s.key.id}" data-toggle="modal" data-target="#edit-soporte" ></a>
-																<a class="papelera" name="${s.key.id}" data-toggle="modal"	data-target="#confirm-delete" id="papelera${s.key.id}"></a></td>
+																<td>
+																${s.erased?'
+																
+																':'
+																
+																'}<img class="vs" src="../img/vs.png"><a class="lapiz" name="${s.key.id}" href="../pruebaModal.do?id=${s.key.id}"	id="lapiz${s.key.id}" data-toggle="modal" data-target="#edit-soporte" ></a>
+																<!--<a class="papelera" name="${s.key.id}" data-toggle="modal"	data-target="#confirm-delete" id="papelera${s.key.id}"></a>-->
+																</td>
 															</tr>
 														</c:when>
 													</c:choose>

@@ -64,6 +64,12 @@ public class Soporte {
 	@Persistent
 	private String producto_canal;
 	
+	@Persistent
+	private String pais;
+	
+	@Persistent
+	private String peticionario;
+	
 	public String getDetalles() {
 		return detalles;
 	}
@@ -198,6 +204,22 @@ public class Soporte {
 
 	public void setTipo_soporte(String tipo_soporte) {
 		this.tipo_soporte = tipo_soporte;
+	}
+	
+	public String getPais() {
+		return pais;
+	}
+
+	public void setPais(String pais) {
+		this.pais = pais;
+	}
+	
+	public String getPeticionario() {
+		return peticionario;
+	}
+
+	public void setPeticionario(String peticionario) {
+		this.peticionario = peticionario;
 	}
 	
 }

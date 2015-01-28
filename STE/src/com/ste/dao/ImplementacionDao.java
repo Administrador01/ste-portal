@@ -91,8 +91,11 @@ public List<Implementacion> getImplementacionByClientId(long l) {
 				Counter contador = contDao.getCounterByName("implementacion");
 				ClienteDao cliDao = ClienteDao.getInstance();
 				Cliente cliente = cliDao.getClientebyId(imp.getCliente_id());
-				String impID = "IMP_"+cliente.getId_cliente()+"_"+contador.getValue();
+				String impID = "IMP_"+cliente.getId_cliente().substring(9)+"_"+contador.getValue();
 				imp.setId_implementacion(impID);
+				
+				contador.setValue(contador.getValue()+1);
+				contDao.createCounter(contador);
 			}
 				
 				

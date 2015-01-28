@@ -94,7 +94,10 @@
 					--%>
 					
 
-					
+					<div class="form-field">
+						<span class="lbl">Peticionario:</span>
+						<input type="text" class="" size="35" name="peticionario" id="" value="">
+					</div>	
 					
 
 				</div>
@@ -160,7 +163,19 @@
 						</div>
 					</div>
 					
+					<div class="form-field">
+						<span class="lbl">Pa&iacutes<span class="required-asterisk">*</span>:</span>
+						<select id="pais_sop" class="selectpicker selected" name="pais">
+							<option value="default">Seleccionar</option>	
+							<c:forEach items="${paises}" var="pais">
+								<option value="${pais.name}">${pais.name}</option>
+							</c:forEach>
+						</select>
+					</div>
+					
 				</div>
+				
+				
 				<div class="form-field-divider down">
 					<div class="form-field detalles">
 						<span class="lbl">Descripci&oacuten:</span>
