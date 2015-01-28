@@ -38,8 +38,13 @@
 														<option value="default">No hay clientes</option>
 													</c:when>
 													<c:otherwise>
-														<c:forEach items="${clientes}" var="t">	
-															<option value="${t.nombre}" data-premium="${t.premium}" data-segmento="${t.tipo_cliente}" data-clientid="${t.key.id}" ${t.nombre == prueba.nombre_cliente ? 'selected' : ''}>${t.nombre}</option>
+														<c:forEach items="${implementaciones}" var="implementacion">
+														<c:if test="implementacion.key.id==prueba.imp_id">
+														<c:forEach items="${clientes}" var="t">
+															
+															<option value="${t.nombre}" data-premium="${t.premium}" data-segmento="${t.tipo_cliente}" data-clientid="${t.key.id}" ${t.key.id == implementacion.cliente_id ? 'selected' : ''}>${t.nombre}</option>
+														</c:forEach>
+														</c:if>
 														</c:forEach>
 													</c:otherwise>
 											</c:choose>
@@ -127,7 +132,7 @@
 									<span class="lbl">Entorno<span class="required-asterisk">*</span>:</span>
 									<div class="input">
 										<select id="estado" class="selectpicker selected" name="entorno" >							
-											<option value="Preproduccion" ${prueba.entorno == 'Preproduccion' ? 'selected' : ''} selected>Pre producci&oacuten</option>									
+											<option value="Integrado" ${prueba.entorno == 'Integrado' ? 'selected' : ''} selected>Integrado</option>									
 											<option value="Producci&oacuten" ${prueba.entorno == 'Producci&oacuten' ? 'selected' : ''}>Producci&oacuten</option>	
 										</select>
 									</div>

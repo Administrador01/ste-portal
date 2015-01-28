@@ -330,7 +330,7 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th><span class="table-title">Fecha alta</span></th>
+						<th><span class="table-title">Fecha estado</span></th>
 						<th><span class="table-title">Cliente</span></th>
 						<th><span class="table-title">Tipo servicio</span></th>
 						<th><span class="table-title">Estado</span></th>
@@ -367,16 +367,19 @@
 													<c:choose>
 														<c:when test="${t.cliente_id==cli.key.id}">				
 															<tr class="valid-result ${s.premium == 'Premium' ? 'premium' : ''}" data-strfechaestado="${s.str_fecha_estado}"
-															 data-nombrecliente="${s.nombre_cliente}" data-estado="${s.estado}" data-entorno="${s.entorno}"  id="row${s.key.id}" style="${s.erased?'background-color:#8B8B8B;':''}${s.entorno=="Producci&oacuten"?'background-color:#C8DBFF;':''}">
+															 data-nombrecliente="${cli.nombre}" data-estado="${s.estado}" data-entorno="${s.entorno}"  id="row${s.key.id}" style="${s.erased?'background-color:#8B8B8B;':''}${s.entorno=="Producci&oacuten"?'background-color:#C8DBFF;':''}">
 																<td><span>${s.str_fecha_estado}</span></td>
 																<td><span>${cli.nombre}</span></td>
 																<td><span>${s.tipo_servicio}</span></td>
 																<td><span style="color:
 																
+																
 																${s.estado=="Pendiente"?'orange':''}
 																${s.estado=="En curso"?'blue':''}
-																${s.estado=="Finalizada"?'green':''}
+																${s.estado=="Finalizado"?'green':''}
 																${s.estado=="Cancelada"?'grey':''}
+																
+																
 																
 																">${s.estado}</span></td>
 																<td><span>${s.producto}</span></td>

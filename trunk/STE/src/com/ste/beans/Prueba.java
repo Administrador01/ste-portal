@@ -28,8 +28,7 @@ public class Prueba {
 	@Persistent
 	private String premium;
 
-	@Persistent
-	private String nombre_cliente;
+
 	
 	@Persistent
 	private String tipo_servicio;
@@ -111,14 +110,6 @@ public class Prueba {
 
 	public void setPremium(String premium) {
 		this.premium = premium;
-	}
-	
-	public String getNombre_cliente() {
-		return nombre_cliente;
-	}
-
-	public void setNombre_cliente(String nombre_cliente) {
-		this.nombre_cliente = nombre_cliente;
 	}
 	
 	public String getTipo_servicio() {
