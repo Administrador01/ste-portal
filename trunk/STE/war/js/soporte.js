@@ -66,6 +66,30 @@ $(function(){
 		});
 	});
 	
+	$('#soporte').on('click','#restoreSoporte', function (e){
+		
+		 var formURL = "/soporteServlet?";
+		 var postData="accion=restore&id="+ id;
+		 $.ajax({
+			url : formURL,
+			type: "POST",
+			data : postData,
+			success:function(data, textStatus, jqXHR) 
+			{
+				$('#row'+id).fadeOut("fast", function(){
+					$(this).remove();
+					$('#myTable').paginateMe({
+						pagerSelector : '#myPager',
+						showPrevNext : true,
+						hidePageNumbers : false,
+						perPage : 10
+					});
+				});
+				$('#confirm-restore').modal('hide');	        	
+			}
+		});
+	})
+	
 	$('#cliente-soporte').on('change', function() {
 		//console.log($(this).find(":selected"));
 		var option = $(this).find(":selected");
