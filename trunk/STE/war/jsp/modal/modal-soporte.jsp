@@ -63,6 +63,10 @@
 						<input type="text" name="tipo_cliente" id="input-segmento-soporte-modal" value="${soporte.tipo_cliente}" readonly>
 					</div>
 			
+					<div class="form-field">
+						<span class="lbl">Peticionario:</span>
+						<input type="text" class="" size="35" name="peticionario" id="" value="${soporte.peticionario}">
+					</div>	
 				</div>
 				<div class="form-field-divider right">
 					
@@ -130,6 +134,17 @@
 								</c:forEach>
 
 							</select>
+						</div>
+					</div>
+					
+					<div class="form-field" >
+						<span class="lbl">Pa&iacutes<span class="required-asterisk">*</span>:</span>
+						<div class="input">
+						<select id="pais_imp" class="selectpicker selected" name="pais" required aria-required="true">	
+								<c:forEach items="${paises}" var="pais">
+									<option value="${pais.name}" ${soporte.pais == pais.name ? 'selected' : ''}>${pais.name}</option>
+								</c:forEach>
+						</select>
 						</div>
 					</div>
 					

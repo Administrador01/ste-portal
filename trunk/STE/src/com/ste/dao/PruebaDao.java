@@ -75,26 +75,12 @@ public class PruebaDao {
 				}
 					
 			}
-			/*
-			int i = 0;
-			while (i<prueb_arr.size()||flag){
-				if(prueb_arr.get(i).getDetalles().equals(s.getDetalles())&&
-						   prueb_arr.get(i).getEntorno().equals(s.getEntorno())&&
-						   prueb_arr.get(i).getEstado().equals(s.getEstado())&&
-						   prueb_arr.get(i).getStr_fecha_estado().equals(s.getStr_fecha_estado())&&
-						   prueb_arr.get(i).getSolucion().equals(s.getSolucion())&&
-						   prueb_arr.get(i).getIdCliente().equals(s.getIdCliente())&&
-						   prueb_arr.get(i).getProducto().equals(s.getProducto())&&
-						   prueb_arr.get(i).getReferencia().equals(s.getReferencia())&&
-						   prueb_arr.get(i).getTipo_servicio().equals(s.getTipo_servicio())){
-								flag = true;
-				}
-				i++;
-			}*/
 			if(!flag){
 				//Conversi'on de las fechas de string a tipo date
 				s.setFecha_estado(Utils.dateConverter(s.getStr_fecha_estado()));
-	
+				if(!s.getFecha_inicio_str().equals("")||!s.getFecha_inicio_str().equals(null)){
+					s.setFecha_inicio(Utils.dateConverter(s.getFecha_inicio_str()));
+				}
 				
 				if (s.getKey()==null){
 					CounterDao cDao = CounterDao.getInstance();
@@ -130,6 +116,39 @@ public class PruebaDao {
 	
 	@SuppressWarnings("unchecked")
 	public List<Prueba> getAllPruebas() {
+
+		List<Prueba> pruebas;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		
+		Query q = pm.newQuery("select from " + Prueba.class.getName()+" where erased == false");		
+		q.setOrdering("fecha_estado desc");
+		pruebas = (List<Prueba>) q.execute();
+		
+		
+		pm.close();
+
+		return pruebas;
+	}
+	@SuppressWarnings("unchecked")
+	public List<Prueba> getAllDelPruebas() {
+
+		List<Prueba> pruebas;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		
+		Query q = pm.newQuery("select from " + Prueba.class.getName()+" where erased == true");		
+		q.setOrdering("fecha_estado desc");
+		pruebas = (List<Prueba>) q.execute();
+		
+		
+		pm.close();
+
+		return pruebas;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Prueba> getAllPruebasEvenDel() {
 
 		List<Prueba> pruebas;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
