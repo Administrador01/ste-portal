@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.ste.beans.Prueba;
+import com.ste.dao.ImplementacionDao;
 import com.ste.dao.PruebaDao;
 import com.ste.utils.Utils;
 
@@ -78,7 +79,7 @@ public class PruebaServlet extends HttpServlet{
 
 			
 			String fecha_estado = req.getParameter("fecha_estado");
-			String nombre_cliente = req.getParameter("cliente");
+			//String nombre_cliente = req.getParameter("cliente");
 			String referencia = req.getParameter("referencia");
 			String producto = req.getParameter("producto_canal");
 			String premium = req.getParameter("input-premium-soporte");
@@ -98,7 +99,7 @@ public class PruebaServlet extends HttpServlet{
 			Prueba p = new Prueba();
 			
 			p.setStr_fecha_estado(fecha_estado);
-			p.setNombre_cliente(nombre_cliente);
+			//p.setNombre_cliente(nombre_cliente);
 			p.setReferencia(referencia);
 			p.setProducto(producto);
 			p.setPremium(premium);
@@ -144,7 +145,7 @@ public class PruebaServlet extends HttpServlet{
 		String id_str = req.getParameter("id");
 		
 		String fecha_estado = req.getParameter("fecha_estado");
-		String nombre_cliente = req.getParameter("cliente");
+		//String nombre_cliente = req.getParameter("cliente");
 		String referencia = req.getParameter("referencia");
 		String producto = req.getParameter("producto_canal");
 		String premium = req.getParameter("input-premium-soporte");
@@ -165,7 +166,7 @@ public class PruebaServlet extends HttpServlet{
 		Utils.writeLog(usermail, "Modifica", "Prueba", p.getId_prueba());
 		
 		p.setStr_fecha_estado(fecha_estado);
-		p.setNombre_cliente(nombre_cliente);
+		//p.setNombre_cliente(nombre_cliente);
 		p.setReferencia(referencia);
 		p.setProducto(producto);
 		p.setPremium(premium);
@@ -238,7 +239,9 @@ public class PruebaServlet extends HttpServlet{
 
 			PruebaDao pDao = PruebaDao.getInstance();
 			List<Prueba> pruebas = pDao.getAllPruebas();
-
+			
+			ImplementacionDao impdao = ImplementacionDao.getInstance();
+					
 			WritableSheet s = w.createSheet("Gestion de pruebas", 0);
 
 			WritableFont cellFont = new WritableFont(WritableFont.TIMES, 12);
@@ -281,7 +284,7 @@ public class PruebaServlet extends HttpServlet{
 				
 				
 				s.addCell(new Label(0, aux, pru.getId_prueba()));
-				s.addCell(new Label(1, aux, pru.getNombre_cliente()));
+				s.addCell(new Label(1, aux, pDao.getClientNameByTestId(pru.getKey().getId())));
 				s.addCell(new Label(2, aux, pru.getStr_fecha_estado()));
 				s.addCell(new Label(3, aux, pru.getPremium()));
 				s.addCell(new Label(4, aux, pru.getProducto()));

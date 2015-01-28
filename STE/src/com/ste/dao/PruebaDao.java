@@ -1,6 +1,7 @@
 package com.ste.dao;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -9,6 +10,9 @@ import javax.jdo.Query;
 
 
 
+
+
+import com.ste.beans.Implementacion;
 import com.ste.beans.Prueba;
 import com.ste.counters.Counter;
 import com.ste.persistence.PMF;
@@ -164,15 +168,44 @@ public class PruebaDao {
 		return pruebas;
 	}
 	
+	
+	public String getClientNameByTestId(long l) {
+		
+		PruebaDao pruDao = PruebaDao.getInstance();
+		Prueba prueba = pruDao.getPruebabyId(l);
+		ImplementacionDao impDao = ImplementacionDao.getInstance();
+		
+
+		return impDao.getNombreClienteByImpId(Long.parseLong(prueba.getImp_id()));
+	}
+	
+
+	
 	@SuppressWarnings("unchecked")
 	public List<Prueba> getAllPruebasByClientId(String clientID) {
 
-		List<Prueba> pruebas;
+		PruebaDao pruDao = PruebaDao.getInstance();
+		List<Prueba> pruebas = new ArrayList();
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		
+		ImplementacionDao impDao = ImplementacionDao.getInstance();
+		List<Implementacion> implementaciones = impDao.getImplementacionByClientId(Long.parseLong(clientID));
 		
-		
-		String query = "select from " + Prueba.class.getName()+" where cliente_id == '"+clientID+"'";
+		for(Implementacion imp : implementaciones){
+			pruebas.addAll(pruDao.getAllPruebasByImpId(imp.getKey().getId()));
+		}
+		pm.close();
+
+		return pruebas;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Prueba> getAllPruebasByImpId(long impID) {
+
+		List<Prueba> pruebas;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+
+		String query = "select from " + Prueba.class.getName()+" where imp_id == '"+impID+"' && erased==false";
 		
 		Query q = pm.newQuery(query);//.setFilter(propertyFilter);
 
@@ -187,21 +220,11 @@ public class PruebaDao {
 	@SuppressWarnings("unchecked")
 	public boolean existPruebaByClientId (String clientID) {
 
-		List<Prueba> pruebas;
-		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		
-		
-		String query = "select from " + Prueba.class.getName()+" where cliente_id == '"+clientID+"'";
-		
-		Query q = pm.newQuery(query);//.setFilter(propertyFilter);
-
-		pruebas = (List<Prueba>) q.execute();
+		PruebaDao pruDao = PruebaDao.getInstance();
+		List<Prueba> pruebas = pruDao.getAllPruebasByClientId(clientID);
 		
 		boolean existe = true;
 		if(pruebas.isEmpty())existe = false;
-		
-		pm.close();
 
 		return existe;
 	}

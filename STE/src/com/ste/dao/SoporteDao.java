@@ -190,7 +190,7 @@ public class SoporteDao {
 
 		List<Soporte> soportes;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		String query = "select from " + Soporte.class.getName()+" where cliente_id == '"+clientID+"'";
+		String query = "select from " + Soporte.class.getName()+" where cliente_id == '"+clientID+"' && erased==false";
 		Query q = pm.newQuery(query);//.setFilter(propertyFilter);
 		soportes = (List<Soporte>) q.execute();
 		boolean existe = true;

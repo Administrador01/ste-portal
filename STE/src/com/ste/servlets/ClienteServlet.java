@@ -226,6 +226,7 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 		c.setPremium(premium);
 		
 		//actualizamos los valores de los campos de pruebas y de soporte
+		/*
 		for (Prueba a : prueb_arr){
 			a.setNombre_cliente(nombre);
 			a.setPremium(premium);
@@ -238,7 +239,7 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 			so.setTipo_cliente(tipo_cliente);
 			sDao.updateSoporte(so);
 		}
-		
+		*/
 		
 		//eeeeeeeeeeeeeee
 		cDao.createCliente(c);
