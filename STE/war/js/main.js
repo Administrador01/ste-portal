@@ -127,6 +127,10 @@ $(function() {
 		id= $(this).attr('name');	
 	});
 	
+	$('html').on('click', '.subida', function(e) {		
+		id= $(this).attr('name');	
+	});
+	
 	$('html').on('loaded.bs.modal', function () {
 		showModal();
 	});

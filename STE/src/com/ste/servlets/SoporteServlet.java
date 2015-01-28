@@ -32,9 +32,12 @@ import jxl.write.WritableWorkbook;
 
 
 
+
 import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
+import com.ste.beans.Cliente;
 import com.ste.beans.Soporte;
+import com.ste.dao.ClienteDao;
 import com.ste.dao.SoporteDao;
 import com.ste.utils.Utils;
 
@@ -64,6 +67,8 @@ public class SoporteServlet extends HttpServlet{
 					updateSoporte(req,resp,usermail);
 				}else if (accion.equals("xls")){
 					generateXLS(req,resp,usermail);
+				}else if (accion.equals("restore")){
+					restore(req,resp,usermail);
 				}
 			 
 		
@@ -191,6 +196,34 @@ public class SoporteServlet extends HttpServlet{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void restore(HttpServletRequest req, HttpServletResponse resp, String usermail) throws JSONException, IOException{
+		
+		JSONObject json = new JSONObject();
+		String str_id = req.getParameter("id");
+		
+		SoporteDao cDao = SoporteDao.getInstance();
+		Soporte c = cDao.getSoportebyId(Long.parseLong(str_id));
+		//registramos la operacion
+		Utils.writeLog(usermail, "Restaura", "soporte", c.getId_soporte());
+		
+		
+		c.setErased(false);
+		cDao.updateSoporte(c);
+		
+		try{
+			json.append("success", "true");
+			
+			
+			resp.setCharacterEncoding("UTF-8");
+	        resp.setContentType("application/json");       
+			resp.getWriter().println(json);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	
 	}
 	
 	public void updateSoporte(HttpServletRequest req, HttpServletResponse resp, String usermail){
