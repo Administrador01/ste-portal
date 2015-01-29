@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -101,6 +102,7 @@ public class InformeServlet extends HttpServlet{
 				Date fech = Utils.dateConverter(fechaDesde);
 				Date haHasta = Utils.dateConverter(fechaHasta);
 				pruebas = pruDao.getPruebasBetweenDates(fech,haHasta);
+
 				tipoFecha=4;
 			}else{
 				Date dateHasta = Utils.dateConverter(fechaHasta);
@@ -115,6 +117,9 @@ public class InformeServlet extends HttpServlet{
 			}
 		}
 		
+		int totalPruebas =pruebas.size();
+		
+		
 		resp.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 		resp.setHeader("Content-Disposition","attachment; filename=InformePruebasSTE.xlsx");
 		String link= "/datadocs/templatePruebas.xlsx";
@@ -123,7 +128,6 @@ public class InformeServlet extends HttpServlet{
 		
 		//CreationHelper createHelper = workbook.getCreationHelper();
 		Sheet sh=workbook.getSheetAt(0);
-		Sheet sh2=workbook.getSheetAt(1);
 		//String sheetName=sh.getSheetName();	
 		
 		/*ESTILO DE CELDA CON BORDES*/
@@ -134,15 +138,31 @@ public class InformeServlet extends HttpServlet{
 		cellStyle.setBorderRight(width);
 		cellStyle.setBorderTop(width);
 		
+		CellStyle clientCellStyle = workbook.createCellStyle();
+		clientCellStyle.setBorderBottom(width);
+		clientCellStyle.setBorderLeft(width);
+		clientCellStyle.setBorderRight(width);
+		clientCellStyle.setBorderTop((short)0);
 		
+		CellStyle footerCellStyle = workbook.createCellStyle();
+		footerCellStyle.setBorderBottom(width);
+		footerCellStyle.setBorderLeft(width);
+		footerCellStyle.setBorderRight(width);
+		footerCellStyle.setBorderTop((short)2);
+		
+		CellStyle headerCellStyle = workbook.createCellStyle();
+		headerCellStyle.setBorderBottom((short)2);
+		headerCellStyle.setBorderLeft(width);
+		headerCellStyle.setBorderRight(width);
+		headerCellStyle.setBorderTop(width);	
 		/*------------------------------------------TABLA 1---------------------------------------------*/
 		int num = 0;
 		for(Estado estado: estados){
 			//Creacion de las celdas con bordes de manera dinamica
-			sh.createRow(8+num).createCell(5).setCellStyle(cellStyle);
-			sh.getRow(8+num).createCell(6).setCellStyle(cellStyle);
-			sh.getRow(8+num).createCell(7).setCellStyle(cellStyle);
-			sh.getRow(8+num).createCell(8).setCellStyle(cellStyle);
+			sh.createRow(8+num).createCell(5).setCellStyle(clientCellStyle);
+			sh.getRow(8+num).createCell(6).setCellStyle(clientCellStyle);
+			sh.getRow(8+num).createCell(7).setCellStyle(clientCellStyle);
+			sh.getRow(8+num).createCell(8).setCellStyle(clientCellStyle);
 			sh.getRow(8+num).getCell(5).setCellValue(estado.getName());
 			sh.getRow(8+num).getCell(6).setCellValue(0.0);
 			sh.getRow(8+num).getCell(7).setCellValue(0.0);
@@ -153,7 +173,7 @@ public class InformeServlet extends HttpServlet{
 			for(int i =0;i<estados.size();i++){
 				
 				
-				if(pru.getEntorno().equals("Produccion")){
+				if(pru.getEntorno().equals("Producci&oacuten")){
 					
 					if(pru.getEstado().equals(estados.get(i).getName()))sh.getRow(i+8).getCell(7).setCellValue(sh.getRow(i+8).getCell(7).getNumericCellValue()+1);
 					
@@ -168,24 +188,90 @@ public class InformeServlet extends HttpServlet{
 			}
 		}
 		
-		sh.createRow(estados.size()+8).createCell(5).setCellStyle(cellStyle);
-		sh.getRow(estados.size()+8).createCell(6).setCellStyle(cellStyle);
-		sh.getRow(estados.size()+8).createCell(7).setCellStyle(cellStyle);
-		sh.getRow(estados.size()+8).createCell(8).setCellStyle(cellStyle);
+		sh.createRow(estados.size()+8).createCell(5).setCellStyle(footerCellStyle);
+		sh.getRow(estados.size()+8).createCell(6).setCellStyle(footerCellStyle);
+		sh.getRow(estados.size()+8).createCell(7).setCellStyle(footerCellStyle);
+		sh.getRow(estados.size()+8).createCell(8).setCellStyle(footerCellStyle);
 		sh.getRow(estados.size()+8).getCell(5).setCellValue("Total");
 		sh.getRow(estados.size()+8).getCell(6).setCellFormula("SUM(G"+(8+1)+":G"+(8+estados.size())+")");
 		sh.getRow(estados.size()+8).getCell(7).setCellFormula("SUM(H"+(8+1)+":H"+(8+estados.size())+")");
 		sh.getRow(estados.size()+8).getCell(8).setCellFormula("SUM(I"+(8+1)+":I"+(8+estados.size())+")");
 		/*------------------------------FIN DE TABLA 1-------------------------------------------------------*/
 		
-		/*Insertamos el rango de nombres para la grafica*/
 		
+		/*------------------------------TABLA FICHEROS--------------------------------------------------------------*/
 
+		switch (tipoFecha){
+		case 1:
+			pruebas = pruDao.getAllPruebas();
+			break;
+		case 2:
+			Date dateDesde = Utils.dateConverter(fechaDesde);
+			pruebas = pruDao.getPruebasSinceDate(dateDesde);
+			break;
+		case 3:
+			Date dateHasta = Utils.dateConverter(fechaHasta);
+			pruebas = pruDao.getPruebasUntilDate(dateHasta);
+			break;
+		case 4:
+			Date datDesde = Utils.dateConverter(fechaDesde);
+			Date datHasta = Utils.dateConverter(fechaHasta);
+			pruebas = pruDao.getPruebasBetweenDates(datDesde, datHasta);
+			break;
+		default:
+			break;
+		}
+		
+		List<String> ficheros = new ArrayList<String>();
+		
+		for(Prueba prueba : pruebas){
+			if(ficheros.contains(prueba.getFichero())){
+				int pos = ficheros.indexOf(prueba.getFichero());
+				sh.getRow(49+pos).getCell(6).setCellValue(sh.getRow(49+pos).getCell(6).getNumericCellValue()+1);
+			}else{
+				
+				sh.createRow(49+ficheros.size()).createCell(5).setCellStyle(clientCellStyle);
+				sh.getRow(49+ficheros.size()).getCell(5).setCellValue(prueba.getFichero());
+				sh.getRow(49+ficheros.size()).createCell(6).setCellStyle(clientCellStyle);
+				sh.getRow(49+ficheros.size()).getCell(6).setCellValue(1);				
+				ficheros.add(prueba.getFichero());
+			}
+		}
+		
+		
+		sh.createRow(49+ficheros.size()).createCell(5).setCellStyle(footerCellStyle);
+		sh.getRow(49+ficheros.size()).getCell(5).setCellValue("Total");
+		sh.getRow(49+ficheros.size()).createCell(6).setCellStyle(footerCellStyle);
+		sh.getRow(49+ficheros.size()).getCell(6).setCellValue(pruebas.size());
+		sh.getRow(49+ficheros.size()).createCell(7).setCellStyle(footerCellStyle);
+		sh.getRow(49+ficheros.size()).getCell(7).setCellValue(100);		
+		
+		for(int head = 0 ; head<ficheros.size();head++){
+			sh.getRow(49+head).createCell(7).setCellStyle(footerCellStyle);
+			sh.getRow(49+head).getCell(7).setCellFormula("INT("+sh.getRow(49+head).getCell(6).getNumericCellValue()*100+"/"+pruebas.size()+")");		
+		}
+		/*------------------------------FIN TABLA FICHEROS----------------------------------------------------------*/
+		
+		int head= ficheros.size()+49+14; 										//A partir de ahora lo leeremos para las filas como si se tratase de un fichero ya que se actura sobre filas variables
+		//numero ficheros + desplazamento a headFicheros + espacio entre tablas
+		
+		sh.createRow(head).createCell(6).setCellStyle(headerCellStyle);
+		sh.getRow(head).getCell(6).setCellValue("Integrado");
+		sh.getRow(head).createCell(7).setCellStyle(headerCellStyle);
+		sh.getRow(head).getCell(7).setCellValue("Producción");
+		sh.getRow(head).createCell(8).setCellStyle(headerCellStyle);
+		sh.getRow(head).getCell(8).setCellValue("Total pruebas");
+		sh.getRow(head).createCell(9).setCellStyle(headerCellStyle);
+		sh.getRow(head).getCell(9).setCellValue("Total porcentual");
+		head++;
+		
+		int headClientes= head;
+		
 		
 		
 		ClienteDao clientDao = ClienteDao.getInstance();
-		List<Cliente> clientes = clientDao.getAllClientsEvenDeleted();
-		/*------------------------------TABLA 2--------------------------------------------------------------*/
+		List<Cliente> clientes = clientDao.getAllClients();
+		/*------------------------------TABLA CLIENTES--------------------------------------------------------------*/
 		int i = 0;
 		for(Cliente cli :clientes){
 			switch (tipoFecha){
@@ -194,90 +280,200 @@ public class InformeServlet extends HttpServlet{
 					break;
 				case 2:
 					Date dateDesde = Utils.dateConverter(fechaDesde);
-					//TODO
-					//pruebas = pruDao.getPruebasSinceDateByClientId(Long.toString(cli.getKey().getId()), dateDesde);
+					
+					pruebas = pruDao.getPruebasSinceDateByClientId(Long.toString(cli.getKey().getId()), dateDesde);
 					break;
 				case 3:
 					Date dateHasta = Utils.dateConverter(fechaHasta);
-					//pruebas = pruDao.getPruebasUntilDateByClientId(Long.toString(cli.getKey().getId()), dateHasta);
+					pruebas = pruDao.getPruebasUntilDateByClientId(Long.toString(cli.getKey().getId()), dateHasta);
 					break;
 				case 4:
 					Date datDesde = Utils.dateConverter(fechaDesde);
 					Date datHasta = Utils.dateConverter(fechaHasta);
-					//pruebas = pruDao.getPruebasBetweenDatesByClientId(Long.toString(cli.getKey().getId()), datDesde, datHasta);
+					pruebas = pruDao.getPruebasBetweenDatesByClientId(Long.toString(cli.getKey().getId()), datDesde, datHasta);
 					break;
 				default:
 					break;
 			}
-			sh.createRow(25+i).createCell(1).setCellStyle(cellStyle);
-			sh.getRow(25+i).createCell(2).setCellStyle(cellStyle);
-			sh.getRow(25+i).createCell(3).setCellStyle(cellStyle);
-			sh.getRow(25+i).createCell(4).setCellStyle(cellStyle);
-			sh.getRow(25+i).getCell(1).setCellValue(cli.getId_cliente()+"  -  "+cli.getNombre());
-			sh.getRow(25+i).getCell(2).setCellValue(0.0);
-			sh.getRow(25+i).getCell(3).setCellValue(0.0);
-			sh.getRow(25+i).getCell(4).setCellValue(0.0);
+			sh.createRow(head).createCell(5).setCellStyle(cellStyle);
+			sh.getRow(head).createCell(6).setCellStyle(clientCellStyle);
+			sh.getRow(head).createCell(7).setCellStyle(clientCellStyle);
+			sh.getRow(head).createCell(8).setCellStyle(clientCellStyle);
+			sh.getRow(head).getCell(5).setCellValue(cli.getId_cliente()+"  -  "+cli.getNombre());
+			sh.getRow(head).getCell(6).setCellValue(0.0);
+			sh.getRow(head).getCell(7).setCellValue(0.0);
+			sh.getRow(head).getCell(8).setCellValue(0.0);
 
 
 			for(Prueba pru : pruebas){
-				if(pru.getEntorno().equals("Integrado"))sh.getRow(25+i).getCell(2).setCellValue(sh.getRow(25+i).getCell(2).getNumericCellValue()+1);
-				if(pru.getEntorno().equals("Produccion"))sh.getRow(25+i).getCell(3).setCellValue(sh.getRow(25+i).getCell(3).getNumericCellValue()+1);
-				sh.getRow(25+i).getCell(4).setCellValue(sh.getRow(25+i).getCell(4).getNumericCellValue()+1);
-			
-				
-				
+				if(pru.getEntorno().equals("Integrado"))sh.getRow(head).getCell(6).setCellValue(sh.getRow(head).getCell(6).getNumericCellValue()+1);
+				if(pru.getEntorno().equals("Producci&oacuten"))sh.getRow(head).getCell(7).setCellValue(sh.getRow(head).getCell(7).getNumericCellValue()+1);
+				sh.getRow(head).getCell(8).setCellValue(sh.getRow(head).getCell(8).getNumericCellValue()+1);				
 			}
-			i++;
 			
-
+			
+			sh.getRow(head).createCell(9).setCellStyle(clientCellStyle);
+			sh.getRow(head).getCell(9).setCellFormula("INT("+sh.getRow(head).getCell(8).getNumericCellValue()*100+"/"+totalPruebas+")");
+			head++;
+			i++;
 		}
-		/*------------------------------FIN TABLA 2----------------------------------------------------------*/
-		/*Datos adicionales para graficas*/
+		
+		sh.createRow(head).createCell(5).setCellStyle(footerCellStyle);
+		sh.getRow(head).createCell(6).setCellStyle(footerCellStyle);
+		sh.getRow(head).createCell(7).setCellStyle(footerCellStyle);
+		sh.getRow(head).createCell(8).setCellStyle(footerCellStyle);
+		sh.getRow(head).createCell(9).setCellStyle(footerCellStyle);
+		sh.getRow(head).getCell(5).setCellValue("Total");
+		sh.getRow(head).getCell(6).setCellFormula("SUM(G"+(headClientes)+":G"+(head)+")");
+		sh.getRow(head).getCell(7).setCellFormula("SUM(H"+(headClientes)+":H"+(head)+")");
+		sh.getRow(head).getCell(8).setCellFormula("SUM(I"+(headClientes)+":I"+(head)+")");
+		sh.getRow(head).getCell(9).setCellValue(1);
 		
 		
+		
+		/*------------------------------FIN TABLA CLIENTES----------------------------------------------------------*/
+		
+		
+		
+		
+		Date dateDesde= null;
+		Date dateHasta= null;
 		switch (tipoFecha){
 		case 1:
-			
+			dateDesde = Utils.dateConverter("29/11/1857");
+			dateHasta = Utils.dateConverter("29/11/2500");
 			break;
 		case 2:
-			Date dateDesde = Utils.dateConverter(fechaDesde);
-			
+			dateDesde = Utils.dateConverter(fechaDesde);
+			dateHasta = Utils.dateConverter("29/11/2500");
 			break;
 		case 3:
-			Date dateHasta = Utils.dateConverter(fechaHasta);
+			dateDesde = Utils.dateConverter("29/11/1857");
+			dateHasta = Utils.dateConverter(fechaHasta);
 			break;
 		case 4:
-			Date datDesde = Utils.dateConverter(fechaDesde);
-			Date datHasta = Utils.dateConverter(fechaHasta);
+			dateDesde = Utils.dateConverter(fechaDesde);
+			dateHasta = Utils.dateConverter(fechaHasta);
+			
 			
 			break;
 		default:
 			break;
 		}
-		//sh2.createRow(0).createCell(1).setCellValue(pruDao.getPruebasByResultado("OK",,));
-		sh2.createRow(1).createCell(1).setCellValue(0.0);
-		sh2.createRow(2).createCell(1).setCellValue(0.0);
+		
+		/*Tabla ok ko generada estaticamente*/
+		sh.getRow(29).createCell(6).setCellStyle(clientCellStyle);
+		sh.getRow(29).getCell(6).setCellValue((pruDao.getPruebasByResultado("OK", dateDesde, dateHasta)).size());
+		sh.getRow(29).createCell(7).setCellStyle(clientCellStyle);
+		sh.getRow(29).getCell(7).setCellFormula("INT("+sh.getRow(29).getCell(6).getNumericCellValue()*100+"/"+totalPruebas+")");
+		sh.getRow(30).createCell(6).setCellStyle(clientCellStyle);
+		sh.getRow(30).createCell(7).setCellStyle(clientCellStyle);
+		sh.getRow(30).getCell(6).setCellValue((pruDao.getPruebasByResultado("KO", dateDesde, dateHasta)).size());
+		sh.getRow(30).getCell(7).setCellFormula("INT("+sh.getRow(30).getCell(6).getNumericCellValue()*100+"/"+totalPruebas+")");
+		sh.getRow(31).createCell(6).setCellStyle(clientCellStyle);
+		sh.getRow(31).createCell(7).setCellStyle(clientCellStyle);
+		sh.getRow(31).getCell(6).setCellValue((pruDao.getPruebasByResultado("Cancelada", dateDesde, dateHasta)).size());
+		sh.getRow(31).getCell(7).setCellFormula("INT("+sh.getRow(31).getCell(6).getNumericCellValue()*100+"/"+totalPruebas+")");
+		sh.getRow(32).createCell(6).setCellStyle(footerCellStyle);
+		sh.getRow(32).getCell(6).setCellValue(totalPruebas);
 		
 		
-		//cellStyle.setDataFormat(createHelper.createDataFormat().getFormat(""));
+		/*Tabla de fichero generada estaticamente para desplegable*/
+//		sh.getRow(29).createCell(6).setCellStyle(clientCellStyle);
+//		sh.getRow(29).createCell(7).setCellStyle(clientCellStyle);
+//		sh.getRow(29).getCell(6).setCellValue((pruDao.getPruebasByFichero("Confirming", dateDesde, dateHasta)).size());
+//		sh.getRow(29).getCell(7).setCellFormula("INT("+sh.getRow(39).getCell(6).getNumericCellValue()*100+"/"+totalPruebas+")");
+//		
+//		sh.getRow(30).createCell(6).setCellStyle(clientCellStyle);
+//		sh.getRow(30).createCell(7).setCellStyle(clientCellStyle);
+//		sh.getRow(30).getCell(6).setCellValue((pruDao.getPruebasByFichero("FIT", dateDesde, dateHasta)).size());
+//		sh.getRow(30).getCell(7).setCellFormula("INT("+sh.getRow(30).getCell(6).getNumericCellValue()*100+"/"+totalPruebas+")");
+//		
+//		sh.getRow(31).createCell(6).setCellStyle(clientCellStyle);
+//		sh.getRow(31).createCell(7).setCellStyle(clientCellStyle);
+//		sh.getRow(31).getCell(6).setCellValue((pruDao.getPruebasByFichero("Pagos Francia", dateDesde, dateHasta)).size());
+//		sh.getRow(31).getCell(7).setCellFormula("INT("+sh.getRow(31).getCell(6).getNumericCellValue()*100+"/"+totalPruebas+")");
+//		
+//		sh.getRow(32).createCell(6).setCellStyle(clientCellStyle);
+//		sh.getRow(32).createCell(7).setCellStyle(clientCellStyle);
+//		sh.getRow(32).getCell(6).setCellValue((pruDao.getPruebasByFichero("SDD", dateDesde, dateHasta)).size());
+//		sh.getRow(32).getCell(7).setCellFormula("INT("+sh.getRow(31).getCell(6).getNumericCellValue()*100+"/"+totalPruebas+")");
+//		
+//		sh.getRow(33).createCell(6).setCellStyle(clientCellStyle);
+//		sh.getRow(33).createCell(7).setCellStyle(clientCellStyle);
+//		sh.getRow(33).getCell(6).setCellValue((pruDao.getPruebasByFichero("TIN", dateDesde, dateHasta)).size());
+//		sh.getRow(33).getCell(7).setCellFormula("INT("+sh.getRow(31).getCell(6).getNumericCellValue()*100+"/"+totalPruebas+")");
+//		
+//		sh.getRow(34).createCell(6).setCellStyle(clientCellStyle);
+//		sh.getRow(34).createCell(7).setCellStyle(clientCellStyle);
+//		sh.getRow(34).getCell(6).setCellValue((pruDao.getPruebasByFichero("Pagos UK", dateDesde, dateHasta)).size());
+//		sh.getRow(34).getCell(7).setCellFormula("INT("+sh.getRow(31).getCell(6).getNumericCellValue()*100+"/"+totalPruebas+")");
+//		
+//		sh.getRow(35).createCell(6).setCellStyle(footerCellStyle);
+//		sh.getRow(35).getCell(6).setCellValue(totalPruebas);
+		
+		
+		
+		//Escribimos los rangos de valores para dibujar las graficas
 		String sheetName = workbook.getSheetName(0);
-		String sheetname2 = workbook.getSheetName(1);
+
 				
 		Name rangeTotalPorClie = workbook.getName("TotalPorCliente");
 		Name rangeClientes = workbook.getName("Clientes");
-		rangeTotalPorClie.setRefersToFormula(sheetName+"!$E$"+26+":$E$"+(clientes.size()+25));
-		rangeClientes.setRefersToFormula(sheetName+"!$B$"+26+":$B$"+(clientes.size()+25));
+		rangeTotalPorClie.setRefersToFormula(sheetName+"!$I$"+(headClientes+1)+":$I$"+head);
+		rangeClientes.setRefersToFormula(sheetName+"!$F$"+(headClientes+1)+":$F$"+head);
 		Name rangeTotal = workbook.getName("Total");
 		Name rangeEstados = workbook.getName("Estados");
 		rangeTotal.setRefersToFormula(sheetName+"!$I$"+9+":$I$"+(estados.size()+8));
 		rangeEstados.setRefersToFormula(sheetName+"!$F$"+9+":$F$"+(estados.size()+8));
+		Name rangeEntorno = workbook.getName("PruebasPorEntorno");
+		Name rangeEntornos = workbook.getName("Entorno");
+		rangeEntornos.setRefersToFormula(sheetName+"!$G$"+(headClientes)+":$H$"+(headClientes));
+		rangeEntorno.setRefersToFormula(sheetName+"!$G$"+(head+1)+":$H$"+(head+1));
 		Name rangeResultados = workbook.getName("Resultados");
 		Name rangeTotalResultados = workbook.getName("TotalResultados");
-		rangeResultados.setRefersToFormula("");
+		//rangeResultados.setRefersToFormula("");
 		
 		
 		workbook.write(resp.getOutputStream());
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	private void informePruebasServ(HttpServletRequest req, HttpServletResponse resp)throws Exception {
 		PruebaDao pruDao =PruebaDao.getInstance();
