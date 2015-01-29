@@ -129,7 +129,25 @@
 						<input type="text" class="" size="35" name="peticionario" id="" value="">
 					</div>	
 					
-				</div>	
+				<!--	
+					<div class="form-field">
+						<span class="lbl">Fichero<span class="required-asterisk">*</span>:</span>
+						<div class="input">
+							<select id="estado" class="selectpicker selected" name="fichero" required>
+								<option value="default">Seleccionar</option>
+								<option value="Confirming">Confirming</option>
+								<option value="FIT">FIT</option>
+								<option value="Pagos Francia">Pagos Francia</option>
+								<option value="SDD">SDD</option>
+								<option value="TIN">TIN</option>
+								<option value="Pagos UK">Pagos UK</option>.
+							</select>
+						</div>
+					</div>
+				-->
+				
+				</div>
+					
 				<div class="form-field-divider right">
 				
 					
@@ -183,6 +201,7 @@
 							<select id="resultado" class="selectpicker selected" name="resultado" >
 								<option value="OK">OK</option>
 								<option value="KO">KO</option>
+								<option value="Cancelada">Cancelada</option>
 							</select>
 						</div>
 					</div>

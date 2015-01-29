@@ -109,6 +109,9 @@
 									<span class="lbl">Peticionario:</span>
 									<input type="text" class="" size="35" name="peticionario" id="" value="${prueba.peticionario}">
 								</div>	
+
+								
+								
 							</div>
 							<div class="form-field-divider right">
 			
@@ -156,18 +159,30 @@
 									</div>
 								</div>
 								
-					<div class="form-field">
-						<span class="lbl">Producto/canal<span class="required-asterisk">*</span>:</span>
-						<div class="input">
-							<select id="producto_canal" class="selectpicker selected" name="producto_canal" >
-							
-								<c:forEach items="${productos}" var="producto">
-										<option value="${producto.name}" ${prueba.producto == producto.name ? 'selected' : ''}>${producto.name}</option>
-								</c:forEach>
-
-							</select>
-						</div>
-					</div>
+								<div class="form-field">
+									<span class="lbl">Producto/canal<span class="required-asterisk">*</span>:</span>
+									<div class="input">
+										<select id="producto_canal" class="selectpicker selected" name="producto_canal" >
+										
+											<c:forEach items="${productos}" var="producto">
+													<option value="${producto.name}" ${prueba.producto == producto.name ? 'selected' : ''}>${producto.name}</option>
+											</c:forEach>
+			
+										</select>
+									</div>
+								</div>
+								
+													
+								<div class="form-field">
+									<span class="lbl">Resultado<span class="required-asterisk">*</span>:</span>
+									<div class="input">
+										<select id="resultado" class="selectpicker selected" name="resultado" >
+											<option value="OK">OK</option>
+											<option value="KO">KO</option>
+											<option value="Cancelada">Cancelada</option>
+										</select>
+									</div>
+								</div>
 								
 							</div>
 							
