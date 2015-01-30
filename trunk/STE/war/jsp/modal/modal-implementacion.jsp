@@ -8,8 +8,8 @@
 
 
 <div class="modal_ajax">
-			<div class="" style="text-align: left;'">
-				<h2>Editar implementaci&oacuten</h2>
+			<div class="modalImplementacion" style="text-align: left;'">
+				<h2>Editar implementaci&oacuten ${implementacion.id_implementacion}</h2>
 				<hr />
 			</div>
 			<div class="" style="text-align:right;'">
@@ -27,7 +27,10 @@
 
 				<div class="page1_imp" id='page1_imp_modal'>
 				
-				
+					<div class="form-field" id="div_producto_imp">
+							<span class="lbl">Identificador:</span>
+							<input disabled value="${implementacion.id_implementacion}">
+					</div>
 
 					<div class="form-field" id="div_cliente_imp_modal">
 						<span class="lbl">Cliente<span class="required-asterisk">*</span>:</span>
@@ -151,11 +154,7 @@
 					</div>
 					
 
-						
-			
-					<div class="form-field" style="   float: left;
-    padding-left: 10.8%;
-    width: 49.8%;">
+					<div class="form-field">
 					<span class="lbl">Referencia externa:</span>
 					<input type="text" name="ref_ext" id="ref_ext_modal" maxlength="18" value="${implementacion.referencia_externa}">
 					</div>

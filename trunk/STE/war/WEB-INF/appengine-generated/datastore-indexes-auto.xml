@@ -1,12 +1,6 @@
-<!-- Indices written at Thu, 29 Jan 2015 18:22:18 GMT+01:00 -->
+<!-- Indices written at Fri, 30 Jan 2015 13:06:09 GMT+01:00 -->
 
 <datastore-indexes>
-
-    <!-- Used 12 times in query history -->
-    <datastore-index kind="Prueba" ancestor="false" source="auto">
-        <property name="erased" direction="asc"/>
-        <property name="fecha_estado" direction="desc"/>
-    </datastore-index>
 
     <!-- Used 1 time in query history -->
     <datastore-index kind="Cliente" ancestor="false" source="auto">
@@ -14,11 +8,16 @@
         <property name="id_cliente" direction="asc"/>
     </datastore-index>
 
-    <!-- Used 3 times in query history -->
+    <!-- Used 2 times in query history -->
     <datastore-index kind="Prueba" ancestor="false" source="auto">
         <property name="erased" direction="asc"/>
-        <property name="resultado" direction="asc"/>
-        <property name="fecha_estado" direction="asc"/>
+        <property name="fecha_estado" direction="desc"/>
+    </datastore-index>
+
+    <!-- Used 2 times in query history -->
+    <datastore-index kind="Cliente" ancestor="false" source="auto">
+        <property name="erased" direction="asc"/>
+        <property name="nombre" direction="asc"/>
     </datastore-index>
 
 </datastore-indexes>

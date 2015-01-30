@@ -27,7 +27,7 @@ public class DefaultConf extends HttpServlet{
 		
 		String mail = (String) sesion.getAttribute("mail");
 		
-		if ("david.martin.beltran.contractor@bbva.com".equals(mail)){
+		if ("david.martin.beltran.contractor@bbva.com".equals(mail)||"roberto.gonzalez.roman.contractor@bbva.com".equals(mail)){
 			CounterDao cDao = CounterDao.getInstance();
 			Counter contadorSoporte = cDao.getCounterByName("soporte");
 			//instancia para anadir nuevos contadores+

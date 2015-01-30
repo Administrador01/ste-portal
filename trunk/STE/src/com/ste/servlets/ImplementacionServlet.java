@@ -65,7 +65,9 @@ public class ImplementacionServlet extends HttpServlet{
 				if (accion.equals("xlsServ")){
 					generateXLSserv(req,resp,usermail);
 				}
-
+				if (accion.equals("delete")){
+					deleteImplementacion(req,resp,usermail);
+				}
 			
 		} catch (Exception e) {
 
@@ -106,8 +108,8 @@ public class ImplementacionServlet extends HttpServlet{
 			
 			boolean normalizador=false;
 			boolean firma = false;
-			if (normalizador_str == null)normalizador_str = "No";
-			if (firma_str == null)firma_str = "No";
+			if (normalizador_str.equals(null)||normalizador_str.equals(""))normalizador_str = "No";
+			if (firma_str.equals("")||firma_str.equals(null))firma_str = "No";
 			if (normalizador_str.equals("Si"))normalizador = true;
 			if (firma_str.equals("Si"))firma = true;
 			
@@ -144,7 +146,7 @@ public class ImplementacionServlet extends HttpServlet{
 			
 
 			
-			impDao.createImplementacion(imp, usermail);;
+			impDao.createImplementacion(imp, usermail);
 			
 			Utils.writeLog(usermail, "Crea", "Implementacion", Long.toString(imp.getServicio_id()));
 			
@@ -473,4 +475,31 @@ public class ImplementacionServlet extends HttpServlet{
 
 	}	
 	
+	public void deleteImplementacion(HttpServletRequest req, HttpServletResponse resp, String usermail)
+			throws ServletException, IOException {
+		
+		JSONObject json = new JSONObject();
+		
+		String id=req.getParameter("id");
+		ImplementacionDao impDao = ImplementacionDao.getInstance();
+		Implementacion imp = impDao.getImplementacionById(Long.parseLong(id));
+		
+		
+		Utils.writeLog(usermail, "Borra", "Implementacion", Long.toString(imp.getServicio_id()));
+		try {
+			json.append("success", "true");
+			resp.setCharacterEncoding("UTF-8");
+	        resp.setContentType("application/json");       
+			resp.getWriter().println(json);
+
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 }

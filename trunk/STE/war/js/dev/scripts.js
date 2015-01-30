@@ -109,12 +109,7 @@ $(function(){
 			{
 				$('#row'+id).fadeOut("fast", function(){
 					$(this).remove();
-					$('#myTable').paginateMe({
-						pagerSelector : '#myPager',
-						showPrevNext : true,
-						hidePageNumbers : false,
-						perPage : 10
-					});
+					location.reload(); 
 				});
 				$('#confirm-delete').modal('hide');	        	
 			}
@@ -133,12 +128,7 @@ $(function(){
 			{
 				$('#row'+id).fadeOut("fast", function(){
 					$(this).remove();
-					$('#myTable').paginateMe({
-						pagerSelector : '#myPager',
-						showPrevNext : true,
-						hidePageNumbers : false,
-						perPage : 10
-					});
+					location.reload(); 
 				});
 				$('#confirm-restore').modal('hide');	        	
 			}
@@ -276,29 +266,7 @@ var getIsoDate = function(dateString) {
 
 $(function(){
 
-	$('#implementaciones').on('click','#deleteImplementacion', function (e){
-		
-		 var formURL = "/implementacionServlet?";
-		 var postData="accion=delete&id="+ id;
-		 $.ajax({
-			url : formURL,
-			type: "POST",
-			data : postData,
-			success:function(data, textStatus, jqXHR) 
-			{
-				$('#row'+id).fadeOut("fast", function(){
-					$(this).remove();
-					$('#myTable').paginateMe({
-						pagerSelector : '#myPager',
-						showPrevNext : true,
-						hidePageNumbers : false,
-						perPage : 10
-					});
-				});
-				$('#confirm-delete').modal('hide');	        	
-			}
-		});
-	});
+
 	
 	$('.go_pag2').click(function(e){
 		
@@ -1503,12 +1471,7 @@ $(function(){
 			{
 				$('#row'+id).fadeOut("fast", function(){
 					$(this).remove();
-					$('#myTable').paginateMe({
-						pagerSelector : '#myPager',
-						showPrevNext : true,
-						hidePageNumbers : false,
-						perPage : 10
-					});
+					location.reload(); 
 				});
 				$('#confirm-delete').modal('hide');	        	
 			}
@@ -1527,12 +1490,7 @@ $(function(){
 			{
 				$('#row'+id).fadeOut("fast", function(){
 					$(this).remove();
-					$('#myTable').paginateMe({
-						pagerSelector : '#myPager',
-						showPrevNext : true,
-						hidePageNumbers : false,
-						perPage : 10
-					});
+					location.reload(); 
 				});
 				$('#confirm-restore').modal('hide');	        	
 			}

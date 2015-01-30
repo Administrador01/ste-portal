@@ -279,7 +279,7 @@
 						</div>
 					--%>
 					<div class="form-field-fecha-prueba">
-						<span class="lbl">Fecha alta desde:</span>
+						<span class="lbl">Fecha estado desde:</span>
 							<input type="text" value="" size="16" class="datepicker fromTo" data-target-id='fecha-hasta-filtro' name="fecha-desde-filtro" id="fecha-desde-filtro" >
 						
 					</div>
@@ -310,7 +310,7 @@
 					</div>
 				--%>	
 					<div id="form-field-fecha-prueba-hasta">
-						<span class="lbl">Fecha alta hasta:</span>
+						<span class="lbl">Fecha estado hasta:</span>
 
 							<input type="text" value="" size="16" class="datepicker" name="fecha-hasta-filtro" id="fecha-hasta-filtro" >
 

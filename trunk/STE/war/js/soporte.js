@@ -54,12 +54,7 @@ $(function(){
 			{
 				$('#row'+id).fadeOut("fast", function(){
 					$(this).remove();
-					$('#myTable').paginateMe({
-						pagerSelector : '#myPager',
-						showPrevNext : true,
-						hidePageNumbers : false,
-						perPage : 10
-					});
+					location.reload(); 
 				});
 				$('#confirm-delete').modal('hide');	        	
 			}
@@ -78,12 +73,7 @@ $(function(){
 			{
 				$('#row'+id).fadeOut("fast", function(){
 					$(this).remove();
-					$('#myTable').paginateMe({
-						pagerSelector : '#myPager',
-						showPrevNext : true,
-						hidePageNumbers : false,
-						perPage : 10
-					});
+					location.reload(); 
 				});
 				$('#confirm-restore').modal('hide');	        	
 			}
