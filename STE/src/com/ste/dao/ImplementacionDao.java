@@ -95,7 +95,7 @@ public List<Implementacion> getImplementacionByClientId(long l) {
 			
 			if (imp.getStr_fech_subida()!=null && imp.getStr_fech_subida()!=""){
 				imp.setFech_subida(Utils.dateConverter(imp.getStr_fech_subida()));
-			}			
+			}		
 			if (imp.getKey()==null){
 				CounterDao contDao = CounterDao.getInstance();
 				Counter contador = contDao.getCounterByName("implementacion");
