@@ -114,6 +114,8 @@ public class PruebaServlet extends HttpServlet{
 			p.setFecha_inicio_str(str_fecha_inicio);
 			p.setFichero(fichero);
 			p.setPeticionario(peticionario);
+			p.setFecha_inicio_str(str_fecha_inicio);
+			
 			
 			
 			pDao.createPrueba(p);		

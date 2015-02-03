@@ -860,9 +860,6 @@ textarea.readonly {
 #implementaciones .form-field .grey {
   color: #;
 }
-#implementaciones .form-field .btn {
-  margin: 0px;
-}
 #implementaciones .form-field input,
 #implementaciones .form-field textarea {
   margin-right: 0px;
@@ -950,6 +947,13 @@ textarea.readonly {
 }
 body .modal-dialog {
   width: 850px;
+}
+body .modal-dialog .form-field {
+  width: 49%;
+  padding-left: 5%;
+}
+body .modal-dialog .form-field .selectpicker {
+  margin-left: 2%;
 }
 .input-autorefillable {
   resize: none;

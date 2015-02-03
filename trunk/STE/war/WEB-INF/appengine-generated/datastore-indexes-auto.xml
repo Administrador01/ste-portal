@@ -1,8 +1,8 @@
-<!-- Indices written at Fri, 30 Jan 2015 13:06:09 GMT+01:00 -->
+<!-- Indices written at Tue, 3 Feb 2015 16:00:54 GMT+01:00 -->
 
 <datastore-indexes>
 
-    <!-- Used 1 time in query history -->
+    <!-- Used 2 times in query history -->
     <datastore-index kind="Cliente" ancestor="false" source="auto">
         <property name="erased" direction="asc"/>
         <property name="id_cliente" direction="asc"/>

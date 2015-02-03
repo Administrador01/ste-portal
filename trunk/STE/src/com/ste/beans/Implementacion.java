@@ -20,6 +20,9 @@ public class Implementacion {
 	private String id_implementacion;
 	
 	@Persistent
+	private boolean erased;
+	
+	@Persistent
 	private Date fecha_alta;
 	
 	@Persistent
@@ -289,4 +292,12 @@ public class Implementacion {
 		this.fech_subida = fecha;
 	}
 
+	public boolean getErased() {
+		return erased;
+	}
+
+	public void setErased(boolean erased) {
+		this.erased = erased;
+	}
+	
 }
