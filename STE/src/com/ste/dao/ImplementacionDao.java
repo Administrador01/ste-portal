@@ -24,7 +24,7 @@ public class ImplementacionDao {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		
 		
-		Query q = pm.newQuery("select from " + Implementacion.class.getName());		
+		Query q = pm.newQuery("select from " + Implementacion.class.getName()+" where erased == false");		
 		Implementacions = (List<Implementacion>) q.execute();
 		
 		
@@ -33,6 +33,21 @@ public class ImplementacionDao {
 		return Implementacions;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Implementacion> getAllDelImplementaciones() {
+
+		List<Implementacion> Implementacions;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		
+		Query q = pm.newQuery("select from " + Implementacion.class.getName()+" where erased == true");		
+		Implementacions = (List<Implementacion>) q.execute();
+		
+		
+		pm.close();
+
+		return Implementacions;
+	}
 public Implementacion getImplementacionById(long l) {
 		
 		Implementacion c;
@@ -81,6 +96,12 @@ public List<Implementacion> getImplementacionByClientId(long l) {
 	return implementaciones;
 }	
 
+
+	public synchronized void createImplementacionRaw(Implementacion imp){
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		pm.makePersistent(imp);
+		pm.close();
+	}
 	public synchronized void createImplementacion(Implementacion imp, String usermail) {
 		PersistenceManager pm = PMF.get().getPersistenceManager();	
 		

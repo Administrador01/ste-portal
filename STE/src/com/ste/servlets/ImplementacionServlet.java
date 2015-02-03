@@ -68,6 +68,9 @@ public class ImplementacionServlet extends HttpServlet{
 				if (accion.equals("delete")){
 					deleteImplementacion(req,resp,usermail);
 				}
+				if (accion.equals("restore")){
+					restoreImplementacion(req,resp,usermail);
+				}
 			
 		} catch (Exception e) {
 
@@ -475,6 +478,65 @@ public class ImplementacionServlet extends HttpServlet{
 
 	}	
 	
+	
+	public void deleteImplementacion(HttpServletRequest req, HttpServletResponse resp, String usermail)
+			throws ServletException, IOException {
+		
+		JSONObject json = new JSONObject();
+		
+		String id=req.getParameter("id");
+		ImplementacionDao impDao = ImplementacionDao.getInstance();
+		Implementacion imp = impDao.getImplementacionById(Long.parseLong(id));
+		imp.setErased(true);
+		impDao.createImplementacionRaw(imp);
+		
+		Utils.writeLog(usermail, "Borra", "Implementacion", Long.toString(imp.getServicio_id()));
+		try {
+			json.append("success", "true");
+			resp.setCharacterEncoding("UTF-8");
+	        resp.setContentType("application/json");       
+			resp.getWriter().println(json);
+
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	public void restoreImplementacion(HttpServletRequest req, HttpServletResponse resp, String usermail)
+			throws ServletException, IOException {
+		
+		JSONObject json = new JSONObject();
+		
+		String id=req.getParameter("id");
+		ImplementacionDao impDao = ImplementacionDao.getInstance();
+		Implementacion imp = impDao.getImplementacionById(Long.parseLong(id));
+		imp.setErased(false);
+		impDao.createImplementacionRaw(imp);
+		
+		Utils.writeLog(usermail, "Borra", "Implementacion", Long.toString(imp.getServicio_id()));
+		try {
+			json.append("success", "true");
+			resp.setCharacterEncoding("UTF-8");
+	        resp.setContentType("application/json");       
+			resp.getWriter().println(json);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	/*
+	
 	public void deleteImplementacion(HttpServletRequest req, HttpServletResponse resp, String usermail)
 			throws ServletException, IOException {
 		
@@ -501,5 +563,7 @@ public class ImplementacionServlet extends HttpServlet{
 			e.printStackTrace();
 		}
 
-	}
+	}*/
+	
+	
 }

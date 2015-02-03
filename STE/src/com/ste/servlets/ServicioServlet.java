@@ -191,6 +191,7 @@ public class ServicioServlet  extends HttpServlet{
 		        	  		client.setTipo_cliente(arrCliente[0]);
 		        	  		clientDao.createCliente(client);
 		        	  		break;
+
 		        	  	  
 		        	  }
 	        	  }

@@ -265,7 +265,35 @@ var getIsoDate = function(dateString) {
 
 
 $(function(){
-
+	$('#implementaciones').on('click','#deleteImplementacion', function (e){
+		
+		 var formURL = "/implementacionServlet?";
+		 var postData="accion=delete&id="+ id;
+		 $.ajax({
+			url : formURL,
+			type: "POST",
+			data : postData,
+			success:function(data, textStatus, jqXHR) 
+			{
+				location.reload();        	
+			}
+		});
+	});
+	
+	$('#implementaciones').on('click','#restoreImplementacion', function (e){
+		
+		 var formURL = "/implementacionServlet?";
+		 var postData="accion=restore&id="+ id;
+		 $.ajax({
+			url : formURL,
+			type: "POST",
+			data : postData,
+			success:function(data, textStatus, jqXHR) 
+			{
+				location.reload();        	
+			}
+		});
+	});
 
 	
 	$('.go_pag2').click(function(e){

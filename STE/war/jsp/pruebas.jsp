@@ -279,7 +279,7 @@
 						</div>
 					--%>
 					<div class="form-field-fecha-prueba">
-						<span class="lbl">Fecha estado desde:</span>
+						<span class="lbl">Fecha inicio desde:</span>
 							<input type="text" value="" size="16" class="datepicker fromTo" data-target-id='fecha-hasta-filtro' name="fecha-desde-filtro" id="fecha-desde-filtro" >
 						
 					</div>
@@ -310,7 +310,7 @@
 					</div>
 				--%>	
 					<div id="form-field-fecha-prueba-hasta">
-						<span class="lbl">Fecha estado hasta:</span>
+						<span class="lbl">Fecha inicio hasta:</span>
 
 							<input type="text" value="" size="16" class="datepicker" name="fecha-hasta-filtro" id="fecha-hasta-filtro" >
 
@@ -385,8 +385,8 @@
 												<c:forEach items="${clientes}" var="cli">
 													<c:choose>
 														<c:when test="${t.cliente_id==cli.key.id}">				
-															<tr class="valid-result ${s.premium == 'Premium' ? 'premium' : ''}" data-strfechaestado="${s.str_fecha_estado}"
-															 data-nombrecliente="${cli.nombre}" data-estado="${s.estado}" data-entorno="${s.entorno}"  id="row${s.key.id}" style="${s.erased?'background-color:#8B8B8B;':''}${s.entorno=="Producci&oacuten"?'background-color:#C8DBFF;':''}">
+															<tr class="valid-result ${cli.premium == 'Premium' ? 'premium' : ''}" data-strfechaestado="${s.fecha_inicio_str}"
+															 data-nombrecliente="${cli.nombre}" data-estado="${s.estado}" data-entorno="${s.entorno}"  id="row${s.key.id}" style="${s.entorno=="Producci&oacuten"?'background-color:#C8DBFF;':''}${s.erased?'background-color:#8B8B8B;':''}">
 																<td><span>${s.str_fecha_estado}</span></td>
 																<td><span>${cli.nombre}</span></td>
 																<td><span>${s.tipo_servicio}</span></td>

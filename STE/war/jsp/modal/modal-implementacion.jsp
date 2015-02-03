@@ -11,11 +11,11 @@
 			<div class="modalImplementacion" style="text-align: left;'">
 				<h2>Editar implementaci&oacuten ${implementacion.id_implementacion}</h2>
 				<hr />
-			</div>
+			</div><!--
 			<div class="" style="text-align:right;'">
 				<button type="button" class="go_pag1_modal">P&aacutegina 1</button>
 				<button type="button" class="go_pag2_modal">P&aacutegina 2</button>
-			</div>
+			</div>-->
 			<div class="form-holder" style="margin-top:4%;">
 		<form id="edit-implementacion-form" name="edit-soporte-form" class="edit-form" action="/implementacionServlet"
 			method="POST" novalidate="novalidate">
@@ -108,12 +108,12 @@
 					</div>
 					
 					<div class="form-field">
-					<span style="width:44%;" class="lbl etiqueta">Normalizador<span class="required-asterisk">*</span>:</span>
-							<label style="width:15%;" class="lbl radio ui-marmots-label-radio marmots-label-left ${implementacion.normalizador ? 'on' : ''} " for="radio_Si_Modal">
+					<span style="width:44%;" class="lbl">Normalizador<span class="required-asterisk">*</span>:</span>
+							<label style="width:15%;" class="lbl ui-marmots-label-radio marmots-label-left ${implementacion.normalizador ? 'on' : ''} " for="radio_Si_Modal">
 								<input name="normalizador_modal" id="radio_Si_Modal" type="radio" value="Si" ${implementacion.normalizador ? 'checked' : ''} />Si
 							</label>
 
-							<label style="width:15%;" class="lbl radio ui-marmots-label-radio marmots-label-left ${implementacion.normalizador ? '' : 'on'} " for="radio_No_Modal">
+							<label style="width:15%;" class="lbl ui-marmots-label-radio marmots-label-left ${implementacion.normalizador ? '' : 'on'} " for="radio_No_Modal">
 								<input name="normalizador_modal" id="radio_No_Modal" type="radio" value="No" ${implementacion.normalizador ? '' : 'checked'} />No
 							</label>
 					</div>
@@ -128,8 +128,8 @@
 					</div>
 
 					<div class="form-field">
-					<span class="lbl etiqueta" style="width:44%;">Firma contrato<span class="required-asterisk">*</span>:</span>
-							<label style="width:15%;" class="lbl radio ui-marmots-label-radio marmots-label-left ${implementacion.firma_contrato ? 'on' : ''}" for="radio_Si_Firma_Modal">
+					<span class="lbl" style="width:44%;">Firma contrato<span class="required-asterisk">*</span>:</span>
+							<label style="width:15%;" class="lbl ui-marmots-label-radio marmots-label-left ${implementacion.firma_contrato ? 'on' : ''}" for="radio_Si_Firma_Modal">
 								<input name="firma_modal" ${implementacion.firma_contrato ? 'checked' : ''} id="radio_Si_Firma_Modal"  type="radio" value="Si"  />Si
 							</label>
 
@@ -154,17 +154,13 @@
 					</div>
 					
 
-					<div class="form-field">
-					<span class="lbl">Referencia externa:</span>
-					<input type="text" name="ref_ext" id="ref_ext_modal" maxlength="18" value="${implementacion.referencia_externa}">
-					</div>
+
 
 					
 					
 
 					
-				</div>
-				<div class="page2_imp hidden" id='page2_imp_modal'>
+
 
 					
 					<div class="form-field">
@@ -187,17 +183,18 @@
 					<input type="text" readonly="" value="${implementacion.str_fech_subida}" size="16" class="datepicker" name="fecha_subid" id="fecha_subid_modal">
 					</div>
 					
-<div style="	 						margin-top:2%; 						width:80%; 						padding-right:1%; 						margin-bottom: 4%; 		    			margin-top: 2%; 					" class="form-field">
+					<div style="margin-top:2%;width:99%;margin-bottom: 4%;" class="form-field">
 					<span class="lbl">Detalle:</span>
-					<textarea placeholder="Introduzca texto ..." cols="3" rows="3" maxlength="500" name="detalle" type="text" style="width:81%!important;"></textarea>
+					<textarea placeholder="Introduzca texto ..." cols="3" rows="3" maxlength="500" name="detalle" type="text" style="width:79.5%!important;"></textarea>
 					</div>
 					
-					<h3 style="color:#D1DCFF;">Entorno Integrado</h3>
+					<h3 style="color:#D1DCFF;   margin-top: 5%;
+    text-align: center;">Entorno Integrado</h3>
 					<hr style="border: 3px solid #D1DCFF; border-radius: 300px/10px; height: 0px;width: 80%;margin-left:10%;"/>
-						<div class="form-field">
-						<span class="lbl">Referencia externa:</span>
-						<input type="text" style="background-color: #F3F3F3;" id="input-servicio-referencia_modal" value="${implementacion.referencia_externa}" readonly>
-						</div>
+					<div class="form-field">
+					<span class="lbl">Referencia externa:</span>
+					<input type="text" name="ref_ext" id="ref_ext_modal" maxlength="18" value="${implementacion.referencia_externa}">
+					</div>
 						<div class="form-field">
 						<span class="lbl">Asunto:</span>
 						<input type="text" name="asunto" maxlength="30" value="${implementacion.asunto_ref_ext}">

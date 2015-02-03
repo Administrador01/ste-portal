@@ -1,5 +1,6 @@
 package com.ste.actions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,8 +44,9 @@ public class ImplementacionAction extends Action{
 		req.setAttribute("servicios", servicios);
 		
 		ImplementacionDao impDao = ImplementacionDao.getInstance();
-		List<Implementacion> implementaciones = impDao.getAllImplementaciones();
-		
+		List<Implementacion> implementaciones = new ArrayList<Implementacion>();
+		implementaciones.addAll(impDao.getAllImplementaciones());
+		implementaciones.addAll(impDao.getAllDelImplementaciones());
 		req.setAttribute("implementaciones",implementaciones);
 
 		PaisDao paisDao = PaisDao.getInstance();

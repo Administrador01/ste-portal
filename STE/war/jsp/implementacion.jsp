@@ -291,7 +291,7 @@
 
 						<c:otherwise>
 							<c:forEach items="${implementaciones}" var="s">
-								<tr class="valid-result" id="row${s.key.id}">
+								<tr class="valid-result" id="row${s.key.id}" style="${s.erased?'background-color:#8B8B8B;':''}">
 									<td><span>${s.str_fecha_alta}</span></td>
 									<td><span>${s.pais}</span></td>
 									<td><span>${s.producto}</span></td>
@@ -320,8 +320,17 @@
 									
 									
 									;">${s.estado}</span></td>
-									<td><img class="vs" src="../img/vs.png"><a class="lapiz" name="${s.key.id}" href="../implementacionModal.do?id=${s.key.id}"	id="lapiz${s.key.id}" data-toggle="modal" data-target="#edit-soporte"></a>
-									<!--<a class="papelera" name="${s.key.id}" data-toggle="modal"	data-target="#confirm-delete" id="papelera${s.key.id}"></a>--></td>
+									
+									<td>
+									<c:choose>
+										<c:when test="${s.erased}">
+											<a class="subida" name="${s.key.id}" data-toggle="modal"	data-target="#confirm-restore" id="subida${s.key.id}"></a>
+										</c:when>
+										<c:otherwise>
+											<img class="vs" src="../img/vs.png"><a class="lapiz" name="${s.key.id}" href="../implementacionModal.do?id=${s.key.id}"	id="lapiz${s.key.id}" data-toggle="modal" data-target="#edit-soporte"></a>
+											<a class="papelera" name="${s.key.id}" data-toggle="modal"	data-target="#confirm-delete" id="papelera${s.key.id}"></a></td>
+										</c:otherwise>
+									</c:choose>
 								</tr>
 							</c:forEach>
 						</c:otherwise>
@@ -333,8 +342,7 @@
 			<ul class="pagination" id="myPager"></ul>
 			<span class="pagesummary"></span>
 		</div>
-	</div>
-</div>
+
 
 
 	<div class="modal fade" id="edit-soporte" tabindex="-1" role="dialog"
@@ -360,6 +368,25 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="pink-btn" id="deleteImplementacion">Eliminar</button>
+					<button type="button" class="" data-dismiss="modal">Cancelar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="confirm-restore" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="">
+					<h2>Restaurar implementaci&oacuten</h2>
+					<hr />
+				</div>
+				<div class="">
+					<p>&iquest;Est&aacute; seguro que desea restaurar la implementaci&oacuten?
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="pink-btn" id="restoreImplementacion">Restaurar</button>
 					<button type="button" class="" data-dismiss="modal">Cancelar</button>
 				</div>
 			</div>
