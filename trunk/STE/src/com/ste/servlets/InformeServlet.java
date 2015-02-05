@@ -431,9 +431,9 @@ public class InformeServlet extends HttpServlet{
 		rangeEntornos.setRefersToFormula(sheetName+"!$G$"+(headClientes)+":$H$"+(headClientes));
 		rangeEntorno.setRefersToFormula(sheetName+"!$G$"+(head+1)+":$H$"+(head+1));
 		Name rangePruebPorFich = workbook.getName("PruebasPorFichero");
-		rangePruebPorFich.setRefersToFormula(sheetName+"!$G$"+50+":$G$"+ficheros.size()+48);
+		rangePruebPorFich.setRefersToFormula(sheetName+"!$G$"+50+":$G$"+(ficheros.size()+49));
 		Name rangeTipoFich = workbook.getName("TipoFichero");
-		rangeTipoFich.setRefersToFormula(sheetName+"!$F$"+50+":$F$"+ficheros.size()+48);
+		rangeTipoFich.setRefersToFormula(sheetName+"!$F$"+50+":$F$"+(ficheros.size()+49));
 
 		//rangeResultados.setRefersToFormula("");
 		

@@ -266,19 +266,30 @@ public class PruebaServlet extends HttpServlet{
 			s.setColumnView(8, 20);
 			s.setColumnView(9, 40);
 			s.setColumnView(10, 40);
+			s.setColumnView(11, 20);
+			s.setColumnView(12, 20);
+			s.setColumnView(13, 20);
+			s.setColumnView(14, 20);
+			s.setColumnView(15, 40);
 		
 
 			s.addCell(new Label(0, 0, "IDENTIFICADOR", cellFormat));
 			s.addCell(new Label(1, 0, "CLIENTE", cellFormat));
-			s.addCell(new Label(2, 0, "FECHA ALTA", cellFormat));
-			s.addCell(new Label(3, 0, "TIPO CLIENTE", cellFormat));
-			s.addCell(new Label(4, 0, "PRODUCTO/CANAL", cellFormat));
-			s.addCell(new Label(5, 0, "REFERENCIA", cellFormat));
-			s.addCell(new Label(6, 0, "ENTORNO", cellFormat));
-			s.addCell(new Label(7, 0, "ESTADO", cellFormat));
-			s.addCell(new Label(8, 0, "TIPO SERVICIO", cellFormat));
-			s.addCell(new Label(9, 0, "DESCRIPCIÓN", cellFormat));
-			s.addCell(new Label(10, 0, "SOLUCIÓN", cellFormat));
+			s.addCell(new Label(2, 0, "FECHA INICIO", cellFormat));
+			s.addCell(new Label(3, 0, "FECHA ESTADO", cellFormat));
+			s.addCell(new Label(4, 0, "TIPO CLIENTE", cellFormat));
+			s.addCell(new Label(5, 0, "PRODUCTO/CANAL", cellFormat));
+			s.addCell(new Label(6, 0, "REFERENCIA", cellFormat));
+			s.addCell(new Label(7, 0, "ENTORNO", cellFormat));
+			s.addCell(new Label(8, 0, "ESTADO", cellFormat));
+			s.addCell(new Label(9, 0, "IMPLEMENTACIÓN", cellFormat));
+			s.addCell(new Label(10, 0, "TIPO SERVICIO", cellFormat));
+			s.addCell(new Label(11, 0, "RESULTADO", cellFormat));
+			s.addCell(new Label(12, 0, "PETICIONARIO", cellFormat));
+			s.addCell(new Label(13, 0, "FICHERO", cellFormat));
+			s.addCell(new Label(14, 0, "DESCRIPCIÓN", cellFormat));
+
+			
 			
 			int aux = 1;
 
@@ -286,16 +297,20 @@ public class PruebaServlet extends HttpServlet{
 				
 				
 				s.addCell(new Label(0, aux, pru.getId_prueba()));
-				s.addCell(new Label(1, aux, pDao.getClientNameByTestId(pru.getKey().getId())));
-				s.addCell(new Label(2, aux, pru.getStr_fecha_estado()));
-				s.addCell(new Label(3, aux, pru.getPremium()));
-				s.addCell(new Label(4, aux, pru.getProducto()));
-				s.addCell(new Label(5, aux, pru.getReferencia()));
-				s.addCell(new Label(6, aux, pru.getEntorno()));
-				s.addCell(new Label(7, aux, pru.getEstado()));
-				s.addCell(new Label(8, aux, pru.getTipo_servicio()));
-				s.addCell(new Label(9, aux, pru.getDetalles()));
-				s.addCell(new Label(10, aux, pru.getSolucion()));
+				s.addCell(new Label(1, aux, pDao.getClientByTestId(pru.getKey().getId()).getNombre()));
+				s.addCell(new Label(2, aux, pru.getFecha_inicio_str()));
+				s.addCell(new Label(3, aux, pru.getStr_fecha_estado()));
+				s.addCell(new Label(4, aux, pDao.getClientByTestId(pru.getKey().getId()).getPremium()));
+				s.addCell(new Label(5, aux, pru.getProducto()));
+				s.addCell(new Label(6, aux, pru.getReferencia()));
+				s.addCell(new Label(7, aux, pru.getEntorno()));
+				s.addCell(new Label(8, aux, pru.getEstado()));
+				s.addCell(new Label(9, aux, pDao.getImplementacionByTestId(pru.getKey().getId()).getId_implementacion()));
+				s.addCell(new Label(10, aux, pru.getTipo_servicio()));
+				s.addCell(new Label(11, aux, pru.getResultado()));
+				s.addCell(new Label(12, aux, pru.getPeticionario()));
+				s.addCell(new Label(13, aux, pru.getFichero()));
+				s.addCell(new Label(14, aux, pru.getDetalles()));
 
 
 

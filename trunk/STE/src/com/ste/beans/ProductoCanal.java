@@ -16,6 +16,15 @@ public class ProductoCanal {
 	@Persistent
 	private String name;
 	
+	@Persistent
+	private boolean pruebas;
+	
+	@Persistent
+	private boolean soportes;
+	
+	@Persistent
+	private boolean implementaciones;
+	
 	public Key getKey() {
 		return key;
 	}
@@ -30,5 +39,29 @@ public class ProductoCanal {
 
 	public void setNme(String name) {
 		this.name = name;
+	}
+	
+	public boolean getSoportes() {
+		return soportes;
+	}
+
+	public void setSoportes(boolean visibility) {
+		this.soportes = visibility;
+	}
+	
+	public boolean getPruebas() {
+		return pruebas;
+	}
+
+	public void setPruebas(boolean visibility) {
+		this.pruebas = visibility;
+	}
+	
+	public boolean getImplementaciones() {
+		return implementaciones;
+	}
+
+	public void setImplementaciones(boolean visibility) {
+		this.implementaciones = visibility;
 	}
 }

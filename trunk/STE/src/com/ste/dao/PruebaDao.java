@@ -12,6 +12,8 @@ import javax.jdo.Query;
 
 
 
+
+import com.ste.beans.Cliente;
 import com.ste.beans.Implementacion;
 import com.ste.beans.Prueba;
 import com.ste.counters.Counter;
@@ -169,16 +171,27 @@ public class PruebaDao {
 	}
 	
 	
-	public String getClientNameByTestId(long l) {
+
+	
+	public Cliente getClientByTestId(long l) {
 		
 		PruebaDao pruDao = PruebaDao.getInstance();
 		Prueba prueba = pruDao.getPruebabyId(l);
 		ImplementacionDao impDao = ImplementacionDao.getInstance();
 		
 
-		return impDao.getNombreClienteByImpId(Long.parseLong(prueba.getImp_id()));
+		return impDao.getClienteByImpId(Long.parseLong(prueba.getImp_id()));
 	}
 	
+	public Implementacion getImplementacionByTestId(long l) {
+		
+		PruebaDao pruDao = PruebaDao.getInstance();
+		Prueba prueba = pruDao.getPruebabyId(l);
+		ImplementacionDao impDao = ImplementacionDao.getInstance();
+		
+
+		return impDao.getImplementacionById(Long.parseLong(prueba.getImp_id()));
+	}	
 
 	
 	@SuppressWarnings("unchecked")

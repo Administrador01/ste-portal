@@ -48,7 +48,7 @@ public class PruebaModalAction extends Action{
 			req.setAttribute("implementaciones", implementaciones);
 			
 			ProductoCanalDao prodDao = ProductoCanalDao.getInstance();
-			List<ProductoCanal> productos = prodDao.getAllProductos();
+			List<ProductoCanal> productos = prodDao.getAllProductosFor("pruebas");
 			
 			req.setAttribute("productos", productos);
 			

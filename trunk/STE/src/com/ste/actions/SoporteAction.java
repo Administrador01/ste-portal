@@ -53,7 +53,7 @@ public class SoporteAction extends Action{
 		req.setAttribute("soportes", soportes);
 		
 		ProductoCanalDao prodDao = ProductoCanalDao.getInstance();
-		List<ProductoCanal> productos = prodDao.getAllProductos();
+		List<ProductoCanal> productos = prodDao.getAllProductosFor("soportes");
 		
 		req.setAttribute("productos", productos);
 		

@@ -116,9 +116,10 @@ public class SoporteServlet extends HttpServlet{
 			s.setColumnView(7, 20);
 			s.setColumnView(8, 20);
 			s.setColumnView(9, 20);
-			s.setColumnView(10, 40);
-			s.setColumnView(11, 40);
-
+			s.setColumnView(10, 20);
+			s.setColumnView(11, 20);
+			s.setColumnView(12, 40);
+			s.setColumnView(13, 40);
 
 			s.setRowView(0, 900);
 
@@ -132,8 +133,10 @@ public class SoporteServlet extends HttpServlet{
 			s.addCell(new Label(7, 0, "ESTADO", cellFormat));
 			s.addCell(new Label(8, 0, "SEGMENTO", cellFormat));
 			s.addCell(new Label(9, 0, "PRODUCTO/CANAL", cellFormat));
-			s.addCell(new Label(10, 0, "DESCRIPCIÓN", cellFormat));
-			s.addCell(new Label(11, 0, "SOLUCIÓN", cellFormat));
+			s.addCell(new Label(10, 0, "PAÍS", cellFormat));
+			s.addCell(new Label(11, 0, "PETICIONARIO", cellFormat));
+			s.addCell(new Label(12, 0, "DESCRIPCIÓN", cellFormat));
+			s.addCell(new Label(13, 0, "SOLUCIÓN", cellFormat));
 			
 			int aux = 1;
 
@@ -149,8 +152,10 @@ public class SoporteServlet extends HttpServlet{
 				s.addCell(new Label(7, aux, sop.getEstado()));
 				s.addCell(new Label(8, aux, sop.getTipo_cliente()));
 				s.addCell(new Label(9, aux, sop.getProducto_canal()));
-				s.addCell(new Label(10, aux, sop.getDetalles()));
-				s.addCell(new Label(11, aux, sop.getSolucion()));
+				s.addCell(new Label(10, aux, sop.getPais()));
+				s.addCell(new Label(11, aux, sop.getPeticionario()));
+				s.addCell(new Label(12, aux, sop.getDetalles()));
+				s.addCell(new Label(13, aux, sop.getSolucion()));
 				
 				
 				

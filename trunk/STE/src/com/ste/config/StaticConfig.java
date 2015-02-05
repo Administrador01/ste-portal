@@ -14,6 +14,9 @@ public class StaticConfig {
 			new ArrayList<Config>(Arrays.asList(
 					new Config("Promoción local", "Promoción Local"),
 					new Config("Global Customer Service", "Global Customer Service"),
-					new Config("Local Customer Service", "Local Customer Service")
+					new Config("Local Customer Service", "Local Customer Service"),
+					new Config("Contact Center STE", "Contact Center STE"),
+					new Config("Producto Local", "Producto Local"),
+					new Config("Otros", "Otros")
 					));
 }
