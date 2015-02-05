@@ -59,7 +59,7 @@ public class ImplementacionModalAction extends Action{
 		req.setAttribute("paises", paises);
 		
 		ProductoCanalDao prodDao = ProductoCanalDao.getInstance();
-		List<ProductoCanal> productos = prodDao.getAllProductos();
+		List<ProductoCanal> productos = prodDao.getAllProductosFor("implementaciones");
 		
 		req.setAttribute("productos", productos);
 		

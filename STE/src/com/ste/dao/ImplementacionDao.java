@@ -74,6 +74,16 @@ public String getNombreClienteByImpId(long l) {
 	Cliente cliente = cliDao.getClientebyId(implementacion.getCliente_id());
 	return cliente.getNombre();
 }
+
+public Cliente getClienteByImpId(long l) {
+	
+	ImplementacionDao impDao = ImplementacionDao.getInstance();
+	Implementacion implementacion = impDao.getImplementacionById(l);
+	
+	ClienteDao cliDao = ClienteDao.getInstance();
+	Cliente cliente = cliDao.getClientebyId(implementacion.getCliente_id());
+	return cliente;
+}
 @SuppressWarnings("unchecked")
 public List<Implementacion> getImplementacionByClientId(long l) {
 	

@@ -52,7 +52,7 @@ public class PruebasAction extends Action{
 		req.setAttribute("pruebas", pruebas);
 		
 		ProductoCanalDao prodDao = ProductoCanalDao.getInstance();
-		List<ProductoCanal> productos = prodDao.getAllProductos();
+		List<ProductoCanal> productos = prodDao.getAllProductosFor("pruebas");
 		
 		req.setAttribute("productos", productos);
 		

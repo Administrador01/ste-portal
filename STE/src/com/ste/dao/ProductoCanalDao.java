@@ -49,6 +49,23 @@ public class ProductoCanalDao {
 		return ProductoCanales;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<ProductoCanal> getAllProductosFor(String Visibilidad) {
+
+		List<ProductoCanal> ProductoCanales;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		
+		Query q = pm.newQuery("select from " + ProductoCanal.class.getName() +" where "+Visibilidad+" == true");
+		q.setOrdering("name asc");
+		ProductoCanales = (List<ProductoCanal>) q.execute();
+		
+		
+		pm.close();
+
+		return ProductoCanales;
+	}
+	
 	public void deleteAll(){
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		ProductoCanalDao sDao = ProductoCanalDao.getInstance();

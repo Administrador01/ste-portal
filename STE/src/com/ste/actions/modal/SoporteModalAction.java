@@ -44,7 +44,7 @@ public class SoporteModalAction extends Action {
 			req.setAttribute("clientes", clientes);
 			
 			ProductoCanalDao prodDao = ProductoCanalDao.getInstance();
-			List<ProductoCanal> productos = prodDao.getAllProductos();
+			List<ProductoCanal> productos = prodDao.getAllProductosFor("soportes");
 			
 			req.setAttribute("productos", productos);
 			

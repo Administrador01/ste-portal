@@ -151,7 +151,7 @@
 				</div>
 				<div class="form-field-divider down">
 					<div class="form-field detalles">
-						<span class="lbl">Descripci&oacuten:</span>
+						<span class="">Descripci&oacuten:</span>
 						<div class="input">
 							<textarea name="detalles" maxlength="500" rows="1" cols="1">${soporte.detalles}</textarea>
 						</div>
@@ -159,7 +159,7 @@
 					
 					
 					<div class="form-field detalles">
-						<span class="lbl">Soluci&oacuten:</span>
+						<span class="">Soluci&oacuten:</span>
 						<div class="input">
 							<textarea name="solucion" maxlength="500" rows="1" cols="1">${soporte.solucion}</textarea>
 						</div>
