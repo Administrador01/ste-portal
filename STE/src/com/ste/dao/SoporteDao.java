@@ -1,10 +1,13 @@
 package com.ste.dao;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
+
 
 import com.ste.beans.Soporte;
 import com.ste.counters.Counter;
@@ -200,4 +203,121 @@ public class SoporteDao {
 
 		return existe;
 	}
+	
+	
+	
+	
+	@SuppressWarnings("unchecked")
+	public List<Soporte> getSoportesSinceDate (Date fechaDesde) {
+
+		List<Soporte> soportes;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		
+		
+		String query = "select from " + Soporte.class.getName();
+		Query q = pm.newQuery(query);
+		
+		q.setFilter("fecha_inicio >= fechaDesde"+" && erased==false");
+		q.declareParameters("java.util.Date fechaDesde");
+	
+		soportes = (List<Soporte>) q.execute(fechaDesde);
+		
+		pm.close();
+
+		return soportes;
+	}
+	@SuppressWarnings("unchecked")
+	public List<Soporte> getSoportesUntilDate (Date fechaHasta) {
+
+		List<Soporte> soportes;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		
+		
+		String query = "select from " + Soporte.class.getName();
+		Query q = pm.newQuery(query);
+		
+		q.setFilter("fecha_inicio <= fechaHasta"+" && erased==false");
+		q.declareParameters("java.util.Date fechaHasta");
+	
+		soportes = (List<Soporte>) q.execute(fechaHasta);
+		
+		pm.close();
+
+		return soportes;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Soporte> getSoportesBetweenDates (Date fechaDesde,Date fechaHasta) {
+
+		List<Soporte> soportes;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		
+		
+		String query = "select from " + Soporte.class.getName();
+		Query q = pm.newQuery(query);
+		
+		q.setFilter("fecha_inicio >= fechaDesde && fecha_inicio <= fechaHasta"+" && erased==false");
+		q.declareParameters("java.util.Date fechaDesde , java.util.Date fechaHasta");
+		
+		soportes = (List<Soporte>) q.execute(fechaDesde,fechaHasta);
+		
+		pm.close();
+
+		return soportes;
+	}
+	
+	
+	public List<Soporte> getSoportesSinceDateByClientId (String clientID,Date fechaDesde) {
+
+		List<Soporte> soportes = new ArrayList<Soporte>();
+		
+		SoporteDao sopDao = SoporteDao.getInstance();
+		
+		List<Soporte> soportesByImp = sopDao.getAllSoportesByClientId(clientID);
+		List<Soporte> soportesByDate = sopDao.getSoportesSinceDate(fechaDesde);
+		for(Soporte soporteByImp:soportesByImp){
+			for(Soporte soporteByDate:soportesByDate){
+				if(soporteByDate.getKey().getId()==soporteByImp.getKey().getId())soportes.add(soporteByDate);
+			}
+		}
+
+		return soportes;
+	}
+	
+	public List<Soporte> getSoportesUntilDateByClientId (String clientID,Date fechaHasta) {
+
+		List<Soporte> soportes = new ArrayList<Soporte>();
+		
+		SoporteDao sopDao = SoporteDao.getInstance();
+		
+		List<Soporte> soportesByImp = sopDao.getAllSoportesByClientId(clientID);
+		List<Soporte> soportesByDate = sopDao.getSoportesUntilDate(fechaHasta);
+		for(Soporte soporteByImp:soportesByImp){
+			for(Soporte soporteByDate:soportesByDate){
+				if(soporteByDate.getKey().getId()==soporteByImp.getKey().getId())soportes.add(soporteByDate);
+			}
+		}
+
+		return soportes;
+	}
+	
+	public List<Soporte> getSoportesBetweenDatesByClientId (String clientID,Date fechaDesde,Date fechaHasta) {
+
+		List<Soporte> soportes = new ArrayList<Soporte>();
+		
+		SoporteDao sopDao = SoporteDao.getInstance();
+		
+		List<Soporte> soportesByImp = sopDao.getAllSoportesByClientId(clientID);
+		List<Soporte> soportesByDate = sopDao.getSoportesBetweenDates(fechaDesde,fechaHasta);
+		for(Soporte soporteByImp:soportesByImp){
+			for(Soporte soporteByDate:soportesByDate){
+				if(soporteByDate.getKey().getId()==soporteByImp.getKey().getId())soportes.add(soporteByDate);
+			}
+		}
+
+		return soportes;
+	}	
 }

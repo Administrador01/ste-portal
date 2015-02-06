@@ -36,9 +36,11 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.ste.beans.Cliente;
 import com.ste.beans.Estado;
 import com.ste.beans.Prueba;
+import com.ste.beans.Soporte;
 import com.ste.dao.ClienteDao;
 import com.ste.dao.EstadoDao;
 import com.ste.dao.PruebaDao;
+import com.ste.dao.SoporteDao;
 import com.ste.utils.Utils;
 import com.aspose.cells.Workbook.*;
 import com.aspose.cells.SaveFormat;
@@ -69,7 +71,7 @@ public class InformeServlet extends HttpServlet{
 			
 			if(accion.equals("def"))informepordefecto(req,resp);
 			if(accion.equals("pruebas"))informePruebas(req,resp);
-			if(accion.equals("pruebasServ"))informePruebasServ(req,resp);
+			if(accion.equals("soporte"))informeSoportes(req,resp);
 			if(accion.equals("cliente"))informeCliente(req,resp);
 			
 			
@@ -465,28 +467,16 @@ public class InformeServlet extends HttpServlet{
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	private void informePruebasServ(HttpServletRequest req, HttpServletResponse resp)throws Exception {
-		PruebaDao pruDao =PruebaDao.getInstance();
-		EstadoDao est = EstadoDao.getInstance();
-		
-		List<Prueba> pruebas = pruDao.getAllPruebas();
-		List<Estado> estados = est.getAllEstados();
-		
+	private void informeSoportes(HttpServletRequest req, HttpServletResponse resp)throws Exception {
 		String fechaHasta = req.getParameter("fechaHasta");
 		String fechaDesde = req.getParameter("fechaDesde");
+		
+		SoporteDao sopDao = SoporteDao.getInstance();
+		EstadoDao est = EstadoDao.getInstance();
+		
+		ClienteDao cliDao = ClienteDao.getInstance();
+		List<Estado> estados = est.getAllEstados();
+		List<Soporte> soportes = sopDao.getAllSoportes();
 		
 		int tipoFecha = 1;
 		
@@ -494,50 +484,282 @@ public class InformeServlet extends HttpServlet{
 			if(!fechaDesde.equals("")&&fechaDesde!=null){
 				Date fech = Utils.dateConverter(fechaDesde);
 				Date haHasta = Utils.dateConverter(fechaHasta);
-				//pruebas = pruDao.getPruebasBetweenDates(fech,haHasta);
+				soportes = sopDao.getSoportesBetweenDates(fech,haHasta);
+
 				tipoFecha=4;
 			}else{
 				Date dateHasta = Utils.dateConverter(fechaHasta);
-				//pruebas = pruDao.getPruebasUntilDate(dateHasta);
+				soportes = sopDao.getSoportesUntilDate(dateHasta);
 				tipoFecha=3;
 			}
 		}else{
 			if(!fechaDesde.equals("")&&fechaDesde!=null){
 				Date dateDesde = Utils.dateConverter(fechaDesde);
-				//pruebas = pruDao.getPruebasSinceDate(dateDesde);
+				soportes = sopDao.getSoportesSinceDate(dateDesde);
 				tipoFecha=2;
 			}
 		}
 		
-		resp.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-		resp.setHeader("Content-Disposition","attachment; filename=InformePruebasPorServicioSTE.xlsx");
+		int totalSoportes = soportes.size();
 		
-		String link= "/datadocs/templatePruebasServ.xlsx";
+		
+		resp.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+		resp.setHeader("Content-Disposition","attachment; filename=InformePruebasSTE.xlsx");
+		String link= "/datadocs/templateSoportes.xlsx";
 		InputStream inp = this.getServletContext().getResourceAsStream(link);
 		Workbook workbook = new XSSFWorkbook(OPCPackage.open(inp));
 		
+		
 		//CreationHelper createHelper = workbook.getCreationHelper();
 		Sheet sh=workbook.getSheetAt(0);
+		//String sheetName=sh.getSheetName();	
 		
-		Name rangeServicios = workbook.getName("Servicios");
-		Name rangeValores = workbook.getName("Valores");
+		/*ESTILO DE CELDA CON BORDES*/
+		short width = 1;
+		CellStyle cellStyle = workbook.createCellStyle();
+		cellStyle.setBorderBottom(width);
+		cellStyle.setBorderLeft(width);
+		cellStyle.setBorderRight(width);
+		cellStyle.setBorderTop(width);
+		
+		CellStyle clientCellStyle = workbook.createCellStyle();
+		clientCellStyle.setBorderBottom(width);
+		clientCellStyle.setBorderLeft(width);
+		clientCellStyle.setBorderRight(width);
+		clientCellStyle.setBorderTop((short)0);
+		
+		CellStyle footerCellStyle = workbook.createCellStyle();
+		footerCellStyle.setBorderBottom(width);
+		footerCellStyle.setBorderLeft(width);
+		footerCellStyle.setBorderRight(width);
+		footerCellStyle.setBorderTop((short)2);
+		
+		CellStyle headerCellStyle = workbook.createCellStyle();
+		headerCellStyle.setBorderBottom((short)2);
+		headerCellStyle.setBorderLeft(width);
+		headerCellStyle.setBorderRight(width);
+		headerCellStyle.setBorderTop(width);
+		
+		
+		/*------------------------------TABLA estados--------------------------------------------------------------*/
+		int num = 0;
+		for(Estado estado: estados){
+			//Creacion de las celdas con bordes de manera dinamica
+			sh.createRow(10+num).createCell(10).setCellStyle(clientCellStyle);
+			sh.getRow(10+num).createCell(11).setCellStyle(clientCellStyle);
+			sh.getRow(10+num).createCell(12).setCellStyle(clientCellStyle);
+			sh.getRow(10+num).createCell(13).setCellStyle(clientCellStyle);
+			sh.getRow(10+num).getCell(10).setCellValue(estado.getName());
+			sh.getRow(10+num).getCell(11).setCellValue(0.0);
+			sh.getRow(10+num).getCell(12).setCellValue(0.0);
+			sh.getRow(10+num).getCell(13).setCellValue(0.0);
+			num++;
+		}
+		for(Soporte sop : soportes){
+			for(int i =0;i<estados.size();i++){
+				/*primer if para gestion de cliente = ninguno*/
+				if(sop.getCliente_id()==""){
+					if(sop.getEstado().equals(estados.get(i).getName()))sh.getRow(i+10).getCell(12).setCellValue(sh.getRow(i+10).getCell(12).getNumericCellValue()+1);
+					if(sop.getEstado().equals(estados.get(i).getName()))sh.getRow(i+10).getCell(13).setCellValue(sh.getRow(i+10).getCell(13).getNumericCellValue()+1);
+				}else{
+					if(cliDao.getClientebyId(Long.parseLong(sop.getCliente_id())).getPremium().equals("Premium")){
+						
+						if(sop.getEstado().equals(estados.get(i).getName()))sh.getRow(i+10).getCell(11).setCellValue(sh.getRow(i+10).getCell(11).getNumericCellValue()+1);
+						
+					}else{
+						if(cliDao.getClientebyId(Long.parseLong(sop.getCliente_id())).getPremium().equals("No premium")){
+							
+							if(sop.getEstado().equals(estados.get(i).getName()))sh.getRow(i+10).getCell(12).setCellValue(sh.getRow(i+10).getCell(12).getNumericCellValue()+1);
+							
+						}
+					}
+					if(sop.getEstado().equals(estados.get(i).getName()))sh.getRow(i+10).getCell(13).setCellValue(sh.getRow(i+10).getCell(13).getNumericCellValue()+1);
+				}
+			}
+		}
+		
+		sh.createRow(estados.size()+10).createCell(10).setCellStyle(footerCellStyle);
+		sh.getRow(estados.size()+10).createCell(11).setCellStyle(footerCellStyle);
+		sh.getRow(estados.size()+10).createCell(12).setCellStyle(footerCellStyle);
+		sh.getRow(estados.size()+10).createCell(13).setCellStyle(footerCellStyle);
+		sh.getRow(estados.size()+10).getCell(10).setCellValue("Total");
+		sh.getRow(estados.size()+10).getCell(11).setCellFormula("SUM(L"+(10+1)+":L"+(10+estados.size())+")");
+		sh.getRow(estados.size()+10).getCell(12).setCellFormula("SUM(M"+(10+1)+":M"+(10+estados.size())+")");
+		sh.getRow(estados.size()+10).getCell(13).setCellFormula("SUM(N"+(10+1)+":N"+(10+estados.size())+")");
+		
 		
 		String sheetName = workbook.getSheetName(0);
 		
-		String reference = sheetName + "!$B$"+3 + ":$B$"+5;
+		Name rangeTotal = workbook.getName("totalSopEstado");
+		Name rangeEstados = workbook.getName("estadosSop");
+		rangeTotal.setRefersToFormula(sheetName+"!$N$"+(10+1)+":$N$"+(estados.size()+(10)));
+		rangeEstados.setRefersToFormula(sheetName+"!$K$"+(10+1)+":$K$"+(estados.size()+(10)));
 		
-		rangeServicios.setRefersToFormula(reference);
 		
-		reference = sheetName + "!$C$"+3 + ":$C$"+5;
+		/*------------------------------fin tabla estados--------------------------------------------------------------*/
 		
-		rangeValores.setRefersToFormula(reference);
+		int head= estados.size()+10+14; 										//A partir de ahora lo leeremos para las filas como si se tratase de un fichero ya que se actura sobre filas variables
+		//numero ficheros + desplazamento a headFicheros + espacio entre tablas
 		
-		sh.createRow(4).createCell(1).setCellValue(789987);
-		sh.getRow(4).createCell(2).setCellValue("roberto");
+		sh.createRow(head).createCell(11).setCellStyle(headerCellStyle);
+		sh.getRow(head).getCell(11).setCellValue("INCIDENCIA");
+		sh.getRow(head).createCell(12).setCellStyle(headerCellStyle);
+		sh.getRow(head).getCell(12).setCellValue("CONSULTA");
+		sh.getRow(head).createCell(13).setCellStyle(headerCellStyle);
+		sh.getRow(head).getCell(13).setCellValue("TOTAL");
+		sh.getRow(head).createCell(14).setCellStyle(headerCellStyle);
+		sh.getRow(head).getCell(14).setCellValue("TOTAL PORCENTUAL");
+		head++;
+		
+		int headClientes= head;
+		
+		
+		
+		ClienteDao clientDao = ClienteDao.getInstance();
+		List<Cliente> clientes = clientDao.getAllClients();
+		/*------------------------------TABLA CLIENTES--------------------------------------------------------------*/
+		Date dateDesde = null;
+		Date dateHasta = null;
+		
+		int i = 0;
+		for(Cliente cli :clientes){
+			switch (tipoFecha){
+				case 1:
+					soportes = sopDao.getAllSoportesByClientId(Long.toString(cli.getKey().getId()));
+					break;
+				case 2:
+					dateDesde = Utils.dateConverter(fechaDesde);
+					
+					soportes = sopDao.getSoportesSinceDateByClientId(Long.toString(cli.getKey().getId()), dateDesde);
+					break;
+				case 3:
+					dateHasta = Utils.dateConverter(fechaHasta);
+					soportes = sopDao.getSoportesUntilDateByClientId(Long.toString(cli.getKey().getId()), dateHasta);
+					break;
+				case 4:
+					dateDesde = Utils.dateConverter(fechaDesde);
+					dateHasta = Utils.dateConverter(fechaHasta);
+					soportes = sopDao.getSoportesBetweenDatesByClientId(Long.toString(cli.getKey().getId()), dateDesde, dateHasta);
+					break;
+				default:
+					break;
+			}
+			sh.createRow(head).createCell(10).setCellStyle(cellStyle);
+			sh.getRow(head).createCell(11).setCellStyle(clientCellStyle);
+			sh.getRow(head).createCell(12).setCellStyle(clientCellStyle);
+			sh.getRow(head).createCell(13).setCellStyle(clientCellStyle);
+			sh.getRow(head).getCell(10).setCellValue(cli.getId_cliente()+"  -  "+cli.getNombre());
+			sh.getRow(head).getCell(11).setCellValue(0.0);
+			sh.getRow(head).getCell(12).setCellValue(0.0);
+			sh.getRow(head).getCell(13).setCellValue(0.0);
+
+
+			for(Soporte sop : soportes){
+				if(sop.getTipo_soporte().equals("Incidencia"))sh.getRow(head).getCell(11).setCellValue(sh.getRow(head).getCell(11).getNumericCellValue()+1);
+				if(sop.getTipo_soporte().equals("Consulta"))sh.getRow(head).getCell(12).setCellValue(sh.getRow(head).getCell(12).getNumericCellValue()+1);
+				sh.getRow(head).getCell(13).setCellValue(sh.getRow(head).getCell(13).getNumericCellValue()+1);				
+			}
+			
+			
+			sh.getRow(head).createCell(14).setCellStyle(clientCellStyle);
+			sh.getRow(head).getCell(14).setCellFormula("INT("+sh.getRow(head).getCell(13).getNumericCellValue()*100+"/"+totalSoportes+")");
+			head++;
+			i++;
+		}
+		
+		
+		/*fila para mostrar la no existencia de cliente */
+		sh.createRow(head).createCell(10).setCellStyle(clientCellStyle);
+		sh.getRow(head).createCell(11).setCellStyle(footerCellStyle);
+		sh.getRow(head).createCell(12).setCellStyle(footerCellStyle);
+		sh.getRow(head).createCell(13).setCellStyle(footerCellStyle);
+		sh.getRow(head).createCell(14).setCellStyle(footerCellStyle);
+		sh.getRow(head).getCell(10).setCellValue("Ninguno");
+		sh.getRow(head).getCell(11).setCellValue(0);
+		sh.getRow(head).getCell(12).setCellValue(0);
+		sh.getRow(head).getCell(13).setCellValue(0);
+		
+		switch (tipoFecha){
+			case 1:
+				soportes = sopDao.getAllSoportesByClientId("");
+				break;
+			case 2:
+				dateDesde = Utils.dateConverter(fechaDesde);
+				
+				soportes = sopDao.getSoportesSinceDateByClientId("", dateDesde);
+				break;
+			case 3:
+				dateHasta = Utils.dateConverter(fechaHasta);
+				soportes = sopDao.getSoportesUntilDateByClientId("", dateHasta);
+				break;
+			case 4:
+				dateDesde = Utils.dateConverter(fechaDesde);
+				dateHasta = Utils.dateConverter(fechaHasta);
+				soportes = sopDao.getSoportesBetweenDatesByClientId("", dateDesde, dateHasta);
+				break;
+			default:
+				break;
+		}
+		for(Soporte sop : soportes){
+			if(sop.getTipo_soporte().equals("Incidencia"))sh.getRow(head).getCell(11).setCellValue(sh.getRow(head).getCell(11).getNumericCellValue()+1);
+			if(sop.getTipo_soporte().equals("Consulta"))sh.getRow(head).getCell(12).setCellValue(sh.getRow(head).getCell(12).getNumericCellValue()+1);
+			sh.getRow(head).getCell(13).setCellValue(sh.getRow(head).getCell(13).getNumericCellValue()+1);
+		}
+		
+		sh.getRow(head).getCell(14).setCellFormula("INT("+sh.getRow(head).getCell(13).getNumericCellValue()*100+"/"+totalSoportes+")");
+		
+		/*fin de fila para mostrar la no existencia de cliente*/
+		
+		head++;
+		
+		sh.createRow(head).createCell(10).setCellStyle(footerCellStyle);
+		sh.getRow(head).createCell(11).setCellStyle(footerCellStyle);
+		sh.getRow(head).createCell(12).setCellStyle(footerCellStyle);
+		sh.getRow(head).createCell(13).setCellStyle(footerCellStyle);
+		sh.getRow(head).createCell(14).setCellStyle(footerCellStyle);
+		sh.getRow(head).getCell(10).setCellValue("Total");
+		sh.getRow(head).getCell(11).setCellFormula("SUM(L"+(headClientes)+":L"+(head)+")");
+		sh.getRow(head).getCell(12).setCellFormula("SUM(M"+(headClientes)+":M"+(head)+")");
+		sh.getRow(head).getCell(13).setCellFormula("SUM(N"+(headClientes)+":N"+(head)+")");
+		sh.getRow(head).getCell(14).setCellValue(1);
+		
+		
+		Name rangeTipo = workbook.getName("tiposSop");
+		Name rangeTotalTipos = workbook.getName("totalSopTip");
+		rangeTipo.setRefersToFormula(sheetName+"!$L$"+(headClientes)+":$M$"+(headClientes));
+		rangeTotalTipos.setRefersToFormula(sheetName+"!$L$"+(head+1)+":$M$"+(head+1));
+		/*------------------------------fin tabla CLIENTES--------------------------------------------------------------*/
 		
 		workbook.write(resp.getOutputStream());
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	private void informeCliente(HttpServletRequest req, HttpServletResponse resp)throws Exception {
 		PruebaDao pruDao =PruebaDao.getInstance();
