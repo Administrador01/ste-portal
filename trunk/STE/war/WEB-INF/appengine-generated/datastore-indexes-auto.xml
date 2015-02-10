@@ -1,23 +1,35 @@
-<!-- Indices written at Fri, 6 Feb 2015 14:12:09 GMT+01:00 -->
+<!-- Indices written at Tue, 10 Feb 2015 14:07:55 GMT+01:00 -->
 
 <datastore-indexes>
 
-    <!-- Used 4 times in query history -->
+    <!-- Used 6 times in query history -->
     <datastore-index kind="Soporte" ancestor="false" source="auto">
         <property name="erased" direction="asc"/>
         <property name="fecha_inicio" direction="desc"/>
     </datastore-index>
 
-    <!-- Used 2 times in query history -->
+    <!-- Used 13 times in query history -->
     <datastore-index kind="Cliente" ancestor="false" source="auto">
         <property name="erased" direction="asc"/>
         <property name="id_cliente" direction="asc"/>
     </datastore-index>
 
-    <!-- Used 1 time in query history -->
-    <datastore-index kind="Soporte" ancestor="false" source="auto">
+    <!-- Used 5 times in query history -->
+    <datastore-index kind="ProductoCanal" ancestor="false" source="auto">
+        <property name="soportes" direction="asc"/>
+        <property name="name" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 7 times in query history -->
+    <datastore-index kind="Prueba" ancestor="false" source="auto">
         <property name="erased" direction="asc"/>
-        <property name="fecha_inicio" direction="asc"/>
+        <property name="fecha_estado" direction="desc"/>
+    </datastore-index>
+
+    <!-- Used 8 times in query history -->
+    <datastore-index kind="ProductoCanal" ancestor="false" source="auto">
+        <property name="pruebas" direction="asc"/>
+        <property name="name" direction="asc"/>
     </datastore-index>
 
 </datastore-indexes>
