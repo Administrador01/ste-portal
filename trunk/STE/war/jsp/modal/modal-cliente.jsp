@@ -44,8 +44,8 @@
 							<label class="ui-marmots-label-radio marmots-label-left ${cliente.premium == 'Premium' ? 'on' : ''}" for="radio_Si_modal">
 								<input name="premium_modal" id="radio_Si_modal" ${cliente.premium == 'Premium' ? 'checked' : ''} type="radio" value="Premium"/>Premium
 							</label>
-							<label class="ui-marmots-label-radio marmots-label-left ${cliente.premium == 'No premium' ? 'on' : ''}" for="radio_No_modal">
-								<input name="premium_modal" ${cliente.premium == 'No premium' ? 'checked' : ''} id="radio_No_modal" value="No premium"  type="radio"/>No Premium
+							<label class="ui-marmots-label-radio marmots-label-left ${cliente.premium == 'No Premium' ? 'on' : ''}" for="radio_No_modal">
+								<input name="premium_modal" ${cliente.premium == 'No Premium' ? 'checked' : ''} id="radio_No_modal" value="No Premium"  type="radio"/>No Premium
 							</label>
 						</div>
 					

@@ -100,4 +100,15 @@ public class Cliente {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
+	
+	@Override
+	public String toString() {
+		return "\r\nNombre Cliente= " + nombre 
+				+ "\r\nId="+ id_cliente 
+				+ "\r\nFecha alta Cliente= " + str_fecha_alta
+				+ "\r\nfecha_alta_cliente= " + fecha_alta+ "\r\nTipo= " + tipo_cliente
+				+ "\r\nPremium= " +premium
+				+ "\r\nErased= " + erased ;
+	}	
 }
