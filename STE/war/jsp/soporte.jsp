@@ -56,11 +56,11 @@
 								<c:choose>
 										<c:when test="${empty clientes}">
 											<option value="default">No hay clientes</option>
-											<option value="Ninguno" data-premium="No premium" data-segmento="Ninguno">Ninguno</option>
+											<option value="Ninguno" data-premium="No Premium" data-segmento="Ninguno">Ninguno</option>
 										</c:when>
 										<c:otherwise>
 											<option value="default">Seleccionar</option>
-											<option value="Ninguno" data-premium="No premium" data-segmento="Ninguno">Ninguno</option>
+											<option value="Ninguno" data-premium="No Premium" data-segmento="Ninguno">Ninguno</option>
 											<c:forEach items="${clientes}" var="t">							
 												<option value="${t.nombre}" data-premium="${t.premium}" data-segmento="${t.tipo_cliente}" data-clientid="${t.key.id}" >${t.nombre}</option>
 											</c:forEach>

@@ -117,7 +117,7 @@
 							</label>
 							<label class="ui-marmots-label-radio marmots-label-left" for="radio_No">
 								No Premium
-								<input id="radio_No" type="radio" name="premium" value="No premium" />
+								<input id="radio_No" type="radio" name="premium" value="No Premium" />
 							</label>
 						</div>
 						

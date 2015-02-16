@@ -5,9 +5,9 @@ import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
+import javax.jdo.Transaction;
 
 import com.ste.beans.Cliente;
-
 import com.ste.counters.Counter;
 import com.ste.persistence.PMF;
 import com.ste.utils.Utils;
@@ -137,7 +137,7 @@ public class ClienteDao {
 		}
 	}
 	
-public Cliente getClientebyId(long l) {
+	public Cliente getClientebyId(long l) {
 		
 		Cliente c;
 		try{			
@@ -166,5 +166,29 @@ public Cliente getClientebyId(long l) {
 		
 		pm.close();
 
+	}
+	public Cliente getClienteByName(String name) {
+
+		Cliente c = new Cliente();
+
+		PersistenceManager pManager = PMF.get().getPersistenceManager();
+		Transaction transaction = pManager.currentTransaction();
+		transaction.begin();
+
+		String queryStr = "select from " + Cliente.class.getName()
+				+ " where nombre  == :p1";
+
+		List<Cliente> clientes = (List<Cliente>) pManager.newQuery(queryStr).execute(name);
+
+		if (!clientes.isEmpty()) {
+			c = clientes.get(0);
+		} else {
+			c = null;
+		}
+
+		transaction.commit();
+		pManager.close();
+
+		return c;
 	}
 }

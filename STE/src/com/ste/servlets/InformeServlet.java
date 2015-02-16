@@ -567,7 +567,7 @@ public class InformeServlet extends HttpServlet{
 						if(sop.getEstado().equals(estados.get(i).getName()))sh.getRow(i+10).getCell(11).setCellValue(sh.getRow(i+10).getCell(11).getNumericCellValue()+1);
 						
 					}else{
-						if(cliDao.getClientebyId(Long.parseLong(sop.getCliente_id())).getPremium().equals("No premium")){
+						if(cliDao.getClientebyId(Long.parseLong(sop.getCliente_id())).getPremium().equals("No Premium")){
 							
 							if(sop.getEstado().equals(estados.get(i).getName()))sh.getRow(i+10).getCell(12).setCellValue(sh.getRow(i+10).getCell(12).getNumericCellValue()+1);
 							
@@ -931,161 +931,62 @@ public class InformeServlet extends HttpServlet{
 	private void informepordefecto(HttpServletRequest req, HttpServletResponse resp)throws Exception {	
 		JSONObject json = new JSONObject();
 		
-
-//		
-//		OutputStream out = null;
-//		try {
-//			resp.setContentType("application/vnd.ms-excel");
-//			resp.setHeader("Content-Disposition",
-//					"attachment; filename=GestionPruebasSTE.xls");
-//
-//			
-//			InputStream stream = this.getServletContext().getResourceAsStream("/datadocs/");
-//			
-//			
-//			
-//			WritableWorkbook w = Workbook
-//					.createWorkbook(resp.getOutputStream());
-//
-//			PruebaDao pDao = PruebaDao.getInstance();
-//			
-//			
-//			ClienteDao cliDao = ClienteDao.getInstance();
-//			List<Cliente> clientes = cliDao.getAllClients();
-//
-//			WritableSheet s = w.createSheet("Informe de pruebas", 0);
-//			
-//			
-//			
-//			
-//			
-//			
-//			
-//			
-//			
-//			ByteArrayOutputStream er = new ByteArrayOutputStream();
-//			
-//			Grafico1 frame = new
-//			
-//			WritableImage image = new WritableImage(5, 5, 100, 200, er.toByteArray());
-//			s.addImage(image);
-//			
-//			
-//			
-//			WritableFont cellFont = new WritableFont(WritableFont.TIMES, 12);
-//			cellFont.setColour(Colour.BLACK);
-//
-//			WritableCellFormat cellFormat = new WritableCellFormat(cellFont);
-//			cellFormat.setBackground(Colour.WHITE);
-//			cellFormat.setBorder(Border.ALL, BorderLineStyle.THICK);
-//			cellFormat.setAlignment(jxl.format.Alignment.CENTRE);
-//			cellFormat.setVerticalAlignment(VerticalAlignment.CENTRE);
-//
-//			s.setColumnView(0, 40);
-//			s.setColumnView(1, 25);
-//			s.setColumnView(2, 25);
-//			s.setColumnView(3, 25);
-//
-//
-//			s.addCell(new Label(0, 0,""));
-//			s.addCell(new Label(1, 0, "PRE PRODUCCIÓN", cellFormat));
-//			s.addCell(new Label(2, 0, "PRODUCCIÓN", cellFormat));
-//			s.addCell(new Label(3, 0, "TOTAL PRUEBAS P", cellFormat));
-//
-//			
-//			int aux = 1;
-//
-//			for ( Cliente cliente : clientes) {
-//				
-//				
-//				s.addCell(new Label(0, aux, cliente.getNombre(), cellFormat));
-//				List<Prueba> pruebas = pDao.getAllPruebasByClientId(Long.toString(cliente.getKey().getId()));
-//				int preprod = 0;
-//				int prod = 0;
-//				for (Prueba prueba :pruebas){
-//					if(prueba.getEntorno().equals("Produccion"))prod++;
-//					if(prueba.getEntorno().equals("Preproduccion"))preprod++;
-//				}
-//				s.addCell(new Label(1, aux, String.valueOf(preprod), cellFormat));
-//				s.addCell(new Label(2, aux, String.valueOf(prod), cellFormat));
-//				s.addCell(new Label(3, aux, String.valueOf(pruebas.size()), cellFormat));
-//
-//
-//
-//
-//				aux++;
-//			}
-//
-//			w.write();
-//			w.close();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			throw new ServletException("Exception in Excel", e);
-//		} finally {
-//			if (out != null)
-//				out.close();
-//		}
-//
-//	}
+		String fechaHasta = req.getParameter("fechaHasta");
+		String fechaDesde = req.getParameter("fechaDesde");
 		
-	
-/*
-	resp.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-	resp.setHeader("Content-Disposition","attachment; filename=GestionPruebasSTE.xlsx");
-	String link= "/datadocs/template.xlsx";
-	InputStream inp = this.getServletContext().getResourceAsStream(link);
-	Workbook workbook = new XSSFWorkbook(OPCPackage.open(inp));
-	
-	CreationHelper createHelper = workbook.getCreationHelper();
-	Sheet sh=workbook.getSheetAt(0);
-	String sheetName=sh.getSheetName();	
-	
-	CellStyle cellStyle = workbook.createCellStyle();
-	cellStyle.setDataFormat(createHelper.createDataFormat().getFormat("d/m/yyyy"));
-	sh.getRow(7).getCell(1).setCellValue(23);
-	
-	workbook.write(resp.getOutputStream());
-
+		int tipoFecha = 1;
 		
-		*/
-	
- 
-		
-	
+		if (!fechaHasta.equals("")&&fechaHasta!=null){
+			if(!fechaDesde.equals("")&&fechaDesde!=null){
+				tipoFecha=4;
+			}else{
+				tipoFecha=3;
+			}
+		}else{
+			if(!fechaDesde.equals("")&&fechaDesde!=null){
+				tipoFecha=2;
+			}
+		}
 
-/*Metodos de conversion excela pdf atualmente no validos utilizan java.awt.* por lo que appengine lo prohibe*/
-	
-//	resp.setContentType("application/pdf");
-//	resp.setHeader("Content-Disposition","inline; filename=informe.pdf");
-//
-//	String link= "/datadocs/ex.html";
-//	InputStream test = this.getServletContext().getResourceAsStream(link);
-//	com.aspose.cells.Workbook salidP = new com.aspose.cells.Workbook(test);
-//	salidP.save(resp.getOutputStream(),SaveFormat.PDF);
-	
-//	resp.setContentType("application/pdf");
-//	resp.setHeader("Content-Disposition","inline; filename=informe.pdf");
-//	
-//	
-//	OfficeFile f = new OfficeFile(req.getInputStream(),"localhost","8100",true);
-//	f.convert(resp.getOutputStream(),"pdf");
+		resp.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+		resp.setHeader("Content-Disposition","attachment; filename=InformePruebasPorServicioSTE.xlsx");
+		
+		String link= "/datadocs/templatePruebasCliente.xlsx";
+		InputStream inp = this.getServletContext().getResourceAsStream(link);
+		Workbook workbook = new XSSFWorkbook(OPCPackage.open(inp));
+		
+		Sheet sh=workbook.getSheetAt(0);
+		String sheetName = workbook.getSheetName(0);
+		
+		/*ESTILO DE CELDA CON BORDES*/
+		short width = 1;
+		CellStyle cellStyle = workbook.createCellStyle();
+		cellStyle.setBorderBottom(width);
+		cellStyle.setBorderLeft(width);
+		cellStyle.setBorderRight(width);
+		cellStyle.setBorderTop(width);
+		
+		CellStyle clientCellStyle = workbook.createCellStyle();
+		clientCellStyle.setBorderBottom(width);
+		clientCellStyle.setBorderLeft(width);
+		clientCellStyle.setBorderRight(width);
+		clientCellStyle.setBorderTop((short)0);
+		
+		CellStyle footerCellStyle = workbook.createCellStyle();
+		footerCellStyle.setBorderBottom(width);
+		footerCellStyle.setBorderLeft(width);
+		footerCellStyle.setBorderRight(width);
+		footerCellStyle.setBorderTop((short)2);
+		
+		CellStyle headerCellStyle = workbook.createCellStyle();
+		headerCellStyle.setBorderBottom((short)2);
+		headerCellStyle.setBorderLeft(width);
+		headerCellStyle.setBorderRight(width);
+		headerCellStyle.setBorderTop(width);
+		
+		
+		
 		
 
-//	File inputFile;
-//	File outputFile;
-//	DocumentFormat outputFormat;
-//	String inputExtension = FilenameUtils.getExtension(inputFile.getName());
-//	DocumentFormat inputFormat = formatRegistry.getFormatByExtension(inputExtension);
-//	StandardConversionTask conversionTask = new StandardConversionTask(inputFile, outputFile, outputFormat);
-//	conversionTask.setDefaultLoadProperties(defaultLoadProperties);
-//	conversionTask.setInputFormat(inputFormat);
-//	officeManager.execute(conversionTask);
-	
-
-	
-	
-/*------------------------------------------------------------------------------*/
-	
 	}
-	
 }

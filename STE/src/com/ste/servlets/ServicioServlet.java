@@ -22,6 +22,7 @@ import javax.servlet.http.HttpSession;
 
 
 
+
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
@@ -124,6 +125,11 @@ public class ServicioServlet  extends HttpServlet{
 		
 
 	      String link = req.getParameter("link");
+	      boolean save = false;
+	      String saveParam = req.getParameter("save"); 
+	      if(saveParam != null && saveParam.equals("true")) {
+			save = true;
+	      }
 	      
 	      try {
 	    	  
@@ -186,10 +192,11 @@ public class ServicioServlet  extends HttpServlet{
 		        	  		client = new Cliente();
 		        	  		String[] arrCliente = inputLine.split(" ");
 		        	  		client.setNombre(arrCliente[0]);
-		        	  		client.setPremium(arrCliente[1]);
-		        	  		client.setStr_fecha_alta(arrCliente[2]);
-		        	  		client.setTipo_cliente(arrCliente[0]);
-		        	  		clientDao.createCliente(client);
+		        	  		client.setStr_fecha_alta(arrCliente[1]);
+		        	  		client.setTipo_cliente(arrCliente[2]);
+		        	  		client.setPremium(arrCliente[3]);
+		        	  		
+		        	  		if (save) clientDao.createCliente(client);
 		        	  		break;
 
 		        	  	  
