@@ -35,11 +35,16 @@ import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.ste.beans.Cliente;
 import com.ste.beans.Estado;
+import com.ste.beans.EstadoImplementacion;
+import com.ste.beans.Implementacion;
 import com.ste.beans.Prueba;
 import com.ste.beans.Soporte;
 import com.ste.dao.ClienteDao;
 import com.ste.dao.EstadoDao;
+import com.ste.dao.EstadoImplementacionDao;
+import com.ste.dao.ImplementacionDao;
 import com.ste.dao.PruebaDao;
+import com.ste.dao.ServicioDao;
 import com.ste.dao.SoporteDao;
 import com.ste.utils.Utils;
 import com.aspose.cells.Workbook.*;
@@ -73,6 +78,7 @@ public class InformeServlet extends HttpServlet{
 			if(accion.equals("pruebas"))informePruebas(req,resp);
 			if(accion.equals("soporte"))informeSoportes(req,resp);
 			if(accion.equals("cliente"))informeCliente(req,resp);
+			if(accion.equals("implementaciones"))informeImplementaciones(req,resp);
 			
 			
 		} catch (Exception e) {
@@ -452,6 +458,275 @@ public class InformeServlet extends HttpServlet{
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	private void informeImplementaciones(HttpServletRequest req, HttpServletResponse resp)throws Exception {
+		
+		
+		
+		/*obtenemos las fechas para las que va a aplicarse el filtro*/
+		String fechaHasta = req.getParameter("fechaHasta");
+		String fechaDesde = req.getParameter("fechaDesde");
+		
+		Date dateDesde=null;
+		Date dateHasta=null;
+		
+		int tipoFecha = 1;
+		
+		if (!fechaHasta.equals("")&&fechaHasta!=null){
+			if(!fechaDesde.equals("")&&fechaDesde!=null){
+				tipoFecha=4;
+			}else{
+				tipoFecha=3;
+			}
+		}else{
+			if(!fechaDesde.equals("")&&fechaDesde!=null){
+				tipoFecha=2;
+			}
+		}
+		
+		switch (tipoFecha){
+			case 1:
+				dateDesde = Utils.dateConverter("29/11/1857");
+				dateHasta = Utils.dateConverter("29/11/2500");
+				break;
+			case 2:
+				dateDesde = Utils.dateConverter(fechaDesde);
+				dateHasta = Utils.dateConverter("29/11/2500");
+				break;
+			case 3:
+				dateDesde = Utils.dateConverter("29/11/1857");
+				dateHasta = Utils.dateConverter(fechaHasta);
+				break;
+			case 4:
+				dateDesde = Utils.dateConverter(fechaDesde);
+				dateHasta = Utils.dateConverter(fechaHasta);
+				
+				
+				break;
+			default:
+				break;
+		}
+		
+		/*INICIAMOS EL LIBRO EXCEL E INDICAMOS LA RESPUESTA DEL SERVIDOR*/
+		resp.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+		resp.setHeader("Content-Disposition","attachment; filename=InformePruebasSTE.xlsx");
+		String link= "/datadocs/templateImplementaciones.xlsx";
+		InputStream inp = this.getServletContext().getResourceAsStream(link);
+		Workbook workbook = new XSSFWorkbook(OPCPackage.open(inp));
+		
+		
+		
+		Sheet sh=workbook.getSheetAt(0);
+			
+		
+		/*ESTILO DE CELDA CON BORDES*/
+		short width = 1;
+		CellStyle cellStyle = workbook.createCellStyle();
+		cellStyle.setBorderBottom(width);
+		cellStyle.setBorderLeft(width);
+		cellStyle.setBorderRight(width);
+		cellStyle.setBorderTop(width);
+		
+		CellStyle clientCellStyle = workbook.createCellStyle();
+		clientCellStyle.setBorderBottom(width);
+		clientCellStyle.setBorderLeft(width);
+		clientCellStyle.setBorderRight(width);
+		clientCellStyle.setBorderTop((short)0);
+		
+		CellStyle footerCellStyle = workbook.createCellStyle();
+		footerCellStyle.setBorderBottom(width);
+		footerCellStyle.setBorderLeft(width);
+		footerCellStyle.setBorderRight(width);
+		footerCellStyle.setBorderTop((short)2);
+		
+		CellStyle headerCellStyle = workbook.createCellStyle();
+		headerCellStyle.setBorderBottom((short)2);
+		headerCellStyle.setBorderLeft(width);
+		headerCellStyle.setBorderRight(width);
+		headerCellStyle.setBorderTop(width);
+		
+		
+		/*-------------------------------------TABLA DE IMPLEMENTACIONES POR ESTADO------------------------------------------------------*/
+		ImplementacionDao impDao = ImplementacionDao.getInstance();
+		
+		
+		EstadoImplementacionDao estDao = EstadoImplementacionDao.getInstance();
+		List<EstadoImplementacion> estados = estDao.getAllEstadoImplementacions();
+		
+		int headEstados = 4;
+		int head = 4;
+		
+		for(EstadoImplementacion estado: estados){
+			//Creacion de las celdas con bordes de manera dinamica
+			sh.createRow(head).createCell(2).setCellStyle(clientCellStyle);
+			sh.getRow(head).createCell(3).setCellStyle(clientCellStyle);
+			sh.getRow(head).createCell(4).setCellStyle(clientCellStyle);
+			sh.getRow(head).getCell(2).setCellValue(estado.getName());
+			sh.getRow(head).getCell(3).setCellValue(impDao.getNumberForVariableValueBetween("estado", estado.getName(),dateDesde,dateHasta));
+			head++;
+		}
+		
+		sh.createRow(head).createCell(2).setCellStyle(footerCellStyle);
+		sh.getRow(head).createCell(3).setCellStyle(footerCellStyle);
+		sh.getRow(head).createCell(4).setCellStyle(footerCellStyle);
+		sh.getRow(head).getCell(2).setCellValue("Total de implementaciones:");
+		sh.getRow(head).getCell(3).setCellValue(impDao.getAllImplementacionesBetweenDates(dateDesde, dateHasta).size());
+		sh.getRow(head).getCell(4).setCellValue(1);
+		
+		int totalImp = impDao.getAllImplementacionesBetweenDates(dateDesde, dateHasta).size();
+		
+		for(int i=0; i<(head-headEstados);i++){
+			sh.getRow(headEstados+i).getCell(4).setCellFormula("INT("+sh.getRow(headEstados+i).getCell(3).getNumericCellValue()*100+"/"+totalImp+")");
+		}
+		
+		String sheetName = workbook.getSheetName(0);
+		Name rangeImpEstados = workbook.getName("ImplementacionesEstados");
+		Name rangeEstados = workbook.getName("Estados");
+		rangeImpEstados.setRefersToFormula(sheetName+"!$D$"+(headEstados+1)+":$D$"+head);
+		rangeEstados.setRefersToFormula(sheetName+"!$C$"+(headEstados+1)+":$C$"+head);
+		
+		/*-----------------------FIN TABLA IMPLEMENTACIONES POR ESTADO --------------------------------------------*/
+		
+		head = head+16;
+		int headNuevas = head;
+		
+		ClienteDao cliDao = ClienteDao.getInstance();
+		List<Implementacion> implementaciones = impDao.getAllImplementacionesBetweenDates(dateDesde, dateHasta);
+		
+		ServicioDao servDao = ServicioDao.getInstance();
+		
+		/*----------------------TABLA DE NUEVAS IMPLEMENTACIONES -------------------------------------------------*/
+		
+		
+		sh.createRow(head).createCell(2).setCellStyle(headerCellStyle);
+		sh.getRow(head).getCell(2).setCellValue("Cliente");
+		sh.getRow(head).createCell(3).setCellStyle(headerCellStyle);
+		sh.getRow(head).getCell(3).setCellValue("Producto");
+		sh.getRow(head).createCell(4).setCellStyle(headerCellStyle);
+		sh.getRow(head).getCell(4).setCellValue("Servicio");
+		sh.getRow(head).createCell(5).setCellStyle(headerCellStyle);
+		sh.getRow(head).getCell(5).setCellValue("Fecha alta");
+		head++;
+		
+		
+		for(Implementacion imp:implementaciones){
+			
+			sh.createRow(head).createCell(2).setCellStyle(clientCellStyle);
+			sh.getRow(head).createCell(3).setCellStyle(clientCellStyle);
+			sh.getRow(head).createCell(4).setCellStyle(clientCellStyle);
+			sh.getRow(head).createCell(5).setCellStyle(clientCellStyle);
+			
+			sh.getRow(head).getCell(2).setCellValue(cliDao.getClientebyId(imp.getCliente_id()).getNombre());	
+			sh.getRow(head).getCell(3).setCellValue(imp.getProducto());
+			sh.getRow(head).getCell(4).setCellValue(servDao.getImplementacionById(imp.getServicio_id()).getName());
+			sh.getRow(head).getCell(5).setCellValue(imp.getStr_fecha_alta());
+			head++;
+		}
+		
+		int totalNuevas = implementaciones.size();
+		sh.createRow(head).createCell(2).setCellStyle(footerCellStyle);
+		sh.getRow(head).createCell(3).setCellStyle(footerCellStyle);
+		sh.getRow(head).getCell(2).setCellValue("Nuevas implementaciones:");
+		sh.getRow(head).getCell(3).setCellValue(totalNuevas);
+		head++;
+		sh.createRow(head).createCell(2).setCellStyle(footerCellStyle);
+		sh.getRow(head).createCell(3).setCellStyle(footerCellStyle);
+		sh.getRow(head).getCell(2).setCellValue("Implementaciones antiguas:");
+		sh.getRow(head).getCell(3).setCellValue(totalImp-totalNuevas);
+		head++;
+		
+
+		
+		Name rangeNuevImp = workbook.getName("NuevasImp");
+		Name rangeNameNuevImp = workbook.getName("NameNuevasImp");
+		rangeNuevImp.setRefersToFormula(sheetName+"!$D$"+(head-1)+":"+sheetName+"!$D$"+head);
+		rangeNameNuevImp.setRefersToFormula(sheetName+"!$C$"+(head-1)+":"+sheetName+"!$C$"+head);
+		
+		/*----------------------FIN TABLA DE NUEVAS IMPLEMENTACIONES -------------------------------------------------*/
+		
+		implementaciones = impDao.getAllSubidasBetweenDates(dateDesde, dateHasta);
+		head = head+16;
+		int headSubidas = head;
+		
+		/*----------------------TABLA DE SUBIDAS -------------------------------------------------*/
+		
+		sh.createRow(head).createCell(2).setCellStyle(headerCellStyle);
+		sh.getRow(head).getCell(2).setCellValue("Cliente");
+		sh.getRow(head).createCell(3).setCellStyle(headerCellStyle);
+		sh.getRow(head).getCell(3).setCellValue("Producto");
+		sh.getRow(head).createCell(4).setCellStyle(headerCellStyle);
+		sh.getRow(head).getCell(4).setCellValue("Servicio");
+		sh.getRow(head).createCell(5).setCellStyle(headerCellStyle);
+		sh.getRow(head).getCell(5).setCellValue("Fecha subida");
+		sh.getRow(head).createCell(6).setCellStyle(headerCellStyle);
+		sh.getRow(head).getCell(6).setCellValue("Observaciones");
+		head++;
+		
+		for(Implementacion imp:implementaciones){
+			
+			sh.createRow(head).createCell(2).setCellStyle(clientCellStyle);
+			sh.getRow(head).createCell(3).setCellStyle(clientCellStyle);
+			sh.getRow(head).createCell(4).setCellStyle(clientCellStyle);
+			sh.getRow(head).createCell(5).setCellStyle(clientCellStyle);
+			sh.getRow(head).createCell(6).setCellStyle(clientCellStyle);
+			
+			sh.getRow(head).getCell(2).setCellValue(cliDao.getClientebyId(imp.getCliente_id()).getNombre());	
+			sh.getRow(head).getCell(3).setCellValue(imp.getProducto());
+			sh.getRow(head).getCell(4).setCellValue(servDao.getImplementacionById(imp.getServicio_id()).getName());
+			sh.getRow(head).getCell(5).setCellValue(imp.getStr_fech_subida());
+			sh.getRow(head).getCell(6).setCellValue(imp.getDetalle());
+			head++;
+		}
+		int totalSubidas = implementaciones.size();
+		sh.createRow(head).createCell(2).setCellStyle(footerCellStyle);
+		sh.getRow(head).createCell(3).setCellStyle(footerCellStyle);
+		sh.getRow(head).getCell(2).setCellValue("Total de subidas a producción:");
+		sh.getRow(head).getCell(3).setCellValue(totalSubidas);
+		head++;
+
+		sh.createRow(head).createCell(2).setCellStyle(footerCellStyle);
+		sh.getRow(head).createCell(3).setCellStyle(footerCellStyle);
+		sh.getRow(head).getCell(2).setCellValue("Implementaciones no subidas en fecha:");
+		sh.getRow(head).getCell(3).setCellValue(totalImp-totalSubidas);
+		head++;
+		
+
+		
+		Name rangeSubidImp = workbook.getName("SubidasImp");
+		Name rangeNameSubidImp = workbook.getName("NameSubidasImp");
+		rangeSubidImp.setRefersToFormula(sheetName+"!$D$"+(head-1)+":"+sheetName+"!$D$"+head);
+		rangeNameSubidImp.setRefersToFormula(sheetName+"!$C$"+(head-1)+":"+sheetName+"!$C$"+head);
+
+		
+		/*----------------------FIN TABLA DE SUBIDAS -------------------------------------------------*/
+		workbook.write(resp.getOutputStream());
+		
+		
+	}
 	
 	
 	
