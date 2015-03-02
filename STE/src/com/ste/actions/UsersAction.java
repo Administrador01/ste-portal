@@ -23,21 +23,7 @@ public class UsersAction extends Action {
 			throws IOException {
 		try {
 			UserDao uDao = UserDao.getInstance();
-			List<User> usuarios = uDao.getAllNonDeletedUsers();
-
-			// req.getSession().setAttribute("userList", usuarios);
-
-			/*
-			 * for (User u:usuarios){ JSONObject jsonUser = new JSONObject();
-			 * jsonUser.put("name", u.getNombre()); jsonUser.put("ap1",
-			 * u.getApellido1()); jsonUser.put("ap2", u.getApellido2());
-			 * jsonUser.put("email", u.getEmail()); jsonUser.put("permiso",
-			 * u.getPermiso()); jsonUser.put("permisoStr", u.getPermisoStr());
-			 * jsonUser.put("areas", u.getAreas()); jsonUser.put("email",
-			 * u.getDepartamento()); jsonUser.put("id", u.getKey().getId());
-			 * jsonArray.put(jsonUser); } req.setAttribute("userJson",
-			 * jsonArray);
-			 */
+			List<User> usuarios = uDao.getAllNonDeletedUsers(); 
 			req.setAttribute("userList", usuarios);
 			req.setAttribute("permisos", StaticConfig.permisos);
 			req.setAttribute("departamentos", StaticConfig.departamentos);			

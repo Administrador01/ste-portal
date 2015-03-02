@@ -19,6 +19,8 @@ import javax.servlet.http.HttpSession;
 import com.ste.beans.Cliente;
 import com.ste.dao.ClienteDao;
 import com.ste.utils.Utils;
+import com.ste.beans.User;
+import com.ste.dao.UserDao;
 import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.ste.counters.Counter;
@@ -244,7 +246,140 @@ public class DefaultConf extends HttpServlet{
 		return result;
 	}
 	
-	
+	private String loadUsuarios(HttpServletRequest req, HttpServletResponse resp, String usermail) throws InterruptedException{
+		boolean save = false;
+		String saveParam = req.getParameter("save");
+		String deleteParam = req.getParameter("delete"); 
+		
+		boolean delete = false;
+		 
+		if(deleteParam != null && deleteParam.equals("true")) {
+			delete = true;
+		}
+		if(saveParam != null && saveParam.equals("true")) {
+			save = true;
+		}
+		String link = "/datadocs/users.csv";
+		
+		String result = "";
+		try {
+			
+			InputStream stream = this.getServletContext().getResourceAsStream(link);
+			BufferedReader in = new BufferedReader(new InputStreamReader(stream, "Cp1252"));
+
+			String inputLine = new String();
+
+			UserDao userDao = UserDao.getInstance();
+			if(delete){
+				userDao.deleteAll();
+			}
+			User user = null;
+			
+			int counter = 0;
+			boolean error = false;
+
+			while ((inputLine = in.readLine()) != null) {
+				error = false;
+				
+				String line = inputLine;
+				String[] userSplit = line.split(";", -1);
+
+				boolean procesar = true;
+				if (userSplit.length < 8) {
+					procesar = false;
+				}
+				String nombre = userSplit[0];
+				if (esNuloVacio(nombre)) {
+					procesar = false;
+					break;
+				}
+
+				if (procesar) {
+					
+					String apellido1 = userSplit[1];
+					String apellido2 = userSplit[2];
+					int perm1= 0;
+					String permiso = Integer.toString(perm1); 
+					permiso = userSplit[3];
+					String permisoStr = userSplit[4];
+					String departamento = userSplit[5];
+					String email = userSplit[6];
+					email.replace(" ", "");
+					Boolean activo = true;
+					
+					String activo1 = userSplit[7];
+					
+					
+					user = new User();		
+					 
+					if(!esNuloVacio(nombre)) {
+						user.setNombre(nombre);
+					}
+					else {
+						result += "Error Falta Nombre \r\n";
+						error = true;
+					}	
+						if(!esNuloVacio(apellido1)) {
+							user.setApellido1(apellido1);
+						}
+						else {
+							result += "Error Falta Apellido1 \r\n";
+							error = true;
+						}	
+												
+						if(!esNuloVacio(email)) {
+							user.setEmail(email);
+						}
+						else {
+							result += "Error Falta email \r\n";
+							error = true;
+						}
+						
+						
+						if(!esNuloVacio(departamento)) {
+							user.setDepartamento(departamento);
+						}
+						else {
+							result += "Error Falta Departamento \r\n";
+							error = true;
+						}	
+						
+						if(!esNuloVacio(permisoStr)) {
+							user.setPermisoStr(permisoStr);
+						}
+						else {
+							result += "Error Falta Permiso de Perfil \r\n";
+							error = true;
+						}
+						if(activo1.equals("false")||activo1.equals("FALSE"))activo=false;
+						user.setPermiso(Integer.parseInt(permiso));
+						user.setApellido2(apellido2);
+						
+						user.setErased(false);
+										
+					if(!error) {
+						result += user.toString() + "\r\n\r\n";
+					}
+					else {
+						result += "\r\n";
+					}
+					
+					if(save) {
+						userDao.createUser(user);
+					}
+				}
+				counter++;
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		
+		return result;
+					
+				
+				
+	}
 	public boolean esNuloVacio(String string) {
 		if(string == null || "".equals(string)) {
 			return true;
