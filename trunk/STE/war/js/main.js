@@ -1,6 +1,9 @@
 var userBoxSize;
 var id;
 
+$.ajaxSetup({ cache:false });
+
+
 function  changeActionsButtonColor(){
 	if ($('#accion_menu').hasClass('white')){
 		$('#accion_menu').removeClass('white');
@@ -472,6 +475,7 @@ $(function() {
 			  url : formURL,
 			  type: "GET",
 			  data : postData,
+			  cache : false,
 			  success:function(data, textStatus, jqXHR) 
 			  {
 					//data: return data from server
@@ -487,7 +491,7 @@ $(function() {
 
 					setTimeout(function() { 
 						resetForm($form);
-						location.reload();
+						window.location = "/implementacion.do";
 					}, 1500);
 				}else{
 					$('#message_div').removeClass("success").addClass("error");

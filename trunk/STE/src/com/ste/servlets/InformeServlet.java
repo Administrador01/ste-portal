@@ -533,7 +533,7 @@ public class InformeServlet extends HttpServlet{
 		
 		/*INICIAMOS EL LIBRO EXCEL E INDICAMOS LA RESPUESTA DEL SERVIDOR*/
 		resp.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-		resp.setHeader("Content-Disposition","attachment; filename=InformePruebasSTE.xlsx");
+		resp.setHeader("Content-Disposition","attachment; filename=InformeImplantacionesSTE.xlsx");
 		String link= "/datadocs/templateImplementaciones.xlsx";
 		InputStream inp = this.getServletContext().getResourceAsStream(link);
 		Workbook workbook = new XSSFWorkbook(OPCPackage.open(inp));

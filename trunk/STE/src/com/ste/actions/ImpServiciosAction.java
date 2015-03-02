@@ -27,8 +27,8 @@ public class ImpServiciosAction extends Action{
 
 		ImplementacionDao impDao = ImplementacionDao.getInstance();
 		List<Implementacion> implementaciones = impDao.getAllImplementaciones();
-		
 		req.setAttribute("implementaciones",implementaciones);
+		
 		ClienteDao cDao = ClienteDao.getInstance();
 		List<Cliente> clientes = cDao.getAllClientsAlphabet();
 		req.setAttribute("clientes", clientes);

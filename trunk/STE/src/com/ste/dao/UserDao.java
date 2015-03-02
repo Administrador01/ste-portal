@@ -146,4 +146,15 @@ public class UserDao {
 		return agrupations;
 	}
 
+	public void deleteAll() {
+		List<User> usuarios = UserDao.getInstance().getAllUsers();
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		
+		for(User u:usuarios){
+			pm.deletePersistent(pm.getObjectById(u.getClass(), u.getKey().getId()));	
+		}
+		pm.close();
+	}
+
 }
