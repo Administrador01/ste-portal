@@ -35,6 +35,9 @@ public class Implementacion {
 	private long servicio_id;
 	
 	@Persistent
+	private String servicio_name;
+	
+	@Persistent
 	private String estado;
 	
 	@Persistent
@@ -257,6 +260,13 @@ public class Implementacion {
 	}
 	public String getCuenta_ref_ext() {
 		return cuenta_ref_ext;
+	}
+	
+	public void setServicio_name(String servicio) {
+		this.servicio_name = servicio;
+	}
+	public String getServicio_name() {
+		return servicio_name;
 	}
 
 	public void setCuenta_ref_ext(String cuenta) {

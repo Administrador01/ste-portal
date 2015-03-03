@@ -17,7 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.ste.beans.Cliente;
+import com.ste.beans.Implementacion;
+import com.ste.beans.Servicio;
 import com.ste.dao.ClienteDao;
+import com.ste.dao.ImplementacionDao;
+import com.ste.dao.ServicioDao;
 import com.ste.utils.Utils;
 import com.ste.beans.User;
 import com.ste.dao.UserDao;
@@ -51,6 +55,10 @@ public class DefaultConf extends HttpServlet{
 				counterInicialization(req,resp, usermail);
 				json.append("success", "true");
 				result = "todo bien, contadores inicializados";
+				json.append("result", result);
+			}else if ("implementaciones".equals(accion)){
+				result = loadImplementaciones(req,resp);
+				json.append("success", "true");
 				json.append("result", result);
 			}
 			resp.setCharacterEncoding("UTF-8");
@@ -236,6 +244,174 @@ public class DefaultConf extends HttpServlet{
 					
 					if(save) {
 						clientesDao.createCliente(cliente);
+					}
+				}
+				counter++;
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	
+	public String loadImplementaciones(HttpServletRequest req, HttpServletResponse resp) throws InterruptedException, IOException{
+		HttpSession sesion = req.getSession();
+		boolean save = false;
+		String saveParam = req.getParameter("save"); 
+		if(saveParam != null && saveParam.equals("true")) {
+			save = true;
+		}
+		String link = "/datadocs/implementacionesCarga.csv";
+		
+		String result = "";
+		try {
+			
+			InputStream stream = this.getServletContext().getResourceAsStream(link);
+			BufferedReader in = new BufferedReader(new InputStreamReader(stream, "Cp1252"));
+
+			String inputLine = new String();
+
+			ImplementacionDao implementacionDao = ImplementacionDao.getInstance();
+			
+			int counter = 1;
+			boolean error = false;
+			
+			ServicioDao servicioDao = ServicioDao.getInstance();
+			List<Servicio> servicios = servicioDao.getAllServicios();
+			
+
+			while ((inputLine = in.readLine()) != null) {
+				error = false;
+				
+				result = result+"\n"+counter+"    ";
+				
+				String line = inputLine;
+				String[] implementacionSplit = line.split(";", -1);
+
+				boolean procesar = true;
+				if (implementacionSplit.length < 22) {
+					procesar = false;
+				}
+
+
+				if (procesar) {
+					Implementacion implementacion = new Implementacion();
+					
+					String clienteName = implementacionSplit[0];
+					String productoCanal = implementacionSplit[1];
+					String segmento  = implementacionSplit[2];
+					String servicio  = implementacionSplit[3];
+					String str_fecha_alta = implementacionSplit[4];
+					String tipoServicio = implementacionSplit[5];
+					String gestorGcs = implementacionSplit[6];
+					String pais = implementacionSplit[7];
+					String gestorPromocion = implementacionSplit[8];
+					String normalizador = implementacionSplit[9];
+					String gestorRelacion = implementacionSplit[10];
+					String referenciaGlobal = implementacionSplit[11];
+					String firmaContrato = implementacionSplit[12];
+					String referenciaLocal = implementacionSplit[13];
+					String estado = implementacionSplit[14];
+					String fechaContratacion = implementacionSplit[15];
+					String detalle = implementacionSplit[16];
+					String referenciaExterna = implementacionSplit[17];
+					String asunto = implementacionSplit[18];
+					String contratoAdeudos = implementacionSplit[19];
+					String idAcreedor = implementacionSplit[20];
+					String cuentaAbono = implementacionSplit[21];
+					
+					implementacion.setReferencia_global(referenciaGlobal);
+					implementacion.setReferencia_externa(referenciaLocal);
+					implementacion.setReferencia_externa(referenciaExterna);
+					implementacion.setGestor_gcs(gestorGcs);
+					implementacion.setGestor_promocion(gestorPromocion);
+					implementacion.setGestor_relacion(gestorRelacion);
+					implementacion.setStr_fech_subida(null);
+					implementacion.setCuenta_ref_ext(cuentaAbono);
+					implementacion.setAcreedor_ref_ext(idAcreedor);
+					implementacion.setAdeudos_ref_ext(contratoAdeudos);
+					implementacion.setCuenta_ref_ext(cuentaAbono);
+					implementacion.setDetalle(detalle);
+					implementacion.setPais(pais);
+					implementacion.setServicio_name(servicio);
+					implementacion.setProducto(productoCanal);
+					
+												
+					if(!esNuloVacio(clienteName)) {
+
+						ClienteDao cliDao = ClienteDao.getInstance();
+
+						List<Cliente> clientesForId =cliDao.getClientesByName(clienteName);
+						if(clientesForId.size()==1){
+							long clienteKeyLong = clientesForId.get(0).getKey().getId();
+							implementacion.setCliente_id(clienteKeyLong);
+							
+						}else{
+							result += "Error cliente \r\n";
+							error = true;	
+						}
+					}
+					
+					
+					
+					if (isThisDateValid(str_fecha_alta, "dd/MM/yyyy")) {
+							implementacion.setStr_fech_alta(str_fecha_alta);;
+					}
+					else {
+						result += "Error\r\nError fecha alta \r\n";
+						error = true;
+					}
+					
+					if(!fechaContratacion.equals("")||!fechaContratacion.equals("")){
+						if (isThisDateValid(fechaContratacion, "dd/MM/yyyy")) {
+							implementacion.setStr_fech_alta(fechaContratacion);
+						}
+						else {
+
+						}
+					}					
+					
+					if(normalizador.equals("SI")){
+						implementacion.setNormalizador(true);
+					}else{
+						if(normalizador.equals("NO")){
+							implementacion.setNormalizador(false);
+						}else{
+							result += "Error normalizador \r\n";
+							error = true;	
+						}
+					}
+					
+					if(firmaContrato.equals("SI")){
+						implementacion.setFirma_contrato(true);
+					}else{
+						if(firmaContrato.equals("NO")){
+							implementacion.setFirma_contrato(false);
+						}else{
+							result += "Error firma \r\n";
+							error = true;	
+						}
+					}
+					
+					List<Servicio> serviciosforname =servicioDao.getServicioByName(servicio);		
+					if(serviciosforname.size()==1){
+						long servicioKeyLong = serviciosforname.get(0).getKey().getId();
+						implementacion.setServicio_id(servicioKeyLong);
+						implementacion.setServicio_name(serviciosforname.get(0).getName());
+					}else{
+						result += "Error servicio \r\n";
+						error = true;	
+					}
+					if(!error) {
+						result += implementacion.toString() + "\r\n\r\n";
+					}
+					else {
+						result += "\r\n";
+					}
+					
+					if(save&&!error) {
+						implementacionDao.createImplementacion(implementacion, "");
 					}
 				}
 				counter++;
