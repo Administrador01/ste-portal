@@ -6,7 +6,10 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 
+
+
 import com.ste.beans.Servicio;
+import com.ste.beans.Soporte;
 import com.ste.persistence.PMF;
 
 public class ServicioDao {
@@ -73,5 +76,20 @@ public Servicio getImplementacionById(long l) {
 		}
 
 
+	}
+
+	public List<Servicio> getServicioByName(String name) {
+		List<Servicio> servicios;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		
+		Query q = pm.newQuery("select from " + Servicio.class.getName()+" where name == '"+name+"'");		
+		servicios = (List<Servicio>) q.execute();
+		
+		
+		pm.close();
+
+		
+		return servicios;
 	}
 }

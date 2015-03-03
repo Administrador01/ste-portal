@@ -211,13 +211,7 @@ public class ServicioServlet  extends HttpServlet{
 	          e.printStackTrace();
 	       }
 	}
-	public void createServicio(HttpServletRequest req, HttpServletResponse resp, String usermail) throws InterruptedException{
-		ServicioDao sDao = ServicioDao.getInstance();
-		sDao.deleteAll();
-		
-		TipoServicioDao tipservDao = TipoServicioDao.getInstance();
-		tipservDao.deleteAll();
-		
+	public void createElse(HttpServletRequest req, HttpServletResponse resp, String usermail) throws InterruptedException{
 		PaisDao paisDao = PaisDao.getInstance();
 		paisDao.deleteAll();
 		
@@ -412,6 +406,17 @@ public class ServicioServlet  extends HttpServlet{
 		prod.setPruebas(true);
 		prodDao.createProductoCanal(prod);
 		prod = new ProductoCanal();
+	}
+	public void createServicio(HttpServletRequest req, HttpServletResponse resp, String usermail) throws InterruptedException{
+		ServicioDao sDao = ServicioDao.getInstance();
+		sDao.deleteAll();
+		
+		TipoServicioDao tipservDao = TipoServicioDao.getInstance();
+		tipservDao.deleteAll();
+		
+		
+		
+		
 
 		
 		TipoServicio tipserv = new TipoServicio();
@@ -661,13 +666,13 @@ public class ServicioServlet  extends HttpServlet{
 		s.setTipo(tipo);
 		sDao.createServicio(s, usermail);
 		s = new Servicio();
-		 nombre ="Mt940";
+		 nombre ="MT940";
 		tipo = "Recepción";
 		s.setNme(nombre);
 		s.setTipo(tipo);
 		sDao.createServicio(s, usermail);
 		s = new Servicio();
-		 nombre ="Mt942";
+		 nombre ="MT942";
 		tipo = "Recepción";
 		s.setNme(nombre);
 		s.setTipo(tipo);

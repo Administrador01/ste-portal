@@ -1,6 +1,7 @@
 package com.ste.dao;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -190,5 +191,17 @@ public class ClienteDao {
 		pManager.close();
 
 		return c;
+	}
+	
+	public List<Cliente> getClientesByName(String name) {
+		ClienteDao clienteDao = ClienteDao.getInstance();
+		List<Cliente> clientes = clienteDao.getAllClients();
+		List<Cliente> clientesCoinc = new ArrayList<Cliente>();
+		for (Cliente cli: clientes ){
+			if (cli.getNombre().toLowerCase().equals(name.toLowerCase())){
+				clientesCoinc.add(cli);
+			}
+		}
+		return clientesCoinc;
 	}
 }
