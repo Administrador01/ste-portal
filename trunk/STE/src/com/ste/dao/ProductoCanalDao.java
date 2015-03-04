@@ -5,6 +5,7 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import com.ste.beans.EstadoImplementacion;
 import com.ste.beans.Pais;
 import com.ste.beans.ProductoCanal;
 import com.ste.persistence.PMF;
@@ -64,6 +65,23 @@ public class ProductoCanalDao {
 		pm.close();
 
 		return ProductoCanales;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<ProductoCanal> getEstadoImpForNameAndEnty(String name, String enty) {
+
+		List<ProductoCanal> EstadoImplementacions;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		
+		Query q = pm.newQuery("select from " + ProductoCanal.class.getName()+" WHERE name=='"+name+"' && "+enty+"==true");
+
+		EstadoImplementacions = (List<ProductoCanal>) q.execute();
+		
+		
+		pm.close();
+
+		return EstadoImplementacions;
 	}
 	
 	public void deleteAll(){
