@@ -6,9 +6,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import javax.servlet.http.HttpServlet;
@@ -17,10 +19,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.ste.beans.Cliente;
+import com.ste.beans.EstadoImplementacion;
 import com.ste.beans.Implementacion;
+import com.ste.beans.ProductoCanal;
 import com.ste.beans.Servicio;
 import com.ste.dao.ClienteDao;
+import com.ste.dao.EstadoImplementacionDao;
 import com.ste.dao.ImplementacionDao;
+import com.ste.dao.ProductoCanalDao;
 import com.ste.dao.ServicioDao;
 import com.ste.utils.Utils;
 import com.ste.beans.User;
@@ -263,7 +269,10 @@ public class DefaultConf extends HttpServlet{
 			save = true;
 		}
 		String link = "/datadocs/implementacionesCarga.csv";
-		
+		String linkParam = req.getParameter("link"); 
+		if(linkParam != null) {
+			link = linkParam;
+		}
 		String result = "";
 		try {
 			
@@ -273,18 +282,19 @@ public class DefaultConf extends HttpServlet{
 			String inputLine = new String();
 
 			ImplementacionDao implementacionDao = ImplementacionDao.getInstance();
-			
-			int counter = 1;
+			ServicioDao servicioDao = ServicioDao.getInstance();
+			EstadoImplementacionDao estadoDao = EstadoImplementacionDao.getInstance();
+			ProductoCanalDao productoDao = ProductoCanalDao.getInstance();
+			int counter = 301;
 			boolean error = false;
 			
-			ServicioDao servicioDao = ServicioDao.getInstance();
-			List<Servicio> servicios = servicioDao.getAllServicios();
-			
+			List<EstadoImplementacion> estadosforname;
+			List<String> servprintados = new ArrayList<String>();
 
 			while ((inputLine = in.readLine()) != null) {
 				error = false;
 				
-				result = result+"\n"+counter+"    ";
+				//result = result+"\n"+counter+"    ";
 				
 				String line = inputLine;
 				String[] implementacionSplit = line.split(";", -1);
@@ -300,10 +310,10 @@ public class DefaultConf extends HttpServlet{
 					
 					String clienteName = implementacionSplit[0];
 					String productoCanal = implementacionSplit[1];
-					String segmento  = implementacionSplit[2];
+					//String segmento  = implementacionSplit[2];
 					String servicio  = implementacionSplit[3];
 					String str_fecha_alta = implementacionSplit[4];
-					String tipoServicio = implementacionSplit[5];
+					//String tipoServicio = implementacionSplit[5];
 					String gestorGcs = implementacionSplit[6];
 					String pais = implementacionSplit[7];
 					String gestorPromocion = implementacionSplit[8];
@@ -336,6 +346,7 @@ public class DefaultConf extends HttpServlet{
 					implementacion.setPais(pais);
 					implementacion.setServicio_name(servicio);
 					implementacion.setProducto(productoCanal);
+					implementacion.setAsunto_ref_ext(asunto);
 					
 												
 					if(!esNuloVacio(clienteName)) {
@@ -348,7 +359,7 @@ public class DefaultConf extends HttpServlet{
 							implementacion.setCliente_id(clienteKeyLong);
 							
 						}else{
-							result += "Error cliente \r\n";
+							//result += "Error cliente \r\n";
 							error = true;	
 						}
 					}
@@ -400,11 +411,37 @@ public class DefaultConf extends HttpServlet{
 						implementacion.setServicio_id(servicioKeyLong);
 						implementacion.setServicio_name(serviciosforname.get(0).getName());
 					}else{
-						result += "Error servicio \r\n";
+						if(servprintados.contains(servicio)){}else{
+							servprintados.add(servicio);
+							result += counter+"   "+servicio+"\r\n";
+							error = true;	
+						}
+					}
+					
+					
+					estado = estado.toLowerCase();
+					String initial = estado.substring(0, 1);
+					estado = estado.substring(1);
+					initial = initial.toUpperCase();
+					estado = initial+estado;
+				
+					estadosforname = estadoDao.getEstadoImpForName(estado);		
+					if(estadosforname.size()==1){
+						implementacion.setEstado(estadosforname.get(0).getName());
+					}else{
+						result += "Error estado \r\n";
+						error = true;	
+					}
+					
+					List<ProductoCanal> productos = productoDao.getEstadoImpForNameAndEnty(productoCanal, "implementaciones");		
+					if(productos.size()==1){
+						implementacion.setProducto(productos.get(0).getName());
+					}else{
+						result += "Error producto \r\n";
 						error = true;	
 					}
 					if(!error) {
-						result += implementacion.toString() + "\r\n\r\n";
+						//result += implementacion.toString() + "\r\n\r\n";
 					}
 					else {
 						result += "\r\n";

@@ -138,7 +138,12 @@ public class ImplementacionServlet extends HttpServlet{
 			imp.setReferencia_global(ref_glob);
 			imp.setReferencia_local(ref_loc);
 			imp.setReferencia_externa(ref_ext);
-			imp.setServicio_id(Long.parseLong(servicio_id));
+			
+			if(servicio_id!=null&&!servicio_id.equals("")){
+				imp.setServicio_id(Long.parseLong(servicio_id));
+				Servicio serv = ServicioDao.getInstance().getImplementacionById(Long.parseLong(servicio_id));
+				imp.setServicio_name(serv.getName());
+			}
 			imp.setStr_fech_contratacion(fecha_contrat);
 			imp.setStr_fech_subida(fecha_subid);
 			imp.setProducto(producto);
@@ -227,7 +232,11 @@ public class ImplementacionServlet extends HttpServlet{
 			imp.setReferencia_global(ref_glob);
 			imp.setReferencia_local(ref_loc);
 			imp.setReferencia_externa(ref_ext);
-			imp.setServicio_id(Long.parseLong(servicio_id));
+			if(servicio_id!=null&&!servicio_id.equals("")){
+				imp.setServicio_id(Long.parseLong(servicio_id));
+				Servicio serv = ServicioDao.getInstance().getImplementacionById(Long.parseLong(servicio_id));
+				imp.setServicio_name(serv.getName());
+			}
 			imp.setStr_fech_contratacion(fecha_contrat);
 			imp.setStr_fech_subida(fecha_subid);
 			imp.setProducto(producto);
@@ -345,7 +354,7 @@ public class ImplementacionServlet extends HttpServlet{
 			
 			int aux = 1;
 
-			for ( Implementacion imp : implementaciones) {
+			for ( Implementacion imp : implementaciones) { 
 				
 				Cliente cliente = cliDao.getClientebyId(imp.getCliente_id());
 				Servicio servicio = servDao.getImplementacionById(imp.getServicio_id());

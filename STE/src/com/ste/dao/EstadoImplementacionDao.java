@@ -48,6 +48,22 @@ public class EstadoImplementacionDao {
 		return EstadoImplementacions;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<EstadoImplementacion> getEstadoImpForName(String name) {
+
+		List<EstadoImplementacion> EstadoImplementacions;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		
+		Query q = pm.newQuery("select from " + EstadoImplementacion.class.getName()+" WHERE name=='"+name+"'");
+		EstadoImplementacions = (List<EstadoImplementacion>) q.execute();
+		
+		
+		pm.close();
+
+		return EstadoImplementacions;
+	}
+	
 	public void deleteAll(){
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		EstadoImplementacionDao sDao = EstadoImplementacionDao.getInstance();
