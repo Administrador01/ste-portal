@@ -60,7 +60,7 @@ public class ImplementacionDao {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		
 		
-		Query q = pm.newQuery("select from " + Implementacion.class.getName()+" where erased == true && cliente_id == "+ cliente.getKey().getId());		
+		Query q = pm.newQuery("select from " + Implementacion.class.getName()+" where erased == false && cliente_id == "+ cliente.getKey().getId());		
 		Implementacions = (List<Implementacion>) q.execute();
 		
 		

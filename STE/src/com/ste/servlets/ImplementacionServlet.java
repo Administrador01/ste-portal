@@ -144,6 +144,12 @@ public class ImplementacionServlet extends HttpServlet{
 				Servicio serv = ServicioDao.getInstance().getImplementacionById(Long.parseLong(servicio_id));
 				imp.setServicio_name(serv.getName());
 			}
+			
+			if(cliente_id!=null&&!cliente_id.equals("")){
+				imp.setCliente_id(Long.parseLong(cliente_id));
+				Cliente serv = ClienteDao.getInstance().getClientebyId(Long.parseLong(cliente_id));
+				imp.setClient_name(serv.getNombre());
+			}
 			imp.setStr_fech_contratacion(fecha_contrat);
 			imp.setStr_fech_subida(fecha_subid);
 			imp.setProducto(producto);

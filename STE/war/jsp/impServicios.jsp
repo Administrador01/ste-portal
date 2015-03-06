@@ -58,6 +58,7 @@
 								<tr class="valid-result" id="row${s.key.id}">
 	
 									<td><span>
+										<!--
 										<c:forEach items="${clientesAll}" var="t">
 										<c:choose>
 											<c:when test="${t.key.id==s.cliente_id}">
@@ -65,8 +66,12 @@
 											</c:when>
 										</c:choose>	
 										</c:forEach>
+										-->
+										${s.client_name}
 									</span></td>
 									<td><span>
+										
+										<!--
 										<c:forEach items="${servicios}" var="t">
 											<c:choose>
 												<c:when test="${t.key.id==s.servicio_id}">
@@ -74,6 +79,8 @@
 												</c:when>
 											</c:choose>	
 										</c:forEach>
+										-->
+										${s.servicio_name}
 									</span></td>
 									<td><span>${s.pais}</span></td>
 									<td><span>${s.str_fech_subida}</span></td>

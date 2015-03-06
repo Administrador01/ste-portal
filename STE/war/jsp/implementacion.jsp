@@ -296,6 +296,7 @@
 									<td><span>${s.pais}</span></td>
 									<td><span>${s.producto}</span></td>
 									<td><span>
+									<!--
 										<c:forEach items="${servicios}" var="t">
 											<c:choose>
 												<c:when test="${t.key.id==s.servicio_id}">
@@ -303,6 +304,9 @@
 												</c:when>
 											</c:choose>	
 										</c:forEach>
+									-->
+									
+										${s.servicio_name}
 									</span></td>
 									<td><span>
  										<b>${s.normalizador ? 'S&iacute' : 'No'}</b>
