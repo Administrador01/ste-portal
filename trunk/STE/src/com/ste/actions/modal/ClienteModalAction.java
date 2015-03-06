@@ -19,14 +19,12 @@ public class ClienteModalAction extends Action{
 			HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		try {
-			String str_id = req.getParameter("id");
-			
-			ClienteDao cDao = ClienteDao.getInstance();
-			Cliente c = cDao.getClientebyId(Long.parseLong(str_id));
-			
-			req.setAttribute("cliente", c);
-					
-		
+				String str_id = req.getParameter("id");
+				
+				ClienteDao cDao = ClienteDao.getInstance();
+				Cliente c = cDao.getClientebyId(Long.parseLong(str_id));
+				
+				req.setAttribute("cliente", c);	
 			
 			}catch(Exception e){
 				

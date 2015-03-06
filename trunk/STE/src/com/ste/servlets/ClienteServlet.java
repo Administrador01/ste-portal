@@ -24,9 +24,11 @@ import jxl.write.WritableWorkbook;
 import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.ste.beans.Cliente;
+import com.ste.beans.Implementacion;
 import com.ste.beans.Prueba;
 import com.ste.beans.Soporte;
 import com.ste.dao.ClienteDao;
+import com.ste.dao.ImplementacionDao;
 import com.ste.dao.PruebaDao;
 import com.ste.dao.SoporteDao;
 import com.ste.utils.Utils;
@@ -210,6 +212,10 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 		
 		List<Soporte> sop_arr = sDao.getAllSoportesByClientId(str_id);
 		
+		ImplementacionDao impDao = ImplementacionDao.getInstance();
+		
+		List<Implementacion> imp_arr = impDao.getImplementacionesForClient(c);
+		
 		//actualizamos los valores del cliente
 		
 		String str_fecha_alta = req.getParameter("fecha_alta");		
@@ -226,9 +232,9 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 		c.setPremium(premium);
 		
 		//actualizamos los valores de los campos de pruebas y de soporte
-		/*
+		
 		for (Prueba a : prueb_arr){
-			a.setNombre_cliente(nombre);
+			//a.setNombre_cliente(nombre);
 			a.setPremium(premium);
 			pDao.updatePrueba(a);
 		}
@@ -239,7 +245,12 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 			so.setTipo_cliente(tipo_cliente);
 			sDao.updateSoporte(so);
 		}
-		*/
+		
+		for(Implementacion imp: imp_arr){
+			imp.setClient_name(nombre);
+			impDao.createImplementacionRaw(imp);
+		}
+		
 		
 		//eeeeeeeeeeeeeee
 		cDao.createCliente(c);

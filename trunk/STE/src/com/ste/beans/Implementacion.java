@@ -97,6 +97,9 @@ public class Implementacion {
 	@Persistent
 	private Date fech_subida;
 	
+	@Persistent
+	private String client_name;
+	
 
 	public Key getKey() {
 		return key;
@@ -208,6 +211,14 @@ public class Implementacion {
 
 	public void setGestor_gcs(String gcs) {
 		this.gestor_gcs = gcs;
+	}
+	
+	public String getClient_name() {
+		return client_name;
+	}
+
+	public void setClient_name(String name){
+		this.client_name = name;
 	}
 	public String getGestor_promocion() {
 		return gestor_promocion;
