@@ -285,7 +285,7 @@ public class DefaultConf extends HttpServlet{
 			ServicioDao servicioDao = ServicioDao.getInstance();
 			EstadoImplementacionDao estadoDao = EstadoImplementacionDao.getInstance();
 			ProductoCanalDao productoDao = ProductoCanalDao.getInstance();
-			int counter = 301;
+			int counter = 1;
 			boolean error = false;
 			
 			List<EstadoImplementacion> estadosforname;
@@ -357,7 +357,7 @@ public class DefaultConf extends HttpServlet{
 						if(clientesForId.size()==1){
 							long clienteKeyLong = clientesForId.get(0).getKey().getId();
 							implementacion.setCliente_id(clienteKeyLong);
-							
+							implementacion.setClient_name(clientesForId.get(0).getNombre());
 						}else{
 							//result += "Error cliente \r\n";
 							error = true;	

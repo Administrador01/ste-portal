@@ -263,6 +263,7 @@
 					<tr>
 						
 						<th><span class="table-title">Fecha alta</span></th>
+						<th><span class="table-title">Cliente</span></th>
 						<th><span class="table-title">Pa&iacutes</span></th>
 						<th><span class="table-title">Producto</span></th>
 						<th><span class="table-title">Servicio</span></th>
@@ -278,6 +279,7 @@
 						<th class="search-th"><input class="search col3 search_anywhere"></th>
 						<th class="search-th"><input class="search col4 search_anywhere"></th>
 						<th class="search-th"><input class="search col5 search_anywhere"></th>
+						<th class="search-th"><input class="search col6 search_anywhere"></th>
 						<th style="width: 110px;">&nbsp;</th>
 					</tr>
 				</thead>
@@ -293,6 +295,7 @@
 							<c:forEach items="${implementaciones}" var="s">
 								<tr class="valid-result" id="row${s.key.id}" style="${s.erased?'background-color:#8B8B8B;':''}">
 									<td><span>${s.str_fecha_alta}</span></td>
+									<td><span>${s.client_name}</span></td>
 									<td><span>${s.pais}</span></td>
 									<td><span>${s.producto}</span></td>
 									<td><span>
