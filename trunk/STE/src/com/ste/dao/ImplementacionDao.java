@@ -207,6 +207,19 @@ public Implementacion getImplementacionById(long l) {
 		return c;
 	}
 
+public void deleteAll() {
+	ImplementacionDao impDao = ImplementacionDao.getInstance();
+	List<Implementacion> implementaciones = impDao.getAllImplementaciones();
+	for(Implementacion imp : implementaciones){
+		impDao.deleteImplementaciones(imp);
+	}
+}
+
+public void deleteImplementaciones(Implementacion imp) {
+	PersistenceManager pm = PMF.get().getPersistenceManager();
+	pm.deletePersistent( pm.getObjectById( imp.getClass(), imp.getKey().getId())); 
+	pm.close();
+}
 public String getNombreClienteByImpId(long l) {
 	
 	ImplementacionDao impDao = ImplementacionDao.getInstance();
