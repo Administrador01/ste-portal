@@ -34,6 +34,23 @@ public class ImplementacionDao {
 
 		return Implementacions;
 	}
+	@SuppressWarnings("unchecked")
+	public List<Implementacion> getImplementacionFor(String clienteName,String productoCanal,String servicio,String gestorGcs,String pais,String gestorPromocion,String gestorRelacion,String referenciaGlobal,boolean firmaBol,boolean normalizadorbol, String referenciaLocal,String estado,String detalle,String referenciaExterna,String asunto,String contratoAdeudos, String idAcreedor,String cuentaAbono) {
+
+		List<Implementacion> Implementacions = null;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		
+		Query q = pm.newQuery("select from " + Implementacion.class.getName());
+		q.setFilter(" ");
+		q.declareParameters("String clienteName,String productoCanal,String servicio,String gestorGcs,String pais,String gestorPromocion,String gestorRelacion,String referenciaGlobal,boolean firmaBol,boolean normalizadorbol, String referenciaLocal,String estado,String detalle,String referenciaExterna,String asunto,String contratoAdeudos, String idAcreedor,String cuentaAbono");
+		//Implementacions = (List<Implementacion>) q.execute( clienteName, productoCanal, servicio, gestorGcs, pais, gestorPromocion, gestorRelacion, referenciaGlobal,firmaBol,normalizadorbol,  referenciaLocal, estado, detalle, referenciaExterna, asunto, contratoAdeudos,  idAcreedor, cuentaAbono);
+		
+		
+		pm.close();
+
+		return Implementacions;
+	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Implementacion> getAllDelImplementaciones() {

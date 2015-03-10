@@ -259,7 +259,211 @@ public class DefaultConf extends HttpServlet{
 		}
 		return result;
 	}
+	public String UpdateFechaImplementaciones(HttpServletRequest req, HttpServletResponse resp) throws InterruptedException, IOException{
+		HttpSession sesion = req.getSession();
+		boolean save = false;
+		String saveParam = req.getParameter("save"); 
+		if(saveParam != null && saveParam.equals("true")) {
+			save = true;
+		}
+		String link = "/datadocs/implementacionesCarga.csv";
+		String linkParam = req.getParameter("link"); 
+		if(linkParam != null) {
+			link = linkParam;
+		}
+		String result = "";
+		try {
+			
+			InputStream stream = this.getServletContext().getResourceAsStream(link);
+			BufferedReader in = new BufferedReader(new InputStreamReader(stream, "Cp1252"));
+
+			String inputLine = new String();
+
+			ImplementacionDao implementacionDao = ImplementacionDao.getInstance();
+			ServicioDao servicioDao = ServicioDao.getInstance();
+			EstadoImplementacionDao estadoDao = EstadoImplementacionDao.getInstance();
+			ProductoCanalDao productoDao = ProductoCanalDao.getInstance();
+			int counter = 1;
+			boolean error = false;
+			
+			List<EstadoImplementacion> estadosforname;
+			List<String> servprintados = new ArrayList<String>();
+
+			while ((inputLine = in.readLine()) != null) {
+				error = false;
+				
+				result = result+"\n"+counter+"    ";
+				
+				String line = inputLine;
+				String[] implementacionSplit = line.split(";", -1);
+
+				boolean procesar = true;
+				if (implementacionSplit.length < 22) {
+					procesar = false;
+				}
+
+
+				if (procesar) {
+					
+					String fechaContratacion = implementacionSplit[15];
+					if(!fechaContratacion.equals("")||!fechaContratacion.equals("")){
+					
+						String clienteName = implementacionSplit[0];
+						String productoCanal = implementacionSplit[1];
+						//String segmento  = implementacionSplit[2];
+						String servicio  = implementacionSplit[3];
+						String str_fecha_alta = implementacionSplit[4];
+						//String tipoServicio = implementacionSplit[5];
+						String gestorGcs = implementacionSplit[6];
+						String pais = implementacionSplit[7];
+						String gestorPromocion = implementacionSplit[8];
+						String normalizador = implementacionSplit[9];
+						String gestorRelacion = implementacionSplit[10];
+						String referenciaGlobal = implementacionSplit[11];
+						String firmaContrato = implementacionSplit[12];
+						String referenciaLocal = implementacionSplit[13];
+						String estado = implementacionSplit[14];
+						String detalle = implementacionSplit[16];
+						String referenciaExterna = implementacionSplit[17];
+						String asunto = implementacionSplit[18];
+						String contratoAdeudos = implementacionSplit[19];
+						String idAcreedor = implementacionSplit[20];
+						String cuentaAbono = implementacionSplit[21];
+						
+						
 	
+						if (detalle.length()>=500){
+							detalle = detalle.substring(0, 499);
+						}
+	
+						
+								
+													
+						if(!esNuloVacio(clienteName)) {
+	
+							ClienteDao cliDao = ClienteDao.getInstance();
+	
+							List<Cliente> clientesForId =cliDao.getClientesByName(clienteName);
+							if(clientesForId.size()==1){
+								long clienteKeyLong = clientesForId.get(0).getKey().getId();
+								clienteName = clientesForId.get(0).getNombre();
+							}else{
+								result += "Error cliente \r\n";
+								error = true;	
+							}
+						}
+						
+						boolean normalizadorbol = false;
+						if(normalizador.equals("SI")){
+							normalizadorbol = true;
+						}else{
+							if(normalizador.equals("NO")){
+								normalizadorbol = false;
+							}else{
+								result += "Error normalizador \r\n";
+								error = true;	
+							}
+						}
+						
+						boolean firmabol = false;
+						if(firmaContrato.equals("SI")){
+							firmabol=true;
+						}else{
+							if(firmaContrato.equals("NO")){
+								firmabol = false;
+							}else{
+								result += "Error firma \r\n";
+								error = true;	
+							}
+						}
+						
+						List<Servicio> serviciosforname =servicioDao.getServicioByName(servicio);		
+						if(serviciosforname.size()==1){
+							long servicioKeyLong = serviciosforname.get(0).getKey().getId();
+							servicio = serviciosforname.get(0).getName();
+						}else{
+							if(servprintados.contains(servicio)){}else{
+								servprintados.add(servicio);
+								result += counter+"   "+servicio+"\r\n";
+								error = true;	
+							}
+						}
+						
+						
+						estado = estado.toLowerCase();
+						String initial = estado.substring(0, 1);
+						estado = estado.substring(1);
+						initial = initial.toUpperCase();
+						estado = initial+estado;
+					
+						estadosforname = estadoDao.getEstadoImpForName(estado);		
+						if(estadosforname.size()==1){
+							estado = estadosforname.get(0).getName();
+						}else{
+							result += "Error estado \r\n";
+							error = true;	
+						}
+						
+						List<ProductoCanal> productos = productoDao.getEstadoImpForNameAndEnty(productoCanal, "implementaciones");		
+						if(productos.size()==1){
+							productoCanal = productos.get(0).getName();
+						}else{
+							result += "Error producto \r\n";
+							error = true;	
+						}
+						
+						
+						List<Implementacion> implementasdf = implementacionDao.getImplementacionFor(clienteName, productoCanal, servicio, gestorGcs, pais, gestorPromocion, gestorRelacion, referenciaGlobal, firmabol, normalizadorbol, referenciaLocal, estado, detalle, referenciaExterna, asunto, contratoAdeudos, idAcreedor, cuentaAbono);
+						
+						Implementacion implementacion = null;
+						if(implementasdf.size()==1){
+							implementacion = implementasdf.get(0);
+						}else{
+							error = true;
+						}
+						
+						if (isThisDateValid(str_fecha_alta, "dd/MM/yyyy")) {
+								implementacion.setStr_fech_alta(str_fecha_alta);;
+						}
+						else {
+							result += "Error\r\nError fecha alta \r\n";
+							error = true;
+						}
+						
+						if(!fechaContratacion.equals("")||!fechaContratacion.equals("")){
+							if (isThisDateValid(fechaContratacion, "dd/MM/yyyy")) {
+								implementacion.setStr_fech_contratacion(fechaContratacion);
+							}
+							else {
+	
+							}
+						}					
+						
+
+						
+
+						if(!error) {
+							//result += implementacion.toString() + "\r\n\r\n";
+						}
+						else {
+							result += "\r\n";
+						}
+						
+						
+						
+						if(save&&!error) {
+							implementacionDao.createImplementacionRaw(implementacion);
+						}
+					
+					}
+				}
+				counter++;
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 	public String loadImplementaciones(HttpServletRequest req, HttpServletResponse resp) throws InterruptedException, IOException{
 		HttpSession sesion = req.getSession();
@@ -294,7 +498,7 @@ public class DefaultConf extends HttpServlet{
 			while ((inputLine = in.readLine()) != null) {
 				error = false;
 				
-				//result = result+"\n"+counter+"    ";
+				result = result+"\n"+counter+"    ";
 				
 				String line = inputLine;
 				String[] implementacionSplit = line.split(";", -1);
@@ -342,6 +546,9 @@ public class DefaultConf extends HttpServlet{
 					implementacion.setAcreedor_ref_ext(idAcreedor);
 					implementacion.setAdeudos_ref_ext(contratoAdeudos);
 					implementacion.setCuenta_ref_ext(cuentaAbono);
+					if (detalle.length()>=500){
+						detalle = detalle.substring(0, 499);
+					}
 					implementacion.setDetalle(detalle);
 					implementacion.setPais(pais);
 					implementacion.setServicio_name(servicio);
@@ -359,7 +566,7 @@ public class DefaultConf extends HttpServlet{
 							implementacion.setCliente_id(clienteKeyLong);
 							implementacion.setClient_name(clientesForId.get(0).getNombre());
 						}else{
-							//result += "Error cliente \r\n";
+							result += "Error cliente \r\n";
 							error = true;	
 						}
 					}
@@ -376,7 +583,7 @@ public class DefaultConf extends HttpServlet{
 					
 					if(!fechaContratacion.equals("")||!fechaContratacion.equals("")){
 						if (isThisDateValid(fechaContratacion, "dd/MM/yyyy")) {
-							implementacion.setStr_fech_alta(fechaContratacion);
+							implementacion.setStr_fech_contratacion(fechaContratacion);
 						}
 						else {
 
