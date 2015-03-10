@@ -185,7 +185,7 @@
 					
 					<div style="margin-top:2%;width:99%;margin-bottom: 4%;" class="form-field">
 					<span class="lbl">Detalle:</span>
-					<textarea placeholder="Introduzca texto ..." cols="3" rows="3" maxlength="500" name="detalle" type="text" style="width:79.5%!important;"></textarea>
+					<textarea placeholder="Introduzca texto ..." cols="3" rows="3" maxlength="500" name="detalle" type="text" style="width:79.5%!important;">${implementacion.detalle}</textarea>
 					</div>
 					
 					<h3 style="color:#D1DCFF;   margin-top: 5%;

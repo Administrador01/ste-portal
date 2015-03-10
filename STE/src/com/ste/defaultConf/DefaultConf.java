@@ -472,6 +472,11 @@ public class DefaultConf extends HttpServlet{
 		if(saveParam != null && saveParam.equals("true")) {
 			save = true;
 		}
+		ImplementacionDao implementacionDao = ImplementacionDao.getInstance();
+		String deleteParam = req.getParameter("delete"); 
+		if(deleteParam != null && deleteParam.equals("true")) {
+			implementacionDao.deleteAll();
+		}
 		String link = "/datadocs/implementacionesCarga.csv";
 		String linkParam = req.getParameter("link"); 
 		if(linkParam != null) {
@@ -485,7 +490,7 @@ public class DefaultConf extends HttpServlet{
 
 			String inputLine = new String();
 
-			ImplementacionDao implementacionDao = ImplementacionDao.getInstance();
+			
 			ServicioDao servicioDao = ServicioDao.getInstance();
 			EstadoImplementacionDao estadoDao = EstadoImplementacionDao.getInstance();
 			ProductoCanalDao productoDao = ProductoCanalDao.getInstance();
@@ -536,7 +541,7 @@ public class DefaultConf extends HttpServlet{
 					String cuentaAbono = implementacionSplit[21];
 					
 					implementacion.setReferencia_global(referenciaGlobal);
-					implementacion.setReferencia_externa(referenciaLocal);
+					implementacion.setReferencia_local(referenciaLocal);
 					implementacion.setReferencia_externa(referenciaExterna);
 					implementacion.setGestor_gcs(gestorGcs);
 					implementacion.setGestor_promocion(gestorPromocion);
@@ -545,7 +550,6 @@ public class DefaultConf extends HttpServlet{
 					implementacion.setCuenta_ref_ext(cuentaAbono);
 					implementacion.setAcreedor_ref_ext(idAcreedor);
 					implementacion.setAdeudos_ref_ext(contratoAdeudos);
-					implementacion.setCuenta_ref_ext(cuentaAbono);
 					if (detalle.length()>=500){
 						detalle = detalle.substring(0, 499);
 					}
