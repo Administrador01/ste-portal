@@ -443,8 +443,8 @@ public class ImplementacionServlet extends HttpServlet{
 			s.setColumnView(1, 30);
 			s.setColumnView(2, 40);
 			s.setColumnView(3, 30);
-			s.setColumnView(4, 40);
-			s.setColumnView(5, 45);
+			s.setColumnView(4, 45);
+			s.setColumnView(5, 40);
 			s.setColumnView(6, 20);
 
 
@@ -454,8 +454,8 @@ public class ImplementacionServlet extends HttpServlet{
 			s.addCell(new Label(1, 0, "CLIENTE", cellFormat));
 			s.addCell(new Label(2, 0, "FORMATO/SERVICIO", cellFormat));
 			s.addCell(new Label(3, 0, "PAÍS", cellFormat));
-			s.addCell(new Label(4, 0, "FECHA SUBIDA A PRODUCCIÓN", cellFormat));
-			s.addCell(new Label(5, 0, "FECHA CONTRATACIÓN PRODUCCIÓN", cellFormat));
+			s.addCell(new Label(4, 0, "FECHA CONTRATACIÓN PRODUCCIÓN", cellFormat));
+			s.addCell(new Label(5, 0, "FECHA SUBIDA A PRODUCCIÓN", cellFormat));
 			s.addCell(new Label(6, 0, "NORMALIZADOR", cellFormat));
 
 			

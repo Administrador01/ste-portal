@@ -551,6 +551,7 @@ public class DefaultConf extends HttpServlet{
 					implementacion.setAcreedor_ref_ext(idAcreedor);
 					implementacion.setAdeudos_ref_ext(contratoAdeudos);
 					if (detalle.length()>=500){
+						detalle.replace("\"", "");
 						detalle = detalle.substring(0, 499);
 					}
 					implementacion.setDetalle(detalle);
