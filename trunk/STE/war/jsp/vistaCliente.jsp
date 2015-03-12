@@ -63,7 +63,7 @@
 						<span class="table-title">PAIS</span>
 					</th>
 					<th>
-						<span class="table-title">FORMATO</span>
+						<span class="table-title">FECHA ALTA</span>
 					</th>
 					<th>
 						<span class="table-title">SERVICIO</span>
@@ -88,7 +88,7 @@
 							<tr class="valid-result" id="row${s.key.id}">
 								<td><span>${s.producto}</span></td>
 								<td><span>${s.pais}</span></td>
-								<td>unknow</td>
+								<td>${s.str_fecha_alta}</td>
 								<td><span>
 								<c:forEach items="${servicios}" var="t">
 									
