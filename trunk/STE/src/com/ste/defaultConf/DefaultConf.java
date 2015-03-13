@@ -1,4 +1,4 @@
-package com.ste.defaultConf;
+ package com.ste.defaultConf;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,15 +19,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.ste.beans.Cliente;
+import com.ste.beans.Estado;
 import com.ste.beans.EstadoImplementacion;
 import com.ste.beans.Implementacion;
 import com.ste.beans.ProductoCanal;
+import com.ste.beans.Prueba;
 import com.ste.beans.Servicio;
+import com.ste.beans.TipoServicio;
 import com.ste.dao.ClienteDao;
+import com.ste.dao.EstadoDao;
 import com.ste.dao.EstadoImplementacionDao;
 import com.ste.dao.ImplementacionDao;
 import com.ste.dao.ProductoCanalDao;
+import com.ste.dao.PruebaDao;
 import com.ste.dao.ServicioDao;
+import com.ste.dao.TipoServicioDao;
 import com.ste.utils.Utils;
 import com.ste.beans.User;
 import com.ste.dao.UserDao;
@@ -73,7 +79,7 @@ public class DefaultConf extends HttpServlet{
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		
+		 
 	}
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse resp){
@@ -144,6 +150,192 @@ public class DefaultConf extends HttpServlet{
 			e.printStackTrace();
 		}
 	}
+	
+	public String loadPruebas(HttpServletRequest req, HttpServletResponse resp) throws InterruptedException, IOException{
+		HttpSession sesion = req.getSession();
+		boolean save = false;
+		String saveParam = req.getParameter("save"); 
+		if(saveParam != null && saveParam.equals("true")) {
+			save = true;
+		}
+		PruebaDao pruebaDao = PruebaDao.getInstance();
+		String deleteParam = req.getParameter("delete"); 
+		if(deleteParam != null && deleteParam.equals("true")) {
+			List<Prueba> pruebas = pruebaDao.getAllPruebasEvenDel();
+			for(Prueba prueba : pruebas){
+				pruebaDao.deletePrueba(prueba);
+			}
+		}
+		String link = "/datadocs/pruebasCarga.csv";
+		String linkParam = req.getParameter("link"); 
+		if(linkParam != null) {
+			link = linkParam;
+		}
+		String result = "";
+		try {
+			
+			InputStream stream = this.getServletContext().getResourceAsStream(link);
+			BufferedReader in = new BufferedReader(new InputStreamReader(stream, "Cp1252"));
+
+			String inputLine = new String();
+
+			
+			ServicioDao servicioDao = ServicioDao.getInstance();
+			TipoServicioDao tipoServDao = TipoServicioDao.getInstance();
+			EstadoDao estadoDao = EstadoDao.getInstance(); 
+			ProductoCanalDao productoDao = ProductoCanalDao.getInstance();
+			int counter = 1;
+			boolean error = false;
+			
+			List<EstadoImplementacion> estadosforname;
+			List<String> servprintados = new ArrayList<String>();
+
+			while ((inputLine = in.readLine()) != null) {
+				error = false;
+				
+				result = result+"\n"+counter+"    ";
+				
+				String line = inputLine;
+				String[] implementacionSplit = line.split(";", -1);
+
+				boolean procesar = true;
+				if (implementacionSplit.length != 14) {
+					procesar = false;
+				}
+
+
+				if (procesar) {
+					Prueba prueba = new Prueba();
+					
+					String clienteName = implementacionSplit[0];
+					String imp = implementacionSplit[1];
+					String strFechaInicio  = implementacionSplit[2];
+					String strFechaEstado  = implementacionSplit[3];
+					//String segmento  = implementacionSplit[4];
+					String producto = implementacionSplit[5];
+					String referencia = implementacionSplit[6];
+					String entorno = implementacionSplit[7];
+					String estado = implementacionSplit[8];
+					String resultado = implementacionSplit[9];
+					String fichero = implementacionSplit[10];
+					String tipoServicio = implementacionSplit[11];
+					String peticionario = implementacionSplit[12];
+					String descripcion = implementacionSplit[13];
+					if (descripcion.length()>=500){
+						descripcion.replace("\"", "");
+						descripcion = descripcion.substring(0, 499);
+					}
+					
+					
+					
+					
+					
+					prueba.setDetalles(descripcion);
+					prueba.setErased(false);
+					prueba.setReferencia(referencia);
+					prueba.setPeticionario(peticionario);
+
+					
+					
+					
+					if(entorno.equals("Integrado")||entorno.equals("Producción")){
+						prueba.setEntorno(entorno);	
+					}else{
+						result += "El estado no es integrado o produccion\r\n";		
+						error = true;
+					}
+					
+					
+					
+					
+					
+					
+					if(!peticionario.equals("")){
+						prueba.setPeticionario(peticionario);
+					}else{
+						result += "No existe peticionario y es obligatiorio\r\n";		
+						error = true;
+					}
+					
+					
+					if (isThisDateValid(strFechaInicio, "dd/MM/yyyy")) {
+						prueba.setFecha_inicio_str(strFechaInicio);
+					}
+					else {
+						result += "Fecha de inicio incorrecta o inexistente \r\n";
+						error = true;
+					}
+					
+					
+					
+					
+					
+					
+					if (isThisDateValid(strFechaEstado, "dd/MM/yyyy")) {
+						try{
+							Date FechaEstado = Utils.dateConverter(strFechaEstado);
+							prueba.setFecha_estado(FechaEstado);
+						}catch(Exception e){
+							result += "Fecha de estado conversion \r\n";
+							error = true;
+						}
+					}
+					else {
+						result += "Fecha de estado incorrecta o inexistente \r\n";
+						error = true;
+					}
+					
+					
+					
+					List<ProductoCanal> productos = productoDao.getEstadoImpForNameAndEnty(producto, "pruebas");		
+					if(productos.size()==1){
+						producto = productos.get(0).getName();
+						prueba.setProducto(producto);
+					}else{
+						result += "Error producto \r\n";
+						error = true;	
+					}
+					
+					
+					
+					
+					estado = estado.toLowerCase();
+					String initial = estado.substring(0, 1);
+					estado = estado.substring(1);
+					initial = initial.toUpperCase();
+					estado = initial+estado;					
+					List<Estado> estados = estadoDao.getAllEstados();		
+					if(estados.contains(estado)){
+						prueba.setEstado(estado);
+					}else{
+						result += "Error estado \r\n";
+						error = true;	
+					}
+
+					
+					
+					List<TipoServicio> tiposServ = tipoServDao.getAllServicios();
+					if(tiposServ.contains(tipoServicio)){
+						prueba.setTipo_servicio(tipoServicio);
+					}else{
+						result += "Error tipo de servicio \r\n";
+						error = true;	
+					}
+					
+					
+					
+					if(save&&!error) {
+						pruebaDao.createPrueba(prueba);
+					}
+				}
+				counter++;
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	
 	public String loadClientes(HttpServletRequest req, HttpServletResponse resp) throws InterruptedException, IOException{
 		HttpSession sesion = req.getSession();
