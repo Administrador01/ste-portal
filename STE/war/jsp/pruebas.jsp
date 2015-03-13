@@ -381,14 +381,11 @@
 								
 									<c:forEach items="${implementaciones}" var="t">	
 										<c:choose>
-											<c:when test="${t.key.id==s.imp_id}">				
-												<c:forEach items="${clientes}" var="cli">
-													<c:choose>
-														<c:when test="${t.cliente_id==cli.key.id}">				
-															<tr class="valid-result ${cli.premium == 'Premium' ? 'premium' : ''}" data-strfechaestado="${s.fecha_inicio_str}"
-															 data-nombrecliente="${cli.nombre}" data-estado="${s.estado}" data-entorno="${s.entorno}"  id="row${s.key.id}" style="${s.entorno=="Producci&oacuten"?'background-color:#C8DBFF;':''}${s.erased?'background-color:#8B8B8B;':''}">
+											<c:when test="${t.key.id==s.imp_id}">							
+															<tr class="valid-result ${s.premium == 'Premium' ? 'premium' : ''}" data-strfechaestado="${s.fecha_inicio_str}"
+															 data-nombrecliente="${s.client_name}" data-estado="${s.estado}" data-entorno="${s.entorno}"  id="row${s.key.id}" style="${s.entorno=="Producci&oacuten"?'background-color:#C8DBFF;':''}${s.erased?'background-color:#8B8B8B;':''}">
 																<td><span>${s.str_fecha_estado}</span></td>
-																<td><span>${cli.nombre}</span></td>
+																<td><span>${s.client_name}</span></td>
 																<td><span>${s.tipo_servicio}</span></td>
 																<td><span style="color:
 																
@@ -413,9 +410,6 @@
 																<!--<a class="papelera" name="${s.key.id}" data-toggle="modal"	data-target="#confirm-delete" id="papelera${s.key.id}"></a>-->
 																</td>
 															</tr>
-														</c:when>
-													</c:choose>
-												</c:forEach>
 											</c:when>
 										</c:choose>
 									</c:forEach>

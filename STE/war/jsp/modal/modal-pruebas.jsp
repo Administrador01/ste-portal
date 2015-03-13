@@ -55,7 +55,7 @@
 								<div class="form-field">
 									<span class="lbl">Implementaci&oacuten<span class="required-asterisk">*</span>:</span>
 									<div class="input">
-										<select class="selectpicker selected" name="implementacion" id="imp-pruebas-modal" data-live-search="true">
+										<select class="selectpicker selected" name="imp_id_mod" id="imp-pruebas-modal" data-live-search="true">
 											<c:choose>
 												<c:when test="${empty implementaciones}">
 													<option value="default">No hay implementaciones</option>

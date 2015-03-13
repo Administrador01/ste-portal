@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
+import com.ste.beans.Cliente;
 import com.ste.beans.Prueba;
 import com.ste.dao.ImplementacionDao;
 import com.ste.dao.PruebaDao;
@@ -98,6 +99,13 @@ public class PruebaServlet extends HttpServlet{
 			PruebaDao pDao = PruebaDao.getInstance();	
 			Prueba p = new Prueba();
 			
+			ImplementacionDao impDao = ImplementacionDao.getInstance();
+			Cliente cliente =  impDao.getClienteByImpId(Long.parseLong(impID));
+			
+			
+			p.setClient_name(cliente.getNombre());
+			p.setPremium(cliente.getPremium());
+			
 			p.setStr_fecha_estado(fecha_estado);
 			//p.setNombre_cliente(nombre_cliente);
 			p.setReferencia(referencia);
@@ -166,6 +174,14 @@ public class PruebaServlet extends HttpServlet{
 		PruebaDao pDao = PruebaDao.getInstance();	
 		Prueba p = pDao.getPruebabyId(Long.parseLong(id_str));
 		Utils.writeLog(usermail, "Modifica", "Prueba", p.getId_prueba());
+		
+		ImplementacionDao impDao = ImplementacionDao.getInstance();
+		Cliente cliente =  impDao.getClienteByImpId(Long.parseLong(impID));
+		
+		
+		p.setClient_name(cliente.getNombre());
+		p.setPremium(cliente.getPremium());
+		
 		
 		p.setStr_fecha_estado(fecha_estado);
 		//p.setNombre_cliente(nombre_cliente);

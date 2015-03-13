@@ -28,7 +28,8 @@ public class Prueba {
 	@Persistent
 	private String premium;
 
-
+	@Persistent
+	private String client_name;
 	
 	@Persistent
 	private String tipo_servicio;
@@ -174,6 +175,14 @@ public class Prueba {
 
 	public void setImp_id(String id_cliente) {
 		this.imp_id = id_cliente;
+	}
+	
+	public String getClient_name() {
+		return client_name;
+	}
+
+	public void setClient_name(String client_name) {
+		this.client_name = client_name;
 	}
 	
 	public String getResultado() {

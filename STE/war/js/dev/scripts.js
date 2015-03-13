@@ -1123,6 +1123,40 @@ $(function() {
 	}
 }
 
+function ajaxProyectos(cliente,target){
+	target.empty();
+	target.selectpicker("render");
+	target.empty();
+	if (cliente!="default"){
+		 var formURL = "/implementacionServlet?";
+		 var postData="accion=getImpByClient&client="+cliente;
+		 $.ajax(			
+			{
+				url : formURL,
+				type: "POST",
+				data : postData,
+				success:function(data, textStatus, jqXHR) 
+				{
+					if (data.success=="true"){
+						
+						var implementations = data.implementaciones[0];
+						
+						var tamano = implementations.length;
+						for (var i = 0 ; i < tamano; i=i+2){
+							var id = implementations[i];
+							var name = implementations[i+1];
+							target.append($("<option></option>").attr("value",id).text(name));
+						}
+
+						
+					}
+					target.selectpicker("refresh");
+				}					
+				
+			});
+	}else{target.append($("<option></option>").attr("value","default").text("-"));}
+	target.selectpicker("refresh");
+}
 
 $(function(){
 	$('#pruebas').on('click','#deletePrueba', function (e){
