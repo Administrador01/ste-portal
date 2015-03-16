@@ -40,10 +40,31 @@
 				<div class="form-field-divider left">
 				
 				
+					<div class="form-field">
+						<span class="lbl">Cliente<span class="required-asterisk">*</span>:</span>
+						<div class="input">
+						
+							<select class="selectpicker selected" name="cliente" id="cliente-pruebas" data-live-search="true">
+							
+								<c:choose>
+										<c:when test="${empty clientes}">
+											<option value="default">No hay clientes</option>
+										</c:when>
+										<c:otherwise>
+											<option value="default">Seleccionar</option>
+											<c:forEach items="${clientes}" var="t">							
+												<option value="${t.key.id}" data-premium="${t.premium}" data-clientid="${t.key.id}" data-segmento="${t.tipo_cliente}">${t.nombre}</option>
+											</c:forEach>
+										</c:otherwise>
+								</c:choose>
+							</select>
+						</div>
+					</div>
+				
 					<div class="form-field" id="div_imp">
 						<span class="lbl">Implementaci&oacuten<span class="required-asterisk">*</span>:</span>
 						<select class="selectpicker selected" name="imp_id" id="imp-pruebas" data-live-search="true">
-							<c:choose>
+							<!--<c:choose>
 								<c:when test="${empty implementaciones}">
 									<option value="default">No hay implementaciones</option>
 								</c:when>
@@ -61,36 +82,18 @@
 									</c:forEach>
 								</c:forEach>
 							</c:otherwise>
-							</c:choose>
+							</c:choose>-->
+							<option value="default">-</option>
 						</select>
 					</div>
+				
+
 				<!--
-					<div class="form-field">
-						<span class="lbl">Cliente<span class="required-asterisk">*</span>:</span>
-						<div class="input">
-						
-							<select class="selectpicker selected" name="cliente" id="cliente-pruebas" data-live-search="true">
-							
-								<c:choose>
-										<c:when test="${empty clientes}">
-											<option value="default">No hay clientes</option>
-										</c:when>
-										<c:otherwise>
-											<option value="default">Seleccionar</option>
-											<c:forEach items="${clientes}" var="t">							
-												<option value="${t.nombre}" data-premium="${t.premium}" data-clientid="${t.key.id}" data-segmento="${t.tipo_cliente}">${t.nombre}</option>
-											</c:forEach>
-										</c:otherwise>
-								</c:choose>
-							</select>
-						</div>
-					</div>
-				-->
 					<div class="form-field">
 						<span class="lbl">Cliente:</span>
 						<input type="text" class="input-autorefillable" id="input-cliente-prueba" value="" readonly>
 					</div>	
-					
+					-->
 					<div class="form-field">
 						<span class="lbl">Tipo cliente:</span>
 						<input type="text" class="input-autorefillable" id="input-premium-prueba" value="" readonly>

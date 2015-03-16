@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.ste.beans.Cliente;
+import com.ste.beans.Implementacion;
 import com.ste.beans.Prueba;
 import com.ste.dao.ImplementacionDao;
 import com.ste.dao.PruebaDao;
@@ -16,6 +17,7 @@ import com.ste.utils.Utils;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import jxl.Workbook;
@@ -60,6 +62,8 @@ public class PruebaServlet extends HttpServlet{
 					updatePrueba(req,resp,usermail);
 				}else if (accion.equals("xls")){
 					generateXLS(req,resp,usermail);
+				}else if (accion.equals("getImpByClient")){
+					getImpByClient(req,resp,usermail);
 				}
 				
 			
@@ -147,6 +151,37 @@ public class PruebaServlet extends HttpServlet{
 			
 
 	}
+	public void getImpByClient(HttpServletRequest req, HttpServletResponse resp, String usermail){
+		JSONObject json = new JSONObject();
+		try{
+			ImplementacionDao implementacionDao = ImplementacionDao.getInstance();
+			
+			String client = req.getParameter("client");
+			ArrayList<String> implmns = new ArrayList<String>();
+			
+			List<Implementacion> implementaciones = implementacionDao.getImplementacionByClientId(Long.parseLong(client));
+			for(Implementacion implementacion : implementaciones){
+				implmns.add(String.valueOf(implementacion.getKey().getId()));
+				implmns.add(implementacion.getId_implementacion());
+			}
+			
+			
+			
+			json.append("success","true");
+			json.append("implementaciones", implmns);
+			
+			resp.setCharacterEncoding("UTF-8");
+			resp.setContentType("application/json");
+			resp.getWriter().println(json);
+		
+		} catch (IOException | JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 	//ACTUALIZAR PRUEBA	
 	public void updatePrueba(HttpServletRequest req, HttpServletResponse resp, String usermail){
 		
