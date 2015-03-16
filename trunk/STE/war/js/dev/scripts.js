@@ -1123,12 +1123,11 @@ $(function() {
 	}
 }
 
-function ajaxProyectos(cliente,target){
+function ajaxImplementaciones(cliente,target){
 	target.empty();
 	target.selectpicker("render");
-	target.empty();
 	if (cliente!="default"){
-		 var formURL = "/implementacionServlet?";
+		 var formURL = "/pruebaServlet?";
 		 var postData="accion=getImpByClient&client="+cliente;
 		 $.ajax(			
 			{
@@ -1142,6 +1141,9 @@ function ajaxProyectos(cliente,target){
 						var implementations = data.implementaciones[0];
 						
 						var tamano = implementations.length;
+						if(tamano == 0){
+							target.append($("<option></option>").attr("value","default").text("No hay implementaciones"));
+						}
 						for (var i = 0 ; i < tamano; i=i+2){
 							var id = implementations[i];
 							var name = implementations[i+1];
@@ -1182,7 +1184,7 @@ $(function(){
 			}
 		});
 	});
-	
+	+
 	$('#imp-pruebas').on('change', function() {
 
 		var option = $(this).find(":selected");
@@ -1190,7 +1192,11 @@ $(function(){
 		$('#input-cliente-prueba').val(option.data('nombre'));
 		$('#input-premium-prueba').val(option.data('premium'));
 	})
-	
+	$('#pruebas').on('change','#cliente-pruebas', function (){
+		var cliente = $('#cliente-pruebas').val();
+		var target = $('#imp-pruebas');
+		ajaxImplementaciones(cliente,target);
+	});
 	$('#pruebas').on('click','#test_filter_button', function (){
 
 		var val_client_form = $('#cliente-filtro').val();

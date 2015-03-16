@@ -234,7 +234,7 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 		//actualizamos los valores de los campos de pruebas y de soporte
 		
 		for (Prueba a : prueb_arr){
-			//a.setNombre_cliente(nombre);
+			a.setClient_name(nombre);
 			a.setPremium(premium);
 			pDao.updatePrueba(a);
 		}
