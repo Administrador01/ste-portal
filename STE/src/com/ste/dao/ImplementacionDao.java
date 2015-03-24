@@ -123,7 +123,7 @@ public class ImplementacionDao {
 		ArrayList<Implementacion> implementaciones = new ArrayList<Implementacion>();
 		
 		for(Implementacion imp: Implementacions){
-			if(!imp.getStr_fech_subida().equals("")&&!imp.getStr_fech_subida().equals(null)){
+			if(imp.getStr_fech_subida()!=null){
 				implementaciones.add(imp);
 			}
 		}
@@ -182,6 +182,26 @@ public class ImplementacionDao {
 		q.setFilter(variable+" == value &&  erased==false");
 		q.declareParameters("String value");
 		Implementacions = (List<Implementacion>) q.execute(value);
+		
+		
+		pm.close();
+
+		return Implementacions;
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public List<Implementacion> getImplementacionesByServiceClient(String client, String service) {
+
+		List<Implementacion> Implementacions;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		
+		Query q = pm.newQuery("select from " + Implementacion.class.getName());		
+		
+		q.setFilter("client_name == client && servicio_name == service && erased==false");
+		q.declareParameters("String client, String service");
+		Implementacions = (List<Implementacion>) q.execute(client,service);
 		
 		
 		pm.close();

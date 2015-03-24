@@ -48,6 +48,23 @@ public class TipoServicioDao {
 		return Servicios;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<TipoServicio> getServiciosByName(String name) {
+
+		List<TipoServicio> Servicios;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		
+		Query q = pm.newQuery("select from " + TipoServicio.class.getName()+" where name=='"+name+"'");
+		q.setOrdering("name asc");
+		Servicios = (List<TipoServicio>) q.execute();
+		
+		
+		pm.close();
+
+		return Servicios;
+	}
+	
 	public void deleteAll(){
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		TipoServicioDao sDao = TipoServicioDao.getInstance();

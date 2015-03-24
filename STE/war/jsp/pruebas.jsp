@@ -123,8 +123,8 @@
 					</div>
 					
 					<div class="form-field">
-						<span class="lbl">Fichero<span class="required-asterisk">*</span>:</span>
-						<input type="text" class=""  name="fichero" id="" value="" required>
+						<span class="lbl">Fichero:</span>
+						<input type="text" class=""  name="fichero" id="" value="">
 					</div>
 					
 					<div class="form-field">
@@ -172,7 +172,7 @@
 					<div class="form-field">
 						<span class="lbl">Producto/canal<span class="required-asterisk">*</span>:</span>
 						<div class="input">
-							<select id="producto_canal" class="selectpicker selected" name="producto_canal" >
+							<select id="producto_canal" class="selectpicker selected" name="producto_canal" data-live-search="true">
 								
 								<option value="default">Seleccionar</option>	
 
@@ -204,6 +204,7 @@
 							<select id="resultado" class="selectpicker selected" name="resultado" >
 								<option value="OK">OK</option>
 								<option value="KO">KO</option>
+								<option value=""></option>
 								<option value="Cancelada">Cancelada</option>
 							</select>
 						</div>
@@ -212,7 +213,7 @@
 					<div class="form-field">
 						<span class="lbl">Tipo servicio<span class="required-asterisk">*</span>:</span>
 						<div class="input">
-							<select id="tipo_servicio" class="selectpicker selected" name="tipo_servicio" >
+							<select id="tipo_servicio" class="selectpicker selected" name="tipo_servicio" data-live-search="true">
 								<option value="default">Seleccionar</option>	
 
 								<c:forEach items="${tiposervicios}" var="servicio">
@@ -381,12 +382,9 @@
 
 						<c:otherwise>
 							<c:forEach items="${pruebas}" var="s">
-								
-									<c:forEach items="${implementaciones}" var="t">	
-										<c:choose>
-											<c:when test="${t.key.id==s.imp_id}">							
+							
 															<tr class="valid-result ${s.premium == 'Premium' ? 'premium' : ''}" data-strfechaestado="${s.fecha_inicio_str}"
-															 data-nombrecliente="${s.client_name}" data-estado="${s.estado}" data-entorno="${s.entorno}"  id="row${s.key.id}" style="${s.entorno=="Producci&oacuten"?'background-color:#C8DBFF;':''}${s.erased?'background-color:#8B8B8B;':''}">
+															 data-nombrecliente="${s.client_name}" data-estado="${s.estado}" data-entorno="${s.entorno}" name="${s.key.id}" id="row${s.key.id}" style="${s.entorno=="Producci&oacuten"?'background-color:#C8DBFF;':''}${s.erased?'background-color:#8B8B8B;':''}">
 																<td><span>${s.str_fecha_estado}</span></td>
 																<td><span>${s.client_name}</span></td>
 																<td><span>${s.tipo_servicio}</span></td>
@@ -413,9 +411,7 @@
 																<!--<a class="papelera" name="${s.key.id}" data-toggle="modal"	data-target="#confirm-delete" id="papelera${s.key.id}"></a>-->
 																</td>
 															</tr>
-											</c:when>
-										</c:choose>
-									</c:forEach>
+
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>

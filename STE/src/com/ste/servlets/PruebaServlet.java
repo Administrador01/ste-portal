@@ -354,7 +354,11 @@ public class PruebaServlet extends HttpServlet{
 				s.addCell(new Label(4, aux, pDao.getClientByTestId(pru.getKey().getId()).getPremium()));
 				s.addCell(new Label(5, aux, pru.getProducto()));
 				s.addCell(new Label(6, aux, pru.getReferencia()));
-				s.addCell(new Label(7, aux, pru.getEntorno()));
+				if(pru.getEntorno().equals("Producci&oacuten")){
+					s.addCell(new Label(7, aux, "Producción"));
+				}else{
+					s.addCell(new Label(7, aux,pru.getEntorno()));	
+				}
 				s.addCell(new Label(8, aux, pru.getEstado()));
 				s.addCell(new Label(9, aux, pDao.getImplementacionByTestId(pru.getKey().getId()).getId_implementacion()));
 				s.addCell(new Label(10, aux, pru.getTipo_servicio()));

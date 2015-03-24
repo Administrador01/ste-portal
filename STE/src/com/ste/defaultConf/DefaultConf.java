@@ -72,6 +72,10 @@ public class DefaultConf extends HttpServlet{
 				result = loadImplementaciones(req,resp);
 				json.append("success", "true");
 				json.append("result", result);
+			}else if ("pruebas".equals(accion)){
+				result = loadPruebas(req,resp);
+				json.append("success", "true");
+				json.append("result", result);
 			}
 			resp.setCharacterEncoding("UTF-8");
 			resp.setContentType("text/plain");
@@ -152,7 +156,7 @@ public class DefaultConf extends HttpServlet{
 	}
 	
 	public String loadPruebas(HttpServletRequest req, HttpServletResponse resp) throws InterruptedException, IOException{
-		HttpSession sesion = req.getSession();
+		//HttpSession sesion = req.getSession();
 		boolean save = false;
 		String saveParam = req.getParameter("save"); 
 		if(saveParam != null && saveParam.equals("true")) {
@@ -184,23 +188,28 @@ public class DefaultConf extends HttpServlet{
 			TipoServicioDao tipoServDao = TipoServicioDao.getInstance();
 			EstadoDao estadoDao = EstadoDao.getInstance(); 
 			ProductoCanalDao productoDao = ProductoCanalDao.getInstance();
+			ImplementacionDao implementacionDao = ImplementacionDao.getInstance();
+			ClienteDao clienteDao = ClienteDao.getInstance();
 			int counter = 1;
 			boolean error = false;
 			
 			List<EstadoImplementacion> estadosforname;
 			List<String> servprintados = new ArrayList<String>();
+			
 
+			
+			
 			while ((inputLine = in.readLine()) != null) {
 				error = false;
 				
-				result = result+"\n"+counter+"    ";
+				//result = result+"\n"+counter+"    ";
 				
 				String line = inputLine;
 				String[] implementacionSplit = line.split(";", -1);
 
 				boolean procesar = true;
 				if (implementacionSplit.length != 14) {
-					procesar = false;
+					
 				}
 
 
@@ -236,6 +245,42 @@ public class DefaultConf extends HttpServlet{
 					prueba.setPeticionario(peticionario);
 
 					
+					List<Cliente> clientes = clienteDao.getClientesByName(clienteName);
+					if (clientes.size()==1){
+						prueba.setClient_name(clientes.get(0).getNombre());
+						prueba.setPremium(clientes.get(0).getPremium());
+					}else{
+						result += "No se encuentra el cliente\r\n";		
+						error = true;
+					}
+					
+					
+					if(!imp.equals("")){
+						List<Implementacion> implementaciones = implementacionDao.getImplementacionesForVariableValue("id_implementacion", imp);
+						if(implementaciones.size()==1){
+							prueba.setImp_id(String.valueOf(implementaciones.get(0).getKey().getId()));
+						}else{
+							result += "El numero de implementacion especificado no se encuentra de forma univoca\r\n";		
+							error = true;
+						}
+					}else{
+						List<Implementacion> implementaciones = implementacionDao.getImplementacionesByServiceClient(clienteName, tipoServicio);
+						if(implementaciones.size()==1){
+							Implementacion implementacion = implementaciones.get(0);
+							prueba.setImp_id(String.valueOf(implementacion.getKey().getId()));
+							prueba.setClient_name(implementacion.getClient_name());
+						}else{
+							if(implementaciones.size()==0){
+							result += counter+ "  No se puede encontrar una implementacion \r\n";
+							}else{
+															
+									result +=counter+"   Con los datos proporcionados en pruebas mas de una implementacion cumple las condiciones\r\n";
+								
+							}
+							error = true;
+						}
+					}
+					
 					
 					
 					if(entorno.equals("Integrado")||entorno.equals("Producción")){
@@ -244,8 +289,6 @@ public class DefaultConf extends HttpServlet{
 						result += "El estado no es integrado o produccion\r\n";		
 						error = true;
 					}
-					
-					
 					
 					
 					
@@ -274,6 +317,7 @@ public class DefaultConf extends HttpServlet{
 					if (isThisDateValid(strFechaEstado, "dd/MM/yyyy")) {
 						try{
 							Date FechaEstado = Utils.dateConverter(strFechaEstado);
+							prueba.setStr_fecha_estado(strFechaEstado);
 							prueba.setFecha_estado(FechaEstado);
 						}catch(Exception e){
 							result += "Fecha de estado conversion \r\n";
@@ -304,26 +348,26 @@ public class DefaultConf extends HttpServlet{
 					estado = estado.substring(1);
 					initial = initial.toUpperCase();
 					estado = initial+estado;					
-					List<Estado> estados = estadoDao.getAllEstados();		
-					if(estados.contains(estado)){
-						prueba.setEstado(estado);
+
+					List<Estado> estados = estadoDao.getEstadosByName(estado);
+					
+					if(estados.size()==1){
+						prueba.setEstado(estados.get(0).getName());
 					}else{
 						result += "Error estado \r\n";
 						error = true;	
 					}
 
 					
-					
-					List<TipoServicio> tiposServ = tipoServDao.getAllServicios();
-					if(tiposServ.contains(tipoServicio)){
+					/*
+					List<TipoServicio> servicios = tipoServDao.getServiciosByName(tipoServicio);
+					if(servicios.size()==1){
 						prueba.setTipo_servicio(tipoServicio);
 					}else{
-						result += "Error tipo de servicio \r\n";
+						//result += "Error tipo de servicio \r\n";
 						error = true;	
-					}
-					
-					
-					
+					}*/
+				
 					if(save&&!error) {
 						pruebaDao.createPrueba(prueba);
 					}

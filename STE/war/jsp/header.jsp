@@ -48,7 +48,7 @@
 				</li>
 				
 				<li class="menu">
-					<a class="no-underline" href="https://sites.google.com/a/bbva.com/portal-ste/home?previewAsViewer=1">
+					<a class="no-underline" href="https://sites.google.com/a/bbva.com/portal-ste/home">
 						<span class="icon-24 documentacion-24x"></span>
 						<span class="menu-title">Documentación</span>
 					</a>
