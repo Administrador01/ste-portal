@@ -1,0 +1,143 @@
+RIUSA;IMP_0018_153;02/12/2014;01/01/2010;BEC;Swift Fileact;10000000125;Integrado;Finalizado;KO;00000200.PPG;Pagos nacionales Londres;Natalia;00000200.PPG (error en el formato de la cuenta)
+SA MAJ;IMP_0008_50;18/02/2014;01/01/2010;BEC;Swift Fileact;10000000098;Producción;Finalizado;OK;00000009.CSP;Adeudos directos 19.14 (Sepa);Ignacio;00000009.CSP (fecha de ejecución: 25/02/2014)
+SA MAJ;IMP_0008_50;18/02/2014;01/01/2010;BEC;Swift Fileact;10000000098;Producción;Finalizado;OK;00000010.CSP;Adeudos directos 19.14 (Sepa);Ignacio;00000010.CSP (fecha de ejecución: 25/02/2014)
+SA MAJ;IMP_0008_50;21/01/2014;01/01/2010;BEC;Swift Fileact;10000000077;Integrado;Finalizado;KO;;Adeudos directos 19.14 (Sepa);Ignacio;Rechazado por formato en SSTT.
+SA MAJ;IMP_0008_50;21/01/2014;01/01/2010;BEC;Swift Fileact;10000000077;Integrado;Finalizado;KO;00000034.CSP;Adeudos directos 19.14 (Sepa);Ignacio;00000034.CSP. Autorizado. Más de un adeudo con la misma referencia.
+SA MAJ;IMP_0008_50;21/01/2014;01/01/2010;BEC;Swift Fileact;10000000077;Integrado;Finalizado;KO;00000035.CSP;Adeudos directos 19.14 (Sepa);Ignacio;00000035.CSP. Autorizado. Más de un adeudo con la misma referencia.
+SA MAJ;IMP_0008_50;21/01/2014;01/01/2010;BEC;Swift Fileact;10000000077;Integrado;Finalizado;KO;00000032.CSP;Adeudos directos 19.14 (Sepa);Ignacio;00000032.CSP. Autorizado y cedido. Más de un adeudo con la misma referencia.
+SA MAJ;IMP_0008_50;21/01/2014;01/01/2010;BEC;Swift Fileact;10000000077;Integrado;Finalizado;OK;00000031.CSP;Adeudos directos 19.14 (Sepa);Ignacio;00000031.CSP. Autorizado y cedido
+SA MAJ;IMP_0008_50;25/02/2014;01/01/2010;BEC;Swift Fileact;10000000098;Producción;Finalizado;OK;00000017.CSP;Adeudos directos 19.14 (Sepa);Ignacio;00000017.CSP (fecha de ejecución: 05/03/2014)
+SA MAJ;IMP_0008_50;25/02/2014;01/01/2010;BEC;Swift Fileact;10000000098;Producción;Finalizado;OK;00000018.CSP;Adeudos directos 19.14 (Sepa);Ignacio;00000018.CSP (fecha de ejecución: 05/03/2014)
+SA MAJ;IMP_0008_50;25/02/2014;01/01/2010;BEC;Swift Fileact;10000000098;Producción;Finalizado;OK;00000019.CSP;Adeudos directos 19.14 (Sepa);Ignacio;00000019.CSP (fecha de ejecución: 05/03/2014)
+SA MAJ;IMP_0008_50;25/02/2014;01/01/2010;BEC;Swift Fileact;10000000098;Producción;Finalizado;OK;00000020.CSP;Adeudos directos 19.14 (Sepa);Ignacio;00000020.CSP (fecha de ejecución: 06/03/2014)
+SA MAJ;IMP_0008_50;25/02/2014;01/01/2010;BEC;Swift Fileact;10000000098;Producción;Finalizado;OK;00000022.CSP;Adeudos directos 19.14 (Sepa);Ignacio;00000022.CSP (fecha de ejecución: 05/03/2014)
+SA MAJ;IMP_0008_50;25/02/2014;01/01/2010;BEC;Swift Fileact;10000000098;Producción;Finalizado;OK;00000021.CSP;Adeudos directos 19.14 (Sepa);Ignacio;00000021.CSP (fecha de ejecución: 06/03/2014)
+SA MAJ;IMP_0008_50;25/02/2014;01/01/2010;BEC;Swift Fileact;10000000098;Producción;Finalizado;OK;00000023.CSP;Adeudos directos 19.14 (Sepa);Ignacio;00000023.CSP (fecha de ejecución: 07/03/2014)
+SA MAJ;IMP_0008_50;27/03/2014;01/01/2010;BEC;Swift Fileact;10000000098;Producción;Cancelado;;;Adeudos directos 19.14 (Sepa);Ignacio;
+SA MAJ;IMP_0008_43;23/07/2014;01/01/2010;BEC;Swift Fileact;10000000098;Integrado;Finalizado;OK;00001772.FIT;Transferencias 34.14;Ignacio;00001772.FIT
+SA MAJ;IMP_0008_43;08/04/2014;01/01/2010;BEC;Swift Fileact;1,00E+10;Integrado;Finalizado;KO;00000040.FIT;Transferencias 34.14;Ignacio;00000040.FIT (cuenta inexistente)
+SA MAJ;IMP_0008_43;08/04/2014;01/01/2010;BEC;Swift Fileact;1,00E+10;Integrado;Finalizado;KO;00000047.FIT;Transferencias 34.14;Ignacio;00000047.FIT (cuenta inexistente)
+SA MAJ;IMP_0008_45;11/04/2014;01/01/2010;BEC;Swift Fileact;1,00E+10;Integrado;Finalizado;KO;00000058.OMF;OMF Banco de España en fichero;Ignacio;00000058.OMF. Cedido el 11/04 a PRISMA sobre las 12:40, sin procesar el 14/04 a primera hora. Reclamado, PRISMA dice que no lo ha recibido. Cesión erróna desde SSTT, se ha cedido finalmente el 14/04 por la tarde. De nuevo se ha cedido erróneamente, SSTT dbe cederlo bien a PRISMA, en espera. Cambios del equipo de Proyectos SSTT para OMFs que han afectado a la cesión de los ficheros a PRISMA, lo cambiarán para que se puedan ceder los ficheros. El fichero se ha rechazado en PRISMA por fecha valor.
+SA MAJ;IMP_0008_45;15/04/2014;01/01/2010;BEC;Swift Fileact;1,00E+10;Integrado;Finalizado;KO;00000058.OMF;OMF Banco de España en fichero;Ignacio;00000058.OMF. Intervención manual de PRISMA sobre el fichero para modifcar la fecha valor por 15/04. Se ha rechazado por la cuenta beneficiaria, banco y oficina inexistentes: 0001 5425.
+SA MAJ;IMP_0008_45;16/04/2014;01/01/2010;BEC;Swift Fileact;1,00E+10;Integrado;Finalizado;OK;00000060.OMF;OMF Banco de España en fichero;Ignacio;00000060.OMF.Reinyección de fichero con fecha valor16/04 y cuenta beneficiaria válida. Fichero autorizado. Todo ok en PRISMA.
+SA MAJ;IMP_0008_47;11/04/2014;01/01/2010;BEC;Swift Fileact;1,00E+10;Integrado;Finalizado;OK;00000050.TIN;Órdenes pago internacionales en fichero;Ignacio;00000050.TIN. Reclamado a COMEX.
+SA MAJ;IMP_0008_47;12/05/2014;01/01/2010;BEC;Swift Fileact;10000000098;Producción;Finalizado;OK;00000519.TIN;Órdenes pago internacionales en fichero;Ignacio;00000519.TIN
+SA MAJ;IMP_0008_47;16/05/2014;01/01/2010;BEC;Swift Fileact;10000000098;Producción;Finalizado;OK;00000585.FIT;Órdenes pago internacionales en fichero;Ignacio;00000585.FIT
+SA MAJ;IMP_0008_47;08/04/2014;01/01/2010;BEC;Swift Fileact;1,00E+10;Integrado;Finalizado;KO;00000048.TIN;Órdenes pago internacionales en fichero;Ignacio;00000048.TIN (cuenta inexistente)
+SAICA;IMP_0094_353;10/02/2015;01/01/2010;BEC;Swift Fileact;10000000057;Integrado;Finalizado;OK;04000726.FIM;Nóminas 34.14;Nacho;04000726.FIM
+SAICA;IMP_0094_353;24/02/2015;01/01/2010;BEC;Swift Fileact;SAICES2ZXXX;Producción;Finalizado;OK;04006142.FIM;Nóminas 34.14;Nacho;04006142.FIM
+SAICA;IMP_0094_353;09/02/2015;01/01/2010;BEC;Swift Fileact;10000000057;Integrado;Finalizado;OK;04000724.FIM;Nóminas 34.14;Nacho;04000724.FIM
+SCHNEIDER;IMP_0009_600;07/01/2014;01/01/2010;CIB;Swift Fileact;10000000014;Producción;Cancelado;;;Nóminas 34.14;Sonia;El cliente informa que podrá enviar la semana del 16 de diciembre, lo pospone a enero de 2014.
+SCHNEIDER;IMP_0009_598;14/01/2014;01/01/2010;CIB;Swift Fileact;10000000014;Producción;Finalizado;OK;12006170.FIT;Transferencias 34.14;Sonia;12006170.FIT (fecha de ejecución: 20/01/2014)
+SCHNEIDER;IMP_0009_598;15/01/2014;01/01/2010;CIB;Swift Fileact;10000000014;Producción;Pendiente;OK;12006172.FIT;Transferencias 34.14;Sonia;12006172.FIT (fecha de ejecución: 20/01/2014)
+SCHNEIDER;IMP_0009_598;07/01/2014;01/01/2010;CIB;Swift Fileact;10000000014;Producción;Cancelado;;;Transferencias 34.14;Sonia;El cliente informa que podrá enviar la semana del 16 de diciembre, lo pospone a enero de 2014.
+SCHNEIDER;IMP_0009_599;15/01/2014;01/01/2010;CIB;Swift Fileact;10000000010;Integrado;Pendiente;KO;12000405.TIN;Órdenes pago internacionales en fichero;Sonia;12000405.TIN (ha llegado XML)
+SCHNEIDER;IMP_0009_599;20/01/2014;01/01/2010;CIB;Swift Fileact;10000000010;Integrado;Finalizado;KO;12000409.TIN;Órdenes pago internacionales en fichero;Sonia;12000409.TIN (la cuenta no existe en integrado)
+SCHNEIDER;IMP_0009_599;21/01/2014;01/01/2010;CIB;Swift Fileact;10000000010;Integrado;Finalizado;KO;;Órdenes pago internacionales en fichero;Sonia;Cuenta no existe en integrado, se da de alta una nueva en el servicio y se les solicita cambiarla
+SCHNEIDER;IMP_0009_599;22/01/2014;01/01/2010;CIB;Swift Fileact;10000000010;Integrado;Finalizado;KO;12000413.TIN;Órdenes pago internacionales en fichero;Sonia;12000413.TIN problemas en el ciclo de integrado (no se llegó a ejecutar el envío)
+SCHNEIDER;IMP_0009_599;30/01/2014;01/01/2010;CIB;Swift Fileact;10000000010;Integrado;Finalizado;OK;12000415.TIN;Órdenes pago internacionales en fichero;Sonia;12000415.TIN
+SCHNEIDER;IMP_0009_599;07/01/2014;01/01/2010;CIB;Swift Fileact;10000000014;Producción;Cancelado;;;Órdenes pago internacionales en fichero;Sonia;El cliente informa que podrá enviar la semana del 16 de diciembre, lo pospone a enero de 2014.
+SERUNION;;21/01/2015;01/01/2010;BEC;Swift Fileact;MIGRACION01;Integrado;Finalizado;KO;12000666.CNR;Euroconfirming;Ana;12000666.CNR (no mapedo, ha llegado XML)
+SERUNION;;21/01/2015;01/01/2010;BEC;Swift Fileact;MIGRACION01;Integrado;Finalizado;KO;12000667.CNR;Euroconfirming;Ana;12000667.CNR (no mapedo, ha llegado XML)
+SERUNION;;21/01/2015;01/01/2010;BEC;Swift Fileact;MIGRACION01;Integrado;Finalizado;KO;12000668.CNR;Euroconfirming;Ana;12000668.CNR (no mapedo, ha llegado XML)
+SERUNION;;21/01/2015;01/01/2010;BEC;Swift Fileact;MIGRACION01;Integrado;Finalizado;KO;12000669.CNR;Euroconfirming;Ana;12000669.CNR (no mapedo, ha llegado XML)
+SERUNION;;21/01/2015;01/01/2010;BEC;Swift Fileact;MIGRACION01;Integrado;Finalizado;KO;12000671.CNR;Euroconfirming;Ana;12000671.CNR (no mapedo, ha llegado XML)
+SERUNION;;21/01/2015;01/01/2010;BEC;Swift Fileact;MIGRACION01;Integrado;Finalizado;KO;12000672.CNR;Euroconfirming;Ana;12000672.CNR (no mapedo, ha llegado XML)
+SERUNION;;21/01/2015;01/01/2010;BEC;Swift Fileact;MIGRACION01;Integrado;Finalizado;KO;12000673.CNR;Euroconfirming;Ana;12000673.CNR (no mapedo, ha llegado XML)
+SERUNION;;21/01/2015;01/01/2010;BEC;Swift Fileact;MIGRACION01;Integrado;Finalizado;KO;12000674.CNR;Euroconfirming;Ana;12000674.CNR (no mapedo, ha llegado XML)
+SERUNION;;24/02/2015;01/01/2010;BEC;Swift Fileact;10000000018;Producción;Finalizado;OK;12020579.CNR;Euroconfirming;Ana;12020579.CNR
+SERUNION;;24/02/2015;01/01/2010;BEC;Swift Fileact;10000000018;Producción;Finalizado;OK;12020581.CNR;Euroconfirming;Ana;12020581.CNR
+SERUNION;;24/02/2015;01/01/2010;BEC;Swift Fileact;10000000018;Producción;Finalizado;OK;12020582.CNR;Euroconfirming;Ana;12020582.CNR
+SERUNION;;24/02/2015;01/01/2010;BEC;Swift Fileact;10000000018;Producción;Finalizado;OK;12020584.CNR;Euroconfirming;Ana;12020584.CNR
+SERUNION;;24/02/2015;01/01/2010;BEC;Swift Fileact;10000000018;Producción;Finalizado;OK;12020583.CNR;Euroconfirming;Ana;12020583.CNR
+SERUNION;;24/02/2015;01/01/2010;BEC;Swift Fileact;10000000018;Producción;Finalizado;OK;12020585.CNR;Euroconfirming;Ana;12020585.CNR
+SERUNION;;24/02/2015;01/01/2010;BEC;Swift Fileact;10000000018;Producción;Finalizado;OK;12020580.CNR;Euroconfirming;Ana;12020580.CNR
+SERUNION;;29/01/2015;01/01/2010;BEC;Swift Fileact;MIGRACION01;Integrado;Finalizado;OK;12000682.CNR;Euroconfirming;Ana;12000682.CNR
+SERUNION;;29/01/2015;01/01/2010;BEC;Swift Fileact;MIGRACION01;Integrado;Finalizado;OK;12000683.CNR;Euroconfirming;Ana;12000683.CNR
+SERUNION;;29/01/2015;01/01/2010;BEC;Swift Fileact;MIGRACION01;Integrado;Finalizado;OK;12000684.CNR;Euroconfirming;Ana;12000684.CNR
+SERUNION;;09/02/2015;01/01/2010;BEC;Swift Fileact;MIGRACION01;Integrado;Finalizado;OK;12000693.CNR;Euroconfirming;Ana;12000693.CNR
+SERUNION;;09/02/2015;01/01/2010;BEC;Swift Fileact;MIGRACION01;Integrado;Finalizado;OK;12000694.CNR;Euroconfirming;Ana;12000694.CNR
+SERUNION;;09/02/2015;01/01/2010;BEC;Swift Fileact;MIGRACION01;Integrado;Finalizado;OK;12000695.CNR;Euroconfirming;Ana;12000695.CNR
+SERUNION;;09/02/2015;01/01/2010;BEC;Swift Fileact;MIGRACION01;Integrado;Finalizado;OK;12000697.CNR;Euroconfirming;Ana;12000697.CNR
+SERUNION;;09/02/2015;01/01/2010;BEC;Swift Fileact;MIGRACION01;Integrado;Finalizado;OK;12000698.CNR;Euroconfirming;Ana;12000698.CNR
+SERUNION;;09/02/2015;01/01/2010;BEC;Swift Fileact;MIGRACION01;Integrado;Finalizado;OK;12000699.CNR;Euroconfirming;Ana;12000699.CNR
+SERUNION;;09/02/2015;01/01/2010;BEC;Swift Fileact;MIGRACION01;Integrado;Finalizado;OK;12000700.CNR;Euroconfirming;Ana;12000700.CNR
+SOLVAY;;09/12/2014;01/01/2010;CIB;Swift Fileact;10000000008;Integrado;Finalizado;OK;09003581.CNF;Confirming de clientes;Natalia;09003581.CNF
+SOLVAY;IMP_0068_324;21/01/2014;01/01/2010;CIB;Swift Fileact;10000000021;Producción;Cancelado;;;Transferencias 34.14;Ángel;
+SOLVAY;IMP_0068_324;27/01/2014;01/01/2010;CIB;Swift Fileact;10000000021;Producción;Finalizado;OK;09015941.FIT;Transferencias 34.14;Ángel;09015941.FIT (fecha de ejecución 30/01/2014)
+TECNICAS REUNIDAS;IMP_0028_281;10/09/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;KO;00000042.FIM;Nóminas 34.14;Ana;00000042.FIM (No han llegado a SSTT)
+TECNICAS REUNIDAS;IMP_0028_281;10/09/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;KO;00000043.FIM;Nóminas 34.14;Ana;00000043.FIM (No han llegado a SSTT)
+TECNICAS REUNIDAS;IMP_0028_281;10/09/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;KO;00000043.FIM;Nóminas 34.14;Ana;00000044.FIM (No han llegado a SSTT)
+TECNICAS REUNIDAS;IMP_0028_281;19/09/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000048.FIT;Nóminas 34.14;Ängel;00000048.FIT
+TECNICAS REUNIDAS;IMP_0028_281;22/10/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000074.FIM;Nóminas 34.14;Ana;00000074.FIM
+TECNICAS REUNIDAS;IMP_0028_281;22/10/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000082.FIM;Nóminas 34.14;Ana;00000082.FIM
+TECNICAS REUNIDAS;IMP_0028_281;09/09/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000038.FIM;Nóminas 34.14;Ana;00000038.FIM
+TECNICAS REUNIDAS;IMP_0028_279;11/08/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000024.FIT;Transferencias 34.14;Ana;00000024.FIT
+TECNICAS REUNIDAS;IMP_0028_279;12/08/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000027.FIT;Transferencias 34.14;Ana;00000027.FIT
+TECNICAS REUNIDAS;IMP_0028_279;15/01/2015;01/01/2010;BEC;Swift Fileact;10000000147;Producción;Finalizado;OK;00000002.FIT;Transferencias 34.14;Ana;00000002.FIT
+TECNICAS REUNIDAS;IMP_0028_279;19/09/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000050.FIM;Transferencias 34.14;Ängel;00000050.FIM
+TECNICAS REUNIDAS;IMP_0028_279;22/10/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000066.FIM;Transferencias 34.14;Ana;"00000066.FIM (Debido a un error en otro tipo de pruebas los ficheros se habían descartado en la aplicación de destino, pero se han
+  podido recuperar y ya han sido procesados de forma correcta)"
+TECNICAS REUNIDAS;IMP_0028_279;22/10/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000067.FIT;Transferencias 34.14;Ana;"00000067.FIT (Debido a un error en otro tipo de pruebas los ficheros se habían descartado en la aplicación de destino, pero se han
+  podido recuperar y ya han sido procesados de forma correcta)"
+TECNICAS REUNIDAS;IMP_0028_279;22/10/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000068.FIM;Transferencias 34.14;Ana;"00000068.FIM (Debido a un error en otro tipo de pruebas los ficheros se habían descartado en la aplicación de destino, pero se han
+  podido recuperar y ya han sido procesados de forma correcta)"
+TECNICAS REUNIDAS;IMP_0028_279;22/10/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000070.FIT;Transferencias 34.14;Ana;"00000070.FIT (Debido a un error en otro tipo de pruebas los ficheros se habían descartado en la aplicación de destino, pero se han
+  podido recuperar y ya han sido procesados de forma correcta)"
+TECNICAS REUNIDAS;IMP_0028_279;22/10/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000076.FIT;Transferencias 34.14;Ana;00000076.FIT
+TECNICAS REUNIDAS;IMP_0028_279;22/10/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000084.FIT;Transferencias 34.14;Ana;00000084.FIT
+TECNICAS REUNIDAS;IMP_0028_279;03/09/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000032.FIT;Transferencias 34.14;Ana;00000032.FIT Ha quedado parado en IMG por una incidencia
+TECNICAS REUNIDAS;IMP_0028_279;03/09/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;KO;00000035.FIT;Transferencias 34.14;Ana;00000035.FIT Ha quedado parado en IMG por una incidencia (DUPLICADO)
+TECNICAS REUNIDAS;IMP_0028_279;03/09/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000036.FIT;Transferencias 34.14;Ana;00000036.FIT Ha quedado parado en IMG por una incidencia
+TECNICAS REUNIDAS;IMP_0028_279;05/08/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000014.FIT;Transferencias 34.14;Angel;00000014.FIT. Autorizado, ha llegado con cuenta ordenante real, no la de pruebas.
+TECNICAS REUNIDAS;IMP_0028_281;04/02/2015;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;En curso;OK;00000155.FIM;Nóminas 34.14;Jorge;00000155.FIM
+TECNICAS REUNIDAS;IMP_0028_281;05/02/2015;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000160.FIM;Nóminas 34.14;Jorge;00000160.FIM
+TECNICAS REUNIDAS;IMP_0028_281;05/02/2015;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000163.FIM;Nóminas 34.14;Jorge;00000163.FIM
+TECNICAS REUNIDAS;IMP_0028_280;11/08/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000023.TIN;Órdenes pago internacionales en fichero;Ana;00000023.TIN
+TECNICAS REUNIDAS;IMP_0028_280;12/08/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000028.TIN;Órdenes pago internacionales en fichero;Ana;00000028.TIN
+TECNICAS REUNIDAS;IMP_0028_280;15/01/2015;01/01/2010;BEC;Swift Fileact;10000000147;Producción;Finalizado;OK;00000004.TIN;Órdenes pago internacionales en fichero;Ana;00000004.TIN
+TECNICAS REUNIDAS;IMP_0028_280;22/10/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000083.TIN;Órdenes pago internacionales en fichero;Ana;00000083.TIN
+TECNICAS REUNIDAS;IMP_0028_280;22/10/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000085.TIN;Órdenes pago internacionales en fichero;Ana;00000085.TIN
+TECNICAS REUNIDAS;IMP_0028_280;22/10/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000086.TIN;Órdenes pago internacionales en fichero;Ana;00000086.TIN
+TECNICAS REUNIDAS;IMP_0028_280;04/08/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000005.TIN;Órdenes pago internacionales en fichero;Angel;00000005.TIN. Autorizado, ha llegado con cuenta ordenante real, no la de pruebas. Se ha reclamado a Comex el 06/08 pues no se han procesado aún. Nos piden desde COMEX volver a enviarlo pq se cedieron al pozo equivocado y ya no hay copia de los ficheros. Finalmente se han procesado y cargado según confirma COMEX el 12/08.
+TECNICAS REUNIDAS;IMP_0028_280;04/08/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000006.TIN;Órdenes pago internacionales en fichero;Angel;00000006.TIN. Autorizado, ha llegado con cuenta ordenante real, no la de pruebas.Se ha reclamado a Comex el 06/08 pues no se han procesado aún.Nos piden desde COMEX volver a enviarlo pq se cedieron al pozo equivocado y ya no hay copia de los ficheros. Finalmente se han procesado y cargado según confirma COMEX el 12/08.
+TECNICAS REUNIDAS;IMP_0028_280;05/08/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000015.TIN;Órdenes pago internacionales en fichero;Angel;00000015.TIN. Autorizado, ha llegado con cuenta ordenante real, no la de pruebas.Se ha reclamado a Comex el 06/08 pues no se han procesado aún. Nos piden desde COMEX volver a enviarlo pq se cedieron al pozo equivocado y ya no hay copia de los ficheros. Finalmente se han procesado y cargado según confirma COMEX el 12/08.
+TECNICAS REUNIDAS;IMP_0028_280;15/01/2015;01/01/2010;BEC;Swift Fileact;10000000147;Producción;Finalizado;OK;00000006.TIN;Órdenes pago internacionales en fichero;Ana;00000006.TIN
+TECNICAS REUNIDAS;IMP_0028_279;05/02/2015;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000161.FIT;Transferencias 34.14;Jorge;00000161.FIT
+TECNICAS REUNIDAS;IMP_0028_279;05/02/2015;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000162.FIT;Transferencias 34.14;Jorge;00000162.FIT
+TELFISA;IMP_0014_602;08/01/2015;01/01/2010;CIB;Swift Fileact;10000000150;Producción;Finalizado;OK;00000009.FIT;Transferencias 34.14;Jorge;00000009.FIT
+TELFISA;IMP_0014_601;22/05/2014;01/01/2010;CIB;Swift Fileact;10000000108;Integrado;Finalizado;KO;00000028.TIN;Órdenes pago internacionales en fichero;Jorge;00000028.TIN (cuenta incorrecta)
+TELFISA;IMP_0014_601;22/05/2014;01/01/2010;CIB;Swift Fileact;10000000108;Integrado;Finalizado;KO;00000029.TIN;Órdenes pago internacionales en fichero;Jorge;00000029.TIN (cuenta incorrecta)
+TELFISA;IMP_0014_601;26/05/2014;01/01/2010;CIB;Swift Fileact;10000000108;Integrado;Finalizado;OK;00000031.TIN;Órdenes pago internacionales en fichero;Jorge;00000031.TIN
+TELFISA;IMP_0014_601;26/05/2014;01/01/2010;CIB;Swift Fileact;10000000108;Integrado;Finalizado;OK;00000032.TIN;Órdenes pago internacionales en fichero;Jorge;00000032.TIN
+TELFISA;IMP_0014_601;07/01/2015;01/01/2010;CIB;Swift Fileact;10000000150;Producción;Finalizado;OK;00000006.TIN;Órdenes pago internacionales en fichero;Jorge;00000006.TIN
+TELFISA;IMP_0014_601;07/01/2015;01/01/2010;CIB;Swift Fileact;10000000150;Producción;Finalizado;OK;00000007.TIN;Órdenes pago internacionales en fichero;Jorge;00000007.TIN
+TETRAPAK;IMP_0116_552;10/03/2014;01/01/2010;BEC;Swift Fileact;10000000107;Integrado;Finalizado;OK;000000028.FIT;Transferencias 34.14;Cristina;000000028.FIT
+TETRAPAK;IMP_0116_552;10/03/2014;01/01/2010;BEC;Swift Fileact;10000000107;Integrado;Finalizado;OK;000000029.FIT;Transferencias 34.14;Cristina;000000029.FIT
+TETRAPAK;IMP_0116_552;19/02/2014;01/01/2010;BEC;Swift Fileact;10000000107;Integrado;Cancelado;;;Transferencias 34.14;Cristina;
+TETRAPAK;IMP_0116_552;02/04/2014;01/01/2010;BEC;Swift Fileact;1,00E+10;Producción;Cancelado;;;Transferencias 34.14;Cristina;
+TETRAPAK;IMP_0116_552;25/03/2014;01/01/2010;BEC;Swift Fileact;10000000125;Producción;Finalizado;OK;00000003.FIT;Transferencias 34.14;Cristina;00000003.FIT
+TETRAPAK;IMP_0116_552;25/03/2014;01/01/2010;BEC;Swift Fileact;10000000125;Producción;Finalizado;OK;00000004.FIT;Transferencias 34.14;Cristina;00000004.FIT
+TETRAPAK;IMP_0116_552;27/02/2014;01/01/2010;BEC;Swift Fileact;10000000107;Integrado;Finalizado;OK;00000024.FIT;Transferencias 34.14;Cristina;00000024.FIT. Todas las validaciones ok en PRISMA
+TETRAPAK;IMP_0116_552;27/02/2014;01/01/2010;BEC;Swift Fileact;10000000107;Integrado;Finalizado;OK;00000025.FIT;Transferencias 34.14;Cristina;00000025.FIT. Todas las validaciones ok en PRISMA
+TETRAPAK;IMP_0116_552;04/04/2014;01/01/2010;BEC;Swift Fileact;1,00E+10;Producción;Finalizado;OK;00000006.FIT;Transferencias 34.14;Cristina;00000006.FIT
+TOMPLA;IMP_0075_94;19/05/2014;01/01/2010;BEC;Swift Fileact;10000000029;Producción;Finalizado;OK;18000399.TIN;Órdenes pago internacionales en fichero;Alba;18000399.TIN
+TOMPLA;;18/02/2014;01/01/2010;BEC;Swift Fileact;10000000029;Producción;Finalizado;OK;18000304.SPF;Sepa - pagos París;Ana;18000304.SPF
+TOMPLA;;21/01/2014;01/01/2010;BEC;Swift Fileact;TESTSIWFT04;Integrado;Finalizado;KO;18001264.SPF;Sepa - pagos París;Ana;18001264.SPF (cuenta incorrecta)
+TOMPLA;;21/01/2014;01/01/2010;BEC;Swift Fileact;TESTSIWFT04;Integrado;Finalizado;OK;18001266.SPF;Sepa - pagos París;Ana;18001266.SPF
+TOMPLA;IMP_0075_101;21/01/2014;01/01/2010;BEC;Swift Fileact;TESTSIWFT04;Integrado;Finalizado;KO;;Transferencias tesorería - Paris;Ana;Fichero erróneo, no ha llegado a SSTT
+TOTAL;;13/01/2014;01/01/2010;CIB;Swift Fileact;TESTSWIFT02;Integrado;Finalizado;KO;30002329.CSP;Adeudos directos 19.14 (Sepa);Cristina;30002329.CSP (ID Acreedor incorrecto)
+TOTAL;;13/01/2014;01/01/2010;CIB;Swift Fileact;TESTSWIFT02;Integrado;Finalizado;KO;30002330.CSP;Adeudos directos 19.14 (Sepa);Cristina;30002330.CSP (ID Acreedor incorrecto)
+TOTAL;;14/01/2014;01/01/2010;CIB;Swift Fileact;TESTSWIFT02;Integrado;Finalizado;KO;30002337.CSP;Adeudos directos 19.14 (Sepa);Cristina;30002337.CSP (fuera de plazo)
+TOTAL;;14/01/2014;01/01/2010;CIB;Swift Fileact;TESTSWIFT02;Integrado;Finalizado;KO;30002338.CSP;Adeudos directos 19.14 (Sepa);Cristina;30002338.CSP (fuera de plazo)
+TOTAL;;15/01/2014;01/01/2010;CIB;Swift Fileact;TESTSWIFT02;Integrado;Finalizado;OK;30002349.CSP;Adeudos directos 19.14 (Sepa);Cristina;30002349.CSP
+TOTAL;;15/01/2014;01/01/2010;CIB;Swift Fileact;TESTSWIFT02;Integrado;Finalizado;KO;30002350.CSP;Adeudos directos 19.14 (Sepa);Cristina;30002350.CSP (reportado a SEPA E2E-->no respetaba la fecha mínima de presentación)
+TOTAL;;17/01/2014;01/01/2010;CIB;Swift Fileact;TESTSWIFT02;Integrado;Cancelado;;;Adeudos directos 19.14 (Sepa);Cristina;
+TOTAL;;21/01/2014;01/01/2010;CIB;Swift Fileact;TESTSWIFT02;Integrado;Finalizado;OK;30002355.CSP;Adeudos directos 19.14 (Sepa);Cristina;30002355.CSP
+TOTAL;;13/01/2014;01/01/2010;CIB;Swift Fileact;TESTSWIFT02;Integrado;Finalizado;OK;30002324.FIT;Transferencias 34.14;Cristina;30002324.FIT
+TOTAL;;13/01/2014;01/01/2010;CIB;Swift Fileact;TESTSWIFT02;Integrado;Finalizado;OK;30002326.FIT;Transferencias 34.14;Cristina;30002326.FIT
+TOTAL;;05/12/2014;01/01/2010;CIB;Swift Fileact;TESTSWIFT02;Integrado;Finalizado;OK;30002559.FIT;Transferencias 34.14;Cristina;30002559.FIT
+TOTAL;;18/02/2014;01/01/2010;CIB;Swift Fileact;10000000114;Producción;Finalizado;Ok;;AEB43;Cristina;Se han enviado los ficheros al cliente por primera vez el 18/02
+TOTAL;;23/01/2014;01/01/2010;CIB;Swift Fileact;10000000119;Integrado;Finalizado;OK;;AEB43;Cristina;Confirmado por el cliente ok
+VOLKSWAGEN;IMP_0080_180;30/01/2014;01/01/2010;CIB;Swift Fileact;10000000072;Integrado;Finalizado;OK;19019805.CSP;Adeudos directos 19.44 (Sepa B2B);Jose Manuel;19019805.CSP
+VOLKSWAGEN;IMP_0080_180;30/01/2014;01/01/2010;CIB;Swift Fileact;10000000072;Integrado;Finalizado;OK;19019807.CSP;Adeudos directos 19.44 (Sepa B2B);Jose Manuel;19019807.CSP

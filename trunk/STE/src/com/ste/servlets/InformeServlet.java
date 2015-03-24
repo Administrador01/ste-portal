@@ -640,9 +640,9 @@ public class InformeServlet extends HttpServlet{
 			sh.getRow(head).createCell(4).setCellStyle(clientCellStyle);
 			sh.getRow(head).createCell(5).setCellStyle(clientCellStyle);
 			
-			sh.getRow(head).getCell(2).setCellValue(cliDao.getClientebyId(imp.getCliente_id()).getNombre());	
+			sh.getRow(head).getCell(2).setCellValue(imp.getClient_name());	
 			sh.getRow(head).getCell(3).setCellValue(imp.getProducto());
-			sh.getRow(head).getCell(4).setCellValue(servDao.getImplementacionById(imp.getServicio_id()).getName());
+			sh.getRow(head).getCell(4).setCellValue(imp.getServicio_name());
 			sh.getRow(head).getCell(5).setCellValue(imp.getStr_fecha_alta());
 			head++;
 		}
@@ -694,9 +694,9 @@ public class InformeServlet extends HttpServlet{
 			sh.getRow(head).createCell(5).setCellStyle(clientCellStyle);
 			sh.getRow(head).createCell(6).setCellStyle(clientCellStyle);
 			
-			sh.getRow(head).getCell(2).setCellValue(cliDao.getClientebyId(imp.getCliente_id()).getNombre());	
+			sh.getRow(head).getCell(2).setCellValue(imp.getClient_name());	
 			sh.getRow(head).getCell(3).setCellValue(imp.getProducto());
-			sh.getRow(head).getCell(4).setCellValue(servDao.getImplementacionById(imp.getServicio_id()).getName());
+			sh.getRow(head).getCell(4).setCellValue(imp.getServicio_name());
 			sh.getRow(head).getCell(5).setCellValue(imp.getStr_fech_subida());
 			sh.getRow(head).getCell(6).setCellValue(imp.getDetalle());
 			head++;
@@ -779,7 +779,7 @@ public class InformeServlet extends HttpServlet{
 		
 		
 		resp.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-		resp.setHeader("Content-Disposition","attachment; filename=InformePruebasSTE.xlsx");
+		resp.setHeader("Content-Disposition","attachment; filename=InformeSoporteSTE.xlsx");
 		String link= "/datadocs/templateSoportes.xlsx";
 		InputStream inp = this.getServletContext().getResourceAsStream(link);
 		Workbook workbook = new XSSFWorkbook(OPCPackage.open(inp));

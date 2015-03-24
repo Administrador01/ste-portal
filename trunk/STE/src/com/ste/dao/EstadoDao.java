@@ -47,7 +47,22 @@ public class EstadoDao {
 
 		return Estados;
 	}
-	
+	@SuppressWarnings("unchecked")
+	public List<Estado> getEstadosByName(String name) {
+
+		List<Estado> Estados;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		
+		Query q = pm.newQuery("select from " + Estado.class.getName()+" where name=='"+name+"'");
+		
+		Estados = (List<Estado>) q.execute();
+		
+		
+		pm.close();
+
+		return Estados;
+	}
 	public void deleteAll(){
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		EstadoDao sDao = EstadoDao.getInstance();

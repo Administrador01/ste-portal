@@ -16,12 +16,14 @@ import com.ste.beans.Estado;
 import com.ste.beans.Implementacion;
 import com.ste.beans.ProductoCanal;
 import com.ste.beans.Prueba;
+import com.ste.beans.Servicio;
 import com.ste.beans.TipoServicio;
 import com.ste.dao.ClienteDao;
 import com.ste.dao.EstadoDao;
 import com.ste.dao.ImplementacionDao;
 import com.ste.dao.ProductoCanalDao;
 import com.ste.dao.PruebaDao;
+import com.ste.dao.ServicioDao;
 import com.ste.dao.TipoServicioDao;
 
 public class PruebasAction extends Action{
@@ -62,14 +64,10 @@ public class PruebasAction extends Action{
 		
 		req.setAttribute("productos", productos);
 		
-		TipoServicioDao servDao = TipoServicioDao.getInstance();
-		List<TipoServicio> servicios = servDao.getAllServicios();
+		ServicioDao servDao = ServicioDao.getInstance();
+		List<Servicio> servicios = servDao.getAllServicios();
 		req.setAttribute("tiposervicios", servicios);
-		
-		ImplementacionDao impDao = ImplementacionDao.getInstance();
-		List<Implementacion> implementaciones = impDao.getAllImplementaciones();
-		
-		req.setAttribute("implementaciones", implementaciones);
+	
 		
 		return  mapping.findForward("ok");
 	}

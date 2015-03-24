@@ -101,8 +101,8 @@
 								</div>
 						
 								<div class="form-field">
-									<span class="lbl">Fichero<span class="required-asterisk">*</span>:</span>
-									<input type="text" class=""  name="fichero" id="" value="${prueba.fichero}" required>
+									<span class="lbl">Fichero:</span>
+									<input type="text" class=""  name="fichero" id="" value="${prueba.fichero}">
 								</div>
 								
 								<div class="form-field">
@@ -153,7 +153,7 @@
 								</div>
 								
 								<div class="form-field">
-									<span class="lbl">Referencia<span class="required-asterisk">*</span>:</span>
+									<span class="lbl">Referencia:</span>
 									<div class="input">
 										<input class="long" type="text" name="referencia" id="referencia" value="${prueba.referencia}">
 									</div>
@@ -177,9 +177,10 @@
 									<span class="lbl">Resultado<span class="required-asterisk">*</span>:</span>
 									<div class="input">
 										<select id="resultado" class="selectpicker selected" name="resultado" >
-											<option value="OK">OK</option>
-											<option value="KO">KO</option>
-											<option value="Cancelada">Cancelada</option>
+											<option value="OK"${prueba.resultado == "OK" ? 'selected' : ''}>OK</option>
+											<option value="KO"${prueba.resultado == "KO" ? 'selected' : ''}>KO</option>
+											<option value=""${prueba.resultado == "" ? 'selected' : ''}></option>
+											<option value="Cancelada"${prueba.resultado == "Cancelada" ? 'selected' : ''}>Cancelada</option>
 										</select>
 									</div>
 								</div>
