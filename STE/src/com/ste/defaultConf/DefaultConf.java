@@ -76,6 +76,10 @@ public class DefaultConf extends HttpServlet{
 				result = loadPruebas(req,resp);
 				json.append("success", "true");
 				json.append("result", result);
+			}else if ("tipoServicio".equals(accion)){
+				result = loadTipoServicio(req,resp);
+				json.append("success", "true");
+				json.append("result", result);
 			}
 			resp.setCharacterEncoding("UTF-8");
 			resp.setContentType("text/plain");
@@ -154,7 +158,42 @@ public class DefaultConf extends HttpServlet{
 			e.printStackTrace();
 		}
 	}
-	
+	public String loadTipoServicio(HttpServletRequest req, HttpServletResponse resp) throws InterruptedException, IOException{
+		String result = "";
+		String link = "/datadocs/tiposServicio.csv";
+		TipoServicioDao tipoServicioDao = com.ste.dao.TipoServicioDao.getInstance();
+		
+		String deleteParam = req.getParameter("delete"); 
+		if(deleteParam != null && deleteParam.equals("true")) {
+			tipoServicioDao.deleteAll();
+		}
+		
+		
+		try{
+			InputStream stream = this.getServletContext().getResourceAsStream(link);
+			BufferedReader in = new BufferedReader(new InputStreamReader(stream, "Cp1252"));
+			
+			tipoServicioDao.deleteAll();
+			String inputLine = new String();
+			
+			while ((inputLine = in.readLine()) != null) {
+				String line = inputLine;
+
+				if (!line.equals("")&&!line.equals(null)){
+					TipoServicio tipoServicio = new TipoServicio();
+					tipoServicio.setNme(inputLine);
+					tipoServicioDao.createTipoServicio(tipoServicio);
+				}
+				
+				
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		return "todo ok ";
+	}
 	public String loadPruebas(HttpServletRequest req, HttpServletResponse resp) throws InterruptedException, IOException{
 		//HttpSession sesion = req.getSession();
 		boolean save = false;
@@ -190,7 +229,7 @@ public class DefaultConf extends HttpServlet{
 			ProductoCanalDao productoDao = ProductoCanalDao.getInstance();
 			ImplementacionDao implementacionDao = ImplementacionDao.getInstance();
 			ClienteDao clienteDao = ClienteDao.getInstance();
-			int counter = 1;
+			int counter = 901;
 			boolean error = false;
 			
 			List<EstadoImplementacion> estadosforname;
@@ -202,7 +241,7 @@ public class DefaultConf extends HttpServlet{
 			while ((inputLine = in.readLine()) != null) {
 				error = false;
 				
-				//result = result+"\n"+counter+"    ";
+				result = result+"\n"+counter+"    ";
 				
 				String line = inputLine;
 				String[] implementacionSplit = line.split(";", -1);
@@ -271,10 +310,10 @@ public class DefaultConf extends HttpServlet{
 							prueba.setClient_name(implementacion.getClient_name());
 						}else{
 							if(implementaciones.size()==0){
-							result += counter+ "  No se puede encontrar una implementacion \r\n";
+							result += "  No se puede encontrar una implementacion \r\n";
 							}else{
 															
-									result +=counter+"   Con los datos proporcionados en pruebas mas de una implementacion cumple las condiciones\r\n";
+									result +="   Con los datos proporcionados en pruebas mas de una implementacion cumple las condiciones\r\n";
 								
 							}
 							error = true;
@@ -359,17 +398,21 @@ public class DefaultConf extends HttpServlet{
 					}
 
 					
-					/*
+					
 					List<TipoServicio> servicios = tipoServDao.getServiciosByName(tipoServicio);
 					if(servicios.size()==1){
 						prueba.setTipo_servicio(tipoServicio);
 					}else{
-						//result += "Error tipo de servicio \r\n";
+						result += "Error tipo de servicio \r\n";
 						error = true;	
-					}*/
+					}
 				
 					if(save&&!error) {
 						pruebaDao.createPrueba(prueba);
+					}
+					
+					if(!error) {
+						result += "Todo OK \r\n";
 					}
 				}
 				counter++;

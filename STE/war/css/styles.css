@@ -60,6 +60,7 @@
 .header-layout .header-container .main-menu ul.menu li.menu {
   display: inline-block;
   height: 48px;
+  width: 18%!important;
   padding: 0 7px;
   position: relative;
   top: -5px;
@@ -1103,7 +1104,6 @@ body .modal-dialog .detalles {
 .modal-dialog .form-field > div.bootstrap-select {
   position: relative;
   float: right;
-  margin-right: 5px;
   width: 200px !important;
 }
 .main-table > .table {

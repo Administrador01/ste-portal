@@ -25,14 +25,14 @@
 						<span class="menu-title">Pruebas</span>
 					</a>
 				</li>
-				
+				<!--
 				<li class="menu">
 					<a class="no-underline" href="${entorno}/impServicios.do">
 						<span class="icon-24 servicios-24x"></span>
 						<span class="menu-title">Servicios</span>
 					</a>
 				</li>
-				
+				-->
 				<li class="menu">
 					<a class="no-underline" href="${entorno}/informes.do">
 						<span class="icon-24 informes-24x"></span>

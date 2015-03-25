@@ -64,7 +64,7 @@ AIRBUS;IMP_0004_547;31/01/2014;01/01/2010;CIB;Swift Fileact;AIRBUS;Integrado;Can
 AIRBUS;IMP_0004_547;31/01/2014;01/01/2010;CIB;Swift Fileact;AIRBUS;Integrado;Cancelado;;;Transferencias 34.14;Cristina;
 AIRBUS;IMP_0004_547;05/02/2014;01/01/2010;CIB;Swift Fileact;AIRBUS;Integrado;Finalizado;OK;06001085.FIT;Transferencias 34.14;Cristina;06001085.FIT
 AIRBUS;IMP_0004_547;05/02/2014;01/01/2010;CIB;Swift Fileact;AIRBUS;Integrado;Finalizado;OK;06001086.FIT;Transferencias 34.14;Cristina;06001086.FIT
-ALCOA;IMP_0005_314;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000025;Integrado;Finalizado;KO;0000103.TR1 ;Transferencias, en fichero 34.1;Jorge;0000103.TR1 (Ha llegado como XML)
+ALCOA;IMP_0005_314;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000025;Integrado;Finalizado;KO;0000103.TR1 ;Transferencias, en fichero 34.1;Jorge;0000103.TR1 (Ha llegado como XML)
 ALCOA;IMP_0005_314;16/01/2014;01/01/2010;CIB;Swift Fileact;10000000025;Integrado;Finalizado;KO;00000073.TR1;Transferencias, en fichero 34.1;Jorge;00000073.TR1 (Cuenta inexistente)
 ALCOA;IMP_0005_314;16/01/2014;01/01/2010;CIB;Swift Fileact;10000000025;Integrado;Finalizado;KO;00000074.TR1;Transferencias, en fichero 34.1;Jorge;00000074.TR1 (Cuenta inexistente)
 ALCOA;IMP_0005_314;17/01/2014;01/01/2010;CIB;Swift Fileact;10000000025;Integrado;Finalizado;OK;00000077.TR1;Transferencias, en fichero 34.1;Jorge;00000077.TR1
@@ -73,7 +73,7 @@ ALCOA;IMP_0005_314;17/01/2014;01/01/2010;CIB;Swift Fileact;10000000025;Integrado
 ALCOA;IMP_0005_314;17/01/2014;01/01/2010;CIB;Swift Fileact;10000000025;Integrado;Finalizado;OK;00000076.TR1;Transferencias, en fichero 34.1;Jorge;00000076.TR1
 ALCOA;IMP_0005_314;24/02/2015;01/01/2010;CIB;Swift Fileact;10000000025;Integrado;Finalizado;KO;;Transferencias, en fichero 34.1;Jorge;Registros erróneos
 ALCOA;IMP_0005_314;24/02/2015;01/01/2010;CIB;Swift Fileact;10000000025;Integrado;Finalizado;KO;;Transferencias, en fichero 34.1;Jorge;Caracteres extraños al principio del fichero y una operación de España en transfronterizas.
-ALCOA;IMP_0005_604;24/02/2015;01/01/2010;CIB;Swift Fileact;10000000025;Integrado;EN VUELO;;;Envío respuesta de pagos XML;Jorge;
+ALCOA;IMP_0005_604;24/02/2015;01/01/2010;CIB;Swift Fileact;10000000025;Integrado;En curso;;;Envío respuesta de pagos XML;Jorge;
 ALDESA;IMP_0029_285;22/10/2014;01/01/2010;BEC;Swift Fileact;;Integrado;Finalizado;OK;;AEB43;Natalia;Fichero ejemplo real de extractos AEB43 para pruebas Test con cliente
 ALDESA;IMP_0029_285;05/11/2014;01/01/2010;BEC;Swift Fileact;;Producción;Finalizado;OK;;AEB43;Andrés;FICHERO ENVIADO OK, CONEXIÓN OK.
 ALSTOM;IMP_0012_105;10/02/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Finalizado;KO;00000209.CNR;Euroconfirming;Ana;00000209.CNR (diversos errores)
@@ -129,8 +129,7 @@ ALSTOM;;10/03/2014;01/01/2010;CIB;Swift Fileact;10000000121;Producción;Finalizad
 ALSTOM;;11/03/2014;01/01/2010;CIB;Swift Fileact;10000000121;Producción;Finalizado;OK;00000008.TIN;Órdenes pago internacionales en fichero;Ana;00000008.TIN
 ALSTOM;;17/03/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;En curso;;00000299.TIN;Órdenes pago internacionales en fichero;Ana;00000299.TIN
 ALSTOM;;20/06/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Cancelado;;;Órdenes pago internacionales en fichero;Ana;Sin recibir aún el fichero
-ALSTOM;;22/01/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Finalizado;OK;00000025.TIN;Órdenes pago internacionales en fichero;Ana;"00000025.TIN. No están en autorizaciones, en SSTT. Pendiente por servicio no 
- contratado, cuenta real del cliente, al ser pagos se ha autorizado."
+ALSTOM;;22/01/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Finalizado;OK;00000025.TIN;Órdenes pago internacionales en fichero;Ana;00000025.TIN. No están en autorizaciones, en SSTT. Pendiente por servicio no  contratado, cuenta real del cliente, al ser pagos se ha autorizado.
 ALSTOM;;22/01/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Finalizado;OK;00000023.TIN;Órdenes pago internacionales en fichero;Ana;00000023.TIN. Se ha autorizado, estaba pendiente por saldo.
 ALSTOM;;23/01/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Finalizado;OK;00000053.TIN;Órdenes pago internacionales en fichero;Ana;00000053.TIN
 ALSTOM;;24/09/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Finalizado;OK;00000500.TIN;Órdenes pago internacionales en fichero;JM;00000500.TIN (no ha cambiado de situación -> se abre remedy)
@@ -169,8 +168,7 @@ ALSTOM;;20/06/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Cancelado;
 ALSTOM;;21/01/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Finalizado;OK;00000011.FIT;Transferencias 34.14;Ana;00000011.FIT.Han llegado a SSTT, se ha autorizado, estaba pendiente por saldo.
 ALSTOM;;21/01/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Finalizado;OK;00000012.FIT;Transferencias 34.14;Ana;00000012.FIT. No están en autorizaciones, en SSTT. Han llegado a SSTT, se ha autorizado, estaba pendiente por saldo.
 ALSTOM;;21/01/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Finalizado;OK;00000018.FIT;Transferencias 34.14;Ana;00000018.FIT. No están en autorizaciones, en SSTT. Pendiente por servicio no contratado, cuenta real del cliente, al ser pagos se ha autorizado.
-ALSTOM;;21/01/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Finalizado;OK;00000019.FIT;Transferencias 34.14;Ana;"00000019.FIT. No están en autorizaciones, en SSTT. No están en autorizaciones, en SSTT. Pendiente por servicio no 
- contratado, cuenta real del cliente, al ser pagos se ha autorizado."
+ALSTOM;;21/01/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Finalizado;OK;00000019.FIT;Transferencias 34.14;Ana;00000019.FIT. No están en autorizaciones, en SSTT. No están en autorizaciones, en SSTT. Pendiente por servicio no  contratado, cuenta real del cliente, al ser pagos se ha autorizado.
 ALSTOM;;22/01/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Finalizado;OK;00000032.FIT;Transferencias 34.14;Ana;00000032.FIT (se autoriza el fichero)
 ALSTOM;;22/01/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Finalizado;OK;00000033.FIT;Transferencias 34.14;Ana;00000033.FIT (se autoriza el fichero)
 ALSTOM;;22/01/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Finalizado;OK;00000034.FIT;Transferencias 34.14;Ana;00000034.FIT (se autoriza el fichero)
@@ -291,8 +289,7 @@ CAT;;25/08/2014;01/01/2010;BEC;Swift Fileact;10000000073;Producción;Finalizado;O
 CAT;;11/08/2014;01/01/2010;BEC;Swift Fileact;TCATFRPPXXX;Producción;Finalizado;;;MT101;Ana;Pago a Francia, Credit Lyonais, como SEPA
 CAT;;16/07/2014;01/01/2010;BEC;Swift Fileact;TCATFRPPXXX;Integrado;Finalizado;OK;MT101586.TIN;MT101;Ana;MT101586.TIN
 CAT;;19/11/2014;01/01/2010;BEC;Swift Fileact;TCATFRPPXXX;Producción;Finalizado;OK;;MT101;Antonio Cediel;Pago a Francia, Credit Lyonais. Solicitado penny test por cambios en la tag 59 por parte del cliente.
-CAT;;07/07/2014;01/01/2010;BEC;Swift Fileact;TCATFRPPXXX;Integrado;Finalizado;KO;;MT101;Ana;"El fichero no se ha recibido no en Telemáticos. Parece que sí está en SSTT (SX.CECAPL10.SXCEA029.TLSMJ115.G5101V00), se traslada al ANS.
- La cuenta no existe en integrado."
+CAT;;07/07/2014;01/01/2010;BEC;Swift Fileact;TCATFRPPXXX;Integrado;Finalizado;KO;;MT101;Ana;El fichero no se ha recibido no en Telemáticos. Parece que sí está en SSTT (SX.CECAPL10.SXCEA029.TLSMJ115.G5101V00), se traslada al ANS. La cuenta no existe en integrado.
 CAT;;28/05/2014;01/01/2010;BEC;Swift Fileact;TCATFRPPXXX;Integrado;Finalizado;KO;;MT101;Ángel;No ha llegado a SSTT
 CAT;IMP_0097_9;21/05/2014;01/01/2010;BEC;Swift Fileact;10000000050;Integrado;Finalizado;OK;00000109.SPF;Sepa - pagos París;Ángel;00000109.SPF
 CAT;IMP_0097_3;01/07/2014;01/01/2010;BEC;Swift Fileact;10000000073;Producción;Finalizado;KO;;Órdenes pago internacionales en fichero;Ana;Sin confirmar la fecha. Desde el 17/06, finalmente ha enviado el 1 de julio. Ha fallado en la infraestructura global.
