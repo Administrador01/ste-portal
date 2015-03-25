@@ -64,7 +64,7 @@ AIRBUS;IMP_0004_547;31/01/2014;01/01/2010;CIB;Swift Fileact;AIRBUS;Integrado;Can
 AIRBUS;IMP_0004_547;31/01/2014;01/01/2010;CIB;Swift Fileact;AIRBUS;Integrado;Cancelado;;;Transferencias 34.14;Cristina;
 AIRBUS;IMP_0004_547;05/02/2014;01/01/2010;CIB;Swift Fileact;AIRBUS;Integrado;Finalizado;OK;06001085.FIT;Transferencias 34.14;Cristina;06001085.FIT
 AIRBUS;IMP_0004_547;05/02/2014;01/01/2010;CIB;Swift Fileact;AIRBUS;Integrado;Finalizado;OK;06001086.FIT;Transferencias 34.14;Cristina;06001086.FIT
-ALCOA;IMP_0005_314;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000025;Integrado;Finalizado;KO;0000103.TR1 ;Transferencias, en fichero 34.1;Jorge;0000103.TR1 (Ha llegado como XML)
+ALCOA;IMP_0005_314;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000025;Integrado;Finalizado;KO;0000103.TR1 ;Transferencias, en fichero 34.1;Jorge;0000103.TR1 (Ha llegado como XML)
 ALCOA;IMP_0005_314;16/01/2014;01/01/2010;CIB;Swift Fileact;10000000025;Integrado;Finalizado;KO;00000073.TR1;Transferencias, en fichero 34.1;Jorge;00000073.TR1 (Cuenta inexistente)
 ALCOA;IMP_0005_314;16/01/2014;01/01/2010;CIB;Swift Fileact;10000000025;Integrado;Finalizado;KO;00000074.TR1;Transferencias, en fichero 34.1;Jorge;00000074.TR1 (Cuenta inexistente)
 ALCOA;IMP_0005_314;17/01/2014;01/01/2010;CIB;Swift Fileact;10000000025;Integrado;Finalizado;OK;00000077.TR1;Transferencias, en fichero 34.1;Jorge;00000077.TR1
@@ -73,7 +73,7 @@ ALCOA;IMP_0005_314;17/01/2014;01/01/2010;CIB;Swift Fileact;10000000025;Integrado
 ALCOA;IMP_0005_314;17/01/2014;01/01/2010;CIB;Swift Fileact;10000000025;Integrado;Finalizado;OK;00000076.TR1;Transferencias, en fichero 34.1;Jorge;00000076.TR1
 ALCOA;IMP_0005_314;24/02/2015;01/01/2010;CIB;Swift Fileact;10000000025;Integrado;Finalizado;KO;;Transferencias, en fichero 34.1;Jorge;Registros erróneos
 ALCOA;IMP_0005_314;24/02/2015;01/01/2010;CIB;Swift Fileact;10000000025;Integrado;Finalizado;KO;;Transferencias, en fichero 34.1;Jorge;Caracteres extraños al principio del fichero y una operación de España en transfronterizas.
-ALCOA;IMP_0005_604;24/02/2015;01/01/2010;CIB;Swift Fileact;10000000025;Integrado;EN VUELO;;;Envío respuesta de pagos XML;Jorge;
+ALCOA;IMP_0005_604;24/02/2015;01/01/2010;CIB;Swift Fileact;10000000025;Integrado;En curso;;;Envío respuesta de pagos XML;Jorge;
 ALDESA;IMP_0029_285;22/10/2014;01/01/2010;BEC;Swift Fileact;;Integrado;Finalizado;OK;;AEB43;Natalia;Fichero ejemplo real de extractos AEB43 para pruebas Test con cliente
 ALDESA;IMP_0029_285;05/11/2014;01/01/2010;BEC;Swift Fileact;;Producción;Finalizado;OK;;AEB43;Andrés;FICHERO ENVIADO OK, CONEXIÓN OK.
 ALSTOM;IMP_0012_105;10/02/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Finalizado;KO;00000209.CNR;Euroconfirming;Ana;00000209.CNR (diversos errores)
@@ -129,8 +129,7 @@ ALSTOM;;10/03/2014;01/01/2010;CIB;Swift Fileact;10000000121;Producción;Finalizad
 ALSTOM;;11/03/2014;01/01/2010;CIB;Swift Fileact;10000000121;Producción;Finalizado;OK;00000008.TIN;Órdenes pago internacionales en fichero;Ana;00000008.TIN
 ALSTOM;;17/03/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;En curso;;00000299.TIN;Órdenes pago internacionales en fichero;Ana;00000299.TIN
 ALSTOM;;20/06/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Cancelado;;;Órdenes pago internacionales en fichero;Ana;Sin recibir aún el fichero
-ALSTOM;;22/01/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Finalizado;OK;00000025.TIN;Órdenes pago internacionales en fichero;Ana;"00000025.TIN. No están en autorizaciones, en SSTT. Pendiente por servicio no 
- contratado, cuenta real del cliente, al ser pagos se ha autorizado."
+ALSTOM;;22/01/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Finalizado;OK;00000025.TIN;Órdenes pago internacionales en fichero;Ana;00000025.TIN. No están en autorizaciones, en SSTT. Pendiente por servicio no  contratado, cuenta real del cliente, al ser pagos se ha autorizado.
 ALSTOM;;22/01/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Finalizado;OK;00000023.TIN;Órdenes pago internacionales en fichero;Ana;00000023.TIN. Se ha autorizado, estaba pendiente por saldo.
 ALSTOM;;23/01/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Finalizado;OK;00000053.TIN;Órdenes pago internacionales en fichero;Ana;00000053.TIN
 ALSTOM;;24/09/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Finalizado;OK;00000500.TIN;Órdenes pago internacionales en fichero;JM;00000500.TIN (no ha cambiado de situación -> se abre remedy)
@@ -169,8 +168,7 @@ ALSTOM;;20/06/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Cancelado;
 ALSTOM;;21/01/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Finalizado;OK;00000011.FIT;Transferencias 34.14;Ana;00000011.FIT.Han llegado a SSTT, se ha autorizado, estaba pendiente por saldo.
 ALSTOM;;21/01/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Finalizado;OK;00000012.FIT;Transferencias 34.14;Ana;00000012.FIT. No están en autorizaciones, en SSTT. Han llegado a SSTT, se ha autorizado, estaba pendiente por saldo.
 ALSTOM;;21/01/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Finalizado;OK;00000018.FIT;Transferencias 34.14;Ana;00000018.FIT. No están en autorizaciones, en SSTT. Pendiente por servicio no contratado, cuenta real del cliente, al ser pagos se ha autorizado.
-ALSTOM;;21/01/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Finalizado;OK;00000019.FIT;Transferencias 34.14;Ana;"00000019.FIT. No están en autorizaciones, en SSTT. No están en autorizaciones, en SSTT. Pendiente por servicio no 
- contratado, cuenta real del cliente, al ser pagos se ha autorizado."
+ALSTOM;;21/01/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Finalizado;OK;00000019.FIT;Transferencias 34.14;Ana;00000019.FIT. No están en autorizaciones, en SSTT. No están en autorizaciones, en SSTT. Pendiente por servicio no  contratado, cuenta real del cliente, al ser pagos se ha autorizado.
 ALSTOM;;22/01/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Finalizado;OK;00000032.FIT;Transferencias 34.14;Ana;00000032.FIT (se autoriza el fichero)
 ALSTOM;;22/01/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Finalizado;OK;00000033.FIT;Transferencias 34.14;Ana;00000033.FIT (se autoriza el fichero)
 ALSTOM;;22/01/2014;01/01/2010;CIB;Swift Fileact;10000000105;Integrado;Finalizado;OK;00000034.FIT;Transferencias 34.14;Ana;00000034.FIT (se autoriza el fichero)
@@ -291,8 +289,7 @@ CAT;;25/08/2014;01/01/2010;BEC;Swift Fileact;10000000073;Producción;Finalizado;O
 CAT;;11/08/2014;01/01/2010;BEC;Swift Fileact;TCATFRPPXXX;Producción;Finalizado;;;MT101;Ana;Pago a Francia, Credit Lyonais, como SEPA
 CAT;;16/07/2014;01/01/2010;BEC;Swift Fileact;TCATFRPPXXX;Integrado;Finalizado;OK;MT101586.TIN;MT101;Ana;MT101586.TIN
 CAT;;19/11/2014;01/01/2010;BEC;Swift Fileact;TCATFRPPXXX;Producción;Finalizado;OK;;MT101;Antonio Cediel;Pago a Francia, Credit Lyonais. Solicitado penny test por cambios en la tag 59 por parte del cliente.
-CAT;;07/07/2014;01/01/2010;BEC;Swift Fileact;TCATFRPPXXX;Integrado;Finalizado;KO;;MT101;Ana;"El fichero no se ha recibido no en Telemáticos. Parece que sí está en SSTT (SX.CECAPL10.SXCEA029.TLSMJ115.G5101V00), se traslada al ANS.
- La cuenta no existe en integrado."
+CAT;;07/07/2014;01/01/2010;BEC;Swift Fileact;TCATFRPPXXX;Integrado;Finalizado;KO;;MT101;Ana;El fichero no se ha recibido no en Telemáticos. Parece que sí está en SSTT (SX.CECAPL10.SXCEA029.TLSMJ115.G5101V00), se traslada al ANS. La cuenta no existe en integrado.
 CAT;;28/05/2014;01/01/2010;BEC;Swift Fileact;TCATFRPPXXX;Integrado;Finalizado;KO;;MT101;Ángel;No ha llegado a SSTT
 CAT;IMP_0097_9;21/05/2014;01/01/2010;BEC;Swift Fileact;10000000050;Integrado;Finalizado;OK;00000109.SPF;Sepa - pagos París;Ángel;00000109.SPF
 CAT;IMP_0097_3;01/07/2014;01/01/2010;BEC;Swift Fileact;10000000073;Producción;Finalizado;KO;;Órdenes pago internacionales en fichero;Ana;Sin confirmar la fecha. Desde el 17/06, finalmente ha enviado el 1 de julio. Ha fallado en la infraestructura global.
@@ -542,21 +539,21 @@ IBERDROLA;IMP_0113_204;26/05/2014;01/01/2010;CIB;Swift Fileact;10000000095;Integ
 IBERDROLA;IMP_0113_204;29/07/2014;01/01/2010;CIB;Swift Fileact;10000000113;Producción;Finalizado;OK;00007455.FIM;Nóminas 34.14;Nacho;00007455.FIM
 IBERDROLA;IMP_0113_204;29/07/2014;01/01/2010;CIB;Swift Fileact;10000000113;Producción;Finalizado;OK;00007456.FIM;Nóminas 34.14;Nacho;00007456.FIM
 IBERDROLA;IMP_0113_204;29/07/2014;01/01/2010;CIB;Swift Fileact;10000000113;Producción;Finalizado;OK;00007457.FIM;Nóminas 34.14;Nacho;00007457.FIM
-IBERDROLA;IMP_0113_207;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001280.TIN;Transferencias 34.14;Nacho;00001280.TIN
-IBERDROLA;IMP_0113_207;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001281.TIN;Transferencias 34.14;Nacho;00001281.TIN
-IBERDROLA;IMP_0113_207;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001282.FIT;Transferencias 34.14;Nacho;00001282.FIT
-IBERDROLA;IMP_0113_207;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001283.FIT;Transferencias 34.14;Nacho;00001283.FIT
-IBERDROLA;IMP_0113_207;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001284.FIT;Transferencias 34.14;Nacho;00001284.FIT
-IBERDROLA;IMP_0113_207;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001285.FIT;Transferencias 34.14;Nacho;00001285.FIT
-IBERDROLA;IMP_0113_207;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001286.FIT;Transferencias 34.14;Nacho;00001286.FIT
-IBERDROLA;IMP_0113_207;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001287.FIT;Transferencias 34.14;Nacho;00001287.FIT
-IBERDROLA;IMP_0113_207;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001288.FIT;Transferencias 34.14;Nacho;00001288.FIT
-IBERDROLA;IMP_0113_207;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001289.FIT;Transferencias 34.14;Nacho;00001289.FIT
-IBERDROLA;IMP_0113_207;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001290.FIT;Transferencias 34.14;Nacho;00001290.FIT
-IBERDROLA;IMP_0113_207;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001291.FIT;Transferencias 34.14;Nacho;00001291.FIT
-IBERDROLA;IMP_0113_207;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001292.FIT;Transferencias 34.14;Nacho;00001292.FIT
-IBERDROLA;IMP_0113_207;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001293.FIT;Transferencias 34.14;Nacho;00001293.FIT
-IBERDROLA;IMP_0113_207;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001294.FIT;Transferencias 34.14;Nacho;00001294.FIT
+IBERDROLA;IMP_0113_207;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001280.TIN;Transferencias 34.14;Nacho;00001280.TIN
+IBERDROLA;IMP_0113_207;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001281.TIN;Transferencias 34.14;Nacho;00001281.TIN
+IBERDROLA;IMP_0113_207;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001282.FIT;Transferencias 34.14;Nacho;00001282.FIT
+IBERDROLA;IMP_0113_207;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001283.FIT;Transferencias 34.14;Nacho;00001283.FIT
+IBERDROLA;IMP_0113_207;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001284.FIT;Transferencias 34.14;Nacho;00001284.FIT
+IBERDROLA;IMP_0113_207;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001285.FIT;Transferencias 34.14;Nacho;00001285.FIT
+IBERDROLA;IMP_0113_207;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001286.FIT;Transferencias 34.14;Nacho;00001286.FIT
+IBERDROLA;IMP_0113_207;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001287.FIT;Transferencias 34.14;Nacho;00001287.FIT
+IBERDROLA;IMP_0113_207;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001288.FIT;Transferencias 34.14;Nacho;00001288.FIT
+IBERDROLA;IMP_0113_207;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001289.FIT;Transferencias 34.14;Nacho;00001289.FIT
+IBERDROLA;IMP_0113_207;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001290.FIT;Transferencias 34.14;Nacho;00001290.FIT
+IBERDROLA;IMP_0113_207;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001291.FIT;Transferencias 34.14;Nacho;00001291.FIT
+IBERDROLA;IMP_0113_207;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001292.FIT;Transferencias 34.14;Nacho;00001292.FIT
+IBERDROLA;IMP_0113_207;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001293.FIT;Transferencias 34.14;Nacho;00001293.FIT
+IBERDROLA;IMP_0113_207;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001294.FIT;Transferencias 34.14;Nacho;00001294.FIT
 IBERDROLA;IMP_0113_207;10/04/2014;01/01/2010;CIB;Swift Fileact;1,00E+10;Integrado;Finalizado;OK;00000225.FIT;Transferencias 34.14;Ignacio;00000225.FIT. Reclamado a SSTT, se ha cedido 14/04 a PRISMA.
 IBERDROLA;IMP_0113_207;10/04/2014;01/01/2010;CIB;Swift Fileact;1,00E+10;Integrado;Finalizado;OK;00000227.FIT;Transferencias 34.14;Ignacio;00000227.FIT. Reclamado a SSTT, se ha cedido 14/04 a PRISMA.
 IBERDROLA;IMP_0113_207;10/04/2014;01/01/2010;CIB;Swift Fileact;1,00E+10;Integrado;Finalizado;OK;00000228.FIT;Transferencias 34.14;Ignacio;00000228.FIT (Fecha ejecución: 11/04/2014). Reclamado a SSTT, se ha cedido 14/04 a PRISMA.
@@ -697,75 +694,75 @@ IBERDROLA;IMP_0113_205;21/08/2014;01/01/2010;CIB;Swift Fileact;IBDLES2BXXX;Integ
 IBERDROLA;IMP_0113_205;21/08/2014;01/01/2010;CIB;Swift Fileact;IBDLES2BXXX;Integrado;Finalizado;OK;MT101087.TR1;MT101;Nacho;MT101087.TR1
 IBERDROLA;IMP_0113_205;21/08/2014;01/01/2010;CIB;Swift Fileact;IBDLES2BXXX;Integrado;Finalizado;OK;MT101787.TR1;MT101;Nacho;MT101787.TR1
 IBERDROLA;IMP_0113_205;21/08/2014;01/01/2010;CIB;Swift Fileact;IBDLES2BXXX;Integrado;Finalizado;OK;MT101027.TR1;MT101;Nacho;MT101027.TR1
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001295.FIT;Órdenes pago internacionales en fichero;Nacho;00001295.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001296.FIT;Órdenes pago internacionales en fichero;Nacho;00001296.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001297.FIT;Órdenes pago internacionales en fichero;Nacho;00001297.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001298.FIT;Órdenes pago internacionales en fichero;Nacho;00001298.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001299.FIT;Órdenes pago internacionales en fichero;Nacho;00001299.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001300.FIT;Órdenes pago internacionales en fichero;Nacho;00001300.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001301.FIT;Órdenes pago internacionales en fichero;Nacho;00001301.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001302.FIT;Órdenes pago internacionales en fichero;Nacho;00001302.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001303.FIT;Órdenes pago internacionales en fichero;Nacho;00001303.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001304.FIT;Órdenes pago internacionales en fichero;Nacho;00001304.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001305.FIT;Órdenes pago internacionales en fichero;Nacho;00001305.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001306.FIT;Órdenes pago internacionales en fichero;Nacho;00001306.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001307.FIT;Órdenes pago internacionales en fichero;Nacho;00001307.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001308.FIT;Órdenes pago internacionales en fichero;Nacho;00001308.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001309.FIT;Órdenes pago internacionales en fichero;Nacho;00001309.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001310.FIT;Órdenes pago internacionales en fichero;Nacho;00001310.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001311.FIT;Órdenes pago internacionales en fichero;Nacho;00001311.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001312.FIT;Órdenes pago internacionales en fichero;Nacho;00001312.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001313.FIT;Órdenes pago internacionales en fichero;Nacho;00001313.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001314.FIT;Órdenes pago internacionales en fichero;Nacho;00001314.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001315.FIT;Órdenes pago internacionales en fichero;Nacho;00001315.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001316.FIT;Órdenes pago internacionales en fichero;Nacho;00001316.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001317.FIT;Órdenes pago internacionales en fichero;Nacho;00001317.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001318.FIT;Órdenes pago internacionales en fichero;Nacho;00001318.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001319.FIT;Órdenes pago internacionales en fichero;Nacho;00001319.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001320.FIT;Órdenes pago internacionales en fichero;Nacho;00001320.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001321.FIT;Órdenes pago internacionales en fichero;Nacho;00001321.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001322.FIT;Órdenes pago internacionales en fichero;Nacho;00001322.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001323.FIT;Órdenes pago internacionales en fichero;Nacho;00001323.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001324.FIT;Órdenes pago internacionales en fichero;Nacho;00001324.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001325.FIT;Órdenes pago internacionales en fichero;Nacho;00001325.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001326.FIT;Órdenes pago internacionales en fichero;Nacho;00001326.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001328.FIT;Órdenes pago internacionales en fichero;Nacho;00001328.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001329.FIT;Órdenes pago internacionales en fichero;Nacho;00001329.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001329.FIT;Órdenes pago internacionales en fichero;Nacho;00001329.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001330.FIT;Órdenes pago internacionales en fichero;Nacho;00001330.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001331.FIT;Órdenes pago internacionales en fichero;Nacho;00001331.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001332.FIT;Órdenes pago internacionales en fichero;Nacho;00001332.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001333.FIT;Órdenes pago internacionales en fichero;Nacho;00001333.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001334.FIT;Órdenes pago internacionales en fichero;Nacho;00001334.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001335.FIT;Órdenes pago internacionales en fichero;Nacho;00001335.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001336.FIT;Órdenes pago internacionales en fichero;Nacho;00001336.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001337.FIT;Órdenes pago internacionales en fichero;Nacho;00001337.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001338.FIT;Órdenes pago internacionales en fichero;Nacho;00001338.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001339.FIT;Órdenes pago internacionales en fichero;Nacho;00001339.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001340.FIT;Órdenes pago internacionales en fichero;Nacho;00001340.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001341.FIT;Órdenes pago internacionales en fichero;Nacho;00001341.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001342.FIT;Órdenes pago internacionales en fichero;Nacho;00001342.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001343.FIT;Órdenes pago internacionales en fichero;Nacho;00001343.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001344.FIT;Órdenes pago internacionales en fichero;Nacho;00001344.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001345.FIT;Órdenes pago internacionales en fichero;Nacho;00001345.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001346.FIT;Órdenes pago internacionales en fichero;Nacho;00001346.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001347.FIT;Órdenes pago internacionales en fichero;Nacho;00001347.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001348.FIT;Órdenes pago internacionales en fichero;Nacho;00001348.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001349.FIT;Órdenes pago internacionales en fichero;Nacho;00001349.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001350.FIT;Órdenes pago internacionales en fichero;Nacho;00001350.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001351.FIT;Órdenes pago internacionales en fichero;Nacho;00001351.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001352.FIT;Órdenes pago internacionales en fichero;Nacho;00001352.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001353.FIT;Órdenes pago internacionales en fichero;Nacho;00001353.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001354.FIT;Órdenes pago internacionales en fichero;Nacho;00001354.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001355.FIT;Órdenes pago internacionales en fichero;Nacho;00001355.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001356.FIT;Órdenes pago internacionales en fichero;Nacho;00001356.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001357.FIT;Órdenes pago internacionales en fichero;Nacho;00001357.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001358.FIT;Órdenes pago internacionales en fichero;Nacho;00001358.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001359.FIT;Órdenes pago internacionales en fichero;Nacho;00001359.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001360.FIT;Órdenes pago internacionales en fichero;Nacho;00001360.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001361.FIT;Órdenes pago internacionales en fichero;Nacho;00001361.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001362.FIT;Órdenes pago internacionales en fichero;Nacho;00001362.FIT
-IBERDROLA;IMP_0113_206;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001363.FIT;Órdenes pago internacionales en fichero;Nacho;00001363.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001295.FIT;Órdenes pago internacionales en fichero;Nacho;00001295.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001296.FIT;Órdenes pago internacionales en fichero;Nacho;00001296.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001297.FIT;Órdenes pago internacionales en fichero;Nacho;00001297.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001298.FIT;Órdenes pago internacionales en fichero;Nacho;00001298.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001299.FIT;Órdenes pago internacionales en fichero;Nacho;00001299.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001300.FIT;Órdenes pago internacionales en fichero;Nacho;00001300.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001301.FIT;Órdenes pago internacionales en fichero;Nacho;00001301.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001302.FIT;Órdenes pago internacionales en fichero;Nacho;00001302.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001303.FIT;Órdenes pago internacionales en fichero;Nacho;00001303.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001304.FIT;Órdenes pago internacionales en fichero;Nacho;00001304.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001305.FIT;Órdenes pago internacionales en fichero;Nacho;00001305.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001306.FIT;Órdenes pago internacionales en fichero;Nacho;00001306.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001307.FIT;Órdenes pago internacionales en fichero;Nacho;00001307.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001308.FIT;Órdenes pago internacionales en fichero;Nacho;00001308.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001309.FIT;Órdenes pago internacionales en fichero;Nacho;00001309.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001310.FIT;Órdenes pago internacionales en fichero;Nacho;00001310.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001311.FIT;Órdenes pago internacionales en fichero;Nacho;00001311.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001312.FIT;Órdenes pago internacionales en fichero;Nacho;00001312.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001313.FIT;Órdenes pago internacionales en fichero;Nacho;00001313.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001314.FIT;Órdenes pago internacionales en fichero;Nacho;00001314.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001315.FIT;Órdenes pago internacionales en fichero;Nacho;00001315.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001316.FIT;Órdenes pago internacionales en fichero;Nacho;00001316.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001317.FIT;Órdenes pago internacionales en fichero;Nacho;00001317.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001318.FIT;Órdenes pago internacionales en fichero;Nacho;00001318.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001319.FIT;Órdenes pago internacionales en fichero;Nacho;00001319.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001320.FIT;Órdenes pago internacionales en fichero;Nacho;00001320.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001321.FIT;Órdenes pago internacionales en fichero;Nacho;00001321.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001322.FIT;Órdenes pago internacionales en fichero;Nacho;00001322.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001323.FIT;Órdenes pago internacionales en fichero;Nacho;00001323.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001324.FIT;Órdenes pago internacionales en fichero;Nacho;00001324.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001325.FIT;Órdenes pago internacionales en fichero;Nacho;00001325.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001326.FIT;Órdenes pago internacionales en fichero;Nacho;00001326.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001328.FIT;Órdenes pago internacionales en fichero;Nacho;00001328.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001329.FIT;Órdenes pago internacionales en fichero;Nacho;00001329.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001329.FIT;Órdenes pago internacionales en fichero;Nacho;00001329.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001330.FIT;Órdenes pago internacionales en fichero;Nacho;00001330.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001331.FIT;Órdenes pago internacionales en fichero;Nacho;00001331.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001332.FIT;Órdenes pago internacionales en fichero;Nacho;00001332.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001333.FIT;Órdenes pago internacionales en fichero;Nacho;00001333.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001334.FIT;Órdenes pago internacionales en fichero;Nacho;00001334.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001335.FIT;Órdenes pago internacionales en fichero;Nacho;00001335.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001336.FIT;Órdenes pago internacionales en fichero;Nacho;00001336.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001337.FIT;Órdenes pago internacionales en fichero;Nacho;00001337.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001338.FIT;Órdenes pago internacionales en fichero;Nacho;00001338.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001339.FIT;Órdenes pago internacionales en fichero;Nacho;00001339.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001340.FIT;Órdenes pago internacionales en fichero;Nacho;00001340.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001341.FIT;Órdenes pago internacionales en fichero;Nacho;00001341.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001342.FIT;Órdenes pago internacionales en fichero;Nacho;00001342.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001343.FIT;Órdenes pago internacionales en fichero;Nacho;00001343.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001344.FIT;Órdenes pago internacionales en fichero;Nacho;00001344.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001345.FIT;Órdenes pago internacionales en fichero;Nacho;00001345.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001346.FIT;Órdenes pago internacionales en fichero;Nacho;00001346.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001347.FIT;Órdenes pago internacionales en fichero;Nacho;00001347.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001348.FIT;Órdenes pago internacionales en fichero;Nacho;00001348.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001349.FIT;Órdenes pago internacionales en fichero;Nacho;00001349.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001350.FIT;Órdenes pago internacionales en fichero;Nacho;00001350.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001351.FIT;Órdenes pago internacionales en fichero;Nacho;00001351.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001352.FIT;Órdenes pago internacionales en fichero;Nacho;00001352.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001353.FIT;Órdenes pago internacionales en fichero;Nacho;00001353.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001354.FIT;Órdenes pago internacionales en fichero;Nacho;00001354.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001355.FIT;Órdenes pago internacionales en fichero;Nacho;00001355.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001356.FIT;Órdenes pago internacionales en fichero;Nacho;00001356.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001357.FIT;Órdenes pago internacionales en fichero;Nacho;00001357.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001358.FIT;Órdenes pago internacionales en fichero;Nacho;00001358.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001359.FIT;Órdenes pago internacionales en fichero;Nacho;00001359.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001360.FIT;Órdenes pago internacionales en fichero;Nacho;00001360.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001361.FIT;Órdenes pago internacionales en fichero;Nacho;00001361.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001362.FIT;Órdenes pago internacionales en fichero;Nacho;00001362.FIT
+IBERDROLA;IMP_0113_206;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;En curso;;00001363.FIT;Órdenes pago internacionales en fichero;Nacho;00001363.FIT
 IBERDROLA;IMP_0113_206;12/02/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;Finalizado;OK;;Órdenes pago internacionales en fichero;Nacho;7.360,90 EUR. Cedido el 13/02.
 IBERDROLA;IMP_0113_206;12/02/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;Finalizado;OK;;Órdenes pago internacionales en fichero;Nacho;14.723,67 EUR. Cedido el 13/02.
 IBERDROLA;IMP_0113_206;12/02/2015;01/01/2010;CIB;Swift Fileact;10000000095;Integrado;Finalizado;OK;;Órdenes pago internacionales en fichero;Nacho;562,85 EUR. Cedido el 13/02.
@@ -811,7 +808,7 @@ IBERIA EXPRESS;IMP_0035_326;16/02/2015;01/01/2010;CIB;Swift Fileact;10000000150;
 IBERIA EXPRESS;IMP_0035_326;16/02/2015;01/01/2010;CIB;Swift Fileact;10000000150;Integrado;Finalizado;OK;00000018.FIT;Transferencias 34.14;Cristina;00000018.FIT
 IBERIA EXPRESS;IMP_0035_326;28/01/2015;01/01/2010;CIB;Swift Fileact;10000000150;Integrado;Finalizado;OK;0000002.FIT;Transferencias 34.14;Cristina;0000002.FIT
 IBERIA EXPRESS;IMP_0035_326;28/01/2015;01/01/2010;CIB;Swift Fileact;10000000150;Integrado;Finalizado;OK;0000004.FIT;Transferencias 34.14;Cristina;0000004.FIT
-IBERIA EXPRESS;IMP_0035_327;03-mar-15;01/01/2010;CIB;Swift Fileact;10000000150;Integrado;Finalizado;KO;0000024.TIN ;Órdenes pago internacionales en fichero;Cristina;0000024.TIN (la cuenta no existe en integrado)
+IBERIA EXPRESS;IMP_0035_327;03/03/2015;01/01/2010;CIB;Swift Fileact;10000000150;Integrado;Finalizado;KO;0000024.TIN ;Órdenes pago internacionales en fichero;Cristina;0000024.TIN (la cuenta no existe en integrado)
 IBERIA EXPRESS;IMP_0035_327;03/02/2015;01/01/2010;CIB;Swift Fileact;10000000150;Integrado;Finalizado;KO;0000006.TIN;Órdenes pago internacionales en fichero;Cristina;0000006.TIN (la cuenta no existe en integrado)
 IBERIA EXPRESS;IMP_0035_327;03/02/2015;01/01/2010;CIB;Swift Fileact;10000000150;Integrado;Finalizado;KO;0000007.TIN;Órdenes pago internacionales en fichero;Cristina;0000007.TIN (la cuenta no existe en integrado)
 IBERIA EXPRESS;IMP_0035_327;06/02/2015;01/01/2010;CIB;Swift Fileact;10000000150;Integrado;Finalizado;OK;0000009.TIN;Órdenes pago internacionales en fichero;Natalia;0000009.TIN
@@ -961,9 +958,9 @@ LVMH (Louis Vuiton);;14/02/2014;01/01/2010;CIB;Swift Fileact;10000000055;Producc
 LVMH (Louis Vuiton);;18/02/2014;01/01/2010;CIB;Swift Fileact;10000000055;Producción;Finalizado;OK;00002319.FIT;Transferencias 34.14;Cristina;00002319.FIT
 LVMH (Louis Vuiton);;18/02/2014;01/01/2010;CIB;Swift Fileact;10000000055;Producción;Finalizado;OK;00002320.FIT;Transferencias 34.14;Cristina;00002320.FIT
 LVMH (Louis Vuiton);;02/07/2014;01/01/2010;CIB;Swift Fileact;10000000037;Integrado;Finalizado;OK;41000733.FIT;Transferencias 34.14;Cristina;41000733.FIT
-LVMH (Louis Vuiton);;04-mar-15;01/01/2010;CIB;Swift Fileact;10000000037;Integrado;Pendiente;;;Transferencias 34.14;Cristina;
+LVMH (Louis Vuiton);;04/03/2015;01/01/2010;CIB;Swift Fileact;10000000037;Integrado;Pendiente;;;Transferencias 34.14;Cristina;
 LVMH (Louis Vuiton);IMP_0083_218;07/07/2014;01/01/2010;CIB;Swift FIN;LVMHFRP0XXX;Integrado;Finalizado;KO;;MT101;Cliente;Pruebas regresión. Han intentado enviar el 08/07, pero tienen problemas y no llegan a BBVA, hemos enviado MT199 a su BEI de Test para que verifiquen si lo recuperan, tiene ACK de entrega. Nos confirma el cliente sus probelmas con Test, estamos a la espera.
-LVMH (Louis Vuiton);;04-mar-15;01/01/2010;CIB;Swift Fileact;10000000037;Integrado;Pendiente;;;Órdenes pago internacionales en fichero;Cristina;
+LVMH (Louis Vuiton);;04/03/2015;01/01/2010;CIB;Swift Fileact;10000000037;Integrado;Pendiente;;;Órdenes pago internacionales en fichero;Cristina;
 LVMH (Louis Vuiton);IMP_0083_218;14/05/2014;01/01/2010;CIB;Swift FIN;LVMHFRPPXXX;Producción;Finalizado;OK;MT101082.TR1;MT101;Cristina;MT101082.TR1 (petición del cliente)
 LVMH (Louis Vuiton);IMP_0083_218;14/05/2014;01/01/2010;CIB;Swift FIN;LVMHFRPPXXX;Producción;Finalizado;OK;MT101747.TR1;MT101;Cristina;MT101747.TR1 (petición del cliente)
 LVMH (Louis Vuiton);IMP_0083_218;20/05/2014;01/01/2010;CIB;Swift FIN;LVMHFRPPXXX;Producción;Finalizado;OK;MT101469.TR1;MT101;Cristina;MT101469.TR1 (petición del cliente)
@@ -1279,14 +1276,10 @@ TECNICAS REUNIDAS;IMP_0028_279;11/08/2014;01/01/2010;BEC;Swift Fileact;100000001
 TECNICAS REUNIDAS;IMP_0028_279;12/08/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000027.FIT;Transferencias 34.14;Ana;00000027.FIT
 TECNICAS REUNIDAS;IMP_0028_279;15/01/2015;01/01/2010;BEC;Swift Fileact;10000000147;Producción;Finalizado;OK;00000002.FIT;Transferencias 34.14;Ana;00000002.FIT
 TECNICAS REUNIDAS;IMP_0028_279;19/09/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000050.FIM;Transferencias 34.14;Ängel;00000050.FIM
-TECNICAS REUNIDAS;IMP_0028_279;22/10/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000066.FIM;Transferencias 34.14;Ana;"00000066.FIM (Debido a un error en otro tipo de pruebas los ficheros se habían descartado en la aplicación de destino, pero se han
-  podido recuperar y ya han sido procesados de forma correcta)"
-TECNICAS REUNIDAS;IMP_0028_279;22/10/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000067.FIT;Transferencias 34.14;Ana;"00000067.FIT (Debido a un error en otro tipo de pruebas los ficheros se habían descartado en la aplicación de destino, pero se han
-  podido recuperar y ya han sido procesados de forma correcta)"
-TECNICAS REUNIDAS;IMP_0028_279;22/10/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000068.FIM;Transferencias 34.14;Ana;"00000068.FIM (Debido a un error en otro tipo de pruebas los ficheros se habían descartado en la aplicación de destino, pero se han
-  podido recuperar y ya han sido procesados de forma correcta)"
-TECNICAS REUNIDAS;IMP_0028_279;22/10/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000070.FIT;Transferencias 34.14;Ana;"00000070.FIT (Debido a un error en otro tipo de pruebas los ficheros se habían descartado en la aplicación de destino, pero se han
-  podido recuperar y ya han sido procesados de forma correcta)"
+TECNICAS REUNIDAS;IMP_0028_279;22/10/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000066.FIM;Transferencias 34.14;Ana;00000066.FIM (Debido a un error en otro tipo de pruebas los ficheros se habían descartado en la aplicación de destino, pero se han  podido recuperar y ya han sido procesados de forma correcta)
+TECNICAS REUNIDAS;IMP_0028_279;22/10/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000067.FIT;Transferencias 34.14;Ana;00000067.FIT (Debido a un error en otro tipo de pruebas los ficheros se habían descartado en la aplicación de destino, pero se han  podido recuperar y ya han sido procesados de forma correcta)
+TECNICAS REUNIDAS;IMP_0028_279;22/10/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000068.FIM;Transferencias 34.14;Ana;00000068.FIM (Debido a un error en otro tipo de pruebas los ficheros se habían descartado en la aplicación de destino, pero se han  podido recuperar y ya han sido procesados de forma correcta)
+TECNICAS REUNIDAS;IMP_0028_279;22/10/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000070.FIT;Transferencias 34.14;Ana;00000070.FIT (Debido a un error en otro tipo de pruebas los ficheros se habían descartado en la aplicación de destino, pero se han  podido recuperar y ya han sido procesados de forma correcta)
 TECNICAS REUNIDAS;IMP_0028_279;22/10/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000076.FIT;Transferencias 34.14;Ana;00000076.FIT
 TECNICAS REUNIDAS;IMP_0028_279;22/10/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000084.FIT;Transferencias 34.14;Ana;00000084.FIT
 TECNICAS REUNIDAS;IMP_0028_279;03/09/2014;01/01/2010;BEC;Swift Fileact;10000000135;Integrado;Finalizado;OK;00000032.FIT;Transferencias 34.14;Ana;00000032.FIT Ha quedado parado en IMG por una incidencia

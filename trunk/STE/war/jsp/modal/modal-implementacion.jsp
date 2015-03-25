@@ -31,6 +31,16 @@
 							<span class="lbl">Identificador:</span>
 							<input disabled value="${implementacion.id_implementacion}">
 					</div>
+					
+					<div class="form-field" id="div_producto_imp">
+							<span class="lbl">Producto/canal<span class="required-asterisk">*</span>:</span>
+							
+								<select id="producto_imp" class="selectpicker selected" name="producto_imp" >
+											<c:forEach items="${productos}" var="prod">
+												<option value="${prod.name}" ${implementacion.producto == prod.name ? 'selected' : ''}>${prod.name}</option>
+											</c:forEach>
+								</select>
+					</div>
 
 					<div class="form-field" id="div_cliente_imp_modal">
 						<span class="lbl">Cliente<span class="required-asterisk">*</span>:</span>
@@ -49,15 +59,7 @@
 					</div>
 					
 
-					<div class="form-field" id="div_producto_imp">
-							<span class="lbl">Producto/canal<span class="required-asterisk">*</span>:</span>
-							
-								<select id="producto_imp" class="selectpicker selected" name="producto_imp" >
-											<c:forEach items="${productos}" var="prod">
-												<option value="${prod.name}" ${implementacion.producto == prod.name ? 'selected' : ''}>${prod.name}</option>
-											</c:forEach>
-								</select>
-					</div>
+
 					
 					<div class="form-field" id="div_servicio_imp_modal">
 						<span class="lbl">Servicio<span class="required-asterisk">*</span>:</span>
@@ -81,15 +83,18 @@
 					<input type="text" style="background-color: #F3F3F3;" name="segmento" id="input-segmento-implementacion_modal" value="${cliente.tipo_cliente}" readonly>
 					</div>
 					
+					<!--
 					<div class="form-field">
-						<span class="lbl">Estado<span class="required-asterisk">*</span>:</span>
-							<select id="estado_imp" class="selectpicker selected" name="estado_imp" >	
-							<c:forEach items="${estadosimp}" var="estadoimp">
-								<option value="${estadoimp.name}" ${implementacion.estado == estadoimp.name ? 'selected' : ''}>${estadoimp.name}</option>
-							</c:forEach>
-							</select>
+						<span class="lbl">Servicio:</span>
+						<input type="text" style="background-color: #F3F3F3;" id="input-servicio-name-implementacion_modal" value="${servicio.name}" readonly>
 					</div>
+					-->
 					
+					
+					<div class="form-field">
+						<span class="lbl">Tipo servicio:</span>
+						<input type="text" style="background-color: #F3F3F3;" id="input-servicio-tipo-implementacion_modal" value="${servicio.tipo}" readonly>
+					</div>
 					
 					<div class="form-field" id="div_fecha_alta_imp">
 					<span class="lbl">Fecha alta<span class="required-asterisk">*</span>:</span>
@@ -108,6 +113,12 @@
 					</div>
 					
 					<div class="form-field">
+					<span class="lbl">Gestor GCS:</span>
+					<input type="text" name="gestor_gcs" maxlength="25" value="${implementacion.gestor_gcs}">
+					</div>
+					
+					
+					<div class="form-field">
 					<span style="width:44%;" class="lbl">Normalizador<span class="required-asterisk">*</span>:</span>
 							<label style="width:15%;" class="lbl ui-marmots-label-radio marmots-label-left ${implementacion.normalizador ? 'on' : ''} " for="radio_Si_Modal">
 								<input name="normalizador_modal" id="radio_Si_Modal" type="radio" value="Si" ${implementacion.normalizador ? 'checked' : ''} />Si
@@ -118,15 +129,28 @@
 							</label>
 					</div>
 					
+					
+					<div class="form-field">
+					<span class="lbl">Gestor promoci&oacuten:</span>
+					<input type="text" name="gestor_prom" maxlength="25" value="${implementacion.gestor_promocion}">
+					</div>
+					
+					
 					<div class="form-field">
 					<span class="lbl">Referencia global:</span>
 					<input type="text" name="ref_glo" maxlength="11" value="${implementacion.referencia_global}">
 					</div>
+					
+					<div class="form-field">
+					<span class="lbl">Gestor relaci&oacuten:</span>
+					<input type="text" name="gestor_relacion" maxlength="25" value="${implementacion.gestor_relacion}">
+					</div>
+					
 					<div class="form-field">
 					<span class="lbl">Referencia local:</span>
 					<input type="text" name="ref_loc" maxlength="18" value="${implementacion.referencia_local}">
 					</div>
-
+					
 					<div class="form-field">
 					<span class="lbl" style="width:44%;">Firma contrato<span class="required-asterisk">*</span>:</span>
 							<label style="width:15%;" class="lbl ui-marmots-label-radio marmots-label-left ${implementacion.firma_contrato ? 'on' : ''}" for="radio_Si_Firma_Modal">
@@ -139,45 +163,19 @@
 					</div>
 					
 					<div class="form-field">
-					<span class="lbl">Gestor GCS:</span>
-					<input type="text" name="gestor_gcs" maxlength="25" value="${implementacion.gestor_gcs}">
-					</div>
-					
-					<div class="form-field">
-					<span class="lbl">Gestor promoci&oacuten:</span>
-					<input type="text" name="gestor_prom" maxlength="25" value="${implementacion.gestor_promocion}">
-					</div>
-					
-					<div class="form-field">
-					<span class="lbl">Gestor relaci&oacuten:</span>
-					<input type="text" name="gestor_relacion" maxlength="25" value="${implementacion.gestor_relacion}">
-					</div>
-					
-
-
-
-					
-					
-
-					
-
-
-					
-					<div class="form-field">
-						<span class="lbl">Servicio:</span>
-						<input type="text" style="background-color: #F3F3F3;" id="input-servicio-name-implementacion_modal" value="${servicio.name}" readonly>
-					</div>
-					
-					<div class="form-field">
-						<span class="lbl">Tipo servicio:</span>
-						<input type="text" style="background-color: #F3F3F3;" id="input-servicio-tipo-implementacion_modal" value="${servicio.tipo}" readonly>
-					</div>
-					
-					
-					<div class="form-field">
 					<span class="lbl">Fecha contrataci&oacuten:</span>
 					<input type="text" readonly="" value="${implementacion.str_fech_contratacion}" size="16" class="datepicker" name="fecha_contrat" id="fecha_contrat_modal">
 					</div>
+					
+					<div class="form-field">
+						<span class="lbl">Estado<span class="required-asterisk">*</span>:</span>
+							<select id="estado_imp" class="selectpicker selected" name="estado_imp" >	
+							<c:forEach items="${estadosimp}" var="estadoimp">
+								<option value="${estadoimp.name}" ${implementacion.estado == estadoimp.name ? 'selected' : ''}>${estadoimp.name}</option>
+							</c:forEach>
+							</select>
+					</div>
+
 					<div class="form-field">
 					<span class="lbl">Fecha subida:</span>
 					<input type="text" readonly="" value="${implementacion.str_fech_subida}" size="16" class="datepicker" name="fecha_subid" id="fecha_subid_modal">

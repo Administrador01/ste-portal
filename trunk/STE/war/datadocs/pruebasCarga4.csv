@@ -58,9 +58,9 @@ LVMH (Louis Vuiton);;14/02/2014;01/01/2010;CIB;Swift Fileact;10000000055;Producc
 LVMH (Louis Vuiton);;18/02/2014;01/01/2010;CIB;Swift Fileact;10000000055;Producción;Finalizado;OK;00002319.FIT;Transferencias 34.14;Cristina;00002319.FIT
 LVMH (Louis Vuiton);;18/02/2014;01/01/2010;CIB;Swift Fileact;10000000055;Producción;Finalizado;OK;00002320.FIT;Transferencias 34.14;Cristina;00002320.FIT
 LVMH (Louis Vuiton);;02/07/2014;01/01/2010;CIB;Swift Fileact;10000000037;Integrado;Finalizado;OK;41000733.FIT;Transferencias 34.14;Cristina;41000733.FIT
-LVMH (Louis Vuiton);;04-mar-15;01/01/2010;CIB;Swift Fileact;10000000037;Integrado;Pendiente;;;Transferencias 34.14;Cristina;
+LVMH (Louis Vuiton);;04/03/2015;01/01/2010;CIB;Swift Fileact;10000000037;Integrado;Pendiente;;;Transferencias 34.14;Cristina;
 LVMH (Louis Vuiton);IMP_0083_218;07/07/2014;01/01/2010;CIB;Swift FIN;LVMHFRP0XXX;Integrado;Finalizado;KO;;MT101;Cliente;Pruebas regresión. Han intentado enviar el 08/07, pero tienen problemas y no llegan a BBVA, hemos enviado MT199 a su BEI de Test para que verifiquen si lo recuperan, tiene ACK de entrega. Nos confirma el cliente sus probelmas con Test, estamos a la espera.
-LVMH (Louis Vuiton);;04-mar-15;01/01/2010;CIB;Swift Fileact;10000000037;Integrado;Pendiente;;;Órdenes pago internacionales en fichero;Cristina;
+LVMH (Louis Vuiton);;04/03/2015;01/01/2010;CIB;Swift Fileact;10000000037;Integrado;Pendiente;;;Órdenes pago internacionales en fichero;Cristina;
 LVMH (Louis Vuiton);IMP_0083_218;14/05/2014;01/01/2010;CIB;Swift FIN;LVMHFRPPXXX;Producción;Finalizado;OK;MT101082.TR1;MT101;Cristina;MT101082.TR1 (petición del cliente)
 LVMH (Louis Vuiton);IMP_0083_218;14/05/2014;01/01/2010;CIB;Swift FIN;LVMHFRPPXXX;Producción;Finalizado;OK;MT101747.TR1;MT101;Cristina;MT101747.TR1 (petición del cliente)
 LVMH (Louis Vuiton);IMP_0083_218;20/05/2014;01/01/2010;CIB;Swift FIN;LVMHFRPPXXX;Producción;Finalizado;OK;MT101469.TR1;MT101;Cristina;MT101469.TR1 (petición del cliente)
