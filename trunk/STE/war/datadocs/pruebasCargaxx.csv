@@ -1,0 +1,100 @@
+NH Hoteles;IMP_0132_16;22/04/2014;01/01/2010;BEC;Swift Fileact;1,00E+10;Producción;Finalizado;OK;00000031.CSP;Adeudos directos 19.14 (Sepa);Ángel;00000031.CSP Pendiente de autorización por la oficina. Fecha vencimiento el 28/04. Cedido a Adeudos el 23/04 a primera hora.
+NH Hoteles;IMP_0132_16;24/03/2014;01/01/2010;BEC;Swift Fileact;10000000051;Integrado;Finalizado;KO;00000046.CSP;Adeudos directos 19.14 (Sepa);Ángel;00000046.CSP. Rechazado por la fecah de vencimiento en SSTT, Core1 enviado el 26/03 con fecha vencimeinto mismo 26/03.
+NH Hoteles;IMP_0132_16;26/03/2014;01/01/2010;BEC;Swift Fileact;10000000051;Integrado;Finalizado;KO;00000048.CSP;Adeudos directos 19.14 (Sepa);Ángel;00000048.CSP (ID acreedor incorrecto)
+NH Hoteles;IMP_0132_16;31/03/2014;01/01/2010;BEC;Swift Fileact;10000000051;Integrado;Finalizado;KO;00000050.CSP;Adeudos directos 19.14 (Sepa);Ángel;00000050.CSP (la fecha de vencimiento es anterior a la de presentación)
+NH Hoteles;IMP_0132_16;04/03/2014;01/01/2010;BEC;Swift Fileact;10000000051;Integrado;Cancelado;;;Adeudos directos 19.14 (Sepa);Ángel;
+NH Hoteles;IMP_0132_20;13/01/2014;01/01/2010;BEC;Swift Fileact;10000000017;Producción;Finalizado;KO;;Euroconfirming;Ángel;El fichero ha sido descartado por un error en la configuración del nombre dedicado del fichero.
+NH Hoteles;IMP_0132_20;14/01/2014;01/01/2010;BEC;Swift Fileact;10000000017;Producción;Finalizado;KO;00000002.CNR;Euroconfirming;Ángel;00000002.CNR (diversos errores)
+NH Hoteles;IMP_0132_20;17/12/2013;01/01/2010;BEC;Swift Fileact;10000000051;Integrado;Finalizado;KO;00000022.CNR;Euroconfirming;Ángel;00000022.CNR (banco presentador era incorrecto)
+NH Hoteles;IMP_0132_20;17/12/2013;01/01/2010;BEC;Swift Fileact;10000000051;Integrado;Finalizado;OK;00000023.CNR;Euroconfirming;Ángel;00000023.CNR
+NH Hoteles;IMP_0132_20;21/01/2014;01/01/2010;BEC;Swift Fileact;10000000017;Producción;Finalizado;KO;00000004.CNR;Euroconfirming;Ángel;00000004.CNR (problemas con el folio de confirming)
+NH Hoteles;IMP_0132_20;21/01/2014;01/01/2010;BEC;Swift Fileact;10000000017;Producción;Finalizado;KO;00000005.CNR;Euroconfirming;Ángel;00000005.CNR (problemas con el folio de confirming)
+NH Hoteles;IMP_0132_20;22/01/2014;01/01/2010;BEC;Swift Fileact;10000000017;Producción;Finalizado;OK;00000006.CNR;Euroconfirming;Ángel;00000006.CNR
+NH Hoteles;IMP_0132_20;22/05/2014;01/01/2010;BEC;Swift Fileact;10000000017;Producción;Finalizado;OK;00000033.CNR;Euroconfirming;Cristina;00000033.CNR
+NH Hoteles;IMP_0132_21;13/01/2014;01/01/2010;BEC;Swift Fileact;NHSAESMMXXX;Producción;Finalizado;OK;MT101911.OMF;MT101;Ángel;MT101911.OMF
+OBERTHUR;IMP_0114_77;04/02/2014;01/01/2010;BEC;Swift Fileact;10000000115;Producción;Finalizado;KO;00000002.FIT;Transferencias 34.14;Ángel;00000002.FIT (han puesto la cuenta de test
+OBERTHUR;IMP_0114_77;04/02/2014;01/01/2010;BEC;Swift Fileact;10000000115;Producción;Finalizado;OK;00000004.FIT;Transferencias 34.14;Ángel;00000004.FIT
+OBERTHUR;IMP_0114_77;04/02/2014;01/01/2010;BEC;Swift Fileact;10000000115;Producción;Finalizado;OK;00000006.FIT;Transferencias 34.14;Ángel;00000006.FIT
+OBERTHUR;IMP_0114_76;10/01/2014;01/01/2010;BEC;Swift Fileact;10000000115;Producción;Finalizado;OK;;MT940;Ángel;Correcto el primer envío, se ha generado y está en IMG.
+OBERTHUR;;11/02/2014;01/01/2010;BEC;Swift Fileact;10000000101;Integrado;Cancelado;;;Órdenes pago internacionales en fichero;Ángel;El cliente no puede realizar las purebas
+OBERTHUR;;16/01/2014;01/01/2010;BEC;Swift Fileact;10000000101;Integrado;Cancelado;;;Órdenes pago internacionales en fichero;Ángel;
+OBERTHUR;;09/01/2014;01/01/2010;BEC;Swift Fileact;10000000101;Integrado;Finalizado;KO;;Órdenes pago internacionales en fichero;Ángel;Rechazado por errores en las condiciones de salida (Ángel)
+PERFETTI VAN MELLE;IMP_0115_556;10/01/2014;01/01/2010;BEC;Swift Fileact;10000000100;Integrado;Finalizado;KO;00000061.CSP;Adeudos directos 19.14 (Sepa);Alba;00000061.CSP (Más de un adeudo con la misma referencia)
+PERFETTI VAN MELLE;IMP_0115_556;13/02/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Cancelado;;;Adeudos directos 19.14 (Sepa);Alba;
+PERFETTI VAN MELLE;IMP_0115_556;14/02/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;kO;;Adeudos directos 19.14 (Sepa);Alba;Ha fallado por nombre en infraestructura global
+PERFETTI VAN MELLE;IMP_0115_556;20/06/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;00000220.CSP;Adeudos directos 19.14 (Sepa);Alba;00000220.CSP (fecha de ejecución 26/06/2014)
+PERFETTI VAN MELLE;IMP_0115_556;09/01/2014;01/01/2010;BEC;Swift Fileact;10000000100;Integrado;Finalizado;KO;00000056.CSP;Adeudos directos 19.14 (Sepa);Alba;00000056.CSP: Rechazado por la oficina.
+PERFETTI VAN MELLE;;10/01/2014;01/01/2010;BEC;Swift Fileact;10000000100;Integrado;Finalizado;OK;00000062.FIT;Transferencias 34.14;Alba;00000062.FIT
+PERFETTI VAN MELLE;;10/06/2014;01/01/2010;BEC;Swift Fileact;10000000100;Integrado;Finalizado;OK;00000140.FIT;Transferencias 34.14;Alba;00000140.FIT
+PERFETTI VAN MELLE;;11/06/2014;01/01/2010;BEC;Swift Fileact;10000000100;Integrado;Finalizado;OK;00000142.FIT;Transferencias 34.14;Alba;00000142.FIT
+PERFETTI VAN MELLE;;13/02/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;00000010.FIT;Transferencias 34.14;Alba;00000010.FIT.
+PERFETTI VAN MELLE;;14/02/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;00000013.FIT;Transferencias 34.14;Alba;00000013.FIT
+PERFETTI VAN MELLE;;18/02/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;00000017.FIT;Transferencias 34.14;Alba;00000017.FIT (fecha de ejecución 19/02/2014)
+PERFETTI VAN MELLE;;19/02/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;00000022.FIT;Transferencias 34.14;Alba;00000022.FIT (la fecha de ejecución es 20/02/2014)
+PERFETTI VAN MELLE;;21/02/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;00000028.FIT;Transferencias 34.14;Alba;00000028.FIT (la fecha de ejecución es 25/02/2014)
+PERFETTI VAN MELLE;;24/02/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;00000035.FIT;Transferencias 34.14;Alba;00000035.FIT, con cargo el 25/02.
+PERFETTI VAN MELLE;;31/01/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;00000003.FIT;Transferencias 34.14;Alba;00000003.FIT
+PERFETTI VAN MELLE;;31/01/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;00000008.FIT;Transferencias 34.14;Alba;00000008.FIT (fecha de ejecución 03/02/2014)
+PERFETTI VAN MELLE;;04/03/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;000000043.FIT;Transferencias 34.14;Alba;000000043.FIT
+PERFETTI VAN MELLE;IMP_0115_557;10/01/2014;01/01/2010;BEC;Swift Fileact;10000000100;Integrado;Finalizado;KO;00000065.CSX;Adeudos directos 19.44 (Sepa B2B);Alba;00000065.CSX (Más de un adeudo con la misma referencia)
+PERFETTI VAN MELLE;IMP_0115_557;18/02/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;KO;00000015.CSX;Adeudos directos 19.44 (Sepa B2B);Alba;00000015.CSX Ha usado el NIF/sufijo que tiene contratado para CORE.
+PERFETTI VAN MELLE;IMP_0115_557;18/03/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;000000050.CSX;Adeudos directos 19.44 (Sepa B2B);Alba;000000050.CSX (3 rechazos por importe del adeudo)
+PERFETTI VAN MELLE;IMP_0115_557;18/03/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;000000051.CSX;Adeudos directos 19.44 (Sepa B2B);Alba;000000051.CSX (2 rechazos por importe del adeudo)
+PERFETTI VAN MELLE;IMP_0115_557;19/02/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;KO;00000019.CSX;Adeudos directos 19.44 (Sepa B2B);Alba;00000019.CSX Ha usado el NIF/sufijo que tiene contratado para CORE.
+PERFETTI VAN MELLE;IMP_0115_557;19/02/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;KO;00000020.CSX;Adeudos directos 19.44 (Sepa B2B);Alba;00000020.CSX Ha usado el NIF/sufijo que tiene contratado para CORE.
+PERFETTI VAN MELLE;IMP_0115_557;19/03/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;000000053.CSX;Adeudos directos 19.44 (Sepa B2B);Alba;000000053.CSX
+PERFETTI VAN MELLE;IMP_0115_557;19/03/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;000000054.CSX;Adeudos directos 19.44 (Sepa B2B);Alba;000000054.CSX
+PERFETTI VAN MELLE;IMP_0115_557;21/03/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;00000056.CSX;Adeudos directos 19.44 (Sepa B2B);Alba;00000056.CSX
+PERFETTI VAN MELLE;IMP_0115_557;21/03/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;00000057.CSX;Adeudos directos 19.44 (Sepa B2B);Alba;00000057.CSX
+PERFETTI VAN MELLE;IMP_0115_557;24/02/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;00000033.CSX;Adeudos directos 19.44 (Sepa B2B);Alba;00000033.CSX (la fecha de ejecución es 27/02/2014)
+PERFETTI VAN MELLE;IMP_0115_557;24/02/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;00000031.CSX;Adeudos directos 19.44 (Sepa B2B);Alba;00000031.CSX (la fecha de ejecución es 04/03/2014)
+PERFETTI VAN MELLE;IMP_0115_557;24/02/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;00000032.CSX;Adeudos directos 19.44 (Sepa B2B);Alba;00000032.CSX (la fecha de ejecución es 04/03/2014)
+PERFETTI VAN MELLE;IMP_0115_557;24/02/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;00000033.CSX;Adeudos directos 19.44 (Sepa B2B);Alba;00000033.CSX. Todo correcto, con el abono en la cuenta del acreedor el día 27/02.
+PERFETTI VAN MELLE;IMP_0115_557;25/02/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;00000037.CSX;Adeudos directos 19.44 (Sepa B2B);Alba;00000037.CSX (la fecha de ejecución es 04/03/2014)
+PERFETTI VAN MELLE;IMP_0115_557;25/02/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;00000038.CSX;Adeudos directos 19.44 (Sepa B2B);Alba;00000038.CSX (la fecha de ejecución es 04/03/2014)
+PERFETTI VAN MELLE;IMP_0115_557;26/03/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;00000059.CSX;Adeudos directos 19.44 (Sepa B2B);Alba;00000059.CSX. Enviado el 18/03 con vencimiento 25/03, ok.
+PERFETTI VAN MELLE;IMP_0115_557;26/03/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;00000060.CSX;Adeudos directos 19.44 (Sepa B2B);Alba;00000060.CSX. Enviado el 18/03 con vencimiento 25/03, ok.
+PERFETTI VAN MELLE;IMP_0115_557;31/03/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;00000062.CSX;Adeudos directos 19.44 (Sepa B2B);Alba;00000062.CSX. Enviado el 19/03 con vencimiento 27/03.
+PERFETTI VAN MELLE;IMP_0115_557;31/03/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;00000063.CSX;Adeudos directos 19.44 (Sepa B2B);Alba;00000063.CSX. Enviado el 19/03 con vencimiento 27/03.
+PERFETTI VAN MELLE;IMP_0115_557;31/03/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;00000065.CSX;Adeudos directos 19.44 (Sepa B2B);Alba;00000065.CSX. Enviado el 21/03 con vencimiento 28/03, se ha rechazado un adeudo por BIC inexistente.
+PERFETTI VAN MELLE;IMP_0115_557;31/03/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;00000066.CSX;Adeudos directos 19.44 (Sepa B2B);Alba;00000066.CSX. Enviado el 21/03 con vencimiento 28/03.
+PERFETTI VAN MELLE;IMP_0115_557;04/03/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;000000041.CSX;Adeudos directos 19.44 (Sepa B2B);Alba;000000041.CSX (fecha de ejecución 12/03/2014. 2 rechazos: 1 por importe del adeudo y otro por agotar el plazo pendiente)
+PERFETTI VAN MELLE;IMP_0115_557;04/03/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;000000040.CSX;Adeudos directos 19.44 (Sepa B2B);Alba;000000040.CSX (fecha de ejecución 12/03/2014. 1 rechazo por importe del adeudo)
+PERFETTI VAN MELLE;IMP_0115_557;09/01/2014;01/01/2010;BEC;Swift Fileact;10000000100;Integrado;Finalizado;KO;00000005.CSP;Adeudos directos 19.44 (Sepa B2B);Alba;00000005.CSP: La fecha de venvimiento es inferior a 1 día.
+PERFETTI VAN MELLE;;10/01/2014;01/01/2010;BEC;Swift Fileact;10000000100;Integrado;Finalizado;OK;00000063.TIN;Órdenes pago internacionales en fichero;Alba;00000063.TIN
+PERFETTI VAN MELLE;;31/01/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;00000004.TIN;Órdenes pago internacionales en fichero;Alba;00000004.TIN
+PERFETTI VAN MELLE;;31/01/2014;01/01/2010;BEC;Swift Fileact;10000000112;Producción;Finalizado;OK;00000006.TIN;Órdenes pago internacionales en fichero;Alba;00000006.TIN
+PONTEGADEA;IMP_0072_78;10/01/2014;01/01/2010;BEC;Swift Fileact;10000000093;Integrado;Finalizado;OK;15002813.CSP;Adeudos directos 19.14 (Sepa);Ignacio;15002813.CSP (fecha ejecución: 17/01/2014)
+PONTEGADEA;IMP_0072_78;10/01/2014;01/01/2010;BEC;Swift Fileact;10000000093;Integrado;Finalizado;KO;15002815.CSP;Adeudos directos 19.14 (Sepa);Ignacio;15002815.CSP
+PONTEGADEA;IMP_0072_78;10/01/2014;01/01/2010;BEC;Swift Fileact;10000000093;Integrado;Finalizado;OK;15002820.CSP;Adeudos directos 19.14 (Sepa);Ignacio;15002820.CSP
+PONTEGADEA;IMP_0072_78;10/01/2014;01/01/2010;BEC;Swift Fileact;10000000093;Integrado;Finalizado;OK;15002821.CSP;Adeudos directos 19.14 (Sepa);Ignacio;15002821.CSP
+PONTEGADEA;IMP_0072_78;10/01/2014;01/01/2010;BEC;Swift Fileact;10000000093;Integrado;Finalizado;OK;15002822.CSP;Adeudos directos 19.14 (Sepa);Ignacio;15002822.CSP
+PONTEGADEA;IMP_0072_78;10/01/2014;01/01/2010;BEC;Swift Fileact;10000000093;Integrado;Finalizado;OK;15002823.CSP;Adeudos directos 19.14 (Sepa);Ignacio;15002823.CSP
+PONTEGADEA;IMP_0072_78;10/01/2014;01/01/2010;BEC;Swift Fileact;10000000093;Integrado;Finalizado;OK;15002824.CSP;Adeudos directos 19.14 (Sepa);Ignacio;15002824.CSP
+PONTEGADEA;IMP_0072_78;10/01/2014;01/01/2010;BEC;Swift Fileact;10000000093;Integrado;Finalizado;KO;15002826.CSP;Adeudos directos 19.14 (Sepa);Ignacio;15002826.CSP (adeudo con la misma referencia)
+PONTEGADEA;IMP_0072_78;20/01/2014;01/01/2010;BEC;Swift Fileact;10000000093;Integrado;Finalizado;KO;15002830.CSP;Adeudos directos 19.14 (Sepa);Ignacio;15002830.CSP (fuera de plazo)
+PONTEGADEA;IMP_0072_78;23/01/2014;01/01/2010;BEC;Swift Fileact;10000000093;Integrado;Finalizado;KO;15002832.CSP;Adeudos directos 19.14 (Sepa);Ignacio;15002832.CSP (rechazado por el usuario U515336)
+PONTEGADEA;IMP_0072_78;23/01/2014;01/01/2010;BEC;Swift Fileact;10000000093;Integrado;Finalizado;KO;15002833.CSP;Adeudos directos 19.14 (Sepa);Ignacio;15002833.CSP (rechazado por el usuario U515336)
+PONTEGADEA;IMP_0072_78;23/01/2014;01/01/2010;BEC;Swift Fileact;10000000093;Integrado;Finalizado;KO;15002835.CSP;Adeudos directos 19.14 (Sepa);Ignacio;15002835.CSP (rechada en destino por límite riesgo)
+PONTEGADEA;IMP_0072_78;23/01/2014;01/01/2010;BEC;Swift Fileact;10000000093;Integrado;Finalizado;OK;15002836.CSP;Adeudos directos 19.14 (Sepa);Ignacio;15002836.CSP (se ha rechazado un adeudo por superar el importe permitido)
+PONTEGADEA;IMP_0072_78;26/02/2014;01/01/2010;BEC;Swift Fileact;10000000020;Producción;Finalizado;KO;15006468.CSP;Adeudos directos 19.14 (Sepa);Ignacio;15006468.CSP (fecha de ejecución: 04/03/2014. 7 Adeudos fuera de plazo y 3 cancelados por la oficina)
+PONTEGADEA;IMP_0072_78;26/02/2014;01/01/2010;BEC;Swift Fileact;10000000020;Producción;Finalizado;OK;15006469.CSP;Adeudos directos 19.14 (Sepa);Ignacio;15006469.CSP (fecha de ejecución: 06/03/2014)
+PONTEGADEA;IMP_0072_78;26/02/2014;01/01/2010;BEC;Swift Fileact;10000000020;Producción;Finalizado;OK;15006470.CSP;Adeudos directos 19.14 (Sepa);Ignacio;15006470.CSP (fecha de ejecución: 07/03/2014)
+PONTEGADEA;IMP_0072_78;28/01/2014;01/01/2010;BEC;Swift Fileact;10000000093;Integrado;En curso;KO;15002839.CSP;Adeudos directos 19.14 (Sepa);Ignacio;15002839.CSP
+PONTEGADEA;IMP_0072_78;28/01/2014;01/01/2010;BEC;Swift Fileact;10000000093;Integrado;Finalizado;KO;15002856.CSP;Adeudos directos 19.14 (Sepa);Ignacio;15002856.CSP (fecha de cobro igula a la de presentación)
+PONTEGADEA;IMP_0072_78;28/01/2014;01/01/2010;BEC;Swift Fileact;10000000093;Integrado;Finalizado;KO;15002857.CSP;Adeudos directos 19.14 (Sepa);Ignacio;15002857.CSP (fecha de cobro igula a la de presentación)
+PONTEGADEA;IMP_0072_78;28/01/2014;01/01/2010;BEC;Swift Fileact;10000000093;Integrado;Finalizado;OK;15002858.CSP;Adeudos directos 19.14 (Sepa);Ignacio;15002858.CSP (se han rechazado 3 adeudos por BIC no existe en sistema de intercambio)
+PONTEGADEA;IMP_0072_78;28/01/2014;01/01/2010;BEC;Swift Fileact;10000000093;Integrado;Finalizado;KO;15002861.CSP;Adeudos directos 19.14 (Sepa);Ignacio;15002861.CSP (rechazado por límite de riesgo)
+PONTEGADEA;IMP_0072_78;28/01/2014;01/01/2010;BEC;Swift Fileact;10000000093;Integrado;Finalizado;KO;15002862.CSP;Adeudos directos 19.14 (Sepa);Ignacio;15002862.CSP (rechazado por límite de riesgo)
+PONTEGADEA;IMP_0072_78;28/01/2014;01/01/2010;BEC;Swift Fileact;10000000093;Integrado;En curso;;15002863.CSP;Adeudos directos 19.14 (Sepa);Ignacio;15002863.CSP (la fecha de ejecución es 03/03/2014)
+PONTEGADEA;IMP_0072_78;28/01/2014;01/01/2010;BEC;Swift Fileact;10000000093;Integrado;Finalizado;OK;15002864.CSP;Adeudos directos 19.14 (Sepa);Ignacio;15002864.CSP
+PONTEGADEA;IMP_0072_78;28/01/2014;01/01/2010;BEC;Swift Fileact;10000000093;Integrado;En curso;;15002865.CSP;Adeudos directos 19.14 (Sepa);Ignacio;15002865.CSP (la fecha de ejecución es 03/03/2014)
+PONTEGADEA;IMP_0072_78;28/01/2014;01/01/2010;BEC;Swift Fileact;10000000093;Integrado;En curso;;15002866.CSP;Adeudos directos 19.14 (Sepa);Ignacio;15002866.CSP (la fecha de ejecución es 06/03/2014)
+PONTEGADEA;IMP_0072_78;09/01/2014;01/01/2010;BEC;Swift Fileact;10000000093;Integrado;Finalizado;KO;15002809.CSP;Adeudos directos 19.14 (Sepa);Ignacio;15002809.CSP (no estaba contratada la normalización)
+PONTEGADEA;IMP_0072_79;20/05/2014;01/01/2010;BEC;Swift Fileact;10000000020;Producción;Finalizado;OK;15007423.FIT;Transferencias 34.14;Ignacio;15007423.FIT
+PONTEGADEA;IMP_0072_79;06/05/2014;01/01/2010;BEC;Swift Fileact;10000000093;Integrado;Finalizado;KO;15003619.FIT;Transferencias 34.14;Nacho;15003619.FIT (ha llegado a SSTT con format XML)
+PONTEGADEA;IMP_0072_79;06/05/2014;01/01/2010;BEC;Swift Fileact;10000000093;Integrado;Finalizado;OK;15003621.FIT;Transferencias 34.14;Nacho;15003621.FIT
+PONTEGADEA;IMP_0072_82;27/11/2014;01/01/2010;BEC;Swift Fileact;10000000093;Integrado;Finalizado;OK;15003881.SPF;Sepa - pagos París;Nacho;15003881.SPF
+PONTEGADEA;IMP_0072_82;27/11/2014;01/01/2010;BEC;Swift Fileact;10000000093;Integrado;Finalizado;OK;15003882.SPF;Sepa - pagos París;Nacho;15003882.SPF
+PONTEGADEA;IMP_0072_82;27/11/2014;01/01/2010;BEC;Swift Fileact;10000000093;Integrado;Finalizado;OK;15003883.SPF;Sepa - pagos París;Nacho;15003883.SPF
+PONTEGADEA;IMP_0072_78;19/03/2014;01/01/2010;BEC;Swift Fileact;10000000020;Producción;Finalizado;OK;;Adeudos directos 19.14 (Sepa);Ignacio;Recibido 18/03 a las 19:30h, cedido a Adeudos el 19/03 a primera hora, el 20/03 el abono está en la cuenta del acreedor con valor 20/03.

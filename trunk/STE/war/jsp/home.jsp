@@ -31,7 +31,7 @@
       <h2>Informes</h2>
       <img src="img/icn_t-iconLib_L15-64px_k.png" alt="Imagen destacado"/>
       <p>Obtención de informes de gestión y de seguimiento sobre las implementaciones y las pruebas realizadas.</p>
-      <button onclick="" type="button">Acceder</button>   
+      <button onclick="window.location.href='${entorno}/informes.do'" type="button">Acceder</button>   
       
     </div>
     <div class="destacadoHome">
