@@ -1,10 +1,10 @@
-EADS;IMP_0003_551;04/03/2014;01/01/2010;CIB;Swift Fileact;10000000092;Integrado;Finalizado;KO;20000123.TIN;Órdenes pago internacionales en fichero;Ángel;20000123.TIN (Error con la cuenta)
-EADS;IMP_0003_551;04/03/2014;01/01/2010;CIB;Swift Fileact;10000000092;Integrado;Finalizado;KO;20000124.TIN;Órdenes pago internacionales en fichero;Ángel;20000124.TIN (Error con la cuenta)
-EADS;IMP_0003_551;06/03/2014;01/01/2010;CIB;Swift Fileact;10000000092;Integrado;Cancelado;;;Órdenes pago internacionales en fichero;Ángel;
-EARTHPORT;IMP_0015_116;01/08/2014;01/01/2010;BEC;H2H;10000000060;Integrado;Finalizado;KO;;Transferencias 34.14;Andrés;Fichero entró el 30/07, rechazado en PRISMA porque el tipo de ficehro no se encuentra en la tabla de validaciones. El probelma está en la cuenta ordenante, no es una cuenta BBVA España, se quedó pendiente por servicio no contratado, pero lo autorizaron y posteriormente lo rechazó la aplicación producto.
-EARTHPORT;IMP_0015_116;01/08/2014;01/01/2010;BEC;H2H;10000000060;Integrado;Finalizado;KO;;Transferencias 34.14;Andrés;Fichero entró el 30/07, rechazado en PRISMA porque el tipo de ficehro no se encuentra en la tabla de validaciones. El probelma está en la cuenta ordenante, no es una cuenta BBVA España, se quedó pendiente por servicio no contratado, pero lo autorizaron y posteriormente lo rechazó la aplicación producto.
-EARTHPORT;IMP_0015_116;01/08/2014;01/01/2010;BEC;H2H;10000000060;Integrado;Finalizado;KO;;Transferencias 34.14;Andrés;Fichero entró el 30/07, rechazado en PRISMA porque el tipo de ficehro no se encuentra en la tabla de validaciones. El probelma está en la cuenta ordenante, no es una cuenta BBVA España, se quedó pendiente por servicio no contratado, pero lo autorizaron y posteriormente lo rechazó la aplicación producto.
-EARTHPORT;IMP_0015_116;01/08/2014;01/01/2010;BEC;H2H;10000000060;Integrado;Finalizado;KO;;Transferencias 34.14;Andrés;Fichero entró el 30/07, rechazado en PRISMA porque el tipo de ficehro no se encuentra en la tabla de validaciones. El probelma está en la cuenta ordenante, no es una cuenta BBVA España, se quedó pendiente por servicio no contratado, pero lo autorizaron y posteriormente lo rechazó la aplicación producto.
-EARTHPORT;IMP_0015_116;01/08/2014;01/01/2010;BEC;H2H;10000000060;Integrado;Finalizado;KO;;Transferencias 34.14;Andrés;Fichero entró el 30/07, rechazado en PRISMA porque el tipo de ficehro no se encuentra en la tabla de validaciones. El probelma está en la cuenta ordenante, no es una cuenta BBVA España, se quedó pendiente por servicio no contratado, pero lo autorizaron y posteriormente lo rechazó la aplicación producto.
-EARTHPORT;IMP_0015_116;01/08/2014;01/01/2010;BEC;H2H;10000000060;Integrado;Finalizado;KO;;Transferencias 34.14;Andrés;Fichero entró el 30/07, rechazado en PRISMA porque el tipo de ficehro no se encuentra en la tabla de validaciones. El probelma está en la cuenta ordenante, no es una cuenta BBVA España, se quedó pendiente por servicio no contratado, pero lo autorizaron y posteriormente lo rechazó la aplicación producto.
-EARTHPORT;IMP_0015_116;01/08/2014;01/01/2010;BEC;H2H;10000000060;Integrado;Finalizado;KO;;Transferencias 34.14;Andrés;Fichero entró el 30/07, rechazado en PRISMA porque el tipo de ficehro no se encuentra en la tabla de validaciones. El probelma está en la cuenta ordenante, no es una cuenta BBVA España, se quedó pendiente por servicio no contratado, pero lo autorizaron y posteriormente lo rechazó la aplicación producto.
+INDITEX;;10/12/2014;01/01/2010;BEC;H2H;10000000097;Integrado;Finalizado;OK;34002256.TIG;Pagos internacionales Londres;Alba;34002256.TIG
+REPSOL ESPA�A;IMP_0118_507;17/01/2014;01/01/2010;CIB;Swift Fileact;10000000054;Integrado;Finalizado;OK;00001125.CSX;Adeudos directos 19.44 (Sepa B2B);Andr�s;00001125.CSX
+RIUSA;;02/06/2014;01/01/2010;BEC;Swift Fileact;10000000125;Integrado;Finalizado;OK;00000002.FIM;N�minas 34.14;�ngel;00000002.FIM
+SOLVAY;;09/12/2014;01/01/2010;CIB;Swift Fileact;10000000008;Integrado;Finalizado;OK;09003581.CNF;Confirming de clientes;Natalia;09003581.CNF
+;;;;;;;;;;;;;
+;;;;;;;;;;;;;
+;;;;;;;;;;;;;
+;;;;;;;;;;;;;
+;;;;;;;;;;;;;
+;;;;;;;;;;;;;

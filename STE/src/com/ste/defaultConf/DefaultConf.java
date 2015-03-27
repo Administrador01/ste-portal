@@ -209,6 +209,18 @@ public class DefaultConf extends HttpServlet{
 				pruebaDao.deletePrueba(prueba);
 			}
 		}
+		
+		String fromStr = req.getParameter("from");
+		int from = 1;
+		if(fromStr != null ) {
+			from = Integer.parseInt(fromStr);
+		}
+		
+		String toStr = req.getParameter("to");
+		int to = 5000;
+		if(toStr != null ) {
+			to = Integer.parseInt(toStr);
+		}
 		String link = "/datadocs/pruebasCarga.csv";
 		String linkParam = req.getParameter("link"); 
 		if(linkParam != null) {
@@ -224,12 +236,11 @@ public class DefaultConf extends HttpServlet{
 
 			
 			ServicioDao servicioDao = ServicioDao.getInstance();
-			TipoServicioDao tipoServDao = TipoServicioDao.getInstance();
 			EstadoDao estadoDao = EstadoDao.getInstance(); 
 			ProductoCanalDao productoDao = ProductoCanalDao.getInstance();
 			ImplementacionDao implementacionDao = ImplementacionDao.getInstance();
 			ClienteDao clienteDao = ClienteDao.getInstance();
-			int counter = 901;
+			int counter = 1;
 			boolean error = false;
 			
 			List<EstadoImplementacion> estadosforname;
@@ -237,7 +248,7 @@ public class DefaultConf extends HttpServlet{
 			
 
 			
-			
+			int contador = 1;
 			while ((inputLine = in.readLine()) != null) {
 				error = false;
 				
@@ -247,12 +258,10 @@ public class DefaultConf extends HttpServlet{
 				String[] implementacionSplit = line.split(";", -1);
 
 				boolean procesar = true;
-				if (implementacionSplit.length != 14) {
+
+				
+				if (from<=contador&&contador<=to) {
 					
-				}
-
-
-				if (procesar) {
 					Prueba prueba = new Prueba();
 					
 					String clienteName = implementacionSplit[0];
@@ -399,7 +408,7 @@ public class DefaultConf extends HttpServlet{
 
 					
 					
-					List<TipoServicio> servicios = tipoServDao.getServiciosByName(tipoServicio);
+					List<Servicio> servicios = servicioDao.getServicioByName(tipoServicio);
 					if(servicios.size()==1){
 						prueba.setTipo_servicio(tipoServicio);
 					}else{
@@ -416,6 +425,7 @@ public class DefaultConf extends HttpServlet{
 					}
 				}
 				counter++;
+				contador++;
 			}
 		}catch (Exception e) {
 			e.printStackTrace();

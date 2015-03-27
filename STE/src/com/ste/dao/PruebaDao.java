@@ -62,25 +62,11 @@ public class PruebaDao {
 			
 			PruebaDao pruDao = PruebaDao.getInstance();	
 
-			List<Prueba> prueb_arr = pruDao.getAllPruebas();
+			
 			boolean flag = false;
 			
 			
-			for (Prueba prub : prueb_arr){
-				
-				if(prub.getDetalles().equals(s.getDetalles())&&
-				   prub.getEntorno().equals(s.getEntorno())&&
-				   prub.getEstado().equals(s.getEstado())&&
-				   prub.getStr_fecha_estado().equals(s.getStr_fecha_estado())&&
-				   prub.getSolucion().equals(s.getSolucion())&&
-				   prub.getImp_id().equals(s.getImp_id())&&
-				   prub.getProducto().equals(s.getProducto())&&
-				   prub.getReferencia().equals(s.getReferencia())&&
-				   prub.getTipo_servicio().equals(s.getTipo_servicio())){
-						flag = true;
-				}
-					
-			}
+
 			if(!flag){
 				//Conversi'on de las fechas de string a tipo date
 				s.setFecha_estado(Utils.dateConverter(s.getStr_fecha_estado()));
