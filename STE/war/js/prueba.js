@@ -191,6 +191,13 @@ $(function(){
 				}
 			}
 		}
+		
+		$table.paginateMe({
+			pagerSelector : '#myPager',
+			showPrevNext : true,
+			hidePageNumbers : false,
+			perPage : 10
+		});
 
 	})
 	
