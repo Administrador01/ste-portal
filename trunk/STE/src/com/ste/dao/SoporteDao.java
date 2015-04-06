@@ -198,14 +198,13 @@ public class SoporteDao {
 		
 		String query = "select from " + Soporte.class.getName();
 		Query q = pm.newQuery(query);
-		if(estado.equals("ANY")){
-			q.setFilter("fecha_inicio >= fechaDesde && fecha_inicio <= fechaHasta"+" && erased==false"+" && premium == '"+tipoClient+"'");
+		if(tipoClient.equals("ANY")){
+			q.setFilter("fecha_inicio >= fechaDesde && fecha_inicio <= fechaHasta"+" && erased==false"+" && estado=='"+estado+ "'");
 		}else{
 			q.setFilter("fecha_inicio >= fechaDesde && fecha_inicio <= fechaHasta"+" && erased==false"+" && premium == '"+tipoClient+"' && estado=='"+estado+ "'");			
 		}
 		
 		q.declareParameters("java.util.Date fechaDesde , java.util.Date fechaHasta");
-		//.setFilter(propertyFilter);
 
 		soportes = (List<Soporte>) q.execute(fechaDesde,fechaHasta);
 
