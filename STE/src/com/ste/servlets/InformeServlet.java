@@ -751,31 +751,47 @@ public class InformeServlet extends HttpServlet{
 		
 		ClienteDao cliDao = ClienteDao.getInstance();
 		List<Estado> estados = est.getAllEstados();
-		List<Soporte> soportes = sopDao.getAllSoportes();
 		
-		int tipoFecha = 1;
+		Date dateDesde=null;
+		Date dateHasta=null;
+		int tipoFecha =1 ;
 		
 		if (!fechaHasta.equals("")&&fechaHasta!=null){
 			if(!fechaDesde.equals("")&&fechaDesde!=null){
-				Date fech = Utils.dateConverter(fechaDesde);
-				Date haHasta = Utils.dateConverter(fechaHasta);
-				soportes = sopDao.getSoportesBetweenDates(fech,haHasta);
-
 				tipoFecha=4;
 			}else{
-				Date dateHasta = Utils.dateConverter(fechaHasta);
-				soportes = sopDao.getSoportesUntilDate(dateHasta);
 				tipoFecha=3;
 			}
 		}else{
 			if(!fechaDesde.equals("")&&fechaDesde!=null){
-				Date dateDesde = Utils.dateConverter(fechaDesde);
-				soportes = sopDao.getSoportesSinceDate(dateDesde);
 				tipoFecha=2;
 			}
 		}
 		
-		int totalSoportes = soportes.size();
+		switch (tipoFecha){
+			case 1:
+				dateDesde = Utils.dateConverter("29/11/1857");
+				dateHasta = Utils.dateConverter("29/11/2500");
+				break;
+			case 2:
+				dateDesde = Utils.dateConverter(fechaDesde);
+				dateHasta = Utils.dateConverter("29/11/2500");
+				break;
+			case 3:
+				dateDesde = Utils.dateConverter("29/11/1857");
+				dateHasta = Utils.dateConverter(fechaHasta);
+				break;
+			case 4:
+				dateDesde = Utils.dateConverter(fechaDesde);
+				dateHasta = Utils.dateConverter(fechaHasta);
+				
+				
+				break;
+			default:
+				break;
+		}
+		
+	
 		
 		
 		resp.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
@@ -818,6 +834,8 @@ public class InformeServlet extends HttpServlet{
 		
 		/*------------------------------TABLA estados--------------------------------------------------------------*/
 		int num = 0;
+		int totalSoportes = sopDao.getSoportesBetweenDates(dateDesde, dateHasta).size();
+		
 		for(Estado estado: estados){
 			//Creacion de las celdas con bordes de manera dinamica
 			sh.createRow(10+num).createCell(10).setCellStyle(clientCellStyle);
@@ -825,14 +843,15 @@ public class InformeServlet extends HttpServlet{
 			sh.getRow(10+num).createCell(12).setCellStyle(clientCellStyle);
 			sh.getRow(10+num).createCell(13).setCellStyle(clientCellStyle);
 			sh.getRow(10+num).getCell(10).setCellValue(estado.getName());
-			sh.getRow(10+num).getCell(11).setCellValue(0.0);
-			sh.getRow(10+num).getCell(12).setCellValue(0.0);
-			sh.getRow(10+num).getCell(13).setCellValue(0.0);
+			sh.getRow(10+num).getCell(11).setCellValue(sopDao.getSoportesByTipoClientEstado("Premium", estado.getName(), dateDesde, dateHasta).size());
+			sh.getRow(10+num).getCell(12).setCellValue(sopDao.getSoportesByTipoClientEstado("No Premium", estado.getName(), dateDesde, dateHasta).size());
+			sh.getRow(10+num).getCell(13).setCellValue(sopDao.getSoportesByTipoClientEstado("ANY", estado.getName(), dateDesde, dateHasta).size());
 			num++;
 		}
+		/*
 		for(Soporte sop : soportes){
 			for(int i =0;i<estados.size();i++){
-				/*primer if para gestion de cliente = ninguno*/
+			
 				if(sop.getCliente_id()==""){
 					if(sop.getEstado().equals(estados.get(i).getName()))sh.getRow(i+10).getCell(12).setCellValue(sh.getRow(i+10).getCell(12).getNumericCellValue()+1);
 					if(sop.getEstado().equals(estados.get(i).getName()))sh.getRow(i+10).getCell(13).setCellValue(sh.getRow(i+10).getCell(13).getNumericCellValue()+1);
@@ -851,7 +870,7 @@ public class InformeServlet extends HttpServlet{
 					if(sop.getEstado().equals(estados.get(i).getName()))sh.getRow(i+10).getCell(13).setCellValue(sh.getRow(i+10).getCell(13).getNumericCellValue()+1);
 				}
 			}
-		}
+		}*/
 		
 		sh.createRow(estados.size()+10).createCell(10).setCellStyle(footerCellStyle);
 		sh.getRow(estados.size()+10).createCell(11).setCellStyle(footerCellStyle);
@@ -893,8 +912,9 @@ public class InformeServlet extends HttpServlet{
 		ClienteDao clientDao = ClienteDao.getInstance();
 		List<Cliente> clientes = clientDao.getAllClients();
 		/*------------------------------TABLA CLIENTES--------------------------------------------------------------*/
-		Date dateDesde = null;
-		Date dateHasta = null;
+		dateDesde = null;
+		dateHasta = null;
+		List<Soporte> soportes = null;
 		
 		int i = 0;
 		for(Cliente cli :clientes){

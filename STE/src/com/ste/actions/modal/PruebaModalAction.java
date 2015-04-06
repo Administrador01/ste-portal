@@ -45,8 +45,8 @@ public class PruebaModalAction extends Action{
 			List<Cliente> clientes = cDao.getAllClients();
 			req.setAttribute("clientes", clientes);
 			
-			ImplementacionDao impDao = ImplementacionDao.getInstance();
-			List<Implementacion> implementaciones = impDao.getAllImplementaciones();
+			ImplementacionDao implemnDao = ImplementacionDao.getInstance();
+			List<Implementacion> implementaciones = implemnDao.getImplementacionByClientId(pDao.getClientByTestId(p.getKey().getId()).getKey().getId());
 			req.setAttribute("implementaciones", implementaciones);
 			
 			ProductoCanalDao prodDao = ProductoCanalDao.getInstance();

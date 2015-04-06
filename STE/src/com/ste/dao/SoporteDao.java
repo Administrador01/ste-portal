@@ -189,6 +189,33 @@ public class SoporteDao {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<Soporte> getSoportesByTipoClientEstado(String tipoClient, String estado,Date fechaDesde,Date fechaHasta) {
+
+		List<Soporte> soportes;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		
+		
+		String query = "select from " + Soporte.class.getName();
+		Query q = pm.newQuery(query);
+		if(estado.equals("ANY")){
+			q.setFilter("fecha_inicio >= fechaDesde && fecha_inicio <= fechaHasta"+" && erased==false"+" && premium == '"+tipoClient+"'");
+		}else{
+			q.setFilter("fecha_inicio >= fechaDesde && fecha_inicio <= fechaHasta"+" && erased==false"+" && premium == '"+tipoClient+"' && estado=='"+estado+ "'");			
+		}
+		
+		q.declareParameters("java.util.Date fechaDesde , java.util.Date fechaHasta");
+		//.setFilter(propertyFilter);
+
+		soportes = (List<Soporte>) q.execute(fechaDesde,fechaHasta);
+
+		
+		pm.close();
+
+		return soportes;
+	}
+	
+	@SuppressWarnings("unchecked")
 	public boolean existSoporteByClientId(String clientID) {
 
 		List<Soporte> soportes;
