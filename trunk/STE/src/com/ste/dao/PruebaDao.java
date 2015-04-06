@@ -115,6 +115,7 @@ public class PruebaDao {
 		
 		Query q = pm.newQuery("select from " + Prueba.class.getName()+" where erased == false");		
 		q.setOrdering("fecha_estado desc");
+		q.setDatastoreReadTimeoutMillis(30000000);
 		pruebas = (List<Prueba>) q.execute();
 		
 		

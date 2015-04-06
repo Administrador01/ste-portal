@@ -764,14 +764,15 @@ $(function() {
 	//submit method for new test
 	
 	$("#submit_form_test").on('click',function(e) {
-
+		
+		
 		e.preventDefault(); //STOP default action
 		
 		
 		var $form = $($(this).prev());
 		
 		if($form.valid()){
-						
+			$("#submit_form_test").addClass("hidden");
 			var postData = $form.serialize() + "&accion=new";
 			var formURL = $form.attr("action");
 			$.ajax(
@@ -1084,8 +1085,9 @@ $(function() {
 
 	var $form = $("#edit-prueba-form");
 	
+	
 	if($form.valid()){			
-		
+		$("#submit_edit_prueba_form").addClass("hidden");
 		var postData = $form.serialize() + "&accion=update&id="+id;
 		var formURL = $form.attr("action");
 		$.ajax(
@@ -1185,16 +1187,17 @@ $(function(){
 		});
 	});
 	+
-	$('#imp-pruebas').on('change', function() {
 
-		var option = $(this).find(":selected");
-
-		$('#input-cliente-prueba').val(option.data('nombre'));
-		$('#input-premium-prueba').val(option.data('premium'));
-	})
 	$('#pruebas').on('change','#cliente-pruebas', function (){
+		$('#input-premium-prueba').val($("#cliente-pruebas").find(":selected").data('premium'));
 		var cliente = $('#cliente-pruebas').val();
 		var target = $('#imp-pruebas');
+		ajaxImplementaciones(cliente,target);
+	});
+	$('#pruebas').on('change','#cliente_pru_modal', function (){
+		$('#input-premium-prueba-modal').val($("#cliente_pru_modal").find(":selected").data('premium'));
+		var cliente = $('#cliente_pru_modal').val();
+		var target = $('#imp-pruebas-modal');
 		ajaxImplementaciones(cliente,target);
 	});
 	$('#pruebas').on('click','#test_filter_button', function (){

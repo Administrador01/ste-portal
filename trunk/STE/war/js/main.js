@@ -403,14 +403,15 @@ $(function() {
 	//submit method for new test
 	
 	$("#submit_form_test").on('click',function(e) {
-
+		
+		
 		e.preventDefault(); //STOP default action
 		
 		
 		var $form = $($(this).prev());
 		
 		if($form.valid()){
-						
+			$("#submit_form_test").addClass("hidden");
 			var postData = $form.serialize() + "&accion=new";
 			var formURL = $form.attr("action");
 			$.ajax(

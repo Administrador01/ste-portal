@@ -1,8 +1,22 @@
-<!-- Indices written at Fri, 27 Mar 2015 15:53:32 GMT+01:00 -->
+<!-- Indices written at Mon, 6 Apr 2015 16:27:40 GMT+01:00 -->
 
 <datastore-indexes>
 
-    <!-- Used 100 times in query history -->
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="Soporte" ancestor="false" source="auto">
+        <property name="erased" direction="asc"/>
+        <property name="fecha_inicio" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 15 times in query history -->
+    <datastore-index kind="Soporte" ancestor="false" source="auto">
+        <property name="erased" direction="asc"/>
+        <property name="estado" direction="asc"/>
+        <property name="premium" direction="asc"/>
+        <property name="fecha_inicio" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 1 time in query history -->
     <datastore-index kind="Cliente" ancestor="false" source="auto">
         <property name="erased" direction="asc"/>
         <property name="id_cliente" direction="asc"/>

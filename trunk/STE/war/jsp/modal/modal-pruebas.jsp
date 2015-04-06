@@ -25,68 +25,52 @@
 									<span class="lbl">Identificador:</span>
 									<input class="long readonly" type="text" readonly name="id_prueba" id="id_prueba" value="${prueba.id_prueba}">
 								</div>
-			<!--
-								
-								<div class="form-field">
+									
+								<div class="form-field" >
 									<span class="lbl">Cliente<span class="required-asterisk">*</span>:</span>
 									<div class="input">
-									
-										<select class="selectpicker selected" name="cliente" id="cliente-pruebas-modal" required data-live-search="true">
-										
-											<c:choose>
-													<c:when test="${empty clientes}">
-														<option value="default">No hay clientes</option>
-													</c:when>
-													<c:otherwise>
-														<c:forEach items="${implementaciones}" var="implementacion">
-														<c:if test="implementacion.key.id==prueba.imp_id">
-														<c:forEach items="${clientes}" var="t">
-															
-															<option value="${t.nombre}" data-premium="${t.premium}" data-segmento="${t.tipo_cliente}" data-clientid="${t.key.id}" ${t.key.id == implementacion.cliente_id ? 'selected' : ''}>${t.nombre}</option>
-														</c:forEach>
-														</c:if>
-														</c:forEach>
-													</c:otherwise>
-											</c:choose>
-										</select>
+									<select class="selectpicker selected" name="cliente" id="cliente_pru_modal" data-live-search="true">
+										<c:choose>
+											<c:when test="${empty clientes}">
+												<option value="default">No hay clientes</option>
+											</c:when>
+										<c:otherwise>
+											<c:forEach items="${clientes}" var="t">							
+												<option value="${t.key.id}" data-premium="${t.premium}" data-segmento="${t.tipo_cliente}" ${t.nombre == prueba.client_name ? 'selected' : ''}>${t.nombre}</option>
+											</c:forEach>
+										</c:otherwise>
+										</c:choose>
+									</select>
 									</div>
 								</div>
-			-->					
+								
+	
+												
 								<div class="form-field">
 									<span class="lbl">Implementaci&oacuten<span class="required-asterisk">*</span>:</span>
 									<div class="input">
 										<select class="selectpicker selected" name="imp_id_mod" id="imp-pruebas-modal" data-live-search="true">
-											<c:choose>
-												<c:when test="${empty implementaciones}">
-													<option value="default">No hay implementaciones</option>
-												</c:when>
-											<c:otherwise>
-												<option value="default">Seleccionar</option>
-												<c:forEach items="${implementaciones}" var="t">	
-													<c:forEach items="${clientes}" var="cli">
-														<c:choose>
-															<c:when test="${t.cliente_id==cli.key.id}">				
-																<option value="${t.key.id}" data-nombre="${cli.nombre}" data-premium="${cli.premium}"  ${t.key.id == prueba.imp_id ? 'selected' : ''}>${t.id_implementacion}&nbsp${cli.nombre}</option>
-															</c:when>
-														</c:choose>
-													</c:forEach>
-												</c:forEach>
-											</c:otherwise>
-											</c:choose>
+										<c:choose>											
+											<c:when test="${empty implementaciones}">
+												<option value="default">hay un error en la aplicacion</option>
+											</c:when>
+										<c:otherwise>
+											<c:forEach items="${implementaciones}" var="imp">							
+												<option value="${imp.key.id}" ${imp.key.id == prueba.imp_id ? 'selected' : ''}>${imp.id_implementacion}</option>
+											</c:forEach>
+										</c:otherwise>
+										</c:choose>
 										</select>
 									</div>
 								</div>
 								
-								
-								<div class="form-field">
-									<span class="lbl">Cliente:</span>
-									<input type="text" class="input-autorefillable" id="input-cliente-prueba-modal" value="" readonly>
-								</div>	
-								
-								<div class="form-field">
+																<div class="form-field">
 									<span class="lbl">Tipo cliente:</span>
 									<input type="text" class="input-autorefillable" id="input-premium-prueba-modal" value="" readonly>
-								</div>		
+								</div>	
+
+								
+
 								
 								<div class="form-field">
 									<span class="lbl">Tipo de servicio<span class="required-asterisk">*</span>:</span>
@@ -215,17 +199,11 @@
 
 $(document).ready(function(){
 
-	var option = $('#imp-pruebas-modal').find(":selected");
-	$('#input-cliente-prueba-modal').val(option.data('nombre'));
+	var option = $('#cliente_pru_modal').find(":selected");
+
 	$('#input-premium-prueba-modal').val(option.data('premium'));
 	
-	$('#imp-pruebas-modal').on('change', function() {
 
-		var option = $(this).find(":selected");
-
-		$('#input-cliente-prueba-modal').val(option.data('nombre'));
-		$('#input-premium-prueba-modal').val(option.data('premium'));
-	})
 	
 	
 	
