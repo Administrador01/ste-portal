@@ -293,7 +293,7 @@ public class PruebaServlet extends HttpServlet{
 			PruebaDao pDao = PruebaDao.getInstance();
 			List<Prueba> pruebas = pDao.getAllPruebas();
 			
-			ImplementacionDao impdao = ImplementacionDao.getInstance();
+
 					
 			WritableSheet s = w.createSheet("Gestion de pruebas", 0);
 
@@ -348,10 +348,10 @@ public class PruebaServlet extends HttpServlet{
 				
 				
 				s.addCell(new Label(0, aux, pru.getId_prueba()));
-				s.addCell(new Label(1, aux, pDao.getClientByTestId(pru.getKey().getId()).getNombre()));
+				s.addCell(new Label(1, aux, pru.getClient_name()));
 				s.addCell(new Label(2, aux, pru.getFecha_inicio_str()));
 				s.addCell(new Label(3, aux, pru.getStr_fecha_estado()));
-				s.addCell(new Label(4, aux, pDao.getClientByTestId(pru.getKey().getId()).getPremium()));
+				s.addCell(new Label(4, aux, pru.getPremium()));
 				s.addCell(new Label(5, aux, pru.getProducto()));
 				s.addCell(new Label(6, aux, pru.getReferencia()));
 				if(pru.getEntorno().equals("Producci&oacuten")){
@@ -360,7 +360,7 @@ public class PruebaServlet extends HttpServlet{
 					s.addCell(new Label(7, aux,pru.getEntorno()));	
 				}
 				s.addCell(new Label(8, aux, pru.getEstado()));
-				s.addCell(new Label(9, aux, pDao.getImplementacionByTestId(pru.getKey().getId()).getId_implementacion()));
+				//s.addCell(new Label(9, aux, pDao.getImplementacionByTestId(pru.getKey().getId()).getId_implementacion()));
 				s.addCell(new Label(10, aux, pru.getTipo_servicio()));
 				s.addCell(new Label(11, aux, pru.getResultado()));
 				s.addCell(new Label(12, aux, pru.getPeticionario()));
