@@ -42,11 +42,21 @@ public class PruebasAction extends Action{
 		List<Prueba> pruebas = new ArrayList <Prueba>();
 		
 		String idCli = req.getParameter("idCli");
+		String  fecha= req.getParameter("fecha-filter");
+		String  cliente= req.getParameter("cliente-filter");
+		String  servicio= req.getParameter("servicio-filter");
+		String  estado= req.getParameter("estado-filter");
+		String  producto= req.getParameter("producto-filter");
+		String  entorno= req.getParameter("entorno-filter");
 
 		if(idCli == null || idCli == ""){
-		
-			pruebas.addAll(pDao.getAllPruebas());
-			pruebas.addAll(pDao.getAllDelPruebas());
+			if(fecha !=null || cliente!= null || servicio!=null || estado!=null || producto!=null || entorno!=null){
+				
+			}else{
+				pruebas.addAll(pDao.getAllPruebas());
+				pruebas.addAll(pDao.getAllDelPruebas());
+				/*ANIADIR FLAG PARA DISTIGUIR PAGINACION*/
+			}
 		}else{
 			pruebas = pDao.getAllPruebasByClientId(idCli);
 		}
