@@ -363,13 +363,15 @@
 					</tr>
 
 					<tr>
-						<th class="search-th"><input class="search col0 search_anywhere"></th>
-						<th class="search-th"><input class="search col1 search_anywhere"></th>
-						<th class="search-th"><input class="search col2 search_anywhere"></th>
-						<th class="search-th"><input class="search col3 search_anywhere"></th>
-						<th class="search-th"><input class="search col4 search_anywhere"></th>
-						<th class="search-th"><input class="search col5 search_anywhere"></th>
-						<th style="width: 110px;">&nbsp;</th>
+						<form action="">
+						<th class="search-th"><input name="fecha-filter"></th>
+						<th class="search-th"><input name="cliente-filter"></th>
+						<th class="search-th"><input name="servicio-filter"></th>
+						<th class="search-th"><input name="estado-filter"></th>
+						<th class="search-th"><input name="producto-filter"></th>
+						<th class="search-th"><input name="entorno-filter"></th>
+						<th style="width: 110px;"><button type='submit'>  FILTRAR  </button></th>
+						</form>
 					</tr>
 				</thead>
 				<tbody id="myTable" cellspacing="0">
