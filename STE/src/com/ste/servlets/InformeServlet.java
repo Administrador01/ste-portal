@@ -845,7 +845,7 @@ public class InformeServlet extends HttpServlet{
 			sh.getRow(10+num).getCell(10).setCellValue(estado.getName());
 			sh.getRow(10+num).getCell(11).setCellValue(sopDao.getSoportesByTipoClientEstado("Premium", estado.getName(), dateDesde, dateHasta).size());
 			sh.getRow(10+num).getCell(12).setCellValue(sopDao.getSoportesByTipoClientEstado("No Premium", estado.getName(), dateDesde, dateHasta).size());
-			sh.getRow(10+num).getCell(13).setCellValue(sopDao.getSoportesByTipoClientEstado("ANY", estado.getName(), dateDesde, dateHasta).size());
+			sh.getRow(10+num).getCell(13).setCellFormula("SUM(L"+(num+11)+":M"+(num+11)+")");
 			num++;
 		}
 		/*
