@@ -108,7 +108,7 @@ public class DefaultConf extends HttpServlet{
 				contadorSoporte = new Counter();
 			}
 			contadorSoporte.setNombre("soporte");
-			contadorSoporte.setValue(1);
+			contadorSoporte.setValue(6);
 			cDao.createCounter(contadorSoporte);
 			
 			
@@ -118,7 +118,7 @@ public class DefaultConf extends HttpServlet{
 				contadorCliente = new Counter();
 			}
 			contadorCliente.setNombre("cliente");
-			contadorCliente.setValue(1);
+			contadorCliente.setValue(119);
 			cDao.createCounter(contadorCliente);
 			
 			Counter contadorPrueba = cDao.getCounterByName("prueba");
@@ -127,7 +127,7 @@ public class DefaultConf extends HttpServlet{
 				contadorPrueba = new Counter();
 			}
 			contadorPrueba.setNombre("prueba");
-			contadorPrueba.setValue(1);
+			contadorPrueba.setValue(1392);
 			cDao.createCounter(contadorPrueba);			
 			
 			
@@ -137,7 +137,7 @@ public class DefaultConf extends HttpServlet{
 				contadorImp = new Counter();
 			}
 			contadorImp.setNombre("implementacion");
-			contadorImp.setValue(1);
+			contadorImp.setValue(502);
 			cDao.createCounter(contadorImp);	
 			json.append("success", true);
 			

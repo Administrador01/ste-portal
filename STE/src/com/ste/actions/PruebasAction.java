@@ -44,6 +44,7 @@ public class PruebasAction extends Action{
 		String idCli = req.getParameter("idCli");
 
 		if(idCli == null || idCli == ""){
+		
 			pruebas.addAll(pDao.getAllPruebas());
 			pruebas.addAll(pDao.getAllDelPruebas());
 		}else{
