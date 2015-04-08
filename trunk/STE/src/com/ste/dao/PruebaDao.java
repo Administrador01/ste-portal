@@ -2,6 +2,7 @@ package com.ste.dao;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -522,16 +523,24 @@ public class PruebaDao {
 		
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		com.google.appengine.api.datastore.Query q = new com.google.appengine.api.datastore.Query("Prueba");
-				
+		/*		
 		List<Filter> impIdSubFilters = new ArrayList<>();
 		for(Long id : impIds) {
 			impIdSubFilters.add(new FilterPredicate("imp_id", FilterOperator.EQUAL, id.toString()));
 		}		
 		Filter impIdFilter = CompositeFilterOperator.or(impIdSubFilters);
-		
+		*/
+		int i = 0;
+		Collection<String> impIdsCollect = new ArrayList<String>();
+		impIdsCollect.add("0");
+		for(Long id : impIds) {
+			impIdsCollect.add(impIds.get(i).toString());
+			i++;
+		}
 		List<Filter> finalFilters = new ArrayList<>();
 		finalFilters.add(new FilterPredicate("erased", FilterOperator.EQUAL, false));
-		finalFilters.add(impIdFilter);
+		finalFilters.add(new FilterPredicate("imp_id", FilterOperator.IN, impIdsCollect));
+		//finalFilters.add(impIdFilter);
 		Filter finalFilter = CompositeFilterOperator.and(finalFilters);
 		q.setFilter(finalFilter);
 		
