@@ -502,6 +502,60 @@ public class PruebaDao {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<Prueba> getPruebasByAllParam(String fecha, String cliente, String servicio , String estado, String producto, String entorno, String desde, String hasta, String premium, Integer page) {
+		List<Prueba> pruebas;
+		
+		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		com.google.appengine.api.datastore.Query q = new com.google.appengine.api.datastore.Query("Prueba");
+		
+		List<Filter> finalFilters = new ArrayList<>();
+		
+//		if(!cliente.equals("")){
+//			Collection<Character> clienteArr = new ArrayList<Character>();
+//			for(char caract : cliente.toCharArray()){
+//				clienteArr.add(caract);
+//			}
+//			finalFilters.add(new FilterPredicate("client_name", FilterOperator.IN, clienteArr));
+//
+//			
+//		}
+		
+		if(!cliente.equals("")){
+			cliente = cliente.toUpperCase();
+			finalFilters.add(new FilterPredicate("client_name", FilterOperator.GREATER_THAN_OR_EQUAL, cliente));
+			finalFilters.add(new FilterPredicate("client_name", FilterOperator.LESS_THAN, "\ufffd"));
+			
+		}
+//		if(!fecha.equals("")){
+//			 
+//			finalFilters.add(new FilterPredicate("str_fecha_estado", FilterOperator.GREATER_THAN_OR_EQUAL, fecha));
+//			finalFilters.add(new FilterPredicate("str_fecha_estado", FilterOperator.LESS_THAN, "\ufffd"));
+//			
+//		}
+		Filter finalFilter = null;
+		if(finalFilters.size()>1) finalFilter = CompositeFilterOperator.and(finalFilters);
+		if(finalFilters.size()==1) finalFilter = finalFilters.get(0);
+		if(finalFilters.size()!=0)q.setFilter(finalFilter);
+		
+		
+		List<Entity> entities = null;
+		FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+		if(page != null) {
+			Integer offset = page * DATA_SIZE;
+			fetchOptions.limit(DATA_SIZE);	
+			fetchOptions.offset(offset);
+		}
+		entities = datastore.prepare(q).asList(fetchOptions);
+				
+		pruebas = new ArrayList<>();	
+		for (Entity result : entities) {			
+			pruebas.add(buildPrueba(result));
+		}
+		
+		return pruebas;
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<Prueba> getAllPruebasByClientIdPaged(String clientID, Integer page) {
 
 		ImplementacionDao impDao = ImplementacionDao.getInstance();
