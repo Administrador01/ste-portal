@@ -13,18 +13,17 @@ import org.apache.struts.action.ActionMapping;
 
 import com.ste.beans.Cliente;
 import com.ste.beans.Estado;
-import com.ste.beans.Implementacion;
 import com.ste.beans.ProductoCanal;
 import com.ste.beans.Prueba;
 import com.ste.beans.Servicio;
-import com.ste.beans.TipoServicio;
+import com.ste.counters.Counter;
 import com.ste.dao.ClienteDao;
+import com.ste.dao.CounterDao;
 import com.ste.dao.EstadoDao;
-import com.ste.dao.ImplementacionDao;
 import com.ste.dao.ProductoCanalDao;
 import com.ste.dao.PruebaDao;
 import com.ste.dao.ServicioDao;
-import com.ste.dao.TipoServicioDao;
+import com.ste.utils.Utils;
 
 public class PruebasAction extends Action{
 	
@@ -34,32 +33,35 @@ public class PruebasAction extends Action{
 
 		//Mandamos los clientes para generar la lista select desplegable
 		ClienteDao cDao = ClienteDao.getInstance();
-		List<Cliente> clientes = cDao.getAllClients();
-
 		
+		List<Cliente> clientes = cDao.getAllClients();
 		
 		PruebaDao pDao = PruebaDao.getInstance();
 		List<Prueba> pruebas = new ArrayList <Prueba>();
 		
 		String idCli = req.getParameter("idCli");
-		String  fecha= req.getParameter("fecha-filter");
-		String  cliente= req.getParameter("cliente-filter");
-		String  servicio= req.getParameter("servicio-filter");
-		String  estado= req.getParameter("estado-filter");
-		String  producto= req.getParameter("producto-filter");
-		String  entorno= req.getParameter("entorno-filter");
-
+		
+		String page = req.getParameter("page");
+		int pageint = Utils.stringToInt(page);		
+		
 		if(idCli == null || idCli == ""){
-			if(fecha !=null || cliente!= null || servicio!=null || estado!=null || producto!=null || entorno!=null){
-				
-			}else{
-				pruebas.addAll(pDao.getAllPruebas());
-				pruebas.addAll(pDao.getAllDelPruebas());
-				/*ANIADIR FLAG PARA DISTIGUIR PAGINACION*/
-			}
-		}else{
-			pruebas = pDao.getAllPruebasByClientId(idCli);
+			pruebas = pDao.getPruebasPaged(pageint);		
+			
+			CounterDao counterDao = CounterDao.getInstance();
+			Counter count = counterDao.getCounterByName("prueba");
+			int numpages = (count.getValue()/PruebaDao.DATA_SIZE) + 1;			
+			req.setAttribute("numpages", numpages);			
+		} else {
+			pruebas = pDao.getAllPruebasByClientIdPaged(idCli, pageint);
+			
+			int numpages = 0;			
+			req.setAttribute("numpages", numpages);
 		}
+
+		boolean lastpage = (pruebas.size() < PruebaDao.DATA_SIZE) ? true : false;
+		
+		req.setAttribute("lastpage", lastpage);
+		req.setAttribute("page", pageint);
 		
 		req.setAttribute("clientes", clientes);	
 		req.setAttribute("pruebas", pruebas);
