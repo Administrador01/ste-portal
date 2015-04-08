@@ -167,5 +167,18 @@ public class Utils {
 		
         return convertedDate;
 	}
+	
+	public static int stringToInt(String value){
+		int intValue = 0;
+		if(value != null) {
+			try {
+				intValue = Integer.parseInt(value);
+			}
+			catch(NumberFormatException e) {
+				return intValue;
+			}
+		}
+		return intValue;
+	}
 
 }

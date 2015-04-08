@@ -8,11 +8,18 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-
-
-
-
-
+import com.google.appengine.api.datastore.Cursor;
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.FetchOptions;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query.Filter;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
+import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
+import com.google.appengine.api.datastore.QueryResultIterator;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import com.ste.beans.Cliente;
 import com.ste.beans.Implementacion;
 import com.ste.beans.Prueba;
@@ -20,9 +27,9 @@ import com.ste.counters.Counter;
 import com.ste.persistence.PMF;
 import com.ste.utils.Utils;
 
-
-
 public class PruebaDao {
+	
+	public static final int DATA_SIZE = 10;
 
 	public static PruebaDao getInstance() {
 		return new PruebaDao();
@@ -115,7 +122,7 @@ public class PruebaDao {
 		
 		Query q = pm.newQuery("select from " + Prueba.class.getName()+" where erased == false");		
 		q.setOrdering("fecha_estado desc");
-		q.setDatastoreReadTimeoutMillis(30000000);
+		//q.setDatastoreReadTimeoutMillis(30000000);
 		pruebas = (List<Prueba>) q.execute();
 		
 		
@@ -179,7 +186,6 @@ public class PruebaDao {
 
 		return impDao.getImplementacionById(Long.parseLong(prueba.getImp_id()));
 	}	
-
 	
 	@SuppressWarnings("unchecked")
 	public List<Prueba> getAllPruebasByClientId(String clientID) {
@@ -191,31 +197,32 @@ public class PruebaDao {
 		ImplementacionDao impDao = ImplementacionDao.getInstance();
 		List<Implementacion> implementaciones = impDao.getImplementacionByClientId(Long.parseLong(clientID));
 		
+		List<Long> impIds = new ArrayList<>();
 		for(Implementacion imp : implementaciones){
-			pruebas.addAll(pruDao.getAllPruebasByImpId(imp.getKey().getId()));
+			impIds.add(new Long(imp.getKey().getId()));
+			//pruebas.addAll(pruDao.getAllPruebasByImpId(imp.getKey().getId()));
 		}
+		pruebas.addAll(pruDao.getAllPruebasByImpIdPaged(impIds, null));
+		/*for(Implementacion imp : implementaciones){
+			pruebas.addAll(pruDao.getAllPruebasByImpIdPaged(imp.getKey().getId(), null));
+		}*/
 		pm.close();
 
 		return pruebas;
 	}
 	
-	@SuppressWarnings("unchecked")
+	/*@SuppressWarnings("unchecked")
 	public List<Prueba> getAllPruebasByImpId(long impID) {
 
 		List<Prueba> pruebas;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-
 		String query = "select from " + Prueba.class.getName()+" where imp_id == '"+impID+"' && erased==false";
-		
-		Query q = pm.newQuery(query);//.setFilter(propertyFilter);
-
-		pruebas = (List<Prueba>) q.execute();
-
-		
+		Query q = pm.newQuery(query);
+		pruebas = (List<Prueba>) q.execute();		
 		pm.close();
 
 		return pruebas;
-	}
+	}*/
 	
 	@SuppressWarnings("unchecked")
 	public boolean existPruebaByClientId (String clientID) {
@@ -457,4 +464,191 @@ public class PruebaDao {
 
 		return pruebas;
 	}
+		
+	@SuppressWarnings("unchecked")
+	public List<Prueba> getPruebasPaged(Integer page) {
+		List<Prueba> pruebas;
+		
+		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		com.google.appengine.api.datastore.Query q = new com.google.appengine.api.datastore.Query("Prueba");
+		
+		List<Entity> entities = null;
+		FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+		if(page != null) {
+			Integer offset = page * DATA_SIZE;
+			fetchOptions.limit(DATA_SIZE);	
+			fetchOptions.offset(offset);
+		}
+		entities = datastore.prepare(q).asList(fetchOptions);
+				
+		pruebas = new ArrayList<>();	
+		for (Entity result : entities) {			
+			pruebas.add(buildPrueba(result));
+		}
+		
+		return pruebas;
+		
+		/*PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		Query q = pm.newQuery("select from " + Prueba.class.getName());		
+		q.setOrdering("fecha_estado desc");
+		long offset = page * DATA_SIZE;
+		q.setRange(offset, offset + DATA_SIZE);
+		pruebas = (List<Prueba>) q.execute();
+		pm.close();*/
+		
+		//return pruebas;		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Prueba> getAllPruebasByClientIdPaged(String clientID, Integer page) {
+
+		ImplementacionDao impDao = ImplementacionDao.getInstance();
+		List<Implementacion> implementaciones = impDao.getImplementacionByClientId(Long.parseLong(clientID));
+		
+		List<Long> impIds = new ArrayList<>();
+		for(Implementacion imp : implementaciones){
+			impIds.add(new Long(imp.getKey().getId()));
+		}
+		PruebaDao pruDao = PruebaDao.getInstance();
+		List<Prueba> pruebas = pruDao.getAllPruebasByImpIdPaged(impIds, page);
+		
+		return pruebas;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Prueba> getAllPruebasByImpIdPaged(List<Long> impIds, Integer page) {
+		List<Prueba> pruebas;
+		
+		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		com.google.appengine.api.datastore.Query q = new com.google.appengine.api.datastore.Query("Prueba");
+				
+		List<Filter> impIdSubFilters = new ArrayList<>();
+		for(Long id : impIds) {
+			impIdSubFilters.add(new FilterPredicate("imp_id", FilterOperator.EQUAL, id.toString()));
+		}		
+		Filter impIdFilter = CompositeFilterOperator.or(impIdSubFilters);
+		
+		List<Filter> finalFilters = new ArrayList<>();
+		finalFilters.add(new FilterPredicate("erased", FilterOperator.EQUAL, false));
+		finalFilters.add(impIdFilter);
+		Filter finalFilter = CompositeFilterOperator.and(finalFilters);
+		q.setFilter(finalFilter);
+		
+		List<Entity> entities = null;
+		FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+		if(page != null) {
+			Integer offset = page * DATA_SIZE;
+			fetchOptions.limit(DATA_SIZE);	
+			fetchOptions.offset(offset);
+		}
+		entities = datastore.prepare(q).asList(fetchOptions);
+				
+		pruebas = new ArrayList<>();	
+		for (Entity result : entities) {			
+			pruebas.add(buildPrueba(result));
+		}
+		
+		return pruebas;
+	}
+	
+	private Prueba buildPrueba(Entity entity) {
+		Prueba prueba = new Prueba();
+		
+		prueba.setKey(entity.getKey());
+		
+		String client_name = getString(entity, "client_name");
+		if(client_name != null) {
+			prueba.setClient_name(client_name);
+		}
+		String detalles = getString(entity, "detalles");
+		if(detalles != null) {
+			prueba.setDetalles(detalles);
+		}
+		String entorno = getString(entity, "entorno");
+		if(entorno != null) {
+			prueba.setEntorno(entorno);
+		}
+		prueba.setErased((boolean) entity.getProperty("erased"));
+		String estado = getString(entity, "estado");
+		if(estado != null) {
+			prueba.setEstado(estado);
+		}
+		Date fecha_estado = getDate(entity, "fecha_estado");
+		if(fecha_estado != null) {
+			prueba.setFecha_estado(fecha_estado);
+		}
+		Date fecha_inicio = getDate(entity, "fecha_inicio");
+		if(fecha_inicio != null) {
+			prueba.setFecha_inicio(fecha_inicio);
+		}
+		String fecha_inicio_str = getString(entity, "fecha_inicio_str");
+		if(fecha_inicio_str != null) {
+			prueba.setFecha_inicio_str(fecha_inicio_str);
+		}
+		String fichero = getString(entity, "fichero");
+		if(fichero != null) {
+			prueba.setFichero(fichero);
+		}
+		String id_prueba = getString(entity, "id_prueba");
+		if(id_prueba != null) {
+			prueba.setId_prueba(id_prueba);
+		}
+		String imp_id = getString(entity, "imp_id");
+		if(imp_id != null) {
+			prueba.setImp_id(imp_id);
+		}
+		String peticionario = getString(entity, "peticionario");
+		if(peticionario != null) {
+			prueba.setPeticionario(peticionario);
+		}
+		String premium = getString(entity, "premium");
+		if(premium != null) {
+			prueba.setPremium(premium);
+		}
+		String producto = getString(entity, "producto");
+		if(producto != null) {
+			prueba.setProducto(producto);
+		}
+		String referencia = getString(entity, "referencia");
+		if(referencia != null) {
+			prueba.setReferencia(referencia);
+		}
+		String resultado = getString(entity, "resultado");
+		if(resultado != null) {
+			prueba.setResultado(resultado);
+		}
+		String solucion = getString(entity, "solucion");
+		if(solucion != null) {
+			prueba.setSolucion(solucion);
+		}
+		String str_fecha_estado = getString(entity, "str_fecha_estado");
+		if(str_fecha_estado != null) {
+			prueba.setStr_fecha_estado(str_fecha_estado);
+		}
+		String tipo_servicio = getString(entity, "tipo_servicio");
+		if(tipo_servicio != null) {
+			prueba.setTipo_servicio(tipo_servicio);
+		}
+		return prueba;
+	}
+	
+	private String getString(Entity e, String field) {
+		try {
+			return (String) e.getProperty(field);
+		}
+		catch(Exception exp) {
+			return null;
+		}
+	}
+	
+	private Date getDate(Entity e, String field) {
+		try {
+			return (Date) e.getProperty(field);
+		}
+		catch(Exception exp) {
+			return null;
+		}
+	}
+	
 }
