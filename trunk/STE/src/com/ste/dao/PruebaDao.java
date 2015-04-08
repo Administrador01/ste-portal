@@ -513,19 +513,31 @@ public class PruebaDao {
 //		if(!cliente.equals("")){
 //			Collection<Character> clienteArr = new ArrayList<Character>();
 //			for(char caract : cliente.toCharArray()){
-//				clienteArr.add(caract);
+//				
 //			}
 //			finalFilters.add(new FilterPredicate("client_name", FilterOperator.IN, clienteArr));
 //
 //			
 //		}
 		
+		
+		/*TODO no se puede consultar sobre mas de una coluna con esta operacion
+		 * ver pagina
+		 * http://gae-java-persistence.blogspot.de/2009/12/queries-with-and-in-filters.html
+		 * 
+		 * */
 		if(!cliente.equals("")){
-			cliente = cliente.toUpperCase();
-			finalFilters.add(new FilterPredicate("client_name", FilterOperator.GREATER_THAN_OR_EQUAL, cliente));
-			finalFilters.add(new FilterPredicate("client_name", FilterOperator.LESS_THAN, "\ufffd"));
-			
+		cliente = cliente.toUpperCase();
+		finalFilters.add(new FilterPredicate("client_name", FilterOperator.GREATER_THAN_OR_EQUAL, cliente));
+		finalFilters.add(new FilterPredicate("client_name", FilterOperator.LESS_THAN, "\ufffd"));
 		}
+		
+//		if(!cliente.equals("")){
+//			cliente = cliente.toUpperCase();
+//			finalFilters.add(new FilterPredicate("client_name", FilterOperator.GREATER_THAN_OR_EQUAL, cliente));
+//			finalFilters.add(new FilterPredicate("client_name", FilterOperator.LESS_THAN, "\ufffd"));
+//			
+//		}
 //		if(!fecha.equals("")){
 //			 
 //			finalFilters.add(new FilterPredicate("str_fecha_estado", FilterOperator.GREATER_THAN_OR_EQUAL, fecha));
