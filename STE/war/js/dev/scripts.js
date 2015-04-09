@@ -1204,6 +1204,11 @@ $(function() {
 	}
 }
 
+function filtering(){
+	var $form = $("#test-header-filter");
+	var postData =  $form.serialize();
+	postData = postData + "&desde-filter="+$('#fecha-desde-filtro').val()+ "&hasta-filter="+$('#fecha-hasta-filtro').val()+ "&premium="+$('#tipo_cliente').val();
+}
 function ajaxImplementaciones(cliente,target){
 	target.empty();
 	target.selectpicker("render");

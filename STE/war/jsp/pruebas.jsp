@@ -282,11 +282,7 @@
 							</div>
 						</div>
 					--%>
-					<div class="form-field-fecha-prueba">
-						<span class="lbl">Fecha inicio desde:</span>
-							<input type="text" value="" size="16" class="datepicker fromTo" data-target-id='fecha-hasta-filtro' name="fecha-desde-filtro" id="fecha-desde-filtro" >
-						
-					</div>
+
 					<%-- 
 					<div class="form-field">
 						<span class="lbl">Tipo servicio:</span>
@@ -313,12 +309,8 @@
 						</div>
 					</div>
 				--%>	
-					<div id="form-field-fecha-prueba-hasta">
-						<span class="lbl">Fecha inicio hasta:</span>
+				
 
-							<input type="text" value="" size="16" class="datepicker" name="fecha-hasta-filtro" id="fecha-hasta-filtro" >
-
-					</div>
 					<%-- 
 					<div class="form-field">
 						<span class="lbl">Estado:</span>
@@ -335,7 +327,17 @@
 					--%>
 					
 					
-				
+					<div class="form-field-fecha-prueba">
+						<span class="lbl">Fecha inicio desde:</span>
+							<input type="text" value="${desdeFilter}" size="16" class="datepicker fromTo" data-target-id='fecha-hasta-filtro' name="fecha-desde-filtro" id="fecha-desde-filtro" >
+						
+					</div>
+					<div id="form-field-fecha-prueba-hasta">
+						<span class="lbl">Fecha inicio hasta:</span>
+
+							<input type="text" value="${hastaFilter}" size="16" class="datepicker" name="fecha-hasta-filtro" id="fecha-hasta-filtro" >
+
+					</div>
 				
 				<button id="test_filter_button" type="button">Buscar</button>
 			
@@ -363,13 +365,14 @@
 					</tr>
 
 					<tr>
-						<form action="">
-						<th class="search-th"><input name="fecha-filter"></th>
-						<th class="search-th"><input name="cliente-filter"></th>
-						<th class="search-th"><input name="servicio-filter"></th>
-						<th class="search-th"><input name="estado-filter"></th>
-						<th class="search-th"><input name="producto-filter"></th>
-						<th class="search-th"><input name="entorno-filter"></th>
+						<form if='test-header-filter' action="">
+						<th class="search-th"><input name="fecha-filter" value="${fechaFilter}"></th>
+						<th class="search-th"><input name="cliente-filter" value="${clienteFilter}"></th>
+						<th class="search-th"><input name="servicio-filter" value='${servicioFilter}'></th>
+						<th class="search-th"><input name="estado-filter" value="${estadoFilter}"></th>
+						<th class="search-th"><input name="producto-filter" value="${productoFilter}"></th>
+						<th class="search-th"><input name="entorno-filter" value="${entornoFilter}"></th>
+						<input name="idCli" class="hidden" value="${idCli}">
 						<th style="width: 110px;"><button type='submit'>  FILTRAR  </button></th>
 						</form>
 					</tr>
