@@ -509,16 +509,7 @@ public class PruebaDao {
 		com.google.appengine.api.datastore.Query q = new com.google.appengine.api.datastore.Query("Prueba");
 		
 		List<Filter> finalFilters = new ArrayList<>();
-		
-//		if(!cliente.equals("")){
-//			Collection<Character> clienteArr = new ArrayList<Character>();
-//			for(char caract : cliente.toCharArray()){
-//				
-//			}
-//			finalFilters.add(new FilterPredicate("client_name", FilterOperator.IN, clienteArr));
-//
-//			
-//		}
+
 		
 		
 		/*TODO no se puede consultar sobre mas de una coluna con esta operacion
@@ -526,23 +517,16 @@ public class PruebaDao {
 		 * http://gae-java-persistence.blogspot.de/2009/12/queries-with-and-in-filters.html
 		 * 
 		 * */
-		if(!cliente.equals("")){
-		cliente = cliente.toUpperCase();
-		finalFilters.add(new FilterPredicate("client_name", FilterOperator.GREATER_THAN_OR_EQUAL, cliente));
-		finalFilters.add(new FilterPredicate("client_name", FilterOperator.LESS_THAN, "\ufffd"));
-		}
+
 		
-//		if(!cliente.equals("")){
-//			cliente = cliente.toUpperCase();
-//			finalFilters.add(new FilterPredicate("client_name", FilterOperator.GREATER_THAN_OR_EQUAL, cliente));
-//			finalFilters.add(new FilterPredicate("client_name", FilterOperator.LESS_THAN, "\ufffd"));
-//			
-//		}
+		if(!cliente.equals("")){
+			cliente = cliente.toUpperCase();
+			finalFilters.add(new FilterPredicate("client_name", FilterOperator.GREATER_THAN_OR_EQUAL, cliente));
+			finalFilters.add(new FilterPredicate("client_name", FilterOperator.LESS_THAN, cliente+"\ufffd"));
+		}
 //		if(!fecha.equals("")){
-//			 
 //			finalFilters.add(new FilterPredicate("str_fecha_estado", FilterOperator.GREATER_THAN_OR_EQUAL, fecha));
-//			finalFilters.add(new FilterPredicate("str_fecha_estado", FilterOperator.LESS_THAN, "\ufffd"));
-//			
+//			finalFilters.add(new FilterPredicate("str_fecha_estado", FilterOperator.LESS_THAN, fecha+"\ufffd"));
 //		}
 		Filter finalFilter = null;
 		if(finalFilters.size()>1) finalFilter = CompositeFilterOperator.and(finalFilters);
