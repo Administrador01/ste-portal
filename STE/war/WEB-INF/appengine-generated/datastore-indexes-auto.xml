@@ -1,14 +1,14 @@
-<!-- Indices written at Thu, 9 Apr 2015 17:17:55 GMT+01:00 -->
+<!-- Indices written at Fri, 10 Apr 2015 13:53:14 GMT+01:00 -->
 
 <datastore-indexes>
 
-    <!-- Used 8 times in query history -->
+    <!-- Used 11 times in query history -->
     <datastore-index kind="Cliente" ancestor="false" source="auto">
         <property name="erased" direction="asc"/>
         <property name="id_cliente" direction="asc"/>
     </datastore-index>
 
-    <!-- Used 5 times in query history -->
+    <!-- Used 6 times in query history -->
     <datastore-index kind="ProductoCanal" ancestor="false" source="auto">
         <property name="pruebas" direction="asc"/>
         <property name="name" direction="asc"/>
