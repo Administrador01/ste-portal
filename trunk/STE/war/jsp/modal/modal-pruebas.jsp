@@ -95,7 +95,7 @@
 								</div>	
 
 								
-								
+							<input type="text" class="hidden"  name="id_prueba_hid" value="${prueba.key.id}">	
 							</div>
 							<div class="form-field-divider right">
 			

@@ -187,7 +187,7 @@ public class PruebaServlet extends HttpServlet{
 		
 		JSONObject json = new JSONObject();
 		
-		String id_str = req.getParameter("id");
+		String id_str = req.getParameter("id_prueba_hid");
 		
 		String fecha_estado = req.getParameter("fecha_estado");
 		//String nombre_cliente = req.getParameter("cliente");

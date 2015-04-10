@@ -67,9 +67,9 @@ public class PruebasAction extends Action{
 				String premium = req.getParameter("premium");
 				
 				pruebas = pDao.getPruebasByAllParam(fechaFilter, clienteFilter, servicioFilter, estadoFilter, productoFilter, entornoFilter,desdeFilter,hastaFilter, premium, pageint);		
-				CounterDao counterDao = CounterDao.getInstance();
-				Counter count = counterDao.getCounterByName("prueba");
-				int numpages = (count.getValue()/PruebaDao.DATA_SIZE) + 1;			
+
+				int numpages = (Integer.parseInt(pruebas.get(pruebas.size()-1).getDetalles())/PruebaDao.DATA_SIZE) + 1;
+				pruebas.remove(pruebas.size()-1);
 				req.setAttribute("numpages", numpages);
 				req.setAttribute("clienteFilter", clienteFilter);
 				req.setAttribute("servicioFilter", servicioFilter);

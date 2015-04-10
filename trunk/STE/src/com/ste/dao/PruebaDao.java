@@ -514,6 +514,7 @@ public class PruebaDao {
 		
 		/*TODO no se puede consultar sobre mas de una coluna con esta operacion
 		 * ver pagina
+		 * 
 		 * http://gae-java-persistence.blogspot.de/2009/12/queries-with-and-in-filters.html
 		 * 
 		 * */
@@ -588,13 +589,13 @@ public class PruebaDao {
 				pruebas.add(buildPrueba(result));
 			}
 		}else{
-			List<Entity> clienteEntities = new ArrayList<Entity>();
-			List<Entity> fechaEntities = new ArrayList<Entity>();
-			List<Entity> servicioEntities = new ArrayList<Entity>();
-			List<Entity> entornoEntities = new ArrayList<Entity>();
-			List<Entity> estadoEntities = new ArrayList<Entity>();
-			List<Entity> productoEntities = new ArrayList<Entity>();
-			List<Entity> entities = new ArrayList<Entity>();
+//			List<Entity> clienteEntities = new ArrayList<Entity>();
+//			List<Entity> fechaEntities = new ArrayList<Entity>();
+//			List<Entity> servicioEntities = new ArrayList<Entity>();
+//			List<Entity> entornoEntities = new ArrayList<Entity>();
+//			List<Entity> estadoEntities = new ArrayList<Entity>();
+//			List<Entity> productoEntities = new ArrayList<Entity>();
+//			List<Entity> entities = new ArrayList<Entity>();
 			List<List<Entity>> Entities = new ArrayList<List<Entity>>();
 			
 			if(!cliente.equals("")){
@@ -605,7 +606,7 @@ public class PruebaDao {
 				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
 				q.setFilter(finalFilter);
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
-				clienteEntities =datastore.prepare(q).asList(fetchOptions);
+//				clienteEntities =datastore.prepare(q).asList(fetchOptions);
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
 			if(!fecha.equals("")){
@@ -617,7 +618,7 @@ public class PruebaDao {
 				q.setFilter(finalFilter);
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
 				
-				fechaEntities =datastore.prepare(q).asList(fetchOptions);
+//				fechaEntities =datastore.prepare(q).asList(fetchOptions);
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
 			if(!servicio.equals("")){
@@ -629,7 +630,7 @@ public class PruebaDao {
 				q.setFilter(finalFilter);
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
 				
-				servicioEntities =datastore.prepare(q).asList(fetchOptions);
+//				servicioEntities =datastore.prepare(q).asList(fetchOptions);
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
 			if(!entorno.equals("")){
@@ -640,7 +641,7 @@ public class PruebaDao {
 				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
 				q.setFilter(finalFilter);
-				entornoEntities =datastore.prepare(q).asList(fetchOptions);
+//				entornoEntities =datastore.prepare(q).asList(fetchOptions);
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
 			if(!estado.equals("")){
@@ -651,7 +652,7 @@ public class PruebaDao {
 				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
 				q.setFilter(finalFilter);
-				entornoEntities =datastore.prepare(q).asList(fetchOptions);
+//				estadoEntities =datastore.prepare(q).asList(fetchOptions);
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
 			if(!producto.equals("")){
@@ -662,7 +663,7 @@ public class PruebaDao {
 				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
 				q.setFilter(finalFilter);
-				productoEntities =datastore.prepare(q).asList(fetchOptions);
+//				productoEntities =datastore.prepare(q).asList(fetchOptions);
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
 
@@ -690,12 +691,14 @@ public class PruebaDao {
 				}
 			}
 			
-			pruebas = new ArrayList();
-			int pruebasasdf = pruebasFinal.size();
+			pruebas = new ArrayList<Prueba>();
+			int pruebasPages = pruebasFinal.size();
 			for (int i = page*10; i < (page*10)+10&&i<pruebasFinal.size();i++) {			
 				pruebas.add(buildPrueba(pruebasFinal.get(i)));
 			}
-			
+			Prueba pages = new Prueba();
+			pages.setDetalles(Integer.toString(pruebasPages));
+			pruebas.add(pages);
 		}
 		
 		
