@@ -8,6 +8,10 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.FetchOptions;
 import com.ste.beans.Cliente;
 import com.ste.beans.Implementacion;
 import com.ste.counters.Counter;
@@ -15,6 +19,9 @@ import com.ste.persistence.PMF;
 import com.ste.utils.Utils;
 
 public class ImplementacionDao {
+	
+	public static final int DATA_SIZE = 10;
+	
 	public static ImplementacionDao getInstance() {
 		return new ImplementacionDao();
 	}
@@ -34,7 +41,31 @@ public class ImplementacionDao {
 
 		return Implementacions;
 	}
-	@SuppressWarnings("unchecked")
+	
+	public List<Implementacion> getAllImplementacionesPagin(Integer page) {
+
+		
+		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		com.google.appengine.api.datastore.Query q = new com.google.appengine.api.datastore.Query("Implementacion");
+		
+		List<Entity> entities = null;
+		FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+		if(page != null) {
+			Integer offset = page * DATA_SIZE;
+			fetchOptions.limit(DATA_SIZE);	
+			fetchOptions.offset(offset);
+		}
+		entities = datastore.prepare(q).asList(fetchOptions);
+		
+		List<Implementacion> Implementacions = new ArrayList<Implementacion>();	;
+		
+		for (Entity result : entities){
+			Implementacions.add(buildImplementacion(result));
+		}
+
+		return Implementacions;
+	}
+	
 	public List<Implementacion> getImplementacionFor(String clienteName,String productoCanal,String servicio,String gestorGcs,String pais,String gestorPromocion,String gestorRelacion,String referenciaGlobal,boolean firmaBol,boolean normalizadorbol, String referenciaLocal,String estado,String detalle,String referenciaExterna,String asunto,String contratoAdeudos, String idAcreedor,String cuentaAbono) {
 
 		List<Implementacion> Implementacions = null;
@@ -330,4 +361,161 @@ public List<Implementacion> getImplementacionByClientId(long l) {
 	}
 	
 	
+	private Implementacion buildImplementacion(Entity entity) {
+		Implementacion implementacion = new Implementacion();
+		
+		implementacion.setKey(entity.getKey());
+		
+		String client_name = getString(entity, "client_name");
+		if(client_name != null) {
+			implementacion.setClient_name(client_name);
+		}
+		String detalle = getString(entity, "detalle");
+		if(detalle != null) {
+			implementacion.setDetalle(detalle);
+		}
+
+		
+		implementacion.setErased((boolean) entity.getProperty("erased"));
+		
+		implementacion.setFirma_contrato((boolean) entity.getProperty("firma_contrato"));
+		
+		implementacion.setNormalizador((boolean) entity.getProperty("normalizador"));
+		
+		String estado = getString(entity, "estado");
+		if(estado != null) {
+			implementacion.setEstado(estado);
+		}
+		Date fecha_alta = getDate(entity, "fecha_alta");
+		if(fecha_alta != null) {
+			implementacion.setFecha_alta(fecha_alta);
+		}
+		Date fecha_contratacion = getDate(entity, "fecha_contratacion");
+		if(fecha_contratacion != null) {
+			implementacion.setFech_contratacion(fecha_contratacion);
+		}
+		
+		Date fecha_subida = getDate(entity, "fecha_subida");
+		if(fecha_subida != null) {
+			implementacion.setFech_subida(fecha_subida);
+		}
+		
+		String str_fecha_alta = getString(entity, "str_fecha_alta");
+		if(str_fecha_alta != null) {
+			implementacion.setStr_fech_alta(str_fecha_alta);
+		}
+		
+		String str_fecha_contratacion = getString(entity, "str_fecha_contratacion");
+		if(str_fecha_contratacion != null) {
+			implementacion.setStr_fech_contratacion(str_fecha_contratacion);
+		}
+		
+		String str_fecha_subida = getString(entity, "str_fecha_subida");
+		if(str_fecha_subida != null) {
+			implementacion.setStr_fech_subida(str_fecha_subida);
+		}
+		
+		String acreedor = getString(entity, "acreedor_ref_ext");
+		if(acreedor != null) {
+			implementacion.setAcreedor_ref_ext(acreedor);
+		}
+		
+		String adeudos = getString(entity, "adeudos_ref_ext");
+		if(adeudos != null) {
+			implementacion.setAdeudos_ref_ext(adeudos);
+		}
+		
+		String asunto = getString(entity, "asunto_ref_ext");
+		if(asunto != null) {
+			implementacion.setAsunto_ref_ext(asunto);
+		}
+		
+
+		long cliente_id  = getLong(entity, "cliente_id");
+		if(cliente_id != 0l) {
+			implementacion.setCliente_id(cliente_id);
+		}
+		String cuenta  = getString(entity, "cuenta_ref_ext");
+		if(cuenta != null) {
+			implementacion.setCuenta_ref_ext(cuenta);
+		}
+		String estadoImp = getString(entity, "estado");
+		if(estadoImp != null) {
+			implementacion.setEstado(estadoImp);
+		}
+		String gestorGcs = getString(entity, "gestor_gcs");
+		if(gestorGcs != null) {
+			implementacion.setGestor_gcs(gestorGcs);
+		}
+		String gestorPromocion = getString(entity, "gestor_promocion");
+		if( gestorPromocion!= null) {
+			implementacion.setGestor_promocion(gestorPromocion);
+		}
+		
+		String gestorRelacion = getString(entity, "gestor_relacion");
+		if( gestorRelacion!= null) {
+			implementacion.setGestor_relacion(gestorRelacion);
+		}		
+		String id_implementacion = getString(entity,"id_implementacion");
+		if(id_implementacion!= null){
+			implementacion.setId_implementacion(id_implementacion);
+		}
+		String pais = getString(entity,"pais");
+		if(pais!= null){
+			implementacion.setPais(pais);
+		}
+		String producto  = getString(entity,"producto");
+		if(producto!= null){
+			implementacion.setProducto(producto);
+		}
+		String externa = getString(entity,"referencia_externa");
+		if(externa!= null){
+			implementacion.setReferencia_externa(externa);
+		}
+		String global = getString(entity,"referencia_global");
+		if(global!= null){
+			implementacion.setReferencia_global(global);
+		}
+		String local  = getString(entity,"referencia_local");
+		if(local!= null){
+			implementacion.setReferencia_local(local);
+		}
+		String servicioName = getString(entity,"servicio_name");
+		if(servicioName!= null){
+			implementacion.setServicio_name(servicioName);
+		}
+		long servicioId = getLong(entity,"servicio_id");
+		if(servicioId!=0l){
+			implementacion.setServicio_id(servicioId);;
+		}
+		return implementacion;
+	}
+	
+	
+	private String getString(Entity e, String field) {
+		try {
+			return (String) e.getProperty(field);
+		}
+		catch(Exception exp) {
+			return null;
+		}
+	}
+	
+	private Long getLong(Entity e, String field) {
+		try {
+			return (Long) e.getProperty(field);
+		}
+		catch(Exception exp) {
+			return null;
+		}
+	}
+	
+	private Date getDate(Entity e, String field) {
+		try {
+			return (Date) e.getProperty(field);
+		}
+		catch(Exception exp) {
+			return null;
+		}
+	}
 }

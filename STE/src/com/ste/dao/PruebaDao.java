@@ -588,6 +588,13 @@ public class PruebaDao {
 			for (Entity result : entities) {			
 				pruebas.add(buildPrueba(result));
 			}
+			Prueba pruebaPagin = new Prueba();
+			pruebaPagin.setDetalles("0");
+			pruebas.add(pruebaPagin);
+			
+			
+			
+			//pruebaPagin.setDetalles();
 		}else{
 //			List<Entity> clienteEntities = new ArrayList<Entity>();
 //			List<Entity> fechaEntities = new ArrayList<Entity>();

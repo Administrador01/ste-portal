@@ -283,7 +283,7 @@
 						<th style="width: 110px;">&nbsp;</th>
 					</tr>
 				</thead>
-				<tbody id="myTable" cellspacing="0">
+				<tbody id="myTable" cellspacing="0"  data-page="${page}" data-lastpage="${lastpage}" data-numpages="${numpages}">
 					<c:choose>
 						<c:when test="${empty implementaciones}">
 							<tr>
