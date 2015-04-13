@@ -12,6 +12,10 @@ import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.FetchOptions;
+import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
+import com.google.appengine.api.datastore.Query.Filter;
+import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.ste.beans.Cliente;
 import com.ste.beans.Implementacion;
 import com.ste.counters.Counter;
@@ -360,6 +364,81 @@ public List<Implementacion> getImplementacionByClientId(long l) {
 		}
 	}
 	
+	
+	public List<Implementacion> getImplementacionesByAllParam(String fecha, String cliente, String pais, String producto, String servicio, String normalizador, String estado, Integer page){
+		List<Implementacion> implementaciones= null;
+		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		com.google.appengine.api.datastore.Query q = new com.google.appengine.api.datastore.Query("Implementacion");
+		List<Filter> finalFilters = new ArrayList<>();
+		
+		int filters =0;
+		if(!fecha.equals("")){
+			filters++;
+		}
+		if(!cliente.equals("")){
+			filters++;
+		}
+		if(!pais.equals("")){
+			filters++;
+		}
+		if(!producto.equals("")){
+			filters++;
+		}
+		if(!estado.equals("")){
+			filters++;
+		}
+		
+		if(filters<=1){
+			if(!fecha.equals("")){
+				finalFilters.add(new FilterPredicate("str_fecha_alta",FilterOperator.GREATER_THAN_OR_EQUAL, fecha));
+				finalFilters.add(new FilterPredicate("str_fecha_alta",FilterOperator.LESS_THAN, fecha+"\ufffd"));
+			}
+			if(!cliente.equals("")){
+				finalFilters.add(new FilterPredicate("client_name",FilterOperator.GREATER_THAN_OR_EQUAL, cliente));
+				finalFilters.add(new FilterPredicate("client_name",FilterOperator.LESS_THAN, cliente+"\ufffd"));
+			}
+			if(!pais.equals("")){
+				finalFilters.add(new FilterPredicate("pais",FilterOperator.GREATER_THAN_OR_EQUAL, pais));
+				finalFilters.add(new FilterPredicate("pais",FilterOperator.LESS_THAN, pais+"\ufffd"));
+			}
+			if(!producto.equals("")){
+				finalFilters.add(new FilterPredicate("producto",FilterOperator.GREATER_THAN_OR_EQUAL, producto));
+				finalFilters.add(new FilterPredicate("producto",FilterOperator.LESS_THAN, producto+"\ufffd"));
+			}
+			if(!estado.equals("")){
+				finalFilters.add(new FilterPredicate("estado",FilterOperator.GREATER_THAN_OR_EQUAL, estado));
+				finalFilters.add(new FilterPredicate("estado",FilterOperator.LESS_THAN, estado+"\ufffd"));
+			}
+			if(!servicio.equals("")){
+				finalFilters.add(new FilterPredicate("servicio_name",FilterOperator.GREATER_THAN_OR_EQUAL, servicio));
+				finalFilters.add(new FilterPredicate("servicio_name",FilterOperator.LESS_THAN, servicio+"\ufffd"));
+			}
+			
+			Filter finalFilter = null;
+			if(finalFilters.size()>1) finalFilter = CompositeFilterOperator.and(finalFilters);
+			if(finalFilters.size()==1) finalFilter = finalFilters.get(0);
+			if(finalFilters.size()!=0)q.setFilter(finalFilter);
+			
+			List<Entity> entities = null;
+			FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+			if(page != null) {
+				Integer offset = page * DATA_SIZE;
+				fetchOptions.limit(DATA_SIZE);	
+				fetchOptions.offset(offset);
+			}
+			
+			entities = datastore.prepare(q).asList(fetchOptions);
+			implementaciones = new ArrayList<>();
+			for(Entity result:entities){
+				implementaciones.add(buildImplementacion(result));
+			}
+			Implementacion impPage = new Implementacion();
+			impPage.setDetalle("0");
+			implementaciones.add(impPage);
+		
+		}else{}
+		return implementaciones;
+	}
 	
 	private Implementacion buildImplementacion(Entity entity) {
 		Implementacion implementacion = new Implementacion();

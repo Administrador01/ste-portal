@@ -269,18 +269,20 @@
 						<th><span class="table-title">Servicio</span></th>
 						<th><span class="table-title">Normalizador</span></th>
 						<th><span class="table-title">Estado</span></th>
-						<th style="width: 110px;">&nbsp;</th>
+						<th style="width: 110px;"></th>
 					</tr>
 
 					<tr>
-						<th class="search-th"><input class="search col0 search_anywhere"></th>
-						<th class="search-th"><input class="search col1 search_anywhere"></th>
-						<th class="search-th"><input class="search col2 search_anywhere"></th>
-						<th class="search-th"><input class="search col3 search_anywhere"></th>
-						<th class="search-th"><input class="search col4 search_anywhere"></th>
-						<th class="search-th"><input class="search col5 search_anywhere"></th>
-						<th class="search-th"><input class="search col6 search_anywhere"></th>
-						<th style="width: 110px;">&nbsp;</th>
+					<form if='test-header-filter' action="">
+						<th class="search-th"><input name='fecha'></th>
+						<th class="search-th"><input name='cliente'></th>
+						<th class="search-th"><input name='pais'></th>
+						<th class="search-th"><input name='producto'></th>
+						<th class="search-th"><input name='servicio'></th>
+						<th class="search-th"><input name='normalizador'></th>
+						<th class="search-th"><input name='estado'></th>
+						<th style="width: 110px;"><button type='submit'>  FILTRAR  </button></th>
+					</form>
 					</tr>
 				</thead>
 				<tbody id="myTable" cellspacing="0"  data-page="${page}" data-lastpage="${lastpage}" data-numpages="${numpages}">
