@@ -17,12 +17,16 @@ import com.ste.beans.Implementacion;
 import com.ste.beans.Pais;
 import com.ste.beans.ProductoCanal;
 import com.ste.beans.Servicio;
+import com.ste.counters.Counter;
 import com.ste.dao.ClienteDao;
+import com.ste.dao.CounterDao;
 import com.ste.dao.EstadoImplementacionDao;
 import com.ste.dao.ImplementacionDao;
 import com.ste.dao.PaisDao;
 import com.ste.dao.ProductoCanalDao;
+import com.ste.dao.PruebaDao;
 import com.ste.dao.ServicioDao;
+import com.ste.utils.Utils;
 
 
 public class ImplementacionAction extends Action{
@@ -42,13 +46,36 @@ public class ImplementacionAction extends Action{
 		List<Servicio> servicios = sDao.getAllServicios();
 
 		req.setAttribute("servicios", servicios);
-		
+		/*
 		ImplementacionDao impDao = ImplementacionDao.getInstance();
 		List<Implementacion> implementaciones = new ArrayList<Implementacion>();
 		implementaciones.addAll(impDao.getAllImplementaciones());
 		implementaciones.addAll(impDao.getAllDelImplementaciones());
 		req.setAttribute("implementaciones",implementaciones);
-
+		 */
+		
+		String fechaFilter = req.getParameter("fecha-filter");
+		String page = req.getParameter("page");
+		int pageint = Utils.stringToInt(page);	
+		
+		ImplementacionDao impDao = ImplementacionDao.getInstance();
+		List<Implementacion> implementaciones = new ArrayList<Implementacion>();
+				
+		if(fechaFilter!=null){
+			
+		}else{
+			implementaciones = impDao.getAllImplementacionesPagin(pageint);
+			CounterDao counterDao = CounterDao.getInstance();
+			Counter count = counterDao.getCounterByName("implementacion");
+			int numpages = (count.getValue()/PruebaDao.DATA_SIZE) + 1;			
+			req.setAttribute("numpages", numpages);
+		}
+		boolean lastpage = (implementaciones.size() < ImplementacionDao.DATA_SIZE) ? true : false;
+		req.setAttribute("lastpage", lastpage);
+		req.setAttribute("page", pageint);
+		
+		req.setAttribute("implementaciones",implementaciones);
+		
 		PaisDao paisDao = PaisDao.getInstance();
 		List<Pais> paises = paisDao.getAllPaises();
 		
