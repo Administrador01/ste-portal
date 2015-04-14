@@ -55,13 +55,7 @@ public class ImplementacionAction extends Action{
 		 */
 		
 		String fechaFilter = req.getParameter("fecha");
-		String clienteFilter = req.getParameter("cliente");
-		String paisFilter = req.getParameter("pais");
-		
-		String productoFilter = req.getParameter("producto");
-		String normalizadorFilter = req.getParameter("normalizador");
-		String servicioFilter = req.getParameter("servicio");
-		String estadoFilter = req.getParameter("estado");
+
 				
 		String page = req.getParameter("page");
 		int pageint = Utils.stringToInt(page);	
@@ -70,6 +64,13 @@ public class ImplementacionAction extends Action{
 		List<Implementacion> implementaciones = new ArrayList<Implementacion>();
 				
 		if(fechaFilter!=null){
+			String clienteFilter = req.getParameter("cliente");
+			String paisFilter = req.getParameter("pais");
+			
+			String productoFilter = req.getParameter("producto");
+			String normalizadorFilter = req.getParameter("normalizador");
+			String servicioFilter = req.getParameter("servicio");
+			String estadoFilter = req.getParameter("estado");
 			implementaciones = impDao.getImplementacionesByAllParam(fechaFilter, clienteFilter, paisFilter, productoFilter, servicioFilter, normalizadorFilter, estadoFilter, pageint);
 			int numpages = (Integer.parseInt(implementaciones.get(implementaciones.size()-1).getDetalle())/PruebaDao.DATA_SIZE)+1;
 			implementaciones.remove(implementaciones.size()-1);

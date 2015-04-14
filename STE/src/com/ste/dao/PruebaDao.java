@@ -466,7 +466,7 @@ public class PruebaDao {
 		return pruebas;
 	}
 		
-	@SuppressWarnings("unchecked")
+	
 	public List<Prueba> getPruebasPaged(Integer page) {
 		List<Prueba> pruebas;
 		
@@ -501,7 +501,7 @@ public class PruebaDao {
 		//return pruebas;		
 	}
 	
-	@SuppressWarnings("unchecked")
+	
 	public List<Prueba> getPruebasByAllParam(String fecha, String cliente, String servicio , String estado, String producto, String entorno, String desde, String hasta, String premium, Integer page) {
 		List<Prueba> pruebas = null;
 		

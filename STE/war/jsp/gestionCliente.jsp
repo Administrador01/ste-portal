@@ -184,15 +184,17 @@
 						<th style="width: 110px;">&nbsp;</th>
 					</tr>
 					<tr>
-						<th class="search-th"><input class="search col0 search_anywhere"></th>
-						<th class="search-th"><input class="search col1 search_anywhere"></th>
-						<th class="search-th"><input class="search col2 search_anywhere"></th>
-						<th class="search-th"><input class="search col3 search_anywhere"></th>
-						<th class="search-th"><input class="search col4 search_anywhere"></th>
-						<th style="width: 110px;">&nbsp;</th>
+						<form>
+						<th class="search-th"><input name='identificador' value='${identificador}'></th>
+						<th class="search-th"><input name='nombre' value='${nombre}'></th>
+						<th class="search-th"><input name='fecha' value='${fecha}'></th>
+						<th class="search-th"><input name='segmento' value='${sergmento}'></th>
+						<th class="search-th"><input name='premium' value='${premium}'></th>
+						<th style="width: 110px;"><button type='submit'>  FILTRAR  </button></th>
+						</form>
 					</tr>
 				</thead>
-				<tbody id="myTable" cellspacing="0">
+				<tbody id="myTable" cellspacing="0" data-page="${page}" data-lastpage="${lastpage}" data-numpages="${numpages}">
 					<c:choose>
 						<c:when test="${empty clientes}">
 							<tr>
