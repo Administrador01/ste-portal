@@ -2,12 +2,21 @@ package com.ste.dao;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.FetchOptions;
+import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
+import com.google.appengine.api.datastore.Query.Filter;
+import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.ste.beans.Cliente;
 import com.ste.counters.Counter;
 import com.ste.persistence.PMF;
@@ -18,6 +27,8 @@ public class ClienteDao {
 	public static ClienteDao getInstance() {
 		return new ClienteDao();
 	}
+	
+	public static final int DATA_SIZE = 10;
 	
 	@SuppressWarnings("unchecked")
 	public List<Cliente> getAllClients() {
@@ -75,8 +86,7 @@ public class ClienteDao {
 
 		List<Cliente> clientes;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		
+				
 		Query q = pm.newQuery("select from " + Cliente.class.getName() +" where erased == false");		
 		q.setOrdering("nombre asc");
 		clientes = (List<Cliente>) q.execute();
@@ -203,5 +213,165 @@ public class ClienteDao {
 			}
 		}
 		return clientesCoinc;
+	}
+	
+	public List<Cliente> getClienteByAllParam(String identificador, String nombre, String fecha, String segmento, String premium, Integer page){
+		
+		
+		List<Cliente> clientes=null;
+		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		com.google.appengine.api.datastore.Query q = new com.google.appengine.api.datastore.Query("Cliente");
+
+		List<Filter> finalFilters = new ArrayList<>();
+		
+		int filters = 0;
+		if(!identificador.equals("")){
+			filters++;
+		}
+		if(!nombre.equals("")){
+			filters++;
+		}
+		if(!fecha.equals("")){
+			filters++;
+		}
+		if(!segmento.equals("")){
+			filters++;
+		}
+		if(!premium.equals("")){
+			filters++;
+		}
+		if(filters<=1){
+			if(!identificador.equals("")){
+				finalFilters.add(new FilterPredicate("id_cliente", FilterOperator.GREATER_THAN_OR_EQUAL, identificador));
+				finalFilters.add(new FilterPredicate("id_cliente", FilterOperator.LESS_THAN, identificador+"\ufffd"));
+			}
+			if(!nombre.equals("")){
+				finalFilters.add(new FilterPredicate("nombre", FilterOperator.GREATER_THAN_OR_EQUAL, nombre));
+				finalFilters.add(new FilterPredicate("nombre", FilterOperator.LESS_THAN, nombre+"\ufffd"));
+			}
+			if(!fecha.equals("")){
+				finalFilters.add(new FilterPredicate("str_fecha_alta", FilterOperator.GREATER_THAN_OR_EQUAL, fecha));
+				finalFilters.add(new FilterPredicate("str_fecha_alta", FilterOperator.LESS_THAN, fecha+"\ufffd"));
+			}
+			if(!segmento.equals("")){
+				finalFilters.add(new FilterPredicate("tipo_cliente", FilterOperator.GREATER_THAN_OR_EQUAL, segmento));
+				finalFilters.add(new FilterPredicate("tipo_cliente", FilterOperator.LESS_THAN, segmento+"\ufffd"));
+			}
+			if(!premium.equals("")){
+				finalFilters.add(new FilterPredicate("premium", FilterOperator.GREATER_THAN_OR_EQUAL, premium));
+				finalFilters.add(new FilterPredicate("premium", FilterOperator.LESS_THAN, premium+"\ufffd"));
+			}
+			
+			Filter finalFilter = null;
+			if(finalFilters.size()>1) finalFilter = CompositeFilterOperator.and(finalFilters);
+			if(finalFilters.size()==1) finalFilter = finalFilters.get(0);
+			if(finalFilters.size()!=0)q.setFilter(finalFilter);
+			
+			
+			List<Entity> entities = null;
+			FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+			if(page != null) {
+				Integer offset = page * DATA_SIZE;
+				fetchOptions.limit(DATA_SIZE);	
+				fetchOptions.offset(offset);
+			}
+			entities = datastore.prepare(q).asList(fetchOptions);
+			
+			clientes = new ArrayList<>();
+			for (Entity result : entities) {
+				clientes.add(buildCliente(result));
+			}
+			Cliente clientePagin = new Cliente();
+			clientePagin.setNombre("0");
+			clientes.add(clientePagin);
+			
+		}else{
+			
+			
+			
+		}
+		
+		
+		
+		return clientes;
+	}
+	
+	public List<Cliente> getClientePaged(Integer page){
+		List<Cliente> clientes;
+		
+		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		com.google.appengine.api.datastore.Query q = new com.google.appengine.api.datastore.Query("Cliente");
+		
+		List<Entity> entities = null;
+		FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+		if(page != null) {
+			Integer offset = page * DATA_SIZE;
+			fetchOptions.limit(DATA_SIZE);	
+			fetchOptions.offset(offset);
+		}
+		entities = datastore.prepare(q).asList(fetchOptions);
+				
+		clientes = new ArrayList<>();
+		for(Entity result:entities){
+			clientes.add(buildCliente(result));
+		}
+		
+		return clientes;
+	}
+	
+	private Cliente buildCliente(Entity entity){
+		Cliente cliente = new Cliente();
+		String client_name = getString(entity, "nombre");
+		if(client_name != null) {
+			cliente.setNombre(client_name);
+		}
+		
+		String client_id = getString(entity, "id_cliente");
+		if(client_id != null) {
+			cliente.setId_cliente(client_id);
+		}
+		
+		cliente.setErased((boolean) entity.getProperty("erased"));
+		
+		Date fecha_alta = getDate(entity, "fecha_alta");
+		if(fecha_alta != null) {
+			cliente.setFecha_alta(fecha_alta);
+		}
+		
+		String premium = getString(entity, "premium");
+		if(premium != null) {
+			cliente.setPremium(premium);
+		}
+		
+		String tipo_cliente = getString(entity, "tipo_cliente");
+		if(tipo_cliente != null) {
+			cliente.setTipo_cliente(tipo_cliente);
+		}
+		
+		String str_fecha_alta = getString(entity, "str_fecha_alta");
+		if(str_fecha_alta != null) {
+			cliente.setStr_fecha_alta(str_fecha_alta);
+		}
+		return cliente;
+	}
+	
+	
+	private String getString(Entity e, String field) {
+		try {
+			return (String) e.getProperty(field);
+		}
+		catch(Exception exp) {
+			return null;
+		}
+	}
+	
+	
+	private Date getDate(Entity e, String field) {
+		try {
+			return (Date) e.getProperty(field);
+		}
+		catch(Exception exp) {
+			return null;
+		}
 	}
 }
