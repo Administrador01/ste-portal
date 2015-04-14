@@ -387,6 +387,9 @@ public List<Implementacion> getImplementacionByClientId(long l) {
 		if(!estado.equals("")){
 			filters++;
 		}
+		if(!servicio.equals("")){
+			filters++;
+		}
 		
 		if(filters<=1){
 			if(!fecha.equals("")){
@@ -436,7 +439,104 @@ public List<Implementacion> getImplementacionByClientId(long l) {
 			impPage.setDetalle("0");
 			implementaciones.add(impPage);
 		
-		}else{}
+		}else{
+			
+			List<List<Entity>> Entities = new ArrayList<List<Entity>>();
+			
+			if(!fecha.equals("")){
+				q = new com.google.appengine.api.datastore.Query("Prueba");
+				finalFilters = new ArrayList<>();
+				finalFilters.add(new FilterPredicate("str_fecha_alta",FilterOperator.GREATER_THAN_OR_EQUAL, fecha));
+				finalFilters.add(new FilterPredicate("str_fecha_alta",FilterOperator.LESS_THAN, fecha+"\ufffd"));
+				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
+				q.setFilter(finalFilter);
+				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+				Entities.add(datastore.prepare(q).asList(fetchOptions));
+			}
+			if(!cliente.equals("")){
+				q = new com.google.appengine.api.datastore.Query("Implementacion");
+				finalFilters = new ArrayList<>();
+				finalFilters.add(new FilterPredicate("client_name",FilterOperator.GREATER_THAN_OR_EQUAL, cliente));
+				finalFilters.add(new FilterPredicate("client_name",FilterOperator.LESS_THAN, cliente+"\ufffd"));
+				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
+				q.setFilter(finalFilter);
+				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+				Entities.add(datastore.prepare(q).asList(fetchOptions));
+			}
+			if(!pais.equals("")){
+				q = new com.google.appengine.api.datastore.Query("Implementacion");
+				finalFilters = new ArrayList<>();
+				finalFilters.add(new FilterPredicate("pais",FilterOperator.GREATER_THAN_OR_EQUAL, pais));
+				finalFilters.add(new FilterPredicate("pais",FilterOperator.LESS_THAN, pais+"\ufffd"));
+				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
+				q.setFilter(finalFilter);
+				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+				Entities.add(datastore.prepare(q).asList(fetchOptions));
+			}
+			if(!producto.equals("")){
+				q = new com.google.appengine.api.datastore.Query("Implementacion");
+				finalFilters = new ArrayList<>();
+				finalFilters.add(new FilterPredicate("producto",FilterOperator.GREATER_THAN_OR_EQUAL, producto));
+				finalFilters.add(new FilterPredicate("producto",FilterOperator.LESS_THAN, producto+"\ufffd"));
+				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
+				q.setFilter(finalFilter);
+				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+				Entities.add(datastore.prepare(q).asList(fetchOptions));
+			}
+			if(!estado.equals("")){
+				q = new com.google.appengine.api.datastore.Query("Implementacion");
+				finalFilters = new ArrayList<>();
+				finalFilters.add(new FilterPredicate("estado",FilterOperator.GREATER_THAN_OR_EQUAL, estado));
+				finalFilters.add(new FilterPredicate("estado",FilterOperator.LESS_THAN, estado+"\ufffd"));
+				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
+				q.setFilter(finalFilter);
+				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+				Entities.add(datastore.prepare(q).asList(fetchOptions));
+			}
+			if(!servicio.equals("")){
+				q = new com.google.appengine.api.datastore.Query("Implementacion");
+				finalFilters = new ArrayList<>();
+				finalFilters.add(new FilterPredicate("servicio_name",FilterOperator.GREATER_THAN_OR_EQUAL, servicio));
+				finalFilters.add(new FilterPredicate("servicio_name",FilterOperator.LESS_THAN, servicio+"\ufffd"));
+				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
+				q.setFilter(finalFilter);
+				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+				Entities.add(datastore.prepare(q).asList(fetchOptions));
+			}
+			
+			List<Entity> implementacionesFinal = new ArrayList<>();
+			int lowRowsIndex = 0;
+			int lowRowsNumber = Entities.get(0).size();
+			
+			for(int i=1;i<Entities.size();i++){
+				if(lowRowsNumber>Entities.get(i).size()){
+					lowRowsIndex=i;
+					lowRowsNumber=Entities.get(i).size();
+				}
+			}
+			
+			implementacionesFinal = Entities.get(lowRowsIndex);
+			for(int i=0;i<Entities.size();i++){
+				if(i!=lowRowsIndex){
+					int j = 0;
+					for (Entity result : implementacionesFinal) {
+						if(!Entities.get(i).contains(result)){
+							implementacionesFinal.remove(j);
+						}
+						j++;
+					}
+				}
+			}
+			
+			implementaciones = new ArrayList<Implementacion>();
+			int implementacionesPages  = implementacionesFinal.size();
+			for(int i = page*10; i< (page*10)+10&&i<implementacionesFinal.size();i++){
+				implementaciones.add(buildImplementacion(implementacionesFinal.get(i)));
+			}
+			Implementacion pages = new Implementacion();
+			pages.setDetalle(Integer.toString(implementacionesPages));
+			implementaciones.add(pages);
+		}
 		return implementaciones;
 	}
 	
