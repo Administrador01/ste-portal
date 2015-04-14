@@ -274,13 +274,13 @@
 
 					<tr>
 					<form if='test-header-filter' action="">
-						<th class="search-th"><input name='fecha'></th>
-						<th class="search-th"><input name='cliente'></th>
-						<th class="search-th"><input name='pais'></th>
-						<th class="search-th"><input name='producto'></th>
-						<th class="search-th"><input name='servicio'></th>
-						<th class="search-th"><input name='normalizador'></th>
-						<th class="search-th"><input name='estado'></th>
+						<th class="search-th"><input name='fecha' value='${fecha}'></th>
+						<th class="search-th"><input name='cliente' value='${cliente}'></th>
+						<th class="search-th"><input name='pais' value='${pais}'></th>
+						<th class="search-th"><input name='producto' value='${producto}'></th>
+						<th class="search-th"><input name='servicio' value='${servicio}'></th>
+						<th class="search-th"><input name='normalizador' value='${normalizador}'></th>
+						<th class="search-th"><input name='estado' value='${estado}'></th>
 						<th style="width: 110px;"><button type='submit'>  FILTRAR  </button></th>
 					</form>
 					</tr>

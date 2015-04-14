@@ -74,12 +74,21 @@ public class ImplementacionAction extends Action{
 			int numpages = (Integer.parseInt(implementaciones.get(implementaciones.size()-1).getDetalle())/PruebaDao.DATA_SIZE)+1;
 			implementaciones.remove(implementaciones.size()-1);
 			req.setAttribute("numpages", numpages);
+			req.setAttribute("fecha", fechaFilter);
+			req.setAttribute("cliente", clienteFilter);
+			req.setAttribute("pais", paisFilter);
+			req.setAttribute("producto", productoFilter);
+			req.setAttribute("normalizador", normalizadorFilter);
+			req.setAttribute("servicio", servicioFilter);
+			req.setAttribute("estado", estadoFilter);
 		}else{
 			implementaciones = impDao.getAllImplementacionesPagin(pageint);
 			CounterDao counterDao = CounterDao.getInstance();
 			Counter count = counterDao.getCounterByName("implementacion");
 			int numpages = (count.getValue()/PruebaDao.DATA_SIZE) + 1;			
 			req.setAttribute("numpages", numpages);
+
+			
 		}
 		boolean lastpage = (implementaciones.size() < ImplementacionDao.DATA_SIZE) ? true : false;
 		req.setAttribute("lastpage", lastpage);
