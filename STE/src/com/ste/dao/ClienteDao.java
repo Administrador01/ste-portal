@@ -282,12 +282,96 @@ public class ClienteDao {
 				clientes.add(buildCliente(result));
 			}
 			Cliente clientePagin = new Cliente();
-			clientePagin.setNombre("0");
+			clientePagin.setId_cliente("0");
 			clientes.add(clientePagin);
 			
 		}else{
+			List<List<Entity>> Entities = new ArrayList<List<Entity>>();
+			
+			if(!identificador.equals("")){
+				q = new com.google.appengine.api.datastore.Query("Cliente");
+				finalFilters = new ArrayList<>();
+				finalFilters.add(new FilterPredicate("id_cliente", FilterOperator.GREATER_THAN_OR_EQUAL, identificador));
+				finalFilters.add(new FilterPredicate("id_cliente", FilterOperator.LESS_THAN, identificador+"\ufffd"));
+				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
+				q.setFilter(finalFilter);
+				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+				Entities.add(datastore.prepare(q).asList(fetchOptions));
+			}
+			if(!nombre.equals("")){
+				q = new com.google.appengine.api.datastore.Query("Cliente");
+				finalFilters = new ArrayList<>();
+				finalFilters.add(new FilterPredicate("nombre", FilterOperator.GREATER_THAN_OR_EQUAL, nombre));
+				finalFilters.add(new FilterPredicate("nombre", FilterOperator.LESS_THAN, nombre+"\ufffd"));
+				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
+				q.setFilter(finalFilter);
+				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+				Entities.add(datastore.prepare(q).asList(fetchOptions));
+			}
+			if(!fecha.equals("")){
+				q = new com.google.appengine.api.datastore.Query("Cliente");
+				finalFilters = new ArrayList<>();
+				finalFilters.add(new FilterPredicate("str_fecha_alta", FilterOperator.GREATER_THAN_OR_EQUAL, fecha));
+				finalFilters.add(new FilterPredicate("str_fecha_alta", FilterOperator.LESS_THAN, fecha+"\ufffd"));
+				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
+				q.setFilter(finalFilter);
+				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+				Entities.add(datastore.prepare(q).asList(fetchOptions));
+			}
+			if(!segmento.equals("")){
+				q = new com.google.appengine.api.datastore.Query("Cliente");
+				finalFilters = new ArrayList<>();
+				finalFilters.add(new FilterPredicate("tipo_cliente", FilterOperator.GREATER_THAN_OR_EQUAL, segmento));
+				finalFilters.add(new FilterPredicate("tipo_cliente", FilterOperator.LESS_THAN, segmento+"\ufffd"));
+				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
+				q.setFilter(finalFilter);
+				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+				Entities.add(datastore.prepare(q).asList(fetchOptions));
+			}
+			if(!premium.equals("")){
+				q = new com.google.appengine.api.datastore.Query("Cliente");
+				finalFilters = new ArrayList<>();
+				finalFilters.add(new FilterPredicate("premium", FilterOperator.GREATER_THAN_OR_EQUAL, premium));
+				finalFilters.add(new FilterPredicate("premium", FilterOperator.LESS_THAN, premium+"\ufffd"));
+				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
+				q.setFilter(finalFilter);
+				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+				Entities.add(datastore.prepare(q).asList(fetchOptions));
+			}
 			
 			
+			int lowRowsIndex = 0;
+			int lowRowsNumber = Entities.get(0).size();
+			
+			for(int i=1;i<Entities.size();i++){
+				if(lowRowsNumber>Entities.get(i).size()){
+					lowRowsIndex=i;
+					lowRowsNumber=Entities.get(i).size();
+				}
+			}
+			
+			List<Entity> clientesFinal = new ArrayList<Entity>();
+			clientesFinal = Entities.get(lowRowsIndex);
+			for(int i=0;i<Entities.size();i++){
+				if(i!=lowRowsIndex){
+					int j = 0;
+					for (Entity result : clientesFinal) {
+						if(!Entities.get(i).contains(result)){
+							clientesFinal.remove(j);
+						}
+						j++;
+					}
+				}
+			}
+			
+			clientes = new ArrayList<Cliente>();
+			int clientesPages = clientesFinal.size();
+			for (int i = page*10; i < (page*10)+10&&i<clientesFinal.size();i++) {
+				clientes.add(buildCliente(clientesFinal.get(i)));
+			}
+			Cliente pages= new Cliente();
+			pages.setId_cliente(Integer.toString(clientesPages));
+			clientes.add(pages);
 			
 		}
 		
@@ -321,6 +405,9 @@ public class ClienteDao {
 	
 	private Cliente buildCliente(Entity entity){
 		Cliente cliente = new Cliente();
+		
+		cliente.setKey(entity.getKey());
+		
 		String client_name = getString(entity, "nombre");
 		if(client_name != null) {
 			cliente.setNombre(client_name);

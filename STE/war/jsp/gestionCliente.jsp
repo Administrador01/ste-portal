@@ -188,7 +188,7 @@
 						<th class="search-th"><input name='identificador' value='${identificador}'></th>
 						<th class="search-th"><input name='nombre' value='${nombre}'></th>
 						<th class="search-th"><input name='fecha' value='${fecha}'></th>
-						<th class="search-th"><input name='segmento' value='${sergmento}'></th>
+						<th class="search-th"><input name='segmento' value='${segmento}'></th>
 						<th class="search-th"><input name='premium' value='${premium}'></th>
 						<th style="width: 110px;"><button type='submit'>  FILTRAR  </button></th>
 						</form>
@@ -211,7 +211,7 @@
 									<td><span>${c.tipo_cliente}</span></td>
 									<td><span>${c.premium}</span></td>
 									
-									<td><img class="vs" src="../img/vs.png"><a class="lapiz" name="${c.key.id}" href="../clienteModal.do?id=${c.key.id}"	id="lapiz${c.key.id}" data-toggle="modal" data-target="#edit-cliente" ></a>
+									<td><img class="vs" src="../img/vs.png"><a class="lapiz" name="${c.key.id}" href="../clienteModal.do?id=${c.key.id}" id="lapiz${c.key.id}" data-toggle="modal" data-target="#edit-cliente" ></a>
 									<a class="papelera" name="${c.key.id}" data-toggle="modal"	data-target="#confirm-delete" id="papelera${c.key.id}"></a></td>
 								</tr>
 							</c:forEach>
