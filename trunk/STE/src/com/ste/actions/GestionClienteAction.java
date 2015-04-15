@@ -54,7 +54,7 @@ public class GestionClienteAction extends Action{
 				String segmentoFilter = req.getParameter("segmento");
 				String premiumFilter = req.getParameter("premium");
 				clientes = cDao.getClienteByAllParam(identificadorFilter, nombreFilter, fechaFilter, segmentoFilter, premiumFilter, pageint);
-				int numpages = (Integer.parseInt(clientes.get(clientes.size()-1).getNombre()));
+				int numpages = (Integer.parseInt(clientes.get(clientes.size()-1).getId_cliente()));
 				clientes.remove(clientes.size()-1);
 				req.setAttribute("numpages", numpages);
 				req.setAttribute("identificador", identificadorFilter);
@@ -64,7 +64,7 @@ public class GestionClienteAction extends Action{
 				req.setAttribute("premium", premiumFilter);
 				
 				boolean lastpage = (numpages < ClienteDao.DATA_SIZE) ? true : false;
-				
+				if(identificadorFilter.equals("")&& nombreFilter.equals("")&& fechaFilter.equals("")&& segmentoFilter.equals("")&& premiumFilter.equals(""))lastpage=false;
 				req.setAttribute("lastpage", lastpage);
 			}
 		}else{
@@ -75,7 +75,7 @@ public class GestionClienteAction extends Action{
 		
 		
 		req.setAttribute("clientes", clientes);
-		
+		req.setAttribute("page", page);
 		
 		return  mapping.findForward("ok");
 	}

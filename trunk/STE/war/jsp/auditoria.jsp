@@ -31,7 +31,7 @@
            
           </tr>          
         </thead>
-        <tbody id="myTable" cellspacing="0">
+        <tbody id="myTable" cellspacing="0" data-old="true">
           <c:choose>
             <c:when test="${empty logs}">
               <tr>

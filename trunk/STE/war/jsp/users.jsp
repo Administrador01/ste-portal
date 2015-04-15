@@ -152,7 +152,7 @@
 						<th style="width: 110px;">&nbsp;</th>
 					</tr>
 				</thead>
-				<tbody id="myTable" cellspacing="0">
+				<tbody id="myTable" cellspacing="0" data-old="true">
 					<c:choose>
 						<c:when test="${empty userList}">
 							<tr>
