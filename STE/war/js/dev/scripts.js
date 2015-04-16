@@ -1247,8 +1247,10 @@ $(function() {
 
 function filtering(){
 	var $form = $("#test-header-filter");
+	
 	var postData =  $form.serialize();
 	postData = postData + "&desde-filter="+$('#fecha-desde-filtro').val()+ "&hasta-filter="+$('#fecha-hasta-filtro').val()+ "&premium="+$('#tipo_cliente').val();
+	window.location = "/pruebas.do?"+postData;
 }
 function ajaxImplementaciones(cliente,target){
 	target.empty();
@@ -1311,7 +1313,9 @@ $(function(){
 			}
 		});
 	});
-	+
+	
+	
+	
 
 	$('#pruebas').on('change','#cliente-pruebas', function (){
 		$('#input-premium-prueba').val($("#cliente-pruebas").find(":selected").data('premium'));
@@ -1325,6 +1329,8 @@ $(function(){
 		var target = $('#imp-pruebas-modal');
 		ajaxImplementaciones(cliente,target);
 	});
+	
+	/*
 	$('#pruebas').on('click','#test_filter_button', function (){
 
 		var val_client_form = $('#cliente-filtro').val();
@@ -1408,10 +1414,12 @@ $(function(){
 		});
 
 	})
-	
+	*/
 	
 });
 
+
+/*
 function compare_dates(fecha, fecha2)  
 {  
   var xMonth=fecha.substring(3, 5);  
@@ -1449,7 +1457,7 @@ function compare_dates(fecha, fecha2)
     else  
       return(false);  
   }  
-};;var normalize = (function() {
+};*/;var normalize = (function() {
 	var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
 	  to   = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc",
 	  mapping = {};
