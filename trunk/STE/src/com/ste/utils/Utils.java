@@ -19,6 +19,7 @@ import java.util.List;
 
 
 
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.ste.beans.Log;
@@ -49,6 +50,27 @@ public class Utils {
 			lDao.createLog(log);
 		}
 	
+	}
+	
+	public static boolean isThisDateValid(String dateToValidate, String dateFormat){
+		 
+		if(dateToValidate == null || "".equals(dateToValidate)){
+			return false;
+		}
+ 
+		SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+		sdf.setLenient(false);
+ 
+		try {
+			//if not valid, it will throw ParseException
+			Date date = sdf.parse(dateToValidate);
+			//System.out.println(date);
+ 
+		} catch (ParseException e) {
+			return false;
+		}
+ 
+		return true;
 	}
 	/*Metodo que devuelve la url completa de una peticion web incluyendo datos get y post*/
 	public static String getAllUrl (HttpServletRequest req){

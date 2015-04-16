@@ -342,7 +342,7 @@
 
 					</div>
 				
-				<button id="test_filter_button" type="button">Buscar</button>
+				<button id="test_filter_button" onclick="filtering();" type="button">Buscar</button>
 			
 			</form>
 
@@ -350,8 +350,8 @@
 		<div class="tipo-cliente-field">
 			<span class="lbl">Tipo cliente:</span>
 			<select id="tipo_cliente" class="selectpicker selected" name="tipo_servicio" >
-				<option value="Todos" selected>Todos</option>	
-				<option value="Premium">Premium</option>	
+				<option value="Todos" ${premiumFilter == "Todos" ? 'selected' : ''}>Todos</option>	
+				<option value="Premium" ${premiumFilter == "Premium" ? 'selected' : ''}>Premium</option>	
 			</select>
 		</div>
 		<div class="main-table usersTable">
@@ -368,7 +368,7 @@
 					</tr>
 
 					<tr>
-						<form if='test-header-filter' action="">
+						<form id='test-header-filter' action="">
 						<th class="search-th"><input name="fecha-filter" value="${fechaFilter}"></th>
 						<th class="search-th"><input name="cliente-filter" value="${clienteFilter}"></th>
 						<th class="search-th"><input name="servicio-filter" value='${servicioFilter}'></th>
@@ -376,7 +376,7 @@
 						<th class="search-th"><input name="producto-filter" value="${productoFilter}"></th>
 						<th class="search-th"><input name="entorno-filter" value="${entornoFilter}"></th>
 						<input name="idCli" class="hidden" value="${idCli}">
-						<th style="width: 110px;"><button type='submit'>  FILTRAR  </button></th>
+						<th style="width: 110px;"><button type='button' onclick="filtering();">  FILTRAR  </button></th>
 						</form>
 					</tr>
 				</thead>

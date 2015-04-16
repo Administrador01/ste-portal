@@ -444,7 +444,7 @@ public List<Implementacion> getImplementacionByClientId(long l) {
 			List<List<Entity>> Entities = new ArrayList<List<Entity>>();
 			
 			if(!fecha.equals("")){
-				q = new com.google.appengine.api.datastore.Query("Prueba");
+				q = new com.google.appengine.api.datastore.Query("Implementacion");
 				finalFilters = new ArrayList<>();
 				finalFilters.add(new FilterPredicate("str_fecha_alta",FilterOperator.GREATER_THAN_OR_EQUAL, fecha));
 				finalFilters.add(new FilterPredicate("str_fecha_alta",FilterOperator.LESS_THAN, fecha+"\ufffd"));
@@ -516,17 +516,21 @@ public List<Implementacion> getImplementacionByClientId(long l) {
 			}
 			
 			implementacionesFinal = Entities.get(lowRowsIndex);
+			List<Entity> indexDel = new ArrayList<Entity>();
 			for(int i=0;i<Entities.size();i++){
 				if(i!=lowRowsIndex){
 					int j = 0;
 					for (Entity result : implementacionesFinal) {
 						if(!Entities.get(i).contains(result)){
-							implementacionesFinal.remove(j);
+							Entity auxEnty = implementacionesFinal.get(j);
+							if(!indexDel.contains(auxEnty))indexDel.add(auxEnty);
 						}
 						j++;
 					}
 				}
 			}
+			
+			implementacionesFinal.remove(indexDel);
 			
 			implementaciones = new ArrayList<Implementacion>();
 			int implementacionesPages  = implementacionesFinal.size();

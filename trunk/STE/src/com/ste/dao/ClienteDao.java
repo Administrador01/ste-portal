@@ -351,18 +351,22 @@ public class ClienteDao {
 			}
 			
 			List<Entity> clientesFinal = new ArrayList<Entity>();
+			List<Entity> indexDel = new ArrayList<Entity>();
 			clientesFinal = Entities.get(lowRowsIndex);
 			for(int i=0;i<Entities.size();i++){
 				if(i!=lowRowsIndex){
 					int j = 0;
 					for (Entity result : clientesFinal) {
 						if(!Entities.get(i).contains(result)){
-							clientesFinal.remove(j);
+							Entity auxEnty = clientesFinal.get(j);
+							if(!indexDel.contains(auxEnty))indexDel.add(auxEnty);
 						}
 						j++;
 					}
 				}
 			}
+			
+			clientesFinal.remove(indexDel);
 			
 			clientes = new ArrayList<Cliente>();
 			int clientesPages = clientesFinal.size();

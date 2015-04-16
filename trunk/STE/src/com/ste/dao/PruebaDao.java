@@ -502,7 +502,7 @@ public class PruebaDao {
 	}
 	
 	
-	public List<Prueba> getPruebasByAllParam(String fecha, String cliente, String servicio , String estado, String producto, String entorno, String desde, String hasta, String premium, Integer page) {
+	public List<Prueba> getPruebasByAllParam(String fecha, String cliente, String servicio , String estado, String producto, String entorno, String desde, String hasta, String premium, Integer page) throws ParseException {
 		List<Prueba> pruebas = null;
 		
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -510,7 +510,8 @@ public class PruebaDao {
 		
 		List<Filter> finalFilters = new ArrayList<>();
 
-		
+		Date dateDesde= null;
+		Date dateHasta= null;
 		
 		/*TODO no se puede consultar sobre mas de una coluna con esta operacion
 		 * ver pagina
@@ -524,6 +525,7 @@ public class PruebaDao {
 			filters++;
 		}
 		if(!fecha.equals("")){
+			
 			filters++;
 		}
 		if(!servicio.equals("")){
@@ -541,6 +543,19 @@ public class PruebaDao {
 			entorno = entorno2;
 			filters++;
 		}
+		boolean auxFechDesde= Utils.isThisDateValid(desde, "dd/MM/yyyy");
+		if(!desde.equals("")&& auxFechDesde){
+			dateDesde = Utils.dateConverter(desde);
+			filters++;
+		}
+		boolean auxFechHasta = Utils.isThisDateValid(hasta, "dd/MM/yyyy");
+		if(!hasta.equals("") && auxFechHasta){
+			dateHasta = Utils.dateConverter(hasta);
+			filters++;
+		}
+		if(!premium.equals("Todos")){
+			filters++;
+		}
 		if(!producto.equals("")){
 
 			filters++;
@@ -549,6 +564,13 @@ public class PruebaDao {
 			if(!cliente.equals("")){
 				finalFilters.add(new FilterPredicate("client_name", FilterOperator.GREATER_THAN_OR_EQUAL, cliente));
 				finalFilters.add(new FilterPredicate("client_name", FilterOperator.LESS_THAN, cliente+"\ufffd"));
+			}
+			
+			if(!desde.equals("")&& auxFechDesde){
+				finalFilters.add(new FilterPredicate("fecha_inicio", FilterOperator.GREATER_THAN_OR_EQUAL, dateDesde));
+			}
+			if(!hasta.equals("")&& auxFechHasta){
+				finalFilters.add(new FilterPredicate("fecha_inicio", FilterOperator.LESS_THAN_OR_EQUAL, dateHasta));
 			}
 			if(!fecha.equals("")){
 				finalFilters.add(new FilterPredicate("str_fecha_estado", FilterOperator.GREATER_THAN_OR_EQUAL, fecha));
@@ -569,6 +591,9 @@ public class PruebaDao {
 			if(!producto.equals("")){
 				finalFilters.add(new FilterPredicate("producto", FilterOperator.GREATER_THAN_OR_EQUAL, producto));
 				finalFilters.add(new FilterPredicate("producto", FilterOperator.LESS_THAN,producto+"\ufffd"));
+			}
+			if(!premium.equals("Todos")){
+				finalFilters.add(new FilterPredicate("premium", FilterOperator.EQUAL,premium));
 			}
 			Filter finalFilter = null;
 			if(finalFilters.size()>1) finalFilter = CompositeFilterOperator.and(finalFilters);
@@ -673,7 +698,28 @@ public class PruebaDao {
 //				productoEntities =datastore.prepare(q).asList(fetchOptions);
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
-
+			
+			if(!desde.equals("")&& auxFechDesde){
+				q = new com.google.appengine.api.datastore.Query("Prueba");
+				Filter filtro = new FilterPredicate("fecha_inicio", FilterOperator.GREATER_THAN_OR_EQUAL, dateDesde);
+				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+				q.setFilter(filtro);
+				Entities.add(datastore.prepare(q).asList(fetchOptions));
+			}
+			if(!hasta.equals("")&& auxFechHasta){
+				q = new com.google.appengine.api.datastore.Query("Prueba");
+				Filter filtro = new FilterPredicate("fecha_inicio", FilterOperator.LESS_THAN_OR_EQUAL, dateHasta);
+				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+				q.setFilter(filtro);
+				Entities.add(datastore.prepare(q).asList(fetchOptions));
+			}
+			if(!premium.equals("Todos")){
+				q = new com.google.appengine.api.datastore.Query("Prueba");
+				Filter filtro= new FilterPredicate("premium", FilterOperator.EQUAL,premium);
+				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+				q.setFilter(filtro);
+				Entities.add(datastore.prepare(q).asList(fetchOptions));
+			}
 			List<Entity> pruebasFinal = new ArrayList<Entity>();
 			int lowRowsIndex = 0;
 			int lowRowsNumber = Entities.get(0).size();
@@ -685,18 +731,21 @@ public class PruebaDao {
 				}
 			}
 			
+			List<Entity> indexDel = new ArrayList<Entity>();
 			pruebasFinal = Entities.get(lowRowsIndex);
 			for(int i=0;i<Entities.size();i++){
 				if(i!=lowRowsIndex){
-					int j = 0;
-					for (Entity result : pruebasFinal) {
-						if(!Entities.get(i).contains(result)){
-							pruebasFinal.remove(j);
-						}
-						j++;
+					int limite = pruebasFinal.size();
+					for (int j = 0 ; j<limite;j++) {				
+							if(!Entities.get(i).contains(pruebasFinal.get(j))){
+								Entity auxEnty = pruebasFinal.get(j);
+								if(!indexDel.contains(auxEnty))indexDel.add(auxEnty);
+							}
 					}
 				}
 			}
+			
+			pruebasFinal.removeAll(indexDel);
 			
 			pruebas = new ArrayList<Prueba>();
 			int pruebasPages = pruebasFinal.size();
