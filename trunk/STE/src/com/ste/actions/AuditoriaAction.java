@@ -26,6 +26,9 @@ public class AuditoriaAction extends Action{
 		LogsDao lDao = LogsDao.getInstance();		
 		List<Log> logs = new ArrayList<Log>();
 		
+		String page = req.getParameter("page");
+		int pageint = Utils.stringToInt(page);
+		
 		Calendar fecha = Calendar.getInstance();
 		fecha.add(Calendar.DATE, 0);
 		String hoy = Utils.CalendarConverterToStr(fecha);
@@ -35,15 +38,19 @@ public class AuditoriaAction extends Action{
 		
 		
 		if("lastweek".equals(accion)){
-			logs = lDao.getLogsByLastWeek();
+			logs = lDao.getLogsByLastWeek(pageint);
 		}else if("lastmonth".equals(accion)){
-			logs = lDao.getLogsByLastMonth();
+			logs = lDao.getLogsByLastMonth(pageint);
 		}else if("lastthreemonths".equals(accion)){
-			logs = lDao.getLogsByLast3Months();
+			logs = lDao.getLogsByLast3Months(pageint);
 		}else{
-			logs = lDao.getLogsByLastWeek();
+			logs = lDao.getLogsByLastWeek(pageint);
 
 		}
+		
+		
+		
+		req.setAttribute("page", pageint);
 		
 		req.setAttribute("accion", accion);
 		req.setAttribute("logs", logs);

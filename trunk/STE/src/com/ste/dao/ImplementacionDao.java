@@ -376,6 +376,7 @@ public List<Implementacion> getImplementacionByClientId(long l) {
 			filters++;
 		}
 		if(!cliente.equals("")){
+			cliente = cliente.toUpperCase();
 			filters++;
 		}
 		if(!pais.equals("")){

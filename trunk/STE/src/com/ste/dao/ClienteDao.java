@@ -229,6 +229,7 @@ public class ClienteDao {
 			filters++;
 		}
 		if(!nombre.equals("")){
+			nombre = nombre.toUpperCase();
 			filters++;
 		}
 		if(!fecha.equals("")){

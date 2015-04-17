@@ -31,7 +31,7 @@
            
           </tr>          
         </thead>
-        <tbody id="myTable" cellspacing="0" data-old="true">
+        <tbody id="myTable" cellspacing="0" data-page="${page}" data-lastpage="${lastpage}" data-numpages="${numpages}">
           <c:choose>
             <c:when test="${empty logs}">
               <tr>

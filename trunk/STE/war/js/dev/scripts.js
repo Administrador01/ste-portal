@@ -1,4 +1,10 @@
 $(function() {
+	
+	$('#historico').on('change', function(e) {
+		var accion = $(this).val();
+		window.location.replace("./auditoria.do?p="+accion);
+	});
+});$(function() {
 	initForms();
 });
 
@@ -1019,7 +1025,7 @@ $(function() {
 			if(page > 0) {
 				page = page - 1;
 				
-				var location = '/' + sPage + '?page=' + page;
+				var location = './' + sPage + '?page=' + page;
 				var oldparams = getParameters();
 				if(oldparams != "") {
 					location = location + "&" + oldparams;
@@ -1034,7 +1040,7 @@ $(function() {
 			var sPath=window.location.pathname;
 			var sPage = sPath.substring(sPath.lastIndexOf('/') + 1);
 			
-			var location = '/' + sPage + '?page=' + page;
+			var location = './' + sPage + '?page=' + page;
 			var oldparams = getParameters();
 			if(oldparams != "") {
 				location = location + "&" + oldparams;
