@@ -91,7 +91,7 @@ $.fn.paginateMe = function(opts) {
 			if(page > 0) {
 				page = page - 1;
 				
-				var location = '/' + sPage + '?page=' + page;
+				var location = './' + sPage + '?page=' + page;
 				var oldparams = getParameters();
 				if(oldparams != "") {
 					location = location + "&" + oldparams;
@@ -106,7 +106,7 @@ $.fn.paginateMe = function(opts) {
 			var sPath=window.location.pathname;
 			var sPage = sPath.substring(sPath.lastIndexOf('/') + 1);
 			
-			var location = '/' + sPage + '?page=' + page;
+			var location = './' + sPage + '?page=' + page;
 			var oldparams = getParameters();
 			if(oldparams != "") {
 				location = location + "&" + oldparams;
