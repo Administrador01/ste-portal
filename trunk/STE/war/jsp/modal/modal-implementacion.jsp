@@ -9,6 +9,7 @@
 
 <div class="modal_ajax">
 			<div class="modalImplementacion" style="text-align: left;'">
+			<button onclick="sendCloneImplementacion();" id="new_prueba_form_modal" class="" type="button" style="float:right">Crear una nueva implementacion con estos datos</button>
 				<h2>Editar implementaci&oacuten ${implementacion.id_implementacion}</h2>
 				<hr />
 			</div><!--

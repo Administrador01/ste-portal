@@ -225,7 +225,49 @@ var getIsoDate = function(dateString) {
 	var isoDate = year + '/' + month + '/' + day;
 
 	return isoDate;
-};function sendEditImplementacion(){
+};function sendCloneImplementacion(){
+	var $form = $("#edit-implementacion-form");
+	
+	if($form.valid()){			
+		
+		var postData = $form.serialize() + "&accion=clone";
+		var formURL = $form.attr("action");
+		$.ajax(
+		{
+		  url : formURL,
+		  type: "GET",
+		  data : postData,
+		  success:function(data, textStatus, jqXHR) 
+		  {
+				//data: return data from server
+			  if (data.success==("true")){
+					if ($('.edit-user-form-holder').height()<190){
+						$('.edit-user-form-holder').height($('.edit-user-form-holder').height()+35);
+					}
+					$form.find('#message_div_modal').removeClass("hidden");
+					$('#message_div_modal').css('display','block').removeClass("error").addClass("success");
+					
+					$form.find('#span_message').html('La implementaci&oacuten ha sido duplicada de forma correcta.');
+					
+					
+
+					setTimeout(function() { 
+						$form.find('#message_div_modal').addClass("hidden");
+					}, 1500);
+				}else{
+					$('#message_div_modal').removeClass("success").addClass("error");
+					if ($('.edit-user-form-holder').height()<190){
+						$('.edit-user-form-holder').height($('.edit-user-form-holder').height()+35);
+					}
+					$('#span_message_modal').html(data.error);
+					$('#message_div_modal').css('display','block');
+				}
+		  }
+		},'html');
+	}
+}
+
+function sendEditImplementacion(){
 
 	var $form = $("#edit-implementacion-form");
 	
@@ -245,11 +287,12 @@ var getIsoDate = function(dateString) {
 					if ($('.edit-user-form-holder').height()<190){
 						$('.edit-user-form-holder').height($('.edit-user-form-holder').height()+35);
 					}
+					$form.find('#message_div_modal').removeClass("hidden");
 					$form.find('.form-container').find('div:not(#message_div_modal)').hide(0);
-					
-					$form.find('#span_message_modal').html('La implementaci&oacuten ha sido modificado de forma correcta.<br/>En breve volvemos a la p&aacute;gina.');
+					$('#new_prueba_form_modal').addClass("hidden");
+					$form.find('#span_message').html('La implementaci&oacuten ha sido modificado de forma correcta.<br/>En breve volvemos a la p&aacute;gina.');
 					$('#modal-footer_submit').css('display','none');
-					$('#message_div_modal').css('display','block').removeClass("error").addClass("success");;
+					
 
 					setTimeout(function() { 
 						resetForm($form);
@@ -986,6 +1029,17 @@ $(function() {
 			if(lastpage == false) {
 				$('<li><a href="#" class="next_link">></a></li>').appendTo(pager);
 			}
+			
+			$('<li><span>Ir a p&aacutegina:</span></li>').appendTo(pager);
+			var opcionespage = "<li><select>";
+			
+			for(var i=1;i<=numpages;i++){
+				opcionespage= opcionespage+"<option class=\"pagerselect\" val=\'"+i+"\'>"+i+"</option>";
+			}
+			
+			opcionespage = opcionespage+"<select></li>";
+			$(opcionespage).appendTo(pager);
+			
 			/*
 			$('<li>').appendTo(pager);
 			$('<span>Ir a p&aacutegina:</span>').appendTo(pager);
@@ -1207,7 +1261,38 @@ $(function() {
 	}
 };
 
-;function sendEditPrueba(){
+
+
+$(function(){
+	$('.pagerselect').click(function(e){
+		
+		var page = $(this).val();
+		if(page > 0) {
+		
+			var sPath=window.location.pathname;
+			var sPage = sPath.substring(sPath.lastIndexOf('/') + 1);
+			var location = './' + sPage + '?page=' + page;
+			var oldparams = getParameters();
+			if(oldparams != "") {
+				location = location + "&" + oldparams;
+			}
+			window.location = location;		
+		}
+	});
+	
+	function getParameters(){
+		var sPath=window.location.search;
+		var queryString = sPath.substring(sPath.lastIndexOf("?") + 1);
+		var newQueryString = $.map(queryString.split("&"), function(pair) { 
+			  var p = pair.split("="); 
+			  if(p[0] != "page") {
+				  return p.join("=");
+			  }			  
+		}).join("&");
+		return newQueryString;
+	}
+	
+});;function sendEditPrueba(){
 
 	var $form = $("#edit-prueba-form");
 	
@@ -1228,8 +1313,9 @@ $(function() {
 					if ($('.edit-user-form-holder').height()<190){
 						$('.edit-user-form-holder').height($('.edit-user-form-holder').height()+35);
 					}
+					$form.find('#message_div_modal').removeClass("hidden");
 					$form.find('.form-container').find('div:not(#message_div_modal)').hide(0);
-					
+					$('#new_prueba_form_modal').addClass("hidden");
 					$form.find('#span_message_modal').html('La prueba ha sido modificado de forma correcta.<br/>En breve volvemos a la p&aacute;gina.');
 					$('#modal-footer_submit').css('display','none');
 					$('#message_div_modal').css('display','block').removeClass("error").addClass("success");;
@@ -1237,6 +1323,46 @@ $(function() {
 					setTimeout(function() { 
 						resetForm($form);
 						location.reload();
+					}, 1500);
+				}else{
+					$('#message_div_modal').removeClass("success").addClass("error");
+					if ($('.edit-user-form-holder').height()<190){
+						$('.edit-user-form-holder').height($('.edit-user-form-holder').height()+35);
+					}
+					$('#span_message_modal').html(data.error);
+					$('#message_div_modal').css('display','block');
+				}
+		  }
+		},'html');
+	}
+}
+
+function sendCloneTest(){
+
+	var $form = $("#edit-prueba-form");
+	
+	
+	if($form.valid()){			
+		var postData = $form.serialize() + "&accion=clone";
+		var formURL = $form.attr("action");
+		$.ajax(
+		{
+		  url : formURL,
+		  type: "GET",
+		  data : postData,
+		  success:function(data, textStatus, jqXHR) 
+		  {
+				//data: return data from server
+			  if (data.success==("true")){
+					if ($('.edit-user-form-holder').height()<190){
+						$('.edit-user-form-holder').height($('.edit-user-form-holder').height()+35);
+					}
+					$form.find('#span_message_modal').html('La prueba ha sido duplicada de forma correcta.');
+					$('#message_div_modal').css('display','block').removeClass("error").addClass("success");
+
+					setTimeout(function() { 
+						$form.find('#message_div_modal').addClass("hidden");
+						
 					}, 1500);
 				}else{
 					$('#message_div_modal').removeClass("success").addClass("error");
@@ -1657,7 +1783,9 @@ $(function() {
 					if ($('.edit-user-form-holder').height()<190){
 						$('.edit-user-form-holder').height($('.edit-user-form-holder').height()+35);
 					}
+					$form.find('#message_div_modal').removeClass("hidden");
 					$form.find('.form-container').find('div:not(#message_div_modal)').hide(0);
+					$('#new_prueba_form_modal').addClass("hidden");
 					$form.find('#span_message_modal').html('El soporte ha sido modificado de forma correcta.<br/>En breve volvemos a la p&aacute;gina.');
 					$('#modal-footer_submit').css('display','none');
 					$('#message_div_modal').css('display','block').removeClass("error").addClass("success");;
@@ -1665,6 +1793,48 @@ $(function() {
 					setTimeout(function() { 
 						resetForm($form);
 						location.reload();
+					}, 1500);
+				}else{
+					$('#message_div_modal').removeClass("success").addClass("error");
+					if ($('.edit-user-form-holder').height()<190){
+						$('.edit-user-form-holder').height($('.edit-user-form-holder').height()+35);
+					}
+					$('#span_message_modal').html(data.error);
+					$('#message_div_modal').css('display','block');
+				}
+		  }
+		},'html');
+	}
+}
+
+function sendCloneSoporte(){
+
+	var $form = $("#edit-soporte-form");
+	
+	if($form.valid()){			
+		
+		var postData = $form.serialize() + "&accion=clone";
+		var formURL = $form.attr("action");
+		$.ajax(
+		{
+		  url : formURL,
+		  type: "GET",
+		  data : postData,
+		  success:function(data, textStatus, jqXHR) 
+		  {
+				//data: return data from server
+			  if (data.success==("true")){
+					if ($('.edit-user-form-holder').height()<190){
+						$('.edit-user-form-holder').height($('.edit-user-form-holder').height()+35);
+					}
+					$form.find('#message_div_modal').removeClass("hidden");
+					
+					$form.find('#span_message_modal').html('El soporte ha sido duplicado de forma correcta.');
+					
+					$('#message_div_modal').css('display','block').removeClass("error").addClass("success");;
+
+					setTimeout(function() { 
+						$form.find('#message_div_modal').addClass("hidden");
 					}, 1500);
 				}else{
 					$('#message_div_modal').removeClass("success").addClass("error");

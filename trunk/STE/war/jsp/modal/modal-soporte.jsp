@@ -8,6 +8,7 @@
 
 <div class="modal_ajax">
 			<div class="">
+			<button onclick="sendCloneSoporte();" id="new_prueba_form_modal" class="" type="button" style="float:right">Crear una nueva soporte con estos datos</button>
 				<h2>Editar soporte</h2>
 				<hr />
 			</div>

@@ -69,6 +69,8 @@ public class SoporteServlet extends HttpServlet{
 					generateXLS(req,resp,usermail);
 				}else if (accion.equals("restore")){
 					restore(req,resp,usermail);
+				}else if (accion.equals("clone")){
+					cloneSoporte(req,resp,usermail);
 				}
 			 
 		
@@ -272,6 +274,64 @@ public class SoporteServlet extends HttpServlet{
 		s.setPeticionario(peticionario);
 		
 		sDao.updateSoporte(s);
+		
+		
+		try {
+			json.append("success", "true");
+			resp.setCharacterEncoding("UTF-8");
+	        resp.setContentType("application/json");       
+			resp.getWriter().println(json);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	}
+	
+public void cloneSoporte(HttpServletRequest req, HttpServletResponse resp, String usermail){
+		
+		JSONObject json = new JSONObject();
+		
+		
+		SoporteDao sDao = SoporteDao.getInstance();
+		Soporte s = new Soporte();
+		
+		Utils.writeLog(usermail, "Clona", "Soporte", "");
+		
+		String fecha_inicio = req.getParameter("fecha_inicio");
+		String fecha_fin = req.getParameter("fecha_fin");
+		String tipo = req.getParameter("tipoModal");
+		String cliente = req.getParameter("cliente");
+		String estado = req.getParameter("estado");
+		String tipo_servicio = req.getParameter("tipo_servicio");
+		String producto_canal = req.getParameter("producto_canal");
+		String premium = req.getParameter("input-premium-soporte");
+		String tipo_cliente = req.getParameter("tipo_cliente");		
+		String detalles = req.getParameter("detalles");
+		String solucion = req.getParameter("solucion");
+		String clienteID = req.getParameter("client_id");
+		String pais = req.getParameter("pais");
+		String peticionario = req.getParameter("peticionario");
+		
+		s.setStr_fecha_inicio(fecha_inicio);
+		s.setStr_fecha_fin(fecha_fin);
+		s.setTipo_soporte(tipo);
+		s.setCliente_name(cliente);
+		s.setEstado(estado);
+		s.setTipo_servicio(tipo_servicio);
+		s.setProducto_canal(producto_canal);
+		s.setDetalles(detalles);
+		s.setPremium(premium);
+		s.setTipo_cliente(tipo_cliente);
+		s.setSolucion(solucion);
+		s.setCliente_id(clienteID);
+		s.setPais(pais);
+		s.setPeticionario(peticionario);
+		
+		sDao.createSoporte(s);
 		
 		
 		try {
