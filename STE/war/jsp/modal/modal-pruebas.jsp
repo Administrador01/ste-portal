@@ -9,6 +9,8 @@
 
 <div class="modal_ajax">
 			<div class="">
+			
+			<button onclick="sendCloneTest();" id="new_prueba_form_modal" class="" type="button" style="float:right">Crear una nueva prueba con estos datos</button>
 				<h2>Editar prueba</h2>
 				<hr />
 			</div>

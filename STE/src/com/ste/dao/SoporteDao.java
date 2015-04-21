@@ -55,7 +55,7 @@ public class SoporteDao {
 			boolean flag = false;
 			for (Soporte sopor : sopor_arr){
 				
-				if(sopor.getDetalles().equals(s.getDetalles())&&
+				/*if(sopor.getDetalles().equals(s.getDetalles())&&
 				   sopor.getProducto_canal().equals(s.getProducto_canal())&&
 				   sopor.getEstado().equals(s.getEstado())&&
 				   sopor.getStr_fecha_inicio().equals(s.getStr_fecha_inicio())&&
@@ -64,7 +64,7 @@ public class SoporteDao {
 				   sopor.getTipo_soporte().equals(s.getTipo_soporte())&&
 				   sopor.getTipo_servicio().equals(s.getTipo_servicio())){
 						flag = true;
-				}
+				}*/
 
 			}
 			if(!flag){

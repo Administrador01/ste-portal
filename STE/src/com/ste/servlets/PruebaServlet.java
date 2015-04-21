@@ -64,6 +64,8 @@ public class PruebaServlet extends HttpServlet{
 					generateXLS(req,resp,usermail);
 				}else if (accion.equals("getImpByClient")){
 					getImpByClient(req,resp,usermail);
+				}else if (accion.equals("clone")){
+					clonePrueba(req,resp,usermail);
 				}
 				
 			
@@ -256,6 +258,75 @@ public class PruebaServlet extends HttpServlet{
 	
 	}
 	
+	
+	
+	public void clonePrueba(HttpServletRequest req, HttpServletResponse resp, String usermail){
+	
+		JSONObject json = new JSONObject();
+		
+		
+		
+		String fecha_estado = req.getParameter("fecha_estado");
+		//String nombre_cliente = req.getParameter("cliente");
+		String referencia = req.getParameter("referencia");
+		String producto = req.getParameter("producto_canal");
+		String premium = req.getParameter("input-premium-soporte");
+		String estado = req.getParameter("estado");
+		String entorno = req.getParameter("entorno");
+		String servicio =  req.getParameter("tipo_servicio");
+		String detalles = req.getParameter("detalles");
+		String solucion = req.getParameter("solucion");
+		String impID = req.getParameter("imp_id_mod");
+		String resultado = req.getParameter("resultado");
+		String peticionario = req.getParameter("peticionario");
+		String fichero = req.getParameter("fichero");
+		String str_fecha_inicio = req.getParameter("fecha_inicio");
+		
+		
+		PruebaDao pDao = PruebaDao.getInstance();	
+		Prueba p = new Prueba();
+		Utils.writeLog(usermail, "Clona", "Prueba", "");
+		
+		ImplementacionDao impDao = ImplementacionDao.getInstance();
+		Cliente cliente =  impDao.getClienteByImpId(Long.parseLong(impID));
+		
+		
+		p.setClient_name(cliente.getNombre());
+		p.setPremium(cliente.getPremium());
+		
+		
+		p.setStr_fecha_estado(fecha_estado);
+		//p.setNombre_cliente(nombre_cliente);
+		p.setReferencia(referencia);
+		p.setProducto(producto);
+		p.setPremium(premium);
+		p.setTipo_servicio(servicio);
+		p.setEntorno(entorno);
+		p.setEstado(estado);
+		if(p.getEstado().equals("Cancelado")){p.setErased(true);}else{p.setErased(false);}
+		p.setDetalles(detalles);
+		p.setSolucion(solucion);
+		if (impID !="" && impID != null) p.setImp_id(impID);
+		p.setResultado(resultado);
+		p.setFecha_inicio_str(str_fecha_inicio);
+		p.setFichero(fichero);
+		p.setPeticionario(peticionario);
+
+		pDao.createPrueba(p);
+		
+		
+		try {
+			json.append("success", "true");
+			resp.setCharacterEncoding("UTF-8");
+	        resp.setContentType("application/json");       
+			resp.getWriter().println(json);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void deletePrueba (HttpServletRequest req, HttpServletResponse resp, String usermail){
 		JSONObject json = new JSONObject();
 		
@@ -270,11 +341,9 @@ public class PruebaServlet extends HttpServlet{
 			resp.setCharacterEncoding("UTF-8");
 	        resp.setContentType("application/json");       
 			resp.getWriter().println(json);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
+		} catch (JSONException e) { 
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
