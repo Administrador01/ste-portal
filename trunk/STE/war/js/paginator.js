@@ -17,6 +17,7 @@ $.fn.paginateMe = function(opts) {
 		
 	
 		var pager = $('.pagination');
+		var pagerGoto = $('.paginationGoto');
 		var resumen = $('.pagesummary');
 	
 		if (typeof settings.childSelector != "undefined") {
@@ -41,7 +42,7 @@ $.fn.paginateMe = function(opts) {
 		var sPage = sPath.substring(sPath.lastIndexOf('/') + 1);
 		
 		if(numpages > 0) {
-			if(page > 0) {
+			if(page >= 0) {
 				$('<li><a href="#" class="prev_link"><</a></li>').appendTo(pager);
 				$('<li><a href="'+ sPage+'?page=0" class="page_link">1</a></li>').appendTo(pager);
 			}	
@@ -53,15 +54,16 @@ $.fn.paginateMe = function(opts) {
 				$('<li><a href="#" class="next_link">></a></li>').appendTo(pager);
 			}
 			
-			$('<li><span>Ir a p&aacutegina:</span></li>').appendTo(pager);
-			var opcionespage = "<li><select>";
+			$('<span>Ir a p&aacutegina:</span>').appendTo(pagerGoto);
+			var opcionespage = "<select>";
 			
 			for(var i=1;i<=numpages;i++){
 				opcionespage= opcionespage+"<option class=\"pagerselect\" val=\'"+i+"\'>"+i+"</option>";
+			
 			}
 			
-			opcionespage = opcionespage+"<select></li>";
-			$(opcionespage).appendTo(pager);
+			opcionespage = opcionespage+"<select>";
+			$(opcionespage).appendTo(pagerGoto);
 			
 			/*
 			$('<li>').appendTo(pager);
@@ -290,6 +292,7 @@ $(function(){
 	$('.pagerselect').click(function(e){
 		
 		var page = $(this).val();
+		page--;
 		if(page > 0) {
 		
 			var sPath=window.location.pathname;
