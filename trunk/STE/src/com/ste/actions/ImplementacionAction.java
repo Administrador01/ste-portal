@@ -68,7 +68,7 @@ public class ImplementacionAction extends Action{
 			String paisFilter = req.getParameter("pais");
 			
 			String productoFilter = req.getParameter("producto");
-			String normalizadorFilter = req.getParameter("normalizador");
+			String normalizadorFilter = req.getParameter("normalizator");
 			String servicioFilter = req.getParameter("servicio");
 			String estadoFilter = req.getParameter("estado");
 			implementaciones = impDao.getImplementacionesByAllParam(fechaFilter, clienteFilter, paisFilter, productoFilter, servicioFilter, normalizadorFilter, estadoFilter, pageint);
@@ -79,7 +79,7 @@ public class ImplementacionAction extends Action{
 			req.setAttribute("cliente", clienteFilter);
 			req.setAttribute("pais", paisFilter);
 			req.setAttribute("producto", productoFilter);
-			req.setAttribute("normalizador", normalizadorFilter);
+			req.setAttribute("normalizator", normalizadorFilter);
 			req.setAttribute("servicio", servicioFilter);
 			req.setAttribute("estado", estadoFilter);
 		}else{
