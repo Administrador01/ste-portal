@@ -111,11 +111,11 @@
 							<span class="lbl">Tipo cliente<span class="required-asterisk">*</span>:</span>						
 							
 							
-							<label class="ui-marmots-label-radio marmots-label-left on" for="radio_Si">
+							<label class="radio ui-marmots-label-radio marmots-label-left on" for="radio_Si">
 								Premium
 								<input id="radio_Si" type="radio" name="premium" value="Premium" checked/>
 							</label>
-							<label class="ui-marmots-label-radio marmots-label-left" for="radio_No">
+							<label class="radio ui-marmots-label-radio marmots-label-left" for="radio_No">
 								No Premium
 								<input id="radio_No" type="radio" name="premium" value="No Premium" />
 							</label>
@@ -189,7 +189,7 @@
 						<th class="search-th"><input name='nombre' value='${nombre}'></th>
 						<th class="search-th"><input name='fecha' value='${fecha}'></th>
 						<th class="search-th"><input name='segmento' value='${segmento}'></th>
-						<th class="search-th"><input name='premium' value='${premium}'></th>
+						<th class="search-th"><input name='tipo' value='${tipo}'></th>
 						<th style="width: 110px;"><button type='submit'>  FILTRAR  </button></th>
 						</form>
 					</tr>
@@ -236,7 +236,9 @@
 		<div class="col-md-12 text-center">
 			<ul class="pagination" id="myPager"></ul>
 			<span class="pagesummary"></span>
+			<div class="paginationGoto" />
 		</div>
+
 	</div>
 </div>
 

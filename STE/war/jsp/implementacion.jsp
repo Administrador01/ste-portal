@@ -279,7 +279,7 @@
 						<th class="search-th"><input name='pais' value='${pais}'></th>
 						<th class="search-th"><input name='producto' value='${producto}'></th>
 						<th class="search-th"><input name='servicio' value='${servicio}'></th>
-						<th class="search-th"><input name='normalizador' value='${normalizador}'></th>
+						<th class="search-th"><input name='normalizator' value='${normalizator}'></th>
 						<th class="search-th"><input name='estado' value='${estado}'></th>
 						<th style="width: 110px;"><button type='submit'>  FILTRAR  </button></th>
 					</form>
@@ -350,6 +350,7 @@
 		<div class="col-md-12 text-center">
 			<ul class="pagination" id="myPager"></ul>
 			<span class="pagesummary"></span>
+			<div class="paginationGoto" />
 		</div>
 
 

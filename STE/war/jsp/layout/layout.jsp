@@ -9,12 +9,14 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-15"  />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">		
 		
-		<link rel="stylesheet" type="text/css" href="../components/bootstrap/css/bootstrap.min.css">
+
 		<link rel="stylesheet" type="text/css" href="../tools/css/jquery-ui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../tools/css/jquery-ui.theme.min.css" />
 		<link rel="stylesheet" type="text/css" href="../tools/css/jquery-ui.structure.min.css" />
+		<link rel="stylesheet" type="text/css" href="../components/checkbox/jquery.marmots-checkbox.css" />
   		<link rel="stylesheet" type="text/css" href="../components/bootstrap/select/bootstrap-select.css" />
-  		<link rel="stylesheet" type="text/css" href="../components/checkbox/jquery.marmots-checkbox.css" />
+  		<link rel="stylesheet" type="text/css" href="../components/bootstrap/css/bootstrap.min.css">
+  		
   		<link rel="stylesheet" type="text/css" href="../css/BBVA.css">
   		
 	  	<link rel="stylesheet" type="text/css" href="../css/styles.min.css" /> 
@@ -30,11 +32,11 @@
       	<script src="../tools/jquery-ui.min.js" type="text/javascript"></script>
       	<script src="../tools/jquery-ui-datepicker-es.js" type="text/javascript"></script>
       	<script src="../tools/jquery.validate.js" type="text/javascript"></script> 
-		
 		<script src="../components/checkbox/jquery.marmots-checkbox.js" type="text/javascript"></script>
+		<script src="../js/dev/scripts.js" type="text/javascript"></script>		
 		<script src="../components/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 		<script src="../components/bootstrap/select/bootstrap-select.min.js" type="text/javascript"></script>
-		<script src="../js/dev/scripts.js" type="text/javascript"></script>		
+		
 
 		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 		<META HTTP-EQUIV="Expires" CONTENT="-1">
