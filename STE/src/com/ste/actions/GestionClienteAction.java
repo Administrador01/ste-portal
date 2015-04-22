@@ -52,7 +52,7 @@ public class GestionClienteAction extends Action{
 				String identificadorFilter = req.getParameter("identificador");
 				String nombreFilter = req.getParameter("nombre");
 				String segmentoFilter = req.getParameter("segmento");
-				String premiumFilter = req.getParameter("premium");
+				String premiumFilter = req.getParameter("tipo");
 				clientes = cDao.getClienteByAllParam(identificadorFilter, nombreFilter, fechaFilter, segmentoFilter, premiumFilter, pageint);
 				int numpages = (Integer.parseInt(clientes.get(clientes.size()-1).getId_cliente()));
 				clientes.remove(clientes.size()-1);
@@ -61,7 +61,7 @@ public class GestionClienteAction extends Action{
 				req.setAttribute("nombre", nombreFilter);
 				req.setAttribute("fecha", fechaFilter);
 				req.setAttribute("segmento", segmentoFilter);
-				req.setAttribute("premium", premiumFilter);
+				req.setAttribute("tipo", premiumFilter);
 				
 				boolean lastpage = (numpages < ClienteDao.DATA_SIZE) ? true : false;
 				if(identificadorFilter.equals("")&& nombreFilter.equals("")&& fechaFilter.equals("")&& segmentoFilter.equals("")&& premiumFilter.equals(""))lastpage=false;
