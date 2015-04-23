@@ -17,7 +17,7 @@
 				<button type="button" class="go_pag1_modal">P&aacutegina 1</button>
 				<button type="button" class="go_pag2_modal">P&aacutegina 2</button>
 			</div>-->
-			<div class="form-holder" style="margin-top:4%;">
+			<div class="form-holder" style="margin-top:4%;margin-right:5%;">
 		<form id="edit-implementacion-form" name="edit-soporte-form" class="edit-form" action="/implementacionServlet"
 			method="POST" novalidate="novalidate">
 				
@@ -120,7 +120,7 @@
 					
 					
 					<div class="form-field">
-					<span style="width:44%;" class="lbl">Normalizador<span class="required-asterisk">*</span>:</span>
+					<span style="width:38%;" class="lbl">Normalizador<span class="required-asterisk">*</span>:</span>
 							<label style="width:15%;" class="lbl ui-marmots-label-radio marmots-label-left ${implementacion.normalizador ? 'on' : ''} " for="radio_Si_Modal">
 								<input name="normalizador_modal" id="radio_Si_Modal" type="radio" value="Si" ${implementacion.normalizador ? 'checked' : ''} />Si
 							</label>
@@ -153,7 +153,7 @@
 					</div>
 					
 					<div class="form-field">
-					<span class="lbl" style="width:44%;">Firma contrato<span class="required-asterisk">*</span>:</span>
+					<span class="lbl" style="width:33%;">Firma contrato<span class="required-asterisk">*</span>:</span>
 							<label style="width:15%;" class="lbl ui-marmots-label-radio marmots-label-left ${implementacion.firma_contrato ? 'on' : ''}" for="radio_Si_Firma_Modal">
 								<input name="firma_modal" ${implementacion.firma_contrato ? 'checked' : ''} id="radio_Si_Firma_Modal"  type="radio" value="Si"  />Si
 							</label>

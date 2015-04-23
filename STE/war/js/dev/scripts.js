@@ -244,7 +244,7 @@ var getIsoDate = function(dateString) {
 					if ($('.edit-user-form-holder').height()<190){
 						$('.edit-user-form-holder').height($('.edit-user-form-holder').height()+35);
 					}
-					$form.find('#message_div_modal').removeClass("hidden");
+					
 					$('#message_div_modal').css('display','block').removeClass("error").addClass("success");
 					
 					$form.find('#span_message').html('La implementaci&oacuten ha sido duplicada de forma correcta.');
@@ -252,7 +252,7 @@ var getIsoDate = function(dateString) {
 					
 
 					setTimeout(function() { 
-						$form.find('#message_div_modal').addClass("hidden");
+						$('#message_div_modal').css('display','none');
 					}, 1500);
 				}else{
 					$('#message_div_modal').removeClass("success").addClass("error");
@@ -270,9 +270,10 @@ var getIsoDate = function(dateString) {
 function sendEditImplementacion(){
 
 	var $form = $("#edit-implementacion-form");
+	$('#modal-footer_submit').css('display','none');
 	
 	if($form.valid()){			
-		
+		$('#new_prueba_form_modal').addClass("hidden");
 		var postData = $form.serialize() + "&accion=update&id="+id;
 		var formURL = $form.attr("action");
 		$.ajax(
@@ -287,11 +288,11 @@ function sendEditImplementacion(){
 					if ($('.edit-user-form-holder').height()<190){
 						$('.edit-user-form-holder').height($('.edit-user-form-holder').height()+35);
 					}
-					$form.find('#message_div_modal').removeClass("hidden");
+					$('#message_div_modal').css('display','block').removeClass("error").addClass("success");
 					$form.find('.form-container').find('div:not(#message_div_modal)').hide(0);
-					$('#new_prueba_form_modal').addClass("hidden");
+					
 					$form.find('#span_message').html('La implementaci&oacuten ha sido modificado de forma correcta.<br/>En breve volvemos a la p&aacute;gina.');
-					$('#modal-footer_submit').css('display','none');
+					
 					
 
 					setTimeout(function() { 
@@ -710,7 +711,7 @@ $(function() {
 		var $form = $($(this).prev());
 		
 		if($form.valid()){
-						
+			$('#submit_form_client').hide(0);			
 			var postData = $form.serialize() + "&accion=new";
 			var formURL = $form.attr("action");
 			$.ajax(
@@ -726,7 +727,7 @@ $(function() {
 						$('.form-holder').height($('.form-holder').height()+35);
 					}
 					$form.find('.form-container').find('div:not(#message_div)').hide(0);
-					$('#submit_form_client').hide(0);
+					
 					$form.find('#span_message').html('El cliente ha sido creado de forma correcta.<br/>En breve volvemos a la p&aacute;gina.');
 					$('#message_div').css('display','block').removeClass("error").addClass("success");;
 
@@ -764,7 +765,7 @@ $(function() {
 		var $form = $($(this).prev());
 		
 		if($form.valid()){
-						
+			$('#submit_form_support').hide(0);			
 			var postData = $form.serialize() + "&accion=new";
 			var formURL = $form.attr("action");
 			$.ajax(
@@ -780,7 +781,7 @@ $(function() {
 						$('.form-holder').height($('.form-holder').height()+35);
 					}
 					$form.find('.form-container').find('div:not(#message_div)').hide(0);
-					$('#submit_form_support').hide(0);
+					
 					$form.find('#span_message').html('El soporte ha sido creado de forma correcta.<br/>En breve volvemos a la p&aacute;gina.');
 					$('#message_div').css('display','block').removeClass("error").addClass("success");;
 
@@ -821,7 +822,8 @@ $(function() {
 		var $form = $($(this).prev());
 		
 		if($form.valid()){
-			$("#submit_form_test").addClass("hidden");
+			$('#submit_form_test').hide(0);
+			
 			var postData = $form.serialize() + "&accion=new";
 			var formURL = $form.attr("action");
 			$.ajax(
@@ -837,8 +839,8 @@ $(function() {
 						$('.form-holder').height($('.form-holder').height()+35);
 					}
 					$form.find('.form-container').find('div:not(#message_div)').hide(0);
-					$('#submit_form_test').hide(0);
 					$('.close-form').hide(0);
+					
 					$form.find('#span_message').html('La prueba ha sido creada de forma correcta.<br/>En breve volvemos a la p&aacute;gina.');
 					$('#message_div').css('display','block').removeClass("error").addClass("success");;
 
@@ -878,7 +880,7 @@ $(function() {
 		var $form = $($('#new-user-form'));
 		
 		if($form.valid()){
-						
+			$('.submit_form_implementacion').hide(0);			
 			var postData = $form.serialize() + "&accion=new";
 			var formURL = $form.attr("action");
 			$.ajax(
@@ -895,7 +897,7 @@ $(function() {
 						$('.form-holder').height($('.form-holder').height()+35);
 					}
 					$form.find('.form-container').find('div:not(#message_div)').hide(0);
-					$('.submit_form_implementacion').hide(0);
+					
 					$('.close-form').hide(0);
 					$form.find('#span_message').html('La implementaci&oacuten ha sido creada de forma correcta.<br/>En breve volvemos a la p&aacute;gina.');
 					$('#message_div').css('display','block').removeClass("error").addClass("success");;
@@ -994,6 +996,7 @@ $(function() {
 		
 	
 		var pager = $('.pagination');
+		var pagerGoto = $('.paginationGoto');
 		var resumen = $('.pagesummary');
 	
 		if (typeof settings.childSelector != "undefined") {
@@ -1030,15 +1033,16 @@ $(function() {
 				$('<li><a href="#" class="next_link">></a></li>').appendTo(pager);
 			}
 			
-			$('<li><span>Ir a p&aacutegina:</span></li>').appendTo(pager);
-			var opcionespage = "<li><select>";
+			$('<span>Ir a p&aacutegina:</span>').appendTo(pagerGoto);
+			var opcionespage = "<select>";
 			
 			for(var i=1;i<=numpages;i++){
 				opcionespage= opcionespage+"<option class=\"pagerselect\" val=\'"+i+"\'>"+i+"</option>";
+			
 			}
 			
-			opcionespage = opcionespage+"<select></li>";
-			$(opcionespage).appendTo(pager);
+			opcionespage = opcionespage+"<select>";
+			$(opcionespage).appendTo(pagerGoto);
 			
 			/*
 			$('<li>').appendTo(pager);
@@ -1267,6 +1271,7 @@ $(function(){
 	$('.pagerselect').click(function(e){
 		
 		var page = $(this).val();
+		page--;
 		if(page > 0) {
 		
 			var sPath=window.location.pathname;
@@ -1299,6 +1304,8 @@ $(function(){
 	
 	if($form.valid()){			
 		$("#submit_edit_prueba_form").addClass("hidden");
+		$('#new_prueba_form_modal').addClass("hidden");
+		$('#modal-footer_submit').css('display','none');
 		var postData = $form.serialize() + "&accion=update&id="+id;
 		var formURL = $form.attr("action");
 		$.ajax(
@@ -1315,9 +1322,8 @@ $(function(){
 					}
 					$form.find('#message_div_modal').removeClass("hidden");
 					$form.find('.form-container').find('div:not(#message_div_modal)').hide(0);
-					$('#new_prueba_form_modal').addClass("hidden");
 					$form.find('#span_message_modal').html('La prueba ha sido modificado de forma correcta.<br/>En breve volvemos a la p&aacute;gina.');
-					$('#modal-footer_submit').css('display','none');
+					
 					$('#message_div_modal').css('display','block').removeClass("error").addClass("success");;
 
 					setTimeout(function() { 
@@ -1357,11 +1363,13 @@ function sendCloneTest(){
 					if ($('.edit-user-form-holder').height()<190){
 						$('.edit-user-form-holder').height($('.edit-user-form-holder').height()+35);
 					}
-					$form.find('#span_message_modal').html('La prueba ha sido duplicada de forma correcta.');
+					
 					$('#message_div_modal').css('display','block').removeClass("error").addClass("success");
+					$form.find('#span_message_modal').html('La prueba ha sido duplicada de forma correcta.');
+					
 
 					setTimeout(function() { 
-						$form.find('#message_div_modal').addClass("hidden");
+						$('#message_div_modal').css('display','none');
 						
 					}, 1500);
 				}else{
