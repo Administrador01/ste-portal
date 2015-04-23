@@ -16,6 +16,7 @@ import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
 import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import com.ste.beans.Cliente;
 import com.ste.beans.Implementacion;
 import com.ste.counters.Counter;
@@ -304,7 +305,7 @@ public List<Implementacion> getImplementacionByClientId(long l) {
 	
 	
 	
-	String query = "select from " + Implementacion.class.getName()+" where cliente_id == "+l;
+	String query = "select from " + Implementacion.class.getName()+" where cliente_id == "+l+" && erased==false";
 	
 	Query q = pm.newQuery(query);//.setFilter(propertyFilter);
 
@@ -492,7 +493,11 @@ public List<Implementacion> getImplementacionByClientId(long l) {
 				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
 				q.setFilter(finalFilter);
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+				
+				List<Entity> estasdf =datastore.prepare(q).asList(fetchOptions); 
+				
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
+				
 			}
 			if(!servicio.equals("")){
 				q = new com.google.appengine.api.datastore.Query("Implementacion");
@@ -531,7 +536,9 @@ public List<Implementacion> getImplementacionByClientId(long l) {
 				}
 			}
 			
-			implementacionesFinal.remove(indexDel);
+			for (Entity impborr : indexDel){
+				implementacionesFinal.remove(impborr);
+			}
 			
 			implementaciones = new ArrayList<Implementacion>();
 			int implementacionesPages  = implementacionesFinal.size();

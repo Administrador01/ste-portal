@@ -9,13 +9,21 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 
+
+
+
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.FetchOptions;
+import com.ste.beans.Prueba;
 import com.ste.beans.Soporte;
 import com.ste.counters.Counter;
 import com.ste.persistence.PMF;
 import com.ste.utils.Utils;
 
 public class SoporteDao {
-
+	Integer DATA_SIZE = 10; 
 	public static SoporteDao getInstance() {
 		return new SoporteDao();
 	}
@@ -346,4 +354,155 @@ public class SoporteDao {
 
 		return soportes;
 	}	
+	
+	
+	public List<Soporte> getSoportesPaged(Integer page) {
+		
+		List<Soporte> soportes;
+		
+		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		com.google.appengine.api.datastore.Query q = new com.google.appengine.api.datastore.Query("Soporte");
+		
+		List<Entity> entities = null;
+		FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+		if(page != null) {
+			Integer offset = page * DATA_SIZE;
+			fetchOptions.limit(DATA_SIZE);	
+			fetchOptions.offset(offset);
+		}
+		entities = datastore.prepare(q).asList(fetchOptions);
+				
+		soportes = new ArrayList<>();	
+		for (Entity result : entities) {			
+			soportes.add(buildSoporte(result));
+		}
+		
+		return soportes;
+		
+		/*PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		Query q = pm.newQuery("select from " + Prueba.class.getName());		
+		q.setOrdering("fecha_estado desc");
+		long offset = page * DATA_SIZE;
+		q.setRange(offset, offset + DATA_SIZE);
+		pruebas = (List<Prueba>) q.execute();
+		pm.close();*/
+		
+		//return pruebas;		
+	}
+	
+	private Soporte buildSoporte(Entity entity) {
+		Soporte soporte = new Soporte();
+		
+		soporte.setKey(entity.getKey());
+		
+		soporte.setErased((boolean) entity.getProperty("erased"));
+		
+		String cliente_id = getString(entity,"cliente_id");
+		if(cliente_id != null) {
+			soporte.setCliente_id(cliente_id);
+		}
+		
+		String client_name = getString(entity, "cliente_name");
+		if(client_name != null) {
+			soporte.setCliente_name(client_name);
+		}
+		
+		String detalles = getString(entity, "detalles");
+		if(client_name != null) {
+			soporte.setDetalles(detalles);
+		}
+		
+		String estado = getString(entity, "estado");
+		if(estado != null) {
+			soporte.setEstado(estado);
+		}
+		
+		Date fecha_fin = getDate(entity, "fecha_fin");
+		if(fecha_fin!=null){
+			soporte.setFecha_fin(fecha_fin);
+		}
+		
+		Date fecha_inicio = getDate(entity,"fecha_inicio");
+		if(fecha_inicio!=null){
+			soporte.setFecha_inicio(fecha_inicio);
+		}
+		
+		String id_soporte = getString(entity, "id_soporte");
+		if(id_soporte!=null){
+			soporte.setId_soporte(id_soporte);
+		}
+		
+		String pais = getString(entity, "pais");
+		if(pais!=null){
+			soporte.setPais(pais);
+		}
+		
+		String peticionario = getString(entity, "peticionario");
+		if(peticionario!=null){
+			soporte.setPeticionario(peticionario);
+		}
+		
+		String premium = getString(entity, "premium");
+		if(premium!=null){
+			soporte.setPremium(premium);
+		}
+		
+		String producto_canal = getString(entity, "producto_canal");
+		if(producto_canal!=null){
+			soporte.setProducto_canal(producto_canal);
+		}
+		
+		String solucion = getString(entity, "solucion");
+		if(solucion!=null){
+			soporte.setSolucion(solucion);
+		}
+		
+		String str_fecha_fin = getString(entity, "str_fecha_fin");
+		if(str_fecha_fin!=null){
+			soporte.setStr_fecha_fin(str_fecha_fin);
+		}
+		
+		String str_fecha_inicio = getString(entity,"str_fecha_inicio");
+		if(str_fecha_inicio!=null){
+			soporte.setStr_fecha_inicio(str_fecha_inicio);
+		}
+		
+		String tipo_cliente = getString(entity,"tipo_cliente");
+		if(tipo_cliente!=null){
+			soporte.setTipo_cliente(tipo_cliente);
+		}
+		
+		String tipo_servicio = getString(entity,"tipo_servicio");
+		if(tipo_servicio!=null){
+			soporte.setTipo_servicio(tipo_servicio);
+		}
+		
+		String tipo_soporte = getString(entity,"tipo_soporte");
+		if(tipo_soporte!=null){
+			soporte.setTipo_soporte(tipo_soporte);
+		}
+		
+		
+		
+		return soporte;
+	}
+	
+	private String getString(Entity e, String field) {
+		try {
+			return (String) e.getProperty(field);
+		}
+		catch(Exception exp) {
+			return null;
+		}
+	}
+	
+	private Date getDate(Entity e, String field) {
+		try {
+			return (Date) e.getProperty(field);
+		}
+		catch(Exception exp) {
+			return null;
+		}
+	}
 }

@@ -366,8 +366,10 @@ public class ClienteDao {
 					}
 				}
 			}
+			for(Entity removEnty:indexDel){
+				clientesFinal.remove(removEnty);
+			}
 			
-			clientesFinal.remove(indexDel);
 			
 			clientes = new ArrayList<Cliente>();
 			int clientesPages = clientesFinal.size();
