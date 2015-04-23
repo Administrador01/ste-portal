@@ -41,12 +41,19 @@ public class PruebasAction extends Action{
 		
 		String idCli = req.getParameter("idCli");
 		String fechaFilter = req.getParameter("fecha-filter");
-
+		String clienteFilter = req.getParameter("cliente-filter");
+		String servicioFilter = req.getParameter("servicio-filter");
+		String estadoFilter = req.getParameter("estado-filter");
+		String productoFilter = req.getParameter("producto-filter");
+		String entornoFilter = req.getParameter("entorno-filter");
+		String desdeFilter = req.getParameter("desde-filter");
+		String hastaFilter = req.getParameter("hasta-filter");
+		String premium = req.getParameter("premium");
 		
 		String page = req.getParameter("page");
 		int pageint = Utils.stringToInt(page);		
 		
-		if(idCli == null){
+		if(idCli == null||(fechaFilter.endsWith("")&&clienteFilter.equals("")&&servicioFilter.equals("")&&estadoFilter.equals("")&&productoFilter.equals("")&&entornoFilter.equals("")&&desdeFilter.equals("")&&hastaFilter.equals("")&&premium.equals("Todos")&&idCli.equals(""))){
 			
 				pruebas = pDao.getPruebasPaged(pageint);		
 				CounterDao counterDao = CounterDao.getInstance();
@@ -57,14 +64,7 @@ public class PruebasAction extends Action{
 		} else {
 			if(fechaFilter!=null){
 				
-				String clienteFilter = req.getParameter("cliente-filter");
-				String servicioFilter = req.getParameter("servicio-filter");
-				String estadoFilter = req.getParameter("estado-filter");
-				String productoFilter = req.getParameter("producto-filter");
-				String entornoFilter = req.getParameter("entorno-filter");
-				String desdeFilter = req.getParameter("desde-filter");
-				String hastaFilter = req.getParameter("hasta-filter");
-				String premium = req.getParameter("premium");
+
 				
 				pruebas = pDao.getPruebasByAllParam(fechaFilter, clienteFilter, servicioFilter, estadoFilter, productoFilter, entornoFilter,desdeFilter,hastaFilter, premium, pageint);		
 

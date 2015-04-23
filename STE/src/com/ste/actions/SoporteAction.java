@@ -23,6 +23,7 @@ import com.ste.dao.PaisDao;
 import com.ste.dao.ProductoCanalDao;
 import com.ste.dao.SoporteDao;
 import com.ste.dao.TipoServicioDao;
+import com.ste.utils.Utils;
 
 public class SoporteAction extends Action{
 
@@ -35,16 +36,33 @@ public class SoporteAction extends Action{
 		List<Soporte> soportes = new ArrayList <Soporte>();
 		
 		String idCli = req.getParameter("idCli");
+		String fechaFilter = req.getParameter("fecha-filter");
+		String clienteFilter = req.getParameter("cliente-filter");
+		String segmentoFilter = req.getParameter("segmento-filter");
+		String estadoFilter = req.getParameter("estado-filter");
+		String tipoServFilter = req.getParameter("tipoServ-filter");
+		String productoFilter = req.getParameter("producto-filter");
+		String descripcionFilter = req.getParameter("descripcion-filter");
 		
-		if(idCli == null || idCli == ""){
-			soportes= sDao.getAllDelSoportes();
-			req.setAttribute("soportesDel", soportes);
-			soportes= sDao.getAllSoportes();
-			
+		String page = req.getParameter("page");
+		int pageint = Utils.stringToInt(page);	
+		
+		if(idCli == null || idCli == ""|| (fechaFilter.equals("")&&clienteFilter.equals("")&&segmentoFilter.equals("")&&estadoFilter.equals("")&&tipoServFilter.equals("")&&productoFilter.equals("")&&descripcionFilter.equals(""))){
+			soportes= sDao.getSoportesPaged(pageint);
+			req.setAttribute("soportes", soportes);
 		}else{
 			soportes = sDao.getAllSoportesByClientId(idCli);
 		}
 		
+//		if(idCli == null || idCli == ""|| (fechaFilter.equals("")&&clienteFilter.equals("")&&segmentoFilter.equals("")&&estadoFilter.equals("")&&tipoServFilter.equals("")&&productoFilter.equals("")&&descripcionFilter.equals(""))){
+//			soportes= sDao.getAllDelSoportes();
+//			req.setAttribute("soportesDel", soportes);
+//			soportes= sDao.getAllSoportes();
+//			
+//		}else{
+//			soportes = sDao.getAllSoportesByClientId(idCli);
+//		}
+//		
 		//Mandamos los clientes para generar la lista select desplegable
 		ClienteDao cDao = ClienteDao.getInstance();
 		List<Cliente> clientes = cDao.getAllClients();

@@ -744,8 +744,9 @@ public class PruebaDao {
 					}
 				}
 			}
-			
-			pruebasFinal.removeAll(indexDel);
+			for(Entity removEnty: indexDel){
+				pruebasFinal.remove(removEnty);
+			}
 			
 			pruebas = new ArrayList<Prueba>();
 			int pruebasPages = pruebasFinal.size();
