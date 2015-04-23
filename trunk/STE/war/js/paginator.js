@@ -42,7 +42,7 @@ $.fn.paginateMe = function(opts) {
 		var sPage = sPath.substring(sPath.lastIndexOf('/') + 1);
 		
 		if(numpages > 0) {
-			if(page >= 0) {
+			if(page > 0) {
 				$('<li><a href="#" class="prev_link"><</a></li>').appendTo(pager);
 				$('<li><a href="'+ sPage+'?page=0" class="page_link">1</a></li>').appendTo(pager);
 			}	

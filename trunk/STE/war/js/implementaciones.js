@@ -17,7 +17,7 @@ function sendCloneImplementacion(){
 					if ($('.edit-user-form-holder').height()<190){
 						$('.edit-user-form-holder').height($('.edit-user-form-holder').height()+35);
 					}
-					$form.find('#message_div_modal').removeClass("hidden");
+					
 					$('#message_div_modal').css('display','block').removeClass("error").addClass("success");
 					
 					$form.find('#span_message').html('La implementaci&oacuten ha sido duplicada de forma correcta.');
@@ -25,7 +25,7 @@ function sendCloneImplementacion(){
 					
 
 					setTimeout(function() { 
-						$form.find('#message_div_modal').addClass("hidden");
+						$('#message_div_modal').css('display','none');
 					}, 1500);
 				}else{
 					$('#message_div_modal').removeClass("success").addClass("error");
@@ -43,9 +43,10 @@ function sendCloneImplementacion(){
 function sendEditImplementacion(){
 
 	var $form = $("#edit-implementacion-form");
+	$('#modal-footer_submit').css('display','none');
 	
 	if($form.valid()){			
-		
+		$('#new_prueba_form_modal').addClass("hidden");
 		var postData = $form.serialize() + "&accion=update&id="+id;
 		var formURL = $form.attr("action");
 		$.ajax(
@@ -60,11 +61,11 @@ function sendEditImplementacion(){
 					if ($('.edit-user-form-holder').height()<190){
 						$('.edit-user-form-holder').height($('.edit-user-form-holder').height()+35);
 					}
-					$form.find('#message_div_modal').removeClass("hidden");
+					$('#message_div_modal').css('display','block').removeClass("error").addClass("success");
 					$form.find('.form-container').find('div:not(#message_div_modal)').hide(0);
-					$('#new_prueba_form_modal').addClass("hidden");
+					
 					$form.find('#span_message').html('La implementaci&oacuten ha sido modificado de forma correcta.<br/>En breve volvemos a la p&aacute;gina.');
-					$('#modal-footer_submit').css('display','none');
+					
 					
 
 					setTimeout(function() { 
