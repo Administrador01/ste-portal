@@ -1,3 +1,13 @@
+
+
+function filteringSupport(){
+	var $form = $("#support-header-filter");
+	
+	var postData =  $form.serialize();
+	postData = postData + "&premium="+$('#tipo_cliente').val();
+	window.location = "/soporte.do?"+postData;
+}
+
 function sendEditSoporte(){
 
 	var $form = $("#edit-soporte-form");

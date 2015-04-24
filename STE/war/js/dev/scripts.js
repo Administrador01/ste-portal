@@ -585,7 +585,7 @@ $(function() {
 		drawLetters();
 	});
 	
-	
+	/*
 	$('#tipo_cliente').on('change', function(e) {
 		var val = $('#tipo_cliente').val();
 		var trs = $('#myTable').find('tr');
@@ -609,6 +609,8 @@ $(function() {
 		})
 			
 	});
+	
+	*/
 	
 	$('#tip_crit').on('change', function(e) {		
 		var val = $('#tip_crit').val();
@@ -1784,7 +1786,17 @@ $(function() {
 	
 });
 
-;function sendEditSoporte(){
+;
+
+function filteringSupport(){
+	var $form = $("#support-header-filter");
+	
+	var postData =  $form.serialize();
+	postData = postData + "&premium="+$('#tipo_cliente').val();
+	window.location = "/soporte.do?"+postData;
+}
+
+function sendEditSoporte(){
 
 	var $form = $("#edit-soporte-form");
 	
