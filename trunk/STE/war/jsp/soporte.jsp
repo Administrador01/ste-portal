@@ -211,11 +211,13 @@
 
 <div>	
 	<div>
+
+		
 		<div class="tipo-cliente-field">
 			<span class="lbl">Tipo cliente:</span>
 			<select id="tipo_cliente" class="selectpicker selected" name="tipo_servicio" >
-				<option value="Todos" selected>Todos</option>	
-				<option value="Premium">Premium</option>	
+				<option value="Todos" ${premiumFilter == "Todos" ? 'selected' : ''}>Todos</option>	
+				<option value="Premium" ${premiumFilter == "Premium" ? 'selected' : ''}>Premium</option>	
 			</select>
 		</div>
 		<div class="main-table usersTable">
@@ -232,14 +234,17 @@
 						<th style="width: 110px;">&nbsp;</th>
 					</tr>
 					<tr>
-						<th class="search-th"><input class="search col0 search_anywhere"></th>
-						<th class="search-th"><input class="search col1 search_anywhere"></th>
-						<th class="search-th"><input class="search col2 search_anywhere"></th>
-						<th class="search-th"><input class="search col3 search_anywhere"></th>
-						<th class="search-th"><input class="search col4 search_anywhere"></th>
-						<th class="search-th"><input class="search col5 search_anywhere"></th>
-						<th class="search-th"><input class="search col6 search_anywhere"></th>
-						<th style="width: 110px;">&nbsp;</th>
+						<form id='support-header-filter' action="">
+							<th class="search-th"><input name="fechaFilter" value="${fechaFilter}"></th>
+							<th class="search-th"><input name="clienteFilter" value="${clienteFilter}"></th>
+							<th class="search-th"><input name="segmentoFilter" value="${segmentoFilter}"></th>
+							<th class="search-th"><input name="estadoFilter" value="${estadoFilter}"></th>
+							<th class="search-th"><input name="servicioFilter" value="${servicioFilter}"></th>
+							<th class="search-th"><input name="productoFilter" value="${productoFilter}"></th>
+							<th class="search-th"><input name="descripcionFilter" value="${descripcionFilter}"></th>
+							<input name="idCli" class="hidden" value="${idCli}">
+							<th style="width: 110px;"><button type='button' onclick="filteringSupport();">  FILTRAR  </button></th>
+						</form>
 					</tr>
 				</thead>
 				<tbody id="myTable" cellspacing="0" data-page="${page}" data-lastpage="${lastpage}" data-numpages="${numpages}">
@@ -288,6 +293,7 @@
 		<div class="col-md-12 text-center">
 			<ul class="pagination" id="myPager"></ul>
 			<span class="pagesummary"></span>
+			<div class="paginationGoto" />
 		</div>
 	</div>
 </div>

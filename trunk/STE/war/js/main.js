@@ -174,7 +174,7 @@ $(function() {
 		drawLetters();
 	});
 	
-	
+	/*
 	$('#tipo_cliente').on('change', function(e) {
 		var val = $('#tipo_cliente').val();
 		var trs = $('#myTable').find('tr');
@@ -198,6 +198,8 @@ $(function() {
 		})
 			
 	});
+	
+	*/
 	
 	$('#tip_crit').on('change', function(e) {		
 		var val = $('#tip_crit').val();

@@ -502,7 +502,7 @@ public class PruebaDao {
 	}
 	
 	
-	public List<Prueba> getPruebasByAllParam(String fecha, String cliente, String servicio , String estado, String producto, String entorno, String desde, String hasta, String premium, Integer page) throws ParseException {
+	public List<Prueba> getPruebasByAllParam(String fecha, String cliente, String servicio , String estado, String producto, String entorno, String desde, String hasta, String premium,String idCli, Integer page) throws ParseException {
 		List<Prueba> pruebas = null;
 		
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -560,6 +560,14 @@ public class PruebaDao {
 
 			filters++;
 		}
+		String client_name=null;
+		if(!idCli.equals("")){
+			ClienteDao clientDao = ClienteDao.getInstance();
+			Cliente clien = clientDao.getClientebyId(Long.parseLong(idCli));
+			client_name= clien.getNombre();
+			//cliente="";
+			filters++;
+		}
 		if(filters<=1){
 			if(!cliente.equals("")){
 				finalFilters.add(new FilterPredicate("client_name", FilterOperator.GREATER_THAN_OR_EQUAL, cliente));
@@ -591,6 +599,10 @@ public class PruebaDao {
 			if(!producto.equals("")){
 				finalFilters.add(new FilterPredicate("producto", FilterOperator.GREATER_THAN_OR_EQUAL, producto));
 				finalFilters.add(new FilterPredicate("producto", FilterOperator.LESS_THAN,producto+"\ufffd"));
+			}
+			
+			if(!idCli.equals("")){
+				finalFilters.add(new FilterPredicate("client_name", FilterOperator.EQUAL, client_name));
 			}
 			if(!premium.equals("Todos")){
 				finalFilters.add(new FilterPredicate("premium", FilterOperator.EQUAL,premium));
@@ -719,6 +731,14 @@ public class PruebaDao {
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
 				q.setFilter(filtro);
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
+			}
+			
+			if(!idCli.equals("")){
+				q = new com.google.appengine.api.datastore.Query("Prueba");
+				Filter filtro=new FilterPredicate("client_name", FilterOperator.EQUAL, client_name);
+				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+				q.setFilter(filtro);
+				Entities.add(datastore.prepare(q).asList(fetchOptions));	
 			}
 			List<Entity> pruebasFinal = new ArrayList<Entity>();
 			int lowRowsIndex = 0;

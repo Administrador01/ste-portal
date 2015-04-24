@@ -12,10 +12,17 @@ import javax.jdo.Query;
 
 
 
+
+
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.FetchOptions;
+import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
+import com.google.appengine.api.datastore.Query.Filter;
+import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
+import com.ste.beans.Cliente;
 import com.ste.beans.Prueba;
 import com.ste.beans.Soporte;
 import com.ste.counters.Counter;
@@ -23,7 +30,7 @@ import com.ste.persistence.PMF;
 import com.ste.utils.Utils;
 
 public class SoporteDao {
-	Integer DATA_SIZE = 10; 
+	public static final int DATA_SIZE = 10; 
 	public static SoporteDao getInstance() {
 		return new SoporteDao();
 	}
@@ -391,13 +398,299 @@ public class SoporteDao {
 		//return pruebas;		
 	}
 	
+	public List<Soporte> getSoportesByAllParam(String fecha, String cliente, String segmento , String estado, String servicio, String producto,String descripcion , String premium,String idCli, Integer page) throws ParseException {
+		List<Soporte> soportes = null;
+		
+		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		com.google.appengine.api.datastore.Query q = new com.google.appengine.api.datastore.Query("Soporte");
+		
+		List<Filter> finalFilters = new ArrayList<>();
+
+		Date dateDesde= null;
+		Date dateHasta= null;
+		
+		/*TODO no se puede consultar sobre mas de una coluna con esta operacion
+		 * ver pagina
+		 * 
+		 * http://gae-java-persistence.blogspot.de/2009/12/queries-with-and-in-filters.html
+		 * 
+		 * */
+		int filters = 0;		
+		if(!fecha.equals("")){	
+			filters++;
+		}
+
+		if(!cliente.equals("")){
+			cliente = cliente.toUpperCase();
+			filters++;
+		}
+		
+		if(!segmento.equals("")){
+			filters++;
+		}
+
+		if(!estado.equals("")){
+			Character a = estado.charAt(0);
+			String estado2= a.toString().toUpperCase()+estado.substring(1);
+			estado = estado2;
+			filters++;
+		}
+		if(!servicio.equals("")){
+			filters++;
+		}
+
+		if(!producto.equals("")){
+			filters++;
+		}
+		
+		if(!descripcion.equals("")){
+			filters++;
+		}
+		
+		if(!premium.equals("Todos")){
+			filters++;
+		}
+		
+		if(!idCli.equals("")){
+			filters++;
+		}
+
+		String client_name=null;
+		if(!idCli.equals("")){
+//			ClienteDao clientDao = ClienteDao.getInstance();
+//			Cliente clien = clientDao.getClientebyId(Long.parseLong(idCli));
+//			client_name= clien.getNombre();
+//			cliente="";
+			filters++;
+		}
+		if(filters<=1){
+			
+			if(!fecha.equals("")){
+				finalFilters.add(new FilterPredicate("str_fecha_inicio", FilterOperator.GREATER_THAN_OR_EQUAL, fecha));
+				finalFilters.add(new FilterPredicate("str_fecha_inicio", FilterOperator.LESS_THAN, fecha+"\ufffd"));
+			}
+			if(!cliente.equals("")){
+				finalFilters.add(new FilterPredicate("cliente_name", FilterOperator.GREATER_THAN_OR_EQUAL, cliente));
+				finalFilters.add(new FilterPredicate("cliente_name", FilterOperator.LESS_THAN, cliente+"\ufffd"));
+			}
+
+			if(!segmento.equals("")){
+				finalFilters.add(new FilterPredicate("tipo_cliente", FilterOperator.GREATER_THAN_OR_EQUAL,segmento));
+				finalFilters.add(new FilterPredicate("tipo_cliente", FilterOperator.LESS_THAN, segmento+"\ufffd"));
+			}
+			
+			if(!estado.equals("")){
+				finalFilters.add(new FilterPredicate("estado", FilterOperator.GREATER_THAN_OR_EQUAL, estado));
+				finalFilters.add(new FilterPredicate("estado", FilterOperator.LESS_THAN, estado+"\ufffd"));
+			}
+			
+			if(!servicio.equals("")){
+				finalFilters.add(new FilterPredicate("tipo_servicio", FilterOperator.GREATER_THAN_OR_EQUAL, servicio));
+				finalFilters.add(new FilterPredicate("tipo_servicio", FilterOperator.LESS_THAN, servicio+"\ufffd"));
+			}
+
+			if(!producto.equals("")){
+				finalFilters.add(new FilterPredicate("producto_canal", FilterOperator.GREATER_THAN_OR_EQUAL, producto));
+				finalFilters.add(new FilterPredicate("producto_canal", FilterOperator.LESS_THAN,producto+"\ufffd"));
+			}
+			
+			if(!descripcion.equals("")){
+				finalFilters.add(new FilterPredicate("detalles", FilterOperator.GREATER_THAN_OR_EQUAL, descripcion));
+				finalFilters.add(new FilterPredicate("detalles", FilterOperator.LESS_THAN,descripcion+"\ufffd"));
+			}
+			
+			if(!idCli.equals("")){
+				finalFilters.add(new FilterPredicate("cliente_id", FilterOperator.EQUAL, idCli));
+			}
+			if(!premium.equals("Todos")){
+				finalFilters.add(new FilterPredicate("premium", FilterOperator.EQUAL,premium));
+			}
+			Filter finalFilter = null;
+			if(finalFilters.size()>1) finalFilter = CompositeFilterOperator.and(finalFilters);
+			if(finalFilters.size()==1) finalFilter = finalFilters.get(0);
+			if(finalFilters.size()!=0)q.setFilter(finalFilter);
+			
+			
+			List<Entity> entities = null;
+			FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+			if(page != null) {
+				Integer offset = page * DATA_SIZE;
+				fetchOptions.limit(DATA_SIZE);	
+				fetchOptions.offset(offset);
+			}
+			entities = datastore.prepare(q).asList(fetchOptions);
+			soportes = new ArrayList<>();	
+			for (Entity result : entities) {			
+				soportes.add(buildSoporte(result));
+			}
+			Soporte soportePagin = new Soporte();
+			soportePagin.setDetalles("0");
+			soportes.add(soportePagin);
+			
+			
+			
+			//soportePagin.setDetalles();
+		}else{
+//			List<Entity> clienteEntities = new ArrayList<Entity>();
+//			List<Entity> fechaEntities = new ArrayList<Entity>();
+//			List<Entity> servicioEntities = new ArrayList<Entity>();
+//			List<Entity> entornoEntities = new ArrayList<Entity>();
+//			List<Entity> estadoEntities = new ArrayList<Entity>();
+//			List<Entity> productoEntities = new ArrayList<Entity>();
+//			List<Entity> entities = new ArrayList<Entity>();
+			List<List<Entity>> Entities = new ArrayList<List<Entity>>();
+			
+			if(!fecha.equals("")){
+				q = new com.google.appengine.api.datastore.Query("Soporte");
+				finalFilters = new ArrayList<>();
+				finalFilters.add(new FilterPredicate("str_fecha_inicio", FilterOperator.GREATER_THAN_OR_EQUAL, fecha));
+				finalFilters.add(new FilterPredicate("str_fecha_inicio", FilterOperator.LESS_THAN, fecha+"\ufffd"));
+				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
+				q.setFilter(finalFilter);
+				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+				
+//				fechaEntities =datastore.prepare(q).asList(fetchOptions);
+				Entities.add(datastore.prepare(q).asList(fetchOptions));
+			}
+			if(!cliente.equals("")){
+				q = new com.google.appengine.api.datastore.Query("Soporte");
+				finalFilters = new ArrayList<>();
+				finalFilters.add(new FilterPredicate("cliente_name", FilterOperator.GREATER_THAN_OR_EQUAL, cliente));
+				finalFilters.add(new FilterPredicate("cliente_name", FilterOperator.LESS_THAN, cliente+"\ufffd"));
+				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
+				q.setFilter(finalFilter);
+				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+//				clienteEntities =datastore.prepare(q).asList(fetchOptions);
+				Entities.add(datastore.prepare(q).asList(fetchOptions));
+			}
+			
+			if(!segmento.equals("")){
+				q = new com.google.appengine.api.datastore.Query("Soporte");
+				finalFilters = new ArrayList<>();
+				finalFilters.add(new FilterPredicate("tipo_cliente", FilterOperator.GREATER_THAN_OR_EQUAL,segmento));
+				finalFilters.add(new FilterPredicate("tipo_cliente", FilterOperator.LESS_THAN, segmento+"\ufffd"));
+				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
+				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+				q.setFilter(finalFilter);
+//				entornoEntities =datastore.prepare(q).asList(fetchOptions);
+				Entities.add(datastore.prepare(q).asList(fetchOptions));
+			}
+			
+
+			if(!estado.equals("")){
+				q = new com.google.appengine.api.datastore.Query("Soporte");
+				finalFilters = new ArrayList<>();
+				finalFilters.add(new FilterPredicate("estado", FilterOperator.GREATER_THAN_OR_EQUAL, estado));
+				finalFilters.add(new FilterPredicate("estado", FilterOperator.LESS_THAN, estado+"\ufffd"));
+				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
+				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+				q.setFilter(finalFilter);
+//				estadoEntities =datastore.prepare(q).asList(fetchOptions);
+				Entities.add(datastore.prepare(q).asList(fetchOptions));
+			}
+			
+			if(!servicio.equals("")){
+				q = new com.google.appengine.api.datastore.Query("Soporte");
+				finalFilters = new ArrayList<>();
+				finalFilters.add(new FilterPredicate("tipo_servicio", FilterOperator.GREATER_THAN_OR_EQUAL, servicio));
+				finalFilters.add(new FilterPredicate("tipo_servicio", FilterOperator.LESS_THAN, servicio+"\ufffd"));
+				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
+				q.setFilter(finalFilter);
+				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+				
+//				servicioEntities =datastore.prepare(q).asList(fetchOptions);
+				Entities.add(datastore.prepare(q).asList(fetchOptions));
+			}
+
+			if(!producto.equals("")){
+				q = new com.google.appengine.api.datastore.Query("Soporte");
+				finalFilters = new ArrayList<>();
+				finalFilters.add(new FilterPredicate("producto_canal", FilterOperator.GREATER_THAN_OR_EQUAL, producto));
+				finalFilters.add(new FilterPredicate("producto_canal", FilterOperator.LESS_THAN,producto+"\ufffd"));
+				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
+				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+				q.setFilter(finalFilter);
+//				productoEntities =datastore.prepare(q).asList(fetchOptions);
+				Entities.add(datastore.prepare(q).asList(fetchOptions));
+			}
+			
+			if(!descripcion.equals("")){
+				q = new com.google.appengine.api.datastore.Query("Soporte");
+				finalFilters = new ArrayList<>();
+				finalFilters.add(new FilterPredicate("detalles", FilterOperator.GREATER_THAN_OR_EQUAL, descripcion));
+				finalFilters.add(new FilterPredicate("detalles", FilterOperator.LESS_THAN,descripcion+"\ufffd"));
+				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
+				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+				q.setFilter(finalFilter);
+//				productoEntities =datastore.prepare(q).asList(fetchOptions);
+				Entities.add(datastore.prepare(q).asList(fetchOptions));
+			}
+			
+			if(!premium.equals("Todos")){
+				q = new com.google.appengine.api.datastore.Query("Soporte");
+				Filter filtro= new FilterPredicate("cliente_id", FilterOperator.EQUAL, idCli);
+				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+				q.setFilter(filtro);
+				Entities.add(datastore.prepare(q).asList(fetchOptions));
+			}
+			
+			if(!idCli.equals("")){
+				q = new com.google.appengine.api.datastore.Query("Soporte");
+				Filter filtro=new FilterPredicate("cliente_name", FilterOperator.EQUAL, client_name);
+				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+				q.setFilter(filtro);
+				Entities.add(datastore.prepare(q).asList(fetchOptions));	
+			}
+			List<Entity> soportesFinal = new ArrayList<Entity>();
+			int lowRowsIndex = 0;
+			int lowRowsNumber = Entities.get(0).size();
+			
+			for(int i=1;i<Entities.size();i++){
+				if(lowRowsNumber>Entities.get(i).size()){
+					lowRowsIndex=i;
+					lowRowsNumber=Entities.get(i).size();
+				}
+			}
+			
+			List<Entity> indexDel = new ArrayList<Entity>();
+			soportesFinal = Entities.get(lowRowsIndex);
+			for(int i=0;i<Entities.size();i++){
+				if(i!=lowRowsIndex){
+					int limite = soportesFinal.size();
+					for (int j = 0 ; j<limite;j++) {				
+							if(!Entities.get(i).contains(soportesFinal.get(j))){
+								Entity auxEnty = soportesFinal.get(j);
+								if(!indexDel.contains(auxEnty))indexDel.add(auxEnty);
+							}
+					}
+				}
+			}
+			for(Entity removEnty: indexDel){
+				soportesFinal.remove(removEnty);
+			}
+			
+			soportes = new ArrayList<Soporte>();
+			int soportesPages = soportesFinal.size();
+			for (int i = page*10; i < (page*10)+10&&i<soportesFinal.size();i++) {			
+				soportes.add(buildSoporte(soportesFinal.get(i)));
+			}
+			Soporte pages = new Soporte();
+			pages.setDetalles(Integer.toString(soportesPages));
+			soportes.add(pages);
+		}
+		
+		
+		return soportes;
+	}
+	
 	private Soporte buildSoporte(Entity entity) {
 		Soporte soporte = new Soporte();
 		
 		soporte.setKey(entity.getKey());
-		
-		soporte.setErased((boolean) entity.getProperty("erased"));
-		
+		Boolean erasedd = (boolean) entity.getProperty("erased");
+		if(erasedd!=null){
+			soporte.setErased(erasedd);
+		}
 		String cliente_id = getString(entity,"cliente_id");
 		if(cliente_id != null) {
 			soporte.setCliente_id(cliente_id);
