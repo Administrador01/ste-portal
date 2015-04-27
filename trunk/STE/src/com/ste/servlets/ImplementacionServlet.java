@@ -305,6 +305,16 @@ public class ImplementacionServlet extends HttpServlet{
 			String normalizador_str = req.getParameter("normalizador_modal");
 			String firma_str = req.getParameter("firma_modal");
 			
+			ClienteDao clienteDao = ClienteDao.getInstance();
+			Cliente cliente = null;
+			try{
+				cliente = clienteDao.getClientebyId(Long.parseLong(cliente_id));
+			}catch(Exception e){
+				
+			}
+			
+			
+			
 			boolean normalizador=false;
 			boolean firma = false;
 			if (normalizador_str == null)normalizador_str = "No";
@@ -317,6 +327,8 @@ public class ImplementacionServlet extends HttpServlet{
 			ImplementacionDao impDao = ImplementacionDao.getInstance();
 			Implementacion imp = new Implementacion();
 			
+			
+			imp.setClient_name(cliente.getNombre());
 			imp.setAdeudos_ref_ext(contrat_adeud);
 			imp.setAsunto_ref_ext(asunto);
 			imp.setCliente_id(Long.parseLong(cliente_id));
@@ -351,7 +363,7 @@ public class ImplementacionServlet extends HttpServlet{
 			
 			impDao.createImplementacion(imp, usermail);
 			
-			Utils.writeLog(usermail, "Modifica", "Implementacion","");
+			Utils.writeLog(usermail, "Clona", "Implementacion","");
 			
 			try {
 				json.append("success", "true");
