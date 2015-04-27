@@ -101,6 +101,14 @@ function editForm($form, entidad){
 	}
 }
 
+function filteringClient(){
+	var $form = $("#client-header-filter");
+	
+	var postData =  $form.serialize();
+	
+	window.location = "/gestionCliente.do?"+postData;
+}
+
 $(function(){
 	
 	$('#gestion_cliente').on('click','#deleteClient', function (e){
@@ -265,6 +273,12 @@ var getIsoDate = function(dateString) {
 		  }
 		},'html');
 	}
+}
+
+function filteringImplementation(){
+	var $form = $("#imp-header-filter");
+	var postData =  $form.serialize();
+	window.location = "/implementacion.do?"+postData;
 }
 
 function sendEditImplementacion(){

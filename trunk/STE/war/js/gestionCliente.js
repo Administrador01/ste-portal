@@ -43,6 +43,14 @@ function editForm($form, entidad){
 	}
 }
 
+function filteringClient(){
+	var $form = $("#client-header-filter");
+	
+	var postData =  $form.serialize();
+	
+	window.location = "/gestionCliente.do?"+postData;
+}
+
 $(function(){
 	
 	$('#gestion_cliente').on('click','#deleteClient', function (e){
