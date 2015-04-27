@@ -581,8 +581,8 @@ public class PruebaDao {
 				finalFilters.add(new FilterPredicate("fecha_inicio", FilterOperator.LESS_THAN_OR_EQUAL, dateHasta));
 			}
 			if(!fecha.equals("")){
-				finalFilters.add(new FilterPredicate("str_fecha_estado", FilterOperator.GREATER_THAN_OR_EQUAL, fecha));
-				finalFilters.add(new FilterPredicate("str_fecha_estado", FilterOperator.LESS_THAN, fecha+"\ufffd"));
+				finalFilters.add(new FilterPredicate("str_fecha_estado", FilterOperator.EQUAL,"("+fecha+")"));
+				
 			}
 			if(!servicio.equals("")){
 				finalFilters.add(new FilterPredicate("tipo_servicio", FilterOperator.GREATER_THAN_OR_EQUAL, servicio));

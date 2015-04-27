@@ -62,7 +62,7 @@ public class PruebasAction extends Action{
 
 		} else {
 			if(fechaFilter!=null){
-				if(fechaFilter.endsWith("")&&clienteFilter.equals("")&&servicioFilter.equals("")&&estadoFilter.equals("")&&productoFilter.equals("")&&entornoFilter.equals("")&&desdeFilter.equals("")&&hastaFilter.equals("")&&premium.equals("Todos")&&idCli.equals("")){
+				if(fechaFilter.equals("")&&clienteFilter.equals("")&&servicioFilter.equals("")&&estadoFilter.equals("")&&productoFilter.equals("")&&entornoFilter.equals("")&&desdeFilter.equals("")&&hastaFilter.equals("")&&premium.equals("Todos")&&idCli.equals("")){
 					pruebas = pDao.getPruebasPaged(pageint);		
 					CounterDao counterDao = CounterDao.getInstance();
 					Counter count = counterDao.getCounterByName("prueba");
