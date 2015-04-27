@@ -273,7 +273,7 @@
 					</tr>
 
 					<tr>
-					<form if='test-header-filter' action="">
+					<form id='imp-header-filter' action="" >
 						<th class="search-th"><input name='fecha' value='${fecha}'></th>
 						<th class="search-th"><input name='cliente' value='${cliente}'></th>
 						<th class="search-th"><input name='pais' value='${pais}'></th>
@@ -281,7 +281,7 @@
 						<th class="search-th"><input name='servicio' value='${servicio}'></th>
 						<th class="search-th"><input name='normalizator' value='${normalizator}'></th>
 						<th class="search-th"><input name='estado' value='${estado}'></th>
-						<th style="width: 110px;"><button type='submit'>  FILTRAR  </button></th>
+						<th style="width: 110px;"><button type='button' onclick='filteringImplementation();'>  FILTRAR  </button></th>
 					</form>
 					</tr>
 				</thead>

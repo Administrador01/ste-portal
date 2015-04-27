@@ -40,6 +40,12 @@ function sendCloneImplementacion(){
 	}
 }
 
+function filteringImplementation(){
+	var $form = $("#imp-header-filter");
+	var postData =  $form.serialize();
+	window.location = "/implementacion.do?"+postData;
+}
+
 function sendEditImplementacion(){
 
 	var $form = $("#edit-implementacion-form");

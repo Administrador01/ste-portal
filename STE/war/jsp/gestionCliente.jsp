@@ -184,13 +184,13 @@
 						<th style="width: 110px;">&nbsp;</th>
 					</tr>
 					<tr>
-						<form>
+						<form id='client-header-filter'>
 						<th class="search-th"><input name='identificador' value='${identificador}'></th>
 						<th class="search-th"><input name='nombre' value='${nombre}'></th>
 						<th class="search-th"><input name='fecha' value='${fecha}'></th>
 						<th class="search-th"><input name='segmento' value='${segmento}'></th>
 						<th class="search-th"><input name='tipo' value='${tipo}'></th>
-						<th style="width: 110px;"><button type='submit'>  FILTRAR  </button></th>
+						<th style="width: 110px;"><button type='button' onclick='filteringClient();'>  FILTRAR  </button></th>
 						</form>
 					</tr>
 				</thead>
