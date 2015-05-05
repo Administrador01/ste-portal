@@ -2,6 +2,7 @@ package com.ste.servlets;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.ParseException;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -20,6 +21,7 @@ import jxl.write.WritableCellFormat;
 import jxl.write.WritableFont;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
+
 
 
 
@@ -205,7 +207,7 @@ public class SoporteServlet extends HttpServlet{
 		}
 	}
 	
-	public void restore(HttpServletRequest req, HttpServletResponse resp, String usermail) throws JSONException, IOException{
+	public void restore(HttpServletRequest req, HttpServletResponse resp, String usermail) throws JSONException, IOException, ParseException{
 		
 		JSONObject json = new JSONObject();
 		String str_id = req.getParameter("id");
@@ -233,7 +235,7 @@ public class SoporteServlet extends HttpServlet{
 	
 	}
 	
-	public void updateSoporte(HttpServletRequest req, HttpServletResponse resp, String usermail){
+	public void updateSoporte(HttpServletRequest req, HttpServletResponse resp, String usermail) throws ParseException{
 		
 		JSONObject json = new JSONObject();
 		
@@ -273,7 +275,7 @@ public class SoporteServlet extends HttpServlet{
 		s.setPais(pais);
 		s.setPeticionario(peticionario);
 		
-		sDao.updateSoporte(s);
+		sDao.createSoporte(s);
 		
 		
 		try {

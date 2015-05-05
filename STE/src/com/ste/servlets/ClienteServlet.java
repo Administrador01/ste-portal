@@ -224,6 +224,8 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 		nombre = nombre.substring(0,1).toUpperCase() + nombre.substring(1,nombre.length());
 		
 		String premium = req.getParameter("premium_modal");
+		
+		if(premium == ""|| premium == null)premium = "No Premium";
 		String tipo_cliente = req.getParameter("tipo_cliente");
 		
 		c.setStr_fecha_alta(str_fecha_alta);
@@ -274,7 +276,7 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 		String premium = req.getParameter("premium");
 		String tipo_cliente = req.getParameter("tipo_cliente");
 		
-		if(premium == ""|| premium == null)premium = "Premium";
+		if(premium == ""|| premium == null)premium = "No Premium";
 		
 		c.setStr_fecha_alta(str_fecha_alta);
 		c.setNombre(nombre);
