@@ -66,22 +66,22 @@ public class SoporteDao {
 			
 			SoporteDao sopDao = SoporteDao.getInstance();	
 
-			List<Soporte> sopor_arr = sopDao.getAllSoportes();
+//			List<Soporte> sopor_arr = sopDao.getAllSoportes();
 			boolean flag = false;
-			for (Soporte sopor : sopor_arr){
-				
-				/*if(sopor.getDetalles().equals(s.getDetalles())&&
-				   sopor.getProducto_canal().equals(s.getProducto_canal())&&
-				   sopor.getEstado().equals(s.getEstado())&&
-				   sopor.getStr_fecha_inicio().equals(s.getStr_fecha_inicio())&&
-				   sopor.getSolucion().equals(s.getSolucion())&&
-				   sopor.getCliente_id().equals(s.getCliente_id())&&
-				   sopor.getTipo_soporte().equals(s.getTipo_soporte())&&
-				   sopor.getTipo_servicio().equals(s.getTipo_servicio())){
-						flag = true;
-				}*/
-
-			}
+//			for (Soporte sopor : sopor_arr){
+//				
+//				/*if(sopor.getDetalles().equals(s.getDetalles())&&
+//				   sopor.getProducto_canal().equals(s.getProducto_canal())&&
+//				   sopor.getEstado().equals(s.getEstado())&&
+//				   sopor.getStr_fecha_inicio().equals(s.getStr_fecha_inicio())&&
+//				   sopor.getSolucion().equals(s.getSolucion())&&
+//				   sopor.getCliente_id().equals(s.getCliente_id())&&
+//				   sopor.getTipo_soporte().equals(s.getTipo_soporte())&&
+//				   sopor.getTipo_servicio().equals(s.getTipo_servicio())){
+//						flag = true;
+//				}*/
+//
+//			}
 			if(!flag){
 			
 				//Conversi'on de las fechas de string a tipo date
