@@ -56,30 +56,34 @@ $.fn.paginateMe = function(opts) {
 			}
 			
 			$('<span>Ir a p&aacutegina:</span>').appendTo(pagerGoto);
-			var opcionespage = "<select>";
+			var opcionespage = "<select class=\"page-select\">";
 			
 			for(var i=1;i<=numpages;i++){
-				opcionespage= opcionespage+"<option class=\"pagerselect\" val=\'"+i+"\'>"+i+"</option>";
-			
+				if(i == page+1) {
+					opcionespage= opcionespage+"<option class=\"pagerselect\" val=\'"+i+"\' selected>"+i+"</option>";
+				}
+				else {
+					opcionespage= opcionespage+"<option class=\"pagerselect\" val=\'"+i+"\'>"+i+"</option>";
+				}
 			}
 			
 			opcionespage = opcionespage+"<select>";
 			$(opcionespage).appendTo(pagerGoto);
 			
-			/*
-			$('<li>').appendTo(pager);
-			$('<span>Ir a p&aacutegina:</span>').appendTo(pager);
-			$('<select>').appendTo(pager);
-			for(var i= 1;i<numpages ;i++){
-				var auxili = '<option class="irapag" value=\''+i+'\'>'+i;
-				$('<option class="irapag" value=\''+i+'\'>'+i).appendTo(pager);
-				
-				$('</option>').appendTo(pager);
-			}
-			
-			$('</select>').appendTo(pager);
-			$('</li>').appendTo(pager);
-			*/
+			$('.page-select').on('change', function() {
+				var page = $(this).val();
+				page--;
+				if(page >= 0) {				
+					var sPath=window.location.pathname;
+					var sPage = sPath.substring(sPath.lastIndexOf('/') + 1);
+					var location = './' + sPage + '?page=' + page;
+					var oldparams = getParameters();
+					if(oldparams != "") {
+						location = location + "&" + oldparams;
+					}
+					window.location = location;		
+				}
+			});			
 		}
 		else {
 			if(page > 0) {
@@ -286,40 +290,6 @@ $.fn.paginateMe = function(opts) {
 		}
 	}
 };
-
-
-
-$(function(){
-	$('.pagerselect').click(function(e){
-		
-		var page = $(this).val();
-		page--;
-		if(page > 0) {
-		
-			var sPath=window.location.pathname;
-			var sPage = sPath.substring(sPath.lastIndexOf('/') + 1);
-			var location = './' + sPage + '?page=' + page;
-			var oldparams = getParameters();
-			if(oldparams != "") {
-				location = location + "&" + oldparams;
-			}
-			window.location = location;		
-		}
-	});
-	
-	function getParameters(){
-		var sPath=window.location.search;
-		var queryString = sPath.substring(sPath.lastIndexOf("?") + 1);
-		var newQueryString = $.map(queryString.split("&"), function(pair) { 
-			  var p = pair.split("="); 
-			  if(p[0] != "page") {
-				  return p.join("=");
-			  }			  
-		}).join("&");
-		return newQueryString;
-	}
-	
-});
 
 function getParameters(){
 	var sPath=window.location.search;
