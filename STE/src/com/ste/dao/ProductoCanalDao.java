@@ -5,31 +5,26 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import com.ste.beans.EstadoImplementacion;
-import com.ste.beans.Pais;
 import com.ste.beans.ProductoCanal;
 import com.ste.persistence.PMF;
+import com.ste.utils.Utils;
 
 public class ProductoCanalDao {
 	public static ProductoCanalDao getInstance() {
 		return new ProductoCanalDao();
 	}
 	
-	public synchronized void createProductoCanal(ProductoCanal imp) {
-		PersistenceManager pm = PMF.get().getPersistenceManager();	
+	public synchronized void createProductoCanal(ProductoCanal producto) {
+		PersistenceManager pm = PMF.get().getPersistenceManager();
 
-		try{
-			
-			//ServicioDao impDao = ServicioDao.getInstance();
+		producto.setName(Utils.toUpperCase(producto.getName()));
 		
-			try {
-				pm.makePersistent(imp);
-			} finally {}
-			
-			
-		}finally {
-			pm.close();
-			
+		try{
+			pm.makePersistent(producto);			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}finally {		
+			pm.close();			
 		}
 	}
 	
@@ -37,14 +32,11 @@ public class ProductoCanalDao {
 	public List<ProductoCanal> getAllProductos() {
 
 		List<ProductoCanal> ProductoCanales;
-		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
+		PersistenceManager pm = PMF.get().getPersistenceManager();	
 		
 		Query q = pm.newQuery("select from " + ProductoCanal.class.getName());
 		q.setOrdering("name asc");
-		ProductoCanales = (List<ProductoCanal>) q.execute();
-		
-		
+		ProductoCanales = (List<ProductoCanal>) q.execute();	
 		pm.close();
 
 		return ProductoCanales;
@@ -56,12 +48,9 @@ public class ProductoCanalDao {
 		List<ProductoCanal> ProductoCanales;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		
-		
 		Query q = pm.newQuery("select from " + ProductoCanal.class.getName() +" where "+Visibilidad+" == true");
 		q.setOrdering("name asc");
 		ProductoCanales = (List<ProductoCanal>) q.execute();
-		
-		
 		pm.close();
 
 		return ProductoCanales;
@@ -72,13 +61,8 @@ public class ProductoCanalDao {
 
 		List<ProductoCanal> EstadoImplementacions;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		
-		Query q = pm.newQuery("select from " + ProductoCanal.class.getName()+" WHERE name=='"+name+"' && "+enty+"==true");
-
+		Query q = pm.newQuery("select from " + ProductoCanal.class.getName()+" WHERE name=='"+Utils.toUpperCase(name)+"' && "+enty+"==true");
 		EstadoImplementacions = (List<ProductoCanal>) q.execute();
-		
-		
 		pm.close();
 
 		return EstadoImplementacions;

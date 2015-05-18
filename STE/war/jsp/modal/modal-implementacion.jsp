@@ -122,11 +122,11 @@
 					<div class="form-field">
 					<span style="width:38%;" class="lbl">Normalizador<span class="required-asterisk">*</span>:</span>
 							<label style="width:15%;" class="lbl ui-marmots-label-radio marmots-label-left ${implementacion.normalizador ? 'on' : ''} " for="radio_Si_Modal">
-								<input name="normalizador_modal" id="radio_Si_Modal" type="radio" value="Si" ${implementacion.normalizador ? 'checked' : ''} />Si
+								<input name="normalizador_modal" id="radio_Si_Modal" type="radio" value="SI" ${implementacion.normalizador ? 'checked' : ''} />SI
 							</label>
 
 							<label style="width:15%;" class="lbl ui-marmots-label-radio marmots-label-left ${implementacion.normalizador ? '' : 'on'} " for="radio_No_Modal">
-								<input name="normalizador_modal" id="radio_No_Modal" type="radio" value="No" ${implementacion.normalizador ? '' : 'checked'} />No
+								<input name="normalizador_modal" id="radio_No_Modal" type="radio" value="NO" ${implementacion.normalizador ? '' : 'checked'} />NO
 							</label>
 					</div>
 					
@@ -155,11 +155,11 @@
 					<div class="form-field">
 					<span class="lbl" style="width:33%;">Firma contrato<span class="required-asterisk">*</span>:</span>
 							<label style="width:15%;" class="lbl ui-marmots-label-radio marmots-label-left ${implementacion.firma_contrato ? 'on' : ''}" for="radio_Si_Firma_Modal">
-								<input name="firma_modal" ${implementacion.firma_contrato ? 'checked' : ''} id="radio_Si_Firma_Modal"  type="radio" value="Si"  />Si
+								<input name="firma_modal" ${implementacion.firma_contrato ? 'checked' : ''} id="radio_Si_Firma_Modal"  type="radio" value="SI"  />SI
 							</label>
 
 							<label style="width:15%;" class="lbl radio ui-marmots-label-radio marmots-label-left ${implementacion.firma_contrato ? '' : 'on'}" for="radio_No_Firma_Modal">
-								<input name="firma_modal" ${implementacion.firma_contrato ? '' : 'checked'} id="radio_No_Firma_Modal"   type="radio" value="No"  />No
+								<input name="firma_modal" ${implementacion.firma_contrato ? '' : 'checked'} id="radio_No_Firma_Modal"   type="radio" value="NO"  />NO
 							</label>
 					</div>
 					

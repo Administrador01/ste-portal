@@ -14,8 +14,8 @@
 			<div class="selects">
 				<span>Tipo de cliente</span>
 				<select class="selectpicker clients" id="tip_crit" >
-					<option value="">Todos</option>
-					<option value="Premium">Premium</option>
+					<option value="">TODOS</option>
+					<option value="PREMIUM">Premium</option>
 				</select>
 			</div>
 		
@@ -115,7 +115,7 @@
 				</c:when>
 			</c:choose>
 				<a class="enlaceCliente" href="../vistaCliente.do?id=${c.key.id}">
-					<div class="client_box ${c.premium == 'Premium' ? 'tipo_premium' : 'tipo_nopremium'}" data-id="${c.key.id}">
+					<div class="client_box ${c.premium == 'PREMIUM' ? 'tipo_premium' : 'tipo_nopremium'}" data-id="${c.key.id}">
 						<p>${c.nombre}</p>
 					</div>
 				</a>

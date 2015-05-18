@@ -35,11 +35,8 @@
 			<!--botones -->
 			<div class="form-container">
 			
-
 				<div class="page1_imp" id='page1_imp'>
 				
-				
-
 					<div class="form-field" id="div_cliente_imp">
 						<span class="lbl">Cliente<span class="required-asterisk">*</span>:</span>
 						<select class="selectpicker selected" name="cliente" id="cliente_imp" data-live-search="true">
@@ -125,11 +122,11 @@
 					<div class="form-field">
 						<span class="lbl etiqueta">Normalizador<span class="required-asterisk">*</span>:</span>
 							<label class="lbl radio ui-marmots-label-radio marmots-label-left" for="radio_Si">
-								<input name="normalizador" id="radio_Si" type="radio" value="Si"/>Si
+								<input name="normalizador" id="radio_Si" type="radio" value="SI"/>SI
 							</label>
 
 							<label class="lbl radio ui-marmots-label-radio marmots-label-left on" for="radio_No">
-								<input name="normalizador" id="radio_No" type="radio" value="No" checked/>No
+								<input name="normalizador" id="radio_No" type="radio" value="NO" checked/>NO
 							</label>
 					</div>
 					
@@ -146,11 +143,11 @@
 					<div class="form-field">
 					<span class="lbl etiqueta">Firma contrato<span class="required-asterisk">*</span>:</span>
 							<label class="lbl radio ui-marmots-label-radio marmots-label-left" for="crack_Si">
-								<input name="firma" id="crack_Si" type="radio" value="Si"/>Si
+								<input name="firma" id="crack_Si" type="radio" value="SI"/>SI
 							</label>
 
 							<label class="lbl radio ui-marmots-label-radio marmots-label-left on" for="crack_No">
-								<input name="firma" id="crack_No"  type="radio" value="No" checked />No
+								<input name="firma" id="crack_No"  type="radio" value="NO" checked />NO
 							</label>
 					</div>
 					
@@ -186,8 +183,6 @@
 						<input type="text" size="16" class="datepicker" name="fecha_subid" id="fecha_subid" readonly>
 					</div>
 					
-					
-
 					<div class="entor_integrad2">
 					<h3>Entorno Integrado</h3>
 						<div class="form-field">
@@ -214,8 +209,6 @@
 						<input type="text" name="cuent_abon" maxlength="16">
 						</div>
 					</div>
-
-
 					
 				</div>
 				<div class="page2_imp hidden" id='page2_imp'>
@@ -230,22 +223,9 @@
 						<span class="lbl">Tipo servicio:</span>
 						<input type="text" class="autorrellenable" id="input-servicio-tipo-implementacion" value="" readonly>
 					</div>
-					
-
-					
-
-					
+										
 				</div>
 
-
-					
-
-					
-<!--
-					<div class="form-field">
-					<button type="submit" class="submit_form_implementacion"> Aceptar </button>
-					<button class="close-form">Cancelar</button>	
-					</div>-->
 				</div>
 			<div id="message_div" class="message_div">
 				<span id="span_message">La implementacion ha sido creado de forma correcta.<br/>En breve volvemos a la página.</span>
@@ -274,7 +254,13 @@
 
 					<tr>
 					<form id='imp-header-filter' action="" >
-						<th class="search-th"><input name='fecha' value='${fecha}'></th>
+						<th class="search-th">
+							<div class="date-container">
+								<input class="date" name='fechadia' value='${fechadia}' maxlength="2">								
+								<input class="date" name='fechames' value='${fechames}' maxlength="2">
+								<input class="date anio" name='fechaanio' value='${fechaanio}' maxlength="4">		
+							</div>
+						</th>
 						<th class="search-th"><input name='cliente' value='${cliente}'></th>
 						<th class="search-th"><input name='pais' value='${pais}'></th>
 						<th class="search-th"><input name='producto' value='${producto}'></th>
@@ -314,17 +300,17 @@
 										${s.servicio_name}
 									</span></td>
 									<td><span>
- 										<b>${s.normalizador ? 'S&iacute' : 'No'}</b>
+ 										<b>${s.normalizador ? 'SI' : 'NO'}</b>
 									</span></td>
 									<td><span style="color:
 									
-									${s.estado == "Finalizada"? 'green' : ''}
-									${s.estado == "An&aacutelisis"? 'black' : ''}
-									${s.estado == "Pendiente"? 'orange' : ''}
-									${s.estado == "Pruebas"? 'blue' : ''}
-									${s.estado == "Penny test"? 'purple' : ''}
-									${s.estado == "Anulado"? 'grey' : ''}
-									${s.estado == "Parado"? 'red' : ''}
+									${s.estado == "FINALIZADA"? 'green' : ''}
+									${s.estado == "AN&AacuteLISIS"? 'black' : ''}
+									${s.estado == "PENDIENTE"? 'orange' : ''}
+									${s.estado == "PRUEBAS"? 'blue' : ''}
+									${s.estado == "PENNY TEST"? 'purple' : ''}
+									${s.estado == "ANULADO"? 'grey' : ''}
+									${s.estado == "PARADO"? 'red' : ''}
 									
 									
 									

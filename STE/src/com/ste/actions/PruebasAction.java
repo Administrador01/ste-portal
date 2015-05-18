@@ -27,6 +27,8 @@ import com.ste.utils.Utils;
 
 public class PruebasAction extends Action{
 	
+	private static final String TODOS = "TODOS";
+	
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest req, HttpServletResponse resp)
 			throws Exception{
@@ -40,7 +42,9 @@ public class PruebasAction extends Action{
 		List<Prueba> pruebas = new ArrayList <Prueba>();
 		
 		String idCli = req.getParameter("idCli");
-		String fechaFilter = req.getParameter("fecha-filter");
+		String fechaDiaFilter = req.getParameter("fechadia");
+		String fechaMesFilter = req.getParameter("fechames");
+		String fechaAnioFilter = req.getParameter("fechaanio");
 		String clienteFilter = req.getParameter("cliente-filter");
 		String servicioFilter = req.getParameter("servicio-filter");
 		String estadoFilter = req.getParameter("estado-filter");
@@ -53,48 +57,53 @@ public class PruebasAction extends Action{
 		String page = req.getParameter("page");
 		int pageint = Utils.stringToInt(page);		
 		
-		if(idCli == null){
-				pruebas = pDao.getPruebasPaged(pageint);		
-				CounterDao counterDao = CounterDao.getInstance();
-				Counter count = counterDao.getCounterByName("prueba");
-				int numpages = (count.getValue()/PruebaDao.DATA_SIZE) + 1;			
-				req.setAttribute("numpages", numpages);
-
-		} else {
-			if(fechaFilter!=null){
-				if(fechaFilter.equals("")&&clienteFilter.equals("")&&servicioFilter.equals("")&&estadoFilter.equals("")&&productoFilter.equals("")&&entornoFilter.equals("")&&desdeFilter.equals("")&&hastaFilter.equals("")&&premium.equals("Todos")&&idCli.equals("")){
-					pruebas = pDao.getPruebasPaged(pageint);		
-					CounterDao counterDao = CounterDao.getInstance();
-					Counter count = counterDao.getCounterByName("prueba");
-					int numpages = (count.getValue()/PruebaDao.DATA_SIZE) + 1;			
-					req.setAttribute("numpages", numpages);
-				}else{
-					if(!clienteFilter.equals("")){
-						idCli="";
-					}
-					
-					pruebas = pDao.getPruebasByAllParam(fechaFilter, clienteFilter, servicioFilter, estadoFilter, productoFilter, entornoFilter,desdeFilter,hastaFilter, premium,idCli, pageint);		
-	
-					int numpages = (Integer.parseInt(pruebas.get(pruebas.size()-1).getDetalles())/PruebaDao.DATA_SIZE) + 1;
-					pruebas.remove(pruebas.size()-1);
-					req.setAttribute("idCli", idCli);
-					req.setAttribute("numpages", numpages);
-					req.setAttribute("clienteFilter", clienteFilter);
-					req.setAttribute("servicioFilter", servicioFilter);
-					req.setAttribute("fechaFilter", fechaFilter);
-					req.setAttribute("estadoFilter", estadoFilter);
-					req.setAttribute("productoFilter", productoFilter);
-					req.setAttribute("entornoFilter", entornoFilter);
-					req.setAttribute("desdeFilter", desdeFilter);
-					req.setAttribute("hastaFilter", hastaFilter);
-					req.setAttribute("premiumFilter", premium);
-				}
-			}else{
-				pruebas = pDao.getAllPruebasByClientIdPaged(idCli, pageint);
-				req.setAttribute("idCli", idCli);
-				int numpages = 0;			
-				req.setAttribute("numpages", numpages);
+		if(!Utils.esNuloVacio(idCli)) {
+			// por id cliente
+			pruebas = pDao.getAllPruebasByClientIdPaged(idCli, pageint);
+			req.setAttribute("idCli", idCli);
+			int numpages = 0;			
+			req.setAttribute("numpages", numpages);			
+		}
+		else if((Utils.esNuloVacio(premium) || TODOS.equals(premium)) &&
+				Utils.isFechaFilterEmpty(fechaDiaFilter, fechaMesFilter, fechaAnioFilter) &&
+				Utils.esNuloVacio(clienteFilter) &&
+				Utils.esNuloVacio(servicioFilter) &&
+				Utils.esNuloVacio(estadoFilter) &&
+				Utils.esNuloVacio(productoFilter) &&
+				Utils.esNuloVacio(entornoFilter) &&
+				Utils.esNuloVacio(desdeFilter) &&
+				Utils.esNuloVacio(hastaFilter) &&
+				Utils.esNuloVacio(idCli)) {
+			
+			// sin filtros
+			pruebas = pDao.getPruebasPaged(pageint);		
+			CounterDao counterDao = CounterDao.getInstance();
+			Counter count = counterDao.getCounterByName("prueba");
+			int numpages = (count.getValue()/PruebaDao.DATA_SIZE) + 1;			
+			req.setAttribute("numpages", numpages);
+		} 
+		else {
+			// con filtros
+			if(!Utils.esNuloVacio(clienteFilter)){
+				idCli="";
 			}
+			pruebas = pDao.getPruebasByAllParam(fechaDiaFilter, fechaMesFilter, fechaAnioFilter, clienteFilter, servicioFilter, estadoFilter, productoFilter, entornoFilter,desdeFilter,hastaFilter, premium,idCli, pageint);		
+			int numPagesItemIndex = pruebas.size()-1;
+			int numpages = (Integer.parseInt(pruebas.get(numPagesItemIndex).getDetalles())/PruebaDao.DATA_SIZE) + 1;
+			pruebas.remove(numPagesItemIndex);
+			req.setAttribute("idCli", idCli);
+			req.setAttribute("numpages", numpages);
+			req.setAttribute("clienteFilter", clienteFilter);
+			req.setAttribute("servicioFilter", servicioFilter);
+			req.setAttribute("fechadia", fechaDiaFilter);
+			req.setAttribute("fechames", fechaMesFilter);
+			req.setAttribute("fechaanio", fechaAnioFilter);
+			req.setAttribute("estadoFilter", estadoFilter);
+			req.setAttribute("productoFilter", productoFilter);
+			req.setAttribute("entornoFilter", entornoFilter);
+			req.setAttribute("desdeFilter", desdeFilter);
+			req.setAttribute("hastaFilter", hastaFilter);
+			req.setAttribute("premiumFilter", premium);			
 		}
 
 		boolean lastpage = (pruebas.size() < PruebaDao.DATA_SIZE) ? true : false;

@@ -1,38 +1,23 @@
 package com.ste.servlets;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.Name;
-import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.util.WorkbookUtil;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Rectangle;
-import com.itextpdf.text.pdf.PdfWriter;
 import com.ste.beans.Cliente;
 import com.ste.beans.Estado;
 import com.ste.beans.EstadoImplementacion;
@@ -47,39 +32,26 @@ import com.ste.dao.PruebaDao;
 import com.ste.dao.ServicioDao;
 import com.ste.dao.SoporteDao;
 import com.ste.utils.Utils;
-import com.aspose.cells.Workbook.*;
-import com.aspose.cells.SaveFormat;
-
-import org.artofsolving.*;
 
 public class InformeServlet extends HttpServlet{
 	
+	private static final String PREMIUM = "PREMIUM";
+	private static final String NO_PREMIUM = "NO PREMIUM";
+	private static final String PRODUCCION = "PRODUCCION";
+	private static final String INTEGRADO = "INTEGRADO";
 	
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	public void doGet(HttpServletRequest req, HttpServletResponse resp){
-
-
-		
-		
 		
 		 try {
-			 
 			HttpSession sesion = req.getSession();
-			//int sesionpermiso = (int) sesion.getAttribute("permiso");			 
-			String usermail = (String) sesion.getAttribute("mail");
 			String accion = req.getParameter("accion");
 			
 			if(accion.equals("def"))informepordefecto(req,resp);
 			if(accion.equals("pruebas"))informePruebas(req,resp);
 			if(accion.equals("soporte"))informeSoportes(req,resp);
 			if(accion.equals("cliente"))informeCliente(req,resp);
-			if(accion.equals("implementaciones"))informeImplementaciones(req,resp);
-			
+			if(accion.equals("implementaciones"))informeImplementaciones(req,resp);			
 			
 		} catch (Exception e) {
 
@@ -181,18 +153,20 @@ public class InformeServlet extends HttpServlet{
 			for(int i =0;i<estados.size();i++){
 				
 				
-				if(pru.getEntorno().equals("Producci&oacuten")){
-					
-					if(pru.getEstado().equals(estados.get(i).getName()))sh.getRow(i+8).getCell(7).setCellValue(sh.getRow(i+8).getCell(7).getNumericCellValue()+1);
-					
+				if(pru.getEntorno().equals(PRODUCCION)){					
+					if(pru.getEstado().equals(estados.get(i).getName())) {
+						sh.getRow(i+8).getCell(7).setCellValue(sh.getRow(i+8).getCell(7).getNumericCellValue()+1);
+					}					
 				}else{
-					if(pru.getEntorno().equals("Integrado")){
-						
-						if(pru.getEstado().equals(estados.get(i).getName()))sh.getRow(i+8).getCell(6).setCellValue(sh.getRow(i+8).getCell(6).getNumericCellValue()+1);
-						
+					if(pru.getEntorno().equals(INTEGRADO)) {						
+						if(pru.getEstado().equals(estados.get(i).getName())) {
+							sh.getRow(i+8).getCell(6).setCellValue(sh.getRow(i+8).getCell(6).getNumericCellValue()+1);
+						}						
 					}
 				}
-				if(pru.getEstado().equals(estados.get(i).getName()))sh.getRow(i+8).getCell(8).setCellValue(sh.getRow(i+8).getCell(8).getNumericCellValue()+1);
+				if(pru.getEstado().equals(estados.get(i).getName())) {
+					sh.getRow(i+8).getCell(8).setCellValue(sh.getRow(i+8).getCell(8).getNumericCellValue()+1);
+				}
 			}
 		}
 		
@@ -274,9 +248,7 @@ public class InformeServlet extends HttpServlet{
 		head++;
 		
 		int headClientes= head;
-		
-		
-		
+				
 		ClienteDao clientDao = ClienteDao.getInstance();
 		List<Cliente> clientes = clientDao.getAllClients();
 		/*------------------------------TABLA CLIENTES--------------------------------------------------------------*/
@@ -314,8 +286,8 @@ public class InformeServlet extends HttpServlet{
 
 
 			for(Prueba pru : pruebas){
-				if(pru.getEntorno().equals("Integrado"))sh.getRow(head).getCell(6).setCellValue(sh.getRow(head).getCell(6).getNumericCellValue()+1);
-				if(pru.getEntorno().equals("Producci&oacuten"))sh.getRow(head).getCell(7).setCellValue(sh.getRow(head).getCell(7).getNumericCellValue()+1);
+				if(pru.getEntorno().equals(INTEGRADO))sh.getRow(head).getCell(6).setCellValue(sh.getRow(head).getCell(6).getNumericCellValue()+1);
+				if(pru.getEntorno().equals(PRODUCCION))sh.getRow(head).getCell(7).setCellValue(sh.getRow(head).getCell(7).getNumericCellValue()+1);
 				sh.getRow(head).getCell(8).setCellValue(sh.getRow(head).getCell(8).getNumericCellValue()+1);				
 			}
 			
@@ -340,9 +312,6 @@ public class InformeServlet extends HttpServlet{
 		
 		
 		/*------------------------------FIN TABLA CLIENTES----------------------------------------------------------*/
-		
-		
-		
 		
 		Date dateDesde= null;
 		Date dateHasta= null;
@@ -445,42 +414,8 @@ public class InformeServlet extends HttpServlet{
 
 		//rangeResultados.setRefersToFormula("");
 		
-		
 		workbook.write(resp.getOutputStream());
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	private void informeImplementaciones(HttpServletRequest req, HttpServletResponse resp)throws Exception {
@@ -728,20 +663,6 @@ public class InformeServlet extends HttpServlet{
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	private void informeSoportes(HttpServletRequest req, HttpServletResponse resp)throws Exception {
 		String fechaHasta = req.getParameter("fechaHasta");
 		String fechaDesde = req.getParameter("fechaDesde");
@@ -790,10 +711,7 @@ public class InformeServlet extends HttpServlet{
 			default:
 				break;
 		}
-		
-	
-		
-		
+				
 		resp.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 		resp.setHeader("Content-Disposition","attachment; filename=InformeSoporteSTE.xlsx");
 		String link= "/datadocs/templateSoportes.xlsx";
@@ -843,34 +761,11 @@ public class InformeServlet extends HttpServlet{
 			sh.getRow(10+num).createCell(12).setCellStyle(clientCellStyle);
 			sh.getRow(10+num).createCell(13).setCellStyle(clientCellStyle);
 			sh.getRow(10+num).getCell(10).setCellValue(estado.getName());
-			sh.getRow(10+num).getCell(11).setCellValue(sopDao.getSoportesByTipoClientEstado("Premium", estado.getName(), dateDesde, dateHasta).size());
-			sh.getRow(10+num).getCell(12).setCellValue(sopDao.getSoportesByTipoClientEstado("No Premium", estado.getName(), dateDesde, dateHasta).size());
+			sh.getRow(10+num).getCell(11).setCellValue(sopDao.getSoportesByTipoClientEstado(PREMIUM, estado.getName(), dateDesde, dateHasta).size());
+			sh.getRow(10+num).getCell(12).setCellValue(sopDao.getSoportesByTipoClientEstado(NO_PREMIUM, estado.getName(), dateDesde, dateHasta).size());
 			sh.getRow(10+num).getCell(13).setCellFormula("SUM(L"+(num+11)+":M"+(num+11)+")");
 			num++;
 		}
-		/*
-		for(Soporte sop : soportes){
-			for(int i =0;i<estados.size();i++){
-			
-				if(sop.getCliente_id()==""){
-					if(sop.getEstado().equals(estados.get(i).getName()))sh.getRow(i+10).getCell(12).setCellValue(sh.getRow(i+10).getCell(12).getNumericCellValue()+1);
-					if(sop.getEstado().equals(estados.get(i).getName()))sh.getRow(i+10).getCell(13).setCellValue(sh.getRow(i+10).getCell(13).getNumericCellValue()+1);
-				}else{
-					if(cliDao.getClientebyId(Long.parseLong(sop.getCliente_id())).getPremium().equals("Premium")){
-						
-						if(sop.getEstado().equals(estados.get(i).getName()))sh.getRow(i+10).getCell(11).setCellValue(sh.getRow(i+10).getCell(11).getNumericCellValue()+1);
-						
-					}else{
-						if(cliDao.getClientebyId(Long.parseLong(sop.getCliente_id())).getPremium().equals("No Premium")){
-							
-							if(sop.getEstado().equals(estados.get(i).getName()))sh.getRow(i+10).getCell(12).setCellValue(sh.getRow(i+10).getCell(12).getNumericCellValue()+1);
-							
-						}
-					}
-					if(sop.getEstado().equals(estados.get(i).getName()))sh.getRow(i+10).getCell(13).setCellValue(sh.getRow(i+10).getCell(13).getNumericCellValue()+1);
-				}
-			}
-		}*/
 		
 		sh.createRow(estados.size()+10).createCell(10).setCellStyle(footerCellStyle);
 		sh.getRow(estados.size()+10).createCell(11).setCellStyle(footerCellStyle);
@@ -950,8 +845,8 @@ public class InformeServlet extends HttpServlet{
 
 
 			for(Soporte sop : soportes){
-				if(sop.getTipo_soporte().equals("Incidencia"))sh.getRow(head).getCell(11).setCellValue(sh.getRow(head).getCell(11).getNumericCellValue()+1);
-				if(sop.getTipo_soporte().equals("Consulta"))sh.getRow(head).getCell(12).setCellValue(sh.getRow(head).getCell(12).getNumericCellValue()+1);
+				if(sop.getTipo_soporte().equals("INCIDENCIA"))sh.getRow(head).getCell(11).setCellValue(sh.getRow(head).getCell(11).getNumericCellValue()+1);
+				if(sop.getTipo_soporte().equals("CONSULTA"))sh.getRow(head).getCell(12).setCellValue(sh.getRow(head).getCell(12).getNumericCellValue()+1);
 				sh.getRow(head).getCell(13).setCellValue(sh.getRow(head).getCell(13).getNumericCellValue()+1);				
 			}
 			
@@ -996,8 +891,8 @@ public class InformeServlet extends HttpServlet{
 				break;
 		}
 		for(Soporte sop : soportes){
-			if(sop.getTipo_soporte().equals("Incidencia"))sh.getRow(head).getCell(11).setCellValue(sh.getRow(head).getCell(11).getNumericCellValue()+1);
-			if(sop.getTipo_soporte().equals("Consulta"))sh.getRow(head).getCell(12).setCellValue(sh.getRow(head).getCell(12).getNumericCellValue()+1);
+			if(sop.getTipo_soporte().equals("INCIDENCIA"))sh.getRow(head).getCell(11).setCellValue(sh.getRow(head).getCell(11).getNumericCellValue()+1);
+			if(sop.getTipo_soporte().equals("CONSULTA"))sh.getRow(head).getCell(12).setCellValue(sh.getRow(head).getCell(12).getNumericCellValue()+1);
 			sh.getRow(head).getCell(13).setCellValue(sh.getRow(head).getCell(13).getNumericCellValue()+1);
 		}
 		
@@ -1028,32 +923,6 @@ public class InformeServlet extends HttpServlet{
 		workbook.write(resp.getOutputStream());
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	private void informeCliente(HttpServletRequest req, HttpServletResponse resp)throws Exception {
@@ -1146,8 +1015,8 @@ public class InformeServlet extends HttpServlet{
 			sh.getRow(7+i).createCell(5).setCellStyle(cellStyle);
 			
 			for(Prueba pru : pruebas){
-				if(pru.getEntorno().equals("Integrado"))sh.getRow(7+i).getCell(2).setCellValue((sh.getRow(7+i).getCell(2).getNumericCellValue()+1));
-				if(pru.getEntorno().equals("Produccion"))sh.getRow(7+i).getCell(3).setCellValue((sh.getRow(7+i).getCell(3).getNumericCellValue()+1));
+				if(pru.getEntorno().equals(INTEGRADO))sh.getRow(7+i).getCell(2).setCellValue((sh.getRow(7+i).getCell(2).getNumericCellValue()+1));
+				if(pru.getEntorno().equals(PRODUCCION))sh.getRow(7+i).getCell(3).setCellValue((sh.getRow(7+i).getCell(3).getNumericCellValue()+1));
 				sh.getRow(7+i).getCell(4).setCellValue((sh.getRow(7+i).getCell(4).getNumericCellValue()+1));
 			}
 			
@@ -1279,9 +1148,5 @@ public class InformeServlet extends HttpServlet{
 		headerCellStyle.setBorderRight(width);
 		headerCellStyle.setBorderTop(width);
 		
-		
-		
-		
-
 	}
 }

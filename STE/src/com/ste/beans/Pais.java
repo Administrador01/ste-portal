@@ -28,7 +28,7 @@ public class Pais {
 		return name;
 	}
 
-	public void setNme(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 }

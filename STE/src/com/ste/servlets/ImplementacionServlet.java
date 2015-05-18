@@ -38,46 +38,34 @@ public class ImplementacionServlet extends HttpServlet{
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse resp){
 
-		JSONObject json = new JSONObject();
-		
+		JSONObject json = new JSONObject();		
 		String accion = req.getParameter("accion");
 			
-		 try {
-			 
+		 try {			 
 			HttpSession sesion = req.getSession();
-			int sesionpermiso = (int) sesion.getAttribute("permiso");			 
 			String usermail = (String) sesion.getAttribute("mail");
-			String id = (String) sesion.getAttribute("id");
-
-			
-				if (accion.equals("new")){
-					createImplementacion(req,resp,usermail);
-				}
-				
-				if (accion.equals("update")){
-					modifImplementacion(req,resp,usermail);
-				}
-				
-				if (accion.equals("xls")){
-					generateXLS(req,resp,usermail);
-				}
-				
-				if (accion.equals("xlsServ")){
-					generateXLSserv(req,resp,usermail);
-				}
-				if (accion.equals("delete")){
-					deleteImplementacion(req,resp,usermail);
-				}
-				if (accion.equals("restore")){
-					restoreImplementacion(req,resp,usermail);
-				}
-				
-				if (accion.equals("clone")){
-					cloneImplementacion(req,resp,usermail);
-				}
-			
+			if (accion.equals("new")){
+				createImplementacion(req,resp,usermail);
+			}
+			if (accion.equals("update")) {
+				modifImplementacion(req, resp, usermail);
+			}
+			if (accion.equals("xls")) {
+				generateXLS(req, resp, usermail);
+			}
+			if (accion.equals("xlsServ")) {
+				generateXLSserv(req, resp, usermail);
+			}
+			if (accion.equals("delete")) {
+				deleteImplementacion(req, resp, usermail);
+			}
+			if (accion.equals("restore")) {
+				restoreImplementacion(req, resp, usermail);
+			}
+			if (accion.equals("clone")) {
+				cloneImplementacion(req, resp, usermail);
+			}
 		} catch (Exception e) {
-
 			e.printStackTrace();
 		}		
 	}
@@ -115,10 +103,10 @@ public class ImplementacionServlet extends HttpServlet{
 			
 			boolean normalizador=false;
 			boolean firma = false;
-			if (normalizador_str.equals(null)||normalizador_str.equals(""))normalizador_str = "No";
-			if (firma_str.equals("")||firma_str.equals(null))firma_str = "No";
-			if (normalizador_str.equals("Si"))normalizador = true;
-			if (firma_str.equals("Si"))firma = true;
+			if (normalizador_str.equals(null)||normalizador_str.equals(""))normalizador_str = "NO";
+			if (firma_str.equals("")||firma_str.equals(null))firma_str = "NO";
+			if (normalizador_str.equals("SI"))normalizador = true;
+			if (firma_str.equals("SI"))firma = true;
 			
 			
 			
@@ -164,7 +152,7 @@ public class ImplementacionServlet extends HttpServlet{
 			
 
 			
-			impDao.createImplementacion(imp, usermail);
+			impDao.createImplementacion(imp);
 			
 			Utils.writeLog(usermail, "Crea", "Implementacion", Long.toString(imp.getServicio_id()));
 			
@@ -215,13 +203,11 @@ public class ImplementacionServlet extends HttpServlet{
 			
 			boolean normalizador=false;
 			boolean firma = false;
-			if (normalizador_str == null)normalizador_str = "No";
-			if (firma_str == null)firma_str = "No";
-			if (normalizador_str.equals("Si"))normalizador = true;
-			if (firma_str.endsWith("Si"))firma = true;
-			
-			
-			
+			if (normalizador_str == null)normalizador_str = "NO";
+			if (firma_str == null)firma_str = "NO";
+			if (normalizador_str.equals("SI"))normalizador = true;
+			if (firma_str.endsWith("SI"))firma = true;
+						
 			ImplementacionDao impDao = ImplementacionDao.getInstance();
 			Implementacion imp = impDao.getImplementacionById(Long.parseLong(id));
 			
@@ -253,11 +239,8 @@ public class ImplementacionServlet extends HttpServlet{
 			imp.setNormalizador(normalizador);
 			imp.setFirma_contrato(firma);
 			imp.setAcreedor_ref_ext(id_acred);
-
 			
-
-			
-			impDao.createImplementacion(imp, usermail);;
+			impDao.createImplementacion(imp);
 			
 			Utils.writeLog(usermail, "Modifica", "Implementacion", Long.toString(imp.getServicio_id()));
 			
@@ -317,10 +300,10 @@ public class ImplementacionServlet extends HttpServlet{
 			
 			boolean normalizador=false;
 			boolean firma = false;
-			if (normalizador_str == null)normalizador_str = "No";
-			if (firma_str == null)firma_str = "No";
-			if (normalizador_str.equals("Si"))normalizador = true;
-			if (firma_str.endsWith("Si"))firma = true;
+			if (normalizador_str == null)normalizador_str = "NO";
+			if (firma_str == null)firma_str = "NO";
+			if (normalizador_str.equals("SI"))normalizador = true;
+			if (firma_str.endsWith("SI"))firma = true;
 			
 			
 			
@@ -357,11 +340,8 @@ public class ImplementacionServlet extends HttpServlet{
 			imp.setNormalizador(normalizador);
 			imp.setFirma_contrato(firma);
 			imp.setAcreedor_ref_ext(id_acred);
-
-			
-
-			
-			impDao.createImplementacion(imp, usermail);
+		
+			impDao.createImplementacion(imp);
 			
 			Utils.writeLog(usermail, "Clona", "Implementacion","");
 			
@@ -371,7 +351,6 @@ public class ImplementacionServlet extends HttpServlet{
 		        resp.setContentType("application/json");       
 				resp.getWriter().println(json);
 
-				
 			} catch (JSONException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -497,9 +476,6 @@ public class ImplementacionServlet extends HttpServlet{
 				s.addCell(new Label(21, aux,servicio.getTipo()));
 				s.addCell(new Label(22, aux,imp.getStr_fech_contratacion()));
 				s.addCell(new Label(23, aux,imp.getStr_fech_subida()));
-
-
-
 				aux++;
 			}
 
@@ -581,9 +557,6 @@ public class ImplementacionServlet extends HttpServlet{
 				s.addCell(new Label(4, aux,imp.getStr_fech_contratacion()));
 				s.addCell(new Label(5, aux,imp.getStr_fech_subida()));
 				if(imp.getNormalizador())s.addCell(new Label(6, aux,"Si"));else s.addCell(new Label(6, aux,"No"));
-				
-
-
 
 				aux++;
 			}
@@ -622,10 +595,8 @@ public class ImplementacionServlet extends HttpServlet{
 
 			
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -649,44 +620,11 @@ public class ImplementacionServlet extends HttpServlet{
 	        resp.setContentType("application/json");       
 			resp.getWriter().println(json);
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
-	
-	/*
-	
-	public void deleteImplementacion(HttpServletRequest req, HttpServletResponse resp, String usermail)
-			throws ServletException, IOException {
-		
-		JSONObject json = new JSONObject();
-		
-		String id=req.getParameter("id");
-		ImplementacionDao impDao = ImplementacionDao.getInstance();
-		Implementacion imp = impDao.getImplementacionById(Long.parseLong(id));
-		
-		
-		Utils.writeLog(usermail, "Borra", "Implementacion", Long.toString(imp.getServicio_id()));
-		try {
-			json.append("success", "true");
-			resp.setCharacterEncoding("UTF-8");
-	        resp.setContentType("application/json");       
-			resp.getWriter().println(json);
-
-			
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}*/
-	
 	
 }

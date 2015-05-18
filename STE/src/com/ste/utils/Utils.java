@@ -7,7 +7,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.GregorianCalendar;
 import java.util.List;
+
+
+
+
 
 
 
@@ -28,7 +33,119 @@ import com.ste.dao.LogsDao;
 import com.ste.dao.UserDao;
 
 public class Utils {
+	
+	public static Date buildDate(String dia, String mes, String anio) {
+		try {
+			int diaInt = Integer.parseInt(dia);
+			int	mesInt = Integer.parseInt(mes) - 1;
+			int anioInt = Integer.parseInt(anio);
+			
+			GregorianCalendar cal = (GregorianCalendar) GregorianCalendar.getInstance();
+	        cal.set(GregorianCalendar.YEAR, anioInt);
+	        cal.set(GregorianCalendar.MONTH, mesInt);			        
+	        cal.set(GregorianCalendar.DAY_OF_MONTH, diaInt);
+	        cal.set(GregorianCalendar.SECOND, 0);
+	        cal.set(GregorianCalendar.MINUTE, 0);
+	        cal.set(GregorianCalendar.HOUR_OF_DAY, 0);
+	        cal.set(GregorianCalendar.MILLISECOND, 0);
+	        Date date =cal.getTime();
+			return date;
+		}
+		catch(Exception e) {
+			return null;
+		}
+	}
 
+	public static Date getDesdeDate(String mes, String anio) {
+		try {
+			int mesInt = 0;
+			if(!Utils.esNuloVacio(mes)) {
+				mesInt = Integer.parseInt(mes) - 1;
+			}			
+			int anioInt = Integer.parseInt(anio);
+			
+			GregorianCalendar cal = (GregorianCalendar) GregorianCalendar.getInstance();
+	        cal.set(GregorianCalendar.YEAR, anioInt);
+	        cal.set(GregorianCalendar.MONTH, mesInt);			        
+	        int min = cal.getActualMinimum(GregorianCalendar.DAY_OF_MONTH);
+	        cal.set(GregorianCalendar.DAY_OF_MONTH, min);
+	        cal.set(GregorianCalendar.SECOND, 0);
+	        cal.set(GregorianCalendar.MINUTE, 0);
+	        cal.set(GregorianCalendar.HOUR_OF_DAY, 0);
+	        cal.set(GregorianCalendar.MILLISECOND, 0);
+	        Date date =cal.getTime();
+			return date;
+		}
+		catch(Exception e) {
+			return null;
+		}
+	}
+	
+	public static Date getHastaDate(String mes, String anio) {
+		try {
+			int mesInt = 11;
+			if(!Utils.esNuloVacio(mes)) {
+				mesInt = Integer.parseInt(mes) - 1;
+			}	
+			int anioInt = Integer.parseInt(anio);
+			
+			GregorianCalendar cal = (GregorianCalendar) GregorianCalendar.getInstance();
+	        cal.set(GregorianCalendar.YEAR, anioInt);
+	        cal.set(GregorianCalendar.MONTH, mesInt);			        
+	        int min = cal.getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
+	        cal.set(GregorianCalendar.DAY_OF_MONTH, min);
+	        cal.set(GregorianCalendar.SECOND, 0);
+	        cal.set(GregorianCalendar.MINUTE, 0);
+	        cal.set(GregorianCalendar.HOUR_OF_DAY, 0);
+	        cal.set(GregorianCalendar.MILLISECOND, 0);
+			Date date =cal.getTime();
+			return date;
+		}
+		catch(Exception e) {
+			return null;
+		}
+	}
+	
+	
+	
+	public static String toUpperCase(String value) {
+		if(value != null) {
+			return value.toUpperCase();
+		}
+		return null;
+	}
+	
+	public static boolean esNuloVacio(String string) {
+		if(string == null || "".equals(string)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static boolean isFechaFilterValid(String fechaDiaFilter, String fechaMesFilter, String fechaAnioFilter) {
+		if(!Utils.esNuloVacio(fechaDiaFilter) && 
+				!Utils.esNuloVacio(fechaMesFilter) && 
+				!Utils.esNuloVacio(fechaAnioFilter)) {
+			return true;
+		}
+		else if(!Utils.esNuloVacio(fechaMesFilter) && 
+				!Utils.esNuloVacio(fechaAnioFilter)) {
+			return true;
+		}
+		else if(!Utils.esNuloVacio(fechaAnioFilter)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static boolean isFechaFilterEmpty(String fechaDiaFilter, String fechaMesFilter, String fechaAnioFilter) {
+		if(Utils.esNuloVacio(fechaDiaFilter) && 
+				Utils.esNuloVacio(fechaMesFilter) && 
+				Utils.esNuloVacio(fechaAnioFilter)) {
+			return true;
+		}
+		return false;
+	}
 	
 	public static void writeLog(String usermail, String accion, String entidad, String nombre_entidad){
 		

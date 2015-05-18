@@ -46,16 +46,16 @@ public class ImplementacionAction extends Action{
 		List<Servicio> servicios = sDao.getAllServicios();
 
 		req.setAttribute("servicios", servicios);
-		/*
-		ImplementacionDao impDao = ImplementacionDao.getInstance();
-		List<Implementacion> implementaciones = new ArrayList<Implementacion>();
-		implementaciones.addAll(impDao.getAllImplementaciones());
-		implementaciones.addAll(impDao.getAllDelImplementaciones());
-		req.setAttribute("implementaciones",implementaciones);
-		 */
 		
-		String fechaFilter = req.getParameter("fecha");
-
+		String clienteFilter = req.getParameter("cliente");
+		String paisFilter = req.getParameter("pais");
+		String fechaDiaFilter = req.getParameter("fechadia");
+		String fechaMesFilter = req.getParameter("fechames");
+		String fechaAnioFilter = req.getParameter("fechaanio");
+		String productoFilter = req.getParameter("producto");
+		String normalizadorFilter = req.getParameter("normalizator");
+		String servicioFilter = req.getParameter("servicio");
+		String estadoFilter = req.getParameter("estado");
 				
 		String page = req.getParameter("page");
 		int pageint = Utils.stringToInt(page);	
@@ -63,33 +63,37 @@ public class ImplementacionAction extends Action{
 		ImplementacionDao impDao = ImplementacionDao.getInstance();
 		List<Implementacion> implementaciones = new ArrayList<Implementacion>();
 				
-		if(fechaFilter!=null){
-			String clienteFilter = req.getParameter("cliente");
-			String paisFilter = req.getParameter("pais");
+		if(Utils.isFechaFilterEmpty(fechaDiaFilter, fechaMesFilter, fechaAnioFilter) &&
+			Utils.esNuloVacio(clienteFilter) &&
+			Utils.esNuloVacio(paisFilter) &&		
+			Utils.esNuloVacio(productoFilter) &&
+			Utils.esNuloVacio(servicioFilter) &&
+			Utils.esNuloVacio(normalizadorFilter) &&
+			Utils.esNuloVacio(estadoFilter)) {
 			
-			String productoFilter = req.getParameter("producto");
-			String normalizadorFilter = req.getParameter("normalizator");
-			String servicioFilter = req.getParameter("servicio");
-			String estadoFilter = req.getParameter("estado");
-			implementaciones = impDao.getImplementacionesByAllParam(fechaFilter, clienteFilter, paisFilter, productoFilter, servicioFilter, normalizadorFilter, estadoFilter, pageint);
-			int numpages = (Integer.parseInt(implementaciones.get(implementaciones.size()-1).getDetalle())/PruebaDao.DATA_SIZE)+1;
-			implementaciones.remove(implementaciones.size()-1);
+			// Sin filtros
+			implementaciones = impDao.getAllImplementacionesPagin(pageint);
+			CounterDao counterDao = CounterDao.getInstance();
+			Counter count = counterDao.getCounterByName("implementacion");
+			int numpages = (count.getValue()/PruebaDao.DATA_SIZE) + 1;			
+			req.setAttribute("numpages", numpages);		
+		}
+		else {
+			// Con filtros
+			implementaciones = impDao.getImplementacionesByAllParam(fechaDiaFilter, fechaMesFilter, fechaAnioFilter, clienteFilter, paisFilter, productoFilter, servicioFilter, normalizadorFilter, estadoFilter, pageint);
+			int numPagesItemIndex = implementaciones.size()-1;
+			int numpages = (Integer.parseInt(implementaciones.get(numPagesItemIndex).getDetalle())/ImplementacionDao.DATA_SIZE)+1;
+			implementaciones.remove(numPagesItemIndex);
 			req.setAttribute("numpages", numpages);
-			req.setAttribute("fecha", fechaFilter);
+			req.setAttribute("fechadia", fechaDiaFilter);
+			req.setAttribute("fechames", fechaMesFilter);
+			req.setAttribute("fechaanio", fechaAnioFilter);
 			req.setAttribute("cliente", clienteFilter);
 			req.setAttribute("pais", paisFilter);
 			req.setAttribute("producto", productoFilter);
 			req.setAttribute("normalizator", normalizadorFilter);
 			req.setAttribute("servicio", servicioFilter);
 			req.setAttribute("estado", estadoFilter);
-		}else{
-			implementaciones = impDao.getAllImplementacionesPagin(pageint);
-			CounterDao counterDao = CounterDao.getInstance();
-			Counter count = counterDao.getCounterByName("implementacion");
-			int numpages = (count.getValue()/PruebaDao.DATA_SIZE) + 1;			
-			req.setAttribute("numpages", numpages);
-
-			
 		}
 		boolean lastpage = (implementaciones.size() < ImplementacionDao.DATA_SIZE) ? true : false;
 		req.setAttribute("lastpage", lastpage);

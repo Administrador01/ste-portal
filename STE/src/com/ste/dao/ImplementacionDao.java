@@ -1,6 +1,5 @@
 package com.ste.dao;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +15,6 @@ import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
 import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
-import com.google.appengine.api.datastore.Query.SortDirection;
 import com.ste.beans.Cliente;
 import com.ste.beans.Implementacion;
 import com.ste.counters.Counter;
@@ -33,23 +31,16 @@ public class ImplementacionDao {
 	
 	@SuppressWarnings("unchecked")
 	public List<Implementacion> getAllImplementaciones() {
-
 		List<Implementacion> Implementacions;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		
 		Query q = pm.newQuery("select from " + Implementacion.class.getName()+" where erased == false");		
 		Implementacions = (List<Implementacion>) q.execute();
-		
-		
 		pm.close();
 
 		return Implementacions;
 	}
 	
 	public List<Implementacion> getAllImplementacionesPagin(Integer page) {
-
-		
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		com.google.appengine.api.datastore.Query q = new com.google.appengine.api.datastore.Query("Implementacion");
 		
@@ -60,8 +51,7 @@ public class ImplementacionDao {
 			fetchOptions.limit(DATA_SIZE);	
 			fetchOptions.offset(offset);
 		}
-		entities = datastore.prepare(q).asList(fetchOptions);
-		
+		entities = datastore.prepare(q).asList(fetchOptions);		
 		List<Implementacion> Implementacions = new ArrayList<Implementacion>();	;
 		
 		for (Entity result : entities){
@@ -71,18 +61,25 @@ public class ImplementacionDao {
 		return Implementacions;
 	}
 	
-	public List<Implementacion> getImplementacionFor(String clienteName,String productoCanal,String servicio,String gestorGcs,String pais,String gestorPromocion,String gestorRelacion,String referenciaGlobal,boolean firmaBol,boolean normalizadorbol, String referenciaLocal,String estado,String detalle,String referenciaExterna,String asunto,String contratoAdeudos, String idAcreedor,String cuentaAbono) {
+	public List<Implementacion> getImplementacionFor(String clienteName,String productoCanal,String servicio,String gestorGcs,String pais,
+			String gestorPromocion,String gestorRelacion,String referenciaGlobal,boolean firmaBol,boolean normalizadorbol, String referenciaLocal,
+			String estado,String detalle,String referenciaExterna,String asunto,String contratoAdeudos, String idAcreedor,String cuentaAbono) {
 
+		clienteName = Utils.toUpperCase(clienteName);
+		productoCanal = Utils.toUpperCase(productoCanal);
+		servicio = Utils.toUpperCase(servicio);
+		gestorGcs = Utils.toUpperCase(gestorGcs);
+		pais = Utils.toUpperCase(pais);
+		gestorPromocion = Utils.toUpperCase(gestorPromocion);
+		gestorRelacion = Utils.toUpperCase(gestorRelacion);
+		estado = Utils.toUpperCase(estado);
+		detalle = Utils.toUpperCase(detalle);
+		
 		List<Implementacion> Implementacions = null;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		
 		Query q = pm.newQuery("select from " + Implementacion.class.getName());
 		q.setFilter(" ");
 		q.declareParameters("String clienteName,String productoCanal,String servicio,String gestorGcs,String pais,String gestorPromocion,String gestorRelacion,String referenciaGlobal,boolean firmaBol,boolean normalizadorbol, String referenciaLocal,String estado,String detalle,String referenciaExterna,String asunto,String contratoAdeudos, String idAcreedor,String cuentaAbono");
-		//Implementacions = (List<Implementacion>) q.execute( clienteName, productoCanal, servicio, gestorGcs, pais, gestorPromocion, gestorRelacion, referenciaGlobal,firmaBol,normalizadorbol,  referenciaLocal, estado, detalle, referenciaExterna, asunto, contratoAdeudos,  idAcreedor, cuentaAbono);
-		
-		
 		pm.close();
 
 		return Implementacions;
@@ -93,12 +90,8 @@ public class ImplementacionDao {
 
 		List<Implementacion> Implementacions;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		
 		Query q = pm.newQuery("select from " + Implementacion.class.getName()+" where erased == true");		
 		Implementacions = (List<Implementacion>) q.execute();
-		
-		
 		pm.close();
 
 		return Implementacions;
@@ -106,17 +99,10 @@ public class ImplementacionDao {
 	
 	@SuppressWarnings("unchecked")
 	public List<Implementacion> getImplementacionesForClient(Cliente cliente) {
-		
-		
-		
 		List<Implementacion> Implementacions;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		
 		Query q = pm.newQuery("select from " + Implementacion.class.getName()+" where erased == false && cliente_id == "+ cliente.getKey().getId());		
 		Implementacions = (List<Implementacion>) q.execute();
-		
-		
 		pm.close();
 
 		return Implementacions;
@@ -127,15 +113,10 @@ public class ImplementacionDao {
 
 		List<Implementacion> Implementacions;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		
 		Query q = pm.newQuery("select from " + Implementacion.class.getName());		
-		
 		q.setFilter("fecha_alta >= fechaDesde && fecha_alta <= fechaHasta"+" && erased==false");
 		q.declareParameters("java.util.Date fechaDesde , java.util.Date fechaHasta");
 		Implementacions = (List<Implementacion>) q.execute(fechaDesde,fechaHasta);
-		
-		
 		pm.close();
 
 		return Implementacions;
@@ -147,8 +128,6 @@ public class ImplementacionDao {
 
 		List<Implementacion> Implementacions;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		
 		Query q = pm.newQuery("select from " + Implementacion.class.getName());		
 		
 		q.setFilter("fecha_alta >= fechaDesde && fecha_alta <= fechaHasta"+" && erased==false");
@@ -164,43 +143,29 @@ public class ImplementacionDao {
 			}
 		}
 		
-		
 		return implementaciones;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public Integer getNumberForVariableValue(String variable, String value) {
-
 		List<Implementacion> Implementacions;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		
 		Query q = pm.newQuery("select from " + Implementacion.class.getName());		
-		
 		q.setFilter(variable+" == value &&  erased==false");
 		q.declareParameters("String value");
 		Implementacions = (List<Implementacion>) q.execute(value);
-		
-		
 		pm.close();
-
 		return Implementacions.size();
 	}
 	
 	@SuppressWarnings("unchecked")
 	public Integer getNumberForVariableValueBetween(String variable, String value,Date fechaDesde, Date fechaHasta) {
-
 		List<Implementacion> Implementacions;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		
 		Query q = pm.newQuery("select from " + Implementacion.class.getName());		
-		
 		q.setFilter(variable+" == value &&  erased==false && fecha_alta >= fechaDesde && fecha_alta <= fechaHasta");
 		q.declareParameters("String value, java.util.Date fechaDesde , java.util.Date fechaHasta");
 		Implementacions = (List<Implementacion>) q.execute(value,fechaDesde,fechaHasta);
-		
-		
 		pm.close();
 
 		return Implementacions.size();
@@ -208,54 +173,39 @@ public class ImplementacionDao {
 	
 	@SuppressWarnings("unchecked")
 	public List<Implementacion> getImplementacionesForVariableValue(String variable, String value) {
-
 		List<Implementacion> Implementacions;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		
 		Query q = pm.newQuery("select from " + Implementacion.class.getName());		
-		
 		q.setFilter(variable+" == value &&  erased==false");
 		q.declareParameters("String value");
 		Implementacions = (List<Implementacion>) q.execute(value);
-		
-		
 		pm.close();
 
 		return Implementacions;
 	}
-	
 	
 	@SuppressWarnings("unchecked")
 	public List<Implementacion> getImplementacionesByServiceClient(String client, String service) {
-
 		List<Implementacion> Implementacions;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		
 		Query q = pm.newQuery("select from " + Implementacion.class.getName());		
-		
 		q.setFilter("client_name == client && servicio_name == service && erased==false");
 		q.declareParameters("String client, String service");
 		Implementacions = (List<Implementacion>) q.execute(client,service);
-		
-		
 		pm.close();
 
 		return Implementacions;
 	}
 	
 	
-public Implementacion getImplementacionById(long l) {
-		
+	public Implementacion getImplementacionById(long l) {
 		Implementacion c;
 		try{			
-		
-		PersistenceManager pManager = PMF.get().getPersistenceManager();
-		Implementacion implementacion_temp = pManager.getObjectById(Implementacion.class, l);
-
-		c = pManager.detachCopy(implementacion_temp);
-		pManager.close();
+			PersistenceManager pManager = PMF.get().getPersistenceManager();
+			Implementacion implementacion_temp = pManager.getObjectById(Implementacion.class, l);
+	
+			c = pManager.detachCopy(implementacion_temp);
+			pManager.close();
 
 		}catch(Exception e){
 			c=null;
@@ -263,79 +213,103 @@ public Implementacion getImplementacionById(long l) {
 		return c;
 	}
 
-public void deleteAll() {
-	ImplementacionDao impDao = ImplementacionDao.getInstance();
-	List<Implementacion> implementaciones = impDao.getAllImplementaciones();
-	for(Implementacion imp : implementaciones){
-		impDao.deleteImplementaciones(imp);
+	public void deleteAll() {
+		ImplementacionDao impDao = ImplementacionDao.getInstance();
+		List<Implementacion> implementaciones = impDao.getAllImplementaciones();
+		for(Implementacion imp : implementaciones){
+			impDao.deleteImplementaciones(imp);
+		}
 	}
-}
-
-public void deleteImplementaciones(Implementacion imp) {
-	PersistenceManager pm = PMF.get().getPersistenceManager();
-	pm.deletePersistent( pm.getObjectById( imp.getClass(), imp.getKey().getId())); 
-	pm.close();
-}
-public String getNombreClienteByImpId(long l) {
 	
-	ImplementacionDao impDao = ImplementacionDao.getInstance();
-	Implementacion implementacion = impDao.getImplementacionById(l);
+	public void deleteImplementaciones(Implementacion imp) {
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		pm.deletePersistent( pm.getObjectById( imp.getClass(), imp.getKey().getId())); 
+		pm.close();
+	}
 	
-	ClienteDao cliDao = ClienteDao.getInstance();
-	Cliente cliente = cliDao.getClientebyId(implementacion.getCliente_id());
-	return cliente.getNombre();
-}
-
-public Cliente getClienteByImpId(long l) {
+	public String getNombreClienteByImpId(long l) {
+		
+		ImplementacionDao impDao = ImplementacionDao.getInstance();
+		Implementacion implementacion = impDao.getImplementacionById(l);
+		
+		ClienteDao cliDao = ClienteDao.getInstance();
+		Cliente cliente = cliDao.getClientebyId(implementacion.getCliente_id());
+		return cliente.getNombre();
+	}
 	
-	ImplementacionDao impDao = ImplementacionDao.getInstance();
-	Implementacion implementacion = impDao.getImplementacionById(l);
+	public Cliente getClienteByImpId(long l) {
+		
+		ImplementacionDao impDao = ImplementacionDao.getInstance();
+		Implementacion implementacion = impDao.getImplementacionById(l);
+		
+		ClienteDao cliDao = ClienteDao.getInstance();
+		Cliente cliente = cliDao.getClientebyId(implementacion.getCliente_id());
+		return cliente;
+	}
 	
-	ClienteDao cliDao = ClienteDao.getInstance();
-	Cliente cliente = cliDao.getClientebyId(implementacion.getCliente_id());
-	return cliente;
-}
-@SuppressWarnings("unchecked")
-public List<Implementacion> getImplementacionByClientId(long l) {
+	@SuppressWarnings("unchecked")
+	public List<Implementacion> getImplementacionByClientId(long l) {
+		List<Implementacion> implementaciones;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		String query = "select from " + Implementacion.class.getName()+" where cliente_id == "+l+" && erased==false";
+		Query q = pm.newQuery(query);//.setFilter(propertyFilter);
+		implementaciones = (List<Implementacion>) q.execute();
+		pm.close();
 	
-	
-	List<Implementacion> implementaciones;
-	PersistenceManager pm = PMF.get().getPersistenceManager();
-	
-	
-	
-	
-	String query = "select from " + Implementacion.class.getName()+" where cliente_id == "+l+" && erased==false";
-	
-	Query q = pm.newQuery(query);//.setFilter(propertyFilter);
-
-	implementaciones = (List<Implementacion>) q.execute();
-	
-	
-	pm.close();
-
-	return implementaciones;
-}	
-
+		return implementaciones;
+	}	
 
 	public synchronized void createImplementacionRaw(Implementacion imp){
 		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		imp.setClient_name(Utils.toUpperCase(imp.getClient_name()));
+		imp.setDetalle(Utils.toUpperCase(imp.getDetalle()));
+		imp.setEstado(Utils.toUpperCase(imp.getEstado()));
+		imp.setGestor_gcs(Utils.toUpperCase(imp.getGestor_gcs()));
+		imp.setGestor_promocion(Utils.toUpperCase(imp.getGestor_promocion()));
+		imp.setGestor_relacion(Utils.toUpperCase(imp.getGestor_relacion()));
+		imp.setPais(Utils.toUpperCase(imp.getPais()));
+		imp.setServicio_name(Utils.toUpperCase(imp.getServicio_name()));
+		imp.setProducto(Utils.toUpperCase(imp.getProducto()));
+		imp.setReferencia_global(Utils.toUpperCase(imp.getReferencia_global()));
+		imp.setReferencia_local(Utils.toUpperCase(imp.getReferencia_local()));
+		imp.setReferencia_externa(Utils.toUpperCase(imp.getReferencia_externa()));
+		imp.setAsunto_ref_ext(Utils.toUpperCase(imp.getAsunto_ref_ext()));
+		imp.setCuenta_ref_ext(Utils.toUpperCase(imp.getCuenta_ref_ext()));
+		imp.setAdeudos_ref_ext(Utils.toUpperCase(imp.getAdeudos_ref_ext()));
+		imp.setAcreedor_ref_ext(Utils.toUpperCase(imp.getAcreedor_ref_ext()));
+		
 		pm.makePersistent(imp);
 		pm.close();
 	}
-	public synchronized void createImplementacion(Implementacion imp, String usermail) {
+	
+	public synchronized void createImplementacion(Implementacion imp) {
 		PersistenceManager pm = PMF.get().getPersistenceManager();	
 		
-
+		imp.setClient_name(Utils.toUpperCase(imp.getClient_name()));
+		imp.setDetalle(Utils.toUpperCase(imp.getDetalle()));
+		imp.setEstado(Utils.toUpperCase(imp.getEstado()));
+		imp.setGestor_gcs(Utils.toUpperCase(imp.getGestor_gcs()));
+		imp.setGestor_promocion(Utils.toUpperCase(imp.getGestor_promocion()));
+		imp.setGestor_relacion(Utils.toUpperCase(imp.getGestor_relacion()));
+		imp.setPais(Utils.toUpperCase(imp.getPais()));
+		imp.setServicio_name(Utils.toUpperCase(imp.getServicio_name()));
+		imp.setProducto(Utils.toUpperCase(imp.getProducto()));
+		imp.setReferencia_global(Utils.toUpperCase(imp.getReferencia_global()));
+		imp.setReferencia_local(Utils.toUpperCase(imp.getReferencia_local()));
+		imp.setReferencia_externa(Utils.toUpperCase(imp.getReferencia_externa()));
+		imp.setAsunto_ref_ext(Utils.toUpperCase(imp.getAsunto_ref_ext()));
+		imp.setCuenta_ref_ext(Utils.toUpperCase(imp.getCuenta_ref_ext()));
+		imp.setAdeudos_ref_ext(Utils.toUpperCase(imp.getAdeudos_ref_ext()));
+		imp.setAcreedor_ref_ext(Utils.toUpperCase(imp.getAcreedor_ref_ext()));
+		
 		try{
-			
-			
 			imp.setFecha_alta((Utils.dateConverter(imp.getStr_fecha_alta())));
-			if (imp.getStr_fech_contratacion()!=null && imp.getStr_fech_contratacion()!=""){
+			if (!Utils.esNuloVacio(imp.getStr_fech_contratacion())){
 				imp.setFech_contratacion(Utils.dateConverter(imp.getStr_fech_contratacion()));
 			}
 			
-			if (imp.getStr_fech_subida()!=null && imp.getStr_fech_subida()!=""){
+			if (!Utils.esNuloVacio(imp.getStr_fech_subida())){
 				imp.setFech_subida(Utils.dateConverter(imp.getStr_fech_subida()));
 			}		
 			if (imp.getKey()==null){
@@ -349,74 +323,96 @@ public List<Implementacion> getImplementacionByClientId(long l) {
 				contador.setValue(contador.getValue()+1);
 				contDao.createCounter(contador);
 			}
-				
-				
-			try {
-				pm.makePersistent(imp);
-			} finally {}
-			
-			
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+			pm.makePersistent(imp);
+						
+		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			pm.close();
-			
+			pm.close();			
 		}
 	}
 	
 	
-	public List<Implementacion> getImplementacionesByAllParam(String fecha, String cliente, String pais, String producto, String servicio, String normalizador, String estado, Integer page){
+	public List<Implementacion> getImplementacionesByAllParam(String fechaDia, String fechaMes, String fechaAnio, String cliente, String pais, String producto, String servicio, String normalizador, String estado, Integer page){
 		List<Implementacion> implementaciones= null;
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		com.google.appengine.api.datastore.Query q = new com.google.appengine.api.datastore.Query("Implementacion");
 		List<Filter> finalFilters = new ArrayList<>();
 		
 		int filters =0;
-		if(!fecha.equals("")){
+		if(Utils.isFechaFilterValid(fechaDia, fechaMes, fechaAnio)){
 			filters++;
 		}
-		if(!cliente.equals("")){
+		if(!Utils.esNuloVacio(cliente)){
 			cliente = cliente.toUpperCase();
 			filters++;
 		}
-		if(!pais.equals("")){
+		if(!Utils.esNuloVacio(pais)){
+			pais = pais.toUpperCase();
 			filters++;
 		}
-		if(!producto.equals("")){
+		if(!Utils.esNuloVacio(producto)){
+			producto = producto.toUpperCase();
 			filters++;
 		}
-		if(!estado.equals("")){
+		if(!Utils.esNuloVacio(estado)){
+			estado = estado.toUpperCase();
 			filters++;
 		}
-		if(!servicio.equals("")){
+		if(!Utils.esNuloVacio(servicio)){
+			servicio = servicio.toUpperCase();
+			filters++;
+		}
+		if(!Utils.esNuloVacio(normalizador)){
+			normalizador = normalizador.toUpperCase();
 			filters++;
 		}
 		
 		if(filters<=1){
-			if(!fecha.equals("")){
-				finalFilters.add(new FilterPredicate("str_fecha_alta",FilterOperator.GREATER_THAN_OR_EQUAL, fecha));
-				finalFilters.add(new FilterPredicate("str_fecha_alta",FilterOperator.LESS_THAN, fecha+"\ufffd"));
+			if(Utils.isFechaFilterValid(fechaDia, fechaMes, fechaAnio)){
+				if(!Utils.esNuloVacio(fechaAnio) && !Utils.esNuloVacio(fechaMes) && !Utils.esNuloVacio(fechaDia)) {
+					Date fullDate = Utils.buildDate(fechaDia, fechaMes, fechaAnio);
+					finalFilters.add(new FilterPredicate("fecha_alta", FilterOperator.EQUAL, fullDate));
+				}
+				else if(!Utils.esNuloVacio(fechaAnio)) {
+					Date desdeDate = Utils.getDesdeDate(fechaMes, fechaAnio);
+			        Date hastaDate = Utils.getHastaDate(fechaMes, fechaAnio);
+
+			        if(desdeDate != null){
+			            finalFilters.add(new FilterPredicate("fecha_alta", FilterOperator.GREATER_THAN_OR_EQUAL, desdeDate));
+			        }
+			        if(hastaDate != null){
+			            finalFilters.add(new FilterPredicate("fecha_alta", FilterOperator.LESS_THAN_OR_EQUAL, hastaDate));
+			        }
+				}					
 			}
-			if(!cliente.equals("")){
+			if(!Utils.esNuloVacio(cliente)){
 				finalFilters.add(new FilterPredicate("client_name",FilterOperator.GREATER_THAN_OR_EQUAL, cliente));
 				finalFilters.add(new FilterPredicate("client_name",FilterOperator.LESS_THAN, cliente+"\ufffd"));
 			}
-			if(!pais.equals("")){
+			if(!Utils.esNuloVacio(pais)){
 				finalFilters.add(new FilterPredicate("pais",FilterOperator.GREATER_THAN_OR_EQUAL, pais));
 				finalFilters.add(new FilterPredicate("pais",FilterOperator.LESS_THAN, pais+"\ufffd"));
 			}
-			if(!producto.equals("")){
+			if(!Utils.esNuloVacio(producto)){
 				finalFilters.add(new FilterPredicate("producto",FilterOperator.GREATER_THAN_OR_EQUAL, producto));
 				finalFilters.add(new FilterPredicate("producto",FilterOperator.LESS_THAN, producto+"\ufffd"));
 			}
-			if(!estado.equals("")){
+			if(!Utils.esNuloVacio(estado)){
 				finalFilters.add(new FilterPredicate("estado",FilterOperator.GREATER_THAN_OR_EQUAL, estado));
 				finalFilters.add(new FilterPredicate("estado",FilterOperator.LESS_THAN, estado+"\ufffd"));
 			}
-			if(!servicio.equals("")){
+			if(!Utils.esNuloVacio(servicio)){
 				finalFilters.add(new FilterPredicate("servicio_name",FilterOperator.GREATER_THAN_OR_EQUAL, servicio));
 				finalFilters.add(new FilterPredicate("servicio_name",FilterOperator.LESS_THAN, servicio+"\ufffd"));
+			}
+			if(!Utils.esNuloVacio(normalizador)){				
+				if(normalizador.equals("S") || normalizador.equals("SI")) {
+					finalFilters.add(new FilterPredicate("normalizador",FilterOperator.EQUAL, true));
+				}
+				else if(normalizador.equals("N") || normalizador.equals("NO")) {
+					finalFilters.add(new FilterPredicate("normalizador",FilterOperator.EQUAL, false));
+				}
 			}
 			
 			Filter finalFilter = null;
@@ -441,21 +437,33 @@ public List<Implementacion> getImplementacionByClientId(long l) {
 			impPage.setDetalle("0");
 			implementaciones.add(impPage);
 		
-		}else{
-			
+		}
+		else {			
 			List<List<Entity>> Entities = new ArrayList<List<Entity>>();
 			
-			if(!fecha.equals("")){
+			if(Utils.isFechaFilterValid(fechaDia, fechaMes, fechaAnio)){
 				q = new com.google.appengine.api.datastore.Query("Implementacion");
-				finalFilters = new ArrayList<>();
-				finalFilters.add(new FilterPredicate("str_fecha_alta",FilterOperator.GREATER_THAN_OR_EQUAL, fecha));
-				finalFilters.add(new FilterPredicate("str_fecha_alta",FilterOperator.LESS_THAN, fecha+"\ufffd"));
-				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
-				q.setFilter(finalFilter);
+				if(!Utils.esNuloVacio(fechaAnio) && !Utils.esNuloVacio(fechaMes) && !Utils.esNuloVacio(fechaDia)) {
+					Date fullDate = Utils.buildDate(fechaDia, fechaMes, fechaAnio);
+					q.setFilter(new FilterPredicate("fecha_alta", FilterOperator.EQUAL, fullDate));
+				}
+				else if(!Utils.esNuloVacio(fechaAnio)) {
+					Date desdeDate = Utils.getDesdeDate(fechaMes, fechaAnio);
+			        Date hastaDate = Utils.getHastaDate(fechaMes, fechaAnio);
+			        finalFilters = new ArrayList<>();
+			        if(desdeDate != null){
+			            finalFilters.add(new FilterPredicate("fecha_alta", FilterOperator.GREATER_THAN_OR_EQUAL, desdeDate));
+			        }
+			        if(hastaDate != null){
+			            finalFilters.add(new FilterPredicate("fecha_alta", FilterOperator.LESS_THAN_OR_EQUAL, hastaDate));
+			        }
+			        Filter finalFilter = CompositeFilterOperator.and(finalFilters);
+					q.setFilter(finalFilter);
+				}
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
-			if(!cliente.equals("")){
+			if(!Utils.esNuloVacio(cliente)){
 				q = new com.google.appengine.api.datastore.Query("Implementacion");
 				finalFilters = new ArrayList<>();
 				finalFilters.add(new FilterPredicate("client_name",FilterOperator.GREATER_THAN_OR_EQUAL, cliente));
@@ -465,7 +473,7 @@ public List<Implementacion> getImplementacionByClientId(long l) {
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
-			if(!pais.equals("")){
+			if(!Utils.esNuloVacio(pais)){
 				q = new com.google.appengine.api.datastore.Query("Implementacion");
 				finalFilters = new ArrayList<>();
 				finalFilters.add(new FilterPredicate("pais",FilterOperator.GREATER_THAN_OR_EQUAL, pais));
@@ -475,7 +483,7 @@ public List<Implementacion> getImplementacionByClientId(long l) {
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
-			if(!producto.equals("")){
+			if(!Utils.esNuloVacio(producto)){
 				q = new com.google.appengine.api.datastore.Query("Implementacion");
 				finalFilters = new ArrayList<>();
 				finalFilters.add(new FilterPredicate("producto",FilterOperator.GREATER_THAN_OR_EQUAL, producto));
@@ -485,7 +493,7 @@ public List<Implementacion> getImplementacionByClientId(long l) {
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
-			if(!estado.equals("")){
+			if(!Utils.esNuloVacio(estado)){
 				q = new com.google.appengine.api.datastore.Query("Implementacion");
 				finalFilters = new ArrayList<>();
 				finalFilters.add(new FilterPredicate("estado",FilterOperator.GREATER_THAN_OR_EQUAL, estado));
@@ -494,12 +502,9 @@ public List<Implementacion> getImplementacionByClientId(long l) {
 				q.setFilter(finalFilter);
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
 				
-				List<Entity> estasdf =datastore.prepare(q).asList(fetchOptions); 
-				
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
-				
 			}
-			if(!servicio.equals("")){
+			if(!Utils.esNuloVacio(servicio)){
 				q = new com.google.appengine.api.datastore.Query("Implementacion");
 				finalFilters = new ArrayList<>();
 				finalFilters.add(new FilterPredicate("servicio_name",FilterOperator.GREATER_THAN_OR_EQUAL, servicio));
@@ -508,6 +513,19 @@ public List<Implementacion> getImplementacionByClientId(long l) {
 				q.setFilter(finalFilter);
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
+			}
+			if(!Utils.esNuloVacio(normalizador)){		
+				q = new com.google.appengine.api.datastore.Query("Implementacion");
+				if(normalizador.equals("S") || normalizador.equals("SI")) {
+					q.setFilter(new FilterPredicate("normalizador",FilterOperator.EQUAL, true));
+					FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+					Entities.add(datastore.prepare(q).asList(fetchOptions));
+				}
+				else if(normalizador.equals("N") || normalizador.equals("NO")) {
+					q.setFilter(new FilterPredicate("normalizador",FilterOperator.EQUAL, false));
+					FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+					Entities.add(datastore.prepare(q).asList(fetchOptions));
+				}
 			}
 			
 			List<Entity> implementacionesFinal = new ArrayList<>();
@@ -542,7 +560,7 @@ public List<Implementacion> getImplementacionByClientId(long l) {
 			
 			implementaciones = new ArrayList<Implementacion>();
 			int implementacionesPages  = implementacionesFinal.size();
-			for(int i = page*10; i< (page*10)+10&&i<implementacionesFinal.size();i++){
+			for(int i = page*DATA_SIZE; i<(page*DATA_SIZE)+DATA_SIZE && i<implementacionesFinal.size();i++){
 				implementaciones.add(buildImplementacion(implementacionesFinal.get(i)));
 			}
 			Implementacion pages = new Implementacion();

@@ -4,8 +4,10 @@ import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
+
 import com.ste.beans.TipoServicio;
 import com.ste.persistence.PMF;
+import com.ste.utils.Utils;
 
 public class TipoServicioDao {
 	
@@ -13,19 +15,18 @@ public class TipoServicioDao {
 		return new TipoServicioDao();
 	}
 	
-	public synchronized void createTipoServicio(TipoServicio imp) {
+	public synchronized void createTipoServicio(TipoServicio tipoServicio) {
 		PersistenceManager pm = PMF.get().getPersistenceManager();	
 
-		try{
-			
-			//ServicioDao impDao = ServicioDao.getInstance();
+		tipoServicio.setNme(Utils.toUpperCase(tipoServicio.getName()));
 		
-			try {
-				pm.makePersistent(imp);
-			} finally {}
-			
-			
-		}finally {
+		try{
+			pm.makePersistent(tipoServicio);			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
 			pm.close();
 			
 		}
@@ -37,29 +38,9 @@ public class TipoServicioDao {
 		List<TipoServicio> Servicios;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		
-		
 		Query q = pm.newQuery("select from " + TipoServicio.class.getName());
 		q.setOrdering("name asc");
 		Servicios = (List<TipoServicio>) q.execute();
-		
-		
-		pm.close();
-
-		return Servicios;
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<TipoServicio> getServiciosByName(String name) {
-
-		List<TipoServicio> Servicios;
-		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		
-		Query q = pm.newQuery("select from " + TipoServicio.class.getName()+" where name=='"+name+"'");
-		q.setOrdering("name asc");
-		Servicios = (List<TipoServicio>) q.execute();
-		
-		
 		pm.close();
 
 		return Servicios;

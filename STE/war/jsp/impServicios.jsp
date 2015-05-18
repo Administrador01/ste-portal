@@ -88,10 +88,10 @@
 									<td><span>
 									<c:choose>
 										<c:when test="${s.normalizador}">
-											Si
+											SI
 										</c:when>
 										<c:otherwise>
-											No
+											NO
 										</c:otherwise>
 									</c:choose>
 									</span></td>

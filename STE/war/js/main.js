@@ -174,38 +174,11 @@ $(function() {
 		drawLetters();
 	});
 	
-	/*
-	$('#tipo_cliente').on('change', function(e) {
-		var val = $('#tipo_cliente').val();
-		var trs = $('#myTable').find('tr');
-		var a;
-		if (val=="Premium")
-			for (a=0; a<=trs.length;a++){
-				if (!$(trs[a]).hasClass('premium'))
-					$(trs[a]).addClass('hidden');
-			}
-				
-		else{
-			for (a=0; a<=trs.length;a++)
-				$(trs[a]).removeClass('hidden');
-		}
-		
-		$('#myTable').paginateMe({
-			pagerSelector : '#myPager',
-			showPrevNext : true,
-			hidePageNumbers : false,
-			perPage : 10
-		})
-			
-	});
-	
-	*/
-	
 	$('#tip_crit').on('change', function(e) {		
 		var val = $('#tip_crit').val();
 		var cajas = $('.client_box');
 		var a;
-		if (val=="Premium"){
+		if (val=="PREMIUM"){
 			for (a = 0; a<=cajas.length-1; a++){
 				if (!$(cajas[a]).hasClass('tipo_premium'))
 					$(cajas[a]).addClass('hidden');

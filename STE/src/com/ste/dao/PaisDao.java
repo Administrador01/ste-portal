@@ -6,27 +6,25 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import com.ste.beans.Pais;
-import com.ste.beans.TipoServicio;
 import com.ste.persistence.PMF;
+import com.ste.utils.Utils;
 
 public class PaisDao {
 	public static PaisDao getInstance() {
 		return new PaisDao();
 	}
 	
-	public synchronized void createPais(Pais imp) {
+	public synchronized void createPais(Pais pais) {
 		PersistenceManager pm = PMF.get().getPersistenceManager();	
 
+		pais.setName(Utils.toUpperCase(pais.getName()));		
 		try{
-			
-			//ServicioDao impDao = ServicioDao.getInstance();
-		
-			try {
-				pm.makePersistent(imp);
-			} finally {}
-			
-			
-		}finally {
+			pm.makePersistent(pais);			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
 			pm.close();
 			
 		}
@@ -34,16 +32,12 @@ public class PaisDao {
 	
 	@SuppressWarnings("unchecked")
 	public List<Pais> getAllPaises() {
-
 		List<Pais> Paises;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		
+				
 		Query q = pm.newQuery("select from " + Pais.class.getName());	
 		q.setOrdering("name asc");
 		Paises = (List<Pais>) q.execute();
-		
-		
 		pm.close();
 
 		return Paises;

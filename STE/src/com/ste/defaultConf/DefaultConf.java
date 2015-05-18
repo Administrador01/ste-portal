@@ -949,7 +949,7 @@ public class DefaultConf extends HttpServlet{
 					}
 					
 					if(save&&!error) {
-						implementacionDao.createImplementacion(implementacion, "");
+						implementacionDao.createImplementacion(implementacion);
 					}
 				}
 				counter++;

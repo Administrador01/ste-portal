@@ -160,11 +160,6 @@ public class SoporteServlet extends HttpServlet{
 				s.addCell(new Label(11, aux, sop.getPeticionario()));
 				s.addCell(new Label(12, aux, sop.getDetalles()));
 				s.addCell(new Label(13, aux, sop.getSolucion()));
-				
-				
-				
-
-
 				aux++;
 			}
 
@@ -223,8 +218,7 @@ public class SoporteServlet extends HttpServlet{
 		
 		try{
 			json.append("success", "true");
-			
-			
+						
 			resp.setCharacterEncoding("UTF-8");
 	        resp.setContentType("application/json");       
 			resp.getWriter().println(json);
