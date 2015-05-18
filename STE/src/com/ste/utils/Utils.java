@@ -10,21 +10,6 @@ import java.util.Enumeration;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import javax.servlet.http.HttpServletRequest;
 
 import com.ste.beans.Log;
@@ -33,6 +18,29 @@ import com.ste.dao.LogsDao;
 import com.ste.dao.UserDao;
 
 public class Utils {
+	
+	public static int calcNumPages(int numItems, int pageSize) {
+		int numpages = 1;
+		if(numItems > 0) {
+			numpages = numItems/pageSize;
+			if((numItems % pageSize) > 0) {
+				numpages++;
+			}
+		}
+		return numpages;
+	}
+	
+	public static boolean isLastPage(int pageAct, int numPages, int numItems, int pageSize) {
+		if(numPages == 1) {
+			return (numItems < pageSize) ? true : false;
+		}
+		else {
+			if(pageAct == numPages-1) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	public static Date buildDate(String dia, String mes, String anio) {
 		try {

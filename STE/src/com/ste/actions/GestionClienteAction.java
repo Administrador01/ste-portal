@@ -15,6 +15,8 @@ import com.ste.beans.Cliente;
 import com.ste.counters.Counter;
 import com.ste.dao.ClienteDao;
 import com.ste.dao.CounterDao;
+import com.ste.dao.ImplementacionDao;
+import com.ste.dao.PruebaDao;
 import com.ste.utils.Utils;
 
 public class GestionClienteAction extends Action{
@@ -40,11 +42,12 @@ public class GestionClienteAction extends Action{
 		
 		String page = req.getParameter("page");
 		int pageint = Utils.stringToInt(page);	
+		int numpages = 0;
 		
 		if(!Utils.esNuloVacio(idCli)) {
 			// Por id cliente
 			clientes.add(cDao.getClientebyId(Long.valueOf(idCli)));
-			int numpages = 0;			
+			numpages = 0;
 			req.setAttribute("numpages", numpages);
 		}
 		else {
@@ -56,17 +59,17 @@ public class GestionClienteAction extends Action{
 				// Sin filtros
 				clientes = cDao.getClientePaged(pageint);
 				Counter count = counterDao.getCounterByName("cliente");
-				int numpages = (count.getValue()/ClienteDao.DATA_SIZE) + 1;			
-				req.setAttribute("numpages", numpages);
-				boolean lastpage = (clientes.size() < ClienteDao.DATA_SIZE) ? true : false;				
-				req.setAttribute("lastpage", lastpage);				
+				numpages = Utils.calcNumPages(count.getValue(), ClienteDao.DATA_SIZE);			
+				req.setAttribute("numpages", numpages);		
 			}
 			else{
 				// Con filtros
 				clientes = cDao.getClienteByAllParam(identificadorFilter, nombreFilter, fechaDiaFilter, fechaMesFilter, fechaAnioFilter, segmentoFilter, premiumFilter, pageint);
 				int numPagesItemIndex = clientes.size()-1;
-				int numpages = (Integer.parseInt(clientes.get(numPagesItemIndex).getId_cliente())/ClienteDao.DATA_SIZE)+1;
+				int numClientes = Integer.parseInt(clientes.get(numPagesItemIndex).getId_cliente());
 				clientes.remove(numPagesItemIndex);
+				numpages = Utils.calcNumPages(numClientes, ClienteDao.DATA_SIZE);
+				
 				req.setAttribute("numpages", numpages);
 				req.setAttribute("identificador", identificadorFilter);
 				req.setAttribute("nombre", nombreFilter);
@@ -75,18 +78,11 @@ public class GestionClienteAction extends Action{
 				req.setAttribute("fechaanio", fechaAnioFilter);
 				req.setAttribute("segmento", segmentoFilter);
 				req.setAttribute("tipo", premiumFilter);
-				
-				boolean lastpage = (clientes.size() < ClienteDao.DATA_SIZE) ? true : false;
-				if(Utils.esNuloVacio(identificadorFilter) && Utils.esNuloVacio(nombreFilter) && 
-						Utils.esNuloVacio(fechaDiaFilter) && Utils.esNuloVacio(fechaMesFilter) && 
-						Utils.esNuloVacio(fechaAnioFilter) && Utils.esNuloVacio(segmentoFilter) && 
-						Utils.esNuloVacio(premiumFilter)) {
-					lastpage=false;
-				}
-				req.setAttribute("lastpage", lastpage);
 			}
 		}
 		
+		boolean lastpage = Utils.isLastPage(pageint, numpages, clientes.size(), ClienteDao.DATA_SIZE);
+		req.setAttribute("lastpage", lastpage);
 		req.setAttribute("clientes", clientes);
 		req.setAttribute("page", pageint);
 		

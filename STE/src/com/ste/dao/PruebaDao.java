@@ -121,6 +121,30 @@ public class PruebaDao {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<Prueba> getAllPruebasUpdateMayusPaged(Integer page) {
+
+		List<Prueba> pruebas;
+		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		com.google.appengine.api.datastore.Query q = new com.google.appengine.api.datastore.Query("Prueba");
+		
+		List<Entity> entities = null;
+		FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+		if(page != null) {
+			Integer offset = page * 200;
+			fetchOptions.limit(200);	
+			fetchOptions.offset(offset);
+		}
+		entities = datastore.prepare(q).asList(fetchOptions);
+				
+		pruebas = new ArrayList<>();	
+		for (Entity result : entities) {			
+			pruebas.add(buildPrueba(result));
+		}
+		
+		return pruebas;		
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<Prueba> getAllPruebas() {
 
 		List<Prueba> pruebas;

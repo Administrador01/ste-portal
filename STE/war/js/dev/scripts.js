@@ -1006,6 +1006,9 @@ $(function() {
 		var page = listElement.data('page');
 		var lastpage = listElement.data('lastpage');
 		var numpages = listElement.data('numpages');
+		//console.log("page - " + page);
+		//console.log("lastpage - " + lastpage);
+		//console.log("numpages - " + numpages);
 		var oldparameters = getParameters();
 		var sPath=window.location.pathname;
 		var sPage = sPath.substring(sPath.lastIndexOf('/') + 1);

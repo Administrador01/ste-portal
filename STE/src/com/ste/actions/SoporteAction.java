@@ -23,6 +23,7 @@ import com.ste.dao.CounterDao;
 import com.ste.dao.EstadoDao;
 import com.ste.dao.PaisDao;
 import com.ste.dao.ProductoCanalDao;
+import com.ste.dao.PruebaDao;
 import com.ste.dao.SoporteDao;
 import com.ste.dao.TipoServicioDao;
 import com.ste.utils.Utils;
@@ -54,18 +55,21 @@ public class SoporteAction extends Action{
 		
 		String page = req.getParameter("page");
 		int pageint = Utils.stringToInt(page);	
+		int numpages = 0;
 		
 		if(!Utils.esNuloVacio(idCli)) {
 			// Por id cliente
 			req.setAttribute("idCli", idCli);
 			soportes = sDao.getAllSoportesByClientId(idCli);
+			numpages = 0;			
+			req.setAttribute("numpages", numpages);		
 		}
 		else if(idCli == null) {
 			// Carga normal sin filtros
 			soportes= sDao.getSoportesPaged(pageint);
 			req.setAttribute("soportes", soportes);
 			Counter count = counterDao.getCounterByName("soporte");
-			int numpages = (count.getValue()/SoporteDao.DATA_SIZE) + 1;			
+			numpages = Utils.calcNumPages(count.getValue(), SoporteDao.DATA_SIZE);		
 			req.setAttribute("numpages", numpages);
 		} 
 		else if((Utils.esNuloVacio(premiumFilter) || TODOS.equals(premiumFilter)) &&
@@ -81,7 +85,7 @@ public class SoporteAction extends Action{
 			soportes= sDao.getSoportesPaged(pageint);
 			req.setAttribute("soportes", soportes);
 			Counter count = counterDao.getCounterByName("soporte");
-			int numpages = (count.getValue()/SoporteDao.DATA_SIZE) + 1;			
+			numpages = Utils.calcNumPages(count.getValue(), SoporteDao.DATA_SIZE);		
 			req.setAttribute("numpages", numpages);			
 		}
 		else {
@@ -91,8 +95,10 @@ public class SoporteAction extends Action{
 			}
 			soportes= sDao.getSoportesByAllParam(fechaDiaFilter, fechaMesFilter, fechaAnioFilter, clienteFilter, segmentoFilter, estadoFilter, tipoServFilter, productoFilter, descripcionFilter, premiumFilter, idCli, pageint);
 			int numPagesItemIndex = soportes.size()-1;
-			int numpages = (Integer.parseInt(soportes.get(numPagesItemIndex).getDetalles())/SoporteDao.DATA_SIZE) + 1;
+			int numSoportes = Integer.parseInt(soportes.get(numPagesItemIndex).getDetalles());
 			soportes.remove(numPagesItemIndex);
+			numpages = Utils.calcNumPages(numSoportes, SoporteDao.DATA_SIZE);
+			
 			req.setAttribute("idCli", idCli);
 			req.setAttribute("numpages", numpages);
 			req.setAttribute("clienteFilter", clienteFilter);
@@ -107,8 +113,7 @@ public class SoporteAction extends Action{
 			req.setAttribute("premiumFilter", premiumFilter);
 		}
 		
-		boolean lastpage = (soportes.size() < SoporteDao.DATA_SIZE) ? true : false;
-		
+		boolean lastpage = Utils.isLastPage(pageint, numpages, soportes.size(), SoporteDao.DATA_SIZE);
 		req.setAttribute("lastpage", lastpage);
 		req.setAttribute("page", pageint);
 		
