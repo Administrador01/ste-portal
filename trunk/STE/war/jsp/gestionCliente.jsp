@@ -6,7 +6,7 @@
 
 
 
-<h1>Gestión cliente</h1>
+<h1>Gesti&oacuten cliente</h1>
 <span class="btn-atras" onclick="window.location.href='../clientes.do' "></span>
 
 <hr />
@@ -24,12 +24,6 @@
 		Descargar Tabla<span class="excel_span"></span>
 	</button>
  
-	<!-- 
-	<button id="excel_btn" onclick=	"window.location.href='../../usersServlet?accion=xls'">
-		Descargar Tabla<span class="excel_span"></span>
-	</button>
- -->
-
 	<div class="form-holder">
 		<form id="new-user-form" name="new-client-form" action="/clientServlet"
 			method="POST" novalidate="novalidate">
@@ -45,65 +39,13 @@
 							<input class="long" type="text" required name="nombre_cliente" id="nombre_cliente">
 						</div>
 						
-						<!-- 			
-						<div class="form-field">
-							<span class="lbl">Estado<span class="required-asterisk">*</span>:</span>
-							<div class="input">
-								<select id="estado" class="selectpicker selected" name="estado" required aria-required="true">
-									<option value="default">Seleccionar</option>
-									<option value="Implementación en curso">Implementación en curso</option>
-									<option value="Finalizado">Finalizado</option>
-									<option value="Parado">Parado</option>
-									<option value="Terminados Fileact">Terminados Fileact</option>								
-								</select>
-							</div>
-						</div>
-						 -->
 						<div class="form-field">
 							<span class="lbl">Fecha alta<span class="required-asterisk">*</span>:</span>
 							<div class="input">
 								<input type="text" readonly="" value="" size="16" class="datepicker" name="fecha_alta" id="fecha_alta" required aria-required="true">
 							</div>
-						</div>
+						</div>						
 						
-						<!-- 
-						
-						<div class="form-field">
-							<span class="lbl">País<span class="required-asterisk">*</span>:</span>
-							<select placeholder="Seleccionar" name="pais" class="selectpicker selected" multiple required aria-required="true">
-							  <option value="Colombia">Colombia</option>
-							  <option value="España">España</option>
-							  <option value="Venezuela">Venezuela</option>
-							  <option value="Francia">Francia</option>
-							  <option value="México">México</option>
-							  <option value="Argentina">Argentina</option>
-							  <option value="Portugal">Portugal</option>
-							  <option value="UK">UK</option>
-							  <option value="Perú">Perú</option>
-							  <option value="Nueva York">Nueva York</option>					  
-							</select>
-						</div>
-						 -->
-						<!-- 
-						
-						<div class="form-field">
-							<span class="lbl">Producto<span class="required-asterisk">*</span>:</span>
-							<div class="input">
-								<select id="producto" class="selectpicker selected" name="producto" required aria-required="true">
-									<option value="default">Seleccionar</option>
-									<option value="Swift FileAct">Swift FileAct</option>										
-									<option value="Swift FileAct (antigua conexión)">Swift FileAct (antigua conexión)</option>
-									<option value="Swift FIN">Swift FIN</option>
-									<option value="Swift FIN (Relay Bank)">Swift FIN (Relay Bank)</option>
-									<option value="HSS">HSS</option>
-									<option value="EDITRAN">EDITRAN</option>
-									<option value="BBVA net cash">BBVA net cash</option>
-									<option value="EDIFACT">EDIFACT</option>
-									<option value="Normalizador">Normalizador</option>																					
-								</select>
-							</div>
-						</div>
-						 -->
 					</div>
 					<div class="form-field-divider right">
 
@@ -113,35 +55,14 @@
 							
 							<label class="radio ui-marmots-label-radio marmots-label-left on" for="radio_Si">
 								Premium
-								<input id="radio_Si" type="radio" name="premium" value="Premium" checked/>
+								<input id="radio_Si" type="radio" name="premium" value="PREMIUM" checked/>
 							</label>
 							<label class="radio ui-marmots-label-radio marmots-label-left" for="radio_No">
 								No Premium
-								<input id="radio_No" type="radio" name="premium" value="No Premium" />
+								<input id="radio_No" type="radio" name="premium" value="NO PREMIUM" />
 							</label>
 						</div>
-						
-						<!-- 
-						
-						<div class="form-field">
-							<span class="lbl">Subestado<span class="required-asterisk">*</span>:</span>
-							<div class="input">
-								<select id="subestado" class="selectpicker selected" name="subestado" required aria-required="true">
-									<option value="default">-</option>																									
-								</select>
-							</div>
-						</div>
-						
-						 -->
-						<!-- 
-						<div class="form-field">
-							<span class="lbl">Fecha fin<span class="required-asterisk">*</span>:</span>
-							<div class="input">
-								<input type="text" readonly="" value="" size="16" class="datepicker" name="fecha_fin" id="fecha_fin" required aria-required="true">
-							</div>
-						</div>
-						 -->
-						 
+												 
 						<div class="form-field">
 							<span class="lbl">Segmento<span class="required-asterisk">*</span>:</span>
 							<div class="input">
@@ -149,7 +70,7 @@
 									<option value="default">Seleccionar</option>		
 									<option value="CIB">CIB</option>									
 									<option value="BEC">BEC</option>	
-									<option value="Pymes">Pymes</option>								
+									<option value="PYMES">PYMES</option>								
 								</select>
 							</div>
 						</div>
@@ -161,14 +82,10 @@
 				</div>
 			
 		</form>
-		
-			<button id="submit_form_client" type="submit">Aceptar</button>
-			<button class="close-form">Cancelar</button>			
-	
-	</div>
-	
+		<button id="submit_form_client" type="submit">Aceptar</button>
+		<button class="close-form">Cancelar</button>
+	</div>	
 </div>
-
 
 <div>	
 	<div>
@@ -187,7 +104,13 @@
 						<form id='client-header-filter'>
 						<th class="search-th"><input name='identificador' value='${identificador}'></th>
 						<th class="search-th"><input name='nombre' value='${nombre}'></th>
-						<th class="search-th"><input name='fecha' value='${fecha}'></th>
+						<th class="search-th">
+							<div class="date-container">
+								<input class="date" name='fechadia' value='${fechadia}' maxlength="2">								
+								<input class="date" name='fechames' value='${fechames}' maxlength="2">
+								<input class="date anio" name='fechaanio' value='${fechaanio}' maxlength="4">		
+							</div>		
+						</th>
 						<th class="search-th"><input name='segmento' value='${segmento}'></th>
 						<th class="search-th"><input name='tipo' value='${tipo}'></th>
 						<th style="width: 110px;"><button type='button' onclick='filteringClient();'>  FILTRAR  </button></th>
@@ -238,10 +161,8 @@
 			<span class="pagesummary"></span>
 			<div class="paginationGoto" />
 		</div>
-
 	</div>
 </div>
-
 
 <div class="modal fade" id="edit-cliente" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">

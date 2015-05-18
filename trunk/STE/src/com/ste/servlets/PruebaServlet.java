@@ -89,7 +89,7 @@ public class PruebaServlet extends HttpServlet{
 			//String nombre_cliente = req.getParameter("cliente");
 			String referencia = req.getParameter("referencia");
 			String producto = req.getParameter("producto_canal");
-			String premium = req.getParameter("input-premium-soporte");
+			String premium = req.getParameter("input-premium-prueba");
 			String estado = req.getParameter("estado");
 			String entorno = req.getParameter("entorno");
 			String detalles = req.getParameter("detalles");
@@ -195,7 +195,7 @@ public class PruebaServlet extends HttpServlet{
 		//String nombre_cliente = req.getParameter("cliente");
 		String referencia = req.getParameter("referencia");
 		String producto = req.getParameter("producto_canal");
-		String premium = req.getParameter("input-premium-soporte");
+		String premium = req.getParameter("input-premium-prueba");
 		String estado = req.getParameter("estado");
 		String entorno = req.getParameter("entorno");
 		String servicio =  req.getParameter("tipo_servicio");
@@ -414,8 +414,6 @@ public class PruebaServlet extends HttpServlet{
 			int aux = 1;
 
 			for ( Prueba pru : pruebas) {
-				
-				
 				s.addCell(new Label(0, aux, pru.getId_prueba()));
 				s.addCell(new Label(1, aux, pru.getClient_name()));
 				s.addCell(new Label(2, aux, pru.getFecha_inicio_str()));
@@ -423,9 +421,10 @@ public class PruebaServlet extends HttpServlet{
 				s.addCell(new Label(4, aux, pru.getPremium()));
 				s.addCell(new Label(5, aux, pru.getProducto()));
 				s.addCell(new Label(6, aux, pru.getReferencia()));
-				if(pru.getEntorno().equals("Producci&oacuten")){
-					s.addCell(new Label(7, aux, "Producción"));
-				}else{
+				if(pru.getEntorno().equals("PRODUCCION")){
+					s.addCell(new Label(7, aux, "PRODUCCIÓN"));
+				}
+				else {
 					s.addCell(new Label(7, aux,pru.getEntorno()));	
 				}
 				s.addCell(new Label(8, aux, pru.getEstado()));

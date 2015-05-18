@@ -62,7 +62,7 @@
 					</div>
 				
 					<div class="form-field" id="div_imp">
-						<span class="lbl">Implementaci&oacuten<span class="required-asterisk">*</span>:</span>
+						<span class="lbl">Implementaci&oacute;n<span class="required-asterisk">*</span>:</span>
 						<select class="selectpicker selected" name="imp_id" id="imp-pruebas" data-live-search="true">
 							<!--<c:choose>
 								<c:when test="${empty implementaciones}">
@@ -87,22 +87,10 @@
 						</select>
 					</div>
 				
-
-				<!--
-					<div class="form-field">
-						<span class="lbl">Cliente:</span>
-						<input type="text" class="input-autorefillable" id="input-cliente-prueba" value="" readonly>
-					</div>	
-					-->
 					<div class="form-field">
 						<span class="lbl">Tipo cliente:</span>
-						<input type="text" class="input-autorefillable" id="input-premium-prueba" value="" readonly>
+						<input type="text" class="input-autorefillable" name="input-premium-prueba" id="input-premium-prueba" value="" readonly>
 					</div>				
-						
-
-					
-
-					
 					
 					<div class="form-field">
 						<span class="lbl">Referencia:</span>
@@ -122,9 +110,6 @@
 						</div>
 					</div>
 					
-
-					
-					
 					<div class="form-field">
 						<span class="lbl">Fichero:</span>
 						<input type="text" class=""  name="fichero" id="" value="">
@@ -134,28 +119,10 @@
 						<span class="lbl">Peticionario:</span>
 						<input type="text" class="" size="35" name="peticionario" id="" value="">
 					</div>	
-					
-				<!--	
-					<div class="form-field">
-						<span class="lbl">Fichero<span class="required-asterisk">*</span>:</span>
-						<div class="input">
-							<select id="estado" class="selectpicker selected" name="fichero" required>
-								<option value="default">Seleccionar</option>
-								<option value="Confirming">Confirming</option>
-								<option value="FIT">FIT</option>
-								<option value="Pagos Francia">Pagos Francia</option>
-								<option value="SDD">SDD</option>
-								<option value="TIN">TIN</option>
-								<option value="Pagos UK">Pagos UK</option>.
-							</select>
-						</div>
-					</div>
-				-->
 				
 				</div>
 					
 				<div class="form-field-divider right">
-				
 					
 					<div class="form-field">
 						<span class="lbl">Fecha inicio<span class="required-asterisk">*</span>:</span>
@@ -190,13 +157,10 @@
 					<div class="form-field">
 						<span class="lbl">Entorno<span class="required-asterisk">*</span>:</span>
 						<div class="input">
-							<select id="entorno" class="selectpicker selected" name="entorno" >
-								
+							<select id="entorno" class="selectpicker selected" name="entorno" >								
 								<option value="default">Seleccionar</option>	
-								<option value="Integrado">Integrado</option>
-								<option value="Producci&oacuten">Producci&oacuten</option>
-
-															
+								<option value="INTEGRADO">INTEGRADO</option>
+								<option value="PRODUCCION">PRODUCCI&Oacute;N</option>															
 							</select>
 						</div>
 					</div>
@@ -208,7 +172,7 @@
 								<option value="OK">OK</option>
 								<option value="KO">KO</option>
 								<option value=""></option>
-								<option value="Cancelada">Cancelada</option>
+								<option value="CANCELADA">CANCELADA</option>
 							</select>
 						</div>
 					</div>
@@ -350,8 +314,8 @@
 		<div class="tipo-cliente-field">
 			<span class="lbl">Tipo cliente:</span>
 			<select id="tipo_cliente" class="selectpicker selected" name="tipo_servicio" >
-				<option value="Todos" ${premiumFilter == "Todos" ? 'selected' : ''}>Todos</option>	
-				<option value="Premium" ${premiumFilter == "Premium" ? 'selected' : ''}>Premium</option>	
+				<option value="TODOS" ${premiumFilter == "TODOS" ? 'selected' : ''}>Todos</option>	
+				<option value="PREMIUM" ${premiumFilter == "PREMIUM" ? 'selected' : ''}>Premium</option>	
 			</select>
 		</div>
 		<div class="main-table usersTable">
@@ -369,7 +333,13 @@
 
 					<tr>
 						<form id='test-header-filter' action="">
-						<th class="search-th"><input name="fecha-filter" value="${fechaFilter}"></th>
+						<th class="search-th">
+							<div class="date-container">
+								<input class="date" name='fechadia' value='${fechadia}' maxlength="2">								
+								<input class="date" name='fechames' value='${fechames}' maxlength="2">
+								<input class="date anio" name='fechaanio' value='${fechaanio}' maxlength="4">		
+							</div>
+						</th>
 						<th class="search-th"><input name="cliente-filter" value="${clienteFilter}"></th>
 						<th class="search-th"><input name="servicio-filter" value='${servicioFilter}'></th>
 						<th class="search-th"><input name="estado-filter" value="${estadoFilter}"></th>
@@ -391,24 +361,23 @@
 						<c:otherwise>
 							<c:forEach items="${pruebas}" var="s">
 							
-															<tr class="valid-result ${s.premium == 'Premium' ? 'premium' : ''}" data-strfechaestado="${s.fecha_inicio_str}"
-															 data-nombrecliente="${s.client_name}" data-estado="${s.estado}" data-entorno="${s.entorno}" name="${s.key.id}" id="row${s.key.id}" style="${s.entorno=="Producci&oacuten"?'background-color:#C8DBFF;':''}${s.erased?'background-color:#8B8B8B;':''}">
+															<tr class="valid-result ${s.premium == 'PREMIUM' ? 'premium' : ''}" data-strfechaestado="${s.fecha_inicio_str}"
+															 data-nombrecliente="${s.client_name}" data-estado="${s.estado}" data-entorno="${s.entorno}" name="${s.key.id}" id="row${s.key.id}" style="${s.entorno=="PRODUCCION"?'background-color:#C8DBFF;':''}${s.erased?'background-color:#8B8B8B;':''}">
 																<td><span>${s.str_fecha_estado}</span></td>
 																<td><span>${s.client_name}</span></td>
 																<td><span>${s.tipo_servicio}</span></td>
 																<td><span style="color:
 																
 																
-																${s.estado=="Pendiente"?'orange':''}
-																${s.estado=="En curso"?'blue':''}
-																${s.estado=="Finalizado"?'green':''}
-																${s.estado=="Cancelada"?'grey':''}
+																${s.estado=="PENDIENTE"?'orange':''}
+																${s.estado=="EN CURSO"?'blue':''}
+																${s.estado=="FINALIZADO"?'green':''}
+																${s.estado=="CANCELADA"?'grey':''}
 																
-																
-																
+																															
 																">${s.estado}</span></td>
 																<td><span>${s.producto}</span></td>
-																<td><span>${s.entorno}</span></td>
+																<td><span>${s.entorno=="PRODUCCION"?'PRODUCCI&Oacute;N':s.entorno}</span></td>
 																
 																<td>
 																${s.erased?'

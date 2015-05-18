@@ -66,12 +66,10 @@
 									</div>
 								</div>
 								
-																<div class="form-field">
+								<div class="form-field">
 									<span class="lbl">Tipo cliente:</span>
-									<input type="text" class="input-autorefillable" id="input-premium-prueba-modal" value="" readonly>
+									<input type="text" class="input-autorefillable" name="input-premium-prueba" id="input-premium-prueba-modal" value="" readonly>
 								</div>	
-
-								
 
 								
 								<div class="form-field">
@@ -121,8 +119,8 @@
 									<span class="lbl">Entorno<span class="required-asterisk">*</span>:</span>
 									<div class="input">
 										<select id="estado" class="selectpicker selected" name="entorno" >							
-											<option value="Integrado" ${prueba.entorno == 'Integrado' ? 'selected' : ''} selected>Integrado</option>									
-											<option value="Producci&oacuten" ${prueba.entorno == 'Producci&oacuten' ? 'selected' : ''}>Producci&oacuten</option>	
+											<option value="INTEGRADO" ${prueba.entorno == 'INTEGRADO' ? 'selected' : ''} selected>INTEGRADO</option>									
+											<option value="PRODUCCION" ${prueba.entorno == 'PRODUCCION' ? 'selected' : ''}>PRODUCCI&Oacute;N</option>	
 										</select>
 									</div>
 								</div>
@@ -166,7 +164,7 @@
 											<option value="OK"${prueba.resultado == "OK" ? 'selected' : ''}>OK</option>
 											<option value="KO"${prueba.resultado == "KO" ? 'selected' : ''}>KO</option>
 											<option value=""${prueba.resultado == "" ? 'selected' : ''}></option>
-											<option value="Cancelada"${prueba.resultado == "Cancelada" ? 'selected' : ''}>Cancelada</option>
+											<option value="CANCELADA"${prueba.resultado == "CANCELADA" ? 'selected' : ''}>CANCELADA</option>
 										</select>
 									</div>
 								</div>

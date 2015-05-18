@@ -43,10 +43,6 @@
 						</div>
 					</div>
 					
-					
-					
-					
-					
 					<div class="form-field">
 						<span class="lbl">Cliente<span class="required-asterisk">*</span>:</span>
 						<div class="input">
@@ -56,11 +52,11 @@
 								<c:choose>
 										<c:when test="${empty clientes}">
 											<option value="default">No hay clientes</option>
-											<option value="Ninguno" data-premium="No Premium" data-segmento="Ninguno">Ninguno</option>
+											<option value="NINGUNO" data-premium="NO PREMIUM" data-segmento="NINGUNO">NINGUNO</option>
 										</c:when>
 										<c:otherwise>
 											<option value="default">Seleccionar</option>
-											<option value="Ninguno" data-premium="No Premium" data-segmento="Ninguno">Ninguno</option>
+											<option value="NINGUNO" data-premium="NO PREMIUM" data-segmento="NINGUNO">NINGUNO</option>
 											<c:forEach items="${clientes}" var="t">							
 												<option value="${t.nombre}" data-premium="${t.premium}" data-segmento="${t.tipo_cliente}" data-clientid="${t.key.id}" >${t.nombre}</option>
 											</c:forEach>
@@ -85,10 +81,10 @@
 					<div class="form-field">
 							<span class="lbl">Premium:</span>
 							<label class="ui-marmots-label-radio on" for="radio_Si">
-								<input name="premium" id="radio_Si" type="radio" value="Si" checked />Si
+								<input name="premium" id="radio_Si" type="radio" value="SI" checked />SI
 							</label>
 							<label class="ui-marmots-label-radio marmots-label-left" for="radio_No">
-								<input name="premium" id="radio_No"  type="radio" value="No"/>No
+								<input name="premium" id="radio_No"  type="radio" value="NO"/>NO
 							</label>
 					</div>
 					--%>
@@ -108,10 +104,10 @@
 					<div class="form-field">
 							<span class="lbl">Tipo<span class="required-asterisk">*</span>:</span>
 							<label class="ui-marmots-label-radio on" for="radio_incidencia">
-								<input name="tipo" id="radio_incidencia" type="radio" value="Incidencia" checked /><span class="lbl">Incidencia</span>
+								<input name="tipo" id="radio_incidencia" type="radio" value="INCIDENCIA" checked /><span class="lbl">Incidencia</span>
 							</label>
 							<label class="ui-marmots-label-radio marmots-label-left" for="radio_consulta">
-							<input name="tipo"  id="radio_consulta"  type="radio" value="Consulta"/><span class="lbl">Consulta</span>
+							<input name="tipo"  id="radio_consulta"  type="radio" value="CONSULTA"/><span class="lbl">Consulta</span>
 							</label>
 					</div>
 					
@@ -191,11 +187,7 @@
 							<textarea name="solucion" maxlength="500" rows="1" cols="1" placeholder="Introduzca texto ..."></textarea>
 						</div>
 					</div>					 
-				</div>
-				
-				
-
-				
+				</div>			
 				
 				<div id="message_div" class="message_div">
 					<span id="span_message">El soporte ha sido creado de forma correcta.<br/>En breve volvemos a la página.</span>
@@ -216,8 +208,8 @@
 		<div class="tipo-cliente-field">
 			<span class="lbl">Tipo cliente:</span>
 			<select id="tipo_cliente" class="selectpicker selected" name="tipo_servicio" >
-				<option value="Todos" ${premiumFilter == "Todos" ? 'selected' : ''}>Todos</option>	
-				<option value="Premium" ${premiumFilter == "Premium" ? 'selected' : ''}>Premium</option>	
+				<option value="TODOS" ${premiumFilter == "TODOS" ? 'selected' : ''}>Todos</option>	
+				<option value="PREMIUM" ${premiumFilter == "PREMIUM" ? 'selected' : ''}>Premium</option>	
 			</select>
 		</div>
 		<div class="main-table usersTable">
@@ -235,7 +227,13 @@
 					</tr>
 					<tr>
 						<form id='support-header-filter' action="">
-							<th class="search-th"><input name="fechaFilter" value="${fechaFilter}"></th>
+							<th class="search-th">
+								<div class="date-container">
+									<input class="date" name='fechadia' value='${fechadia}' maxlength="2">								
+									<input class="date" name='fechames' value='${fechames}' maxlength="2">
+									<input class="date anio" name='fechaanio' value='${fechaanio}' maxlength="4">		
+								</div>
+							</th>
 							<th class="search-th"><input name="clienteFilter" value="${clienteFilter}"></th>
 							<th class="search-th"><input name="segmentoFilter" value="${segmentoFilter}"></th>
 							<th class="search-th"><input name="estadoFilter" value="${estadoFilter}"></th>
@@ -257,7 +255,7 @@
 
 						<c:otherwise>
 							<c:forEach items="${soportes}" var="s">
-								<tr class="valid-result ${s.premium == 'Premium' ? 'premium' : ''}" id="row${s.key.id}">
+								<tr class="valid-result ${s.premium == 'PREMIUM' ? 'PREMIUM' : ''}" id="row${s.key.id}">
 									<td><span>${s.str_fecha_inicio}</span></td>
 									<td><span>${s.cliente_name}</span></td>
 									<td><span>${s.tipo_cliente}</span></td>
@@ -274,7 +272,7 @@
 					</c:choose>
 					
 					<c:forEach items="${soportesDel}" var="s">
-						<tr class="valid-result ${s.premium == 'Premium' ? 'premium' : ''}" style='background-color:#8B8B8B;' id="row${s.key.id}">
+						<tr class="valid-result ${s.premium == 'PREMIUM' ? 'PREMIUM' : ''}" style='background-color:#8B8B8B;' id="row${s.key.id}">
 							<td><span>${s.str_fecha_inicio}</span></td>
 							<td><span>${s.cliente_name}</span></td>
 							<td><span>${s.tipo_cliente}</span></td>

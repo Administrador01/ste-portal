@@ -34,13 +34,11 @@ public class ClienteDao {
 	public List<Cliente> getAllClients() {
 
 		List<Cliente> clientes;
-		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
+		PersistenceManager pm = PMF.get().getPersistenceManager();		
 		
 		Query q = pm.newQuery("select from " + Cliente.class.getName() +" where erased == false");		
 		q.setOrdering("id_cliente asc");
-		clientes = (List<Cliente>) q.execute();
-		
+		clientes = (List<Cliente>) q.execute();		
 		
 		pm.close();
 
@@ -51,14 +49,11 @@ public class ClienteDao {
 	public List<Cliente> getAllDelClients() {
 
 		List<Cliente> clientes;
-		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
+		PersistenceManager pm = PMF.get().getPersistenceManager();		
 		
 		Query q = pm.newQuery("select from " + Cliente.class.getName() +" where erased == true");		
 		q.setOrdering("id_cliente asc");
 		clientes = (List<Cliente>) q.execute();
-		
-		
 		pm.close();
 
 		return clientes;
@@ -98,33 +93,41 @@ public class ClienteDao {
 	}
 	
 	public synchronized void createClienteRaw(Cliente c) {
-		PersistenceManager pm = PMF.get().getPersistenceManager();	
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		c.setNombre(Utils.toUpperCase(c.getNombre()));
+		c.setPremium(Utils.toUpperCase(c.getPremium()));
+		c.setTipo_cliente(Utils.toUpperCase(c.getTipo_cliente()));
+		
 		pm.makePersistent(c);
 		pm.close();
 	}
+	
 	public synchronized void createCliente(Cliente c) {
 		PersistenceManager pm = PMF.get().getPersistenceManager();	
 		CounterDao cDao = CounterDao.getInstance();
 
+		c.setNombre(Utils.toUpperCase(c.getNombre()));
+		c.setPremium(Utils.toUpperCase(c.getPremium()));
+		c.setTipo_cliente(Utils.toUpperCase(c.getTipo_cliente()));
+		
 		try{
-			
-			ClienteDao cliDao = ClienteDao.getInstance();	
-
+			ClienteDao cliDao = ClienteDao.getInstance();
 			List<Cliente> client_arr = cliDao.getAllClients();
 			boolean flag = false;
 			for (Cliente clie : client_arr){
-				if(clie.getNombre().equals(c.getNombre())&&
-				   clie.getStr_fecha_alta().equals(c.getStr_fecha_alta())&&clie.getPremium().equals(c.getPremium())&&
+				if(clie.getNombre().equals(c.getNombre()) && 
+				   clie.getStr_fecha_alta().equals(c.getStr_fecha_alta()) && 
+				   clie.getPremium().equals(c.getPremium()) && 
 				   clie.getTipo_cliente().equals(c.getTipo_cliente())){
 						flag = true;
 				}
 
 			}
-			if(!flag){
-				
+			if(!flag) {				
 				c.setFecha_alta(Utils.dateConverter(c.getStr_fecha_alta()));
+				
 				if (c.getKey()==null){
-					
 					Counter count = cDao.getCounterByName("cliente");
 					String num = String.format("%04d", count.getValue());
 					
@@ -133,14 +136,12 @@ public class ClienteDao {
 					c.setErased(false);	
 				}
 				
-				
 				try {
 					pm.makePersistent(c);
 				} finally {}
 			}
 			
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			pm.close();
@@ -149,23 +150,17 @@ public class ClienteDao {
 	}
 	
 	public Cliente getClientebyId(long l) {
-		
 		Cliente c;
 		try{			
-		
-		PersistenceManager pManager = PMF.get().getPersistenceManager();
-		Cliente cliente_temp = pManager.getObjectById(Cliente.class, l);
+			PersistenceManager pManager = PMF.get().getPersistenceManager();
+			Cliente cliente_temp = pManager.getObjectById(Cliente.class, l);
 
-		c = pManager.detachCopy(cliente_temp);
-		pManager.close();
-
+			c = pManager.detachCopy(cliente_temp);
+			pManager.close();
 		}catch(Exception e){
 			c=null;
-		}
-		
-		return c;
-		
-		
+		}		
+		return c;	
 	}
 	
 	public void deleteCliente(Cliente c) {
@@ -179,9 +174,6 @@ public class ClienteDao {
 
 	}
 	public Cliente getClienteByName(String name) {
-
-		Cliente c = new Cliente();
-
 		PersistenceManager pManager = PMF.get().getPersistenceManager();
 		Transaction transaction = pManager.currentTransaction();
 		transaction.begin();
@@ -189,8 +181,9 @@ public class ClienteDao {
 		String queryStr = "select from " + Cliente.class.getName()
 				+ " where nombre  == :p1";
 
-		List<Cliente> clientes = (List<Cliente>) pManager.newQuery(queryStr).execute(name);
+		List<Cliente> clientes = (List<Cliente>) pManager.newQuery(queryStr).execute(Utils.toUpperCase(name));
 
+		Cliente c = new Cliente();
 		if (!clientes.isEmpty()) {
 			c = clientes.get(0);
 		} else {
@@ -208,16 +201,14 @@ public class ClienteDao {
 		List<Cliente> clientes = clienteDao.getAllClients();
 		List<Cliente> clientesCoinc = new ArrayList<Cliente>();
 		for (Cliente cli: clientes ){
-			if (cli.getNombre().toLowerCase().equals(name.toLowerCase())){
+			if (cli.getNombre().toUpperCase().equals(Utils.toUpperCase(name))){
 				clientesCoinc.add(cli);
 			}
 		}
 		return clientesCoinc;
 	}
 	
-	public List<Cliente> getClienteByAllParam(String identificador, String nombre, String fecha, String segmento, String premium, Integer page){
-		
-		
+	public List<Cliente> getClienteByAllParam(String identificador, String nombre, String fechaDia, String fechaMes, String fechaAnio, String segmento, String premium, Integer page){
 		List<Cliente> clientes=null;
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		com.google.appengine.api.datastore.Query q = new com.google.appengine.api.datastore.Query("Cliente");
@@ -225,40 +216,55 @@ public class ClienteDao {
 		List<Filter> finalFilters = new ArrayList<>();
 		
 		int filters = 0;
-		if(!identificador.equals("")){
+		if(!Utils.esNuloVacio(identificador)){
+			identificador = Utils.toUpperCase(identificador);
 			filters++;
 		}
-		if(!nombre.equals("")){
-			nombre = nombre.toUpperCase();
+		if(!Utils.esNuloVacio(nombre)){
+			nombre = Utils.toUpperCase(nombre);
 			filters++;
 		}
-		if(!fecha.equals("")){
+		if(Utils.isFechaFilterValid(fechaDia, fechaMes, fechaAnio)){
 			filters++;
 		}
-		if(!segmento.equals("")){
+		if(!Utils.esNuloVacio(segmento)){
+			segmento = Utils.toUpperCase(segmento);
 			filters++;
 		}
-		if(!premium.equals("")){
+		if(!Utils.esNuloVacio(premium)){
+			premium = Utils.toUpperCase(premium);
 			filters++;
 		}
 		if(filters<=1){
-			if(!identificador.equals("")){
+			if(!Utils.esNuloVacio(identificador)){
 				finalFilters.add(new FilterPredicate("id_cliente", FilterOperator.GREATER_THAN_OR_EQUAL, identificador));
 				finalFilters.add(new FilterPredicate("id_cliente", FilterOperator.LESS_THAN, identificador+"\ufffd"));
 			}
-			if(!nombre.equals("")){
+			if(!Utils.esNuloVacio(nombre)){
 				finalFilters.add(new FilterPredicate("nombre", FilterOperator.GREATER_THAN_OR_EQUAL, nombre));
 				finalFilters.add(new FilterPredicate("nombre", FilterOperator.LESS_THAN, nombre+"\ufffd"));
 			}
-			if(!fecha.equals("")){
-				finalFilters.add(new FilterPredicate("str_fecha_alta", FilterOperator.GREATER_THAN_OR_EQUAL, fecha));
-				finalFilters.add(new FilterPredicate("str_fecha_alta", FilterOperator.LESS_THAN, fecha+"\ufffd"));
+			if(Utils.isFechaFilterValid(fechaDia, fechaMes, fechaAnio)){
+				if(!Utils.esNuloVacio(fechaAnio) && !Utils.esNuloVacio(fechaMes) && !Utils.esNuloVacio(fechaDia)) {
+					Date fullDate = Utils.buildDate(fechaDia, fechaMes, fechaAnio);
+					finalFilters.add(new FilterPredicate("fecha_alta", FilterOperator.EQUAL, fullDate));
+				}
+				else if(!Utils.esNuloVacio(fechaAnio)) {
+					Date desdeDate = Utils.getDesdeDate(fechaMes, fechaAnio);
+			        Date hastaDate = Utils.getHastaDate(fechaMes, fechaAnio);
+			        if(desdeDate != null){
+			            finalFilters.add(new FilterPredicate("fecha_alta", FilterOperator.GREATER_THAN_OR_EQUAL, desdeDate));
+			        }
+			        if(hastaDate != null){
+			            finalFilters.add(new FilterPredicate("fecha_alta", FilterOperator.LESS_THAN_OR_EQUAL, hastaDate));
+			        }
+				}		
 			}
-			if(!segmento.equals("")){
+			if(!Utils.esNuloVacio(segmento)){
 				finalFilters.add(new FilterPredicate("tipo_cliente", FilterOperator.GREATER_THAN_OR_EQUAL, segmento));
 				finalFilters.add(new FilterPredicate("tipo_cliente", FilterOperator.LESS_THAN, segmento+"\ufffd"));
 			}
-			if(!premium.equals("")){
+			if(!Utils.esNuloVacio(premium)){
 				finalFilters.add(new FilterPredicate("premium", FilterOperator.GREATER_THAN_OR_EQUAL, premium));
 				finalFilters.add(new FilterPredicate("premium", FilterOperator.LESS_THAN, premium+"\ufffd"));
 			}
@@ -266,8 +272,7 @@ public class ClienteDao {
 			Filter finalFilter = null;
 			if(finalFilters.size()>1) finalFilter = CompositeFilterOperator.and(finalFilters);
 			if(finalFilters.size()==1) finalFilter = finalFilters.get(0);
-			if(finalFilters.size()!=0)q.setFilter(finalFilter);
-			
+			if(finalFilters.size()!=0)q.setFilter(finalFilter);			
 			
 			List<Entity> entities = null;
 			FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
@@ -289,7 +294,7 @@ public class ClienteDao {
 		}else{
 			List<List<Entity>> Entities = new ArrayList<List<Entity>>();
 			
-			if(!identificador.equals("")){
+			if(!Utils.esNuloVacio(identificador)){
 				q = new com.google.appengine.api.datastore.Query("Cliente");
 				finalFilters = new ArrayList<>();
 				finalFilters.add(new FilterPredicate("id_cliente", FilterOperator.GREATER_THAN_OR_EQUAL, identificador));
@@ -299,7 +304,7 @@ public class ClienteDao {
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
-			if(!nombre.equals("")){
+			if(!Utils.esNuloVacio(nombre)){
 				q = new com.google.appengine.api.datastore.Query("Cliente");
 				finalFilters = new ArrayList<>();
 				finalFilters.add(new FilterPredicate("nombre", FilterOperator.GREATER_THAN_OR_EQUAL, nombre));
@@ -309,17 +314,29 @@ public class ClienteDao {
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
-			if(!fecha.equals("")){
+			if(Utils.isFechaFilterValid(fechaDia, fechaMes, fechaAnio)) {
 				q = new com.google.appengine.api.datastore.Query("Cliente");
-				finalFilters = new ArrayList<>();
-				finalFilters.add(new FilterPredicate("str_fecha_alta", FilterOperator.GREATER_THAN_OR_EQUAL, fecha));
-				finalFilters.add(new FilterPredicate("str_fecha_alta", FilterOperator.LESS_THAN, fecha+"\ufffd"));
-				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
-				q.setFilter(finalFilter);
+				if(!Utils.esNuloVacio(fechaAnio) && !Utils.esNuloVacio(fechaMes) && !Utils.esNuloVacio(fechaDia)) {
+					Date fullDate = Utils.buildDate(fechaDia, fechaMes, fechaAnio);
+					q.setFilter(new FilterPredicate("fecha_alta", FilterOperator.EQUAL, fullDate));
+				}
+				else if(!Utils.esNuloVacio(fechaAnio)) {
+					Date desdeDate = Utils.getDesdeDate(fechaMes, fechaAnio);
+			        Date hastaDate = Utils.getHastaDate(fechaMes, fechaAnio);
+			        finalFilters = new ArrayList<>();
+			        if(desdeDate != null){
+			            finalFilters.add(new FilterPredicate("fecha_alta", FilterOperator.GREATER_THAN_OR_EQUAL, desdeDate));
+			        }
+			        if(hastaDate != null){
+			            finalFilters.add(new FilterPredicate("fecha_alta", FilterOperator.LESS_THAN_OR_EQUAL, hastaDate));
+			        }
+			        Filter finalFilter = CompositeFilterOperator.and(finalFilters);
+					q.setFilter(finalFilter);
+				}
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
-			if(!segmento.equals("")){
+			if(!Utils.esNuloVacio(segmento)){
 				q = new com.google.appengine.api.datastore.Query("Cliente");
 				finalFilters = new ArrayList<>();
 				finalFilters.add(new FilterPredicate("tipo_cliente", FilterOperator.GREATER_THAN_OR_EQUAL, segmento));
@@ -329,7 +346,7 @@ public class ClienteDao {
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
-			if(!premium.equals("")){
+			if(!Utils.esNuloVacio(premium)){
 				q = new com.google.appengine.api.datastore.Query("Cliente");
 				finalFilters = new ArrayList<>();
 				finalFilters.add(new FilterPredicate("premium", FilterOperator.GREATER_THAN_OR_EQUAL, premium));
@@ -370,19 +387,15 @@ public class ClienteDao {
 				clientesFinal.remove(removEnty);
 			}
 			
-			
 			clientes = new ArrayList<Cliente>();
 			int clientesPages = clientesFinal.size();
-			for (int i = page*10; i < (page*10)+10&&i<clientesFinal.size();i++) {
+			for (int i = page*DATA_SIZE; i < (page*DATA_SIZE)+DATA_SIZE && i<clientesFinal.size();i++) {
 				clientes.add(buildCliente(clientesFinal.get(i)));
 			}
 			Cliente pages= new Cliente();
 			pages.setId_cliente(Integer.toString(clientesPages));
-			clientes.add(pages);
-			
+			clientes.add(pages);			
 		}
-		
-		
 		
 		return clientes;
 	}

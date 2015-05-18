@@ -8,12 +8,6 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-
-
-
-
-
-
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -22,8 +16,6 @@ import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
 import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
-import com.ste.beans.Cliente;
-import com.ste.beans.Prueba;
 import com.ste.beans.Soporte;
 import com.ste.counters.Counter;
 import com.ste.persistence.PMF;
@@ -31,6 +23,8 @@ import com.ste.utils.Utils;
 
 public class SoporteDao {
 	public static final int DATA_SIZE = 10; 
+	public static final String TODOS = "TODOS";
+	
 	public static SoporteDao getInstance() {
 		return new SoporteDao();
 	}
@@ -54,61 +48,58 @@ public class SoporteDao {
 		
 		
 	}
-	public synchronized void updateSoporte(Soporte s) {
+	public synchronized void updateSoporte(Soporte soporte) {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		pm.makePersistent(s);
+		
+		soporte.setCliente_name(Utils.toUpperCase(soporte.getCliente_name()));
+		soporte.setDetalles(Utils.toUpperCase(soporte.getDetalles()));
+		soporte.setEstado(Utils.toUpperCase(soporte.getEstado()));
+		soporte.setPais(Utils.toUpperCase(soporte.getPais()));
+		soporte.setPeticionario(Utils.toUpperCase(soporte.getPeticionario()));
+		soporte.setPremium(Utils.toUpperCase(soporte.getPremium()));
+		soporte.setSolucion(Utils.toUpperCase(soporte.getSolucion()));
+		soporte.setTipo_cliente(Utils.toUpperCase(soporte.getTipo_cliente()));
+		soporte.setTipo_servicio(Utils.toUpperCase(soporte.getTipo_servicio()));
+		soporte.setTipo_soporte(Utils.toUpperCase(soporte.getTipo_soporte()));
+		soporte.setProducto_canal(Utils.toUpperCase(soporte.getProducto_canal()));
+		
+		pm.makePersistent(soporte);
 		pm.close();
 	}
-	public synchronized void createSoporte(Soporte s) {
+	public synchronized void createSoporte(Soporte soporte) {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 
+		soporte.setCliente_name(Utils.toUpperCase(soporte.getCliente_name()));
+		soporte.setDetalles(Utils.toUpperCase(soporte.getDetalles()));
+		soporte.setEstado(Utils.toUpperCase(soporte.getEstado()));
+		soporte.setPais(Utils.toUpperCase(soporte.getPais()));
+		soporte.setPeticionario(Utils.toUpperCase(soporte.getPeticionario()));
+		soporte.setPremium(Utils.toUpperCase(soporte.getPremium()));
+		soporte.setSolucion(Utils.toUpperCase(soporte.getSolucion()));
+		soporte.setTipo_cliente(Utils.toUpperCase(soporte.getTipo_cliente()));
+		soporte.setTipo_servicio(Utils.toUpperCase(soporte.getTipo_servicio()));
+		soporte.setTipo_soporte(Utils.toUpperCase(soporte.getTipo_soporte()));
+		soporte.setProducto_canal(Utils.toUpperCase(soporte.getProducto_canal()));
+		
 		try {
 			
-			SoporteDao sopDao = SoporteDao.getInstance();	
-
-//			List<Soporte> sopor_arr = sopDao.getAllSoportes();
-			boolean flag = false;
-//			for (Soporte sopor : sopor_arr){
-//				
-//				/*if(sopor.getDetalles().equals(s.getDetalles())&&
-//				   sopor.getProducto_canal().equals(s.getProducto_canal())&&
-//				   sopor.getEstado().equals(s.getEstado())&&
-//				   sopor.getStr_fecha_inicio().equals(s.getStr_fecha_inicio())&&
-//				   sopor.getSolucion().equals(s.getSolucion())&&
-//				   sopor.getCliente_id().equals(s.getCliente_id())&&
-//				   sopor.getTipo_soporte().equals(s.getTipo_soporte())&&
-//				   sopor.getTipo_servicio().equals(s.getTipo_servicio())){
-//						flag = true;
-//				}*/
-//
-//			}
-			if(!flag){
-			
-				//Conversi'on de las fechas de string a tipo date
-				s.setFecha_inicio(Utils.dateConverter(s.getStr_fecha_inicio()));
-				if (s.getStr_fecha_fin()!=""){
-					s.setFecha_fin(Utils.dateConverter(s.getStr_fecha_fin()));
-				}
-				
-				if (s.getKey()==null){
-					CounterDao cDao = CounterDao.getInstance();
-					
-					Counter count = cDao.getCounterByName("soporte");
-					
-					String num = String.format("%08d", count.getValue());
-					
-					s.setId_soporte("STE"+num);
-					
-					CounterDao countDao = CounterDao.getInstance();
-					countDao.increaseCounter(count);
-				}
-				
-				pm.makePersistent(s);
+			//Conversi'on de las fechas de string a tipo date
+			soporte.setFecha_inicio(Utils.dateConverter(soporte.getStr_fecha_inicio()));
+			if (soporte.getStr_fecha_fin()!=""){
+				soporte.setFecha_fin(Utils.dateConverter(soporte.getStr_fecha_fin()));
 			}
 			
-
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+			if (soporte.getKey()==null){
+				CounterDao cDao = CounterDao.getInstance();				
+				Counter count = cDao.getCounterByName("soporte");				
+				String num = String.format("%08d", count.getValue());				
+				soporte.setId_soporte("STE"+num);				
+				CounterDao countDao = CounterDao.getInstance();
+				countDao.increaseCounter(count);
+			}
+			
+			pm.makePersistent(soporte);			
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			pm.close();
@@ -137,12 +128,9 @@ public class SoporteDao {
 		List<Soporte> soportes;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		
-		
 		Query q = pm.newQuery("select from " + Soporte.class.getName()+" where erased == false");		
 		q.setOrdering("fecha_inicio desc");
 		soportes = (List<Soporte>) q.execute();
-		
-		
 		pm.close();
 
 		return soportes;
@@ -153,13 +141,9 @@ public class SoporteDao {
 
 		List<Soporte> soportes;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		
 		Query q = pm.newQuery("select from " + Soporte.class.getName()+" where erased == true");		
 		q.setOrdering("fecha_inicio desc");
 		soportes = (List<Soporte>) q.execute();
-		
-		
 		pm.close();
 
 		return soportes;
@@ -171,13 +155,9 @@ public class SoporteDao {
 
 		List<Soporte> soportes;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		
 		Query q = pm.newQuery("select from " + Soporte.class.getName());		
 		q.setOrdering("fecha_inicio desc");
 		soportes = (List<Soporte>) q.execute();
-		
-		
 		pm.close();
 
 		return soportes;
@@ -188,16 +168,10 @@ public class SoporteDao {
 
 		List<Soporte> soportes;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		
-		
 		String query = "select from " + Soporte.class.getName()+" where cliente_id == '"+clientID+"'";
 		
 		Query q = pm.newQuery(query);//.setFilter(propertyFilter);
-
 		soportes = (List<Soporte>) q.execute();
-
-		
 		pm.close();
 
 		return soportes;
@@ -208,22 +182,16 @@ public class SoporteDao {
 
 		List<Soporte> soportes;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		
-		
 		String query = "select from " + Soporte.class.getName();
 		Query q = pm.newQuery(query);
 		if(tipoClient.equals("ANY")){
-			q.setFilter("fecha_inicio >= fechaDesde && fecha_inicio <= fechaHasta"+" && erased==false"+" && estado=='"+estado+ "'");
+			q.setFilter("fecha_inicio >= fechaDesde && fecha_inicio <= fechaHasta"+" && erased==false"+" && estado=='"+Utils.toUpperCase(estado)+ "'");
 		}else{
-			q.setFilter("fecha_inicio >= fechaDesde && fecha_inicio <= fechaHasta"+" && erased==false"+" && premium == '"+tipoClient+"' && estado=='"+estado+ "'");			
-		}
-		
+			q.setFilter("fecha_inicio >= fechaDesde && fecha_inicio <= fechaHasta"+" && erased==false"+" && premium == '"+Utils.toUpperCase(tipoClient)+"' && estado=='"+Utils.toUpperCase(estado)+ "'");			
+		}		
 		q.declareParameters("java.util.Date fechaDesde , java.util.Date fechaHasta");
 
 		soportes = (List<Soporte>) q.execute(fechaDesde,fechaHasta);
-
-		
 		pm.close();
 
 		return soportes;
@@ -235,35 +203,26 @@ public class SoporteDao {
 		List<Soporte> soportes;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		String query = "select from " + Soporte.class.getName()+" where cliente_id == '"+clientID+"' && erased==false";
-		Query q = pm.newQuery(query);//.setFilter(propertyFilter);
+		Query q = pm.newQuery(query);
 		soportes = (List<Soporte>) q.execute();
 		boolean existe = true;
 		if (soportes.isEmpty())existe= false;
 		
 		pm.close();
-
 		return existe;
 	}
-	
-	
-	
 	
 	@SuppressWarnings("unchecked")
 	public List<Soporte> getSoportesSinceDate (Date fechaDesde) {
 
 		List<Soporte> soportes;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		
-		
 		String query = "select from " + Soporte.class.getName();
 		Query q = pm.newQuery(query);
 		
 		q.setFilter("fecha_inicio >= fechaDesde"+" && erased==false");
 		q.declareParameters("java.util.Date fechaDesde");
-	
 		soportes = (List<Soporte>) q.execute(fechaDesde);
-		
 		pm.close();
 
 		return soportes;
@@ -273,17 +232,11 @@ public class SoporteDao {
 
 		List<Soporte> soportes;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		
-		
 		String query = "select from " + Soporte.class.getName();
 		Query q = pm.newQuery(query);
-		
 		q.setFilter("fecha_inicio <= fechaHasta"+" && erased==false");
 		q.declareParameters("java.util.Date fechaHasta");
-	
 		soportes = (List<Soporte>) q.execute(fechaHasta);
-		
 		pm.close();
 
 		return soportes;
@@ -294,9 +247,6 @@ public class SoporteDao {
 
 		List<Soporte> soportes;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		
-		
 		String query = "select from " + Soporte.class.getName();
 		Query q = pm.newQuery(query);
 		
@@ -304,7 +254,6 @@ public class SoporteDao {
 		q.declareParameters("java.util.Date fechaDesde , java.util.Date fechaHasta");
 		
 		soportes = (List<Soporte>) q.execute(fechaDesde,fechaHasta);
-		
 		pm.close();
 
 		return soportes;
@@ -384,125 +333,117 @@ public class SoporteDao {
 			soportes.add(buildSoporte(result));
 		}
 		
-		return soportes;
-		
-		/*PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		Query q = pm.newQuery("select from " + Prueba.class.getName());		
-		q.setOrdering("fecha_estado desc");
-		long offset = page * DATA_SIZE;
-		q.setRange(offset, offset + DATA_SIZE);
-		pruebas = (List<Prueba>) q.execute();
-		pm.close();*/
-		
-		//return pruebas;		
+		return soportes;		
 	}
 	
-	public List<Soporte> getSoportesByAllParam(String fecha, String cliente, String segmento , String estado, String servicio, String producto,String descripcion , String premium,String idCli, Integer page) throws ParseException {
+	public List<Soporte> getSoportesByAllParam(String fechaDia, String fechaMes, String fechaAnio, String cliente, String segmento , String estado, String servicio, String producto,String descripcion , String premium,String idCli, Integer page) throws ParseException {
 		List<Soporte> soportes = null;
 		
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		com.google.appengine.api.datastore.Query q = new com.google.appengine.api.datastore.Query("Soporte");
 		
 		List<Filter> finalFilters = new ArrayList<>();
-
-		Date dateDesde= null;
-		Date dateHasta= null;
 		
-		/*TODO no se puede consultar sobre mas de una coluna con esta operacion
-		 * ver pagina
-		 * 
-		 * http://gae-java-persistence.blogspot.de/2009/12/queries-with-and-in-filters.html
-		 * 
-		 * */
 		int filters = 0;		
-		if(!fecha.equals("")){	
+		if(Utils.isFechaFilterValid(fechaDia, fechaMes, fechaAnio)){	
 			filters++;
 		}
 
-		if(!cliente.equals("")){
+		if(!Utils.esNuloVacio(cliente)){
 			cliente = cliente.toUpperCase();
 			filters++;
 		}
 		
-		if(!segmento.equals("")){
+		if(!Utils.esNuloVacio(segmento)){
+			segmento = segmento.toUpperCase();
 			filters++;
 		}
 
-		if(!estado.equals("")){
-			Character a = estado.charAt(0);
-			String estado2= a.toString().toUpperCase()+estado.substring(1);
-			estado = estado2;
+		if(!Utils.esNuloVacio(estado)){
+			estado = estado.toUpperCase();
 			filters++;
 		}
-		if(!servicio.equals("")){
+		if(!Utils.esNuloVacio(servicio)){
+			servicio = servicio.toUpperCase();
 			filters++;
 		}
 
-		if(!producto.equals("")){
+		if(!Utils.esNuloVacio(producto)){
+			producto = producto.toUpperCase();
 			filters++;
 		}
 		
-		if(!descripcion.equals("")){
+		if(!Utils.esNuloVacio(descripcion)){
+			descripcion = descripcion.toUpperCase();
 			filters++;
 		}
 		
-		if(!premium.equals("Todos")){
+		if(!Utils.esNuloVacio(premium) && !TODOS.equals(premium)){
+			premium = premium.toUpperCase();
 			filters++;
 		}
 		
-		if(!idCli.equals("")){
+		if(!Utils.esNuloVacio(idCli)){
 			filters++;
 		}
 
 		String client_name=null;
-		if(!idCli.equals("")){
-//			ClienteDao clientDao = ClienteDao.getInstance();
-//			Cliente clien = clientDao.getClientebyId(Long.parseLong(idCli));
-//			client_name= clien.getNombre();
-//			cliente="";
+		if(!Utils.esNuloVacio(idCli)){
+
 			filters++;
 		}
 		if(filters<=1){
 			
-			if(!fecha.equals("")){
-				finalFilters.add(new FilterPredicate("str_fecha_inicio", FilterOperator.GREATER_THAN_OR_EQUAL, fecha));
-				finalFilters.add(new FilterPredicate("str_fecha_inicio", FilterOperator.LESS_THAN, fecha+"\ufffd"));
+			if(Utils.isFechaFilterValid(fechaDia, fechaMes, fechaAnio)){	
+				if(!Utils.esNuloVacio(fechaAnio) && !Utils.esNuloVacio(fechaMes) && !Utils.esNuloVacio(fechaDia)) {
+					Date fullDate = Utils.buildDate(fechaDia, fechaMes, fechaAnio);
+					finalFilters.add(new FilterPredicate("fecha_inicio", FilterOperator.EQUAL, fullDate));
+				}
+				else if(!Utils.esNuloVacio(fechaAnio)) {
+					Date desdeDate = Utils.getDesdeDate(fechaMes, fechaAnio);
+			        Date hastaDate = Utils.getHastaDate(fechaMes, fechaAnio);
+			        if(desdeDate != null){
+			            finalFilters.add(new FilterPredicate("fecha_inicio", FilterOperator.GREATER_THAN_OR_EQUAL, desdeDate));
+			        }
+			        if(hastaDate != null){
+			            finalFilters.add(new FilterPredicate("fecha_inicio", FilterOperator.LESS_THAN_OR_EQUAL, hastaDate));
+			        }
+				}	
 			}
-			if(!cliente.equals("")){
+			if(!Utils.esNuloVacio(cliente)){
 				finalFilters.add(new FilterPredicate("cliente_name", FilterOperator.GREATER_THAN_OR_EQUAL, cliente));
 				finalFilters.add(new FilterPredicate("cliente_name", FilterOperator.LESS_THAN, cliente+"\ufffd"));
 			}
 
-			if(!segmento.equals("")){
+			if(!Utils.esNuloVacio(segmento)){
 				finalFilters.add(new FilterPredicate("tipo_cliente", FilterOperator.GREATER_THAN_OR_EQUAL,segmento));
 				finalFilters.add(new FilterPredicate("tipo_cliente", FilterOperator.LESS_THAN, segmento+"\ufffd"));
 			}
 			
-			if(!estado.equals("")){
+			if(!Utils.esNuloVacio(estado)){
 				finalFilters.add(new FilterPredicate("estado", FilterOperator.GREATER_THAN_OR_EQUAL, estado));
 				finalFilters.add(new FilterPredicate("estado", FilterOperator.LESS_THAN, estado+"\ufffd"));
 			}
 			
-			if(!servicio.equals("")){
+			if(!Utils.esNuloVacio(servicio)){
 				finalFilters.add(new FilterPredicate("tipo_servicio", FilterOperator.GREATER_THAN_OR_EQUAL, servicio));
 				finalFilters.add(new FilterPredicate("tipo_servicio", FilterOperator.LESS_THAN, servicio+"\ufffd"));
 			}
 
-			if(!producto.equals("")){
+			if(!Utils.esNuloVacio(producto)){
 				finalFilters.add(new FilterPredicate("producto_canal", FilterOperator.GREATER_THAN_OR_EQUAL, producto));
 				finalFilters.add(new FilterPredicate("producto_canal", FilterOperator.LESS_THAN,producto+"\ufffd"));
 			}
 			
-			if(!descripcion.equals("")){
+			if(!Utils.esNuloVacio(descripcion)){
 				finalFilters.add(new FilterPredicate("detalles", FilterOperator.GREATER_THAN_OR_EQUAL, descripcion));
 				finalFilters.add(new FilterPredicate("detalles", FilterOperator.LESS_THAN,descripcion+"\ufffd"));
 			}
 			
-			if(!idCli.equals("")){
+			if(!Utils.esNuloVacio(idCli)){
 				finalFilters.add(new FilterPredicate("cliente_id", FilterOperator.EQUAL, idCli));
 			}
-			if(!premium.equals("Todos")){
+			if(!Utils.esNuloVacio(premium) && !TODOS.equals(premium)){
 				finalFilters.add(new FilterPredicate("premium", FilterOperator.EQUAL,premium));
 			}
 			Filter finalFilter = null;
@@ -527,32 +468,33 @@ public class SoporteDao {
 			soportePagin.setDetalles("0");
 			soportes.add(soportePagin);
 			
-			
-			
-			//soportePagin.setDetalles();
 		}else{
-//			List<Entity> clienteEntities = new ArrayList<Entity>();
-//			List<Entity> fechaEntities = new ArrayList<Entity>();
-//			List<Entity> servicioEntities = new ArrayList<Entity>();
-//			List<Entity> entornoEntities = new ArrayList<Entity>();
-//			List<Entity> estadoEntities = new ArrayList<Entity>();
-//			List<Entity> productoEntities = new ArrayList<Entity>();
-//			List<Entity> entities = new ArrayList<Entity>();
+
 			List<List<Entity>> Entities = new ArrayList<List<Entity>>();
 			
-			if(!fecha.equals("")){
+			if(Utils.isFechaFilterValid(fechaDia, fechaMes, fechaAnio)){	
 				q = new com.google.appengine.api.datastore.Query("Soporte");
-				finalFilters = new ArrayList<>();
-				finalFilters.add(new FilterPredicate("str_fecha_inicio", FilterOperator.GREATER_THAN_OR_EQUAL, fecha));
-				finalFilters.add(new FilterPredicate("str_fecha_inicio", FilterOperator.LESS_THAN, fecha+"\ufffd"));
-				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
-				q.setFilter(finalFilter);
+				if(!Utils.esNuloVacio(fechaAnio) && !Utils.esNuloVacio(fechaMes) && !Utils.esNuloVacio(fechaDia)) {
+					Date fullDate = Utils.buildDate(fechaDia, fechaMes, fechaAnio);
+					q.setFilter(new FilterPredicate("fecha_inicio", FilterOperator.EQUAL, fullDate));
+				}
+				else if(!Utils.esNuloVacio(fechaAnio)) {
+					Date desdeDate = Utils.getDesdeDate(fechaMes, fechaAnio);
+			        Date hastaDate = Utils.getHastaDate(fechaMes, fechaAnio);
+			        finalFilters = new ArrayList<>();
+			        if(desdeDate != null){
+			            finalFilters.add(new FilterPredicate("fecha_inicio", FilterOperator.GREATER_THAN_OR_EQUAL, desdeDate));
+			        }
+			        if(hastaDate != null){
+			            finalFilters.add(new FilterPredicate("fecha_inicio", FilterOperator.LESS_THAN_OR_EQUAL, hastaDate));
+			        }
+			        Filter finalFilter = CompositeFilterOperator.and(finalFilters);
+					q.setFilter(finalFilter);
+				}
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
-				
-//				fechaEntities =datastore.prepare(q).asList(fetchOptions);
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
-			if(!cliente.equals("")){
+			if(!Utils.esNuloVacio(cliente)){
 				q = new com.google.appengine.api.datastore.Query("Soporte");
 				finalFilters = new ArrayList<>();
 				finalFilters.add(new FilterPredicate("cliente_name", FilterOperator.GREATER_THAN_OR_EQUAL, cliente));
@@ -560,11 +502,10 @@ public class SoporteDao {
 				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
 				q.setFilter(finalFilter);
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
-//				clienteEntities =datastore.prepare(q).asList(fetchOptions);
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
 			
-			if(!segmento.equals("")){
+			if(!Utils.esNuloVacio(segmento)){
 				q = new com.google.appengine.api.datastore.Query("Soporte");
 				finalFilters = new ArrayList<>();
 				finalFilters.add(new FilterPredicate("tipo_cliente", FilterOperator.GREATER_THAN_OR_EQUAL,segmento));
@@ -572,12 +513,10 @@ public class SoporteDao {
 				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
 				q.setFilter(finalFilter);
-//				entornoEntities =datastore.prepare(q).asList(fetchOptions);
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
-			
 
-			if(!estado.equals("")){
+			if(!Utils.esNuloVacio(estado)){
 				q = new com.google.appengine.api.datastore.Query("Soporte");
 				finalFilters = new ArrayList<>();
 				finalFilters.add(new FilterPredicate("estado", FilterOperator.GREATER_THAN_OR_EQUAL, estado));
@@ -585,11 +524,10 @@ public class SoporteDao {
 				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
 				q.setFilter(finalFilter);
-//				estadoEntities =datastore.prepare(q).asList(fetchOptions);
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
 			
-			if(!servicio.equals("")){
+			if(!Utils.esNuloVacio(servicio)){
 				q = new com.google.appengine.api.datastore.Query("Soporte");
 				finalFilters = new ArrayList<>();
 				finalFilters.add(new FilterPredicate("tipo_servicio", FilterOperator.GREATER_THAN_OR_EQUAL, servicio));
@@ -598,11 +536,10 @@ public class SoporteDao {
 				q.setFilter(finalFilter);
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
 				
-//				servicioEntities =datastore.prepare(q).asList(fetchOptions);
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
 
-			if(!producto.equals("")){
+			if(!Utils.esNuloVacio(producto)){
 				q = new com.google.appengine.api.datastore.Query("Soporte");
 				finalFilters = new ArrayList<>();
 				finalFilters.add(new FilterPredicate("producto_canal", FilterOperator.GREATER_THAN_OR_EQUAL, producto));
@@ -610,11 +547,10 @@ public class SoporteDao {
 				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
 				q.setFilter(finalFilter);
-//				productoEntities =datastore.prepare(q).asList(fetchOptions);
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
 			
-			if(!descripcion.equals("")){
+			if(!Utils.esNuloVacio(descripcion)){
 				q = new com.google.appengine.api.datastore.Query("Soporte");
 				finalFilters = new ArrayList<>();
 				finalFilters.add(new FilterPredicate("detalles", FilterOperator.GREATER_THAN_OR_EQUAL, descripcion));
@@ -622,11 +558,10 @@ public class SoporteDao {
 				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
 				q.setFilter(finalFilter);
-//				productoEntities =datastore.prepare(q).asList(fetchOptions);
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
 			
-			if(!premium.equals("Todos")){
+			if(!Utils.esNuloVacio(premium) && !TODOS.equals(premium)){
 				q = new com.google.appengine.api.datastore.Query("Soporte");
 				Filter filtro= new FilterPredicate("cliente_id", FilterOperator.EQUAL, idCli);
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
@@ -634,7 +569,7 @@ public class SoporteDao {
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
 			
-			if(!idCli.equals("")){
+			if(!Utils.esNuloVacio(idCli)){
 				q = new com.google.appengine.api.datastore.Query("Soporte");
 				Filter filtro=new FilterPredicate("cliente_name", FilterOperator.EQUAL, client_name);
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
@@ -671,14 +606,13 @@ public class SoporteDao {
 			
 			soportes = new ArrayList<Soporte>();
 			int soportesPages = soportesFinal.size();
-			for (int i = page*10; i < (page*10)+10&&i<soportesFinal.size();i++) {			
+			for (int i = page*DATA_SIZE; i < (page*DATA_SIZE)+DATA_SIZE && i<soportesFinal.size();i++) {			
 				soportes.add(buildSoporte(soportesFinal.get(i)));
 			}
 			Soporte pages = new Soporte();
 			pages.setDetalles(Integer.toString(soportesPages));
 			soportes.add(pages);
 		}
-		
 		
 		return soportes;
 	}
@@ -775,8 +709,6 @@ public class SoporteDao {
 		if(tipo_soporte!=null){
 			soporte.setTipo_soporte(tipo_soporte);
 		}
-		
-		
 		
 		return soporte;
 	}

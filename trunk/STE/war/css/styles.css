@@ -1201,6 +1201,18 @@ body .modal-dialog .detalles {
 .main-table > .table th.search-th > input {
   width: 100%;
 }
+.main-table > .table th.search-th .date-container {
+  width: 115px;
+}
+.main-table > .table th.search-th .date-container > input.date {
+  width: 30px;
+  padding: 6px 3px;
+  margin-right: 3px;
+  float: left;
+}
+.main-table > .table th.search-th .date-container > input.date.anio {
+  width: 45px;
+}
 .main-table > .table .extended-row {
   width: 100%;
   background-color: #FFF;

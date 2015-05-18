@@ -30,8 +30,6 @@
 						</div>
 					</div>
 					
-
-
 					<div class="form-field">
 						<span class="lbl">Cliente<span class="required-asterisk">*</span>:</span>
 						<div class="input">
@@ -41,10 +39,10 @@
 								<c:choose>
 										<c:when test="${empty clientes}">
 											<option value="default">No hay clientes</option>
-											<option value="Ninguno" data-premium="No Premium" data-segmento="Ninguno">Ninguno</option>
+											<option value="NINGUNO" data-premium="NO PREMIUM" data-segmento="NINGUNO">NINGUNO</option>
 										</c:when>
 										<c:otherwise>
-											<option value="Ninguno" data-premium="No Premium" data-segmento="Ninguno">Ninguno</option>
+											<option value="NINGUNO" data-premium="NO PREMIUM" data-segmento="NINGUNO">NINGUNO</option>
 											<c:forEach items="${clientes}" var="t">	
 												<option value="${t.nombre}" data-premium="${t.premium}" data-segmento="${t.tipo_cliente}"  data-clientid="${t.key.id}" ${t.nombre == soporte.cliente_name ? 'selected' : ''}>${t.nombre}</option>
 											</c:forEach>
@@ -77,10 +75,10 @@
 					<div class="form-field">
 							<span class="lbl">Premium<span class="required-asterisk">*</span>:</span>
 							<label class="ui-marmots-label-radio marmots-label-left on" for="radio_Si_modal">
-								<input name="premium_modal" id="radio_Si_modal" ${soporte.premium == 'Si' ? 'checked' : ''} type="radio" value="Si" />Si
+								<input name="premium_modal" id="radio_Si_modal" ${soporte.premium == 'SI' ? 'checked' : ''} type="radio" value="SI" />SI
 							</label>
 							<label class="ui-marmots-label-radio marmots-label-left" for="radio_No_modal">
-								<input name="premium_modal"  id="radio_No_modal"  ${soporte.premium == 'No' ? 'checked' : ''}  type="radio" value="No" />No ${soporte.premium}
+								<input name="premium_modal"  id="radio_No_modal"  ${soporte.premium == 'NO' ? 'checked' : ''}  type="radio" value="NO" />NO ${soporte.premium}
 							</label>
 					</div>
 					--%>
@@ -89,10 +87,10 @@
 					<div class="form-field">
 							<span class="lbl">Tipo<span class="required-asterisk">*</span>:</span>
 							<label class="lbl ui-marmots-label-radio ${soporte.tipo_soporte == 'Incidencia' ? 'on' : ''}" for="radio_incidencia_modal">
-								<input name="tipoModal" id="radio_incidencia_modal" ${soporte.tipo_soporte == 'Incidencia' ? 'checked' : ''} type="radio" value="Incidencia"/>Incidencia
+								<input name="tipoModal" id="radio_incidencia_modal" ${soporte.tipo_soporte == 'INCIDENCIA' ? 'checked' : ''} type="radio" value="INCIDENCIA"/>Incidencia
 							</label>
-							<label class="lbl ui-marmots-label-radio marmots-label-left ${soporte.tipo_soporte == 'Consulta' ? 'on' : ''}" for="radio_consulta_modal">
-								<input name="tipoModal"  id="radio_consulta_modal"  ${soporte.tipo_soporte == 'Consulta' ? 'checked' : ''} type="radio" value="Consulta"/>Consulta<br />
+							<label class="lbl ui-marmots-label-radio marmots-label-left ${soporte.tipo_soporte == 'CONSULTA' ? 'on' : ''}" for="radio_consulta_modal">
+								<input name="tipoModal"  id="radio_consulta_modal"  ${soporte.tipo_soporte == 'CONSULTA' ? 'checked' : ''} type="radio" value="CONSULTA"/>Consulta<br />
 							</label>
 					</div>
 
@@ -186,7 +184,6 @@
 $(document).ready(function(){
 	$('input:checkbox, input:radio').checkbox();
 	
-	
 	$('#cliente-soporte-modal').on('change', function() {
 		var option = $(this).find(":selected");
 		var pasfg = option.data('clientid');
@@ -194,9 +191,6 @@ $(document).ready(function(){
 		$('#input-segmento-soporte-modal').val(option.data('segmento'));
 		$('#input-client-id-modal').val(option.data('clientid'));
 	})
-	
-	
-	
 
 });
 </script>

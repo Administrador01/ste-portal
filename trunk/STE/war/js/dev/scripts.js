@@ -599,38 +599,11 @@ $(function() {
 		drawLetters();
 	});
 	
-	/*
-	$('#tipo_cliente').on('change', function(e) {
-		var val = $('#tipo_cliente').val();
-		var trs = $('#myTable').find('tr');
-		var a;
-		if (val=="Premium")
-			for (a=0; a<=trs.length;a++){
-				if (!$(trs[a]).hasClass('premium'))
-					$(trs[a]).addClass('hidden');
-			}
-				
-		else{
-			for (a=0; a<=trs.length;a++)
-				$(trs[a]).removeClass('hidden');
-		}
-		
-		$('#myTable').paginateMe({
-			pagerSelector : '#myPager',
-			showPrevNext : true,
-			hidePageNumbers : false,
-			perPage : 10
-		})
-			
-	});
-	
-	*/
-	
 	$('#tip_crit').on('change', function(e) {		
 		var val = $('#tip_crit').val();
 		var cajas = $('.client_box');
 		var a;
-		if (val=="Premium"){
+		if (val=="PREMIUM"){
 			for (a = 0; a<=cajas.length-1; a++){
 				if (!$(cajas[a]).hasClass('tipo_premium'))
 					$(cajas[a]).addClass('hidden');
@@ -1040,41 +1013,46 @@ $(function() {
 		if(numpages > 0) {
 			if(page > 0) {
 				$('<li><a href="#" class="prev_link"><</a></li>').appendTo(pager);
-				$('<li><a href="'+ sPage+'?page=0'+"&"+oldparameters+ '" class="page_link">1</a></li>').appendTo(pager);
+				$('<li><a href="'+ sPage +'?page=0' + oldparameters + '" class="page_link">1</a></li>').appendTo(pager);
 			}	
-			$('<li><a href="'+ sPage+'?page='+page+'" class="page_link active">'+ (page+1) + '</a></li>').appendTo(pager);
+			$('<li><a href="#" class="page_link active">'+ (page+1) + '</a></li>').appendTo(pager);
 			if(page < (numpages-1)) {
-				$('<li><a href="'+ sPage+'?page='+(numpages-1)+"&"+oldparameters+'" class="page_link">'+ numpages+ '</a></li>').appendTo(pager);
+				$('<li><a href="' + sPage + '?page='+(numpages-1) + oldparameters + '" class="page_link">' + numpages + '</a></li>').appendTo(pager);
 			}
 			if(lastpage == false) {
 				$('<li><a href="#" class="next_link">></a></li>').appendTo(pager);
 			}
 			
-			$('<span>Ir a p&aacutegina:</span>').appendTo(pagerGoto);
-			var opcionespage = "<select>";
-			
-			for(var i=1;i<=numpages;i++){
-				opcionespage= opcionespage+"<option class=\"pagerselect\" val=\'"+i+"\'>"+i+"</option>";
-			
-			}
-			
-			opcionespage = opcionespage+"<select>";
-			$(opcionespage).appendTo(pagerGoto);
-			
-			/*
-			$('<li>').appendTo(pager);
-			$('<span>Ir a p&aacutegina:</span>').appendTo(pager);
-			$('<select>').appendTo(pager);
-			for(var i= 1;i<numpages ;i++){
-				var auxili = '<option class="irapag" value=\''+i+'\'>'+i;
-				$('<option class="irapag" value=\''+i+'\'>'+i).appendTo(pager);
+			if((numpages != null) && (numpages > 1)) {
+				$('<span>Ir a p&aacutegina:</span>').appendTo(pagerGoto);
+				var opcionespage = "<select class=\"page-select\">";
 				
-				$('</option>').appendTo(pager);
+				for(var i=1;i<=numpages;i++){
+					if(i == page+1) {
+						opcionespage= opcionespage+"<option class=\"pagerselect\" val=\'"+i+"\' selected>"+i+"</option>";
+					}
+					else {
+						opcionespage= opcionespage+"<option class=\"pagerselect\" val=\'"+i+"\'>"+i+"</option>";
+					}
+				}
+				
+				opcionespage = opcionespage+"<select>";
+				$(opcionespage).appendTo(pagerGoto);
+				
+				$('.page-select').on('change', function() {
+					var page = $(this).val();
+					page--;
+					if(page >= 0) {				
+						var sPath=window.location.pathname;
+						var sPage = sPath.substring(sPath.lastIndexOf('/') + 1);
+						var location = './' + sPage + '?page=' + page;
+						var oldparams = getParameters();
+						location = location + oldparams;
+						
+						window.location = location;		
+					}
+				});
 			}
-			
-			$('</select>').appendTo(pager);
-			$('</li>').appendTo(pager);
-			*/
 		}
 		else {
 			if(page > 0) {
@@ -1102,9 +1080,7 @@ $(function() {
 				
 				var location = './' + sPage + '?page=' + page;
 				var oldparams = getParameters();
-				if(oldparams != "") {
-					location = location + "&" + oldparams;
-				}
+				location = location + oldparams;
 				window.location = location;		
 			}
 		}
@@ -1117,9 +1093,8 @@ $(function() {
 			
 			var location = './' + sPage + '?page=' + page;
 			var oldparams = getParameters();
-			if(oldparams != "") {
-				location = location + "&" + oldparams;
-			}
+			location = location + oldparams;
+			
 			window.location = location;		
 		}
 		
@@ -1132,9 +1107,15 @@ $(function() {
 					  return p.join("=");
 				  }			  
 			}).join("&");
+			
+			if((newQueryString != null) && (newQueryString.length > 0)) {
+				newQueryString = "&" + newQueryString;
+			}
+			
 			return newQueryString;
 		}
-	}else{
+	}
+	else{
 		
 		var listElement = $this;
 		var perPage = settings.perPage;
@@ -1281,52 +1262,7 @@ $(function() {
 		}
 	}
 };
-
-
-
-$(function(){
-	$('.pagerselect').click(function(e){
-		
-		var page = $(this).val();
-		page--;
-		if(page > 0) {
-		
-			var sPath=window.location.pathname;
-			var sPage = sPath.substring(sPath.lastIndexOf('/') + 1);
-			var location = './' + sPage + '?page=' + page;
-			var oldparams = getParameters();
-			if(oldparams != "") {
-				location = location + "&" + oldparams;
-			}
-			window.location = location;		
-		}
-	});
-	
-	function getParameters(){
-		var sPath=window.location.search;
-		var queryString = sPath.substring(sPath.lastIndexOf("?") + 1);
-		var newQueryString = $.map(queryString.split("&"), function(pair) { 
-			  var p = pair.split("="); 
-			  if(p[0] != "page") {
-				  return p.join("=");
-			  }			  
-		}).join("&");
-		return newQueryString;
-	}
-	
-});
-
-function getParameters(){
-	var sPath=window.location.search;
-	var queryString = sPath.substring(sPath.lastIndexOf("?") + 1);
-	var newQueryString = $.map(queryString.split("&"), function(pair) { 
-		  var p = pair.split("="); 
-		  if(p[0] != "page") {
-			  return p.join("=");
-		  }			  
-	}).join("&");
-	return newQueryString;
-};function sendEditPrueba(){
+;function sendEditPrueba(){
 
 	var $form = $("#edit-prueba-form");
 	

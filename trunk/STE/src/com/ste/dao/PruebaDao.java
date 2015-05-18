@@ -9,18 +9,14 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import com.google.appengine.api.datastore.Cursor;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.FetchOptions;
-import com.google.appengine.api.datastore.PreparedQuery;
-import com.google.appengine.api.datastore.Query.Filter;
-import com.google.appengine.api.datastore.Query.FilterPredicate;
-import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
-import com.google.appengine.api.datastore.QueryResultIterator;
-import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.datastore.Query.Filter;
+import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.ste.beans.Cliente;
 import com.ste.beans.Implementacion;
 import com.ste.beans.Prueba;
@@ -31,6 +27,7 @@ import com.ste.utils.Utils;
 public class PruebaDao {
 	
 	public static final int DATA_SIZE = 10;
+	public static final String TODOS = "TODOS";
 
 	public static PruebaDao getInstance() {
 		return new PruebaDao();
@@ -39,68 +36,77 @@ public class PruebaDao {
 	public Prueba getPruebabyId(long l) {
 		
 		Prueba s;
-		try{			
-		
-		PersistenceManager pManager = PMF.get().getPersistenceManager();
-		Prueba prueba_temp = pManager.getObjectById(Prueba.class, l);
+		try{
+			PersistenceManager pManager = PMF.get().getPersistenceManager();
+			Prueba prueba_temp = pManager.getObjectById(Prueba.class, l);
+	
+			s = pManager.detachCopy(prueba_temp);
+			pManager.close();
 
-		s = pManager.detachCopy(prueba_temp);
-		pManager.close();
-
-		}catch(Exception e){
+		} catch(Exception e){
 			s=null;
 		}
-		
 		return s;
-		
-		
 	}
 	
-	public synchronized void updatePrueba(Prueba s) {
+	public synchronized void updatePrueba(Prueba prueba) {
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		pm.makePersistent(s);
+		
+		prueba.setClient_name(Utils.toUpperCase(prueba.getClient_name()));
+		prueba.setDetalles(Utils.toUpperCase(prueba.getDetalles()));
+		prueba.setEntorno(Utils.toUpperCase(prueba.getEntorno()));
+		prueba.setEstado(Utils.toUpperCase(prueba.getEstado()));
+		prueba.setPeticionario(Utils.toUpperCase(prueba.getPeticionario()));
+		prueba.setPremium(Utils.toUpperCase(prueba.getPremium()));
+		prueba.setResultado(Utils.toUpperCase(prueba.getResultado()));
+		prueba.setSolucion(Utils.toUpperCase(prueba.getSolucion()));
+		prueba.setTipo_servicio(Utils.toUpperCase(prueba.getTipo_servicio()));
+		prueba.setFichero(Utils.toUpperCase(prueba.getFichero()));	
+		prueba.setProducto(Utils.toUpperCase(prueba.getProducto()));
+		prueba.setReferencia(Utils.toUpperCase(prueba.getReferencia()));
+		
+		pm.makePersistent(prueba);
 		pm.close();
 	}
 
-	public synchronized void createPrueba(Prueba s) {
+	public synchronized void createPrueba(Prueba prueba) {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 
+		prueba.setClient_name(Utils.toUpperCase(prueba.getClient_name()));
+		prueba.setDetalles(Utils.toUpperCase(prueba.getDetalles()));
+		prueba.setEntorno(Utils.toUpperCase(prueba.getEntorno()));
+		prueba.setEstado(Utils.toUpperCase(prueba.getEstado()));
+		prueba.setPeticionario(Utils.toUpperCase(prueba.getPeticionario()));
+		prueba.setPremium(Utils.toUpperCase(prueba.getPremium()));
+		prueba.setResultado(Utils.toUpperCase(prueba.getResultado()));
+		prueba.setSolucion(Utils.toUpperCase(prueba.getSolucion()));
+		prueba.setTipo_servicio(Utils.toUpperCase(prueba.getTipo_servicio()));
+		prueba.setFichero(Utils.toUpperCase(prueba.getFichero()));	
+		prueba.setProducto(Utils.toUpperCase(prueba.getProducto()));
+		prueba.setReferencia(Utils.toUpperCase(prueba.getReferencia()));
+		
 		try {
-			
-			PruebaDao pruDao = PruebaDao.getInstance();	
-
-			
 			boolean flag = false;
-			
-			
-
 			if(!flag){
-				//Conversi'on de las fechas de string a tipo date
-				s.setFecha_estado(Utils.dateConverter(s.getStr_fecha_estado()));
-				if(!s.getFecha_inicio_str().equals("")||!s.getFecha_inicio_str().equals(null)){
-					s.setFecha_inicio(Utils.dateConverter(s.getFecha_inicio_str()));
+				prueba.setFecha_estado(Utils.dateConverter(prueba.getStr_fecha_estado()));
+				if(!Utils.esNuloVacio(prueba.getFecha_inicio_str())){
+					prueba.setFecha_inicio(Utils.dateConverter(prueba.getFecha_inicio_str()));
 				}
 				
-				if (s.getKey()==null){
-					CounterDao cDao = CounterDao.getInstance();
-					
-					Counter count = cDao.getCounterByName("prueba");
-					
-					String num = String.format("%08d", count.getValue());
-					
-					s.setId_prueba("PRU"+num);
-					
+				if (prueba.getKey()==null){
+					CounterDao cDao = CounterDao.getInstance();					
+					Counter count = cDao.getCounterByName("prueba");					
+					String num = String.format("%08d", count.getValue());					
+					prueba.setId_prueba("PRU"+num);					
 					CounterDao countDao = CounterDao.getInstance();
 					countDao.increaseCounter(count);
-				}
-				
-				pm.makePersistent(s);
+				}				
+				pm.makePersistent(prueba);
 			}
 			
 
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+		} catch (ParseException e) { 
 			e.printStackTrace();
 		} finally {
 			pm.close();
@@ -119,14 +125,9 @@ public class PruebaDao {
 
 		List<Prueba> pruebas;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		
 		Query q = pm.newQuery("select from " + Prueba.class.getName()+" where erased == false");		
 		q.setOrdering("fecha_estado desc");
-		//q.setDatastoreReadTimeoutMillis(30000000);
 		pruebas = (List<Prueba>) q.execute();
-		
-		
 		pm.close();
 
 		return pruebas;
@@ -136,13 +137,9 @@ public class PruebaDao {
 
 		List<Prueba> pruebas;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		
 		Query q = pm.newQuery("select from " + Prueba.class.getName()+" where erased == true");		
 		q.setOrdering("fecha_estado desc");
 		pruebas = (List<Prueba>) q.execute();
-		
-		
 		pm.close();
 
 		return pruebas;
@@ -153,28 +150,19 @@ public class PruebaDao {
 
 		List<Prueba> pruebas;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		
 		Query q = pm.newQuery("select from " + Prueba.class.getName());		
 		q.setOrdering("fecha_estado desc");
 		pruebas = (List<Prueba>) q.execute();
-		
-		
 		pm.close();
 
 		return pruebas;
 	}
-	
-	
-
-	
+		
 	public Cliente getClientByTestId(long l) {
 		
 		PruebaDao pruDao = PruebaDao.getInstance();
 		Prueba prueba = pruDao.getPruebabyId(l);
 		ImplementacionDao impDao = ImplementacionDao.getInstance();
-		
-
 		return impDao.getClienteByImpId(Long.parseLong(prueba.getImp_id()));
 	}
 	
@@ -183,8 +171,6 @@ public class PruebaDao {
 		PruebaDao pruDao = PruebaDao.getInstance();
 		Prueba prueba = pruDao.getPruebabyId(l);
 		ImplementacionDao impDao = ImplementacionDao.getInstance();
-		
-
 		return impDao.getImplementacionById(Long.parseLong(prueba.getImp_id()));
 	}	
 	
@@ -201,29 +187,12 @@ public class PruebaDao {
 		List<Long> impIds = new ArrayList<>();
 		for(Implementacion imp : implementaciones){
 			impIds.add(new Long(imp.getKey().getId()));
-			//pruebas.addAll(pruDao.getAllPruebasByImpId(imp.getKey().getId()));
 		}
 		pruebas.addAll(pruDao.getAllPruebasByImpIdPaged(impIds, null));
-		/*for(Implementacion imp : implementaciones){
-			pruebas.addAll(pruDao.getAllPruebasByImpIdPaged(imp.getKey().getId(), null));
-		}*/
 		pm.close();
 
 		return pruebas;
 	}
-	
-	/*@SuppressWarnings("unchecked")
-	public List<Prueba> getAllPruebasByImpId(long impID) {
-
-		List<Prueba> pruebas;
-		PersistenceManager pm = PMF.get().getPersistenceManager();
-		String query = "select from " + Prueba.class.getName()+" where imp_id == '"+impID+"' && erased==false";
-		Query q = pm.newQuery(query);
-		pruebas = (List<Prueba>) q.execute();		
-		pm.close();
-
-		return pruebas;
-	}*/
 	
 	@SuppressWarnings("unchecked")
 	public boolean existPruebaByClientId (String clientID) {
@@ -238,93 +207,62 @@ public class PruebaDao {
 	}
 	@SuppressWarnings("unchecked")
 	public List<Prueba> getPruebasByResultado (String Resultado) {
-
 		List<Prueba> pruebas;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		
-		
 		String query = "select from " + Prueba.class.getName();
 		Query q = pm.newQuery(query);
-		
 		q.setFilter("resultado == Resultado"+" && erased==false");
 		q.declareParameters("String Resultado");
-	
 		pruebas = (List<Prueba>) q.execute(Resultado);
-		
 		pm.close();
 
 		return pruebas;
 	}	
+
 	@SuppressWarnings("unchecked")
 	public List<Prueba> getPruebasSinceDate (Date fechaDesde) {
-
 		List<Prueba> pruebas;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		
-		
 		String query = "select from " + Prueba.class.getName();
 		Query q = pm.newQuery(query);
-		
 		q.setFilter("fecha_estado >= fechaDesde"+" && erased==false");
 		q.declareParameters("java.util.Date fechaDesde");
-	
 		pruebas = (List<Prueba>) q.execute(fechaDesde);
-		
 		pm.close();
 
 		return pruebas;
 	}
+
 	@SuppressWarnings("unchecked")
 	public List<Prueba> getPruebasUntilDate (Date fechaHasta) {
-
 		List<Prueba> pruebas;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		
-		
 		String query = "select from " + Prueba.class.getName();
 		Query q = pm.newQuery(query);
-		
 		q.setFilter("fecha_estado <= fechaHasta"+" && erased==false");
 		q.declareParameters("java.util.Date fechaHasta");
-	
 		pruebas = (List<Prueba>) q.execute(fechaHasta);
-		
 		pm.close();
-
 		return pruebas;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Prueba> getPruebasBetweenDates (Date fechaDesde,Date fechaHasta) {
-
 		List<Prueba> pruebas;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		
-		
 		String query = "select from " + Prueba.class.getName();
 		Query q = pm.newQuery(query);
-		
 		q.setFilter("fecha_estado >= fechaDesde && fecha_estado <= fechaHasta"+" && erased==false");
 		q.declareParameters("java.util.Date fechaDesde , java.util.Date fechaHasta");
-		
 		pruebas = (List<Prueba>) q.execute(fechaDesde,fechaHasta);
-		
 		pm.close();
-
 		return pruebas;
 	}
 	
 	
 	public List<Prueba> getPruebasSinceDateByClientId (String clientID,Date fechaDesde) {
-
 		List<Prueba> pruebas = new ArrayList<Prueba>();
-		
 		PruebaDao pruDao = PruebaDao.getInstance();
-		
 		List<Prueba> pruebasByImp = pruDao.getAllPruebasByClientId(clientID);
 		List<Prueba> pruebasByDate = pruDao.getPruebasSinceDate(fechaDesde);
 		for(Prueba pruebaByImp:pruebasByImp){
@@ -332,16 +270,12 @@ public class PruebaDao {
 				if(pruebaByDate.getKey().getId()==pruebaByImp.getKey().getId())pruebas.add(pruebaByDate);
 			}
 		}
-
 		return pruebas;
 	}
 	
 	public List<Prueba> getPruebasUntilDateByClientId (String clientID,Date fechaHasta) {
-
 		List<Prueba> pruebas = new ArrayList<Prueba>();
-		
 		PruebaDao pruDao = PruebaDao.getInstance();
-		
 		List<Prueba> pruebasByImp = pruDao.getAllPruebasByClientId(clientID);
 		List<Prueba> pruebasByDate = pruDao.getPruebasUntilDate(fechaHasta);
 		for(Prueba pruebaByImp:pruebasByImp){
@@ -349,14 +283,11 @@ public class PruebaDao {
 				if(pruebaByDate.getKey().getId()==pruebaByImp.getKey().getId())pruebas.add(pruebaByDate);
 			}
 		}
-
 		return pruebas;
 	}
 	
 	public List<Prueba> getPruebasBetweenDatesByClientId (String clientID,Date fechaDesde,Date fechaHasta) {
-
 		List<Prueba> pruebas = new ArrayList<Prueba>();
-		
 		PruebaDao pruDao = PruebaDao.getInstance();
 		
 		List<Prueba> pruebasByImp = pruDao.getAllPruebasByClientId(clientID);
@@ -366,67 +297,8 @@ public class PruebaDao {
 				if(pruebaByDate.getKey().getId()==pruebaByImp.getKey().getId())pruebas.add(pruebaByDate);
 			}
 		}
-
 		return pruebas;
 	}	
-	/*
-	@SuppressWarnings("unchecked")
-	public List<Prueba> getPruebasSinceDateByImpId (String impID,Date fechaDesde) {
-
-		List<Prueba> pruebas;
-		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		String query = "select from " + Prueba.class.getName();
-		Query q = pm.newQuery(query);
-		
-		q.setFilter("fecha_estado >= fechaDesde && cliente_id==impID"+" && erased==false");
-		q.declareParameters("java.util.Date fechaDesde,String impID");
-	
-		pruebas = (List<Prueba>) q.execute(fechaDesde,impID);
-		
-		pm.close();
-
-		return pruebas;
-	}
-	@SuppressWarnings("unchecked")
-	public List<Prueba> getPruebasUntilDateByImpId (String impID,Date fechaHasta) {
-
-		List<Prueba> pruebas;
-		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		String query = "select from " + Prueba.class.getName();
-		Query q = pm.newQuery(query);
-		
-		q.setFilter("fecha_estado <= fechaHasta && imp_id==impID"+" && erased==false");
-		q.declareParameters("java.util.Date fechaHasta,String impID");
-	
-		pruebas = (List<Prueba>) q.execute(fechaHasta,impID);
-		
-		pm.close();
-
-		return pruebas;
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Prueba> getPruebasBetweenDatesByImpId (String impID,Date fechaDesde,Date fechaHasta) {
-
-		List<Prueba> pruebas;
-		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		String query = "select from " + Prueba.class.getName();
-		Query q = pm.newQuery(query);
-		
-		q.setFilter("fecha_estado >= fechaDesde && fecha_estado <= fechaHasta && imp_id==impID"+" && erased==false");
-		q.declareParameters("java.util.Date fechaDesde, java.util.Date fechaHasta, String impID");
-		
-		pruebas = (List<Prueba>) q.execute(fechaDesde,fechaHasta,impID);
-		
-		pm.close();
-
-		return pruebas;
-	}
-	
-*/
 	
 	@SuppressWarnings("unchecked")
 	public List<Prueba> getPruebasByResultado (String resultado,Date fechaDesde,Date fechaHasta) {
@@ -440,8 +312,7 @@ public class PruebaDao {
 		q.setFilter("fecha_estado >= fechaDesde && fecha_estado <= fechaHasta && resultado==Resultado"+" && erased==false");
 		q.declareParameters("java.util.Date fechaDesde, java.util.Date fechaHasta, String Resultado");
 		
-		pruebas = (List<Prueba>) q.execute(fechaDesde,fechaHasta,resultado);
-		
+		pruebas = (List<Prueba>) q.execute(fechaDesde, fechaHasta, Utils.toUpperCase(resultado));		
 		pm.close();
 
 		return pruebas;
@@ -459,8 +330,7 @@ public class PruebaDao {
 		q.setFilter("fecha_estado >= fechaDesde && fecha_estado <= fechaHasta && fichero==Fichero"+" && erased==false");
 		q.declareParameters("java.util.Date fechaDesde, java.util.Date fechaHasta, String Fichero");
 		
-		pruebas = (List<Prueba>) q.execute(fechaDesde,fechaHasta,fichero);
-		
+		pruebas = (List<Prueba>) q.execute(fechaDesde, fechaHasta, Utils.toUpperCase(fichero));		
 		pm.close();
 
 		return pruebas;
@@ -487,22 +357,11 @@ public class PruebaDao {
 			pruebas.add(buildPrueba(result));
 		}
 		
-		return pruebas;
-		
-		/*PersistenceManager pm = PMF.get().getPersistenceManager();
-		
-		Query q = pm.newQuery("select from " + Prueba.class.getName());		
-		q.setOrdering("fecha_estado desc");
-		long offset = page * DATA_SIZE;
-		q.setRange(offset, offset + DATA_SIZE);
-		pruebas = (List<Prueba>) q.execute();
-		pm.close();*/
-		
-		//return pruebas;		
+		return pruebas;		
 	}
 	
 	
-	public List<Prueba> getPruebasByAllParam(String fecha, String cliente, String servicio , String estado, String producto, String entorno, String desde, String hasta, String premium,String idCli, Integer page) throws ParseException {
+	public List<Prueba> getPruebasByAllParam(String fechaDia, String fechaMes, String fechaAnio, String cliente, String servicio , String estado, String producto, String entorno, String desde, String hasta, String premium,String idCli, Integer page) throws ParseException {
 		List<Prueba> pruebas = null;
 		
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -513,106 +372,107 @@ public class PruebaDao {
 		Date dateDesde= null;
 		Date dateHasta= null;
 		
-		/*TODO no se puede consultar sobre mas de una coluna con esta operacion
-		 * ver pagina
-		 * 
-		 * http://gae-java-persistence.blogspot.de/2009/12/queries-with-and-in-filters.html
-		 * 
-		 * */
 		int filters = 0;
-		if(!cliente.equals("")){
+		if(!Utils.esNuloVacio(cliente)){
 			cliente = cliente.toUpperCase();
 			filters++;
 		}
-		if(!fecha.equals("")){
-			
+		if(Utils.isFechaFilterValid(fechaDia, fechaMes, fechaAnio)) {
 			filters++;
 		}
-		if(!servicio.equals("")){
+		if(!Utils.esNuloVacio(servicio)){
+			servicio = servicio.toUpperCase();
 			filters++;
 		}
-		if(!estado.equals("")){
-			Character a = estado.charAt(0);
-			String estado2= a.toString().toUpperCase()+estado.substring(1);
-			estado = estado2;
+		if(!Utils.esNuloVacio(estado)){
+			estado = estado.toUpperCase();
 			filters++;
 		}
-		if(!entorno.equals("")){
-			Character a = entorno.charAt(0);
-			String entorno2= a.toString().toUpperCase()+entorno.substring(1);
-			entorno = entorno2;
+		if(!Utils.esNuloVacio(entorno)){
+			entorno = entorno.toUpperCase();
 			filters++;
 		}
 		boolean auxFechDesde= Utils.isThisDateValid(desde, "dd/MM/yyyy");
-		if(!desde.equals("")&& auxFechDesde){
+		if(!Utils.esNuloVacio(desde) && auxFechDesde){
 			dateDesde = Utils.dateConverter(desde);
 			filters++;
 		}
 		boolean auxFechHasta = Utils.isThisDateValid(hasta, "dd/MM/yyyy");
-		if(!hasta.equals("") && auxFechHasta){
+		if(!Utils.esNuloVacio(hasta) && auxFechHasta){
 			dateHasta = Utils.dateConverter(hasta);
 			filters++;
 		}
-		if(!premium.equals("Todos")){
+		if(!Utils.esNuloVacio(premium) && !TODOS.equals(premium)){
+			premium = premium.toUpperCase();
 			filters++;
 		}
-		if(!producto.equals("")){
-
+		if(!Utils.esNuloVacio(producto)){
+			producto = producto.toUpperCase();
 			filters++;
 		}
 		String client_name=null;
-		if(!idCli.equals("")){
+		if(!Utils.esNuloVacio(idCli)){
 			ClienteDao clientDao = ClienteDao.getInstance();
 			Cliente clien = clientDao.getClientebyId(Long.parseLong(idCli));
 			client_name= clien.getNombre();
-			//cliente="";
 			filters++;
 		}
 		if(filters<=1){
-			if(!cliente.equals("")){
+			if(!Utils.esNuloVacio(cliente)){
 				finalFilters.add(new FilterPredicate("client_name", FilterOperator.GREATER_THAN_OR_EQUAL, cliente));
 				finalFilters.add(new FilterPredicate("client_name", FilterOperator.LESS_THAN, cliente+"\ufffd"));
 			}
 			
-			if(!desde.equals("")&& auxFechDesde){
+			if(!Utils.esNuloVacio(desde)&& auxFechDesde){
 				finalFilters.add(new FilterPredicate("fecha_inicio", FilterOperator.GREATER_THAN_OR_EQUAL, dateDesde));
 			}
-			if(!hasta.equals("")&& auxFechHasta){
+			if(!Utils.esNuloVacio(hasta)&& auxFechHasta){
 				finalFilters.add(new FilterPredicate("fecha_inicio", FilterOperator.LESS_THAN_OR_EQUAL, dateHasta));
 			}
-			if(!fecha.equals("")){
-				finalFilters.add(new FilterPredicate("str_fecha_estado", FilterOperator.EQUAL,"("+fecha+")"));
-				
+			if(Utils.isFechaFilterValid(fechaDia, fechaMes, fechaAnio)) {
+				if(!Utils.esNuloVacio(fechaAnio) && !Utils.esNuloVacio(fechaMes) && !Utils.esNuloVacio(fechaDia)) {
+					Date fullDate = Utils.buildDate(fechaDia, fechaMes, fechaAnio);
+					finalFilters.add(new FilterPredicate("fecha_estado", FilterOperator.EQUAL, fullDate));
+				}
+				else if(!Utils.esNuloVacio(fechaAnio)) {
+					Date desdeDate = Utils.getDesdeDate(fechaMes, fechaAnio);
+			        Date hastaDate = Utils.getHastaDate(fechaMes, fechaAnio);
+			        if(desdeDate != null){
+			            finalFilters.add(new FilterPredicate("fecha_estado", FilterOperator.GREATER_THAN_OR_EQUAL, desdeDate));
+			        }
+			        if(hastaDate != null){
+			            finalFilters.add(new FilterPredicate("fecha_estado", FilterOperator.LESS_THAN_OR_EQUAL, hastaDate));
+			        }
+				}	
 			}
-			if(!servicio.equals("")){
+			if(!Utils.esNuloVacio(servicio)){
 				finalFilters.add(new FilterPredicate("tipo_servicio", FilterOperator.GREATER_THAN_OR_EQUAL, servicio));
 				finalFilters.add(new FilterPredicate("tipo_servicio", FilterOperator.LESS_THAN, servicio+"\ufffd"));
 			}
-			if(!entorno.equals("")){
+			if(!Utils.esNuloVacio(entorno)){
 				finalFilters.add(new FilterPredicate("entorno", FilterOperator.GREATER_THAN_OR_EQUAL,entorno));
 				finalFilters.add(new FilterPredicate("entorno", FilterOperator.LESS_THAN, entorno+"\ufffd"));
 			}
-			if(!estado.equals("")){
+			if(!Utils.esNuloVacio(estado)){
 				finalFilters.add(new FilterPredicate("estado", FilterOperator.GREATER_THAN_OR_EQUAL, estado));
 				finalFilters.add(new FilterPredicate("estado", FilterOperator.LESS_THAN, estado+"\ufffd"));
 			}
-			if(!producto.equals("")){
+			if(!Utils.esNuloVacio(producto)){
 				finalFilters.add(new FilterPredicate("producto", FilterOperator.GREATER_THAN_OR_EQUAL, producto));
 				finalFilters.add(new FilterPredicate("producto", FilterOperator.LESS_THAN,producto+"\ufffd"));
 			}
 			
-			if(!idCli.equals("")){
+			if(!Utils.esNuloVacio(idCli)){
 				finalFilters.add(new FilterPredicate("client_name", FilterOperator.EQUAL, client_name));
 			}
-			if(!premium.equals("Todos")){
-				finalFilters.add(new FilterPredicate("premium", FilterOperator.EQUAL,premium));
+			if(!Utils.esNuloVacio(premium) && !TODOS.equals(premium)){
+				finalFilters.add(new FilterPredicate("premium", FilterOperator.EQUAL, premium));
 			}
 			Filter finalFilter = null;
 			if(finalFilters.size()>1) finalFilter = CompositeFilterOperator.and(finalFilters);
 			if(finalFilters.size()==1) finalFilter = finalFilters.get(0);
-			if(finalFilters.size()!=0)q.setFilter(finalFilter);
-			
-			
+			if(finalFilters.size()!=0) q.setFilter(finalFilter);
+						
 			List<Entity> entities = null;
 			FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
 			if(page != null) {
@@ -629,20 +489,10 @@ public class PruebaDao {
 			pruebaPagin.setDetalles("0");
 			pruebas.add(pruebaPagin);
 			
-			
-			
-			//pruebaPagin.setDetalles();
 		}else{
-//			List<Entity> clienteEntities = new ArrayList<Entity>();
-//			List<Entity> fechaEntities = new ArrayList<Entity>();
-//			List<Entity> servicioEntities = new ArrayList<Entity>();
-//			List<Entity> entornoEntities = new ArrayList<Entity>();
-//			List<Entity> estadoEntities = new ArrayList<Entity>();
-//			List<Entity> productoEntities = new ArrayList<Entity>();
-//			List<Entity> entities = new ArrayList<Entity>();
 			List<List<Entity>> Entities = new ArrayList<List<Entity>>();
 			
-			if(!cliente.equals("")){
+			if(!Utils.esNuloVacio(cliente)){
 				q = new com.google.appengine.api.datastore.Query("Prueba");
 				finalFilters = new ArrayList<>();
 				finalFilters.add(new FilterPredicate("client_name", FilterOperator.GREATER_THAN_OR_EQUAL, cliente));
@@ -650,22 +500,31 @@ public class PruebaDao {
 				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
 				q.setFilter(finalFilter);
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
-//				clienteEntities =datastore.prepare(q).asList(fetchOptions);
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
-			if(!fecha.equals("")){
+			if(Utils.isFechaFilterValid(fechaDia, fechaMes, fechaAnio)) {
 				q = new com.google.appengine.api.datastore.Query("Prueba");
-				finalFilters = new ArrayList<>();
-				finalFilters.add(new FilterPredicate("str_fecha_estado", FilterOperator.GREATER_THAN_OR_EQUAL, fecha));
-				finalFilters.add(new FilterPredicate("str_fecha_estado", FilterOperator.LESS_THAN, fecha+"\ufffd"));
-				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
-				q.setFilter(finalFilter);
+				if(!Utils.esNuloVacio(fechaAnio) && !Utils.esNuloVacio(fechaMes) && !Utils.esNuloVacio(fechaDia)) {
+					Date fullDate = Utils.buildDate(fechaDia, fechaMes, fechaAnio);
+					q.setFilter(new FilterPredicate("fecha_estado", FilterOperator.EQUAL, fullDate));
+				}
+				else if(!Utils.esNuloVacio(fechaAnio)) {
+					Date desdeDate = Utils.getDesdeDate(fechaMes, fechaAnio);
+			        Date hastaDate = Utils.getHastaDate(fechaMes, fechaAnio);
+			        finalFilters = new ArrayList<>();
+			        if(desdeDate != null){
+			            finalFilters.add(new FilterPredicate("fecha_estado", FilterOperator.GREATER_THAN_OR_EQUAL, desdeDate));
+			        }
+			        if(hastaDate != null){
+			            finalFilters.add(new FilterPredicate("fecha_estado", FilterOperator.LESS_THAN_OR_EQUAL, hastaDate));
+			        }
+			        Filter finalFilter = CompositeFilterOperator.and(finalFilters);
+					q.setFilter(finalFilter);
+				}
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
-				
-//				fechaEntities =datastore.prepare(q).asList(fetchOptions);
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
-			if(!servicio.equals("")){
+			if(!Utils.esNuloVacio(servicio)){
 				q = new com.google.appengine.api.datastore.Query("Prueba");
 				finalFilters = new ArrayList<>();
 				finalFilters.add(new FilterPredicate("tipo_servicio", FilterOperator.GREATER_THAN_OR_EQUAL, servicio));
@@ -674,10 +533,9 @@ public class PruebaDao {
 				q.setFilter(finalFilter);
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
 				
-//				servicioEntities =datastore.prepare(q).asList(fetchOptions);
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
-			if(!entorno.equals("")){
+			if(!Utils.esNuloVacio(entorno)){
 				q = new com.google.appengine.api.datastore.Query("Prueba");
 				finalFilters = new ArrayList<>();
 				finalFilters.add(new FilterPredicate("entorno", FilterOperator.GREATER_THAN_OR_EQUAL,entorno));
@@ -685,10 +543,9 @@ public class PruebaDao {
 				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
 				q.setFilter(finalFilter);
-//				entornoEntities =datastore.prepare(q).asList(fetchOptions);
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
-			if(!estado.equals("")){
+			if(!Utils.esNuloVacio(estado)){
 				q = new com.google.appengine.api.datastore.Query("Prueba");
 				finalFilters = new ArrayList<>();
 				finalFilters.add(new FilterPredicate("estado", FilterOperator.GREATER_THAN_OR_EQUAL,estado));
@@ -696,10 +553,9 @@ public class PruebaDao {
 				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
 				q.setFilter(finalFilter);
-//				estadoEntities =datastore.prepare(q).asList(fetchOptions);
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
-			if(!producto.equals("")){
+			if(!Utils.esNuloVacio(producto)){
 				q = new com.google.appengine.api.datastore.Query("Prueba");
 				finalFilters = new ArrayList<>();
 				finalFilters.add(new FilterPredicate("producto", FilterOperator.GREATER_THAN_OR_EQUAL, producto));
@@ -707,25 +563,24 @@ public class PruebaDao {
 				Filter finalFilter = CompositeFilterOperator.and(finalFilters);
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
 				q.setFilter(finalFilter);
-//				productoEntities =datastore.prepare(q).asList(fetchOptions);
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
 			
-			if(!desde.equals("")&& auxFechDesde){
+			if(!Utils.esNuloVacio(desde) && auxFechDesde){
 				q = new com.google.appengine.api.datastore.Query("Prueba");
 				Filter filtro = new FilterPredicate("fecha_inicio", FilterOperator.GREATER_THAN_OR_EQUAL, dateDesde);
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
 				q.setFilter(filtro);
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
-			if(!hasta.equals("")&& auxFechHasta){
+			if(!Utils.esNuloVacio(hasta)&& auxFechHasta){
 				q = new com.google.appengine.api.datastore.Query("Prueba");
 				Filter filtro = new FilterPredicate("fecha_inicio", FilterOperator.LESS_THAN_OR_EQUAL, dateHasta);
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
 				q.setFilter(filtro);
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
-			if(!premium.equals("Todos")){
+			if(!Utils.esNuloVacio(premium) && !TODOS.equals(premium)){
 				q = new com.google.appengine.api.datastore.Query("Prueba");
 				Filter filtro= new FilterPredicate("premium", FilterOperator.EQUAL,premium);
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
@@ -733,7 +588,7 @@ public class PruebaDao {
 				Entities.add(datastore.prepare(q).asList(fetchOptions));
 			}
 			
-			if(!idCli.equals("")){
+			if(!Utils.esNuloVacio(idCli)){
 				q = new com.google.appengine.api.datastore.Query("Prueba");
 				Filter filtro=new FilterPredicate("client_name", FilterOperator.EQUAL, client_name);
 				FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
@@ -770,14 +625,13 @@ public class PruebaDao {
 			
 			pruebas = new ArrayList<Prueba>();
 			int pruebasPages = pruebasFinal.size();
-			for (int i = page*10; i < (page*10)+10&&i<pruebasFinal.size();i++) {			
+			for (int i = page*DATA_SIZE; i < (page*DATA_SIZE)+DATA_SIZE && i<pruebasFinal.size();i++) {			
 				pruebas.add(buildPrueba(pruebasFinal.get(i)));
 			}
 			Prueba pages = new Prueba();
 			pages.setDetalles(Integer.toString(pruebasPages));
 			pruebas.add(pages);
-		}
-		
+		}		
 		
 		return pruebas;
 	}
@@ -804,13 +658,7 @@ public class PruebaDao {
 		
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		com.google.appengine.api.datastore.Query q = new com.google.appengine.api.datastore.Query("Prueba");
-		/*		
-		List<Filter> impIdSubFilters = new ArrayList<>();
-		for(Long id : impIds) {
-			impIdSubFilters.add(new FilterPredicate("imp_id", FilterOperator.EQUAL, id.toString()));
-		}		
-		Filter impIdFilter = CompositeFilterOperator.or(impIdSubFilters);
-		*/
+		
 		int i = 0;
 		Collection<String> impIdsCollect = new ArrayList<String>();
 		impIdsCollect.add("0");
@@ -821,7 +669,6 @@ public class PruebaDao {
 		List<Filter> finalFilters = new ArrayList<>();
 		finalFilters.add(new FilterPredicate("erased", FilterOperator.EQUAL, false));
 		finalFilters.add(new FilterPredicate("imp_id", FilterOperator.IN, impIdsCollect));
-		//finalFilters.add(impIdFilter);
 		Filter finalFilter = CompositeFilterOperator.and(finalFilters);
 		q.setFilter(finalFilter);
 		

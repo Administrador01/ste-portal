@@ -35,17 +35,16 @@ import com.ste.utils.Utils;
 
 public class ClienteServlet extends HttpServlet {
 	
+private static final String NO_PREMIUM = "NO PREMIUM";
+	
 public void doGet(HttpServletRequest req, HttpServletResponse resp){
 		
 		JSONObject json = new JSONObject();
-		
 		String accion = req.getParameter("accion");
-		
 		
 		 try {
 			 
 			HttpSession sesion = req.getSession();
-			int sesionpermiso = (int) sesion.getAttribute("permiso");			 
 			String usermail = (String) sesion.getAttribute("mail");
 			
 			 if (accion.equals("new")){
@@ -225,7 +224,9 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 		
 		String premium = req.getParameter("premium_modal");
 		
-		if(premium == ""|| premium == null)premium = "No Premium";
+		if(Utils.esNuloVacio(premium)) {
+			premium = NO_PREMIUM;
+		}
 		String tipo_cliente = req.getParameter("tipo_cliente");
 		
 		c.setStr_fecha_alta(str_fecha_alta);
@@ -276,7 +277,9 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 		String premium = req.getParameter("premium");
 		String tipo_cliente = req.getParameter("tipo_cliente");
 		
-		if(premium == ""|| premium == null)premium = "No Premium";
+		if(Utils.esNuloVacio(premium)) {
+			premium = NO_PREMIUM;
+		}
 		
 		c.setStr_fecha_alta(str_fecha_alta);
 		c.setNombre(nombre);
@@ -285,15 +288,12 @@ public void doGet(HttpServletRequest req, HttpServletResponse resp){
 		
 		Utils.writeLog(usermail, "Crea", "Cliente", c.getNombre());		
 		
-		cDao.createCliente(c);
+		cDao.createCliente(c);		
 		
-		
-		json.append("success", "true");
-	
+		json.append("success", "true");	
 		
 		resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");       
 		resp.getWriter().println(json);
 	}
-
 }

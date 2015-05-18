@@ -7,25 +7,24 @@ import javax.jdo.Query;
 
 import com.ste.beans.EstadoImplementacion;
 import com.ste.persistence.PMF;
+import com.ste.utils.Utils;
 
 public class EstadoImplementacionDao {
 	public static EstadoImplementacionDao getInstance() {
 		return new EstadoImplementacionDao();
 	}
 	
-	public synchronized void createEstadoImplementacion(EstadoImplementacion imp) {
-		PersistenceManager pm = PMF.get().getPersistenceManager();	
+	public synchronized void createEstadoImplementacion(EstadoImplementacion estado) {
+		PersistenceManager pm = PMF.get().getPersistenceManager();
 
-		try{
-			
-			//ServicioDao impDao = ServicioDao.getInstance();
+		estado.setName(Utils.toUpperCase(estado.getName()));
 		
-			try {
-				pm.makePersistent(imp);
-			} finally {}
-			
-			
+		try{
+			pm.makePersistent(estado);			
+		} catch(Exception e) {
+			e.printStackTrace();
 		}finally {
+		
 			pm.close();
 			
 		}
@@ -37,12 +36,9 @@ public class EstadoImplementacionDao {
 		List<EstadoImplementacion> EstadoImplementacions;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		
-		
 		Query q = pm.newQuery("select from " + EstadoImplementacion.class.getName());
 		q.setOrdering("orden asc");
 		EstadoImplementacions = (List<EstadoImplementacion>) q.execute();
-		
-		
 		pm.close();
 
 		return EstadoImplementacions;
@@ -54,11 +50,8 @@ public class EstadoImplementacionDao {
 		List<EstadoImplementacion> EstadoImplementacions;
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		
-		
-		Query q = pm.newQuery("select from " + EstadoImplementacion.class.getName()+" WHERE name=='"+name+"'");
+		Query q = pm.newQuery("select from " + EstadoImplementacion.class.getName()+" WHERE name=='"+Utils.toUpperCase(name)+"'");
 		EstadoImplementacions = (List<EstadoImplementacion>) q.execute();
-		
-		
 		pm.close();
 
 		return EstadoImplementacions;
@@ -71,7 +64,5 @@ public class EstadoImplementacionDao {
 		for (EstadoImplementacion s :servicios){
 			pm.deletePersistent(pm.getObjectById(s.getClass(),s.getKey().getId()));
 		}
-
-
 	}
 }

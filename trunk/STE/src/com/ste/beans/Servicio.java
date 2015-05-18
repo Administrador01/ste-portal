@@ -32,7 +32,7 @@ public class Servicio {
 		return name;
 	}
 
-	public void setNme(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 	

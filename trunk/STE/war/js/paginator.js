@@ -45,45 +45,46 @@ $.fn.paginateMe = function(opts) {
 		if(numpages > 0) {
 			if(page > 0) {
 				$('<li><a href="#" class="prev_link"><</a></li>').appendTo(pager);
-				$('<li><a href="'+ sPage+'?page=0'+"&"+oldparameters+ '" class="page_link">1</a></li>').appendTo(pager);
+				$('<li><a href="'+ sPage +'?page=0' + oldparameters + '" class="page_link">1</a></li>').appendTo(pager);
 			}	
-			$('<li><a href="'+ sPage+'?page='+page+'" class="page_link active">'+ (page+1) + '</a></li>').appendTo(pager);
+			$('<li><a href="#" class="page_link active">'+ (page+1) + '</a></li>').appendTo(pager);
 			if(page < (numpages-1)) {
-				$('<li><a href="'+ sPage+'?page='+(numpages-1)+"&"+oldparameters+'" class="page_link">'+ numpages+ '</a></li>').appendTo(pager);
+				$('<li><a href="' + sPage + '?page='+(numpages-1) + oldparameters + '" class="page_link">' + numpages + '</a></li>').appendTo(pager);
 			}
 			if(lastpage == false) {
 				$('<li><a href="#" class="next_link">></a></li>').appendTo(pager);
 			}
 			
-			$('<span>Ir a p&aacutegina:</span>').appendTo(pagerGoto);
-			var opcionespage = "<select class=\"page-select\">";
-			
-			for(var i=1;i<=numpages;i++){
-				if(i == page+1) {
-					opcionespage= opcionespage+"<option class=\"pagerselect\" val=\'"+i+"\' selected>"+i+"</option>";
-				}
-				else {
-					opcionespage= opcionespage+"<option class=\"pagerselect\" val=\'"+i+"\'>"+i+"</option>";
-				}
-			}
-			
-			opcionespage = opcionespage+"<select>";
-			$(opcionespage).appendTo(pagerGoto);
-			
-			$('.page-select').on('change', function() {
-				var page = $(this).val();
-				page--;
-				if(page >= 0) {				
-					var sPath=window.location.pathname;
-					var sPage = sPath.substring(sPath.lastIndexOf('/') + 1);
-					var location = './' + sPage + '?page=' + page;
-					var oldparams = getParameters();
-					if(oldparams != "") {
-						location = location + "&" + oldparams;
+			if((numpages != null) && (numpages > 1)) {
+				$('<span>Ir a p&aacutegina:</span>').appendTo(pagerGoto);
+				var opcionespage = "<select class=\"page-select\">";
+				
+				for(var i=1;i<=numpages;i++){
+					if(i == page+1) {
+						opcionespage= opcionespage+"<option class=\"pagerselect\" val=\'"+i+"\' selected>"+i+"</option>";
 					}
-					window.location = location;		
+					else {
+						opcionespage= opcionespage+"<option class=\"pagerselect\" val=\'"+i+"\'>"+i+"</option>";
+					}
 				}
-			});			
+				
+				opcionespage = opcionespage+"<select>";
+				$(opcionespage).appendTo(pagerGoto);
+				
+				$('.page-select').on('change', function() {
+					var page = $(this).val();
+					page--;
+					if(page >= 0) {				
+						var sPath=window.location.pathname;
+						var sPage = sPath.substring(sPath.lastIndexOf('/') + 1);
+						var location = './' + sPage + '?page=' + page;
+						var oldparams = getParameters();
+						location = location + oldparams;
+						
+						window.location = location;		
+					}
+				});
+			}
 		}
 		else {
 			if(page > 0) {
@@ -111,9 +112,7 @@ $.fn.paginateMe = function(opts) {
 				
 				var location = './' + sPage + '?page=' + page;
 				var oldparams = getParameters();
-				if(oldparams != "") {
-					location = location + "&" + oldparams;
-				}
+				location = location + oldparams;
 				window.location = location;		
 			}
 		}
@@ -126,9 +125,8 @@ $.fn.paginateMe = function(opts) {
 			
 			var location = './' + sPage + '?page=' + page;
 			var oldparams = getParameters();
-			if(oldparams != "") {
-				location = location + "&" + oldparams;
-			}
+			location = location + oldparams;
+			
 			window.location = location;		
 		}
 		
@@ -141,9 +139,15 @@ $.fn.paginateMe = function(opts) {
 					  return p.join("=");
 				  }			  
 			}).join("&");
+			
+			if((newQueryString != null) && (newQueryString.length > 0)) {
+				newQueryString = "&" + newQueryString;
+			}
+			
 			return newQueryString;
 		}
-	}else{
+	}
+	else{
 		
 		var listElement = $this;
 		var perPage = settings.perPage;
@@ -290,15 +294,3 @@ $.fn.paginateMe = function(opts) {
 		}
 	}
 };
-
-function getParameters(){
-	var sPath=window.location.search;
-	var queryString = sPath.substring(sPath.lastIndexOf("?") + 1);
-	var newQueryString = $.map(queryString.split("&"), function(pair) { 
-		  var p = pair.split("="); 
-		  if(p[0] != "page") {
-			  return p.join("=");
-		  }			  
-	}).join("&");
-	return newQueryString;
-}

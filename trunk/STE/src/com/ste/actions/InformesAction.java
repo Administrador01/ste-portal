@@ -12,9 +12,6 @@ public class InformesAction extends Action{
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest req, HttpServletResponse resp){
 		
-		
-		
-		
 		return  mapping.findForward("ok");
 	}
 }
