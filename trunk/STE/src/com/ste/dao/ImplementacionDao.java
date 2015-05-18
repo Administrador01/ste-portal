@@ -30,6 +30,28 @@ public class ImplementacionDao {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<Implementacion> getAllImplementacionesUpdateMayusPaged(Integer page) {
+		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		com.google.appengine.api.datastore.Query q = new com.google.appengine.api.datastore.Query("Implementacion");
+		
+		List<Entity> entities = null;
+		FetchOptions fetchOptions=FetchOptions.Builder.withDefaults();
+		if(page != null) {
+			Integer offset = page * 200;
+			fetchOptions.limit(200);	
+			fetchOptions.offset(offset);
+		}
+		entities = datastore.prepare(q).asList(fetchOptions);		
+		List<Implementacion> Implementacions = new ArrayList<Implementacion>();	;
+		
+		for (Entity result : entities){
+			Implementacions.add(buildImplementacion(result));
+		}
+
+		return Implementacions;
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<Implementacion> getAllImplementaciones() {
 		List<Implementacion> Implementacions;
 		PersistenceManager pm = PMF.get().getPersistenceManager();

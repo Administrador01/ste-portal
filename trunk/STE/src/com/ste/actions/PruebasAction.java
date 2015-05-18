@@ -55,13 +55,14 @@ public class PruebasAction extends Action{
 		String premium = req.getParameter("premium");
 		
 		String page = req.getParameter("page");
-		int pageint = Utils.stringToInt(page);		
+		int pageint = Utils.stringToInt(page);	
+		int numpages = 0;
 		
 		if(!Utils.esNuloVacio(idCli)) {
 			// por id cliente
 			pruebas = pDao.getAllPruebasByClientIdPaged(idCli, pageint);
 			req.setAttribute("idCli", idCli);
-			int numpages = 0;			
+			numpages = 0;			
 			req.setAttribute("numpages", numpages);			
 		}
 		else if((Utils.esNuloVacio(premium) || TODOS.equals(premium)) &&
@@ -79,7 +80,7 @@ public class PruebasAction extends Action{
 			pruebas = pDao.getPruebasPaged(pageint);		
 			CounterDao counterDao = CounterDao.getInstance();
 			Counter count = counterDao.getCounterByName("prueba");
-			int numpages = (count.getValue()/PruebaDao.DATA_SIZE) + 1;			
+			numpages = Utils.calcNumPages(count.getValue(), PruebaDao.DATA_SIZE);			
 			req.setAttribute("numpages", numpages);
 		} 
 		else {
@@ -89,8 +90,10 @@ public class PruebasAction extends Action{
 			}
 			pruebas = pDao.getPruebasByAllParam(fechaDiaFilter, fechaMesFilter, fechaAnioFilter, clienteFilter, servicioFilter, estadoFilter, productoFilter, entornoFilter,desdeFilter,hastaFilter, premium,idCli, pageint);		
 			int numPagesItemIndex = pruebas.size()-1;
-			int numpages = (Integer.parseInt(pruebas.get(numPagesItemIndex).getDetalles())/PruebaDao.DATA_SIZE) + 1;
+			int numPruebas = Integer.parseInt(pruebas.get(numPagesItemIndex).getDetalles());
 			pruebas.remove(numPagesItemIndex);
+			numpages = Utils.calcNumPages(numPruebas, PruebaDao.DATA_SIZE);
+			
 			req.setAttribute("idCli", idCli);
 			req.setAttribute("numpages", numpages);
 			req.setAttribute("clienteFilter", clienteFilter);
@@ -106,8 +109,7 @@ public class PruebasAction extends Action{
 			req.setAttribute("premiumFilter", premium);			
 		}
 
-		boolean lastpage = (pruebas.size() < PruebaDao.DATA_SIZE) ? true : false;
-		
+		boolean lastpage = Utils.isLastPage(pageint, numpages, pruebas.size(), PruebaDao.DATA_SIZE);
 		req.setAttribute("lastpage", lastpage);
 		req.setAttribute("page", pageint);
 		

@@ -90,7 +90,14 @@ public class MayusUpdate extends HttpServlet {
 				json.append("success", "true");
 				json.append("result", result);
 			} else if ("prueba".equals(accion)) {
-				result = updatePrueba(req, resp);
+				String page = req.getParameter("page");
+				if(!Utils.esNuloVacio(page)) {
+					int pageint = Integer.parseInt(page);
+					result = updatePrueba(req, resp, pageint);
+				}
+				else {
+					result += " introduzca pagina de actualizacion ";
+				}
 				json.append("success", "true");
 				json.append("result", result);
 			} 
@@ -100,7 +107,14 @@ public class MayusUpdate extends HttpServlet {
 				json.append("result", result);
 			} */
 			else if ("implementacion".equals(accion)) {
-				result = updateImplementacion(req, resp);
+				String page = req.getParameter("page");
+				if(!Utils.esNuloVacio(page)) {
+					int pageint = Integer.parseInt(page);
+					result = updateImplementacion(req, resp, pageint);
+				}
+				else {
+					result += " introduzca pagina de actualizacion ";
+				}
 				json.append("success", "true");
 				json.append("result", result);
 			} 
@@ -325,13 +339,14 @@ public class MayusUpdate extends HttpServlet {
 	}
 
 	public String updatePrueba(HttpServletRequest req,
-			HttpServletResponse resp) throws InterruptedException, IOException {
+			HttpServletResponse resp, int page) throws InterruptedException, IOException {
 
 		String result = "";
 		try {
 			PruebaDao pruebaDao = PruebaDao.getInstance();
-			List<Prueba> pruebas = pruebaDao.getAllPruebas();
-
+			List<Prueba> pruebas = pruebaDao.getAllPruebasUpdateMayusPaged(page);
+			result += pruebas.size() + " -- ";
+			
 			for (Prueba prueba : pruebas) {
 				prueba.setClient_name(Utils.toUpperCase(prueba.getClient_name()));
 				prueba.setDetalles(Utils.toUpperCase(prueba.getDetalles()));
@@ -382,12 +397,13 @@ public class MayusUpdate extends HttpServlet {
 	}*/
 	
 	public String updateImplementacion(HttpServletRequest req,
-			HttpServletResponse resp) throws InterruptedException, IOException {
+			HttpServletResponse resp, int page) throws InterruptedException, IOException {
 
 		String result = "";
 		try {
 			ImplementacionDao implementacionDao = ImplementacionDao.getInstance();
-			List<Implementacion> implementaciones = implementacionDao.getAllImplementaciones();
+			List<Implementacion> implementaciones = implementacionDao.getAllImplementacionesUpdateMayusPaged(page);
+			result += implementaciones.size() + " -- ";
 
 			for (Implementacion implementacion : implementaciones) {
 				implementacion.setClient_name(Utils.toUpperCase(implementacion.getClient_name()));
