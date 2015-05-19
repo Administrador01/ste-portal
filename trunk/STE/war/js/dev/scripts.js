@@ -538,14 +538,13 @@ function validate_multiform(form, elements){
 }
 
 $(function() {
-	
-	
-		$('#myTable').paginateMe({
-			pagerSelector : '#myPager',
-			showPrevNext : true,
-			hidePageNumbers : false,
-			perPage : 10
-		});
+		
+	$('#myTable').paginateMe({
+		pagerSelector : '#myPager',
+		showPrevNext : true,
+		hidePageNumbers : false,
+		perPage : 10
+	});
 	
 	$('html').on('click', '.lapiz', function(e) {		
 		id= $(this).attr('name');	
@@ -636,9 +635,6 @@ $(function() {
 		
 	});
 	
-		
-	
-
 	// Submit for creating a new user.
 	$("#submit_form").on('click',function(e) {
 		e.preventDefault(); //STOP default action
@@ -1000,8 +996,6 @@ $(function() {
 		var numPages = Math.ceil(numItems / perPage);
 		// clean up.
 		$(pager).html('');
-	
-		//pager.data("curr", 0);
 		
 		var page = listElement.data('page');
 		var lastpage = listElement.data('lastpage');
@@ -1100,23 +1094,7 @@ $(function() {
 			
 			window.location = location;		
 		}
-		
-		function getParameters(){
-			var sPath=window.location.search;
-			var queryString = sPath.substring(sPath.lastIndexOf("?") + 1);
-			var newQueryString = $.map(queryString.split("&"), function(pair) { 
-				  var p = pair.split("="); 
-				  if(p[0] != "page") {
-					  return p.join("=");
-				  }			  
-			}).join("&");
-			
-			if((newQueryString != null) && (newQueryString.length > 0)) {
-				newQueryString = "&" + newQueryString;
-			}
-			
-			return newQueryString;
-		}
+				
 	}
 	else{
 		
@@ -1265,6 +1243,23 @@ $(function() {
 		}
 	}
 };
+
+function getParameters(){
+	var sPath=window.location.search;
+	var queryString = sPath.substring(sPath.lastIndexOf("?") + 1);
+	var newQueryString = $.map(queryString.split("&"), function(pair) { 
+		  var p = pair.split("="); 
+		  if(p[0] != "page") {
+			  return p.join("=");
+		  }			  
+	}).join("&");
+	
+	if((newQueryString != null) && (newQueryString.length > 0)) {
+		newQueryString = "&" + newQueryString;
+	}
+	
+	return newQueryString;
+}
 ;function sendEditPrueba(){
 
 	var $form = $("#edit-prueba-form");

@@ -56,6 +56,7 @@ public class SoporteAction extends Action{
 		String page = req.getParameter("page");
 		int pageint = Utils.stringToInt(page);	
 		int numpages = 0;
+		boolean isNumResultsCalculated = false;
 		
 		if(!Utils.esNuloVacio(idCli)) {
 			// Por id cliente
@@ -69,7 +70,8 @@ public class SoporteAction extends Action{
 			soportes= sDao.getSoportesPaged(pageint);
 			req.setAttribute("soportes", soportes);
 			Counter count = counterDao.getCounterByName("soporte");
-			numpages = Utils.calcNumPages(count.getValue(), SoporteDao.DATA_SIZE);		
+			numpages = Utils.calcNumPages(count.getValue(), SoporteDao.DATA_SIZE);	
+			isNumResultsCalculated = true;
 			req.setAttribute("numpages", numpages);
 		} 
 		else if((Utils.esNuloVacio(premiumFilter) || TODOS.equals(premiumFilter)) &&
@@ -95,9 +97,12 @@ public class SoporteAction extends Action{
 			}
 			soportes= sDao.getSoportesByAllParam(fechaDiaFilter, fechaMesFilter, fechaAnioFilter, clienteFilter, segmentoFilter, estadoFilter, tipoServFilter, productoFilter, descripcionFilter, premiumFilter, idCli, pageint);
 			int numPagesItemIndex = soportes.size()-1;
-			int numSoportes = Integer.parseInt(soportes.get(numPagesItemIndex).getDetalles());
+			int numResultsCalculated = Integer.parseInt(soportes.get(numPagesItemIndex).getDetalles());
+			if(numResultsCalculated > 0) {
+				isNumResultsCalculated = true;
+			}
 			soportes.remove(numPagesItemIndex);
-			numpages = Utils.calcNumPages(numSoportes, SoporteDao.DATA_SIZE);
+			numpages = Utils.calcNumPages(numResultsCalculated, SoporteDao.DATA_SIZE);
 			
 			req.setAttribute("idCli", idCli);
 			req.setAttribute("numpages", numpages);
@@ -113,7 +118,7 @@ public class SoporteAction extends Action{
 			req.setAttribute("premiumFilter", premiumFilter);
 		}
 		
-		boolean lastpage = Utils.isLastPage(pageint, numpages, soportes.size(), SoporteDao.DATA_SIZE);
+		boolean lastpage = Utils.isLastPage(pageint, numpages, isNumResultsCalculated, soportes.size(), SoporteDao.DATA_SIZE);
 		req.setAttribute("lastpage", lastpage);
 		req.setAttribute("page", pageint);
 		

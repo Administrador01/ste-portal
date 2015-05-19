@@ -11,30 +11,19 @@
 	<hr/>
 	
 	<div class="leyenda_clientes">
-			<div class="selects">
-				<span>Tipo de cliente</span>
-				<select class="selectpicker clients" id="tip_crit" >
-					<option value="">TODOS</option>
-					<option value="PREMIUM">Premium</option>
-				</select>
-			</div>
-		
+		<div class="selects">
+			<span>Tipo de cliente</span>
+			<select class="selectpicker clients" id="tip_crit" >
+				<option value="">TODOS</option>
+				<option value="PREMIUM">PREMIUM</option>
+			</select>
+		</div>		
 	</div>
 
-
 	<div class="search_div">
-	<!-- 
-		<c:if test="${sessionScope.permiso <= 6}">
-				<button onclick="location.href = './dashboard/gestionDemanda.do';" id="btn_gestion_demanda">Gesti�n de demanda<img src="../img/gestion.png"></button>  
-			
-				 
-		</c:if>
-	 -->
-
- 
+	
 	<input type="text" class="long" name="buscador_cliente" id="buscador_cliente" placeholder="Introduzca cliente a buscar">
-	
-	
+		
  	<c:choose>
 	 	<c:when test="${sessionScope.permiso != 5 and sessionScope.permiso != 4}">
 		 	<div class="btn-group">
@@ -43,28 +32,19 @@
 				    Acci&oacute;n <span class="caret"></span>
 				  </button>
 				  <ul class="dropdown-menu">
-  				    	<li><a href="./gestionCliente.do"><span class="demanda_span blue"></span>Gestión Cliente</a></li>				  
-  				    	<li><a href="./implementacion.do"><span class="demanda_span blue"></span>Gestión Implementaciones</a></li>				  
+  				    	<li><a href="./gestionCliente.do"><span class="demanda_span blue"></span>Gesti&oacuten Cliente</a></li>				  
+  				    	<li><a href="./implementacion.do"><span class="demanda_span blue"></span>Gesti&oacuten Implementaciones</a></li>				  
 				    	
 				    	
 				  </ul>
 			</div>
 		</c:when>
 	 	<c:otherwise> 			
-			<button onclick="location.href = './dashboard/gestionCliente.do';" id="btn_alta_cliente">Gestión clientes<img src="../img/new-user-white.png"></button> 
-	 
-	 	</c:otherwise>
+			<button onclick="location.href = './dashboard/gestionCliente.do';" id="btn_alta_cliente">Gesti&oacuten clientes<img src="../img/new-user-white.png"></button> 
+	  	</c:otherwise>
  	</c:choose>
  	
- 	<!-- 
- 	 
-	<button onclick="location.href = './dashboard/gestionCliente.do';" id="btn_alta_cliente">Gesti�n clientes<img src="../img/new-user-white.png"></button> 
- 	  -->
- 	
 	</div>
-	
-	
-	
 	
 	<div class="abc">
 		<div id="abc_child_scroll" class="scroll_hidden">

@@ -30,8 +30,8 @@ public class Utils {
 		return numpages;
 	}
 	
-	public static boolean isLastPage(int pageAct, int numPages, int numItems, int pageSize) {
-		if(numPages == 1) {
+	public static boolean isLastPage(int pageAct, int numPages, boolean numResultsCalculated, int numItems, int pageSize) {
+		if(numPages == 1 && !numResultsCalculated) {
 			return (numItems < pageSize) ? true : false;
 		}
 		else {

@@ -43,6 +43,7 @@ public class GestionClienteAction extends Action{
 		String page = req.getParameter("page");
 		int pageint = Utils.stringToInt(page);	
 		int numpages = 0;
+		boolean isNumResultsCalculated = false;
 		
 		if(!Utils.esNuloVacio(idCli)) {
 			// Por id cliente
@@ -59,16 +60,20 @@ public class GestionClienteAction extends Action{
 				// Sin filtros
 				clientes = cDao.getClientePaged(pageint);
 				Counter count = counterDao.getCounterByName("cliente");
-				numpages = Utils.calcNumPages(count.getValue(), ClienteDao.DATA_SIZE);			
-				req.setAttribute("numpages", numpages);		
+				numpages = Utils.calcNumPages(count.getValue(), ClienteDao.DATA_SIZE);
+				isNumResultsCalculated = true;
+				req.setAttribute("numpages", numpages);	
 			}
 			else{
 				// Con filtros
 				clientes = cDao.getClienteByAllParam(identificadorFilter, nombreFilter, fechaDiaFilter, fechaMesFilter, fechaAnioFilter, segmentoFilter, premiumFilter, pageint);
 				int numPagesItemIndex = clientes.size()-1;
-				int numClientes = Integer.parseInt(clientes.get(numPagesItemIndex).getId_cliente());
+				int numResultsCalculated = Integer.parseInt(clientes.get(numPagesItemIndex).getId_cliente());
+				if(numResultsCalculated > 0) {
+					isNumResultsCalculated = true;
+				}
 				clientes.remove(numPagesItemIndex);
-				numpages = Utils.calcNumPages(numClientes, ClienteDao.DATA_SIZE);
+				numpages = Utils.calcNumPages(numResultsCalculated, ClienteDao.DATA_SIZE);
 				
 				req.setAttribute("numpages", numpages);
 				req.setAttribute("identificador", identificadorFilter);
@@ -81,7 +86,7 @@ public class GestionClienteAction extends Action{
 			}
 		}
 		
-		boolean lastpage = Utils.isLastPage(pageint, numpages, clientes.size(), ClienteDao.DATA_SIZE);
+		boolean lastpage = Utils.isLastPage(pageint, numpages, isNumResultsCalculated, clientes.size(), ClienteDao.DATA_SIZE);
 		req.setAttribute("lastpage", lastpage);
 		req.setAttribute("clientes", clientes);
 		req.setAttribute("page", pageint);

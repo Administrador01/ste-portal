@@ -31,174 +31,150 @@ import jxl.write.WritableFont;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 
-public class PruebaServlet extends HttpServlet{
-	
-	
-	
+public class PruebaServlet extends HttpServlet {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public void doGet(HttpServletRequest req, HttpServletResponse resp){
-
-
-		
+	public void doGet(HttpServletRequest req, HttpServletResponse resp) {
 		String accion = req.getParameter("accion");
-		
-		 try {
-			 
+		try {
 			HttpSession sesion = req.getSession();
-			//int sesionpermiso = (int) sesion.getAttribute("permiso");			 
 			String usermail = (String) sesion.getAttribute("mail");
-			
-
-			
-				if (accion.equals("new")){
-					createPrueba(req,resp,usermail);
-				}else if (accion.equals("delete")){
-					deletePrueba(req,resp,usermail);
-				}else if (accion.equals("update")){
-					updatePrueba(req,resp,usermail);
-				}else if (accion.equals("xls")){
-					generateXLS(req,resp,usermail);
-				}else if (accion.equals("getImpByClient")){
-					getImpByClient(req,resp,usermail);
-				}else if (accion.equals("clone")){
-					clonePrueba(req,resp,usermail);
-				}
-				
-			
-			
+			if (accion.equals("new")) {
+				createPrueba(req, resp, usermail);
+			} else if (accion.equals("delete")) {
+				deletePrueba(req, resp, usermail);
+			} else if (accion.equals("update")) {
+				updatePrueba(req, resp, usermail);
+			} else if (accion.equals("xls")) {
+				generateXLS(req, resp, usermail);
+			} else if (accion.equals("getImpByClient")) {
+				getImpByClient(req, resp, usermail);
+			} else if (accion.equals("clone")) {
+				clonePrueba(req, resp, usermail);
+			}
 		} catch (Exception e) {
-
 			e.printStackTrace();
 		}
 	}
-	
-	public void doPost(HttpServletRequest req, HttpServletResponse resp){
-		doGet(req,resp);
+
+	public void doPost(HttpServletRequest req, HttpServletResponse resp) {
+		doGet(req, resp);
 	}
-	
-	public void createPrueba(HttpServletRequest req, HttpServletResponse resp, String usermail) throws InterruptedException{
+
+	public void createPrueba(HttpServletRequest req, HttpServletResponse resp,
+			String usermail) throws InterruptedException {
 		JSONObject json = new JSONObject();
-		
-
-			
-			String fecha_estado = req.getParameter("fecha_estado");
-			//String nombre_cliente = req.getParameter("cliente");
-			String referencia = req.getParameter("referencia");
-			String producto = req.getParameter("producto_canal");
-			String premium = req.getParameter("input-premium-prueba");
-			String estado = req.getParameter("estado");
-			String entorno = req.getParameter("entorno");
-			String detalles = req.getParameter("detalles");
-			String solucion = req.getParameter("solucion");
-			String impID = req.getParameter("imp_id");
-			String tipo_servicio = req.getParameter("tipo_servicio");
-			String resultado = req.getParameter("resultado");
-			String peticionario = req.getParameter("peticionario");
-			String fichero = req.getParameter("fichero");
-			String str_fecha_inicio = req.getParameter("fecha_inicio");
-			
-			
-			PruebaDao pDao = PruebaDao.getInstance();	
-			Prueba p = new Prueba();
-			
-			ImplementacionDao impDao = ImplementacionDao.getInstance();
-			Cliente cliente =  impDao.getClienteByImpId(Long.parseLong(impID));
-			
-			
-			p.setClient_name(cliente.getNombre());
-			p.setPremium(cliente.getPremium());
-			
-			p.setStr_fecha_estado(fecha_estado);
-			//p.setNombre_cliente(nombre_cliente);
-			p.setReferencia(referencia);
-			p.setProducto(producto);
-			p.setPremium(premium);
-			p.setEntorno(entorno);
-			p.setEstado(estado);
-			if(p.getEstado().equals("Cancelado")){p.setErased(true);}else{p.setErased(false);}
-			p.setDetalles(detalles);
-			p.setSolucion(solucion);
-			p.setImp_id(impID);
-			p.setTipo_servicio(tipo_servicio);
-			p.setResultado(resultado);
-			p.setFecha_inicio_str(str_fecha_inicio);
-			p.setFichero(fichero);
-			p.setPeticionario(peticionario);
-			p.setFecha_inicio_str(str_fecha_inicio);
-			
-			
-			
-			pDao.createPrueba(p);		
-			
-			Utils.writeLog(usermail, "Crea", "Prueba", p.getId_prueba());
-			
-			try {
-				json.append("success", "true");
-				resp.setCharacterEncoding("UTF-8");
-		        resp.setContentType("application/json");       
-				resp.getWriter().println(json);
-
-				
-			} catch (JSONException e) {
-
-				e.printStackTrace();
-			} catch (IOException e) {
-
-				e.printStackTrace();
-			}
-			
-
-	}
-	public void getImpByClient(HttpServletRequest req, HttpServletResponse resp, String usermail){
-		JSONObject json = new JSONObject();
-		try{
-			ImplementacionDao implementacionDao = ImplementacionDao.getInstance();
-			
-			String client = req.getParameter("client");
-			ArrayList<String> implmns = new ArrayList<String>();
-			
-			List<Implementacion> implementaciones = implementacionDao.getImplementacionByClientId(Long.parseLong(client));
-			for(Implementacion implementacion : implementaciones){
-				implmns.add(String.valueOf(implementacion.getKey().getId()));
-				implmns.add(implementacion.getId_implementacion());
-			}
-			
-			
-			
-			json.append("success","true");
-			json.append("implementaciones", implmns);
-			
-			resp.setCharacterEncoding("UTF-8");
-			resp.setContentType("application/json");
-			resp.getWriter().println(json);
-		
-		} catch (IOException | JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-	
-	
-	//ACTUALIZAR PRUEBA	
-	public void updatePrueba(HttpServletRequest req, HttpServletResponse resp, String usermail){
-		
-		JSONObject json = new JSONObject();
-		
-		String id_str = req.getParameter("id_prueba_hid");
-		
 		String fecha_estado = req.getParameter("fecha_estado");
-		//String nombre_cliente = req.getParameter("cliente");
+		// String nombre_cliente = req.getParameter("cliente");
 		String referencia = req.getParameter("referencia");
 		String producto = req.getParameter("producto_canal");
 		String premium = req.getParameter("input-premium-prueba");
 		String estado = req.getParameter("estado");
 		String entorno = req.getParameter("entorno");
-		String servicio =  req.getParameter("tipo_servicio");
+		String detalles = req.getParameter("detalles");
+		String solucion = req.getParameter("solucion");
+		String impID = req.getParameter("imp_id");
+		String tipo_servicio = req.getParameter("tipo_servicio");
+		String resultado = req.getParameter("resultado");
+		String peticionario = req.getParameter("peticionario");
+		String fichero = req.getParameter("fichero");
+		String str_fecha_inicio = req.getParameter("fecha_inicio");
+
+		PruebaDao pDao = PruebaDao.getInstance();
+		Prueba p = new Prueba();
+
+		ImplementacionDao impDao = ImplementacionDao.getInstance();
+		Cliente cliente = impDao.getClienteByImpId(Long.parseLong(impID));
+
+		p.setClient_name(cliente.getNombre());
+		p.setPremium(cliente.getPremium());
+
+		p.setStr_fecha_estado(fecha_estado);
+		// p.setNombre_cliente(nombre_cliente);
+		p.setReferencia(referencia);
+		p.setProducto(producto);
+		p.setPremium(premium);
+		p.setEntorno(entorno);
+		p.setEstado(estado);
+		if (p.getEstado().equals("Cancelado")) {
+			p.setErased(true);
+		} else {
+			p.setErased(false);
+		}
+		p.setDetalles(detalles);
+		p.setSolucion(solucion);
+		p.setImp_id(impID);
+		p.setTipo_servicio(tipo_servicio);
+		p.setResultado(resultado);
+		p.setFecha_inicio_str(str_fecha_inicio);
+		p.setFichero(fichero);
+		p.setPeticionario(peticionario);
+		p.setFecha_inicio_str(str_fecha_inicio);
+
+		pDao.createPrueba(p);
+
+		Utils.writeLog(usermail, "Crea", "Prueba", p.getId_prueba());
+
+		try {
+			json.append("success", "true");
+			resp.setCharacterEncoding("UTF-8");
+			resp.setContentType("application/json");
+			resp.getWriter().println(json);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void getImpByClient(HttpServletRequest req,
+			HttpServletResponse resp, String usermail) {
+		JSONObject json = new JSONObject();
+		try {
+			ImplementacionDao implementacionDao = ImplementacionDao
+					.getInstance();
+
+			String client = req.getParameter("client");
+			ArrayList<String> implmns = new ArrayList<String>();
+
+			List<Implementacion> implementaciones = implementacionDao
+					.getImplementacionByClientId(Long.parseLong(client));
+			for (Implementacion implementacion : implementaciones) {
+				implmns.add(String.valueOf(implementacion.getKey().getId()));
+				implmns.add(implementacion.getId_implementacion());
+			}
+
+			json.append("success", "true");
+			json.append("implementaciones", implmns);
+
+			resp.setCharacterEncoding("UTF-8");
+			resp.setContentType("application/json");
+			resp.getWriter().println(json);
+
+		} catch (IOException | JSONException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// ACTUALIZAR PRUEBA
+	public void updatePrueba(HttpServletRequest req, HttpServletResponse resp,
+			String usermail) {
+
+		JSONObject json = new JSONObject();
+
+		String id_str = req.getParameter("id_prueba_hid");
+		String fecha_estado = req.getParameter("fecha_estado");
+		// String nombre_cliente = req.getParameter("cliente");
+		String referencia = req.getParameter("referencia");
+		String producto = req.getParameter("producto_canal");
+		String premium = req.getParameter("input-premium-prueba");
+		String estado = req.getParameter("estado");
+		String entorno = req.getParameter("entorno");
+		String servicio = req.getParameter("tipo_servicio");
 		String detalles = req.getParameter("detalles");
 		String solucion = req.getParameter("solucion");
 		String impID = req.getParameter("imp_id_mod");
@@ -206,74 +182,66 @@ public class PruebaServlet extends HttpServlet{
 		String peticionario = req.getParameter("peticionario");
 		String fichero = req.getParameter("fichero");
 		String str_fecha_inicio = req.getParameter("fecha_inicio");
-		
-		
-		PruebaDao pDao = PruebaDao.getInstance();	
+
+		PruebaDao pDao = PruebaDao.getInstance();
 		Prueba p = pDao.getPruebabyId(Long.parseLong(id_str));
 		Utils.writeLog(usermail, "Modifica", "Prueba", p.getId_prueba());
-		
+
 		ImplementacionDao impDao = ImplementacionDao.getInstance();
-		Cliente cliente =  impDao.getClienteByImpId(Long.parseLong(impID));
-		
-		
+		Cliente cliente = impDao.getClienteByImpId(Long.parseLong(impID));
+
 		p.setClient_name(cliente.getNombre());
 		p.setPremium(cliente.getPremium());
-		
-		
+
 		p.setStr_fecha_estado(fecha_estado);
-		//p.setNombre_cliente(nombre_cliente);
+		// p.setNombre_cliente(nombre_cliente);
 		p.setReferencia(referencia);
 		p.setProducto(producto);
 		p.setPremium(premium);
 		p.setTipo_servicio(servicio);
 		p.setEntorno(entorno);
 		p.setEstado(estado);
-		if(p.getEstado().equals("Cancelado")){p.setErased(true);}else{p.setErased(false);}
+		if (p.getEstado().equals("Cancelado")) {
+			p.setErased(true);
+		} else {
+			p.setErased(false);
+		}
 		p.setDetalles(detalles);
 		p.setSolucion(solucion);
-		if (impID !="" && impID != null) p.setImp_id(impID);
+		if (impID != "" && impID != null)
+			p.setImp_id(impID);
 		p.setResultado(resultado);
 		p.setFecha_inicio_str(str_fecha_inicio);
 		p.setFichero(fichero);
 		p.setPeticionario(peticionario);
-		
-		
 
-		
 		pDao.updatePrueba(p);
-		
-		
+
 		try {
 			json.append("success", "true");
 			resp.setCharacterEncoding("UTF-8");
-	        resp.setContentType("application/json");       
+			resp.setContentType("application/json");
 			resp.getWriter().println(json);
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
 	}
-	
-	
-	
-	public void clonePrueba(HttpServletRequest req, HttpServletResponse resp, String usermail){
-	
+
+	public void clonePrueba(HttpServletRequest req, HttpServletResponse resp,
+			String usermail) {
+
 		JSONObject json = new JSONObject();
-		
-		
-		
+
 		String fecha_estado = req.getParameter("fecha_estado");
-		//String nombre_cliente = req.getParameter("cliente");
+		// String nombre_cliente = req.getParameter("cliente");
 		String referencia = req.getParameter("referencia");
 		String producto = req.getParameter("producto_canal");
 		String premium = req.getParameter("input-premium-soporte");
 		String estado = req.getParameter("estado");
 		String entorno = req.getParameter("entorno");
-		String servicio =  req.getParameter("tipo_servicio");
+		String servicio = req.getParameter("tipo_servicio");
 		String detalles = req.getParameter("detalles");
 		String solucion = req.getParameter("solucion");
 		String impID = req.getParameter("imp_id_mod");
@@ -281,44 +249,45 @@ public class PruebaServlet extends HttpServlet{
 		String peticionario = req.getParameter("peticionario");
 		String fichero = req.getParameter("fichero");
 		String str_fecha_inicio = req.getParameter("fecha_inicio");
-		
-		
-		PruebaDao pDao = PruebaDao.getInstance();	
+
+		PruebaDao pDao = PruebaDao.getInstance();
 		Prueba p = new Prueba();
 		Utils.writeLog(usermail, "Clona", "Prueba", "");
-		
+
 		ImplementacionDao impDao = ImplementacionDao.getInstance();
-		Cliente cliente =  impDao.getClienteByImpId(Long.parseLong(impID));
-		
-		
+		Cliente cliente = impDao.getClienteByImpId(Long.parseLong(impID));
+
 		p.setClient_name(cliente.getNombre());
 		p.setPremium(cliente.getPremium());
-		
-		
+
 		p.setStr_fecha_estado(fecha_estado);
-		//p.setNombre_cliente(nombre_cliente);
+		// p.setNombre_cliente(nombre_cliente);
 		p.setReferencia(referencia);
 		p.setProducto(producto);
 		p.setPremium(premium);
 		p.setTipo_servicio(servicio);
 		p.setEntorno(entorno);
 		p.setEstado(estado);
-		if(p.getEstado().equals("Cancelado")){p.setErased(true);}else{p.setErased(false);}
+		if (p.getEstado().equals("Cancelado")) {
+			p.setErased(true);
+		} else {
+			p.setErased(false);
+		}
 		p.setDetalles(detalles);
 		p.setSolucion(solucion);
-		if (impID !="" && impID != null) p.setImp_id(impID);
+		if (impID != "" && impID != null)
+			p.setImp_id(impID);
 		p.setResultado(resultado);
 		p.setFecha_inicio_str(str_fecha_inicio);
 		p.setFichero(fichero);
 		p.setPeticionario(peticionario);
 
 		pDao.createPrueba(p);
-		
-		
+
 		try {
 			json.append("success", "true");
 			resp.setCharacterEncoding("UTF-8");
-	        resp.setContentType("application/json");       
+			resp.setContentType("application/json");
 			resp.getWriter().println(json);
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -326,30 +295,31 @@ public class PruebaServlet extends HttpServlet{
 			e.printStackTrace();
 		}
 	}
-	
-	public void deletePrueba (HttpServletRequest req, HttpServletResponse resp, String usermail){
+
+	public void deletePrueba(HttpServletRequest req, HttpServletResponse resp,
+			String usermail) {
 		JSONObject json = new JSONObject();
-		
+
 		String id = req.getParameter("id");
 		PruebaDao pruebaDao = PruebaDao.getInstance();
 		Prueba p = pruebaDao.getPruebabyId(Long.parseLong(id));
 		Utils.writeLog(usermail, "Elimina", "Prueba", p.getId_prueba());
 		pruebaDao.deletePrueba(p);
-		
+
 		try {
 			json.append("success", "true");
 			resp.setCharacterEncoding("UTF-8");
-	        resp.setContentType("application/json");       
+			resp.setContentType("application/json");
 			resp.getWriter().println(json);
-		} catch (JSONException e) { 
+		} catch (JSONException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public void generateXLS(HttpServletRequest req, HttpServletResponse resp, String usermail)
-			throws ServletException, IOException {
+
+	public void generateXLS(HttpServletRequest req, HttpServletResponse resp,
+			String usermail) throws ServletException, IOException {
 		OutputStream out = null;
 		try {
 			resp.setContentType("application/vnd.ms-excel");
@@ -361,9 +331,7 @@ public class PruebaServlet extends HttpServlet{
 
 			PruebaDao pDao = PruebaDao.getInstance();
 			List<Prueba> pruebas = pDao.getAllPruebas();
-			
 
-					
 			WritableSheet s = w.createSheet("Gestion de pruebas", 0);
 
 			WritableFont cellFont = new WritableFont(WritableFont.TIMES, 12);
@@ -391,7 +359,6 @@ public class PruebaServlet extends HttpServlet{
 			s.setColumnView(13, 20);
 			s.setColumnView(14, 20);
 			s.setColumnView(15, 40);
-		
 
 			s.addCell(new Label(0, 0, "IDENTIFICADOR", cellFormat));
 			s.addCell(new Label(1, 0, "CLIENTE", cellFormat));
@@ -409,11 +376,9 @@ public class PruebaServlet extends HttpServlet{
 			s.addCell(new Label(13, 0, "FICHERO", cellFormat));
 			s.addCell(new Label(14, 0, "DESCRIPCIÓN", cellFormat));
 
-			
-			
 			int aux = 1;
 
-			for ( Prueba pru : pruebas) {
+			for (Prueba pru : pruebas) {
 				s.addCell(new Label(0, aux, pru.getId_prueba()));
 				s.addCell(new Label(1, aux, pru.getClient_name()));
 				s.addCell(new Label(2, aux, pru.getFecha_inicio_str()));
@@ -421,22 +386,19 @@ public class PruebaServlet extends HttpServlet{
 				s.addCell(new Label(4, aux, pru.getPremium()));
 				s.addCell(new Label(5, aux, pru.getProducto()));
 				s.addCell(new Label(6, aux, pru.getReferencia()));
-				if(pru.getEntorno().equals("PRODUCCION")){
+				if (pru.getEntorno().equals("PRODUCCION")) {
 					s.addCell(new Label(7, aux, "PRODUCCIÓN"));
-				}
-				else {
-					s.addCell(new Label(7, aux,pru.getEntorno()));	
+				} else {
+					s.addCell(new Label(7, aux, pru.getEntorno()));
 				}
 				s.addCell(new Label(8, aux, pru.getEstado()));
-				//s.addCell(new Label(9, aux, pDao.getImplementacionByTestId(pru.getKey().getId()).getId_implementacion()));
+				//s.addCell(new Label(9, aux, pru.getImp_id()));
+				// pDao.getImplementacionByTestId(pru.getKey().getId()).getId_implementacion()));
 				s.addCell(new Label(10, aux, pru.getTipo_servicio()));
 				s.addCell(new Label(11, aux, pru.getResultado()));
 				s.addCell(new Label(12, aux, pru.getPeticionario()));
 				s.addCell(new Label(13, aux, pru.getFichero()));
 				s.addCell(new Label(14, aux, pru.getDetalles()));
-
-
-
 				aux++;
 			}
 
@@ -446,11 +408,9 @@ public class PruebaServlet extends HttpServlet{
 			e.printStackTrace();
 			throw new ServletException("Exception in Excel", e);
 		} finally {
-			Utils.writeLog(usermail, "Descarga XML", "Pruebas","");
+			Utils.writeLog(usermail, "Descarga XML", "Pruebas", "");
 			if (out != null)
 				out.close();
 		}
-
-	}	
-	
+	}
 }
