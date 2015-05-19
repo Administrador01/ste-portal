@@ -60,6 +60,7 @@ public class ImplementacionAction extends Action{
 		String page = req.getParameter("page");
 		int pageint = Utils.stringToInt(page);	
 		int numpages = 0;
+		boolean isNumResultsCalculated = false;
 		
 		ImplementacionDao impDao = ImplementacionDao.getInstance();
 		List<Implementacion> implementaciones = new ArrayList<Implementacion>();
@@ -76,16 +77,20 @@ public class ImplementacionAction extends Action{
 			implementaciones = impDao.getAllImplementacionesPagin(pageint);
 			CounterDao counterDao = CounterDao.getInstance();
 			Counter count = counterDao.getCounterByName("implementacion");
-			numpages = Utils.calcNumPages(count.getValue(), PruebaDao.DATA_SIZE);			
+			numpages = Utils.calcNumPages(count.getValue(), PruebaDao.DATA_SIZE);	
+			isNumResultsCalculated = true;
 			req.setAttribute("numpages", numpages);		
 		}
 		else {
 			// Con filtros
 			implementaciones = impDao.getImplementacionesByAllParam(fechaDiaFilter, fechaMesFilter, fechaAnioFilter, clienteFilter, paisFilter, productoFilter, servicioFilter, normalizadorFilter, estadoFilter, pageint);
 			int numPagesItemIndex = implementaciones.size()-1;
-			int numImplementaciones = Integer.parseInt(implementaciones.get(numPagesItemIndex).getDetalle());
+			int numResultsCalculated = Integer.parseInt(implementaciones.get(numPagesItemIndex).getDetalle());
+			if(numResultsCalculated > 0) {
+				isNumResultsCalculated = true;
+			}
 			implementaciones.remove(numPagesItemIndex);
-			numpages = Utils.calcNumPages(numImplementaciones, ImplementacionDao.DATA_SIZE);
+			numpages = Utils.calcNumPages(numResultsCalculated, ImplementacionDao.DATA_SIZE);
 			
 			req.setAttribute("numpages", numpages);
 			req.setAttribute("fechadia", fechaDiaFilter);
@@ -98,7 +103,7 @@ public class ImplementacionAction extends Action{
 			req.setAttribute("servicio", servicioFilter);
 			req.setAttribute("estado", estadoFilter);
 		}
-		boolean lastpage = Utils.isLastPage(pageint, numpages, implementaciones.size(), ImplementacionDao.DATA_SIZE);
+		boolean lastpage = Utils.isLastPage(pageint, numpages, isNumResultsCalculated, implementaciones.size(), ImplementacionDao.DATA_SIZE);
 		req.setAttribute("lastpage", lastpage);
 		req.setAttribute("page", pageint);
 		

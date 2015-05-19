@@ -57,6 +57,7 @@ public class PruebasAction extends Action{
 		String page = req.getParameter("page");
 		int pageint = Utils.stringToInt(page);	
 		int numpages = 0;
+		boolean isNumResultsCalculated = false;
 		
 		if(!Utils.esNuloVacio(idCli)) {
 			// por id cliente
@@ -80,7 +81,8 @@ public class PruebasAction extends Action{
 			pruebas = pDao.getPruebasPaged(pageint);		
 			CounterDao counterDao = CounterDao.getInstance();
 			Counter count = counterDao.getCounterByName("prueba");
-			numpages = Utils.calcNumPages(count.getValue(), PruebaDao.DATA_SIZE);			
+			numpages = Utils.calcNumPages(count.getValue(), PruebaDao.DATA_SIZE);	
+			isNumResultsCalculated = true;
 			req.setAttribute("numpages", numpages);
 		} 
 		else {
@@ -90,9 +92,12 @@ public class PruebasAction extends Action{
 			}
 			pruebas = pDao.getPruebasByAllParam(fechaDiaFilter, fechaMesFilter, fechaAnioFilter, clienteFilter, servicioFilter, estadoFilter, productoFilter, entornoFilter,desdeFilter,hastaFilter, premium,idCli, pageint);		
 			int numPagesItemIndex = pruebas.size()-1;
-			int numPruebas = Integer.parseInt(pruebas.get(numPagesItemIndex).getDetalles());
+			int numResultsCalculated = Integer.parseInt(pruebas.get(numPagesItemIndex).getDetalles());
+			if(numResultsCalculated > 0) {
+				isNumResultsCalculated = true;
+			}
 			pruebas.remove(numPagesItemIndex);
-			numpages = Utils.calcNumPages(numPruebas, PruebaDao.DATA_SIZE);
+			numpages = Utils.calcNumPages(numResultsCalculated, PruebaDao.DATA_SIZE);
 			
 			req.setAttribute("idCli", idCli);
 			req.setAttribute("numpages", numpages);
@@ -109,7 +114,7 @@ public class PruebasAction extends Action{
 			req.setAttribute("premiumFilter", premium);			
 		}
 
-		boolean lastpage = Utils.isLastPage(pageint, numpages, pruebas.size(), PruebaDao.DATA_SIZE);
+		boolean lastpage = Utils.isLastPage(pageint, numpages, isNumResultsCalculated, pruebas.size(), PruebaDao.DATA_SIZE);
 		req.setAttribute("lastpage", lastpage);
 		req.setAttribute("page", pageint);
 		

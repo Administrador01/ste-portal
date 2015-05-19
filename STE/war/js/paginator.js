@@ -130,23 +130,7 @@ $.fn.paginateMe = function(opts) {
 			
 			window.location = location;		
 		}
-		
-		function getParameters(){
-			var sPath=window.location.search;
-			var queryString = sPath.substring(sPath.lastIndexOf("?") + 1);
-			var newQueryString = $.map(queryString.split("&"), function(pair) { 
-				  var p = pair.split("="); 
-				  if(p[0] != "page") {
-					  return p.join("=");
-				  }			  
-			}).join("&");
-			
-			if((newQueryString != null) && (newQueryString.length > 0)) {
-				newQueryString = "&" + newQueryString;
-			}
-			
-			return newQueryString;
-		}
+				
 	}
 	else{
 		
@@ -295,3 +279,20 @@ $.fn.paginateMe = function(opts) {
 		}
 	}
 };
+
+function getParameters(){
+	var sPath=window.location.search;
+	var queryString = sPath.substring(sPath.lastIndexOf("?") + 1);
+	var newQueryString = $.map(queryString.split("&"), function(pair) { 
+		  var p = pair.split("="); 
+		  if(p[0] != "page") {
+			  return p.join("=");
+		  }			  
+	}).join("&");
+	
+	if((newQueryString != null) && (newQueryString.length > 0)) {
+		newQueryString = "&" + newQueryString;
+	}
+	
+	return newQueryString;
+}

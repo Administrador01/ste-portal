@@ -113,14 +113,13 @@ function validate_multiform(form, elements){
 }
 
 $(function() {
-	
-	
-		$('#myTable').paginateMe({
-			pagerSelector : '#myPager',
-			showPrevNext : true,
-			hidePageNumbers : false,
-			perPage : 10
-		});
+		
+	$('#myTable').paginateMe({
+		pagerSelector : '#myPager',
+		showPrevNext : true,
+		hidePageNumbers : false,
+		perPage : 10
+	});
 	
 	$('html').on('click', '.lapiz', function(e) {		
 		id= $(this).attr('name');	
@@ -211,9 +210,6 @@ $(function() {
 		
 	});
 	
-		
-	
-
 	// Submit for creating a new user.
 	$("#submit_form").on('click',function(e) {
 		e.preventDefault(); //STOP default action

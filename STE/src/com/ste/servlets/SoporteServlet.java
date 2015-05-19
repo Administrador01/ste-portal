@@ -22,71 +22,52 @@ import jxl.write.WritableFont;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
-import com.ste.beans.Cliente;
 import com.ste.beans.Soporte;
-import com.ste.dao.ClienteDao;
 import com.ste.dao.SoporteDao;
 import com.ste.utils.Utils;
 
-public class SoporteServlet extends HttpServlet{
+public class SoporteServlet extends HttpServlet {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 6544096032936400799L;
 
-	public void doGet(HttpServletRequest req, HttpServletResponse resp){
+	public void doGet(HttpServletRequest req, HttpServletResponse resp) {
 
 		JSONObject json = new JSONObject();
-		
 		String accion = req.getParameter("accion");
-			
-		 try {
-			 
+
+		try {
 			HttpSession sesion = req.getSession();
-			int sesionpermiso = (int) sesion.getAttribute("permiso");
 			String usermail = (String) sesion.getAttribute("mail");
-			 
-			 if (accion.equals("new")){
-					createSoporte(req,resp,usermail);
-				}else if (accion.equals("delete")){
-					deleteSoporte(req,resp,usermail);
-				}else if (accion.equals("update")){
-					updateSoporte(req,resp,usermail);
-				}else if (accion.equals("xls")){
-					generateXLS(req,resp,usermail);
-				}else if (accion.equals("restore")){
-					restore(req,resp,usermail);
-				}else if (accion.equals("clone")){
-					cloneSoporte(req,resp,usermail);
-				}
-			 
-		
+
+			if (accion.equals("new")) {
+				createSoporte(req, resp, usermail);
+			} else if (accion.equals("delete")) {
+				deleteSoporte(req, resp, usermail);
+			} else if (accion.equals("update")) {
+				updateSoporte(req, resp, usermail);
+			} else if (accion.equals("xls")) {
+				generateXLS(req, resp, usermail);
+			} else if (accion.equals("restore")) {
+				restore(req, resp, usermail);
+			} else if (accion.equals("clone")) {
+				cloneSoporte(req, resp, usermail);
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
-		}		
+		}
 	}
-	
-	public void doPost(HttpServletRequest req, HttpServletResponse resp){
-		doGet(req,resp);
+
+	public void doPost(HttpServletRequest req, HttpServletResponse resp) {
+		doGet(req, resp);
 	}
-	
-	public void generateXLS(HttpServletRequest req, HttpServletResponse resp, String usermail)
-			throws ServletException, IOException {
+
+	public void generateXLS(HttpServletRequest req, HttpServletResponse resp,
+			String usermail) throws ServletException, IOException {
 		OutputStream out = null;
 		try {
 			resp.setContentType("application/vnd.ms-excel");
@@ -141,11 +122,11 @@ public class SoporteServlet extends HttpServlet{
 			s.addCell(new Label(11, 0, "PETICIONARIO", cellFormat));
 			s.addCell(new Label(12, 0, "DESCRIPCIÓN", cellFormat));
 			s.addCell(new Label(13, 0, "SOLUCIÓN", cellFormat));
-			
+
 			int aux = 1;
 
 			for (Soporte sop : soportes) {
-				
+
 				s.addCell(new Label(0, aux, sop.getId_soporte()));
 				s.addCell(new Label(1, aux, sop.getCliente_name()));
 				s.addCell(new Label(2, aux, sop.getPremium()));
@@ -169,76 +150,75 @@ public class SoporteServlet extends HttpServlet{
 			e.printStackTrace();
 			throw new ServletException("Exception in Excel", e);
 		} finally {
-			Utils.writeLog(usermail, "Descarga XML", "Soporte","");
+			Utils.writeLog(usermail, "Descarga XML", "Soporte", "");
 			if (out != null)
 				out.close();
 		}
 
 	}
 
-	
-	public void deleteSoporte (HttpServletRequest req, HttpServletResponse resp, String usermail){
+	public void deleteSoporte(HttpServletRequest req, HttpServletResponse resp,
+			String usermail) {
 		JSONObject json = new JSONObject();
-		
+
 		String id = req.getParameter("id");
 		SoporteDao sDao = SoporteDao.getInstance();
-		
+
 		Soporte s = sDao.getSoportebyId(Long.parseLong(id));
-		
-		Utils.writeLog(usermail, "Elimina", "Soporte", s.getId_soporte()+" "+s.getCliente_name());
+
+		Utils.writeLog(usermail, "Elimina", "Soporte", s.getId_soporte() + " "
+				+ s.getCliente_name());
 		sDao.deleteSoporte(s);
-		
+
 		try {
 			json.append("success", "true");
 			resp.setCharacterEncoding("UTF-8");
-	        resp.setContentType("application/json");       
+			resp.setContentType("application/json");
 			resp.getWriter().println(json);
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	public void restore(HttpServletRequest req, HttpServletResponse resp, String usermail) throws JSONException, IOException, ParseException{
-		
+
+	public void restore(HttpServletRequest req, HttpServletResponse resp,
+			String usermail) throws JSONException, IOException, ParseException {
+
 		JSONObject json = new JSONObject();
 		String str_id = req.getParameter("id");
-		
+
 		SoporteDao cDao = SoporteDao.getInstance();
 		Soporte c = cDao.getSoportebyId(Long.parseLong(str_id));
-		//registramos la operacion
+		// registramos la operacion
 		Utils.writeLog(usermail, "Restaura", "soporte", c.getId_soporte());
-		
-		
+
 		c.setErased(false);
 		cDao.updateSoporte(c);
-		
-		try{
+
+		try {
 			json.append("success", "true");
-						
 			resp.setCharacterEncoding("UTF-8");
-	        resp.setContentType("application/json");       
+			resp.setContentType("application/json");
 			resp.getWriter().println(json);
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-	
+
 	}
-	
-	public void updateSoporte(HttpServletRequest req, HttpServletResponse resp, String usermail) throws ParseException{
-		
+
+	public void updateSoporte(HttpServletRequest req, HttpServletResponse resp,
+			String usermail) throws ParseException {
+
 		JSONObject json = new JSONObject();
-		
+
 		String id_str = req.getParameter("id");
 		SoporteDao sDao = SoporteDao.getInstance();
 		Soporte s = sDao.getSoportebyId(Long.parseLong(id_str));
-		
-		Utils.writeLog(usermail, "Modifica", "Soporte", s.getId_soporte()+" "+s.getCliente_name());
-		
+
+		Utils.writeLog(usermail, "Modifica", "Soporte", s.getId_soporte() + " "
+				+ s.getCliente_name());
+
 		String fecha_inicio = req.getParameter("fecha_inicio");
 		String fecha_fin = req.getParameter("fecha_fin");
 		String tipo = req.getParameter("tipoModal");
@@ -247,13 +227,13 @@ public class SoporteServlet extends HttpServlet{
 		String tipo_servicio = req.getParameter("tipo_servicio");
 		String producto_canal = req.getParameter("producto_canal");
 		String premium = req.getParameter("input-premium-soporte");
-		String tipo_cliente = req.getParameter("tipo_cliente");		
+		String tipo_cliente = req.getParameter("tipo_cliente");
 		String detalles = req.getParameter("detalles");
 		String solucion = req.getParameter("solucion");
 		String clienteID = req.getParameter("client_id");
 		String pais = req.getParameter("pais");
 		String peticionario = req.getParameter("peticionario");
-		
+
 		s.setStr_fecha_inicio(fecha_inicio);
 		s.setStr_fecha_fin(fecha_fin);
 		s.setTipo_soporte(tipo);
@@ -268,35 +248,32 @@ public class SoporteServlet extends HttpServlet{
 		s.setCliente_id(clienteID);
 		s.setPais(pais);
 		s.setPeticionario(peticionario);
-		
+
 		sDao.createSoporte(s);
-		
-		
+
 		try {
 			json.append("success", "true");
 			resp.setCharacterEncoding("UTF-8");
-	        resp.setContentType("application/json");       
+			resp.setContentType("application/json");
 			resp.getWriter().println(json);
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+
 	}
-	
-public void cloneSoporte(HttpServletRequest req, HttpServletResponse resp, String usermail){
-		
+
+	public void cloneSoporte(HttpServletRequest req, HttpServletResponse resp,
+			String usermail) {
+
 		JSONObject json = new JSONObject();
-		
-		
+
 		SoporteDao sDao = SoporteDao.getInstance();
 		Soporte s = new Soporte();
-		
+
 		Utils.writeLog(usermail, "Clona", "Soporte", "");
-		
+
 		String fecha_inicio = req.getParameter("fecha_inicio");
 		String fecha_fin = req.getParameter("fecha_fin");
 		String tipo = req.getParameter("tipoModal");
@@ -305,13 +282,13 @@ public void cloneSoporte(HttpServletRequest req, HttpServletResponse resp, Strin
 		String tipo_servicio = req.getParameter("tipo_servicio");
 		String producto_canal = req.getParameter("producto_canal");
 		String premium = req.getParameter("input-premium-soporte");
-		String tipo_cliente = req.getParameter("tipo_cliente");		
+		String tipo_cliente = req.getParameter("tipo_cliente");
 		String detalles = req.getParameter("detalles");
 		String solucion = req.getParameter("solucion");
 		String clienteID = req.getParameter("client_id");
 		String pais = req.getParameter("pais");
 		String peticionario = req.getParameter("peticionario");
-		
+
 		s.setStr_fecha_inicio(fecha_inicio);
 		s.setStr_fecha_fin(fecha_fin);
 		s.setTipo_soporte(tipo);
@@ -326,28 +303,26 @@ public void cloneSoporte(HttpServletRequest req, HttpServletResponse resp, Strin
 		s.setCliente_id(clienteID);
 		s.setPais(pais);
 		s.setPeticionario(peticionario);
-		
+
 		sDao.createSoporte(s);
-		
-		
+
 		try {
 			json.append("success", "true");
 			resp.setCharacterEncoding("UTF-8");
-	        resp.setContentType("application/json");       
+			resp.setContentType("application/json");
 			resp.getWriter().println(json);
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+
 	}
-	
-	public void createSoporte(HttpServletRequest req, HttpServletResponse resp, String usermail){
+
+	public void createSoporte(HttpServletRequest req, HttpServletResponse resp,
+			String usermail) {
 		JSONObject json = new JSONObject();
-		
+
 		String fecha_inicio = req.getParameter("fecha_inicio");
 		String fecha_fin = req.getParameter("fecha_fin");
 		String tipo = req.getParameter("tipo");
@@ -356,7 +331,7 @@ public void cloneSoporte(HttpServletRequest req, HttpServletResponse resp, Strin
 		String tipo_servicio = req.getParameter("tipo_servicio");
 		String producto_canal = req.getParameter("producto_canal");
 		String premium = req.getParameter("input-premium-soporte");
-		String tipo_cliente = req.getParameter("tipo_cliente");		
+		String tipo_cliente = req.getParameter("tipo_cliente");
 		String detalles = req.getParameter("detalles");
 		String solucion = req.getParameter("solucion");
 		String clienteID = req.getParameter("client_id");
@@ -364,9 +339,10 @@ public void cloneSoporte(HttpServletRequest req, HttpServletResponse resp, Strin
 		String peticionario = req.getParameter("peticionario");
 		Soporte s = new Soporte();
 		SoporteDao sDao = SoporteDao.getInstance();
-		
-		if(tipo == ""||tipo == null)tipo = "Incidencia";
-		
+
+		if (tipo == "" || tipo == null)
+			tipo = "Incidencia";
+
 		s.setErased(false);
 		s.setStr_fecha_inicio(fecha_inicio);
 		s.setStr_fecha_fin(fecha_fin);
@@ -382,29 +358,23 @@ public void cloneSoporte(HttpServletRequest req, HttpServletResponse resp, Strin
 		s.setCliente_id(clienteID);
 		s.setPais(pais);
 		s.setPeticionario(peticionario);
-		
-		
+
 		sDao.createSoporte(s);
-		
-		Utils.writeLog(usermail, "Crea", "Soporte", s.getId_soporte()+" "+s.getCliente_name());
-		
-		
+
+		Utils.writeLog(usermail, "Crea", "Soporte",
+				s.getId_soporte() + " " + s.getCliente_name());
+
 		try {
 			json.append("success", "true");
 			resp.setCharacterEncoding("UTF-8");
-	        resp.setContentType("application/json");       
+			resp.setContentType("application/json");
 			resp.getWriter().println(json);
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
-		
-		
+
 	}
 
-	
 }
