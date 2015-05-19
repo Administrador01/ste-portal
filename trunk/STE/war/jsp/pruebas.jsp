@@ -314,8 +314,8 @@
 		<div class="tipo-cliente-field">
 			<span class="lbl">Tipo cliente:</span>
 			<select id="tipo_cliente" class="selectpicker selected" name="tipo_servicio" >
-				<option value="TODOS" ${premiumFilter == "TODOS" ? 'selected' : ''}>Todos</option>	
-				<option value="PREMIUM" ${premiumFilter == "PREMIUM" ? 'selected' : ''}>Premium</option>	
+				<option value="TODOS" ${premiumFilter == "TODOS" ? 'selected' : ''}>TODOS</option>	
+				<option value="PREMIUM" ${premiumFilter == "PREMIUM" ? 'selected' : ''}>PREMIUM</option>	
 			</select>
 		</div>
 		<div class="main-table usersTable">

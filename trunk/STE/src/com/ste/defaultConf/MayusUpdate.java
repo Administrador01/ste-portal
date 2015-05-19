@@ -370,7 +370,7 @@ public class MayusUpdate extends HttpServlet {
 				result += prueba.getClient_name() + ", ";
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			result += "EXCEPCION - " + e.getLocalizedMessage();
 		}
 		return result;
 	}
