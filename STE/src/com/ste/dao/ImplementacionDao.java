@@ -45,7 +45,9 @@ public class ImplementacionDao {
 		List<Implementacion> Implementacions = new ArrayList<Implementacion>();	;
 		
 		for (Entity result : entities){
-			Implementacions.add(buildImplementacion(result));
+			try{
+				Implementacions.add(buildImplementacion(result));
+			}catch(Exception exp) {}
 		}
 
 		return Implementacions;
@@ -77,7 +79,9 @@ public class ImplementacionDao {
 		List<Implementacion> Implementacions = new ArrayList<Implementacion>();	;
 		
 		for (Entity result : entities){
-			Implementacions.add(buildImplementacion(result));
+			try{
+				Implementacions.add(buildImplementacion(result));
+			}catch(Exception exp) {}
 		}
 
 		return Implementacions;
@@ -453,7 +457,9 @@ public class ImplementacionDao {
 			entities = datastore.prepare(q).asList(fetchOptions);
 			implementaciones = new ArrayList<>();
 			for(Entity result:entities){
-				implementaciones.add(buildImplementacion(result));
+				try{
+					implementaciones.add(buildImplementacion(result));
+				}catch(Exception exp) {}
 			}
 			Implementacion impPage = new Implementacion();
 			impPage.setDetalle("0");
@@ -583,7 +589,9 @@ public class ImplementacionDao {
 			implementaciones = new ArrayList<Implementacion>();
 			int implementacionesPages  = implementacionesFinal.size();
 			for(int i = page*DATA_SIZE; i<(page*DATA_SIZE)+DATA_SIZE && i<implementacionesFinal.size();i++){
-				implementaciones.add(buildImplementacion(implementacionesFinal.get(i)));
+				try{
+					implementaciones.add(buildImplementacion(implementacionesFinal.get(i)));
+				}catch(Exception exp) {}
 			}
 			Implementacion pages = new Implementacion();
 			pages.setDetalle(Integer.toString(implementacionesPages));

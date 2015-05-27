@@ -101,7 +101,7 @@
 					
 					<div class="form-field">
 						<span class="lbl">Gestor GCS:</span>
-						<input type="text" name="gestor_gcs" maxlength="25">
+						<input type="text" name="gestor_gcs">
 					</div>
 					
 					<div class="form-field" id="div_pais_imp">
@@ -116,7 +116,7 @@
 					
 					<div class="form-field">
 						<span class="lbl">Gestor promoci&oacuten:</span>
-						<input type="text" name="gestor_prom" maxlength="25">
+						<input type="text" name="gestor_prom">
 					</div>
 					
 					<div class="form-field">
@@ -132,12 +132,12 @@
 					
 					<div class="form-field">
 						<span class="lbl">Gestor relaci&oacuten:</span>
-						<input type="text" name="gestor_relacion" maxlength="25">
+						<input type="text" name="gestor_relacion">
 					</div>
 					
 					<div class="form-field">
 						<span class="lbl">Referencia global:</span>
-						<input type="text" name="ref_glo" maxlength="11">
+						<input type="text" name="ref_glo" >
 					</div>
 					
 					<div class="form-field">
@@ -153,7 +153,7 @@
 					
 					<div class="form-field">
 						<span class="lbl">Referencia local:</span>
-						<input type="text" name="ref_loc" maxlength="18">
+						<input type="text" name="ref_loc">
 					</div>
 					
 					
@@ -187,18 +187,18 @@
 					<h3>Entorno Integrado</h3>
 						<div class="form-field">
 						<span class="lbl">Referencia externa:</span>
-						<input type="text" name="ref_ext" id="ref_ext" maxlength="18">
+						<input type="text" name="ref_ext" id="ref_ext" >
 						</div>
 						<div class="form-field">
 						<span class="lbl">Asunto:</span>
-						<input type="text" name="asunto" maxlength="30">
+						<input type="text" name="asunto">
 						</div>
 						<hr style="visibility:hidden;"/>
 						<h4>SDD:</h4>
 						<hr />
 						<div class="form-field">
 						<span class="lbl grey">Contrato Adeudos:</span>
-						<input type="text" name="contrat_adeud" maxlength="21">
+						<input type="text" name="contrat_adeud">
 						</div>
 						<div class="form-field">
 						<span class="lbl grey">ID Acreedor</span>

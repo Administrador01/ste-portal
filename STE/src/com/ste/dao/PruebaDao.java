@@ -137,8 +137,10 @@ public class PruebaDao {
 		entities = datastore.prepare(q).asList(fetchOptions);
 				
 		pruebas = new ArrayList<>();	
-		for (Entity result : entities) {			
+		for (Entity result : entities) {		
+			try{
 			pruebas.add(buildPrueba(result));
+			}catch(Exception exp) {}
 		}
 		
 		return pruebas;		
@@ -377,8 +379,10 @@ public class PruebaDao {
 		entities = datastore.prepare(q).asList(fetchOptions);
 				
 		pruebas = new ArrayList<>();	
-		for (Entity result : entities) {			
+		for (Entity result : entities) {
+			try{
 			pruebas.add(buildPrueba(result));
+			}catch(Exception exp) {}
 		}
 		
 		return pruebas;		
@@ -506,8 +510,10 @@ public class PruebaDao {
 			}
 			entities = datastore.prepare(q).asList(fetchOptions);
 			pruebas = new ArrayList<>();	
-			for (Entity result : entities) {			
+			for (Entity result : entities) {	
+				try{
 				pruebas.add(buildPrueba(result));
+				}catch(Exception exp) {}
 			}
 			Prueba pruebaPagin = new Prueba();
 			pruebaPagin.setDetalles("0");
@@ -649,8 +655,10 @@ public class PruebaDao {
 			
 			pruebas = new ArrayList<Prueba>();
 			int pruebasPages = pruebasFinal.size();
-			for (int i = page*DATA_SIZE; i < (page*DATA_SIZE)+DATA_SIZE && i<pruebasFinal.size();i++) {			
+			for (int i = page*DATA_SIZE; i < (page*DATA_SIZE)+DATA_SIZE && i<pruebasFinal.size();i++) {
+				try{
 				pruebas.add(buildPrueba(pruebasFinal.get(i)));
+				}catch(Exception exp) {}
 			}
 			Prueba pages = new Prueba();
 			pages.setDetalles(Integer.toString(pruebasPages));
@@ -706,8 +714,10 @@ public class PruebaDao {
 		entities = datastore.prepare(q).asList(fetchOptions);
 				
 		pruebas = new ArrayList<>();	
-		for (Entity result : entities) {			
+		for (Entity result : entities) {	
+			try{
 			pruebas.add(buildPrueba(result));
+			}catch(Exception exp) {}
 		}
 		
 		return pruebas;

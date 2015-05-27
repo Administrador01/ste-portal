@@ -285,7 +285,9 @@ public class ClienteDao {
 			
 			clientes = new ArrayList<>();
 			for (Entity result : entities) {
+				try{
 				clientes.add(buildCliente(result));
+				}catch(Exception exp) {}
 			}
 			Cliente clientePagin = new Cliente();
 			clientePagin.setId_cliente("0");
@@ -390,7 +392,9 @@ public class ClienteDao {
 			clientes = new ArrayList<Cliente>();
 			int clientesPages = clientesFinal.size();
 			for (int i = page*DATA_SIZE; i < (page*DATA_SIZE)+DATA_SIZE && i<clientesFinal.size();i++) {
-				clientes.add(buildCliente(clientesFinal.get(i)));
+				try{
+					clientes.add(buildCliente(clientesFinal.get(i)));
+				}catch(Exception exp) {}
 			}
 			Cliente pages= new Cliente();
 			pages.setId_cliente(Integer.toString(clientesPages));
@@ -417,7 +421,9 @@ public class ClienteDao {
 				
 		clientes = new ArrayList<>();
 		for(Entity result:entities){
+			try{
 			clientes.add(buildCliente(result));
+			}catch(Exception exp) {}
 		}
 		
 		return clientes;

@@ -329,8 +329,10 @@ public class SoporteDao {
 		entities = datastore.prepare(q).asList(fetchOptions);
 				
 		soportes = new ArrayList<>();	
-		for (Entity result : entities) {			
+		for (Entity result : entities) {	
+			try{
 			soportes.add(buildSoporte(result));
+			}catch(Exception exp) {}
 		}
 		
 		return soportes;		
@@ -461,8 +463,10 @@ public class SoporteDao {
 			}
 			entities = datastore.prepare(q).asList(fetchOptions);
 			soportes = new ArrayList<>();	
-			for (Entity result : entities) {			
+			for (Entity result : entities) {
+				try{
 				soportes.add(buildSoporte(result));
+				}catch(Exception exp) {}
 			}
 			Soporte soportePagin = new Soporte();
 			soportePagin.setDetalles("0");
@@ -606,8 +610,10 @@ public class SoporteDao {
 			
 			soportes = new ArrayList<Soporte>();
 			int soportesPages = soportesFinal.size();
-			for (int i = page*DATA_SIZE; i < (page*DATA_SIZE)+DATA_SIZE && i<soportesFinal.size();i++) {			
+			for (int i = page*DATA_SIZE; i < (page*DATA_SIZE)+DATA_SIZE && i<soportesFinal.size();i++) {
+				try{
 				soportes.add(buildSoporte(soportesFinal.get(i)));
+				}catch(Exception exp) {}
 			}
 			Soporte pages = new Soporte();
 			pages.setDetalles(Integer.toString(soportesPages));
