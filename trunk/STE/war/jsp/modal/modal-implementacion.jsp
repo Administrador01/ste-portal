@@ -115,7 +115,7 @@
 					
 					<div class="form-field">
 					<span class="lbl">Gestor GCS:</span>
-					<input type="text" name="gestor_gcs" maxlength="25" value="${implementacion.gestor_gcs}">
+					<input type="text" name="gestor_gcs" value="${implementacion.gestor_gcs}">
 					</div>
 					
 					
@@ -133,23 +133,23 @@
 					
 					<div class="form-field">
 					<span class="lbl">Gestor promoci&oacuten:</span>
-					<input type="text" name="gestor_prom" maxlength="25" value="${implementacion.gestor_promocion}">
+					<input type="text" name="gestor_prom" value="${implementacion.gestor_promocion}">
 					</div>
 					
 					
 					<div class="form-field">
 					<span class="lbl">Referencia global:</span>
-					<input type="text" name="ref_glo" maxlength="11" value="${implementacion.referencia_global}">
+					<input type="text" name="ref_glo" value="${implementacion.referencia_global}">
 					</div>
 					
 					<div class="form-field">
 					<span class="lbl">Gestor relaci&oacuten:</span>
-					<input type="text" name="gestor_relacion" maxlength="25" value="${implementacion.gestor_relacion}">
+					<input type="text" name="gestor_relacion" value="${implementacion.gestor_relacion}">
 					</div>
 					
 					<div class="form-field">
 					<span class="lbl">Referencia local:</span>
-					<input type="text" name="ref_loc" maxlength="18" value="${implementacion.referencia_local}">
+					<input type="text" name="ref_loc" value="${implementacion.referencia_local}">
 					</div>
 					
 					<div class="form-field">
@@ -192,11 +192,11 @@
 					<hr style="border: 3px solid #D1DCFF; border-radius: 300px/10px; height: 0px;width: 80%;margin-left:10%;"/>
 					<div class="form-field">
 					<span class="lbl">Referencia externa:</span>
-					<input type="text" name="ref_ext" id="ref_ext_modal" maxlength="18" value="${implementacion.referencia_externa}">
+					<input type="text" name="ref_ext" id="ref_ext_modal" value="${implementacion.referencia_externa}">
 					</div>
 						<div class="form-field">
 						<span class="lbl">Asunto:</span>
-						<input type="text" name="asunto" maxlength="30" value="${implementacion.asunto_ref_ext}">
+						<input type="text" name="asunto" value="${implementacion.asunto_ref_ext}">
 						</div>
 						<hr style=" width: 80%;margin-left:10%;"/>
 		

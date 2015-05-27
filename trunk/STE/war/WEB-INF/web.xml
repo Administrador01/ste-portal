@@ -16,7 +16,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	    <url-pattern>/usersServlet</url-pattern>
 	  </servlet-mapping>
 	  
-	   <servlet>
+	  <servlet>
 	    <servlet-name>ClientServlet</servlet-name>
 	    <servlet-class>com.ste.servlets.ClienteServlet</servlet-class>
 	  </servlet>
@@ -96,7 +96,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	    <url-pattern>/logsServlet</url-pattern>
 	  </servlet-mapping>
 	  
-	  	  <servlet>
+	  <servlet>
 	    <servlet-name>InformeServlet</servlet-name>
 	    <servlet-class>com.ste.servlets.InformeServlet</servlet-class>
 	  </servlet>
